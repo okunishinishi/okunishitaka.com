@@ -1,0 +1,27 @@
+"use strict";
+
+var f = require('apeman-front'),
+    u = require('apeman-util'),
+    h = require('../_helper'),
+    path = u.core.path,
+    reducing = u.reducing;
+
+module.exports = {
+    mode: '444',
+    force: true,
+    data: Object.keys(f.paths)
+        .map(function (kind) {
+            var paths = f.paths[kind];
+            var dirname = path.join('assets', kind);
+            return Object.keys(paths)
+                .map(function (name) {
+                    var filename = paths[name];
+                    return {
+                        src: path.relative(h.basedir, filename),
+                        dest: path.join(dirname, path.basename(filename)),
+                        mode: '444'
+                    }
+                });
+        })
+        .reduce(reducing.concatReduce(), [])
+};

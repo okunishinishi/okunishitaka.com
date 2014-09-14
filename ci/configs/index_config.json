@@ -1,0 +1,9 @@
+[
+    {
+        "dirname": "ci/configs",
+        "doc": {
+            "file": "CI configuration.",
+            "module": "okunishitaka.com/ci/configs"
+        }
+    }
+]
