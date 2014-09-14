@@ -6,22 +6,27 @@ var f = require('apeman-front'),
     path = u.core.path,
     reducing = u.reducing;
 
+function budForFile(src, dest) {
+    return {
+        src: path.relative(h.basedir, src),
+        dest: path.join(dest, path.basename(src)),
+        mode: '444'
+    }
+}
+
 module.exports = {
     mode: '444',
     force: true,
-    data: Object.keys(f.paths)
-        .map(function (kind) {
-            var paths = f.paths[kind];
-            var dirname = path.join('assets', kind);
-            return Object.keys(paths)
-                .map(function (name) {
-                    var filename = paths[name];
-                    return {
-                        src: path.relative(h.basedir, filename),
-                        dest: path.join(dirname, path.basename(filename)),
-                        mode: '444'
-                    }
-                });
-        })
-        .reduce(reducing.concatReduce(), [])
+    data: [
+        budForFile(f.paths.fonts.fontawesomeWebfontEot, 'public/fonts'),
+        budForFile(f.paths.fonts.fontawesomeWebfontSvg, 'public/fonts'),
+        budForFile(f.paths.fonts.fontawesomeWebfontWoff, 'public/fonts'),
+        budForFile(f.paths.html.somethingWrongHtml, 'public/html/error'),
+        budForFile(f.paths.javascripts.angularJs, 'public/javascripts/lib'),
+        budForFile(f.paths.javascripts.apemanJs, 'public/javascripts/lib'),
+        budForFile(f.paths.javascripts.ngApemanJs, 'public/javascripts/lib'),
+        budForFile(f.paths.javascripts.oneColorJs, 'public/javascripts/lib'),
+        budForFile(f.paths.stylesheets.apemanCss , 'public/stylesheets/base'),
+        budForFile(f.paths.stylesheets.fontAwesomeCss , 'public/stylesheets/base'),
+    ]
 };

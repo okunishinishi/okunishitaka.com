@@ -8,9 +8,12 @@
 
 var u = require('apeman-util'),
     TaskHelper = u.tasking.TaskHelper,
-    tasks = require('apeman-tasks');
+    copy = u.object.copy;
 
 var h = new TaskHelper(__dirname + '/..');
-h.tasks = tasks;
+
+h.tasks = {};
+copy(require('apeman-tasks'), h.tasks);
+copy(require('./tasks'), h.tasks);
 
 module.exports = h;

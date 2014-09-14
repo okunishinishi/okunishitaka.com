@@ -5,5 +5,13 @@
             "file": "CI configuration.",
             "module": "okunishitaka.com/ci/configs"
         }
+    },
+    {
+        "dirname": "ci/tasks",
+        "doc": {
+            "file": "CI tasks.",
+            "module": "okunishitaka.com/ci/tasks"
+        },
+        "pascalPattern":"*task"
     }
 ]

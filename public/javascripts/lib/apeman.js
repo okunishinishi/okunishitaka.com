@@ -1,14 +1,12 @@
 /**
  * @file Apeman client side scripts.
  * @namespace apeman
- * @version 0.0.4
+ * @version 0.0.5
  */
 window.apeman = (function (apeman) {
     "use strict";
-    
     /** @lends apeman */
 	var ap = apeman || {};
-    
     /**
 	 * Do nothing.
 	 */
@@ -16,7 +14,6 @@ window.apeman = (function (apeman) {
 	
 	};
 	
-    
 
     return apeman;
 })(window.apeman = window.apeman || {});

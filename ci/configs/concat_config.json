@@ -1,0 +1,23 @@
+[
+    {
+        "src": "public/javascripts/lib/*.js",
+        "dest": "public/javascripts/lib.js"
+    },
+    {
+        "src": "public/javascripts/models/*.js",
+        "dest": "public/javascripts/models.js"
+    },
+    {
+        "src": "public/javascripts/pages/*.js",
+        "dest": "public/javascripts/pages.js"
+    },
+    {
+        "src": "public/javascripts/services/*.js",
+        "dest": "public/javascripts/services.js"
+    },
+    {
+
+        "src": "public/stylesheets/base/*.css",
+        "dest": "public/stylesheets/base.css"
+    }
+]

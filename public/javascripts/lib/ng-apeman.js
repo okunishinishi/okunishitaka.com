@@ -1,7 +1,7 @@
 /**
  * @file Apeman module for angular.js
  * @namespace ng-apeman
- * @version 0.0.4
+ * @version 0.0.5
  * @requires angular
  */
 
@@ -10,10 +10,8 @@
 
     ng.module('apeman', []);
 
-    
     /** @lends angular-apeman */
 	var ap = ng.module('apeman');
-    
     ap.service('apLocaleService', [
 	    ],
 	    /**
@@ -53,7 +51,6 @@
 	        };
 	    }
 	);
-    
     ap.serice('apTemplateService', [
 	        '$templateCache'
 	    ],
@@ -81,6 +78,5 @@
 	            $templateCache.put(name, content);
 	        };
 	    });
-    
 
 })(angular);

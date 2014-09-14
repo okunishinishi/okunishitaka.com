@@ -32,12 +32,16 @@ async.eachSeries([
         task: tasks.TestScaffoldTask
     },
     {
-        config: configs.cpConfig,
-        task: tasks.CpTask
-    },
-    {
         config: configs.budConfig,
         task: tasks.BudTask
+    },
+    {
+        config: configs.concatConfig,
+        task: tasks.ConcatTask
+    },
+    {
+        config: configs.cpConfig,
+        task: tasks.CpTask
     }
 ], function (data, callback) {
     new (data.task)(data.config).run(callback);

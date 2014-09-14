@@ -1,87 +1,52 @@
 [
     {
         "src": "node_modules/apeman-front/assets/fonts/fontawesome-webfont.eot",
-        "dest": "assets/fonts/fontawesome-webfont.eot",
+        "dest": "public/fonts/fontawesome-webfont.eot",
         "mode": "444"
     },
     {
         "src": "node_modules/apeman-front/assets/fonts/fontawesome-webfont.svg",
-        "dest": "assets/fonts/fontawesome-webfont.svg",
+        "dest": "public/fonts/fontawesome-webfont.svg",
         "mode": "444"
     },
     {
         "src": "node_modules/apeman-front/assets/fonts/fontawesome-webfont.woff",
-        "dest": "assets/fonts/fontawesome-webfont.woff",
-        "mode": "444"
-    },
-    {
-        "src": "node_modules/apeman-front/assets/fonts/ionicons.eot",
-        "dest": "assets/fonts/ionicons.eot",
-        "mode": "444"
-    },
-    {
-        "src": "node_modules/apeman-front/assets/fonts/ionicons.svg",
-        "dest": "assets/fonts/ionicons.svg",
-        "mode": "444"
-    },
-    {
-        "src": "node_modules/apeman-front/assets/fonts/ionicons.woff",
-        "dest": "assets/fonts/ionicons.woff",
+        "dest": "public/fonts/fontawesome-webfont.woff",
         "mode": "444"
     },
     {
         "src": "node_modules/apeman-front/assets/html/something-wrong.html",
-        "dest": "assets/html/something-wrong.html",
-        "mode": "444"
-    },
-    {
-        "src": "node_modules/apeman-front/assets/javascripts/angular-mocks.js",
-        "dest": "assets/javascripts/angular-mocks.js",
+        "dest": "public/html/error/something-wrong.html",
         "mode": "444"
     },
     {
         "src": "node_modules/apeman-front/assets/javascripts/angular.js",
-        "dest": "assets/javascripts/angular.js",
+        "dest": "public/javascripts/lib/angular.js",
         "mode": "444"
     },
     {
         "src": "node_modules/apeman-front/assets/javascripts/apeman.js",
-        "dest": "assets/javascripts/apeman.js",
+        "dest": "public/javascripts/lib/apeman.js",
         "mode": "444"
     },
     {
         "src": "node_modules/apeman-front/assets/javascripts/ng-apeman.js",
-        "dest": "assets/javascripts/ng-apeman.js",
+        "dest": "public/javascripts/lib/ng-apeman.js",
         "mode": "444"
     },
     {
         "src": "node_modules/apeman-front/assets/javascripts/one-color.js",
-        "dest": "assets/javascripts/one-color.js",
-        "mode": "444"
-    },
-    {
-        "src": "node_modules/apeman-front/assets/json/schema-error-formats.json",
-        "dest": "assets/json/schema-error-formats.json",
-        "mode": "444"
-    },
-    {
-        "src": "node_modules/apeman-front/assets/json/something-wrong.json",
-        "dest": "assets/json/something-wrong.json",
+        "dest": "public/javascripts/lib/one-color.js",
         "mode": "444"
     },
     {
         "src": "node_modules/apeman-front/assets/stylesheets/apeman.css",
-        "dest": "assets/stylesheets/apeman.css",
+        "dest": "public/stylesheets/base/apeman.css",
         "mode": "444"
     },
     {
         "src": "node_modules/apeman-front/assets/stylesheets/font-awesome.css",
-        "dest": "assets/stylesheets/font-awesome.css",
-        "mode": "444"
-    },
-    {
-        "src": "node_modules/apeman-front/assets/stylesheets/ionicons.css",
-        "dest": "assets/stylesheets/ionicons.css",
+        "dest": "public/stylesheets/base/font-awesome.css",
         "mode": "444"
     }
 ]

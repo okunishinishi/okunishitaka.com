@@ -1,3 +1,3 @@
 {
-    "pattern": "+(assets|bin|ci|doc|lib|test)/**/.*.bud"
+    "pattern": "+(app|ci|doc|public|test)/**/.*.bud"
 }
