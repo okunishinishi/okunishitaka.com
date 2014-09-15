@@ -1,0 +1,39 @@
+#!/usr/bin/env node
+
+/**
+ * @file Stop server.
+ */
+
+
+"use strict";
+
+var h = require('../_helper'),
+    async = h.async;
+
+
+process.chdir(h.basedir);
+
+async.waterfall([
+    function (callback) {
+        h.readStatus(callback);
+    },
+    function (data, callback) {
+        if (data.dead) {
+            callback(null);
+            return;
+        }
+        var pid = data.pid;
+        h.kill(['-SIGUSR2'], pid, function () {
+            callback(data);
+        });
+    },
+    function (data, callback) {
+        data.dead = false;
+        h.writeStatus(data, callback);
+    }
+], function (err, data) {
+    if (err) {
+        console.error(err);
+    }
+    console.log('Stop done.');
+});

@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+
+/**
+ * @file Start app.
+ * @see {@link http://nodejs.org/api/cluster.html | cluster}
+ */
+
+"use strict";
+
+var h = require('../_helper'),
+    cluster = require('cluster'),
+    data = require('../../server');
+
+process.chdir(h.basedir);
+process.env.NODE_ENV = 'production';
+
+var shouldStopAll = false;
+
+if (cluster.isMaster) {
+
+    var numberOfWorkers = h.numberOfCPUs();
+    h.forkWorkers(cluster, numberOfWorkers, function (workers) {
+        workers.forEach(function (worker) {
+            console.log('\tWork start with pid:', worker.process.pid);
+        });
+        console.log('Server listening at port:', data.port);
+        h.writeStatus({
+            pid: process.pid,
+            numberOfWorkers: numberOfWorkers,
+            startAt: new Date
+        });
+    });
+
+    h.bindReforkWorker(cluster, function refork(worker) {
+        var pid = worker.process.pid;
+        console.error('Work dead:', pid);
+        console.log('Restart worker:', pid);
+        return !shouldStopAll;
+    });
+
+    process.on('SIGUSR2', function () {
+        shouldStopAll = true;
+        console.log('Stop server.');
+        h.sendToAllWorkers(cluster, {
+            cmd: 'stop'
+        })
+    });
+
+} else {
+    var app = require('../app'),
+        settings = require('../app_settings'),
+        server = app.start(data.port, settings);
+    process.on('message', function (msg) {
+        var shouldStop = msg.cmd && msg.cmd == 'stop';
+        if (shouldStop) {
+            console.log("\tWork stopped with pid:", process.pid);
+            server.close();
+            process.exit();
+        }
+    });
+}

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd $(dirname $0)/../../
+
+node app/bin/stop
+node app/bin/start &
