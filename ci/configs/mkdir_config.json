@@ -35,6 +35,8 @@
         "test/mocks",
         "test/scenario_tests",
         "test/unit_tests",
+        "test/unit_tests/app_tests",
+        "test/unit_tests/lib_tests",
         "var",
         "var/data",
         "var/log"

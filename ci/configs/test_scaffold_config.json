@@ -1,9 +1,14 @@
 [
     {
         "srcPattern": [
-            "lib/**/*.js",
+            "lib/**/*.js"
+        ],
+        "destDir": "test/unit_tests/lib_tests"
+    },
+    {
+        "srcPattern": [
             "app/middlewares/*.js"
         ],
-        "destDir": "test/unit_tests"
+        "destDir": "test/unit_tests/app_tests"
     }
 ]
