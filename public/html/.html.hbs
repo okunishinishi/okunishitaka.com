@@ -5,17 +5,15 @@
     <meta name="viewport" CONTENT="width=device-width, user-scalable=no"/>
 
     <link rel="icon" href="./images/favicon.png"/>
-    <link rel="stylesheet" href="/stylesheets/base.css"/>
-    <link rel="stylesheet" href="/stylesheets/{{name}}-page.css"/>
 
-    <script src="/javascripts/lib.js"></script>
-    <script src="/javascripts/l.js"></script>
-    <script src="/javascripts/models.js"></script>
-    <script src="/javascripts/services.js"></script>
-    <script src="/javascripts/pages/{{prefix}}-page.js"></script>
-    <script src="/javascripts/pages/{{prefix}}-{{name}}-page.js"></script>
+{{#each stylesheets}}    <link rel="stylesheet" href="/stylesheets/{{this}}"/>
+{{/each}}
 
-    <title></title>
+{{#each javascripts}}    <script src="/javascripts/{{this}}"></script>
+{{/each}}
+
+    <title>{{{title}}}</title>
+
 </head>
 <body ng-controller="{{Name}}Ctrl">
 <header ng-include="baseURL + partials.header"></header>

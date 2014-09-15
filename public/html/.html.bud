@@ -7,18 +7,34 @@
 var u = require('apeman-util'),
     string = u.string,
     path = u.core.path,
+    format = u.core.util.format,
     pages = require('../.pages');
 
 
 module.exports = pages.map(function (page) {
+    var prefix = 'ok',
+        name = string.paramString(page);
     return {
         mode: '644',
         path: path.join(__dirname, string.paramString(page) + '-page.html'),
-        force: true, //FIXME
+        force: false,
         data: {
-            prefix: 'ok',
-            name: page,
-            Name: string.pascalString(page)
+            prefix: prefix,
+            name: name,
+            Name: string.pascalString(page),
+            stylesheets: [
+                'base.css',
+                [name, 'page.css'].join('-')
+            ],
+            javascripts: [
+                'lib.js',
+                'locales.js',
+                'models.js',
+                'services.js',
+                'pages/' + [prefix, 'page.js'].join('-'),
+                'pages/' + [prefix, name, 'page.js'].join('-')
+            ],
+            title: format('{{title("%s")}}', name)
         }
     }
 });

@@ -1,7 +1,7 @@
 /**
 * Message resources.
 */
-window.l = (function () {
+window.locales = (function () {
     return {
     "en": {
         "meta": {

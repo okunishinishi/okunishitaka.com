@@ -4,7 +4,7 @@
 * @requires l
 */
 
-(function (ng, l) {
+(function (ng) {
     "use strict";
 
     ng
@@ -18,14 +18,14 @@
 
         });
 
-})(angular, l);
+})(angular);
 /**
 * Page script for index.
 * @requires angular
 * @requires l
 */
 
-(function (ng, l) {
+(function (ng) {
     "use strict";
 
     ng
@@ -39,53 +39,57 @@
 
         });
 
-})(angular, l);
+})(angular);
 /**
  * okunishitaka.com abstract page script.
  * @requires angular
  * @requires l
  */
 
-(function (ng, l) {
+(function (ng, locales) {
     "use strict";
 
     ng
         .module('okPage', [
+            'apeman',
             'okModels',
             'okServices'
         ])
-        .run(function ($rootScope, $location, $anchorScroll, $window) {
-            $rootScope.meta = {
-                name: 'okunishitaka.com'
-            };
-
+        .run(function locale($rootScope, apLocaleService) {
+            apLocaleService.register(locales);
+            var lang = 'en'; //FIXME
+            $rootScope.l = apLocaleService.localeForLang(lang);
+        })
+        .run(function title($rootScope) {
+            $rootScope.title = function (page) {
+                var name = $rootScope.l.meta.name;
+                [page, name].join(' - ');
+            }
+        })
+        .run(function partials($rootScope) {
             $rootScope.partials = {
                 header: '/html/partials/header.html',
                 footer: '/html/partials/footer.html'
             };
-
+        })
+        .run(function goTop($rootScope, $location) {
             $rootScope.goTop = function () {
-                location.href = '/';
+                $location.href = '/';
             };
-
-            $rootScope.askSure = function () {
-                return confirm('Are you sure?');//FIXME
-            };
-
-            $rootScope.l = l;
-
-            $rootScope.scrollTo = function (id) {
-                $location.hash(id);
-                $anchorScroll();
-            };
-
+        })
+        .run(function url($rootScope) {
             $rootScope.baseURL = '.';
             $rootScope.url = function (url) {
                 return [$rootScope.baseURL, url].join('/');
             }
-
+        })
+        .run(function scrollTo($rootScope, $location, $anchorScroll) {
+            $rootScope.scrollTo = function (id) {
+                $location.hash(id);
+                $anchorScroll();
+            };
         });
-})(angular, l);
+})(angular, locales);
 
 /**
 * Page script for work.
@@ -93,7 +97,7 @@
 * @requires l
 */
 
-(function (ng, l) {
+(function (ng) {
     "use strict";
 
     ng
@@ -107,4 +111,4 @@
 
         });
 
-})(angular, l);
+})(angular);

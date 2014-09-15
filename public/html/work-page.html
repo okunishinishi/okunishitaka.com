@@ -5,17 +5,19 @@
     <meta name="viewport" CONTENT="width=device-width, user-scalable=no"/>
 
     <link rel="icon" href="./images/favicon.png"/>
+
     <link rel="stylesheet" href="/stylesheets/base.css"/>
     <link rel="stylesheet" href="/stylesheets/work-page.css"/>
 
     <script src="/javascripts/lib.js"></script>
-    <script src="/javascripts/l.js"></script>
+    <script src="/javascripts/locales.js"></script>
     <script src="/javascripts/models.js"></script>
     <script src="/javascripts/services.js"></script>
     <script src="/javascripts/pages/ok-page.js"></script>
     <script src="/javascripts/pages/ok-work-page.js"></script>
 
-    <title></title>
+    <title>{{title("work")}}</title>
+
 </head>
 <body ng-controller="WorkCtrl">
 <header ng-include="baseURL + partials.header"></header>

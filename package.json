@@ -20,8 +20,8 @@
   "dependencies": {
     "apeman-util": "0.0.20",
     "apeman-storage": "0.0.1",
-    "apeman-front": "0.0.6",
-    "apeman-web": "0.0.6"
+    "apeman-front": "0.0.8",
+    "apeman-web": "0.0.8"
   },
   "devDependencies": {
     "apeman-tasks": "0.0.14",

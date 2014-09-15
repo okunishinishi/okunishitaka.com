@@ -1,5 +1,12 @@
 [
     {
+        "dirname": "app/locales",
+        "doc": {
+            "file": "Locales.",
+            "module": "okunishitaka.com/app/locales"
+        }
+    },
+    {
         "dirname": "app/routes",
         "doc": {
             "file": "App routes.",
@@ -7,7 +14,6 @@
         }
 
     },
-
     {
         "dirname": "ci/configs",
         "doc": {

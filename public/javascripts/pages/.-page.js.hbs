@@ -4,7 +4,7 @@
 * @requires l
 */
 
-(function (ng, l) {
+(function (ng) {
     "use strict";
 
     ng
@@ -18,4 +18,4 @@
 
         });
 
-})(angular, l);
+})(angular);

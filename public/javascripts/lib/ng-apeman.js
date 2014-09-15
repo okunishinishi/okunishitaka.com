@@ -1,19 +1,18 @@
 /**
  * @file Apeman module for angular.js
  * @namespace ng-apeman
- * @version 0.0.5
+ * @version 0.0.7
  * @requires angular
  */
 
 (function(ng){
     "use strict";
-
-    ng.module('apeman', []);
-
     /** @lends angular-apeman */
-	var ap = ng.module('apeman');
-    ap.service('apLocaleService', [
-	    ],
+	if (typeof(ng) === 'undefined') {
+	    ng = angular;
+	}
+	var ap = ng.module('apeman', []);
+    ap.service('apLocaleService',
 	    /**
 	     * @memberof ng-apeman
 	     * @name apLocaleService
@@ -51,9 +50,7 @@
 	        };
 	    }
 	);
-    ap.serice('apTemplateService', [
-	        '$templateCache'
-	    ],
+    ap.service('apTemplateService',
 	    /**
 	     * @memberof ng-apeman
 	     * @name apTemplateService
@@ -77,6 +74,7 @@
 	            }
 	            $templateCache.put(name, content);
 	        };
-	    });
+	    }
+	);
 
 })(angular);
