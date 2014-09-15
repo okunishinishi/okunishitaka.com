@@ -3,6 +3,7 @@
         "app",
         "app/bin",
         "app/locales",
+        "app/middlewares",
         "app/routes",
         "app/schemas",
         "ci/bin",

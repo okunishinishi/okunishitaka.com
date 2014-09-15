@@ -56,14 +56,16 @@
             'okServices'
         ])
         .run(function locale($rootScope, apLocaleService) {
-            apLocaleService.register(locales);
+            Object.keys(locales).forEach(function (lang) {
+                apLocaleService.register(lang, locales[lang]);
+            });
             var lang = 'en'; //FIXME
             $rootScope.l = apLocaleService.localeForLang(lang);
         })
         .run(function title($rootScope) {
             $rootScope.title = function (page) {
                 var name = $rootScope.l.meta.name;
-                [page, name].join(' - ');
+                return [page, name].join(' - ');
             }
         })
         .run(function partials($rootScope) {

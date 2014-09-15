@@ -1,6 +1,9 @@
 [
     {
-        "srcPattern": "lib/**/*.js",
+        "srcPattern": [
+            "lib/**/*.js",
+            "app/middlewares/*.js"
+        ],
         "destDir": "test/unit_tests"
     }
 ]
