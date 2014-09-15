@@ -2,6 +2,9 @@
     "dirnames": [
         "app",
         "app/bin",
+        "app/locales",
+        "app/routes",
+        "app/schemas",
         "ci/bin",
         "ci/configs",
         "ci/tasks",

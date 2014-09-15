@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+/**
+ * @file Start Server.
+ * @see {@link http://nodejs.org/api/cluster.html | cluster}
+ */
+
+
+"use strict";
+
+
+var h = require('../_helper'),
+    data = require('../../server');
+
+process.chdir(h.basedir);
+process.env.NODE_ENV = 'development';
+
+var app = require('../app'),
+    settings = require('../app_settings');
+
+app.start(data.port, settings, function () {
+    console.log('Dev server listening at port:', data.port);
+});
+
+process.on('uncaughtException', function (err) {
+    console.log('Caught exception: ' + err);
+});

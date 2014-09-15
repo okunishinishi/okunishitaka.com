@@ -1,5 +1,14 @@
 [
     {
+        "dirname": "app/routes",
+        "doc": {
+            "file": "App routes.",
+            "module": "okunishitaka.com/app/routes"
+        }
+
+    },
+
+    {
         "dirname": "ci/configs",
         "doc": {
             "file": "CI configuration.",
@@ -12,6 +21,6 @@
             "file": "CI tasks.",
             "module": "okunishitaka.com/ci/tasks"
         },
-        "pascalPattern":"*task"
+        "pascalPattern": "*task"
     }
 ]
