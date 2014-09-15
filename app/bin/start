@@ -11,6 +11,7 @@ var h = require('../_helper'),
     cluster = require('cluster'),
     data = require('../../server');
 
+
 process.chdir(h.basedir);
 process.env.NODE_ENV = 'production';
 
@@ -19,7 +20,7 @@ var shouldStopAll = false;
 if (cluster.isMaster) {
 
     var numberOfWorkers = h.numberOfCPUs();
-    h.forkWorkers(cluster, numberOfWorkers, function (workers) {
+    h.forkClusterWorkers(cluster, numberOfWorkers, function (workers) {
         workers.forEach(function (worker) {
             console.log('\tWork start with pid:', worker.process.pid);
         });
@@ -31,7 +32,7 @@ if (cluster.isMaster) {
         });
     });
 
-    h.bindReforkWorker(cluster, function refork(worker) {
+    h.bindReforkClusterWorker(cluster, function refork(worker) {
         var pid = worker.process.pid;
         console.error('Work dead:', pid);
         console.log('Restart worker:', pid);
@@ -41,7 +42,7 @@ if (cluster.isMaster) {
     process.on('SIGUSR2', function () {
         shouldStopAll = true;
         console.log('Stop server.');
-        h.sendToAllWorkers(cluster, {
+        h.sendToAllClusterWorkers(cluster, {
             cmd: 'stop'
         })
     });

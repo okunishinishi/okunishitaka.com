@@ -42,6 +42,10 @@ async.eachSeries([
     {
         config: configs.cpConfig,
         task: tasks.CpTask
+    },
+    {
+        config:configs.symlinkConfig,
+        task:tasks.SymlinkTask
     }
 ], function (data, callback) {
     new (data.task)(data.config).run(callback);

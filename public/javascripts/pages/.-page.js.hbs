@@ -1,0 +1,21 @@
+/**
+* Page script for {{name}}.
+* @requires angular
+* @requires l
+*/
+
+(function (ng, l) {
+    "use strict";
+
+    ng
+        .module('{{prefix}}{{Name}}Page', [
+            '{{prefix}}Page',
+        ])
+        .run(function ($rootScope) {
+
+        })
+        .controller('{{Name}}Ctrl', function($scope) {
+
+        });
+
+})(angular, l);

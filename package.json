@@ -18,13 +18,13 @@
   },
   "homepage": "https://github.com/okunishinishi/okunishitaka.com",
   "dependencies": {
-    "apeman-util": "0.0.19",
+    "apeman-util": "0.0.20",
     "apeman-storage": "0.0.1",
     "apeman-front": "0.0.6",
-    "apeman-web": "0.0.3"
+    "apeman-web": "0.0.6"
   },
   "devDependencies": {
-    "apeman-tasks": "0.0.12",
+    "apeman-tasks": "0.0.14",
     "bower": "^1.3.10"
   }
 }

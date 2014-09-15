@@ -27,7 +27,8 @@ app.start = function (port, settings, callback) {
             next();
         })
         .use(mw.serveStaticMiddleware({
-            root: settings.publicDir
+            root: settings.publicDir,
+            extensions: ['html', 'htm', 'json']
         }))
         .use(mw.extendReqMiddleware({
             getQuery: web.extensions.reqGetQuery(),

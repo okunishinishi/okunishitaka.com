@@ -18,10 +18,17 @@ process.env.NODE_ENV = 'development';
 var app = require('../app'),
     settings = require('../app_settings');
 
-app.start(data.port, settings, function () {
-    console.log('Dev server listening at port:', data.port);
-});
 
-process.on('uncaughtException', function (err) {
-    console.log('Caught exception: ' + err);
+h.fork(require.resolve('../../ci/bin/build'), [], function () {
+
+
+    app.start(data.port, settings, function () {
+        console.log('Dev server listening at port:', data.port);
+    });
+
+    process.on('uncaughtException', function (err) {
+        console.log('Caught exception: ' + err);
+    });
+
+
 });

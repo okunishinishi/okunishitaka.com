@@ -13,7 +13,7 @@ var u = require('apeman-util'),
 module.exports = pages.map(function (page) {
     return {
         mode: '644',
-        path: path.join(__dirname, '..', string.paramString(page) + '-page.html'),
+        path: path.join(__dirname, string.paramString(page) + '-page.html'),
         force: true, //FIXME
         data: {
             prefix: 'ok',
