@@ -32,3 +32,15 @@ exports['Should show.'] = function (test) {
     test.ok(!d.isExcapedFragment({}));
     test.done();
 };
+
+exports['Restuore a url.'] = function (test) {
+    test.equal(
+        'http://localhost:3000/profiles/1234?foo=bar',
+        prerenderMiddleware.restoreURL('http://localhost:3000/profiles/1234?_escaped_fragment_=&foo=bar')
+    )
+    test.equal(
+        'http://localhost:3000/#!/profiles/1234',
+        prerenderMiddleware.restoreURL('http://localhost:3000/?_escaped_fragment_=/profiles/1234')
+    )
+    test.done();
+};

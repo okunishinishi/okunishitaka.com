@@ -4,6 +4,9 @@
  * @function _shouldShowPrerenderedPage
  * @private
  */
+var u = require('apeman-util'),
+    _queryInUrl = require('./_query_in_url');
+
 
 /** @lends _shouldShowPrerenderedPage */
 exports = module.exports = function _shouldShowPrerenderedPage(req) {
@@ -23,7 +26,7 @@ exports = module.exports = function _shouldShowPrerenderedPage(req) {
         return true;
     }
 
-    var query = url.parse(req.url, true).query;
+    var query = _queryInUrl(req.url);
     if (d.isExcapedFragment(query)) {
         return true;
     }
