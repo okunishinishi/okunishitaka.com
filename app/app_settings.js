@@ -24,6 +24,16 @@ exports.publicDir = path.resolve(basedir, 'public');
 exports.dataDir = path.resolve(basedir, 'var/data');
 
 /**
+ * Cache directory path.
+ */
+exports.cacheDir = path.resolve(basedir, 'var/cache');
+
+/**
+ * Prerender cache directory path.
+ */
+exports.prerenderCacheDir = path.resolve(exports.cacheDir, 'prerender');
+
+/**
  * Access log file path.
  */
 exports.accessLogFile = path.resolve(basedir, 'var/log/okunishitaka.com-access.log');

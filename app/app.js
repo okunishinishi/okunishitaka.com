@@ -9,7 +9,8 @@
 var web = require('apeman-web'),
     mw = web.middlewares,
     u = require('apeman-util'),
-    connect = web.ext.connect;
+    connect = web.ext.connect,
+    prerenderMiddleware = require('./middlewares/prerender_middleware');
 
 var isDevelopment = process.env.NODE_ENV === 'development';
 
@@ -26,6 +27,9 @@ app.start = function (port, settings, callback) {
         .use(function (req, res, next) {
             next();
         })
+        .use(prerenderMiddleware({
+            cacheDirectory: settings.prerenderCacheDir
+        }))
         .use(mw.serveStaticMiddleware({
             root: settings.publicDir,
             extensions: ['html', 'htm', 'json']

@@ -44,3 +44,9 @@ exports['Restuore a url.'] = function (test) {
     )
     test.done();
 };
+
+exports['Filename for an url.'] = function (test) {
+    var filename = prerenderMiddleware._filenameForUrl('http://localhost:3801/?_escaped_fragment_=/html/index-page.html');
+    test.ok(filename);
+    test.done();
+};

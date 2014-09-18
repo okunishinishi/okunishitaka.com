@@ -22,7 +22,7 @@ exports = module.exports = function _shouldShowPrerenderedPage(req) {
         return true;
     }
 
-    if (d.isCralwer(req.headers)) {
+    if (d.isCrawler(req.headers)) {
         return true;
     }
 
