@@ -69,18 +69,26 @@ prerenderMiddleware.prerender = function (incomingURL, cacheDirectory, callback)
         filename = path.join(cacheDirectory, prerenderMiddleware._filenameForUrl(restoredURL)),
         bin = require.resolve('./bin/prerender.phantom.js');
     restoredURL = 'http://localhost:3801' + restoredURL; //FIXME
-    async.series([
-        function (callback) {
-            mkdirp(path.dirname(filename), callback);
-        },
-        function (callback) {
-            execPhantomScript(bin, [
-                restoredURL,
-                filename
-            ], callback);
+
+    fs.exists(filename, function (exists) {
+        if (exists) {
+            callback(null, filename);
+            return;
         }
-    ], function (err) {
-        callback(err, filename);
+
+        async.series([
+            function (callback) {
+                mkdirp(path.dirname(filename), callback);
+            },
+            function (callback) {
+                execPhantomScript(bin, [
+                    restoredURL,
+                    filename
+                ], callback);
+            }
+        ], function (err) {
+            callback(err, filename);
+        });
     });
 
 

@@ -16,12 +16,12 @@
 
 </head>
 <body ng-controller="{{Name}}Ctrl">
-<header ng-include="baseURL + partials.header"></header>
+<header ng-include="url(partials.header)"></header>
 
 <main class="container">
 </main>
 
-<footer ng-include="baseURL + partials.footer"></footer>
+<footer ng-include="url(partials.footer)"></footer>
 
 </body>
 </html>

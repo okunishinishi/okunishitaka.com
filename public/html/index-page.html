@@ -3,30 +3,29 @@
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" CONTENT="width=device-width, user-scalable=no"/>
-    <meta name="fragment" content="!">
 
     <link rel="icon" href="./images/favicon.png"/>
 
-        <link rel="stylesheet" href="/stylesheets/base.css"/>
-        <link rel="stylesheet" href="/stylesheets/index-page.css"/>
+    <link rel="stylesheet" href="/stylesheets/base.css"/>
+    <link rel="stylesheet" href="/stylesheets/index-page.css"/>
 
-        <script src="/javascripts/lib.js"></script>
-        <script src="/javascripts/locales.js"></script>
-        <script src="/javascripts/models.js"></script>
-        <script src="/javascripts/services.js"></script>
-        <script src="/javascripts/pages/ok-page.js"></script>
-        <script src="/javascripts/pages/ok-index-page.js"></script>
+    <script src="/javascripts/lib.js"></script>
+    <script src="/javascripts/locales.js"></script>
+    <script src="/javascripts/models.js"></script>
+    <script src="/javascripts/services.js"></script>
+    <script src="/javascripts/pages/ok-page.js"></script>
+    <script src="/javascripts/pages/ok-index-page.js"></script>
 
     <title>{{title("index")}}</title>
 
 </head>
 <body ng-controller="IndexCtrl">
-<header ng-include="baseURL + partials.header"></header>
+<header ng-include="url(partials.header)"></header>
 
 <main class="container">
 </main>
 
-<footer ng-include="baseURL + partials.footer"></footer>
+<footer ng-include="url(partials.footer)"></footer>
 
 </body>
 </html>
