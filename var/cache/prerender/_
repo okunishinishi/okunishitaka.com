@@ -1,0 +1,36 @@
+<!DOCTYPE html><html ng-app="okIndexPage" class="ng-scope"><head lang="en"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="fragment" content="!">
+
+    <link rel="icon" href="./images/favicon.png">
+
+        <link rel="stylesheet" href="/stylesheets/base.css">
+        <link rel="stylesheet" href="/stylesheets/index-page.css">
+
+        <script src="/javascripts/lib.js"></script>
+        <script src="/javascripts/locales.js"></script>
+        <script src="/javascripts/models.js"></script>
+        <script src="/javascripts/services.js"></script>
+        <script src="/javascripts/pages/ok-page.js"></script>
+        <script src="/javascripts/pages/ok-index-page.js"></script>
+
+    <title class="ng-binding">index - okunishitaka.com</title>
+
+</head>
+<body ng-controller="IndexCtrl" class="ng-scope">
+<!-- ngInclude: baseURL + partials.header --><header ng-include="baseURL + partials.header" class="ng-scope"><!-- Header HTML -->
+<div class="container ng-scope">
+<h1 class="ng-binding">okunishitaka.com</h1>
+</div></header>
+
+<main class="container">
+</main>
+
+<!-- ngInclude: baseURL + partials.footer --><footer ng-include="baseURL + partials.footer" class="ng-scope"><div class="container ng-scope" id="footer-content">
+    <small id="small-copyright">Copyright © 2014 Taka Okunishi All Rights Reserved</small>
+</div>
+</footer>
+
+
+</body></html>

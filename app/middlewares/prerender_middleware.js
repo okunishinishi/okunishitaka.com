@@ -1,8 +1,10 @@
 /**
  * Middleware to pre render.
  * @function prerenderMiddleware
- * @param {object} [options] - Optional settings.
- * @param {string} options.cacheDirectory - Cache directory path.z
+ * @param {object} options - Optional settings.
+ * @param {string} options.cacheDirectory - Cache directory path.
+ * @param {string} [options.protocol='http'] - Protocol to forwerd to.
+ * @param {string} [options.protocol='http'] - Protocol to forwerd to.
  */
 
 "use strict";
@@ -10,6 +12,7 @@
 var u = require('apeman-util'),
     copy = u.object.copy,
     url = u.core.url,
+    fs = u.core.fs,
     qs = u.ext.qs,
     mkdirp = u.ext.mkdirp,
     async = u.ext.async,
@@ -28,11 +31,15 @@ function prerenderMiddleware(options) {
             next();
             return;
         }
-        prerenderMiddleware.prerender(req.url, o.cacheDirectory, function (err, page) {
+        prerenderMiddleware.prerender(req.url, o.cacheDirectory, function (err, prerendered) {
             if (err) {
+                console.error(err);
                 next(); //Do nothing if faild.
                 return;
             }
+            console.log('prerender page with url:', req.url);
+            console.log(' cached saved:', prerendered);
+            fs.createReadStream(prerendered).pipe(res);
         });
     }
 }
@@ -61,8 +68,7 @@ prerenderMiddleware.prerender = function (incomingURL, cacheDirectory, callback)
     var restoredURL = prerenderMiddleware.restoreURL(incomingURL),
         filename = path.join(cacheDirectory, prerenderMiddleware._filenameForUrl(restoredURL)),
         bin = require.resolve('./bin/prerender.phantom.js');
-    console.log('restoredURL', restoredURL);
-    console.log('filename', filename, path.dirname(filename));
+    restoredURL = 'http://localhost:3801' + restoredURL; //FIXME
     async.series([
         function (callback) {
             mkdirp(path.dirname(filename), callback);
@@ -73,13 +79,15 @@ prerenderMiddleware.prerender = function (incomingURL, cacheDirectory, callback)
                 filename
             ], callback);
         }
-    ], callback);
+    ], function (err) {
+        callback(err, filename);
+    });
 
 
 }
 
 prerenderMiddleware._filenameForUrl = function (url) {
-    return url.replace(/[\/]/g, "/\\");
+    return url.replace(/[\/]/g, "_");
 }
 
 

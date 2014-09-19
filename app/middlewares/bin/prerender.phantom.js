@@ -6,18 +6,16 @@
 
 "use strict";
 
-var args = process.argv,
-    url = args[2],
-    filename = args[3];
+
+var args = require('system').args,
+    url = args[1],
+    filename = args[2];
 
 var page = require('webpage').create(),
     fs = require('fs');
 
 page.open(url, function () {
-    fs.writeFile(filename, page.content, function (err) {
-        if (err) {
-            console.error(err);
-        }
-        phantom.exit();
-    });
+    fs.write(filename, page.content, 'w');
+    phantom.exit();
 });
+
