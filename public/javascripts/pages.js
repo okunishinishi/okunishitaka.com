@@ -79,10 +79,17 @@
                 $location.href = '/';
             };
         })
-        .run(function url($rootScope) {
-            $rootScope.baseURL = '.';
+        .run(function url($rootScope, $window) {
+            var location = $window.location;
+            $rootScope.baseURL = location.origin || [
+                [location.protocol, location.hostname].join("//"),
+                (location.port ? ':' + location.port : '')
+            ].join('');
             $rootScope.url = function (url) {
-                return [$rootScope.baseURL, url].join('/');
+                if (url.match(/^\//)) {
+                    return [$rootScope.baseURL, url].join('');
+                }
+                return [location.href, url].join('/');
             }
         })
         .run(function scrollTo($rootScope, $location, $anchorScroll) {

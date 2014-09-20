@@ -1,1 +1,14 @@
-[]
+[
+    {
+        "src": "public/html/blog-page.html",
+        "dest": "public/blog.html"
+    },
+    {
+        "src": "public/html/index-page.html",
+        "dest": "public/index.html"
+    },
+    {
+        "src": "public/html/work-page.html",
+        "dest": "public/work.html"
+    }
+]

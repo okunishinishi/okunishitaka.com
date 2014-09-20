@@ -20,6 +20,11 @@
         "mode": "444"
     },
     {
+        "src": "node_modules/apeman-front/assets/javascripts/angular-mocks.js",
+        "dest": "test/browser_unit_tests/angular-mocks.js",
+        "mode": "444"
+    },
+    {
         "src": "node_modules/apeman-front/assets/javascripts/angular.js",
         "dest": "public/javascripts/lib/angular.js",
         "mode": "444"
