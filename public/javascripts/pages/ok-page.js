@@ -55,5 +55,27 @@
                 $location.hash(id);
                 $anchorScroll();
             };
+        })
+        .controller('HeadControl', function ($scope) {
+            var l = $scope.l;
+            console.log(l)
+            $scope.navItem = [
+                {
+                    href: '/',
+                    title: l.pageNames.index
+                },
+                {
+                    href: '/blog',
+                    title: l.pageNames.blog
+                },
+                {
+                    href: '/work',
+                    title: l.pageNames.work
+                }
+
+            ]
+        })
+        .controller('FootControl', function ($scope) {
+
         });
 })(angular, locales);

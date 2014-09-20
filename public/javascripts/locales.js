@@ -10,6 +10,11 @@ window.locales = (function () {
             "author": "Taka Okunishi",
             "license": "GNU",
             "homepage": "https://github.com/okunishinishi/okunishitaka.com"
+        },
+        "pageNames": {
+            "index": "Top",
+            "blog": "Blog",
+            "work": "Works"
         }
     },
     "ja": {
@@ -19,6 +24,11 @@ window.locales = (function () {
             "author": "Taka Okunishi",
             "license": "GNU",
             "homepage": "https://github.com/okunishinishi/okunishitaka.com"
+        },
+        "pageNames": {
+            "index": "Top",
+            "blog": "Blog",
+            "work": "Works"
         }
     }
 }

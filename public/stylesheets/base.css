@@ -1922,3 +1922,27 @@ Styleguide 1.
   content: "\f20c";
 }
 
+/** Style of okunishinishi.com */
+
+header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-sizing: border-box;
+    background-color: rgba(250, 250, 250, 0.96);
+}
+
+.header-logo{
+    color: #DDD;
+}
+.header-nav .nav-item{
+    color:#888;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+

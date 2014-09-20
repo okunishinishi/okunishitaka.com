@@ -15,13 +15,12 @@
     <title>{{{title}}}</title>
 
 </head>
-<body ng-controller="{{Name}}Ctrl">
-<header ng-include="url(partials.header)"></header>
-
-<main class="container">
+<body>
+<header ng-include="url(partials.header)" ng-controller="HeadControl"></header>
+<main class="container" ng-controller="{{Name}}Ctrl">
 </main>
 
-<footer ng-include="url(partials.footer)"></footer>
+<footer ng-include="url(partials.footer)" ng-controller="FootControl"></footer>
 
 </body>
 </html>

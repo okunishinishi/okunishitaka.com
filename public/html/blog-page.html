@@ -19,13 +19,12 @@
     <title>{{title("blog")}}</title>
 
 </head>
-<body ng-controller="BlogCtrl">
-<header ng-include="url(partials.header)"></header>
-
-<main class="container">
+<body>
+<header ng-include="url(partials.header)" ng-controller="HeadControl"></header>
+<main class="container" ng-controller="BlogCtrl">
 </main>
 
-<footer ng-include="url(partials.footer)"></footer>
+<footer ng-include="url(partials.footer)" ng-controller="FootControl"></footer>
 
 </body>
 </html>
