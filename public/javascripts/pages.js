@@ -74,9 +74,9 @@
                 footer: '/html/partials/footer.html'
             };
         })
-        .run(function goTop($rootScope, $location) {
+        .run(function goTop($rootScope, $window) {
             $rootScope.goTop = function () {
-                $location.href = '/';
+                $window.location.href = '/';
             };
         })
         .run(function url($rootScope, $window) {

@@ -5,5 +5,5 @@
 "use strict";
 
 module.exports = {
-
+    get settingsRoute() { return require('./settings_route'); }
 };

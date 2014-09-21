@@ -1,31 +1,31 @@
 {
-    "name": "okunishitaka.com",
-    "version": "0.0.0",
-    "description": "Homepage for Taka Okunishi",
-    "main": "index.js",
-    "private": true,
-    "scripts": {
-        "test": "./ci/bin/test"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/okunishinishi/okunishitaka.com.git"
-    },
-    "author": "Taka Okunishi",
-    "license": "GNU",
-    "bugs": {
-        "url": "https://github.com/okunishinishi/okunishitaka.com/issues"
-    },
-    "homepage": "https://github.com/okunishinishi/okunishitaka.com",
-    "dependencies": {
-        "apeman-util": "0.0.21",
-        "apeman-storage": "0.0.1",
-        "apeman-front": "0.0.9",
-        "apeman-web": "0.0.8",
-        "phantomjs": "^1.9.7-15"
-    },
-    "devDependencies": {
-        "apeman-tasks": "0.0.15",
-        "bower": "^1.3.10"
-    }
+  "name": "okunishitaka.com",
+  "version": "0.0.0",
+  "description": "Homepage for Taka Okunishi",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "./ci/bin/test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okunishinishi/okunishitaka.com.git"
+  },
+  "author": "Taka Okunishi",
+  "license": "GNU",
+  "bugs": {
+    "url": "https://github.com/okunishinishi/okunishitaka.com/issues"
+  },
+  "homepage": "https://github.com/okunishinishi/okunishitaka.com",
+  "dependencies": {
+    "apeman-util": "0.0.21",
+    "apeman-storage": "0.0.1",
+    "apeman-front": "0.0.9",
+    "apeman-web": "0.0.8",
+    "phantomjs": "^1.9.7-15"
+  },
+  "devDependencies": {
+    "apeman-tasks": "0.0.15",
+    "bower": "^1.3.10"
+  }
 }
