@@ -1,36 +1,4 @@
 /**
- * Models.
- * @requires angular
- */
-
-(function (ng) {
-    "use strict";
-
-    ng
-        .module('okModels', [
-
-        ]);
-})(angular);
-/**
- * Blog model.
- * @requires angualr
- * @requires apeman
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('okModels')
-        .factory('Blog', function () {
-            function Blog() {
-                var s = this;
-                s.init.apply(s, arguments);
-            }
-
-            return Blog;
-        })
-})(angular, apeman);
-/**
  * Abstract model.
  * @requires angualr
  * @requires apeman

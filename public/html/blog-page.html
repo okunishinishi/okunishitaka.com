@@ -21,7 +21,16 @@
 </head>
 <body>
 <header ng-include="url(partials.header)" ng-controller="HeadControl"></header>
-<main class="container" ng-controller="BlogCtrl">
+<main class="container">
+    <article ng-controller="BlogCtrl" id="blog-article">
+        <section id="blog-list-section">
+            <dl id="blog-list">
+                <dt ng-repeat-start="b in blogs" id="blog-dt-{{b._id}}">
+                    <span ng-if="editing"></span>
+                </dt>
+            </dl>
+        </section>
+    </article>
 </main>
 
 <footer ng-include="url(partials.footer)" ng-controller="FootControl"></footer>
