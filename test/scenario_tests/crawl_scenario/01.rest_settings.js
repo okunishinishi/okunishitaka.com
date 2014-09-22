@@ -34,6 +34,7 @@ describe('Settings', function () {
             url: sceanrio.baseURL + 'settings'
         }, function (err, res, body) {
             test.ifError(err);
+            test.equal(res.statusCode, 200);
             done();
         });
     });

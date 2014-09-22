@@ -70,7 +70,7 @@ exports._detectors = {
         var userAgent = headers['user-agent'];
         var crawlerUserAgents = exports._detectors.crawlerUserAgents;
         return crawlerUserAgents.some(function (crawlerUserAgent) {
-            return userAgent.toLowerCase().indexOf(crawlerUserAgent.toLowerCase()) !== -1;
+            return (userAgent || '').toLowerCase().indexOf(crawlerUserAgent.toLowerCase()) !== -1;
         });
     },
     isExcapedFragment: function isExcapedFragment(query) {

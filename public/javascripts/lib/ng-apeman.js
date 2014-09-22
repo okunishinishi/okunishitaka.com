@@ -1,7 +1,7 @@
 /**
  * @file Apeman module for angular.js
  * @namespace ng-apeman
- * @version 0.0.7
+ * @version 0.0.8
  * @requires angular
  */
 

@@ -4,13 +4,17 @@
             "lib/**/*.js"
         ],
         "destDir": "test/unit_tests/lib_tests",
-        "helperPath": "../../_helper"
+        "data": {
+            "helperPath": "../../_helper"
+        }
     },
     {
         "srcPattern": [
             "app/middlewares/*.js"
         ],
         "destDir": "test/unit_tests/app_tests",
-        "helperPath": "../../_helper"
+        "data": {
+            "helperPath": "../../_helper"
+        }
     }
 ]
