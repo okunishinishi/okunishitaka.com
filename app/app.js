@@ -6,9 +6,8 @@
 
 "use strict";
 
-var h = require('./_helper'),
-    clean = require('./_clean'),
-    web = h.web,
+var clean = require('./_clean'),
+    web = require('apeman-web'),
     async = web.ext.async,
     mw = web.middlewares,
     connect = web.ext.connect,
@@ -78,9 +77,10 @@ app.start = function (port, settings, callback) {
                 }));
 
 
-            app.listen(port, function () {
-                callback.call(app);
+            var server = app.listen(port, function () {
+                callback.call(app, server);
             });
+            app.close = server.close.bind(server);
         }
     ], function (err) {
         callback(err);

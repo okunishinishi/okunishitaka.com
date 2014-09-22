@@ -6,19 +6,10 @@
 "use strict";
 
 var u = require('apeman-util'),
-    file = u.file,
-    web = require('apeman-web'),
     clustering = u.clustering,
-    path = u.core.path;
-
-var basedir = path.resolve(__dirname, '..'),
+    basedir = require('../app_settings').basedir,
     h = new clustering.ClusterHelper(basedir);
 
 h.async = u.ext.async;
-h.path = path;
-h.web = web;
-h.rmdirRecursive = file.rmdirRecursive;
-
-
 
 module.exports = h;

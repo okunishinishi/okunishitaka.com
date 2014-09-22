@@ -30,7 +30,7 @@ AppStorages.prototype = {
     },
     connect: function (dataDir, callback) {
         var s = this;
-        s.settingsStorage = AppStorages.newStorage(dataDir, 'settings');
+        s.settingStorage = AppStorages.newStorage(dataDir, 'settings');
         s.rebuildAll(callback);
     }
 }

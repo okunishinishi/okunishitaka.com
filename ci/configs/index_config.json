@@ -12,7 +12,6 @@
             "file": "App routes.",
             "module": "okunishitaka.com/app/routes"
         }
-
     },
     {
         "dirname": "ci/configs",

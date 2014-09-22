@@ -5,14 +5,16 @@
 
 "use strict";
 
-var h = require('./_helper');
+var u = require('apeman-util'),
+    async = u.ext.async,
+    file = u.file;
 
 /** @lends _clean */
 function _clean(settings, callback) {
-    h.async.series([
+    async.series([
         function (callback) {
             var prerenderCacheDir = settings.prerenderCacheDir;
-            h.rmdirRecursive(prerenderCacheDir, callback);
+            file.rmdirRecursive(prerenderCacheDir, callback);
         }
     ], callback);
 }

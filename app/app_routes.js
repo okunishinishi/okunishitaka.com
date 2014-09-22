@@ -9,5 +9,8 @@
 var r = require('./routes');
 
 module.exports = {
-
+    '/settings': {
+        GET: r.settingRoute.one,
+        PUT: r.settingRoute.save
+    }
 };

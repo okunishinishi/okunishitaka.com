@@ -9,7 +9,7 @@
 "use strict";
 
 
-var h = require('../_helper'),
+var h = require('./_helper'),
     data = require('../../server');
 
 process.chdir(h.basedir);

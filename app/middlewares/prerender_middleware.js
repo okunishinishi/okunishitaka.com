@@ -59,14 +59,14 @@ prerenderMiddleware.restoreURL = function (urlString) {
         fragment = query['_escaped_fragment_'] || '';
     delete query['_escaped_fragment_'];
     var querySring = qs.stringify(query);
-    var href = data.href.replace(data.search, '');
+    var href = data.href.replace(data.search, '').replace(/\/$/, '');
     if (fragment) {
-        href = [href, fragment].join('/');
+        href = [href, fragment.replace(/^\/*/, '')].join('/');
     }
     if (querySring) {
         href = [href, querySring].join('?');
     }
-    return  href.replace(/\/{2,}/g, '/');
+    return  href;
 };
 
 prerenderMiddleware.prerender = function (incomingURL, cacheDirectory, cacheDuration, callback) {

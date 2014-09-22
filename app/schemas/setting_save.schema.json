@@ -1,0 +1,9 @@
+{
+    "title": "settings_save",
+    "type": "object",
+    "properties": {
+
+    },
+    "additionalProperties": {
+    }
+}
