@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+"use strict";
+
+
+/**
+ * Watch project.
+ * @type {exports}
+ */
+
+var h = require('../_helper'),
+    async = h.async,
+    tasks = h.tasks,
+    configs = require('../configs');
+
+process.chdir(h.basedir);
+
+new tasks.ForkTask({
+    files: [
+        'ci/bin/watch_to_concat',
+    ]
+}).run(h.done('Doc done!'));

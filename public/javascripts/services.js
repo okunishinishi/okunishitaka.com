@@ -22,7 +22,6 @@
         .module('okServices')
         .service('blogApiService', function BlogApiService($http) {
             var s = this;
-
             s.list = function list(params) {
                 return $http({
                     method: 'GET',
@@ -31,7 +30,6 @@
                 });
             }
         });
-
 })(angular);
 /**
  * Setting api service.

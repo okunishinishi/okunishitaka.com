@@ -8,6 +8,7 @@
 "use strict";
 
 var h = require('./_helper'),
+    async = h.async,
     data = require('../../server');
 
 process.chdir(h.basedir);
@@ -16,15 +17,24 @@ process.env.NODE_ENV = 'development';
 var app = require('../app'),
     settings = require('../app_settings');
 
-h.fork(require.resolve('../../ci/bin/build'), [], function () {
 
-    app.start(data.port, settings, function () {
-        console.log('Dev server listening at port:', data.port);
-    });
+async.series([
+    function (callback) {
+        h.fork('ci/bin/build', [], callback);
+    },
+    function (callback) {
+        h.fork('ci/bin/watch', [], function () {
+        });
+        callback();
+    },
+    function (callback) {
+        app.start(data.port, settings, function () {
+            console.log('Dev server listening at port:', data.port);
+        });
 
-    process.on('uncaughtException', function (err) {
-        console.log('Caught exception: ' + err);
-    });
-
-
-});
+        process.on('uncaughtException', function (err) {
+            console.log('Caught exception: ' + err);
+            process.exit(1);
+        });
+    }
+]);

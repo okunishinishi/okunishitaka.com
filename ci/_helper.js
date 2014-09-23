@@ -26,5 +26,8 @@ h.mapping = u.mapping;
 h.sorting = u.sorting;
 h.rmdirRecursive = file.rmdirRecursive;
 h.yesno = u.ext.yesno;
+
+h.watchAll = file.watchAll;
+
 module.exports = h;
 
