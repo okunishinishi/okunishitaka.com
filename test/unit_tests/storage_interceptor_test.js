@@ -5,8 +5,8 @@
 
 "use strict";
 
-var StorageInterceptor = require('./../../../app/routes/interceptors/storage_interceptor.js'),
-    h = require('../../_helper');
+var StorageInterceptor = require('./../../app/routes/interceptors/storage_interceptor.js'),
+    h = require('../_helper');
 
 exports.setUp = function (done) {
     // h.injector.inject(console, 'log', h.doNothing);

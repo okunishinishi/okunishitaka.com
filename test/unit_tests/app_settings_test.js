@@ -5,8 +5,8 @@
 
 "use strict";
 
-var appSettings = require('./../../../app/app_settings.js'),
-    h = require('../../_helper');
+var appSettings = require('./../../app/app_settings.js'),
+    h = require('../_helper');
 
 exports.setUp = function (done) {
     // h.injector.inject(console, 'log', h.doNothing);

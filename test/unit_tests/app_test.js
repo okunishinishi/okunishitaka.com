@@ -1,12 +1,12 @@
 /**
- * @file Test for app_storages.js.
+ * @file Test for app.js.
  * Runs with node unit.
  */
 
 "use strict";
 
-var appStorages = require('./../../../app/app_storages.js'),
-    h = require('../../_helper');
+var app = require('./../../app/app.js'),
+    h = require('../_helper');
 
 exports.setUp = function (done) {
     // h.injector.inject(console, 'log', h.doNothing);
@@ -18,7 +18,8 @@ exports.tearDown = function (done) {
     done();
 };
 
-exports['App storages.'] = function (test) {
-    test.ok(appStorages);
+exports['App.'] = function (test) {
+    test.ok(app);
+    test.ok(app.start);
     test.done();
 };

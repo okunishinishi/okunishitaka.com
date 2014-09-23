@@ -1,22 +1,14 @@
 [
     {
         "srcPattern": [
-            "lib/**/*.js"
-        ],
-        "destDir": "test/unit_tests/lib_tests",
-        "data": {
-            "helperPath": "../../_helper"
-        }
-    },
-    {
-        "srcPattern": [
             "app/app*.js",
             "app/middlewares/*.js",
-            "app/routes/interceptors/*_interceptor.js"
+            "app/routes/interceptors/*_interceptor.js",
+            "app/util/*.js"
         ],
-        "destDir": "test/unit_tests/app_tests",
+        "destDir": "test/unit_tests",
         "data": {
-            "helperPath": "../../_helper"
+            "helperPath": "../_helper"
         }
     }
 ]

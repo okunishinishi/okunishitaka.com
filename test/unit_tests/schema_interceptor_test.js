@@ -5,8 +5,8 @@
 
 "use strict";
 
-var SchemaInterceptor = require('./../../../app/routes/interceptors/schema_interceptor.js'),
-    h = require('../../_helper');
+var SchemaInterceptor = require('./../../app/routes/interceptors/schema_interceptor.js'),
+    h = require('../_helper');
 
 exports.setUp = function (done) {
     // h.injector.inject(console, 'log', h.doNothing);

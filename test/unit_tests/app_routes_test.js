@@ -5,8 +5,8 @@
 
 "use strict";
 
-var appRoutes = require('./../../../app/app_routes.js'),
-    h = require('../../_helper');
+var appRoutes = require('./../../app/app_routes.js'),
+    h = require('../_helper');
 
 exports.setUp = function (done) {
     // h.injector.inject(console, 'log', h.doNothing);

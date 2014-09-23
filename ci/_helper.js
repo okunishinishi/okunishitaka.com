@@ -17,7 +17,7 @@ var h = new TaskHelper(__dirname + '/..');
 h.tasks = {};
 copy(require('apeman-tasks'), h.tasks);
 copy(require('./tasks'), h.tasks);
-h.copyDir = require('../lib/util/copy_dir');
+h.copyDir = require('../app/util/copy_dir');
 h.dateformat = dateformat;
 h.fs = u.core.fs;
 h.path = u.core.path;

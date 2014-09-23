@@ -5,11 +5,11 @@
 
 "use strict";
 
-var copyDir = require('./../../../lib/util/copy_dir.js'),
+var copyDir = require('./../../app/util/copy_dir.js'),
     fs = require('fs'),
     u = require('apeman-util'),
     mkdirp = u.ext.mkdirp,
-    h = require('../../_helper');
+    h = require('../_helper');
 
 exports.setUp = function (done) {
     // h.injector.inject(console, 'log', h.doNothing);
