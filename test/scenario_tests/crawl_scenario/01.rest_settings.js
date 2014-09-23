@@ -35,6 +35,8 @@ describe('Settings', function () {
         }, function (err, res, body) {
             test.ifError(err);
             test.equal(res.statusCode, 200);
+            var data = JSON.parse(body);
+            test.equal(data.foo, 'bar');
             done();
         });
     });

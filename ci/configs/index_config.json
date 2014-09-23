@@ -14,6 +14,14 @@
         }
     },
     {
+        "dirname": "app/routes/interceptors",
+        "doc": {
+            "file": "App interceptor",
+            "module": "okunishitaka.com/app/routes/interceptors"
+        },
+        "pascalPattern":"*_interceptor"
+    },
+    {
         "dirname": "ci/configs",
         "doc": {
             "file": "CI configuration.",

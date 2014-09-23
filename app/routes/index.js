@@ -5,5 +5,5 @@
 "use strict";
 
 module.exports = {
-    get settingRoute() { return require('./setting_route'); }
+    get blogRoute() { return require('./blog_route'); },    get interceptors() { return require('./interceptors'); },    get settingRoute() { return require('./setting_route'); }
 };

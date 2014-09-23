@@ -7,7 +7,10 @@
 var h = require('./_helper'),
     settingStorage = h.storages.settingStorage,
     schemas = h.schemas,
-    async = h.async;
+    async = h.async,
+    interceptors = require('./interceptors'),
+    SchemaInterceptor = interceptors.SchemaInterceptor,
+    StorageInterceptor = interceptors.StorageInterceptor;
 
 exports._singletonId = '00000';
 
@@ -18,16 +21,13 @@ exports._singletonId = '00000';
  * @param next
  */
 exports.one = function (req, res, next) {
-    var id = exports._singletonId;
-    async.waterfall([
+    req.params._id = exports._singletonId;
+    var storageInterceptor = new StorageInterceptor(settingStorage);
+    async.series([
         function (callback) {
-            settingStorage.one(id, callback);
-        },
-        function (data, callback) {
-            res.sendJson(data || {});
-            callback(null);
+            storageInterceptor.one(req, res, next);
         }
-    ], h.done(next));
+    ], next);
 }
 
 /**
@@ -37,27 +37,27 @@ exports.one = function (req, res, next) {
  * @param next
  */
 exports.save = function (req, res, next) {
-    var data = req.body;
-    data._id = exports._singletonId;
-    async.waterfall([
+    var schemaInterceptor = new SchemaInterceptor(schemas.settingSaveSchema),
+        storageInterceptor = new StorageInterceptor(settingStorage);
+    async.series([
         function (callback) {
-            h.validate(schemas.settingSaveSchema, data, callback);
+            schemaInterceptor.validate(req, res, callback);
         },
-        function (valid, vError, callback) {
-            if (!valid) {
-                res.statusCode = h.statusCode.validationError;
-                res.sendJson(h.errorData(vError));
-                return;
-            }
+        function (callback) {
+            var id = exports._singletonId;
             async.waterfall([
                 function (callback) {
-                    settingStorage.save(data, callback);
+                    settingStorage.one(id, callback);
                 },
                 function (data, callback) {
-                    res.sendJson(h.successData(data));
-                    callback(null);
+                    req.body._id = id;
+                    if (data) {
+                        storageInterceptor.update(req, res, callback);
+                    } else {
+                        storageInterceptor.create(req, res, callback);
+                    }
                 }
-            ], callback);
+            ])
         }
-    ], h.done(next));
+    ], next);
 }

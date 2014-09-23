@@ -5,9 +5,7 @@
  * @see {@link http://nodejs.org/api/cluster.html | cluster}
  */
 
-
 "use strict";
-
 
 var h = require('./_helper'),
     data = require('../../server');
@@ -18,9 +16,7 @@ process.env.NODE_ENV = 'development';
 var app = require('../app'),
     settings = require('../app_settings');
 
-
 h.fork(require.resolve('../../ci/bin/build'), [], function () {
-
 
     app.start(data.port, settings, function () {
         console.log('Dev server listening at port:', data.port);

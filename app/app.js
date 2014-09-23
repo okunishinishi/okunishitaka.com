@@ -15,7 +15,6 @@ var clean = require('./_clean'),
     prerenderMiddleware = require('./middlewares/prerender_middleware');
 
 var isDevelopment = process.env.NODE_ENV === 'development';
-
 var app = module.exports;
 app.start = function (port, settings, callback) {
 
@@ -29,7 +28,7 @@ app.start = function (port, settings, callback) {
             storages.connect(settings.dataDir, callback);
         },
         function (callback) {
-            var app = connect()
+            var server = connect()
                 .use(function (req, res, next) {
                     next();
                 })
@@ -74,15 +73,16 @@ app.start = function (port, settings, callback) {
                 }))
                 .use(mw.sendServerErrorMiddleware({
 
-                }));
-
-
-            var server = app.listen(port, function () {
-                callback.call(app, server);
-            });
-            app.close = server.close.bind(server);
+                }))
+                .listen(port, function () {
+                    app.close = server.close.bind(server);
+                    callback(null, app);
+                });
         }
     ], function (err) {
-        callback(err);
+        if (err) {
+            console.error(err);
+        }
+        callback(app);
     });
 };

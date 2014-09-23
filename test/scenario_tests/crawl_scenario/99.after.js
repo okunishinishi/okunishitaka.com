@@ -6,6 +6,7 @@
 
 after(function (done) {
     var scenario = this;
+
     scenario.server.close();
     done();
 });

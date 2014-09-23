@@ -6,6 +6,7 @@
 
 var u = require('apeman-util'),
     async = u.ext.async,
+    mkdirp = u.ext.mkdirp,
     path = u.core.path,
     storage = require('apeman-storage'),
     JsonStorage = storage.JsonStorage;
@@ -19,7 +20,7 @@ AppStorages.prototype = {
     rebuildAll: function (callback) {
         var s = this;
         async.eachSeries([
-
+            s.blogStorage
         ], function (storage) {
             if (storage) {
                 storage.rebuild(callback);
@@ -30,13 +31,31 @@ AppStorages.prototype = {
     },
     connect: function (dataDir, callback) {
         var s = this;
-        s.settingStorage = AppStorages.newStorage(dataDir, 'settings');
-        s.rebuildAll(callback);
+        async.series([
+            function (callback) {
+                mkdirp(dataDir, callback);
+            },
+            function (callback) {
+                s.settingStorage = AppStorages.newStorage(dataDir, 'settings');
+                s.blogStorage = AppStorages.newStorage(dataDir, 'blogs');
+
+                callback(null);
+            },
+            function (callback) {
+                s.rebuildAll(callback);
+            }
+
+        ], callback);
+
     }
 }
 
 AppStorages.newStorage = function (dataDir, dataSubDir) {
-    return new JsonStorage(path.resolve(dataDir, dataSubDir));
+    var basedir = path.resolve(dataDir, dataSubDir);
+    mkdirp.sync(basedir);
+    return new JsonStorage({
+        basedir: basedir
+    });
 }
 
 module.exports = new AppStorages();

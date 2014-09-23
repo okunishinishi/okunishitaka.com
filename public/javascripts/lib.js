@@ -22013,14 +22013,30 @@ var styleDirective = valueFn({
 /**
  * @file Apeman client side scripts.
  * @namespace apeman
- * @version 0.0.8
+ * @version 0.0.9
  */
 window.apeman = (function (apeman) {
     "use strict";
     /** @lends apeman */
 	var ap = apeman || {};
     /**
+	 * Copy an object.
+	 * @function copy
+	 * @param {object} src - Object to copy from.
+	 * @param {object} dest - Object to copy to.
+	 * @returns {object} - Destination object.
+	 */
+	ap.copy = function copy(src, dest) {
+	    var keys = Object.keys(src);
+	    for (var i = 0; i < keys.length; i++) {
+	        var key = keys[i];
+	        dest[key] = src[key];
+	    }
+	    return dest;
+	}
+    /**
 	 * Do nothing.
+	 * @function doNothing
 	 */
 	ap.doNothing = function () {
 	
@@ -22052,7 +22068,7 @@ window.apeman = (function (apeman) {
 /**
  * @file Apeman module for angular.js
  * @namespace ng-apeman
- * @version 0.0.8
+ * @version 0.0.9
  * @requires angular
  */
 

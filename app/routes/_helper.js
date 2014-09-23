@@ -30,7 +30,9 @@ exports.validate = function (schema, data, callback) {
 };
 
 exports.statusCode = {
-    validationError: '422'
+    notFoundError:404,
+    conflictError:409,
+    validationError: 422
 }
 
 exports.successData = function (data) {

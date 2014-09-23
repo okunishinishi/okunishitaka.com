@@ -7,7 +7,7 @@
 
 "use strict";
 
-var h = require('../_helper'),
+var h = require('./_helper'),
     cluster = require('cluster'),
     data = require('../../server');
 

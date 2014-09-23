@@ -4,11 +4,13 @@
 
 "use strict";
 
+var config = require('../scenario_tests.config.json');
+process.env.NODE_ENV = config.NODE_ENV;
+
 var h = require('../../_helper'),
     u = require('apeman-util'),
     format = u.core.util.format,
-    app = require('../../../app/app'),
-    config = require('../scenario_tests.config.json');
+    app = require('../../../app/app');
 
 before(function (done) {
     var scenario = this,
