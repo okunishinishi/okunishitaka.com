@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+/**
+ * Clean files.
+ * @function _clean
+ */
+
+"use strict";
+
+var h = require('./_helper'),
+    settings = require('../app_settings'),
+    async = h.async,
+    file = h.file;
+
+async.series([
+    function (callback) {
+        var prerenderCacheDir = settings.prerenderCacheDir;
+        file.rmdirRecursive(prerenderCacheDir, callback);
+    }
+], h.done('Clean done!'));
+

@@ -6,23 +6,25 @@
 
 "use strict";
 
-var clean = require('./_clean'),
-    web = require('apeman-web'),
+var web = require('apeman-web'),
+    u = require('apeman-util'),
+    childProcess = u.core.childProcess,
     async = web.ext.async,
     mw = web.middlewares,
     connect = web.ext.connect,
     storages = require('./app_storages'),
     prerenderMiddleware = require('./middlewares/prerender_middleware');
 
-var isDevelopment = process.env.NODE_ENV === 'development';
-var app = module.exports;
+var app = {};
 app.start = function (port, settings, callback) {
+    var isDevelopment = process.env.NODE_ENV === 'development';
 
     process.chdir(settings.basedir);
 
     async.series([
         function (callback) {
-            clean(settings, callback);
+            var clean = require.resolve('./bin/clean');
+            childProcess.fork(clean).on('exit', callback);
         },
         function (callback) {
             storages.connect(settings.dataDir, callback);
@@ -89,3 +91,5 @@ app.start = function (port, settings, callback) {
         callback(app);
     });
 };
+
+module.exports = app;
