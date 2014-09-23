@@ -9,13 +9,17 @@ process.env.NODE_ENV = config.NODE_ENV;
 
 var h = require('../../_helper'),
     u = require('apeman-util'),
+    url = u.core.url,
     format = u.core.util.format,
     app = require('../../../app/app');
 
 before(function (done) {
     var scenario = this,
         port = config.port;
-    scenario.baseURL = format('http://localhost:%s/', port);
+    var baseURL = format('http://localhost:%s/', port);
+    scenario.url = function (pathname) {
+        return url.resolve(baseURL, pathname);
+    }
     app.start(port, {
         basedir: h.basedir,
         publicDir: 'public',

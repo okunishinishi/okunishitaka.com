@@ -20,9 +20,11 @@ copy(require('./tasks'), h.tasks);
 h.copyDir = require('../lib/util/copy_dir');
 h.dateformat = dateformat;
 h.fs = u.core.fs;
+h.path = u.core.path;
 h.filtering = u.filtering;
 h.mapping = u.mapping;
 h.sorting = u.sorting;
 h.rmdirRecursive = file.rmdirRecursive;
+h.yesno = u.ext.yesno;
 module.exports = h;
 

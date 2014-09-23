@@ -36,6 +36,7 @@
         "test/.work",
         "test/mocks",
         "test/browser_unit_tests",
+        "test/data",
         "test/scenario_tests",
         "test/unit_tests",
         "test/unit_tests/app_tests",

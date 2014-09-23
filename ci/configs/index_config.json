@@ -19,7 +19,7 @@
             "file": "App interceptor",
             "module": "okunishitaka.com/app/routes/interceptors"
         },
-        "pascalPattern":"*_interceptor"
+        "pascalPattern": "*_interceptor"
     },
     {
         "dirname": "ci/configs",
@@ -35,5 +35,12 @@
             "module": "okunishitaka.com/ci/tasks"
         },
         "pascalPattern": "*task"
+    },
+    {
+        "dirname": "test/data",
+        "doc": {
+            "file": "test data modules."
+        }
     }
+
 ]

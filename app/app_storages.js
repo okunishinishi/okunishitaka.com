@@ -37,7 +37,9 @@ AppStorages.prototype = {
             },
             function (callback) {
                 s.settingStorage = AppStorages.newStorage(dataDir, 'settings');
-                s.blogStorage = AppStorages.newStorage(dataDir, 'blogs');
+                s.blogStorage = AppStorages.newStorage(dataDir, 'blogs', [
+                    'title'
+                ]);
 
                 callback(null);
             },
@@ -50,11 +52,12 @@ AppStorages.prototype = {
     }
 }
 
-AppStorages.newStorage = function (dataDir, dataSubDir) {
+AppStorages.newStorage = function (dataDir, dataSubDir, indicies) {
     var basedir = path.resolve(dataDir, dataSubDir);
     mkdirp.sync(basedir);
     return new JsonStorage({
-        basedir: basedir
+        basedir: basedir,
+        indicies: indicies
     });
 }
 

@@ -13,7 +13,7 @@ describe('Blogs', function () {
     it('List blogs.', function (done) {
         var scenario = this;
         request.get({
-            url: scenario.baseURL + 'blogs'
+            url: scenario.url('/blogs')
         }, function (err, res, body) {
             test.ifError(err);
             test.equal(res.statusCode, 200);
@@ -26,7 +26,7 @@ describe('Blogs', function () {
     it('Create a blog.', function (done) {
         var scenario = this;
         request.post({
-            url: scenario.baseURL + 'blogs',
+            url: scenario.url('/blogs'),
             form: {
                 title: 'title-bar'
             }
@@ -45,7 +45,7 @@ describe('Blogs', function () {
     it('Update a blog', function (done) {
         var scenario = this;
         request.put({
-            url: scenario.baseURL + 'blogs/' + created._id,
+            url: scenario.url('/blogs/' + created._id),
             form: {
                 content: 'bazbaz',
                 _vr: 0
@@ -62,7 +62,7 @@ describe('Blogs', function () {
     it('Conflict on a blog', function (done) {
         var scenario = this;
         request.put({
-            url: scenario.baseURL + 'blogs/' + created._id,
+            url: scenario.url('/blogs/' + created._id),
             form: {
                 content: 'bazbaz',
                 _vr: 0
@@ -77,7 +77,7 @@ describe('Blogs', function () {
     it('Find the blog', function (done) {
         var scenario = this;
         request.get({
-            url: scenario.baseURL + 'blogs/' + created._id
+            url: scenario.url('/blogs/' + created._id)
         }, function (err, res, body) {
             test.ifError(err);
             test.equal(res.statusCode, 200);
@@ -85,13 +85,26 @@ describe('Blogs', function () {
             test.equal(blog._id, created._id);
             done();
         });
-    })
+    });
+
+    it('List blogs.', function (done) {
+        var scenario = this;
+        request.get({
+            url: scenario.url('/blogs')
+        }, function (err, res, body) {
+            test.ifError(err);
+            test.equal(res.statusCode, 200);
+            var data = JSON.parse(body);
+            test.ok(data.length);
+            done();
+        });
+    });
 
     it('Destroy the blog.', function (done) {
         var scenario = this;
         request({
             method: 'delete',
-            url: scenario.baseURL + 'blogs/' + created._id
+            url: scenario.url('/blogs/' + created._id)
         }, function (err) {
             test.ifError(err);
             done();
@@ -101,11 +114,27 @@ describe('Blogs', function () {
     it('Find the blog', function (done) {
         var scenario = this;
         request.get({
-            url: scenario.baseURL + 'blogs/' + created._id
+            url: scenario.url('/blogs/' + created._id)
         }, function (err, res, body) {
             test.ifError(err);
             test.equal(res.statusCode, 404);
             done();
         });
-    })
+    });
+
+
+    it('Update a blog', function (done) {
+        var scenario = this;
+        request.put({
+            url: scenario.url('/blogs/' + created._id),
+            form: {
+                content: 'bazbaz',
+                _vr: 1
+            }
+        }, function (err, res, body) {
+            test.ifError(err);
+            test.equal(res.statusCode, 404);
+            done();
+        });
+    });
 });

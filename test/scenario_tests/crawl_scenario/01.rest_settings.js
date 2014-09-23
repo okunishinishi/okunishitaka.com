@@ -13,7 +13,7 @@ describe('Settings', function () {
     it('Update the setting.', function (done) {
         var scenario = this;
         request.put({
-            url: scenario.baseURL + 'settings',
+            url: scenario.url('/settings'),
             form: {
                 foo: 'bar'
             }
@@ -29,9 +29,9 @@ describe('Settings', function () {
     });
 
     it('Get the setting.', function (done) {
-        var sceanrio = this;
+        var scenario = this;
         request.get({
-            url: sceanrio.baseURL + 'settings'
+            url: scenario.url('/settings')
         }, function (err, res, body) {
             test.ifError(err);
             test.equal(res.statusCode, 200);
