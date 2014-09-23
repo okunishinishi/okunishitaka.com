@@ -58,7 +58,6 @@
         })
         .controller('HeadControl', function ($scope) {
             var l = $scope.l;
-            console.log(l)
             $scope.navItem = [
                 {
                     href: '/',

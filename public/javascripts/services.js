@@ -24,7 +24,10 @@
             var s = this;
 
             s.list = function list(params) {
-                return $http.get('/')
+                return $http({
+                    method: 'GET',
+                    url: '/blogs/'
+                });
             }
         });
 

@@ -15,7 +15,7 @@ module.exports = names.map(function (name) {
         filename = format('%s-%s-page.js', prefix, string.paramString(name));
     return {
         path: path.resolve(__dirname, filename),
-        force: true, //FIXME
+        force: false,
         mode: '644',
         data: {
             prefix: prefix,

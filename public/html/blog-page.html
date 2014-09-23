@@ -27,7 +27,10 @@
             <dl id="blog-list">
                 <dt ng-repeat-start="b in blogs" id="blog-dt-{{b._id}}">
                     <span ng-if="editing"></span>
+                    {{b.title}}
                 </dt>
+                <dd ng-repeat-end>
+                </dd>
             </dl>
         </section>
     </article>
