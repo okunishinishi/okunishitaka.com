@@ -29,6 +29,14 @@
 
             Blog.prototype = new Model;
 
+            ap.copy(
+                /** @lends Blog */
+                {
+                    BlogMap: function (data) {
+                        return new Blog(data);
+                    }
+                }, Blog);
+
             return Blog;
         })
 })(angular, apeman);
