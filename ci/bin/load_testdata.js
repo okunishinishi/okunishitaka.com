@@ -13,6 +13,7 @@ process.chdir(settings.basedir);
 h.yesno.ask('Are you sure to load test data ? [y/n]', null, function (ok) {
     if (!ok) {
         console.log('aborted.');
+        process.exit(0);
         return;
     }
 
