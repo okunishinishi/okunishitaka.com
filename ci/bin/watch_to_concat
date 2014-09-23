@@ -1,27 +1,31 @@
 #!/usr/bin/env node
 
-"use strict";
-
-
 /**
  * Watch project to concat.
- * @type {exports}
  */
+
+
+"use strict";
 
 var h = require('../_helper'),
     async = h.async,
-
     tasks = h.tasks,
     configs = require('../configs');
 
 process.chdir(h.basedir);
 
+var task = new tasks.ConcatTask(configs.concatConfig);
+task.busyToRun = false;
 
 configs.concatConfig.forEach(function (config) {
-    console.log('Watch files:', config.src);
-    h.watchAll(config.src, function (event, filename) {
-        new tasks.ConcatTask(config).run(function () {
-
+    var filenames = config.src;
+    console.log('Watch files:', filenames);
+    h.watchAll(filenames, {persistent: true}, function (event, filename) {
+        if (task.busyToRun) {
+            return;
+        }
+        task.run(function () {
+            task.busyToRun = false;
         });
     });
 });

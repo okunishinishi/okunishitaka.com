@@ -17,7 +17,6 @@
  */
 (function (ng) {
     "use strict";
-
     ng
         .module('okServices')
         .service('blogApiService', function BlogApiService($http) {

@@ -7,7 +7,6 @@
 "use strict";
 
 var r = require('./routes');
-
 module.exports = {
     '/blogs': {
         GET: r.blogRoute.list,

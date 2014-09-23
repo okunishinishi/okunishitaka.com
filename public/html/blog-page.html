@@ -21,20 +21,32 @@
 </head>
 <body>
 <header ng-include="url(partials.header)" ng-controller="HeadControl"></header>
-<main class="container">
-    <article ng-controller="BlogCtrl" id="blog-article">
-        <section id="blog-list-section">
-            <dl id="blog-list">
-                <dt ng-repeat-start="b in blogs" id="blog-dt-{{b._id}}">
-                    <span ng-if="editing"></span>
-                    {{b.title}}
-                </dt>
-                <dd ng-repeat-end>
-                </dd>
-            </dl>
-        </section>
-    </article>
-</main>
+<div class="container positioned"  ng-controller="BlogCtrl">
+    <aside>
+        <ul>
+            <li ng-repeat="b in blogs">
+                <a href="javascript:void(0)"
+                   ng-click="scrollTo('blog-dt-' + b._id)"
+                        >{{b.title}}</a>
+            </li>
+        </ul>
+        <a id="aside-blog-more-button" href="javascript:void(0)"
+                >{{l.buttons.more}}</a>
+    </aside>
+    <main>
+        <article id="blog-article">
+            <section id="blog-list-section">
+                <dl id="blog-list">
+                    <dt ng-repeat-start="b in blogs" id="blog-dt-{{b._id}}">
+                        <span ng-if="editing"></span>
+                        {{b.title}}
+                    </dt>
+                    <dd ng-repeat-end>{{b.content}}</dd>
+                </dl>
+            </section>
+        </article>
+    </main>
+</div>
 
 <footer ng-include="url(partials.footer)" ng-controller="FootControl"></footer>
 

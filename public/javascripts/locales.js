@@ -15,6 +15,9 @@ window.locales = (function () {
             "index": "Top",
             "blog": "Blog",
             "work": "Works"
+        },
+        "buttons": {
+            "more": "See more"
         }
     },
     "ja": {
@@ -29,6 +32,9 @@ window.locales = (function () {
             "index": "Top",
             "blog": "Blog",
             "work": "Works"
+        },
+        "buttons": {
+            "more": "See more"
         }
     }
 }

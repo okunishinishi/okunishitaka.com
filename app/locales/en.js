@@ -14,4 +14,8 @@ l.pageNames = {
     work: 'Works'
 }
 
+l.buttons = {
+    more: 'See more'
+}
+
 module.exports = l;
