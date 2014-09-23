@@ -10,7 +10,8 @@
     },
     {
         "srcPattern": [
-            "app/middlewares/*.js"
+            "app/middlewares/*.js",
+            "app/routes/interceptors/*_interceptor.js"
         ],
         "destDir": "test/unit_tests/app_tests",
         "data": {
