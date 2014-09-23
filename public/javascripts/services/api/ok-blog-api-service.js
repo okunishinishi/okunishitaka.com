@@ -13,7 +13,8 @@
             s.list = function list(params) {
                 return $http({
                     method: 'GET',
-                    url: '/blogs/'
+                    url: '/blogs/',
+                    params: params
                 });
             }
         });

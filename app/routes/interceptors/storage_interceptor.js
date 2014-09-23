@@ -69,7 +69,7 @@ StorageInterceptor.prototype = {
                 s.storage.one(id, callback);
             },
             function (data, callback) {
-                var valid = data && (data._vr == vr);
+                var valid = data && (Number(data._vr) === Number(vr));
                 if (!valid) {
                     res.statusCode = h.statusCode.conflictError;
                     res.sendJson(h.errorData('Conflict with verion: ' + id)); //TODO multi lang
@@ -117,7 +117,7 @@ StorageInterceptor.prototype = {
             },
             sorter = {
                 key: q._sort || '_at',
-                dest: (q._reverse || '').toLowerCase() === 'true'
+                desc: ['true', 'yes', '1'].indexOf((q._reverse || '').toLowerCase()) !== -1
             }
         async.waterfall([
             function (callback) {

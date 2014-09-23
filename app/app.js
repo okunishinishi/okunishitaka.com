@@ -44,7 +44,10 @@ app.start = function (port, settings, callback) {
                     parseForm: web.extensions.reqParseForm()
                 }))
                 .use(mw.extendResMiddleware({
-                    sendJson: web.extensions.resSendJson(),
+                    sendJson: web.extensions.resSendJson({
+                        //ブラウザで文字化けするのでUTF-8を明示的に指定している
+                        contentType: 'application/json; charset=UTF-8;'
+                    }),
                     sendRedirect: web.extensions.resSendRedirect()
                 }))
                 .use(function (req, res, next) {

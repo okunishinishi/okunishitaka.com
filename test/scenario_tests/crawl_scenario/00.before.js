@@ -20,6 +20,8 @@ before(function (done) {
     scenario.url = function (pathname) {
         return url.resolve(baseURL, pathname);
     }
+
+    h.prepareCleanWorkDir(h.resolveWorkFile('work_scenario_data'));
     app.start(port, {
         basedir: h.basedir,
         publicDir: 'public',
