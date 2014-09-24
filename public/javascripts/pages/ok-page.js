@@ -1,19 +1,19 @@
 /**
  * okunishitaka.com abstract page script.
  * @requires angular
- * @requires l
  */
 
-(function (ng, locales) {
+(function (ng) {
     "use strict";
 
     ng
         .module('okPage', [
             'apeman',
+            'okConstants',
             'okModels',
             'okServices'
         ])
-        .run(function locale($rootScope, apLocaleService) {
+        .run(function locale($rootScope, apLocaleService, locales) {
             Object.keys(locales).forEach(function (lang) {
                 apLocaleService.register(lang, locales[lang]);
             });
@@ -71,10 +71,9 @@
                     href: '/work',
                     title: l.pageNames.work
                 }
-
             ]
         })
         .controller('FootControl', function ($scope) {
 
         });
-})(angular, locales);
+})(angular);

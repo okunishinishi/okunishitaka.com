@@ -7,7 +7,7 @@
     "use strict";
 
     ng
-        .module('okServices', [
+        .module('okConstants', [
 
         ]);
 })(angular);

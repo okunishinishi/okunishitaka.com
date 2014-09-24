@@ -23,7 +23,7 @@
         "public/images",
         "public/javascripts",
         "public/javascripts/lib",
-        "public/javascripts/locales",
+        "public/javascripts/constants",
         "public/javascripts/services",
         "public/javascripts/services/api",
         "public/javascripts/pages",

@@ -11,6 +11,7 @@
 
         ]);
 })(angular);
+
 /**
  * Blog api service.
  * @requires angular

@@ -4,6 +4,10 @@
         "dest": "public/javascripts/lib.js"
     },
     {
+        "src": "public/javascripts/constants/*.js",
+        "dest": "public/javascripts/constants.js"
+    },
+    {
         "src": "public/javascripts/models/*.js",
         "dest": "public/javascripts/models.js"
     },

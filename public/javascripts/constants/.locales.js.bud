@@ -10,12 +10,13 @@ var u = require('apeman-util'),
 module.exports = {
     mode: '444',
     force: true,
-    path: path.resolve(__dirname, '..', 'locales.js'),
+    path: path.resolve(__dirname, 'locales.js'),
     data: {
+        module: 'okConstants',
         namespace: 'locales',
         get locales() {
             var locales = require('../../../app/locales/index');
-            return JSON.stringify(locales, null, 4);
+            return JSON.stringify(locales, null, 4).replace(/\n/g, "\n\t\t");
         }
     }
 }
