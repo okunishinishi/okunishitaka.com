@@ -1,0 +1,26 @@
+/**
+ * Bud file for module.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    path = u.core.path,
+    string = u.string,
+    fs = u.core.fs,
+    meta = require('./.meta.json');
+
+
+module.exports = Object.keys(meta.modules).map(function (name) {
+    return {
+        mode: '444',
+        force: true,
+        path: path.join(__dirname, string.snakeString(name), '_module.js'),
+        data: {
+            prefix: meta.prefix,
+            namespace: name,
+            dependencies: meta.modules[name]
+        }
+    }
+});
+

@@ -11,7 +11,7 @@ var ng = angular,
 
 describe('ok-models', function () {
 
-    beforeEach(mock.module('okModels'));
+    beforeEach(mock.module('ok.models'));
     it('Create a model', inject(function (Model) {
         var model = new Model({});
         expect(model).toBeDefined();

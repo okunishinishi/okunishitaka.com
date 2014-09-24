@@ -1,0 +1,17 @@
+{
+    "prefix": "ok",
+    "modules": {
+        "constants": [],
+        "models": [],
+        "pages": [],
+        "services": []
+    },
+    "models": [
+        "blog",
+        "setting"
+    ],
+    "endpoints": [
+        "blog",
+        "setting"
+    ]
+}

@@ -16,10 +16,10 @@ module.exports = function (config) {
         // list of files / patterns to load in the browser
         files: [
             'public/javascripts/lib/*.js',
-            'public/javascripts/constants/*.js',
-            'public/javascripts/models/*.js',
-            'public/javascripts/pages/*.js',
-            'public/javascripts/services/*.js',
+            'public/javascripts/ok/constants/*.js',
+            'public/javascripts/ok/models/*.js',
+            'public/javascripts/ok/pages/*.js',
+            'public/javascripts/ok/services/*.js',
             'test/browser_unit_tests/angular-mocks.js',
             'test/browser_unit_tests/**/*-test.js'
         ],

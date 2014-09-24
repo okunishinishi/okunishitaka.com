@@ -1,0 +1,21 @@
+/**
+ * {{Name}} model.
+ * @requires angualr
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('{{module}}')
+        .factory('{{Name}}', function (Model) {
+            function {{Name}}() {
+                var s = this;
+                s.init.apply(s, arguments);
+            }
+
+            {{Name}}.prototype = new Model;
+
+            return {{Name}};
+        })
+})(angular, apeman);

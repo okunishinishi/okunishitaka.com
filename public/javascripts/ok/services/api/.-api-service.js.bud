@@ -1,0 +1,30 @@
+/**
+ * Bud file for api service.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    string = u.string,
+    path = u.core.path,
+    format = u.core.util.format,
+    meta = require('../../.meta.json');
+
+module.exports = meta.endpoints.map(function (name) {
+    return {
+        mode: '644',
+        force: false,
+        path: [
+            __dirname,
+            format('%s-api-service.js', string.paramString(name))
+        ].join('/'),
+        data: {
+            module: [
+                meta.prefix,
+                string.camelString(path.basename(path.dirname(__dirname)))
+            ].join('.'),
+            name: string.camelString(name),
+            Name: string.pascalString(name)
+        }
+    }
+});

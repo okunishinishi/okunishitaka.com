@@ -4,20 +4,20 @@
         "dest": "public/javascripts/lib.js"
     },
     {
-        "src": "public/javascripts/constants/*.js",
-        "dest": "public/javascripts/constants.js"
+        "src": "public/javascripts/ok/constants/*.js",
+        "dest": "public/javascripts/ok/constants.js"
     },
     {
-        "src": "public/javascripts/models/*.js",
-        "dest": "public/javascripts/models.js"
+        "src": "public/javascripts/ok/models/*.js",
+        "dest": "public/javascripts/ok/models.js"
     },
     {
-        "src": "public/javascripts/pages/*.js",
-        "dest": "public/javascripts/pages.js"
+        "src": "public/javascripts/ok/pages/*.js",
+        "dest": "public/javascripts/ok/pages.js"
     },
     {
-        "src": "public/javascripts/services/**/*.js",
-        "dest": "public/javascripts/services.js"
+        "src": "public/javascripts/ok/services/**/*.js",
+        "dest": "public/javascripts/ok/services.js"
     },
     {
 

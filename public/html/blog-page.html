@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="okBlogPage">
+<html ng-app="ok.blogPage">
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" CONTENT="width=device-width, user-scalable=no"/>
@@ -10,18 +10,18 @@
     <link rel="stylesheet" href="/stylesheets/blog-page.css"/>
 
     <script src="/javascripts/lib.js"></script>
-    <script src="/javascripts/constants.js"></script>
-    <script src="/javascripts/models.js"></script>
-    <script src="/javascripts/services.js"></script>
-    <script src="/javascripts/pages/ok-page.js"></script>
-    <script src="/javascripts/pages/ok-blog-page.js"></script>
+    <script src="/javascripts/ok/constants.js"></script>
+    <script src="/javascripts/ok/models.js"></script>
+    <script src="/javascripts/ok/services.js"></script>
+    <script src="/javascripts/ok/pages/page.js"></script>
+    <script src="/javascripts/ok/pages/blog-page.js"></script>
 
     <title>{{title("blog")}}</title>
 
 </head>
 <body>
 <header ng-include="url(partials.header)" ng-controller="HeadControl"></header>
-<div class="container positioned"  ng-controller="BlogCtrl">
+<div class="container positioned" ng-controller="BlogCtrl">
     <aside>
         <ul>
             <li ng-repeat="b in blogs">

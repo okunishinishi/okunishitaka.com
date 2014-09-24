@@ -11,7 +11,7 @@ var ng = angular,
 describe('ok-page', function () {
     var $scope;
 
-    beforeEach(mock.module('okPage'));
+    beforeEach(mock.module('ok.page'));
     beforeEach(mock.inject(function ($injector) {
         $scope = $injector.get('$rootScope');
     }));
