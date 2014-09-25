@@ -1,0 +1,15 @@
+{
+    "html": {
+        "files": "public/html/*.html",
+        "versioning": [
+            {
+                "tag": "script",
+                "attr": "src"
+            },
+            {
+                "tag": "script",
+                "attr": "href"
+            }
+        ]
+    }
+}

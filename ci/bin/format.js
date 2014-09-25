@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * @file Run tests
+ * @file Format files.
  */
 
 "use strict";
@@ -14,7 +14,6 @@ process.chdir(h.basedir);
 
 new tasks.ForkTask({
     files: [
-        'ci/bin/test_unit_tests',
-        'ci/bin/test_scenario_tests'
+        'ci/bin/format_html',
     ]
 }).run(h.done('Doc done!'));
