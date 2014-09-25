@@ -16,7 +16,6 @@ var h = require('../_helper'),
 
 process.chdir(h.basedir);
 
-
 async
     .each([].concat(config.html.files), function (pattern, callback) {
         h.eachFiles(pattern, function (filename, callback) {
