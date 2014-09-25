@@ -2,19 +2,19 @@
 <html ng-app="ok.blogPage">
 <head lang="en">
     <meta charset="UTF-8">
-    <meta name="viewport" CONTENT="width=device-width, user-scalable=no"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
 
-    <link rel="icon" href="./images/favicon.png"/>
+    <link rel="icon" href="./images/favicon.png?v=0.0.0">
 
-    <link rel="stylesheet" href="/stylesheets/base.css"/>
-    <link rel="stylesheet" href="/stylesheets/blog-page.css"/>
+    <link rel="stylesheet" href="/stylesheets/base.css?v=0.0.0">
+    <link rel="stylesheet" href="/stylesheets/blog-page.css?v=0.0.0">
 
-    <script src="/javascripts/lib.js"></script>
-    <script src="/javascripts/ok/constants.js"></script>
-    <script src="/javascripts/ok/models.js"></script>
-    <script src="/javascripts/ok/services.js"></script>
-    <script src="/javascripts/ok/pages/page.js"></script>
-    <script src="/javascripts/ok/pages/blog-page.js"></script>
+    <script src="/javascripts/lib.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/constants.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/models.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/services.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/pages/page.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/pages/blog-page.js?v=0.0.0"></script>
 
     <title>{{title("blog")}}</title>
 
@@ -25,13 +25,10 @@
     <aside>
         <ul>
             <li ng-repeat="b in blogs">
-                <a href="javascript:void(0)"
-                   ng-click="scrollTo('blog-dt-' + b._id)"
-                        >{{b.title}}</a>
+                <a href="javascript:void(0)" ng-click="scrollTo('blog-dt-' + b._id)">{{b.title}}</a>
             </li>
         </ul>
-        <a id="aside-blog-more-button" href="javascript:void(0)"
-                >{{l.buttons.more}}</a>
+        <a id="aside-blog-more-button" href="javascript:void(0)">{{l.buttons.more}}</a>
     </aside>
     <main>
         <article id="blog-article">
@@ -41,7 +38,7 @@
                         <span ng-if="editing"></span>
                         {{b.title}}
                     </dt>
-                    <dd ng-repeat-end>{{b.content}}</dd>
+                    <dd ng-repeat-end="">{{b.content}}</dd>
                 </dl>
             </section>
         </article>
