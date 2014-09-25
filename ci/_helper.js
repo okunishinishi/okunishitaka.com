@@ -33,6 +33,8 @@ h.pkg = require('../package.json')
 
 h.watchAll = file.watchAll;
 
+h.writeJsonFile = u.json.writeJsonFile;
+h.readJsonFile = u.json.readJsonFile;
 h.eachFiles = function (filenames, handler, done) {
     async.waterfall([
         function (callback) {

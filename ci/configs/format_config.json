@@ -1,4 +1,5 @@
 {
+    "_statusFilename": ".format_status.json",
     "html": {
         "files": "public/html/*.html",
         "versioning": [

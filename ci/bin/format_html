@@ -16,41 +16,94 @@ var h = require('../_helper'),
 
 process.chdir(h.basedir);
 
-async
-    .each([].concat(config.html.files), function (pattern, callback) {
-        h.eachFiles(pattern, function (filename, callback) {
-            async.waterfall([
-                function (callback) {
-                    h.loadHtmlFile(filename, callback);
-                },
-                function ($, callback) {
-                    config.html.versioning.forEach(function (config) {
-                        var tagName = config.tag, attrName = config.attr;
-                        $(tagName).each(function () {
-                            var elm = $(this),
-                                value = elm.attr(attrName);
-                            if (!value) {
-                                return;
-                            }
-                            var newValue = updateQueryInUrl(value, {
-                                v: h.pkg.version
-                            });
-                            elm.attr(attrName, newValue);
-                        });
+function formatHtmlFile(filename, callback) {
+    async.waterfall([
+        function (callback) {
+            h.loadHtmlFile(filename, callback);
+        },
+        function ($, callback) {
+            config.html.versioning.forEach(function (config) {
+                var tagName = config.tag, attrName = config.attr;
+                $(tagName).each(function () {
+                    var elm = $(this),
+                        value = elm.attr(attrName);
+                    if (!value) {
+                        return;
+                    }
+                    var newValue = updateQueryInUrl(value, {
+                        v: h.pkg.version
                     });
-                    callback(null, $.html());
+                    elm.attr(attrName, newValue);
+                });
+            });
+            callback(null, $.html());
+        },
+        function (html, callback) {
+            async.series([
+                function (callback) {
+                    fs.writeFile(filename, html, callback);
                 },
-                function (html, callback) {
-                    async.series([
-                        function (callback) {
-                            fs.writeFile(filename, html, callback);
-                        },
-                        function (callback) {
-                            console.log('File rewrited:', filename);
-                            callback(null);
-                        }
-                    ], callback);
+                function (callback) {
+                    callback(null);
                 }
             ], callback);
-        }, callback);
-    }, h.done('Format html done.'));
+        }
+    ], callback);
+}
+
+function isModified(filename, date, callback) {
+    if (!date) {
+        callback(false);
+        return;
+    }
+    async.waterfall([
+        function (callback) {
+            fs.stat(filename, callback);
+        },
+        function (stats, callback) {
+            var modified = new Date(stats.mtime) - new Date(date) > 0;
+            callback(null, modified);
+        }
+    ], function (err, result) {
+        callback(!err && result);
+    });
+}
+
+
+async.waterfall([
+    function (callback) {
+        h.readJsonFile(config._statusFilename, callback);
+    },
+    function (status, callback) {
+        if (!status) {
+            status = {};
+        }
+        async.each(
+            [].concat(config.html.files),
+            function (pattern, callback) {
+                h.eachFiles(pattern, function (filename, callback) {
+                    var lastModified = status[filename] && status[filename].lastModified;
+                    isModified(filename, new Date(lastModified), function (isModified) {
+                        status[filename] = {
+                            lastModified: new Date()
+                        }
+                        if (isModified) {
+                            formatHtmlFile(filename, function (err) {
+                                if (!err) {
+                                    console.log('File rewrited:', filename);
+                                }
+                                callback(err);
+                            });
+                        } else {
+                            callback(null);
+                        }
+                    });
+                }, callback);
+            }, function (err) {
+                callback(err, status);
+            });
+    },
+    function (status, callback) {
+        h.writeJsonFile(config._statusFilename, status, callback);
+    }
+], h.done('Format html done.'));

@@ -31,3 +31,6 @@ node_modules
 .idea
 
 test/.work
+
+.cluster_status.json
+.format_status.json
