@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+
+/**
+ * Watch project to format.
+ */
+
+"use strict";
+
+var h = require('../_helper'),
+    async = h.async,
+    tasks = h.tasks,
+    configs = require('../configs');
+
+process.chdir(h.basedir);
+
+var htmlTask = new tasks.ForkTask({
+    files: [
+        'ci/bin/format_html',
+    ]
+});
+htmlTask.busyToRun = false;
+
+[].concat(configs.formatConfig.html.files).forEach(function (filenames) {
+    console.log('Watch files:', filenames);
+    h.watchAll(filenames, {persistent: true}, function (event, filename) {
+        if (htmlTask.busyToRun) {
+            return;
+        }
+        htmlTask.busyToRun = true;
+        htmlTask.run(function () {
+            htmlTask.busyToRun = false;
+        });
+    })
+});

@@ -24,6 +24,7 @@ configs.concatConfig.forEach(function (config) {
         if (task.busyToRun) {
             return;
         }
+        task.busyToRun = true;
         task.run(function () {
             task.busyToRun = false;
         });
