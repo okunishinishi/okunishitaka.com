@@ -19,15 +19,9 @@ function AppStorages() {
 AppStorages.prototype = {
     rebuildAll: function (callback) {
         var s = this;
-        async.eachSeries([
+        JsonStorage.rebuildAll([
             s.blogStorage
-        ], function (storage) {
-            if (storage) {
-                storage.rebuild(callback);
-            } else {
-                callback(null);
-            }
-        }, callback);
+        ], callback);
     },
     connect: function (dataDir, callback) {
         var s = this;

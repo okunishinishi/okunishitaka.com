@@ -35,7 +35,9 @@
 		            "work": "Works"
 		        },
 		        "buttons": {
-		            "more": "See more"
+		            "more": "See more",
+		            "cancel": "cancel",
+		            "save": "save"
 		        }
 		    },
 		    "ja": {
@@ -52,7 +54,9 @@
 		            "work": "Works"
 		        },
 		        "buttons": {
-		            "more": "See more"
+		            "more": "See more",
+		            "cancel": "cancel",
+		            "save": "save"
 		        }
 		    }
 		});
