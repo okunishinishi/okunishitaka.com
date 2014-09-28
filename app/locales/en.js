@@ -15,7 +15,9 @@ l.pageNames = {
 }
 
 l.buttons = {
-    more: 'See more'
+    more: 'See more',
+    cancel: 'cancel',
+    save: 'save'
 }
 
 module.exports = l;

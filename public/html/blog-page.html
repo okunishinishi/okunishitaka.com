@@ -15,7 +15,6 @@
     <script src="/javascripts/ok/services.js?v=0.0.0"></script>
     <script src="/javascripts/ok/pages/page.js?v=0.0.0"></script>
     <script src="/javascripts/ok/pages/blog-page.js?v=0.0.0"></script>
-
     <title>{{title("blog")}}</title>
 
 </head>
@@ -32,6 +31,17 @@
     </aside>
     <main>
         <article id="blog-article">
+            <section id="blog-edit-setion">
+                <textarea name="blog-text" id="blog-text-textarea" cols="30" rows="10">
+                </textarea>
+
+                <div id="blog-edti-preview"></div>
+
+                <div>
+                    <a id="blog-cancel-button" class="button" href="">l.buttons.cancel</a>
+                    <a id="blog-save-button" class="button" href="">l.buttons.save</a>
+                </div>
+            </section>
             <section id="blog-list-section">
                 <dl id="blog-list">
                     <dt ng-repeat-start="b in blogs" id="blog-dt-{{b._id}}">
