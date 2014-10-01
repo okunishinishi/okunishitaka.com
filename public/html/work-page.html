@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html ng-app="okWorkPage">
+<html ng-app="ok.workPage">
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
 
-    <link rel="icon" href="./images/favicon.png?v=0.0.0">
+    <link rel="icon" href="./images/favicon.png">
 
-    <link rel="stylesheet" href="/stylesheets/base.css?v=0.0.0">
-    <link rel="stylesheet" href="/stylesheets/work-page.css?v=0.0.0">
+    <link rel="stylesheet" href="/stylesheets/base.css">
+    <link rel="stylesheet" href="/stylesheets/work-page.css">
 
-    <script src="/javascripts/lib.js?v=0.0.0">
-    <script src="/javascripts/constants.js?v=0.0.0"/>
-    <script src="/javascripts/models.js?v=0.0.0"/>
-    <script src="/javascripts/services.js?v=0.0.0"/>
-    <script src="/javascripts/pages/ok-page.js?v=0.0.0"/>
-    <script src="/javascripts/pages/ok-work-page.js?v=0.0.0"/>
+    <script src="/javascripts/lib.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/constants.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/models.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/services.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/pages/page.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/pages/work-page.js?v=0.0.0"></script>
 
-    <title>{{title(&quot;work&quot;)}}</title>
+    <title>{{title("work")}}</title>
 
-</link></link></link></meta></meta></head>
+</head>
 <body>
-<header ng-include="url(partials.header)" ng-controller="HeadControl"/>
+<header ng-include="url(partials.header)" ng-controller="HeadControl"></header>
 <main class="container" ng-controller="WorkCtrl">
 </main>
 
-<footer ng-include="url(partials.footer)" ng-controller="FootControl"/>
+<footer ng-include="url(partials.footer)" ng-controller="FootControl"></footer>
 
 </body>
-</html></script></head></html>
+</html>

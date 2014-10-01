@@ -7,8 +7,8 @@
     "use strict";
 
     ng
-        .module('indexPage', [
-            'page',
+        .module('ok.indexPage', [
+            'ok.page',
         ])
         .run(function ($rootScope) {
 

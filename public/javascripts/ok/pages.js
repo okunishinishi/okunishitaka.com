@@ -146,8 +146,8 @@
     "use strict";
 
     ng
-        .module('indexPage', [
-            'page',
+        .module('ok.indexPage', [
+            'ok.page',
         ])
         .run(function ($rootScope) {
 
@@ -243,8 +243,8 @@
     "use strict";
 
     ng
-        .module('workPage', [
-            'page',
+        .module('ok.workPage', [
+            'ok.page',
         ])
         .run(function ($rootScope) {
 

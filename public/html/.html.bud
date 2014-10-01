@@ -28,11 +28,11 @@ module.exports = pages.map(function (page) {
             ],
             javascripts: [
                 'lib.js',
-                'locales.js',
-                'models.js',
-                'services.js',
-                'pages/' + [prefix, 'page.js'].join('-'),
-                'pages/' + [prefix, name, 'page.js'].join('-')
+                'ok/constants.js',
+                'ok/models.js',
+                'ok/services.js',
+                'ok/pages/' + ['page.js'].join('-'),
+                'ok/pages/' + [name, 'page.js'].join('-')
             ],
             title: format('{{title("%s")}}', name)
         }

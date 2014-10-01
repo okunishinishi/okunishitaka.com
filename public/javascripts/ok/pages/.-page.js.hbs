@@ -7,8 +7,8 @@
     "use strict";
 
     ng
-        .module('{{name}}Page', [
-            'page',
+        .module('{{prefix}}.{{name}}Page', [
+            '{{prefix}}.page',
         ])
         .run(function ($rootScope) {
 
