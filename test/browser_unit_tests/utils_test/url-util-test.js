@@ -1,5 +1,5 @@
 /**
- * Test for url
+ * Test for url utility.
  * Runs with karma.
  */
 

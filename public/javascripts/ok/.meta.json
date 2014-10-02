@@ -3,6 +3,7 @@
     "modules": {
         "constants": [],
         "entities": [],
+        "datasources": [],
         "pages": [],
         "services": [],
         "utils": []
@@ -15,7 +16,7 @@
         "blog",
         "setting"
     ],
-    "utils":[
+    "utils": [
         "url"
     ]
 }

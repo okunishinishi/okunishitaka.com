@@ -11,6 +11,7 @@
 
     <script src="/javascripts/lib.js?v=0.0.0"></script>
     <script src="/javascripts/ok/constants.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/datasources.js?v=0.0.0"></script>
     <script src="/javascripts/ok/entities.js?v=0.0.0"></script>
     <script src="/javascripts/ok/services.js?v=0.0.0"></script>
     <script src="/javascripts/ok/utils.js?v=0.0.0"></script>
@@ -24,11 +25,11 @@
 <div class="container positioned" ng-controller="BlogCtrl">
     <aside>
         <ul>
-            <li ng-repeat="b in blogs">
+            <li ng-repeat="b in list.data">
                 <a href="javascript:void(0)" ng-click="scrollTo('blog-dt-' + b._id)">{{b.title}}</a>
             </li>
         </ul>
-        <a id="aside-blog-more-button" href="javascript:void(0)">{{l.buttons.more}}</a>
+        <a id="aside-blog-more-button" href="javascript:void(0)" ng-click="list.load()">{{l.buttons.more}}</a>
     </aside>
     <main>
         <article id="blog-article">
@@ -46,7 +47,7 @@
             </section>
             <section id="blog-list-section">
                 <dl id="blog-list">
-                    <dt ng-repeat-start="b in blogs" id="blog-dt-{{b._id}}">
+                    <dt ng-repeat-start="b in list.data" id="blog-dt-{{b._id}}">
                         <span ng-if="editing"></span>
                         {{b.title}}
                     </dt>

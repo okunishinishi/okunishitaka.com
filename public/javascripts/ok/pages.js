@@ -14,6 +14,7 @@
 /**
  * Page script for blog.
  * @requires angular
+ * @retuires apeman
  */
 
 (function (ng, ap) {
@@ -26,114 +27,36 @@
         .run(function ($rootScope) {
 
         })
-        .factory('BlogList', function (blogApiService, BlogEntity) {
-            function BlogList(properties) {
-                var s = this;
-                ap.copy(properties || {}, s);
-            }
-
-            ap.copy(
-                /** @lends BlogList */
-                {
-                    toModel: function (data) {
-                        return new BlogEntity(data);
-                    }
-                }, BlogList);
-
-            BlogList.prototype = {
-                data: [],
-                limit: 10,
-                skip: 0,
-                hasMore: false,
-                condition: {},
-                query: function () {
-                    var s = this,
-                        query = {
-                            _limit: s.limit,
-                            _skip: s.skip
-                        };
-                    ap.copy(s.condition || {}, query);
-                    return query;
+        .factory('BlogListDatasource', function (ListDatasource, BlogEntity, blogApiService) {
+            return ListDatasource.define({
+                convert: function (data) {
+                    return data.map(BlogEntity.new);
                 },
-                clear: function () {
-                    var s = this;
-                    s.data = [];
-                    s.skip = 0;
-                    s.condition = {};
-                },
-                _fetchData: function (callback) {
-                    var s = this;
-                    callback = callback || ap.doNothing;
-                    blogApiService.list(s.query)
+                fetch: function (query, callback) {
+                    blogApiService.list(query)
                         .success(function (data, status) {
-                            var models = data.map(BlogList.toModel);
-                            callback(null, models);
+                            callback(null, data);
                         })
                         .error(function () {
                             callback(new Error('Failed to fetch'));
                         });
-                },
-                load: function (callback) {
-                    var s = this;
-                    callback = callback || ap.doNothing;
-                    s.skip = 0;
-                    s._fetchData(function (err, data) {
-                        if (!err) {
-                            s.data = data;
-                            s.hasMore = s.limit <= data.length;
-                        }
-                        callback(err);
-                    });
-                },
-                loadMore: function (callback) {
-                    var s = this;
-                    callback = callback || ap.doNothing;
-                    s.skip = s.data.length;
-                    s._fetchData(function (err, data) {
-                        if (!err) {
-                            s.data = s.data.concat(data);
-                            s.hasMore = data.length > 0;
-                        }
-                        callback(err);
-                    });
                 }
-            }
-            return BlogList;
+            });
         })
-        .controller('BlogCtrl', function ($scope, BlogList) {
+        .controller('BlogCtrl', function ($scope, BlogListDatasource) {
 
-            var blogList = new BlogList();
+            var listDatasource = new BlogListDatasource({
+
+            });
+
             ap.copy({
-                load: function () {
-                    blogList.load(function (err) {
+                list: listDatasource,
+                edit: function (blog) {
 
-                    });
-                },
-                loadMore: function () {
-                    blogList.loadMore(function () {
-
-                    });
-                },
-                reload: function (callback) {
-                    blogList.clear();
-                    $scope.load(callback);
                 }
             }, $scope);
 
-            Object.defineProperties($scope, {
-                hasMore: {
-                    get: function () {
-                        return blogList.hasMore;
-                    }
-                },
-                blogs: {
-                    get: function () {
-                        return blogList.data;
-                    }
-                }
-            });
-
-            $scope.load();
+            $scope.list.load();
         });
 
 })(angular, apeman);
@@ -169,8 +92,10 @@
         .module('ok.page', [
             'apeman',
             'ok.constants',
+            'ok.datasources',
             'ok.entities',
-            'ok.services'
+            'ok.services',
+            'ok.utils'
         ])
         .run(function locale($rootScope, apLocaleService, localeConstant) {
             Object.keys(localeConstant).forEach(function (lang) {
@@ -193,17 +118,14 @@
                 $window.location.href = '/';
             };
         })
-        .run(function url($rootScope, $window) {
+        .run(function url($rootScope, $window, urlUtil) {
             var location = $window.location;
-            $rootScope.baseURL = location.origin || [
-                [location.protocol, location.hostname].join("//"),
-                (location.port ? ':' + location.port : '')
-            ].join('');
+            $rootScope.baseURL = urlUtil.baseUrlWithLocation(location);
             $rootScope.url = function (url) {
                 if (url.match(/^\//)) {
-                    return [$rootScope.baseURL, url].join('');
+                    return urlUtil.joinUrl($rootScope.baseURL, url);
                 }
-                return [location.href, url].join('/');
+                return urlUtil.joinUrl(location.href, url);
             }
         })
         .run(function scrollTo($rootScope, $location, $anchorScroll) {

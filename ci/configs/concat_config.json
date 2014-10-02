@@ -8,6 +8,10 @@
         "dest": "public/javascripts/ok/constants.js"
     },
     {
+        "src": "public/javascripts/ok/datasources/*.js",
+        "dest": "public/javascripts/ok/datasources.js"
+    },
+    {
         "src": "public/javascripts/ok/entities/*.js",
         "dest": "public/javascripts/ok/entities.js"
     },
@@ -18,6 +22,10 @@
     {
         "src": "public/javascripts/ok/services/**/*.js",
         "dest": "public/javascripts/ok/services.js"
+    },
+    {
+        "src": "public/javascripts/ok/utils/**/*.js",
+        "dest": "public/javascripts/ok/utils.js"
     },
     {
 

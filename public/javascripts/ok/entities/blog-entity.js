@@ -9,13 +9,21 @@
     ng
         .module('ok.entities')
         .factory('BlogEntity', function (Entity) {
-            function BlogEntity() {
-                var s = this;
-                s.init.apply(s, arguments);
-            }
 
-            BlogEntity.prototype = new Entity({});
+            /**
+             * @augments Entity
+             * @constructor BlogEntity
+             * @param {object} data - Entity data.
+             */
+            var BlogEntity = Entity.define(
+                /** @lends BlogEntity.prototype */
+                {
+
+                }
+            );
 
             return BlogEntity;
-        })
+
+        });
+
 })(angular, apeman);

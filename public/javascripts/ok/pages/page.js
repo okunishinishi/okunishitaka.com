@@ -10,6 +10,7 @@
         .module('ok.page', [
             'apeman',
             'ok.constants',
+            'ok.datasources',
             'ok.entities',
             'ok.services',
             'ok.utils'

@@ -17,6 +17,7 @@ module.exports = function (config) {
         files: [
             'public/javascripts/lib/*.js',
             'public/javascripts/ok/constants/*.js',
+            'public/javascripts/ok/datasources/*.js',
             'public/javascripts/ok/entities/*.js',
             'public/javascripts/ok/pages/*.js',
             'public/javascripts/ok/services/**/*.js',

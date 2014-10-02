@@ -9,13 +9,21 @@
     ng
         .module('ok.entities')
         .factory('SettingEntity', function (Entity) {
-            function SettingEntity() {
-                var s = this;
-                s.init.apply(s, arguments);
-            }
 
-            SettingEntity.prototype = new Entity({});
+            /**
+             * @augments Entity
+             * @constructor SettingEntity
+             * @param {object} data - Entity data.
+             */
+            var SettingEntity = Entity.define(
+                /** @lends SettingEntity.prototype */
+                {
+
+                }
+            );
 
             return SettingEntity;
-        })
+
+        });
+
 })(angular, apeman);

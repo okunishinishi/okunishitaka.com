@@ -7,15 +7,23 @@
     "use strict";
 
     ng
-        .module('{{module}}')
+        .module('ok.entities')
         .factory('{{Name}}Entity', function (Entity) {
-            function {{Name}}Entity() {
-                var s = this;
-                s.init.apply(s, arguments);
-            }
 
-            {{Name}}Entity.prototype = new Entity({});
+            /**
+             * @augments Entity
+             * @constructor {{Name}}Entity
+             * @param {object} data - Entity data.
+             */
+            var {{Name}}Entity = Entity.define(
+                /** @lends {{Name}}Entity.prototype */
+                {
+
+                }
+            );
 
             return {{Name}}Entity;
-        })
+
+        });
+
 })(angular, apeman);
