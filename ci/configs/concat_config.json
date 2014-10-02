@@ -8,8 +8,8 @@
         "dest": "public/javascripts/ok/constants.js"
     },
     {
-        "src": "public/javascripts/ok/models/*.js",
-        "dest": "public/javascripts/ok/models.js"
+        "src": "public/javascripts/ok/entities/*.js",
+        "dest": "public/javascripts/ok/entities.js"
     },
     {
         "src": "public/javascripts/ok/pages/*.js",

@@ -29,7 +29,7 @@ module.exports = pages.map(function (page) {
             javascripts: [
                 'lib.js',
                 'ok/constants.js',
-                'ok/models.js',
+                'ok/entities.js',
                 'ok/services.js',
                 'ok/pages/' + ['page.js'].join('-'),
                 'ok/pages/' + [name, 'page.js'].join('-')

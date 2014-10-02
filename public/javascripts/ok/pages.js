@@ -26,7 +26,7 @@
         .run(function ($rootScope) {
 
         })
-        .factory('BlogList', function (blogApiService, Blog) {
+        .factory('BlogList', function (blogApiService, BlogEntity) {
             function BlogList(properties) {
                 var s = this;
                 ap.copy(properties || {}, s);
@@ -36,7 +36,7 @@
                 /** @lends BlogList */
                 {
                     toModel: function (data) {
-                        return new Blog(data);
+                        return new BlogEntity(data);
                     }
                 }, BlogList);
 
