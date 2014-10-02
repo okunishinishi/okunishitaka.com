@@ -1,0 +1,40 @@
+/**
+ * Bud file for service test.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    fs = u.core.fs,
+    filtering = u.filtering,
+    string = u.string,
+    mapping = u.mapping,
+    reducing = u.reducing,
+    path = u.core.path;
+
+var basedir = path.resolve(__dirname, '../../../'),
+    srcDir = path.resolve(basedir, 'public/javascripts/ok/services'),
+    destDir = __dirname;
+
+function serviceBud(srcDir, destDir) {
+    return fs.readdirSync(srcDir)
+        .filter(filtering.patternAcceptFilter(/-service\.js$/))
+        .map(mapping.pathResolveMap(srcDir))
+        .map(function (src) {
+            var name = path.basename(src, path.extname(src)).replace(/\-service$/, '');
+            return {
+                force: false,
+                mode: '644',
+                path: path.resolve(destDir, name + '-service-test.js'),
+                data: {
+                    name: string.camelString(name),
+                    Name: string.pascalString(name)
+                }
+            }
+        });
+}
+
+
+module.exports = [
+    serviceBud(path.resolve(srcDir, 'api'), destDir)
+].reduce(reducing.concatReduce(), []);

@@ -4,7 +4,8 @@
         "constants": [],
         "entities": [],
         "pages": [],
-        "services": []
+        "services": [],
+        "utils": []
     },
     "entities": [
         "blog",
@@ -13,5 +14,8 @@
     "endpoints": [
         "blog",
         "setting"
+    ],
+    "utils":[
+        "url"
     ]
 }

@@ -1,0 +1,18 @@
+/**
+ * Test for {{name}}
+ * Runs with karma.
+ */
+
+"use strict";
+
+
+var ng = angular,
+    mock = ng.mock;
+
+describe('{{name}}Service', function () {
+
+    beforeEach(mock.module('ok.services'));
+    it('Inject a service.', inject(function ({{name}}Service) {
+        expect({{name}}Service).toBeDefined();
+    }));
+});

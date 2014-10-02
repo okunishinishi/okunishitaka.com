@@ -12,21 +12,21 @@ var u = require('apeman-util'),
     path = u.core.path;
 
 var basedir = path.resolve(__dirname, '../../../'),
-    srcDir = path.resolve(basedir, 'public/javascripts/ok/entities'),
+    srcDir = path.resolve(basedir, 'public/javascripts/ok/utils'),
     destDir = __dirname;
 
 
 module.exports = fs.readdirSync(srcDir)
-    .filter(filtering.patternAcceptFilter(/-entity\.js$/))
+    .filter(filtering.patternAcceptFilter(/-util\.js$/))
     .map(mapping.pathResolveMap(srcDir))
     .map(function (src) {
-        var name = path.basename(src, path.extname(src)).replace(/\-entity$/, '');
+        var name = path.basename(src, path.extname(src)).replace(/\-util$/, '');
         return {
             force: false,
             mode: '644',
-            path: path.resolve(destDir, name + '-entity-test.js'),
+            path: path.resolve(destDir, name + '-util-test.js'),
             data: {
-                name: name,
+                name: string.camelString(name),
                 Name: string.pascalString(name)
             }
         }

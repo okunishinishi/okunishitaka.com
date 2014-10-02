@@ -11,7 +11,8 @@
             'apeman',
             'ok.constants',
             'ok.entities',
-            'ok.services'
+            'ok.services',
+            'ok.utils'
         ])
         .run(function locale($rootScope, apLocaleService, localeConstant) {
             Object.keys(localeConstant).forEach(function (lang) {
@@ -34,17 +35,14 @@
                 $window.location.href = '/';
             };
         })
-        .run(function url($rootScope, $window) {
+        .run(function url($rootScope, $window, urlUtil) {
             var location = $window.location;
-            $rootScope.baseURL = location.origin || [
-                [location.protocol, location.hostname].join("//"),
-                (location.port ? ':' + location.port : '')
-            ].join('');
+            $rootScope.baseURL = urlUtil.baseUrlWithLocation(location);
             $rootScope.url = function (url) {
                 if (url.match(/^\//)) {
-                    return [$rootScope.baseURL, url].join('');
+                    return urlUtil.joinUrl($rootScope.baseURL, url);
                 }
-                return [location.href, url].join('/');
+                return urlUtil.joinUrl(location.href, url);
             }
         })
         .run(function scrollTo($rootScope, $location, $anchorScroll) {

@@ -1,0 +1,27 @@
+/**
+ * Bud file for models.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    format = u.core.util.format,
+    string = u.string;
+
+var meta = require('../.meta.json');
+
+module.exports = meta.utils.map(function (name) {
+    return {
+        mode: '644',
+        force: false,
+        path: [
+            __dirname,
+            (string.paramString(name) + '-util.js')
+        ].join('/'),
+        data: {
+            module: 'ok.utils',
+            name: string.camelString(name),
+            Name: string.pascalString(name)
+        }
+    }
+});
