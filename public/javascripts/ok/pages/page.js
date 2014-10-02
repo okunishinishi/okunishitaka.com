@@ -10,7 +10,7 @@
         .module('ok.page', [
             'apeman',
             'ok.constants',
-            'ok.models',
+            'ok.entities',
             'ok.services'
         ])
         .run(function locale($rootScope, apLocaleService, localeConstant) {

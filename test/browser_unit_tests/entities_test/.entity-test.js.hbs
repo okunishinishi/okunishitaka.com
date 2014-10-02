@@ -1,0 +1,23 @@
+/**
+ * Test for {{name}}
+ * Runs with karma.
+ */
+
+"use strict";
+
+
+var ng = angular,
+    mock = ng.mock;
+
+describe('{{Name}}Entity', function () {
+
+    beforeEach(mock.module('ok.entities'));
+    it('Create an entity', inject(function ({{Name}}Entity) {
+        var entity = new {{Name}}Entity({
+            foo: 'bar'
+        });
+        expect(entity).toBeDefined();
+        expect(entity.foo).toEqual('bar');
+    }));
+
+});

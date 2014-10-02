@@ -2,11 +2,11 @@
     "prefix": "ok",
     "modules": {
         "constants": [],
-        "models": [],
+        "entities": [],
         "pages": [],
         "services": []
     },
-    "models": [
+    "entities": [
         "blog",
         "setting"
     ],

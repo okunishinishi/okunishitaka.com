@@ -14,7 +14,6 @@ header {
     font-size: 1.5em;
 }
 
-
 .header-nav .nav-item {
     color: #888;
     text-decoration: none;
@@ -27,24 +26,24 @@ header {
     margin: 0 auto;
 }
 
-
-body{
-    margin-top:49px;
+body {
+    margin-top: 49px;
 
 }
 
-main{
-    width:600px;
+main {
+    width: 600px;
 }
 
-.positioned{
+.positioned {
     position: relative;
 }
 
-a{
+a {
     text-decoration: none;
 }
-a:hover{
+
+a:hover {
     text-decoration: underline;
 }
 
@@ -61,4 +60,13 @@ aside {
 
 aside ul {
     padding-left: 20px;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.wide-input,
+.wide-textarea{
+    width: 100%;
 }

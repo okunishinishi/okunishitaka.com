@@ -1,6 +1,6 @@
 /**
- * {{Name}} model.
- * @requires angualr
+ * {{Name}} entity.
+ * @requires angular
  * @requires apeman
  */
 (function (ng, ap) {
@@ -8,14 +8,14 @@
 
     ng
         .module('{{module}}')
-        .factory('{{Name}}', function (Model) {
-            function {{Name}}() {
+        .factory('{{Name}}Entity', function (Entity) {
+            function {{Name}}Entity() {
                 var s = this;
                 s.init.apply(s, arguments);
             }
 
-            {{Name}}.prototype = new Model;
+            {{Name}}Entity.prototype = new Entity({});
 
-            return {{Name}};
+            return {{Name}}Entity;
         })
 })(angular, apeman);

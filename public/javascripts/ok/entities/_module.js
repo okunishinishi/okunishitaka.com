@@ -1,12 +1,12 @@
 /**
- * ok models module.
+ * ok entities module.
  * @requires angular
  */
 
 (function (ng) {
     "use strict";
     ng
-        .module('ok.models', [
+        .module('ok.entities', [
             
         ]);
 })(angular);

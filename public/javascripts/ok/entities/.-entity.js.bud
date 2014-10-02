@@ -8,18 +8,18 @@ var u = require('apeman-util'),
     format = u.core.util.format,
     string = u.string;
 
-var meta = require('../.meta');
+var meta = require('../.meta.json');
 
-module.exports = meta.models.map(function (name) {
+module.exports = meta.entities.map(function (name) {
     return {
         mode: '644',
         force: false,
         path: [
             __dirname,
-            (string.paramString(name) + '.js')
+            (string.paramString(name) + '-entity.js')
         ].join('/'),
         data: {
-            module: 'ok.models',
+            module: 'ok.entities',
             name: string.camelString(name),
             Name: string.pascalString(name)
         }

@@ -1,28 +1,28 @@
 /**
- * Abstract model.
- * @requires angualr
+ * Abstract Entity.
+ * @requires angular
  * @requires apeman
  */
 (function (ng, ap) {
     "use strict";
 
     ng
-        .module('ok.models')
-        .factory('Model', function () {
-            function Model() {
+        .module('ok.entities')
+        .factory('Entity', function () {
+            function Entity() {
                 var s = this;
                 s.init.apply(s, arguments);
             }
 
             /**
              * Initialize a model.
-             * @param {object} data - Model data.
+             * @param {object} data - Entity data.
              */
-            Model.prototype.init = function (data) {
+            Entity.prototype.init = function (data) {
                 var s = this;
                 ap.copy(data || {}, s);
             }
 
-            return Model;
+            return Entity;
         })
 })(angular, apeman);
