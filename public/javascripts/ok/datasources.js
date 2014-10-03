@@ -233,9 +233,10 @@
                     load: function (callback) {
                         var s = this;
                     }
-                }
+                },
+                new Datasource({})
             );
 
             return OneDatasource;
         });
-});
+})(angular, apeman);

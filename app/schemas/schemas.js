@@ -1,6 +1,6 @@
 /**
  * @file App schemas.
- * @module okunishitaka.com/app/schemas
+ * @module okunishitaka-dot-com/app/schemas
  */
 
 "use strict";

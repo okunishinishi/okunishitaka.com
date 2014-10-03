@@ -15,6 +15,7 @@ module.exports = {
     mode: '444',
     force: true,
     data: {
+        module: 'okunishitaka-dot-com/app/schemas',
         schemas: fs.readdirSync(__dirname)
             .filter(filtering.patternAcceptFilter(/\.json$/))
             .filter(filtering.patternRejectFilter(/^\./))

@@ -1,5 +1,7 @@
 /**
  * Helper for routes module.
+ * @module okunishitaka-dot-com/app/routes/_helper
+ * @private
  */
 
 "use strict";
@@ -8,6 +10,9 @@ var u = require('apeman-util'),
     async = u.ext.async,
     schemas = require('../schemas'),
     storages = require('../app_storages');
+
+/** @lends _helper */
+exports = module.exports;
 
 exports.storages = storages;
 exports.schemas = schemas;

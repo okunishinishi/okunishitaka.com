@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>okunishitaka.com Source: app/locales/en.js</title>
+	<title>okunishitaka.com Module: module:okunishitaka-dot-com/app/routes/settingRoute</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -112,69 +112,413 @@
 	<div class="row-fluid">
 
 		
-			<div class="span12">
-				
+		<div class="span8">
+			
 				<div id="main">
 					
 
 
-		<h1 class="page-title">Source: app/locales/en.js</h1>
-    
+	<h1 class="page-title">Module: module:okunishitaka-dot-com/app/routes/settingRoute</h1>
 <section>
-	<article>
-		<pre
-			class="sunlight-highlight-javascript linenums">/**
- * English locale data.
- * @memberof module:okunishitaka-dot-com/app/locales
- * @member en
- * @property {object} pageNames - Page names.
- * @property {object} button - Button texts.
- * @property {object} errors - Error title texts.
- * @property {object} errorDescriptions - Error detail texts.
- */
 
-"use strict";
+<header>
+    <h2>
+    module:okunishitaka-dot-com/app/routes/settingRoute
+    </h2>
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        
+            <div class="description"><p>Route for settings.</p></div>
+        
+
+        
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
 
 
-var l = {};
 
-l.meta = require('./_meta');
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="setting_route.js.html">app/routes/setting_route.js</a>,
+				 <a href="setting_route.js.html#sunlight-1-line-1">line 1</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
 
 
-l.pageNames = {
-    INDEX: 'Top',
-    BLOG: 'Blog',
-    WORK: 'Works'
-}
+        
+    
+    </div>
 
-l.buttons = {
-    MORE: 'See more',
-    CANCEL: 'Cancel',
-    SAVE: 'Save'
-}
+    
 
-l.errors = {
-    CONFLICT_ERROR: 'Conflict occured.',
-    CONNECTION_ERROR: 'Connection error occured.',
-    NOT_FOUND_ERROR: 'Resource not found.',
-    SERVER_ERROR: 'Server error occured.',
-    UNEXPECTED_ERROR: 'Unexpected error occured.',
-    VALIDATION_ERROR: 'Invalid input.',
-};
+    
 
-l.errorDescriptions = {
-    CONFLICT_ERROR: 'It seems that someone else update the resource first. \nPlease reload the page and try again.',
-    CONNECTION_ERROR: 'Ensure you are connected to the Internet and please try again.',
-    NOT_FOUND_ERROR: 'Sorry! The requested resource is not availabe anymore.',
-    SERVER_ERROR: 'Something wrong within our server. Plase try again later.',
-    UNEXPECTED_ERROR: 'Something seems to be wrong.',
-    VALIDATION_ERROR: ''
-};
+    
 
-module.exports = Object.seal(l);</pre>
-	</article>
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+            
+<dt>
+    <h4 class="name" id="one"><span class="type-signature">&lt;static> </span>one<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Find a setting.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="setting_route.js.html">app/routes/setting_route.js</a>,
+				 <a href="setting_route.js.html#sunlight-1-line-24">line 24</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="save"><span class="type-signature">&lt;static> </span>save<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Save a setting.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="setting_route.js.html">app/routes/setting_route.js</a>,
+				 <a href="setting_route.js.html#sunlight-1-line-40">line 40</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
 </section>
-
 
 
 
@@ -201,6 +545,10 @@ module.exports = Object.seal(l);</pre>
 				</footer>
 			</div>
 
+			
+			<div class="span3">
+				<div id="toc"></div>
+			</div>
 			
 			<br clear="both">
 		</div>

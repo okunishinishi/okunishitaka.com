@@ -64,15 +64,19 @@
 						</li>
 						
 						<li>
+							<a href="blogRoute.html">okunishitaka-dot-com/app/routes/blogRoute</a>
+						</li>
+						
+						<li>
 							<a href="interceptors.html">okunishitaka-dot-com/app/routes/interceptors</a>
 						</li>
 						
 						<li>
-							<a href="schemas.html">okunishitaka-dot-com/app/schemas</a>
+							<a href="settingRoute.html">okunishitaka-dot-com/app/routes/settingRoute</a>
 						</li>
 						
 						<li>
-							<a href="schemas_.html">okunishitaka.com/app/schemas</a>
+							<a href="schemas.html">okunishitaka-dot-com/app/schemas</a>
 						</li>
 						
 
@@ -101,44 +105,6 @@
 					</ul>
 				</li>
 				
-				<li class="dropdown">
-					<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b
-						class="caret"></b></a>
-
-					<ul class="dropdown-menu ">
-						
-						<li>
-							<a href="global.html#create">create</a>
-						</li>
-						
-						<li>
-							<a href="global.html#destroy">destroy</a>
-						</li>
-						
-						<li>
-							<a href="global.html#done">done</a>
-						</li>
-						
-						<li>
-							<a href="global.html#list">list</a>
-						</li>
-						
-						<li>
-							<a href="global.html#one">one</a>
-						</li>
-						
-						<li>
-							<a href="global.html#save">save</a>
-						</li>
-						
-						<li>
-							<a href="global.html#update">update</a>
-						</li>
-						
-
-					</ul>
-				</li>
-				
 			</ul>
 		</div>
 	</div>
@@ -159,8 +125,7 @@
 		<pre
 			class="sunlight-highlight-javascript linenums">/**
  * Route for blogs.
- * @memberof okunishitaka.com/app/routes
- * @member blogRoutes
+ * @module module:okunishitaka-dot-com/app/routes/blogRoute
  */
 
 "use strict";
@@ -172,12 +137,11 @@ var h = require('./_helper'),
     SchemaInterceptor = interceptors.SchemaInterceptor,
     StorageInterceptor = interceptors.StorageInterceptor;
 
-/** @lends blogRoutes */
+/** @lends blogRoute */
 exports = module.exports = {};
 
 /**
  * Find a blog.
- * @memberof blogRoutes
  * @param {http.ServerRequest} req - Http request
  * @param {http.ServerResponse} res - Http response
  * @param {function} next - Call next.

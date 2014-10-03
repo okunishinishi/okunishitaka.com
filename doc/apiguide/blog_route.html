@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>okunishitaka.com Module: okunishitaka-dot-com/app/appEndpoints</title>
+	<title>okunishitaka.com Module: okunishitaka-dot-com/app/routes/blog_route</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -64,7 +64,7 @@
 						</li>
 						
 						<li>
-							<a href="blogRoute.html">okunishitaka-dot-com/app/routes/blogRoute</a>
+							<a href="blog_route.html">okunishitaka-dot-com/app/routes/blog_route</a>
 						</li>
 						
 						<li>
@@ -72,11 +72,11 @@
 						</li>
 						
 						<li>
-							<a href="settingRoute.html">okunishitaka-dot-com/app/routes/settingRoute</a>
+							<a href="schemas.html">okunishitaka-dot-com/app/schemas</a>
 						</li>
 						
 						<li>
-							<a href="schemas.html">okunishitaka-dot-com/app/schemas</a>
+							<a href="schemas_.html">okunishitaka.com/app/schemas</a>
 						</li>
 						
 
@@ -105,6 +105,28 @@
 					</ul>
 				</li>
 				
+				<li class="dropdown">
+					<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b
+						class="caret"></b></a>
+
+					<ul class="dropdown-menu ">
+						
+						<li>
+							<a href="global.html#done">done</a>
+						</li>
+						
+						<li>
+							<a href="global.html#one">one</a>
+						</li>
+						
+						<li>
+							<a href="global.html#save">save</a>
+						</li>
+						
+
+					</ul>
+				</li>
+				
 			</ul>
 		</div>
 	</div>
@@ -118,12 +140,12 @@
 					
 
 
-	<h1 class="page-title">Module: okunishitaka-dot-com/app/appEndpoints</h1>
+	<h1 class="page-title">Module: okunishitaka-dot-com/app/routes/blog_route</h1>
 <section>
 
 <header>
     <h2>
-    okunishitaka-dot-com/app/appEndpoints
+    okunishitaka-dot-com/app/routes/blog_route
     </h2>
     
 </header>
@@ -134,7 +156,7 @@
 
     
         
-            <div class="description"><p>App route map.</p></div>
+            <div class="description"><p>Route for blogs.</p></div>
         
 
         
@@ -164,8 +186,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="app_endpoints.js.html">app/app_endpoints.js</a>,
-				 <a href="app_endpoints.js.html#sunlight-1-line-1">line 1</a>
+				<a href="blog_route.js.html">app/routes/blog_route.js</a>,
+				 <a href="blog_route.js.html#sunlight-1-line-1">line 1</a>
 			</li>
 		</ul>
 	</dd>
@@ -194,33 +216,34 @@
     
 
     
-        <h3 class="subsection-title">Members</h3>
+
+    
+        <h3 class="subsection-title">Methods</h3>
 
         <dl>
             
-<dt class="name" id="/blogs">
-    <h4><span class="type-signature">&lt;static> </span>/blogs<span class="type-signature"></span></h4>
-
+<dt>
+    <h4 class="name" id="create"><span class="type-signature">&lt;static> </span>create<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
+    
     
 </dt>
 <dd>
     
+    
     <div class="description">
-        <p>Routes for blogs.</p>
+        <p>Create a blog.</p>
     </div>
     
 
     
-
     
-<dl class="details">
-	
+    
+    
+    
+        <h5>Parameters:</h5>
+        
 
-	<h5 class="subsection-title">Properties:</h5>
-
-	<dl>
-
-<table class="props table table-striped">
+<table class="params table table-striped">
     <thead>
 	<tr>
 		
@@ -242,13 +265,13 @@
 
         <tr>
             
-                <td class="name"><code>GET</code></td>
+                <td class="name"><code>req</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">function</span>
+<span class="param-type">http.ServerRequest</span>
 
 
             
@@ -258,14 +281,37 @@
 
             
 
-            <td class="description last"><p>List blogs.</p></td>
+            <td class="description last"><p>Http request</p></td>
         </tr>
 
 	
 
         <tr>
             
-                <td class="name"><code>POST</code></td>
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">http.ServerResponse</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Http response</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
             
 
             <td class="type">
@@ -281,14 +327,17 @@
 
             
 
-            <td class="description last"><p>Create a new blog.</p></td>
+            <td class="description last"><p>Call next.</p></td>
         </tr>
 
 	
 	</tbody>
 </table>
-</dl>
 
+    
+    
+    
+<dl class="details">
 	
 
 	
@@ -314,8 +363,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="app_endpoints.js.html">app/app_endpoints.js</a>,
-				 <a href="app_endpoints.js.html#sunlight-1-line-20">line 20</a>
+				<a href="blog_route.js.html">app/routes/blog_route.js</a>,
+				 <a href="blog_route.js.html#sunlight-1-line-59">line 59</a>
 			</li>
 		</ul>
 	</dd>
@@ -324,46 +373,48 @@
 	
 
 	
-	<dt class="tag-see">See:</dt>
-	<dd class="tag-see">
-		<ul>
-			<li><a href="blogRoute.html">module:okunishitaka-dot-com/app/routes/blogRoute</a></li>
-			</ul>
-	</dd>
-	
 
 	
 </dl>
 
+    
+    
 
+    
+
+    
+    
+    
+    
+    
+    
     
 </dd>
 
         
             
-<dt class="name" id="/blogs/:_id">
-    <h4><span class="type-signature">&lt;static> </span>/blogs/:_id<span class="type-signature"></span></h4>
-
+<dt>
+    <h4 class="name" id="destroy"><span class="type-signature">&lt;static> </span>destroy<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
+    
     
 </dt>
 <dd>
     
+    
     <div class="description">
-        <p>Routes for a single blog.</p>
+        <p>Destroy a blog.</p>
     </div>
     
 
     
-
     
-<dl class="details">
-	
+    
+    
+    
+        <h5>Parameters:</h5>
+        
 
-	<h5 class="subsection-title">Properties:</h5>
-
-	<dl>
-
-<table class="props table table-striped">
+<table class="params table table-striped">
     <thead>
 	<tr>
 		
@@ -385,7 +436,53 @@
 
         <tr>
             
-                <td class="name"><code>GET</code></td>
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">http.ServerRequest</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Http request</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">http.ServerResponse</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Http response</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
             
 
             <td class="type">
@@ -401,55 +498,17 @@
 
             
 
-            <td class="description last"><p>Get a blog.</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>(function}</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>PUT - Update a blog.</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>DELTE</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Destory a blog.</p></td>
+            <td class="description last"><p>Call next.</p></td>
         </tr>
 
 	
 	</tbody>
 </table>
-</dl>
 
+    
+    
+    
+<dl class="details">
 	
 
 	
@@ -475,8 +534,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="app_endpoints.js.html">app/app_endpoints.js</a>,
-				 <a href="app_endpoints.js.html#sunlight-1-line-31">line 31</a>
+				<a href="blog_route.js.html">app/routes/blog_route.js</a>,
+				 <a href="blog_route.js.html#sunlight-1-line-95">line 95</a>
 			</li>
 		</ul>
 	</dd>
@@ -485,46 +544,48 @@
 	
 
 	
-	<dt class="tag-see">See:</dt>
-	<dd class="tag-see">
-		<ul>
-			<li><a href="settingRoute.html">module:okunishitaka-dot-com/app/routes/settingRoute</a></li>
-			</ul>
-	</dd>
-	
 
 	
 </dl>
 
+    
+    
 
+    
+
+    
+    
+    
+    
+    
+    
     
 </dd>
 
         
             
-<dt class="name" id="/settings">
-    <h4><span class="type-signature">&lt;static> </span>/settings<span class="type-signature"></span></h4>
-
+<dt>
+    <h4 class="name" id="list"><span class="type-signature">&lt;static> </span>list<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
+    
     
 </dt>
 <dd>
     
+    
     <div class="description">
-        <p>Routes for the settings.</p>
+        <p>List blogs.</p>
     </div>
     
 
     
-
     
-<dl class="details">
-	
+    
+    
+    
+        <h5>Parameters:</h5>
+        
 
-	<h5 class="subsection-title">Properties:</h5>
-
-	<dl>
-
-<table class="props table table-striped">
+<table class="params table table-striped">
     <thead>
 	<tr>
 		
@@ -546,13 +607,13 @@
 
         <tr>
             
-                <td class="name"><code>GET</code></td>
+                <td class="name"><code>req</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">function</span>
+<span class="param-type">http.ServerRequest</span>
 
 
             
@@ -562,14 +623,37 @@
 
             
 
-            <td class="description last"><p>Get settings.</p></td>
+            <td class="description last"><p>Http request</p></td>
         </tr>
 
 	
 
         <tr>
             
-                <td class="name"><code>PUT</code></td>
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">http.ServerResponse</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Http response</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
             
 
             <td class="type">
@@ -585,14 +669,17 @@
 
             
 
-            <td class="description last"><p>Update settings.</p></td>
+            <td class="description last"><p>Call next.</p></td>
         </tr>
 
 	
 	</tbody>
 </table>
-</dl>
 
+    
+    
+    
+<dl class="details">
 	
 
 	
@@ -618,8 +705,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="app_endpoints.js.html">app/app_endpoints.js</a>,
-				 <a href="app_endpoints.js.html#sunlight-1-line-41">line 41</a>
+				<a href="blog_route.js.html">app/routes/blog_route.js</a>,
+				 <a href="blog_route.js.html#sunlight-1-line-43">line 43</a>
 			</li>
 		</ul>
 	</dd>
@@ -632,13 +719,192 @@
 	
 </dl>
 
+    
+    
 
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="update"><span class="type-signature">&lt;static> </span>update<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Update a blog.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">http.ServerRequest</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Http request</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">http.ServerResponse</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Http response</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Call next.</p></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="blog_route.js.html">app/routes/blog_route.js</a>,
+				 <a href="blog_route.js.html#sunlight-1-line-74">line 74</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
     
 </dd>
 
         </dl>
-    
-
     
 
     

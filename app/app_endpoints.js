@@ -13,6 +13,7 @@ var r = require('./routes');
 module.exports = {
     /**
      * Routes for blogs.
+     * @see module:okunishitaka-dot-com/app/routes/blogRoute
      * @property {function} GET - List blogs.
      * @property {function} POST - Create a new blog.
      */
@@ -22,6 +23,7 @@ module.exports = {
     },
     /**
      * Routes for a single blog.
+     * @see module:okunishitaka-dot-com/app/routes/settingRoute
      * @property {function} GET - Get a blog.
      * @property (function} PUT - Update a blog.
      * @property {function} DELTE - Destory a blog.

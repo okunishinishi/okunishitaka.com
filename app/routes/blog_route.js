@@ -1,7 +1,6 @@
 /**
  * Route for blogs.
- * @memberof okunishitaka.com/app/routes
- * @member blogRoutes
+ * @module module:okunishitaka-dot-com/app/routes/blogRoute
  */
 
 "use strict";
@@ -13,12 +12,11 @@ var h = require('./_helper'),
     SchemaInterceptor = interceptors.SchemaInterceptor,
     StorageInterceptor = interceptors.StorageInterceptor;
 
-/** @lends blogRoutes */
+/** @lends blogRoute */
 exports = module.exports = {};
 
 /**
  * Find a blog.
- * @memberof blogRoutes
  * @param {http.ServerRequest} req - Http request
  * @param {http.ServerResponse} res - Http response
  * @param {function} next - Call next.
