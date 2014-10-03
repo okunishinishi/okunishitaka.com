@@ -1,4 +1,6 @@
 /**
+ * Interceptor to access storage.
+ * @memberof module:okunishitaka-dot-com/app/routes/interceptors
  * @constructor StorageInterceptor
  * @param {JsonStorage} storage
  */

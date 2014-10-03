@@ -8,7 +8,7 @@ var f = require('apeman-front'),
 
 function budForFile(src, dest) {
     return {
-        src: path.relative(h.basedir, src),
+        src: path.relative(h.basedir, path.resolve(src)),
         dest: path.join(dest, path.basename(src)),
         mode: '444'
     }
@@ -18,6 +18,7 @@ module.exports = {
     mode: '444',
     force: true,
     data: [
+        budForFile('doc/readme/README.md', h.basedir),
         budForFile(f.paths.fonts.fontawesomeWebfontEot, 'public/fonts'),
         budForFile(f.paths.fonts.fontawesomeWebfontSvg, 'public/fonts'),
         budForFile(f.paths.fonts.fontawesomeWebfontWoff, 'public/fonts'),

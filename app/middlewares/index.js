@@ -1,6 +1,7 @@
 /**
  * @file Middleware functions.
- * @module okunishitaka-dot-com/app/middlewares */
+ * @module okunishitaka-dot-com/app/middlewares
+ */
 
 "use strict";
 

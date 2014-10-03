@@ -1,4 +1,6 @@
 /**
+ * Interceptor to validate with schemas.
+ * @memberof module:okunishitaka-dot-com/app/routes/interceptors
  * @constructor SchemaInterceptor
  * @param {JsonSchema} schema
  */

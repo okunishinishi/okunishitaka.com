@@ -25,7 +25,8 @@
         "doc": {
             "file": "App routes.",
             "module": "okunishitaka-dot-com/app/routes"
-        }
+        },
+        "descProperties": true
     },
     {
         "dirname": "app/routes/interceptors",
@@ -33,6 +34,7 @@
             "file": "App interceptor",
             "module": "okunishitaka-dot-com/app/routes/interceptors"
         },
+        "descProperties": true,
         "pascalPattern": "*_interceptor"
     },
     {

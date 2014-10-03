@@ -1,6 +1,7 @@
 /**
  * @file Codes.
- * @module okunishitaka-dot-com/app/codes */
+ * @module okunishitaka-dot-com/app/codes
+ */
 
 "use strict";
 

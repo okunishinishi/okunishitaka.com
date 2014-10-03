@@ -94,11 +94,11 @@
 						</li>
 						
 						<li>
-							<a href="SchemaInterceptor.html">SchemaInterceptor</a>
+							<a href="interceptors.SchemaInterceptor.html">okunishitaka-dot-com/app/routes/interceptors.SchemaInterceptor</a>
 						</li>
 						
 						<li>
-							<a href="StorageInterceptor.html">StorageInterceptor</a>
+							<a href="interceptors.StorageInterceptor.html">okunishitaka-dot-com/app/routes/interceptors.StorageInterceptor</a>
 						</li>
 						
 
@@ -125,12 +125,16 @@
 		<pre
 			class="sunlight-highlight-javascript linenums">/**
  * @file App interceptor
- * @module okunishitaka-dot-com/app/routes/interceptors */
+ * @module okunishitaka-dot-com/app/routes/interceptors
+ * @property SchemaInterceptor {object} - {@link module:okunishitaka-dot-com/app/routes/interceptors.SchemaInterceptor|SchemaInterceptor module}.
+ * @property StorageInterceptor {object} - {@link module:okunishitaka-dot-com/app/routes/interceptors.StorageInterceptor|StorageInterceptor module}.
+ */
 
 "use strict";
 
 module.exports = {
-    get SchemaInterceptor() { return require('./schema_interceptor'); },    get StorageInterceptor() { return require('./storage_interceptor'); }
+    get SchemaInterceptor() { return require('./schema_interceptor'); },
+    get StorageInterceptor() { return require('./storage_interceptor'); }
 };</pre>
 	</article>
 </section>
@@ -144,7 +148,7 @@ module.exports = {
 				<div class="clearfix"></div>
 				<footer>
 					
-					<script>var h=document.head;h.innerHTML=h.innerHTML+'<link rel="shortcut icon" href="../images/favicon.png"/><style>.navbar .dropdown-menu{max-height:500px;width:360px;}</style>';</script>
+					<script>var h=document.head;h.innerHTML=h.innerHTML+'<link rel="shortcut icon" href="../images/favicon.png"/><style>.navbar .dropdown-menu{max-height:500px;width:auto;}</style>';</script>
 					<br />
 					
 					

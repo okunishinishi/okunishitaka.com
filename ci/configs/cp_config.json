@@ -1,5 +1,10 @@
 [
     {
+        "src": "doc/readme/README.md",
+        "dest": "/Users/okuni/WebstormProjects/okunishitaka.com/README.md",
+        "mode": "444"
+    },
+    {
         "src": "node_modules/apeman-front/assets/fonts/fontawesome-webfont.eot",
         "dest": "public/fonts/fontawesome-webfont.eot",
         "mode": "444"
