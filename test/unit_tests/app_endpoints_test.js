@@ -19,6 +19,16 @@ exports.tearDown = function (done) {
 };
 
 exports['App endpoints.'] = function (test) {
-    test.ifError(new Error('Not implemented!'));
+    Object.keys(appEndpoints).forEach(function (path) {
+        test.ok(path.match(/^\//));
+
+        var routes = appEndpoints[path];
+        Object.keys(routes).forEach(function (method) {
+            var methods = ['GET', 'POST', 'PUT', 'DELETE', 'HEAD'];
+            test.ok(methods.indexOf(method) !== -1);
+            var handler = routes[method];
+            test.ok(handler);
+        });
+    });
     test.done();
 };
