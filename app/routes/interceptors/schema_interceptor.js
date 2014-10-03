@@ -6,6 +6,7 @@
 "use strict";
 
 var h = require('./../_helper'),
+    codes = h.codes,
     async = h.async;
 
 /** @lends SchemaInterceptor */
@@ -29,7 +30,7 @@ SchemaInterceptor.prototype = {
             },
             function (valid, vError, callback) {
                 if (!valid) {
-                    res.statusCode = h.statusCode.validationError;
+                    res.statusCode = codes.httpStatus.VALIDATION_ERROR;
                     res.sendJson(h.errorData(vError));
                 }
                 callback(null, valid);

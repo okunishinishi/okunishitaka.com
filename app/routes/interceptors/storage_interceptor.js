@@ -6,6 +6,7 @@
 "use strict";
 
 var h = require('../_helper'),
+    codes = h.codes,
     async = h.async;
 
 
@@ -43,7 +44,7 @@ StorageInterceptor.prototype = {
             function (data, callback) {
                 var valid = !!data;
                 if (!valid) {
-                    res.statusCode = h.statusCode.notFoundError;
+                    res.statusCode = codes.httpStatus.NOT_FOUND_ERROR;
                     res.sendJson(h.errorData('Data not found for id: ' + id)); //TODO multi lang
                 }
                 callback(null, valid);
@@ -71,7 +72,7 @@ StorageInterceptor.prototype = {
             function (data, callback) {
                 var valid = data && (Number(data._vr) === Number(vr));
                 if (!valid) {
-                    res.statusCode = h.statusCode.conflictError;
+                    res.statusCode = codes.httpStatus.CONFLICT_ERROR;
                     res.sendJson(h.errorData('Conflict with verion: ' + id)); //TODO multi lang
                 }
                 callback(null, valid);

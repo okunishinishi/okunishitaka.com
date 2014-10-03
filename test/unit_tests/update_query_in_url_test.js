@@ -5,7 +5,7 @@
 
 "use strict";
 
-var updateQueryInUrl = require('./../../app/util/update_query_in_url.js'),
+var updateQueryInUrl = require('./../../app/utils/update_query_in_url.js'),
     h = require('../_helper');
 
 exports.setUp = function (done) {

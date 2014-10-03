@@ -20,7 +20,7 @@ var u = require('apeman-util'),
     path = u.core.path,
     fallbackCopy = u.object.fallbackCopy,
     _shouldShowPrerenderedPage = require('./_should_show_prerendered_page'),
-    execPhantomScript = require('../../app/util/exec_phantom_script');
+    execPhantomScript = require('../../app/utils/exec_phantom_script');
 
 /** @lends prerenderMiddleware */
 function prerenderMiddleware(options) {

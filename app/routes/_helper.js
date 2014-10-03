@@ -13,7 +13,7 @@ exports.storages = storages;
 exports.schemas = schemas;
 exports.async = async;
 
-
+exports.codes = require('../codes');
 exports.validate = function (schema, data, callback) {
     async.waterfall([
         function (callback) {
@@ -29,11 +29,6 @@ exports.validate = function (schema, data, callback) {
     ], callback);
 };
 
-exports.statusCode = {
-    notFoundError:404,
-    conflictError:409,
-    validationError: 422
-}
 
 exports.successData = function (data) {
     return {

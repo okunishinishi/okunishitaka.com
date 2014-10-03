@@ -1,7 +1,7 @@
 /**
-* Partial filenames.
-* @requires angular
-*/
+ * constant for partial.
+ * @requires angular
+ */
 (function (ng) {
     "use strict";
 
@@ -11,5 +11,6 @@
 		    "footer": "/html/partials/footer.html",
 		    "header": "/html/partials/header.html"
 		});
+
 })(angular);
 

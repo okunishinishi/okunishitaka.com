@@ -14,7 +14,7 @@ exports.tearDown = function (done) {
 };
 
 exports['Exec phantom script.'] = function (test) {
-    var bin = require.resolve('./../../app/util/exec_phantom_script.js');
+    var bin = require.resolve('./../../app/utils/exec_phantom_script.js');
     test.ok(bin);
     test.done();
 };

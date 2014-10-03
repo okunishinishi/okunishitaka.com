@@ -12,4 +12,5 @@ var l = copy(en, {}); //use en as fallback.
 
 l.meta = require('./_meta');
 
-module.exports = l;
+
+module.exports = Object.seal(l);

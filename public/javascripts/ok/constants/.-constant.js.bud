@@ -1,0 +1,52 @@
+/**
+ * Bud file for constants.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    string = u.string,
+    fs = u.core.fs,
+    filtering = u.filtering,
+    path = u.core.path;
+
+var meta = require('../.meta');
+
+function constantBud(name, data) {
+    return {
+        mode: '444',
+        force: true,
+        path: path.resolve(__dirname, string.paramString(name) + '-constant.js'),
+        tmpl: path.resolve(__dirname, '.-constant.js.hbs'),
+        get data() {
+            return {
+                module: [
+                    meta.prefix,
+                    path.basename(__dirname)
+                ].join('.'),
+                name: name,
+                get data() {
+                    return JSON.stringify(data, null, 4).replace(/\n/g, "\n\t\t");
+                }
+            }
+        }
+    }
+}
+module.exports = [
+    constantBud('code', require('../../../../app/codes')),
+    constantBud('locale', require('../../../../app/locales')),
+    constantBud('partial', (function () {
+        var dirname = path.resolve(__dirname, '../../../html/partials');
+        var data = {};
+        fs.readdirSync(dirname)
+            .filter(filtering.patternAcceptFilter(/\.html$/))
+            .forEach(function (filename) {
+                var key = string.camelString(path.basename(filename, '.html')),
+                    value = path.join('/html/partials', filename);
+                data[key] = value;
+            });
+        return data;
+    })())
+];
+
+

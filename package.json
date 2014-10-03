@@ -19,7 +19,7 @@
   "homepage": "https://github.com/okunishinishi/okunishitaka.com",
   "dependencies": {
     "apeman-util": "0.0.24",
-    "apeman-storage": "0.0.6",
+    "apeman-storage": "0.0.7",
     "apeman-front": "0.0.10",
     "apeman-web": "0.0.9",
     "phantomjs": "^1.9.7-15",

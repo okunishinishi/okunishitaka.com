@@ -5,7 +5,7 @@
 
 "use strict";
 
-var copyDir = require('./../../app/util/copy_dir.js'),
+var copyDir = require('./../../app/utils/copy_dir.js'),
     fs = require('fs'),
     u = require('apeman-util'),
     mkdirp = u.ext.mkdirp,

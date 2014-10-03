@@ -7,7 +7,8 @@
     "use strict";
     ng
         .module('ok.services', [
-            
+            'ok.constants',
+            'ok.entities'
         ]);
 })(angular);
 
@@ -58,7 +59,7 @@
                     case 404:
                         return errorWithName('NotfoundError');
                     case 409:
-                        return errroWithName('ConflictError');
+                        return errorWithName('ConflictError');
                     case 503:
                         return errorWithName('ConnectionError');
                 }

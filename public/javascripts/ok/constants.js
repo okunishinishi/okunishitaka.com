@@ -12,7 +12,29 @@
 })(angular);
 
 /**
- * Message resources.
+ * constant for code.
+ * @requires angular
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.constants')
+        .constant('codeConstant', {
+		    "httpStatus": {
+		        "OK": 200,
+		        "NOT_FOUND_ERROR": 404,
+		        "CONFLICT_ERROR": 409,
+		        "VALIDATION_ERROR": 422,
+		        "SERVER_ERROR": 503
+		    }
+		});
+
+})(angular);
+
+
+/**
+ * constant for locale.
  * @requires angular
  */
 (function (ng) {
@@ -30,30 +52,30 @@
 		            "homepage": "https://github.com/okunishinishi/okunishitaka.com"
 		        },
 		        "pageNames": {
-		            "index": "Top",
-		            "blog": "Blog",
-		            "work": "Works"
+		            "INDEX": "Top",
+		            "BLOG": "Blog",
+		            "WORK": "Works"
 		        },
 		        "buttons": {
-		            "more": "See more",
-		            "cancel": "Cancel",
-		            "save": "Save"
+		            "MORE": "See more",
+		            "CANCEL": "Cancel",
+		            "SAVE": "Save"
 		        },
 		        "errors": {
-		            "ConflictError": "Conflict occured.",
-		            "ConnectionError": "Connection error occured.",
-		            "NotfoundError": "Resource not found.",
-		            "ServerError": "Server error occured.",
-		            "UnexpectedError": "Unexpected error occured.",
-		            "ValidationError": "Invalid input."
+		            "CONFLICT_ERROR": "Conflict occured.",
+		            "CONNECTION_ERROR": "Connection error occured.",
+		            "NOT_FOUND_ERROR": "Resource not found.",
+		            "SERVER_ERROR": "Server error occured.",
+		            "UNEXPECTED_ERROR": "Unexpected error occured.",
+		            "VALIDATION_ERROR": "Invalid input."
 		        },
 		        "errorDescription": {
-		            "ConflictError": "It seems that someone else update the resource first. \nPlease reload the page and try again.",
-		            "ConnectionError": "Ensure you are connected to the Internet and please try again.",
-		            "NotfoundError": "Sorry! The requested resource is not availabe anymore.",
-		            "ServiceError": "Something wrong within our server. Plase try again later.",
-		            "UnexpectedError": "Something seems to be wrong.",
-		            "ValidationError": ""
+		            "CONFLICT_ERROR": "It seems that someone else update the resource first. \nPlease reload the page and try again.",
+		            "CONNECTION_ERROR": "Ensure you are connected to the Internet and please try again.",
+		            "NOT_FOUND_ERROR": "Sorry! The requested resource is not availabe anymore.",
+		            "SERVER_ERROR": "Something wrong within our server. Plase try again later.",
+		            "UNEXPECTED_ERROR": "Something seems to be wrong.",
+		            "VALIDATION_ERROR": ""
 		        }
 		    },
 		    "ja": {
@@ -65,40 +87,41 @@
 		            "homepage": "https://github.com/okunishinishi/okunishitaka.com"
 		        },
 		        "pageNames": {
-		            "index": "Top",
-		            "blog": "Blog",
-		            "work": "Works"
+		            "INDEX": "Top",
+		            "BLOG": "Blog",
+		            "WORK": "Works"
 		        },
 		        "buttons": {
-		            "more": "See more",
-		            "cancel": "Cancel",
-		            "save": "Save"
+		            "MORE": "See more",
+		            "CANCEL": "Cancel",
+		            "SAVE": "Save"
 		        },
 		        "errors": {
-		            "ConflictError": "Conflict occured.",
-		            "ConnectionError": "Connection error occured.",
-		            "NotfoundError": "Resource not found.",
-		            "ServerError": "Server error occured.",
-		            "UnexpectedError": "Unexpected error occured.",
-		            "ValidationError": "Invalid input."
+		            "CONFLICT_ERROR": "Conflict occured.",
+		            "CONNECTION_ERROR": "Connection error occured.",
+		            "NOT_FOUND_ERROR": "Resource not found.",
+		            "SERVER_ERROR": "Server error occured.",
+		            "UNEXPECTED_ERROR": "Unexpected error occured.",
+		            "VALIDATION_ERROR": "Invalid input."
 		        },
 		        "errorDescription": {
-		            "ConflictError": "It seems that someone else update the resource first. \nPlease reload the page and try again.",
-		            "ConnectionError": "Ensure you are connected to the Internet and please try again.",
-		            "NotfoundError": "Sorry! The requested resource is not availabe anymore.",
-		            "ServiceError": "Something wrong within our server. Plase try again later.",
-		            "UnexpectedError": "Something seems to be wrong.",
-		            "ValidationError": ""
+		            "CONFLICT_ERROR": "It seems that someone else update the resource first. \nPlease reload the page and try again.",
+		            "CONNECTION_ERROR": "Ensure you are connected to the Internet and please try again.",
+		            "NOT_FOUND_ERROR": "Sorry! The requested resource is not availabe anymore.",
+		            "SERVER_ERROR": "Something wrong within our server. Plase try again later.",
+		            "UNEXPECTED_ERROR": "Something seems to be wrong.",
+		            "VALIDATION_ERROR": ""
 		        }
 		    }
 		});
+
 })(angular);
 
 
 /**
-* Partial filenames.
-* @requires angular
-*/
+ * constant for partial.
+ * @requires angular
+ */
 (function (ng) {
     "use strict";
 
@@ -108,6 +131,7 @@
 		    "footer": "/html/partials/footer.html",
 		    "header": "/html/partials/header.html"
 		});
+
 })(angular);
 
 

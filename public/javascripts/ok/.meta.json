@@ -17,6 +17,8 @@
             "ok.utils"
         ],
         "services": [
+            "ok.constants",
+            "ok.entities"
         ],
         "utils": [
 

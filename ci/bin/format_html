@@ -12,7 +12,7 @@ var h = require('../_helper'),
     fs = h.fs,
     tasks = h.tasks,
     config = require('../configs').formatConfig,
-    updateQueryInUrl = require('../../app/util/update_query_in_url');
+    updateQueryInUrl = require('../../app/utils/update_query_in_url');
 
 process.chdir(h.basedir);
 
