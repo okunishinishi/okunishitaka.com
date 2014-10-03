@@ -5,7 +5,7 @@
 
 "use strict";
 
-var httpStatus = require('./../../app/codes/http_status.js'),
+var httpStatus = require('./../../app/codes/http_status_codes.js'),
     h = require('../_helper');
 
 exports.setUp = function (done) {

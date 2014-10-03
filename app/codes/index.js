@@ -6,5 +6,6 @@
 "use strict";
 
 module.exports = {
-    get httpStatus() { return require('./http_status'); }
+    get appErrorCodes() { return require('./app_error_codes'); },
+    get httpStatusCodes() { return require('./http_status_codes'); }
 };

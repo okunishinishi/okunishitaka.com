@@ -1,7 +1,7 @@
 /**
- * Status codes.
+ * Http status codes.
  * @memberof module:okunishitaka-dot-com/app/codes
- * @member httpStatus
+ * @member httpStatusCodes
  * @property {number} SUCCESS - Serve handle the request successfully.
  * @proprety {number} CONFLICT_ERROR - Resouce conflicted.
  * @property {number} VALIDATION_ERROR - Resouce validation failed.
