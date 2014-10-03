@@ -7,7 +7,7 @@
     "use strict";
     ng
         .module('{{prefix}}.{{namespace}}', [
-            {{#each dependencies}}{{this}}{{#if @last}}{{else}},
+            {{#each dependencies}}'{{this}}'{{#if @last}}{{else}},
             {{/if}}{{/each}}
         ]);
 })(angular);

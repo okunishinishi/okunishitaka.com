@@ -2,11 +2,25 @@
     "prefix": "ok",
     "modules": {
         "constants": [],
-        "entities": [],
-        "datasources": [],
-        "pages": [],
-        "services": [],
-        "utils": []
+        "entities": [
+
+        ],
+        "datasources": [
+
+        ],
+        "pages": [
+            "apeman",
+            "ok.constants",
+            "ok.datasources",
+            "ok.entities",
+            "ok.services",
+            "ok.utils"
+        ],
+        "services": [
+        ],
+        "utils": [
+
+        ]
     },
     "entities": [
         "blog",

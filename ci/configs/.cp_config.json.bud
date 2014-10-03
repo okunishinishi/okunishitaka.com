@@ -25,9 +25,10 @@ module.exports = {
         budForFile(f.paths.javascripts.angularMocksJs, 'test/browser_unit_tests'),
         budForFile(f.paths.javascripts.angularJs, 'public/javascripts/lib'),
         budForFile(f.paths.javascripts.apemanJs, 'public/javascripts/lib'),
+        budForFile(f.paths.javascripts.markedJs, 'public/javascripts/lib'),
         budForFile(f.paths.javascripts.ngApemanJs, 'public/javascripts/lib'),
         budForFile(f.paths.javascripts.oneColorJs, 'public/javascripts/lib'),
-        budForFile(f.paths.stylesheets.apemanCss , 'public/stylesheets/base'),
-        budForFile(f.paths.stylesheets.fontAwesomeCss , 'public/stylesheets/base'),
+        budForFile(f.paths.stylesheets.apemanCss, 'public/stylesheets/base'),
+        budForFile(f.paths.stylesheets.fontAwesomeCss, 'public/stylesheets/base'),
     ]
 };

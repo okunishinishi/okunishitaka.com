@@ -24,7 +24,7 @@
         "public/javascripts",
         "public/javascripts/lib",
         "public/javascripts/ok/constants",
-        "public/javascripts/ok/data-sources",
+        "public/javascripts/ok/datasources",
         "public/javascripts/ok/entities",
         "public/javascripts/ok/pages",
         "public/javascripts/ok/services",

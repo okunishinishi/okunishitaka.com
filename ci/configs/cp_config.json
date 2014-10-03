@@ -35,6 +35,11 @@
         "mode": "444"
     },
     {
+        "src": "node_modules/apeman-front/assets/javascripts/marked.js",
+        "dest": "public/javascripts/lib/marked.js",
+        "mode": "444"
+    },
+    {
         "src": "node_modules/apeman-front/assets/javascripts/ng-apeman.js",
         "dest": "public/javascripts/lib/ng-apeman.js",
         "mode": "444"

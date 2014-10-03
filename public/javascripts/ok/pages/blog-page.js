@@ -14,8 +14,8 @@
         .run(function ($rootScope) {
 
         })
-        .factory('BlogListDatasource', function (ListDatasource, BlogEntity, blogApiService) {
-            return ListDatasource.define({
+        .factory('blogListDatasource', function (ListDatasource, BlogEntity, blogApiService) {
+            return new ListDatasource({
                 convert: function (data) {
                     return data.map(BlogEntity.new);
                 },
@@ -30,20 +30,47 @@
                 }
             });
         })
-        .controller('BlogCtrl', function ($scope, BlogListDatasource) {
+        .controller('BlogCtrl', function ($scope, blogListDatasource) {
 
-            var listDatasource = new BlogListDatasource({
-
-            });
+            var listDatasource = blogListDatasource;
 
             ap.copy({
-                list: listDatasource,
+                listDatasource: listDatasource,
                 edit: function (blog) {
 
                 }
             }, $scope);
 
-            $scope.list.load();
-        });
+            listDatasource.load();
+        })
+        .controller('BlogListCtrl', function ($scope) {
+
+            ap.copy({
+                /**
+                 * Load more data.
+                 */
+                more: function () {
+                    $scope.listDatasource.load();
+                }
+            }, $scope);
+
+            Object.defineProperties($scope, {
+                /**
+                 * Blog data.
+                 */
+                blogs: {
+                    get: function () {
+                        return $scope.listDatasource.data;
+                    }
+                }
+            });
+        })
+        .controller('BlogDetailCtrl', function ($scope) {
+
+        })
+        .controller('BlogEditCtrl', function ($scope) {
+
+        })
+    ;
 
 })(angular, apeman);

@@ -24,16 +24,18 @@
 <header ng-include="url(partials.header)" ng-controller="HeadControl"></header>
 <div class="container positioned" ng-controller="BlogCtrl">
     <aside>
-        <ul>
-            <li ng-repeat="b in list.data">
-                <a href="javascript:void(0)" ng-click="scrollTo('blog-dt-' + b._id)">{{b.title}}</a>
-            </li>
-        </ul>
-        <a id="aside-blog-more-button" href="javascript:void(0)" ng-click="list.load()">{{l.buttons.more}}</a>
+        <div ng-controller="BlogListCtrl">
+            <ul>
+                <li ng-repeat="b in blogs">
+                    <a href="javascript:void(0)" ng-click="scrollTo('blog-dt-' + b._id)">{{b.title}}</a>
+                </li>
+            </ul>
+            <a id="aside-blog-more-button" href="javascript:void(0)" ng-click="more()">{{l.buttons.more}}</a>
+        </div>
     </aside>
     <main>
         <article id="blog-article">
-            <section id="blog-edit-setion">
+            <section id="blog-edit-setion" ng-controller="BlogEditCtrl">
                 <div>
                     <input type="text" id="blog-title-input" class="wide-input">
                 </div>
@@ -45,10 +47,9 @@
                     <a id="blog-save-button" class="button" href="">{{l.buttons.save}}</a>
                 </div>
             </section>
-            <section id="blog-list-section">
+            <section id="blog-list-section" ng-controller="BlogListCtrl">
                 <dl id="blog-list">
-                    <dt ng-repeat-start="b in list.data" id="blog-dt-{{b._id}}">
-                        <span ng-if="editing"></span>
+                    <dt ng-repeat-start="b in blogs" id="blog-dt-{{b._id}}">
                         {{b.title}}
                     </dt>
                     <dd ng-repeat-end="">{{b.content}}</dd>
