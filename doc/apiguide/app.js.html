@@ -135,7 +135,6 @@ var web = require('apeman-web'),
     childProcess = u.core.childProcess,
     async = web.ext.async,
     mw = web.middlewares,
-    connect = web.ext.connect,
     storages = require('./app_storages'),
     prerenderMiddleware = require('./middlewares/prerender_middleware');
 
@@ -160,73 +159,72 @@ app.start = function (port, settings, callback) {
 
     async.series([
         function (callback) {
-            var clean = require.resolve('./bin/clean');
-            childProcess.fork(clean).on('exit', callback);
+            app._clean(callback);
         },
         function (callback) {
-            storages.connect(settings.dataDir, callback);
+            app._setupStorage(settings.dataDir, callback);
         },
         function (callback) {
-            var server = connect()
-                .use(function (req, res, next) {
+            var server = app._newServer([
+                function (req, res, next) {
                     next();
-                })
-                .use(prerenderMiddleware({
+                },
+                prerenderMiddleware({
                     cacheDirectory: settings.prerenderCacheDir,
                     baseUrl: [
                         ['http://localhost', port].join(':')
                     ]
-                }))
-                .use(mw.serveStaticMiddleware({
+                }),
+                mw.serveStaticMiddleware({
                     root: settings.publicDir,
                     extensions: ['html', 'htm', 'json']
-                }))
-                .use(mw.extendReqMiddleware({
+                }),
+                mw.extendReqMiddleware({
                     getQuery: web.extensions.reqGetQuery(),
                     parseForm: web.extensions.reqParseForm()
-                }))
-                .use(mw.extendResMiddleware({
+                }),
+                mw.extendResMiddleware({
                     sendJson: web.extensions.resSendJson({
                         //ブラウザで文字化けするのでUTF-8を明示的に指定している
                         contentType: 'application/json; charset=UTF-8;'
                     }),
                     sendRedirect: web.extensions.resSendRedirect()
-                }))
-                .use(function (req, res, next) {
+                }),
+                function setQuery(req, res, next) {
                     req.query = req.getQuery();
                     next();
-                })
-                .use(function (req, res, next) {
+                },
+                function setBody(req, res, next) {
                     req.parseForm(function (err, body) {
                         req.body = body;
                         next(err);
                     });
-                })
-                .use(mw.logDevMiddleware({
+                },
+                mw.logDevMiddleware({
                     enabled: isDevelopment
-                }))
-                .use(mw.logAccessMiddleware({
+                }),
+                mw.logAccessMiddleware({
                     filename: settings.accessLogFile
-                }))
-                .use(mw.selectRouteMiddleware({
+                }),
+                mw.selectRouteMiddleware({
                     paramsName: 'params',
                     routes: require('./app_endpoints')
-                }))
-                .use(mw.logErrorMiddleware({
+                }),
+                mw.logErrorMiddleware({
                     filename: settings.errorLogFile,
                     console: isDevelopment
-                }))
-                .use(mw.sendServerErrorMiddleware({
+                }),
+                mw.sendServerErrorMiddleware({
 
-                }))
+                })
+            ])
                 .listen(port, function () {
-
                     /**
                      * Close the app.
                      * @function
                      * @param {function} [callback] - Callback when done.
                      */
-                    app.close = server.close.bind(server);
+                    app.close = server &amp;&amp; server.close.bind(server);
                     callback(null, app);
                 });
         }
@@ -237,6 +235,23 @@ app.start = function (port, settings, callback) {
         callback(app);
     });
 };
+
+app._clean = function (callback) {
+    var clean = require.resolve('./bin/clean');
+    childProcess.fork(clean).on('exit', callback);
+}
+
+app._setupStorage = function (dataDir, callback) {
+    storages.connect(dataDir, callback);
+}
+
+app._newServer = function (middlewares) {
+    var server = web.ext.connect();
+    middlewares.forEach(function (middleare) {
+        server.use(middleare);
+    });
+    return  server;
+}
 
 module.exports = app;</pre>
 	</article>

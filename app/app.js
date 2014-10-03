@@ -99,7 +99,7 @@ app.start = function (port, settings, callback) {
                      * @function
                      * @param {function} [callback] - Callback when done.
                      */
-                    app.close = server.close.bind(server);
+                    app.close = server && server.close.bind(server);
                     callback(null, app);
                 });
         }
