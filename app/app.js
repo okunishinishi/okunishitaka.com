@@ -1,7 +1,6 @@
 /**
- * App module
- * @memberof okunishitaka.com/app
- * @module app
+ * App module for {@link http://okunishitaka.com|okunishitaka.com}.
+ * @module okunishitaka-dot-com/app
  */
 
 "use strict";
@@ -15,7 +14,20 @@ var web = require('apeman-web'),
     storages = require('./app_storages'),
     prerenderMiddleware = require('./middlewares/prerender_middleware');
 
+/** @lends module:okunishitaka-dot-com/app */
 var app = {};
+
+/**
+ * Start the app.
+ * @param {number} port - Server port number.
+ * @param {object} settings - App settings.
+ * @param {string} settings.basedir - App base directory path.
+ * @param {string} settings.settings - Data directory path.
+ * @param {string} settings.prerenderCacheDir - Directory path to save prerender cache.
+ * @param {string} settings.accessLogFile - Access log file path.
+ * @param {string} settings.errorLogFile - Error log file path.
+ * @param {function} callback - Callback when done.
+ */
 app.start = function (port, settings, callback) {
     var isDevelopment = process.env.NODE_ENV === 'development';
 
@@ -70,7 +82,7 @@ app.start = function (port, settings, callback) {
                 }))
                 .use(mw.selectRouteMiddleware({
                     paramsName: 'params',
-                    routes: require('./app_routes')
+                    routes: require('./app_endpoints')
                 }))
                 .use(mw.logErrorMiddleware({
                     filename: settings.errorLogFile,
@@ -80,6 +92,12 @@ app.start = function (port, settings, callback) {
 
                 }))
                 .listen(port, function () {
+
+                    /**
+                     * Close the app.
+                     * @function
+                     * @param {function} [callback] - Callback when done.
+                     */
                     app.close = server.close.bind(server);
                     callback(null, app);
                 });

@@ -1,5 +1,7 @@
 /**
  * Route for settings.
+ * @memberof okunishitaka.com/app/settings
+ * @member settingRoute
  */
 
 "use strict";

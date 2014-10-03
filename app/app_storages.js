@@ -1,5 +1,8 @@
 /**
- * Storages.
+ * Storages for {@link http://okunishitaka.com|okunishitaka.com}.
+ * This is a singleton instance of {@link module:okunishitaka-dot-com/app/AppStorages|AppStorages}
+ * @see module:okunishitaka-dot-com/app/AppStorages
+ * @module okunishitaka-dot-com/app/appStorages
  */
 
 "use strict";
@@ -12,6 +15,11 @@ var u = require('apeman-util'),
     JsonStorage = storage.JsonStorage;
 
 
+/**
+ * App storages.
+ * @membeof module:okunishitaka-dot-com/app
+ * @constructor AppStorages
+ */
 function AppStorages() {
     var s = this;
 }
@@ -55,4 +63,5 @@ AppStorages.newStorage = function (dataDir, dataSubDir, indicies) {
     });
 }
 
+/** @lends appStorages */
 module.exports = new AppStorages();

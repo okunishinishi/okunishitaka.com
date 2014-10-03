@@ -3,28 +3,28 @@
         "dirname": "app/codes",
         "doc": {
             "file": "Codes.",
-            "module": "okunishitaka.com/app/codes"
+            "module": "okunishitaka-dot-com/app/codes"
         }
     },
     {
         "dirname": "app/locales",
         "doc": {
             "file": "Locales.",
-            "module": "okunishitaka.com/app/locales"
+            "module": "okunishitaka-dot-com/app/locales"
         }
     },
     {
         "dirname": "app/routes",
         "doc": {
             "file": "App routes.",
-            "module": "okunishitaka.com/app/routes"
+            "module": "okunishitaka-dot-com/app/routes"
         }
     },
     {
         "dirname": "app/routes/interceptors",
         "doc": {
             "file": "App interceptor",
-            "module": "okunishitaka.com/app/routes/interceptors"
+            "module": "okunishitaka-dot-com/app/routes/interceptors"
         },
         "pascalPattern": "*_interceptor"
     },
@@ -32,14 +32,14 @@
         "dirname": "ci/configs",
         "doc": {
             "file": "CI configuration.",
-            "module": "okunishitaka.com/ci/configs"
+            "module": "okunishitaka-dot-com/ci/configs"
         }
     },
     {
         "dirname": "ci/tasks",
         "doc": {
             "file": "CI tasks.",
-            "module": "okunishitaka.com/ci/tasks"
+            "module": "okunishitaka-dot-com/ci/tasks"
         },
         "pascalPattern": "*task"
     },

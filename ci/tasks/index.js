@@ -1,6 +1,6 @@
 /**
  * @file CI tasks.
- * @module okunishitaka.com/ci/tasks */
+ * @module okunishitaka-dot-com/ci/tasks */
 
 "use strict";
 

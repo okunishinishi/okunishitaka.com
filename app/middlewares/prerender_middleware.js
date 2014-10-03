@@ -1,5 +1,6 @@
 /**
  * Middleware to pre render.
+ * @memberof okunishitaka.com/app/middlewares
  * @function prerenderMiddleware
  * @param {object} options - Optional settings.
  * @param {string} options.cacheDirectory - Cache directory path.

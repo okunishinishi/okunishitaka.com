@@ -1,6 +1,6 @@
 /**
  * @file App interceptor
- * @module okunishitaka.com/app/routes/interceptors */
+ * @module okunishitaka-dot-com/app/routes/interceptors */
 
 "use strict";
 

@@ -1,6 +1,6 @@
 /**
  * @file App routes.
- * @module okunishitaka.com/app/routes */
+ * @module okunishitaka-dot-com/app/routes */
 
 "use strict";
 

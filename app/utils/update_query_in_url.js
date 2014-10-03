@@ -1,4 +1,5 @@
 /**
+ * @memberof okunishitaka/app/utils
  * @function updateQueryInUrl
  * @param {string} urlString - URL string.
  * @param {object} queryData - Query to write.
@@ -11,6 +12,7 @@ var u = require('apeman-util'),
     copy = u.object.copy,
     qs = u.ext.qs;
 
+/** @lends updateQueryInUrl */
 function updateQueryInUrl(urlString, query) {
     var urlAndQuery = urlString.split('?');
     var orinalQuery = qs.parse(urlAndQuery[1] || '');

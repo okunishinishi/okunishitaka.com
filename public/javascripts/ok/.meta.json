@@ -6,7 +6,8 @@
 
         ],
         "datasources": [
-
+            "ok.constants",
+            "ok.entities"
         ],
         "pages": [
             "apeman",

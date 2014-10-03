@@ -1,5 +1,6 @@
 /**
  * Get query included in an url string.
+ * @memberof okunishitaka.com/app/middlewares
  * @function _queryInUrl
  * @param {string} url
  * @returns {object} - A query object.

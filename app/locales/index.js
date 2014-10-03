@@ -1,6 +1,6 @@
 /**
  * @file Locales.
- * @module okunishitaka.com/app/locales */
+ * @module okunishitaka-dot-com/app/locales */
 
 "use strict";
 
