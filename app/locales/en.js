@@ -1,5 +1,11 @@
 /**
- * @file English locale data.
+ * English locale data.
+ * @memberof module:okunishitaka-dot-com/app/locales
+ * @member en
+ * @property {object} pageNames - Page names.
+ * @property {object} button - Button texts.
+ * @property {object} errors - Error title texts.
+ * @property {object} errorDescriptions - Error detail texts.
  */
 
 "use strict";
@@ -31,7 +37,7 @@ l.errors = {
     VALIDATION_ERROR: 'Invalid input.',
 };
 
-l.errorDescription = {
+l.errorDescriptions = {
     CONFLICT_ERROR: 'It seems that someone else update the resource first. \nPlease reload the page and try again.',
     CONNECTION_ERROR: 'Ensure you are connected to the Internet and please try again.',
     NOT_FOUND_ERROR: 'Sorry! The requested resource is not availabe anymore.',

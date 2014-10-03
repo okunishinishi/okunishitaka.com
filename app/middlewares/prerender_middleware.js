@@ -1,11 +1,11 @@
 /**
  * Middleware to pre render.
- * @memberof okunishitaka.com/app/middlewares
+ * @memberof module:okunishitaka-dot-com/app/middlewares
  * @function prerenderMiddleware
  * @param {object} options - Optional settings.
+ * @param {object} options.baseUrl - Base url.
  * @param {string} options.cacheDirectory - Cache directory path.
- * @param {string} [options.protocol='http'] - Protocol to forwerd to.
- * @param {string} [options.protocol='http'] - Protocol to forwerd to.
+ * @param {number} [options.cacheDuration=100 * 60 * 60 * 24] - Cache duration.
  */
 
 "use strict";
@@ -33,7 +33,7 @@ function prerenderMiddleware(options) {
             return;
         }
         prerenderMiddleware.prerender(
-            req.url,
+            url.resolve(o.baseUrl, req.url),
             o.cacheDirectory,
             o.cacheDuration,
             function (err, prerendered) {
@@ -74,8 +74,6 @@ prerenderMiddleware.prerender = function (incomingURL, cacheDirectory, cacheDura
     var restoredURL = prerenderMiddleware.restoreURL(incomingURL),
         filename = path.join(cacheDirectory, prerenderMiddleware._filenameForUrl(restoredURL)),
         bin = require.resolve('./bin/prerender.phantom.js');
-    restoredURL = 'http://localhost:3801' + restoredURL; //FIXME
-
     prerenderMiddleware._isValidCache(filename, cacheDuration, function (cached) {
         if (cached) {
             callback(null, filename);

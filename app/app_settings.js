@@ -1,8 +1,6 @@
 /**
  * App settings.
- * @memberof okunishitaka.com/app
- * @member appSettings
- * @type {object}
+ * @module okunishitaka-dot-com/app/appSettings
  */
 
 "use strict";
@@ -10,42 +8,48 @@
 var u = require('apeman-util'),
     path = u.core.path;
 
-/** @lends appSettings */
-var appSettings = {};
+/** @lends module:okunishitaka-dot-com/app/appSettings */
+exports = module.exports;
 
 /**
  * Base directory path.
+ * @type {string}
  */
-appSettings.basedir = path.resolve(__dirname, '..');
+exports.basedir = path.resolve(__dirname, '..');
 
 /**
  * Public directory path.
+ * @type {string}
  */
-appSettings.publicDir = path.resolve(appSettings.basedir, 'public');
+exports.publicDir = path.resolve(exports.basedir, 'public');
 
 /**
  * Data directory path.
+ * @type {string}
  */
-appSettings.dataDir = path.resolve(appSettings.basedir, 'var/data');
+exports.dataDir = path.resolve(exports.basedir, 'var/data');
 
 /**
  * Cache directory path.
+ * @type {string}
+ *
  */
-appSettings.cacheDir = path.resolve(appSettings.basedir, 'var/cache');
+exports.cacheDir = path.resolve(exports.basedir, 'var/cache');
 
 /**
  * Prerender cache directory path.
+ * @type {string}
  */
-appSettings.prerenderCacheDir = path.resolve(appSettings.cacheDir, 'prerender');
+exports.prerenderCacheDir = path.resolve(exports.cacheDir, 'prerender');
 
 /**
  * Access log file path.
+ * @type {string}
  */
-appSettings.accessLogFile = path.resolve(appSettings.basedir, 'var/log/okunishitaka.com-access.log');
+exports.accessLogFile = path.resolve(exports.basedir, 'var/log/okunishitaka.com-access.log');
 
 /**
  * Error log file path.
+ * @type {string}
  */
-appSettings.errorLogFile = path.resolve(appSettings.basedir, 'var/log/okunishitaka.com-error.log');
-
-module.exports = appSettings;
+exports.errorLogFile = path.resolve(exports.basedir, 'var/log/okunishitaka.com-error.log');

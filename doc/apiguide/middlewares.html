@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>okunishitaka.com Module: okunishitaka-dot-com/app/locales</title>
+	<title>okunishitaka.com Module: okunishitaka-dot-com/app/middlewares</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -152,12 +152,12 @@
 					
 
 
-	<h1 class="page-title">Module: okunishitaka-dot-com/app/locales</h1>
+	<h1 class="page-title">Module: okunishitaka-dot-com/app/middlewares</h1>
 <section>
 
 <header>
     <h2>
-    okunishitaka-dot-com/app/locales
+    okunishitaka-dot-com/app/middlewares
     </h2>
     
 </header>
@@ -168,7 +168,7 @@
 
     
         
-            <div class="description"><p>Locales.</p></div>
+            <div class="description"><p>Middleware functions.</p></div>
         
 
         
@@ -198,8 +198,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="index.js__.html">app/locales/index.js</a>,
-				 <a href="index.js__.html#sunlight-1-line-1">line 1</a>
+				<a href="index.js___.html">app/middlewares/index.js</a>,
+				 <a href="index.js___.html#sunlight-1-line-1">line 1</a>
 			</li>
 		</ul>
 	</dd>
@@ -228,215 +228,34 @@
     
 
     
-        <h3 class="subsection-title">Members</h3>
+
+    
+        <h3 class="subsection-title">Methods</h3>
 
         <dl>
             
-<dt class="name" id="en">
-    <h4><span class="type-signature">&lt;static> </span>en<span class="type-signature"></span></h4>
-
+<dt>
+    <h4 class="name" id="prerenderMiddleware"><span class="type-signature">&lt;static> </span>prerenderMiddleware<span class="signature">(options)</span><span class="type-signature"></span></h4>
+    
     
 </dt>
 <dd>
     
+    
     <div class="description">
-        <p>English locale data.</p>
+        <p>Middleware to pre render.</p>
     </div>
     
 
     
-
     
-<dl class="details">
-	
-
-	<h5 class="subsection-title">Properties:</h5>
-
-	<dl>
-
-<table class="props table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>pageNames</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Page names.</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>button</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Button texts.</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>errors</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Error title texts.</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>errorDescriptions</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Error detail texts.</p></td>
-        </tr>
-
-	
-	</tbody>
-</table>
-</dl>
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="en.js.html">app/locales/en.js</a>,
-				 <a href="en.js.html#sunlight-1-line-1">line 1</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
     
-</dd>
-
+    
+    
+        <h5>Parameters:</h5>
         
-            
-<dt class="name" id="ja">
-    <h4><span class="type-signature">&lt;static> </span>ja<span class="type-signature"></span></h4>
 
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Japanese locale data.</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-	
-
-	<h5 class="subsection-title">Properties:</h5>
-
-	<dl>
-
-<table class="props table table-striped">
+<table class="params table table-striped">
     <thead>
 	<tr>
 		
@@ -458,7 +277,7 @@
 
         <tr>
             
-                <td class="name"><code>pageNames</code></td>
+                <td class="name"><code>options</code></td>
             
 
             <td class="type">
@@ -474,83 +293,156 @@
 
             
 
-            <td class="description last"><p>Page names.</p></td>
+            <td class="description last"><p>Optional settings.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+		<th>Argument</th>
+		
+
+		
+		<th>Default</th>
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>baseUrl</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Base url.</p></td>
         </tr>
 
 	
 
         <tr>
             
-                <td class="name"><code>button</code></td>
+                <td class="name"><code>cacheDirectory</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">string</span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last"><p>Button texts.</p></td>
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Cache directory path.</p></td>
         </tr>
 
 	
 
         <tr>
             
-                <td class="name"><code>errors</code></td>
+                <td class="name"><code>cacheDuration</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">number</span>
 
 
             
             </td>
 
             
-
-            
-
-            <td class="description last"><p>Error title texts.</p></td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>errorDescriptions</code></td>
-            
-
-            <td class="type">
-            
+                <td class="attributes">
                 
-<span class="param-type">object</span>
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
+            
 
             
-            </td>
-
+                <td class="default">
+                
+                    100 * 60 * 60 * 24
+                
+                </td>
             
 
-            
-
-            <td class="description last"><p>Error detail texts.</p></td>
+            <td class="description last"><p>Cache duration.</p></td>
         </tr>
 
 	
 	</tbody>
 </table>
-</dl>
 
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
 	
 
 	
@@ -576,8 +468,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="ja.js.html">app/locales/ja.js</a>,
-				 <a href="ja.js.html#sunlight-1-line-1">line 1</a>
+				<a href="prerender_middleware.js.html">app/middlewares/prerender_middleware.js</a>,
+				 <a href="prerender_middleware.js.html#sunlight-1-line-1">line 1</a>
 			</li>
 		</ul>
 	</dd>
@@ -590,13 +482,21 @@
 	
 </dl>
 
+    
+    
 
+    
+
+    
+    
+    
+    
+    
+    
     
 </dd>
 
         </dl>
-    
-
     
 
     

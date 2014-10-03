@@ -9,7 +9,7 @@
 var ng = angular,
     mock = ng.mock;
 
-describe('Listdatasource', function () {
+describe('ListDatasource', function () {
 
     beforeEach(mock.module('ok.datasources'));
 

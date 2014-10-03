@@ -34,7 +34,7 @@
 		            "UNEXPECTED_ERROR": "Unexpected error occured.",
 		            "VALIDATION_ERROR": "Invalid input."
 		        },
-		        "errorDescription": {
+		        "errorDescriptions": {
 		            "CONFLICT_ERROR": "It seems that someone else update the resource first. \nPlease reload the page and try again.",
 		            "CONNECTION_ERROR": "Ensure you are connected to the Internet and please try again.",
 		            "NOT_FOUND_ERROR": "Sorry! The requested resource is not availabe anymore.",
@@ -69,7 +69,7 @@
 		            "UNEXPECTED_ERROR": "Unexpected error occured.",
 		            "VALIDATION_ERROR": "Invalid input."
 		        },
-		        "errorDescription": {
+		        "errorDescriptions": {
 		            "CONFLICT_ERROR": "It seems that someone else update the resource first. \nPlease reload the page and try again.",
 		            "CONNECTION_ERROR": "Ensure you are connected to the Internet and please try again.",
 		            "NOT_FOUND_ERROR": "Sorry! The requested resource is not availabe anymore.",

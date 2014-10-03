@@ -11,7 +11,7 @@ var ng = angular,
 
 describe('localeConstant', function () {
     beforeEach(mock.module('ok.constants'));
-    it('Inject a service.', inject(function (localeConstant) {
+    it('Inject a constant.', inject(function (localeConstant) {
         expect(localeConstant).toBeDefined();
     }));
 });

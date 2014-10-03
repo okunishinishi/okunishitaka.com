@@ -22,7 +22,7 @@
         .module('ok.constants')
         .constant('codeConstant', {
 		    "httpStatus": {
-		        "OK": 200,
+		        "SUCCESS": 200,
 		        "NOT_FOUND_ERROR": 404,
 		        "CONFLICT_ERROR": 409,
 		        "VALIDATION_ERROR": 422,
@@ -69,7 +69,7 @@
 		            "UNEXPECTED_ERROR": "Unexpected error occured.",
 		            "VALIDATION_ERROR": "Invalid input."
 		        },
-		        "errorDescription": {
+		        "errorDescriptions": {
 		            "CONFLICT_ERROR": "It seems that someone else update the resource first. \nPlease reload the page and try again.",
 		            "CONNECTION_ERROR": "Ensure you are connected to the Internet and please try again.",
 		            "NOT_FOUND_ERROR": "Sorry! The requested resource is not availabe anymore.",
@@ -104,7 +104,7 @@
 		            "UNEXPECTED_ERROR": "Unexpected error occured.",
 		            "VALIDATION_ERROR": "Invalid input."
 		        },
-		        "errorDescription": {
+		        "errorDescriptions": {
 		            "CONFLICT_ERROR": "It seems that someone else update the resource first. \nPlease reload the page and try again.",
 		            "CONNECTION_ERROR": "Ensure you are connected to the Internet and please try again.",
 		            "NOT_FOUND_ERROR": "Sorry! The requested resource is not availabe anymore.",

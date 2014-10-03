@@ -11,7 +11,7 @@ var ng = angular,
 
 describe('codeConstant', function () {
     beforeEach(mock.module('ok.constants'));
-    it('Inject a service.', inject(function (codeConstant) {
+    it('Inject a constant.', inject(function (codeConstant) {
         expect(codeConstant).toBeDefined();
     }));
 });

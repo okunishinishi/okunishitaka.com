@@ -1,5 +1,11 @@
 /**
- * @file Japanese locale data.
+ * Japanese locale data.
+ * @memberof module:okunishitaka-dot-com/app/locales
+ * @member ja
+ * @property {object} pageNames - Page names.
+ * @property {object} button - Button texts.
+ * @property {object} errors - Error title texts.
+ * @property {object} errorDescriptions - Error detail texts.
  */
 
 "use strict";

@@ -47,7 +47,10 @@ app.start = function (port, settings, callback) {
                     next();
                 })
                 .use(prerenderMiddleware({
-                    cacheDirectory: settings.prerenderCacheDir
+                    cacheDirectory: settings.prerenderCacheDir,
+                    baseUrl: [
+                        ['http://localhost', port].join(':')
+                    ]
                 }))
                 .use(mw.serveStaticMiddleware({
                     root: settings.publicDir,

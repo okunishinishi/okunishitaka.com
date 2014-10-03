@@ -25,12 +25,21 @@ function AppStorages() {
 }
 
 AppStorages.prototype = {
+    /**
+     * Rebuild all.
+     * @param {function} callback - Callback when done.
+     */
     rebuildAll: function (callback) {
         var s = this;
         JsonStorage.rebuildAll([
             s.blogStorage
         ], callback);
     },
+    /**
+     * Connect the storages.
+     * @param {string} dataDir - Base data directory.
+     * @param {function} callback - Callback when done.
+     */
     connect: function (dataDir, callback) {
         var s = this;
         async.series([
@@ -54,6 +63,13 @@ AppStorages.prototype = {
     }
 }
 
+/**
+ * Create a new storage.
+ * @param {string} dataDir - Data root directory path.
+ * @param {string} dataSubDir - Data suby directory path.
+ * @param {string[]} indicies - Index keys.
+ * @returns {JsonStorage}
+ */
 AppStorages.newStorage = function (dataDir, dataSubDir, indicies) {
     var basedir = path.resolve(dataDir, dataSubDir);
     mkdirp.sync(basedir);

@@ -1,5 +1,6 @@
 /**
  * @file Convenience functions for app bin.
+ * @module okunishitaka-dot-com/app/bin/_helper
  * @private
  */
 

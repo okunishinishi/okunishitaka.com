@@ -62,5 +62,5 @@
 
     ng
         .module('ok.services')
-        .service('service', ApiService);
+        .service('apiService', ApiService);
 })(angular, apeman);

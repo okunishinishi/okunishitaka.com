@@ -9,7 +9,7 @@
         .module('ok.constants')
         .constant('codeConstant', {
 		    "httpStatus": {
-		        "OK": 200,
+		        "SUCCESS": 200,
 		        "NOT_FOUND_ERROR": 404,
 		        "CONFLICT_ERROR": 409,
 		        "VALIDATION_ERROR": 422,
