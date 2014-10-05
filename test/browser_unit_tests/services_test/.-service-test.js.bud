@@ -16,7 +16,7 @@ var basedir = path.resolve(__dirname, '../../../'),
     srcDir = path.resolve(basedir, 'public/javascripts/ok/services'),
     destDir = __dirname;
 
-function serviceBud(srcDir, destDir) {
+function serviceTestBud(srcDir, destDir) {
     return fs.readdirSync(srcDir)
         .filter(filtering.patternAcceptFilter(/-service\.js$/))
         .map(mapping.pathResolveMap(srcDir))
@@ -36,6 +36,6 @@ function serviceBud(srcDir, destDir) {
 
 
 module.exports = [
-    serviceBud(path.resolve(srcDir), destDir),
-    serviceBud(path.resolve(srcDir, 'api'), destDir)
+    serviceTestBud(path.resolve(srcDir), destDir),
+    serviceTestBud(path.resolve(srcDir, 'api'), destDir)
 ].reduce(reducing.concatReduce(), []);

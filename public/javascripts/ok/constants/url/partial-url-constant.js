@@ -1,5 +1,5 @@
 /**
- * constant for partial.
+ * constant for partialUrl.
  * @requires angular
  */
 (function (ng) {
@@ -7,7 +7,7 @@
 
     ng
         .module('ok.constants')
-        .constant('partialConstant', {
+        .constant('partialUrlConstant', {
 		    "footer": "/html/partials/footer.html",
 		    "header": "/html/partials/header.html"
 		});

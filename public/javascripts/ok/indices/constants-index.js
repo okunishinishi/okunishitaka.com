@@ -13,7 +13,8 @@
                 get codeConstant() { return $injector.get('codeConstant'); },
                 get localeConstant() { return $injector.get('localeConstant'); },
                 get metaConstant() { return $injector.get('metaConstant'); },
-                get partialConstant() { return $injector.get('partialConstant'); }
+                get pageUrlConstant() { return $injector.get('pageUrlConstant'); },
+                get partialUrlConstant() { return $injector.get('partialUrlConstant'); }
             }
         });
 })(angular, apeman);

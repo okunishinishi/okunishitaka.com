@@ -18,6 +18,8 @@ describe('locationResolveService', function () {
 
     it('Resolve a url.', inject(function (locationResolveService) {
         expect(locationResolveService.baseUrl).toBeDefined();
+        expect(locationResolveService.resolveUrl(null)).toBe(null);
+        expect(locationResolveService.resolveUrl(undefined)).toBe(undefined);
         expect(locationResolveService.resolveUrl('/foo')).toBeDefined();
         expect(locationResolveService.resolveUrl('foo')).toBeDefined();
     }));

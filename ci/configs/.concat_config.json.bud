@@ -29,7 +29,7 @@ module.exports = {
         ]),
         concatData('public/javascripts/ok', [
             {
-                src: 'constants/*.js',
+                src: 'constants/**/*.js',
                 dest: 'constants.js'
             },
             {

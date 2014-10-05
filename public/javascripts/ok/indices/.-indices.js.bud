@@ -6,6 +6,7 @@
 
 var u = require('apeman-util'),
     fs = u.core.fs,
+    glob = u.ext.glob,
     path = u.core.path,
     string = u.string,
     filtering = u.filtering;
@@ -27,9 +28,10 @@ module.exports = Object.keys(data).map(function (key) {
             description: string.sentenceString(name),
             name: string.camelString(name),
             Name: string.pascalString(name),
-            subModules: fs.readdirSync(dirname)
+            subModules: glob.sync('**/*.js', {
+                cwd: dirname
+            })
                 .filter(filtering.patternRejectFilter(/^_/))
-                .filter(filtering.patternAcceptFilter(/\.js$/))
                 .map(function (filename) {
                     var name = string.camelString(path.basename(filename, '.js'));
                     var pascal = data[key].pascal;

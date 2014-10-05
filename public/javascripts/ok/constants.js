@@ -52,6 +52,7 @@
         .module('ok.constants')
         .constant('localeConstant', {
 		    "en": {
+		        "appName": "okunishitaka.com",
 		        "pageNames": {
 		            "INDEX": "Top",
 		            "BLOG": "Blog",
@@ -80,6 +81,7 @@
 		        }
 		    },
 		    "ja": {
+		        "appName": "okunishitaka.com",
 		        "pageNames": {
 		            "INDEX": "Top",
 		            "BLOG": "Blog",
@@ -137,7 +139,7 @@
 
 
 /**
- * constant for partial.
+ * constant for pageUrl.
  * @requires angular
  */
 (function (ng) {
@@ -145,7 +147,25 @@
 
     ng
         .module('ok.constants')
-        .constant('partialConstant', {
+        .constant('pageUrlConstant', {
+		    "blog": "/blog.html",
+		    "index": "/index.html",
+		    "work": "/work.html"
+		});
+
+})(angular);
+
+
+/**
+ * constant for partialUrl.
+ * @requires angular
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.constants')
+        .constant('partialUrlConstant', {
 		    "footer": "/html/partials/footer.html",
 		    "header": "/html/partials/header.html"
 		});

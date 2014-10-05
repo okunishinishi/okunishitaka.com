@@ -4,7 +4,7 @@
         "dest": "public/javascripts/lib.js"
     },
     {
-        "src": "public/javascripts/ok/constants/*.js",
+        "src": "public/javascripts/ok/constants/**/*.js",
         "dest": "public/javascripts/ok/constants.js"
     },
     {

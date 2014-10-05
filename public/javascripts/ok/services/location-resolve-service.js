@@ -14,6 +14,9 @@
             s.baseUrl = urlUtil.baseUrlWithLocation($window.location);
 
             s.resolveUrl = function (url) {
+                if (!url) {
+                    return url;
+                }
                 if (url.match(/^\//)) {
                     return urlUtil.joinUrl(s.baseURL, url);
                 }

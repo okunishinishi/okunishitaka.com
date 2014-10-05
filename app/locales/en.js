@@ -10,7 +10,11 @@
 
 "use strict";
 
+var pkg = require('../../package');
+
 var l = {};
+
+l.appName = pkg.name;
 
 l.pageNames = {
     INDEX: 'Top',

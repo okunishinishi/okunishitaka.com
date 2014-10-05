@@ -110,7 +110,6 @@
             'logicsIndex',
             'servicesIndex',
             function global(cn, lg, sv) {
-
                 var lang = sv.langDetectService.detectLang(),
                     locale = sv.localeLoadService.localeForLang(lang);
                 return {
@@ -124,7 +123,7 @@
                     title: function (page) {
                         return lg.pageTitleLogic.tilteForPage(locale, page);
                     },
-                    partials: cn.partialConstant,
+                    partials: cn.partialUrlConstant,
                     goTopPage: function () {
                         sv.locationChangeService.changeToTopPage();
                     },

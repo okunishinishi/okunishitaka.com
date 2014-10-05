@@ -25,6 +25,7 @@
         "public/javascripts",
         "public/javascripts/lib",
         "public/javascripts/ok/constants",
+        "public/javascripts/ok/constants/url",
         "public/javascripts/ok/datasources",
         "public/javascripts/ok/entities",
         "public/javascripts/ok/errors",

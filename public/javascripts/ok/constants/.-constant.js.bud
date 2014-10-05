@@ -7,8 +7,6 @@
 var u = require('apeman-util'),
     appSettings = require('../../../../app/app_settings'),
     string = u.string,
-    fs = u.core.fs,
-    filtering = u.filtering,
     pkg = require('../../../../package'),
     path = u.core.path;
 
@@ -34,21 +32,11 @@ function constantBud(name, data) {
         }
     }
 }
+
+
 module.exports = [
     constantBud('code', require('../../../../app/codes')),
     constantBud('locale', require('../../../../app/locales')),
-    constantBud('partial', (function () {
-        var dirname = path.resolve(__dirname, '../../../html/partials');
-        var data = {};
-        fs.readdirSync(dirname)
-            .filter(filtering.patternAcceptFilter(/\.html$/))
-            .forEach(function (filename) {
-                var key = string.camelString(path.basename(filename, '.html')),
-                    value = path.join('/html/partials', filename);
-                data[key] = value;
-            });
-        return data;
-    })()),
     constantBud('meta', {
         supportedLangs: appSettings.supportedLangs,
         name: pkg.name,

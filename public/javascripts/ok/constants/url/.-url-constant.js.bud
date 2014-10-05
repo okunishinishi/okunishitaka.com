@@ -1,0 +1,58 @@
+/**
+ * Bud file for constants.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    string = u.string,
+    glob = u.ext.glob,
+    path = u.core.path;
+
+var meta = require('../../.meta'),
+    basedir = path.resolve(__dirname, '../../../../..'),
+    publicDir = path.resolve(basedir, 'public');
+
+function constantBud(name, data) {
+    return {
+        mode: '444',
+        force: true,
+        path: path.resolve(__dirname, string.paramString(name) + '-constant.js'),
+        tmpl: path.resolve(__dirname, '..', '.-constant.js.hbs'),
+        get data() {
+            return {
+                module: [
+                    meta.prefix,
+                    path.basename(path.resolve(__dirname, '..'))
+                ].join('.'),
+                name: name,
+                get data() {
+                    return JSON.stringify(data, null, 4).replace(/\n/g, "\n\t\t");
+                }
+            }
+        }
+    }
+}
+
+function fileUrlData(dirname, pattern) {
+    dirname = path.resolve(publicDir, dirname);
+    pattern = path.resolve(dirname, pattern);
+    var data = {};
+    glob.sync(pattern)
+        .forEach(function (filename) {
+            var key = string.camelString(path.basename(filename, path.extname(filename))),
+                value = path.join('/', path.relative(publicDir, filename));
+            data[key] = value;
+        });
+    return data;
+}
+
+
+module.exports = [
+    constantBud('partialUrl', fileUrlData('html/partials', '*.html')),
+    constantBud('pageUrl', fileUrlData('', '*.html'))
+
+]
+;
+
+
