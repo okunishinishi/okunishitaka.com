@@ -8,7 +8,7 @@ var u = require('apeman-util'),
     format = u.core.util.format,
     string = u.string;
 
-var names = require('./.utils.json');
+var names = require('./.logics.json');
 
 module.exports = names.map(function (name) {
     return {
@@ -16,10 +16,10 @@ module.exports = names.map(function (name) {
         force: false,
         path: [
             __dirname,
-            (string.paramString(name) + '-util.js')
+            (string.paramString(name) + '-logic.js')
         ].join('/'),
         data: {
-            module: 'ok.utils',
+            module: 'ok.logics',
             name: string.camelString(name),
             Name: string.pascalString(name)
         }

@@ -8,6 +8,8 @@
     ng
         .module('ok.services', [
             'ok.constants',
-            'ok.entities'
+            'ok.entities',
+            'ok.logics',
+            'ok.utils'
         ]);
 })(angular);

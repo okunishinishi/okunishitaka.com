@@ -8,7 +8,8 @@
     ng
         .module('ok.datasources', [
             'ok.constants',
-            'ok.entities'
+            'ok.entities',
+            'ok.utils'
         ]);
 })(angular);
 

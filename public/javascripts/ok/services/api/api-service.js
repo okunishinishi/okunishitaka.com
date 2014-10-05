@@ -12,24 +12,8 @@
      * @param $http
      * @constructor
      */
-    function ApiService($http, codeConstant) {
+    function ApiService($http, codeConstant, httpStatusCodeLogic) {
         var s = this;
-
-        s._nameOfStatus = function (status) {
-            var names = Object.keys(codeConstant.httpStatusCodes);
-            for (var i = 0; i < names.length; i++) {
-                var name = names[i];
-                var hit = codeConstant.httpStatusCodes[name] === status;
-                if (hit) {
-                    return name;
-                }
-            }
-            return null;
-        }
-
-        s._isAppError = function (name) {
-
-        };
 
         s._request = function (config, callback) {
             return $http(config)
@@ -38,7 +22,7 @@
                 })
                 .error(function (data, status) {
 
-                    var statusName = s._nameOfStatus(status),
+                    var statusName = s.httpStatusCodeLogic.nameForStatusCode(status),
                         error = ApiService.errorWithName(statusName);
                     callback();
                 });

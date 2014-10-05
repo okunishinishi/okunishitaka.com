@@ -12,7 +12,9 @@ var ng = angular,
 describe('{{name}}util', function () {
 
     beforeEach(mock.module('ok.utils'));
+
     it('Inject a util', inject(function ({{name}}Util) {
-        expet({{name}}Util).toBeDefined();
+        expect({{name}}Util).toBeDefined();
     }));
+
 });

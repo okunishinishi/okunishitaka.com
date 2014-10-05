@@ -19,7 +19,7 @@
 /**
  * Page script for blog.
  * @requires angular
- * @retuires apeman
+ * @requires apeman
  */
 
 (function (ng, ap) {

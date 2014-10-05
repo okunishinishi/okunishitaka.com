@@ -8,7 +8,9 @@
     ng
         .module('ok.services', [
             'ok.constants',
-            'ok.entities'
+            'ok.entities',
+            'ok.logics',
+            'ok.utils'
         ]);
 })(angular);
 
@@ -26,15 +28,18 @@
      * @param $http
      * @constructor
      */
-    function ApiService($http) {
+    function ApiService($http, codeConstant, httpStatusCodeLogic) {
         var s = this;
+
         s._request = function (config, callback) {
             return $http(config)
                 .success(function (data, status) {
                     callback(null, data);
                 })
                 .error(function (data, status) {
-                    var error = ApiService.createError(status, data);
+
+                    var statusName = s.httpStatusCodeLogic.nameForStatusCode(status),
+                        error = ApiService.errorWithName(statusName);
                     callback();
                 });
         };
@@ -48,23 +53,6 @@
 
     ap.copy(
         {
-            /**
-             * Create an error object.
-             * @param {number} status - Status code.
-             * @parma {object} data - Response data.
-             */
-            createError: function (status, data) {
-                var errorWithName = ApiService.errorWithName;
-                switch (Number(status)) {
-                    case 404:
-                        return errorWithName('NotfoundError');
-                    case 409:
-                        return errorWithName('ConflictError');
-                    case 503:
-                        return errorWithName('ConnectionError');
-                }
-                return errorWithName('UnexpectedError');
-            },
             errorWithName: function (name) {
                 var err = new Error(name);
                 err.name = name;

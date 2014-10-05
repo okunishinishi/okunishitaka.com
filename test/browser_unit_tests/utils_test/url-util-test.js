@@ -13,7 +13,6 @@ describe('urlutil', function () {
 
     beforeEach(mock.module('ok.utils'));
 
-
     it('Inject a util', inject(function (urlUtil) {
         expect(urlUtil).toBeDefined();
     }));

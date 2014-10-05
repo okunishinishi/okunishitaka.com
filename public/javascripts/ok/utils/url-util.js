@@ -6,9 +6,10 @@
 (function (ng, ap) {
     "use strict";
 
+
     ng
         .module('ok.utils')
-        .factory('urlUtil', function () {
+        .factory('urlUtil', function urlUtil() {
             return {
                 /**
                  * Get base url for a location.
@@ -36,5 +37,5 @@
                     }, null);
                 }
             }
-        })
+        });
 })(angular, apeman);

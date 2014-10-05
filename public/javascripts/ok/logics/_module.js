@@ -1,12 +1,12 @@
 /**
- * ok datasources module.
+ * ok logics module.
  * @requires angular
  */
 
 (function (ng) {
     "use strict";
     ng
-        .module('ok.datasources', [
+        .module('ok.logics', [
             'ok.constants',
             'ok.entities',
             'ok.utils'

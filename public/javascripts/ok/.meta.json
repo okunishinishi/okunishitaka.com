@@ -7,7 +7,13 @@
         ],
         "datasources": [
             "ok.constants",
-            "ok.entities"
+            "ok.entities",
+            "ok.utils"
+        ],
+        "logics": [
+            "ok.constants",
+            "ok.entities",
+            "ok.utils"
         ],
         "pages": [
             "apeman",
@@ -19,7 +25,9 @@
         ],
         "services": [
             "ok.constants",
-            "ok.entities"
+            "ok.entities",
+            "ok.logics",
+            "ok.utils"
         ],
         "utils": [
 
@@ -32,8 +40,5 @@
     "endpoints": [
         "blog",
         "setting"
-    ],
-    "utils": [
-        "url"
     ]
 }

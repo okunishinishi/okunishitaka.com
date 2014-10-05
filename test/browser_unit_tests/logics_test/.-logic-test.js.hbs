@@ -1,0 +1,18 @@
+/**
+ * Test for {{name}}
+ * Runs with karma.
+ */
+
+"use strict";
+
+
+var ng = angular,
+    mock = ng.mock;
+
+describe('{{name}}Logic', function () {
+
+    beforeEach(mock.module('ok.logics'));
+    it('Inject the logic.', inject(function ({{name}}Logic) {
+        expect({{name}}Logic).toBeDefined();
+    }));
+});
