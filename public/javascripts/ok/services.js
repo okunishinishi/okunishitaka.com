@@ -110,7 +110,7 @@
 
     ng
         .module('ok.services')
-        .factory('locationService', function LocationService($window, $anchorScroll) {
+        .service('locationService', function LocationService($window, $anchorScroll, urlUtil) {
             var s = this;
 
             /**
@@ -128,7 +128,6 @@
                 s.changeTo('/');
             }
 
-
             /**
              * Scroll to hash.
              * @param {string} hash - A url hash (dom element id).
@@ -137,6 +136,13 @@
                 hash = hash.replace(/^#/, '');
                 $location.hash(hash);
                 $anchorScroll();
+            }
+
+
+            s.baseUrl = urlUtil.baseUrlWithLocation($window.location);
+
+            s.resolveUrl = function (url) {
+
             }
 
         });

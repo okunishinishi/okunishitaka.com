@@ -30,6 +30,7 @@ module.exports = pages.map(function (page) {
                 'lib.js',
                 'ok/constants.js',
                 'ok/entities.js',
+                'ok/errors.js',
                 'ok/datasources.js',
                 'ok/logics.js',
                 'ok/services.js',

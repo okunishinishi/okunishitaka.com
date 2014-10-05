@@ -137,14 +137,14 @@
         .run(function partials($rootScope, partialConstant) {
             $rootScope.partials = partialConstant;
         })
-        .run(function goTop($rootScope,locationService) {
+        .run(function goTop($rootScope, locationService) {
             $rootScope.goTop = function () {
                 locationService.changeToTopPage();
             };
         })
-        .run(function url($rootScope, $window, urlUtil) {
+        .run(function url($rootScope, locationService, $window, urlUtil) {
             var location = $window.location;
-            $rootScope.baseURL = urlUtil.baseUrlWithLocation(location);
+//            $rootScope.baseURL = locationService.baseUrl;
             $rootScope.url = function (url) {
                 if (url.match(/^\//)) {
                     return urlUtil.joinUrl($rootScope.baseURL, url);
@@ -157,7 +157,7 @@
                 locationService.scrollToHash(id);
             };
         })
-        .controller('HeadControl', function ($scope) {
+        .controller('HeadControl', function ($scope, locationService) {
             var l = $scope.l;
             $scope.navItem = [
                 {

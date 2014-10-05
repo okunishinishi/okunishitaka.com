@@ -36,5 +36,6 @@ function serviceBud(srcDir, destDir) {
 
 
 module.exports = [
+    serviceBud(path.resolve(srcDir), destDir),
     serviceBud(path.resolve(srcDir, 'api'), destDir)
 ].reduce(reducing.concatReduce(), []);
