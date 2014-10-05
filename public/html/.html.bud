@@ -21,6 +21,9 @@ module.exports = pages.map(function (page) {
         force: false,
         data: {
             prefix: prefix,
+            lang:'{{lang}}',
+            charset:'{{charset}}',
+            viewport:'{{viewport}}',
             name: name,
             Name: string.pascalString(page),
             stylesheets: [

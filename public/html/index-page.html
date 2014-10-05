@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html ng-app="ok.indexPage">
-<head ng-attr-lang="">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
+<head ng-attr-lang="{{lang}}" ng-controller="HeadControl">
+    <meta charset="{{charset}}">
+    <meta name="viewport" ng-attr-content="{{viewport}}">
 
-    <link rel="icon" href="./images/favicon.png?v=0.0.0">
+    <link rel="icon" href="/images/favicon.png?v=0.0.0">
 
     <link rel="stylesheet" href="/stylesheets/base.css?v=0.0.0">
     <link rel="stylesheet" href="/stylesheets/index-page.css?v=0.0.0">

@@ -55,9 +55,13 @@
         .run(function exportsGlobal($rootScope, global) {
             ap.copy(global, $rootScope);
         })
-        .controller('HeaderControl', function ($scope) {
+        .controller('HeadControl', function HeadControl($scope) {
+            $scope.charset = 'UTF-8';
+            $scope.viewport = 'width=device-width, user-scalable=no';
         })
-        .controller('FooterControl', function ($scope) {
+        .controller('HeaderControl', function HeaderControl($scope) {
+        })
+        .controller('FooterControl', function FooterControl($scope) {
 
         });
 })(angular, apeman);
