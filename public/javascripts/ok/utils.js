@@ -84,6 +84,13 @@
                         var joiner = result.match(/\/$/) ? '' : '/';
                         return [result, current].join(joiner);
                     }, null);
+                },
+                /**
+                 * Get host name from url.
+                 * @param url
+                 */
+                hostnameInUrl: function (url) {
+                    return ap.parseURL(url).hostname;
                 }
             }
         });

@@ -1,23 +1,4 @@
 /**
- * ok pages module.
- * @requires angular
- */
-
-(function (ng) {
-    "use strict";
-    ng
-        .module('ok.pages', [
-            'apeman',
-            'ok.constants',
-            'ok.datasources',
-            'ok.entities',
-            'ok.errors',
-            'ok.services',
-            'ok.utils'
-        ]);
-})(angular);
-
-/**
  * Page script for blog.
  * @requires angular
  * @retuires apeman
@@ -121,12 +102,9 @@
             'ok.services',
             'ok.utils'
         ])
-        .run(function locale($rootScope, apLocaleService, localeConstant) {
-            Object.keys(localeConstant).forEach(function (lang) {
-                apLocaleService.register(lang, localeConstant[lang]);
-            });
-            var lang = 'en'; //FIXME
-            $rootScope.l = apLocaleService.localeForLang(lang);
+        .run(function locale($rootScope, langDetectService, localeLoadService) {
+            var lang = langDetectService.detectLang();
+            $rootScope.l = localeLoadService.localeForLang(lang);
         })
         .run(function title($rootScope, pageTitleLogic) {
             $rootScope.title = function (page) {

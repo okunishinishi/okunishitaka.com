@@ -27,4 +27,8 @@ describe('urlutil', function () {
         expect(joined0).toEqual('http://example.com/foo/bar');
     }));
 
+    it('Get host name in url.', inject(function (urlUtil) {
+        var hostname = urlUtil.hostnameInUrl('http://example.com:300/foo/bar');
+        expect(hostname).toEqual('example.com');
+    }));
 });

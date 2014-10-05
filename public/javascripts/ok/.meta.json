@@ -18,16 +18,8 @@
             "ok.entities",
             "ok.utils"
         ],
-        "pages": [
-            "apeman",
-            "ok.constants",
-            "ok.datasources",
-            "ok.entities",
-            "ok.errors",
-            "ok.services",
-            "ok.utils"
-        ],
         "services": [
+            "apeman",
             "ok.constants",
             "ok.entities",
             "ok.errors",
@@ -35,7 +27,6 @@
             "ok.utils"
         ],
         "utils": [
-
         ]
     },
     "entities": [

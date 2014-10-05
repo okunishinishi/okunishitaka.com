@@ -52,6 +52,36 @@
         });
 })(angular, apeman);
 /**
+ * Multi lang url logic.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.logics')
+        .factory('multiLangUrlLogic', function defineMultiLangUrlLogic(urlUtil) {
+            return {
+                /**
+                 * Get lang for url.
+                 */
+                langForUrl: function (url, supportedLangs) {
+                    supportedLangs = [].concat(supportedLangs);
+                    var hostname = urlUtil.hostnameInUrl(url),
+                        subdomain = hostname.split(/\./g).shift();
+                    for (var i = 0; i < supportedLangs.length; i++) {
+                        var lang = supportedLangs[i];
+                        if (lang === subdomain) {
+                            return lang;
+                        }
+                    }
+                    return null;
+                }
+            }
+        });
+})(angular, apeman);
+/**
  * Page title logic.
  * @requires angular
  * @requires apeman
@@ -61,7 +91,7 @@
 
     ng
         .module('ok.logics')
-        .factory('pageTitleLogic', function definePageTitleLogic() {
+        .factory('pageTitleLogic', function definePageTitleLogic(metaConstant) {
             return {
                 /**
                  * Get title for a page.
@@ -69,7 +99,7 @@
                  * @param {string} pageName - Page name.
                  */
                 tilteForPage: function (l, pageName) {
-                    var appName = l.meta.name;
+                    var appName = metaConstant.name;
                     if (!pageName) {
                         return appName;
                     }

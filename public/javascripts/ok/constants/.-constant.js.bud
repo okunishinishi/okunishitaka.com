@@ -5,9 +5,11 @@
 "use strict";
 
 var u = require('apeman-util'),
+    appSettings = require('../../../../app/app_settings'),
     string = u.string,
     fs = u.core.fs,
     filtering = u.filtering,
+    pkg = require('../../../../package'),
     path = u.core.path;
 
 var meta = require('../.meta');
@@ -46,7 +48,16 @@ module.exports = [
                 data[key] = value;
             });
         return data;
-    })())
+    })()),
+    constantBud('meta', {
+        supportedLangs: appSettings.supportedLangs,
+        name: pkg.name,
+        version: pkg.version,
+        descripton: pkg.descripton,
+        author: pkg.author,
+        license: pkg.license,
+        homepage: pkg.homepage,
+    })
 ];
 
 

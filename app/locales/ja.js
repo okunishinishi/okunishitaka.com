@@ -16,7 +16,4 @@ var u = require('apeman-util'),
 
 var l = copy(en, {}); //use en as fallback.
 
-l.meta = require('./_meta');
-
-
 module.exports = Object.seal(l);

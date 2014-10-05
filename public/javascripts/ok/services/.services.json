@@ -1,4 +1,6 @@
 [
     "locationChangeService",
-    "locationResolveService"
+    "locationResolveService",
+    "localeLoadService",
+    "langDetectService"
 ]

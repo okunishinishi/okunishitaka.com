@@ -7,6 +7,7 @@
     "use strict";
     ng
         .module('ok.services', [
+            'apeman',
             'ok.constants',
             'ok.entities',
             'ok.errors',
@@ -100,6 +101,58 @@
         });
 
 })(angular);
+/**
+ * Lang detect service.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('langDetectService', function LangDetectService(localeConstant,
+                                                                 $location,
+                                                                 multiLangUrlLogic) {
+            var s = this;
+
+            s.supportedLangs = Object.keys(localeConstant);
+
+            var defaultLang = 'en';//FIXME
+
+            s.detectLang = function () {
+                var url = $location.href;
+                return multiLangUrlLogic.langForUrl(url, s.supportedLangs) || defaultLang;
+            };
+
+        });
+
+})(angular, apeman);
+/**
+ * Locale load service.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('localeLoadService', function LocaleLoadService(apLocaleService, localeConstant) {
+            var s = this;
+            Object.keys(localeConstant).forEach(function (lang) {
+                apLocaleService.register(lang, localeConstant[lang]);
+            });
+
+            /**
+             * Get locale data for a lang.
+             */
+            s.localeForLang = function (lang) {
+                return apLocaleService.localeForLang(lang);
+            };
+        });
+
+})(angular, apeman);
 /**
  * Location change service.
  * @requires angular

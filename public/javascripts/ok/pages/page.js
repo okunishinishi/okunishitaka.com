@@ -15,12 +15,12 @@
             'ok.services',
             'ok.utils'
         ])
-        .run(function locale($rootScope, apLocaleService, localeConstant) {
-            Object.keys(localeConstant).forEach(function (lang) {
-                apLocaleService.register(lang, localeConstant[lang]);
-            });
-            var lang = 'en'; //FIXME
-            $rootScope.l = apLocaleService.localeForLang(lang);
+        .run(function meta($rootScope, metaConstant) {
+            $rootScope.meta = metaConstant;
+        })
+        .run(function locale($rootScope, langDetectService, localeLoadService) {
+            var lang = langDetectService.detectLang();
+            $rootScope.l = localeLoadService.localeForLang(lang);
         })
         .run(function title($rootScope, pageTitleLogic) {
             $rootScope.title = function (page) {

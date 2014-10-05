@@ -12,8 +12,6 @@
 
 var l = {};
 
-l.meta = require('./_meta');
-
 l.pageNames = {
     INDEX: 'Top',
     BLOG: 'Blog',

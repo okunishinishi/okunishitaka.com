@@ -8,7 +8,7 @@
 
     ng
         .module('ok.logics')
-        .factory('pageTitleLogic', function definePageTitleLogic() {
+        .factory('pageTitleLogic', function definePageTitleLogic(metaConstant) {
             return {
                 /**
                  * Get title for a page.
@@ -16,7 +16,7 @@
                  * @param {string} pageName - Page name.
                  */
                 tilteForPage: function (l, pageName) {
-                    var appName = l.meta.name;
+                    var appName = metaConstant.name;
                     if (!pageName) {
                         return appName;
                     }

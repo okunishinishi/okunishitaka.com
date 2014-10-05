@@ -53,3 +53,9 @@ exports.accessLogFile = path.resolve(exports.basedir, 'var/log/okunishitaka.com-
  * @type {string}
  */
 exports.errorLogFile = path.resolve(exports.basedir, 'var/log/okunishitaka.com-error.log');
+
+/**
+ * Supported langs.
+ * @type {string[]}
+ */
+exports.supportedLangs = ['ja', 'en'];
