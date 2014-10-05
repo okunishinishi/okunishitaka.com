@@ -28,7 +28,7 @@ module.exports = {
             }
         ]),
         concatData('public/javascripts/ok',
-            Object.keys(require('../../public/javascripts/ok/.meta').modules).map(function (moduleName) {
+            Object.keys(require('../../public/javascripts/ok/.ok').modules).map(function (moduleName) {
                 return {
                     src: moduleName + '/**/*.js',
                     dest: moduleName + '.js'

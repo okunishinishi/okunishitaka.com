@@ -8,9 +8,9 @@ var u = require('apeman-util'),
     string = u.string,
     path = u.core.path,
     format = u.core.util.format,
-    meta = require('../../.meta.json');
+    ok = require('../../.ok.json');
 
-module.exports = meta.endpoints.map(function (name) {
+module.exports = ok.endpoints.map(function (name) {
     return {
         mode: '644',
         force: false,
@@ -20,7 +20,7 @@ module.exports = meta.endpoints.map(function (name) {
         ].join('/'),
         data: {
             module: [
-                meta.prefix,
+                ok.prefix,
                 string.camelString(path.basename(path.dirname(__dirname)))
             ].join('.'),
             name: string.camelString(name),

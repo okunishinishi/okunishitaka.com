@@ -10,9 +10,9 @@
         .module('ok.indices')
         .factory('constantsIndex', function defineConstantsIndex($injector) {
             return {
+                get appConstant() { return $injector.get('appConstant'); },
                 get codeConstant() { return $injector.get('codeConstant'); },
                 get localeConstant() { return $injector.get('localeConstant'); },
-                get metaConstant() { return $injector.get('metaConstant'); },
                 get pageUrlConstant() { return $injector.get('pageUrlConstant'); },
                 get partialUrlConstant() { return $injector.get('partialUrlConstant'); }
             }

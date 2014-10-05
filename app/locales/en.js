@@ -15,7 +15,9 @@ var pkg = require('../../package');
 var l = {};
 
 l.meta = {
-    NAME: pkg.name
+    NAME: pkg.name,
+    DESCRIPTION: pkg.description,
+    AUTHOR: pkg.author
 };
 
 l.pageNames = {

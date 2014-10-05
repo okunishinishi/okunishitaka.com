@@ -4,6 +4,7 @@
     <meta ng-attr-charset="{{charset}}">
     <meta name="viewport" ng-attr-content="{{viewport}}">
 
+
     <link rel="icon" href="/images/favicon.png?v=0.0.0">
 
     <link rel="stylesheet" href="/stylesheets/base.css?v=0.0.0">
@@ -24,9 +25,13 @@
     <script src="/javascripts/ok/pages/blog-page.js?v=0.0.0"></script>
     <title ng-bind="title('blog')"></title>
 
+    <meta ok-meta="'a'" ok-config="meta">
+
+
 </head>
 <body>
 <header ng-include="url(partials.HEADER)" ng-controller="HeaderControl"></header>
+
 <div class="container positioned" ng-controller="BlogCtrl">
     <aside>
         <div ng-controller="BlogListCtrl">

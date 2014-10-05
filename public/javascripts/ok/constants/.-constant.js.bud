@@ -5,12 +5,10 @@
 "use strict";
 
 var u = require('apeman-util'),
-    appSettings = require('../../../../app/app_settings'),
     string = u.string,
-    pkg = require('../../../../package'),
     path = u.core.path;
 
-var meta = require('../.meta');
+var ok = require('../.ok');
 
 function constantBud(name, data) {
     return {
@@ -21,7 +19,7 @@ function constantBud(name, data) {
         get data() {
             return {
                 module: [
-                    meta.prefix,
+                    ok.prefix,
                     path.basename(__dirname)
                 ].join('.'),
                 name: name,
@@ -37,15 +35,7 @@ function constantBud(name, data) {
 module.exports = [
     constantBud('code', require('../../../../app/codes')),
     constantBud('locale', require('../../../../app/locales')),
-    constantBud('meta', {
-        SUPPORTED_LANGS: appSettings.supportedLangs,
-        NAME: pkg.name,
-        VERSION: pkg.version,
-        DESCRIPTION: pkg.description,
-        AUTHOR: pkg.author,
-        LICENSE: pkg.license,
-        HOMEPAGE: pkg.homepage,
-    })
+    constantBud('app', require('./.app.data'))
 ];
 
 

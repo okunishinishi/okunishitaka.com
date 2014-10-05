@@ -8,18 +8,18 @@ var u = require('apeman-util'),
     path = u.core.path,
     string = u.string,
     fs = u.core.fs,
-    meta = require('./.meta.json');
+    ok = require('./.ok.json');
 
 
-module.exports = Object.keys(meta.modules).map(function (name) {
+module.exports = Object.keys(ok.modules).map(function (name) {
     return {
         mode: '444',
         force: true,
         path: path.join(__dirname, string.snakeString(name), '_module.js'),
         data: {
-            prefix: meta.prefix,
+            prefix: ok.prefix,
             namespace: name,
-            dependencies: meta.modules[name]
+            dependencies: ok.modules[name]
         }
     }
 });

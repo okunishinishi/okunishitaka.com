@@ -111,9 +111,9 @@
 
     ng
         .module('ok.services')
-        .service('langDetectService', function LangDetectService(metaConstant, $location, multiLangUrlLogic) {
+        .service('langDetectService', function LangDetectService(appConstant, $location, multiLangUrlLogic) {
             var s = this,
-                SUPPORTED_LANGS = metaConstant.SUPPORTED_LANGS,
+                SUPPORTED_LANGS = appConstant.SUPPORTED_LANGS,
                 DEFAULT_LANG = SUPPORTED_LANGS[0];
 
             s.SUPPORTED_LANGS = SUPPORTED_LANGS;

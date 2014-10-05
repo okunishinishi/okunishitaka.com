@@ -34,7 +34,7 @@ module.exports = pages.map(function (page) {
                 [
                     'lib.js'
                 ],
-                Object.keys(require('../javascripts/ok/.meta').modules).map(function (moduleName) {
+                Object.keys(require('../javascripts/ok/.ok.json').modules).map(function (moduleName) {
                     return 'ok/' + string.paramString(moduleName) + '.js'
                 }),
                 [

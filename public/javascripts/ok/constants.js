@@ -12,6 +12,26 @@
 })(angular);
 
 /**
+ * constant for app.
+ * @requires angular
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.constants')
+        .constant('appConstant', {
+		    "SUPPORTED_LANGS": [
+		        "ja",
+		        "en"
+		    ],
+		    "VERSION": "0.0.0"
+		});
+
+})(angular);
+
+
+/**
  * constant for code.
  * @requires angular
  */
@@ -53,7 +73,9 @@
         .constant('localeConstant', {
 		    "en": {
 		        "meta": {
-		            "NAME": "okunishitaka.com"
+		            "NAME": "okunishitaka.com",
+		            "DESCRIPTION": "Homepage for Taka Okunishi",
+		            "AUTHOR": "Taka Okunishi"
 		        },
 		        "pageNames": {
 		            "INDEX": "Top",
@@ -84,7 +106,9 @@
 		    },
 		    "ja": {
 		        "meta": {
-		            "NAME": "okunishitaka.com"
+		            "NAME": "okunishitaka.com",
+		            "DESCRIPTION": "Homepage for Taka Okunishi",
+		            "AUTHOR": "Taka Okunishi"
 		        },
 		        "pageNames": {
 		            "INDEX": "Top",
@@ -113,31 +137,6 @@
 		            "VALIDATION_ERROR": ""
 		        }
 		    }
-		});
-
-})(angular);
-
-
-/**
- * constant for meta.
- * @requires angular
- */
-(function (ng) {
-    "use strict";
-
-    ng
-        .module('ok.constants')
-        .constant('metaConstant', {
-		    "SUPPORTED_LANGS": [
-		        "ja",
-		        "en"
-		    ],
-		    "NAME": "okunishitaka.com",
-		    "VERSION": "0.0.0",
-		    "DESCRIPTION": "Homepage for Taka Okunishi",
-		    "AUTHOR": "Taka Okunishi",
-		    "LICENSE": "GNU",
-		    "HOMEPAGE": "https://github.com/okunishinishi/okunishitaka.com"
 		});
 
 })(angular);

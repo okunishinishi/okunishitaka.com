@@ -92,7 +92,7 @@
 
     ng
         .module('ok.logics')
-        .factory('pageTitleLogic', function definePageTitleLogic(metaConstant) {
+        .factory('pageTitleLogic', function definePageTitleLogic() {
             return {
                 /**
                  * Get title for a page.

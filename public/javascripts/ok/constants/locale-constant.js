@@ -10,7 +10,9 @@
         .constant('localeConstant', {
 		    "en": {
 		        "meta": {
-		            "NAME": "okunishitaka.com"
+		            "NAME": "okunishitaka.com",
+		            "DESCRIPTION": "Homepage for Taka Okunishi",
+		            "AUTHOR": "Taka Okunishi"
 		        },
 		        "pageNames": {
 		            "INDEX": "Top",
@@ -41,7 +43,9 @@
 		    },
 		    "ja": {
 		        "meta": {
-		            "NAME": "okunishitaka.com"
+		            "NAME": "okunishitaka.com",
+		            "DESCRIPTION": "Homepage for Taka Okunishi",
+		            "AUTHOR": "Taka Okunishi"
 		        },
 		        "pageNames": {
 		            "INDEX": "Top",

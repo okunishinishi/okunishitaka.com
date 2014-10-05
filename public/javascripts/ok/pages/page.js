@@ -28,7 +28,6 @@
                 var lang = sv.langDetectService.detectLang(),
                     locale = sv.localeLoadService.localeForLang(lang);
                 return {
-                    meta: cn.metaConstant,
                     lang: lang,
                     locale: locale,
                     get l() {
@@ -38,6 +37,8 @@
                     title: function (page) {
                         return lg.pageTitleLogic.tilteForPage(locale, page);
                     },
+                    app: cn.appConstant,
+                    meta: {},
                     pages: cn.pageUrlConstant,
                     partials: cn.partialUrlConstant,
                     goTopPage: function () {
@@ -56,12 +57,17 @@
             ap.copy(global, $rootScope);
         })
         .controller('HeadControl', function HeadControl($scope) {
+            $scope.meta = {
+                foo: 'bar'
+            }
             $scope.charset = 'UTF-8';
             $scope.viewport = 'width=device-width, user-scalable=no';
         })
         .controller('HeaderControl', function HeaderControl($scope) {
         })
         .controller('FooterControl', function FooterControl($scope) {
-
+            $scope.meta = {
+                foo: 'bar in footer'
+            }
         });
 })(angular, apeman);

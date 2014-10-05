@@ -9,7 +9,7 @@ var u = require('apeman-util'),
     glob = u.ext.glob,
     path = u.core.path;
 
-var meta = require('../../.meta'),
+var ok = require('../../.ok'),
     basedir = path.resolve(__dirname, '../../../../..'),
     publicDir = path.resolve(basedir, 'public');
 
@@ -22,7 +22,7 @@ function constantBud(name, data) {
         get data() {
             return {
                 module: [
-                    meta.prefix,
+                    ok.prefix,
                     path.basename(path.resolve(__dirname, '..'))
                 ].join('.'),
                 name: name,
@@ -40,7 +40,7 @@ function fileUrlData(dirname, pattern) {
     var data = {};
     glob.sync(pattern)
         .forEach(function (filename) {
-            var key = string.snakeString(path.basename(filename, path.extname(filename))).toUpperCase(),
+            var key = string.snakeString(path.basename(filename).split(/\./g).shift()).toUpperCase(),
                 value = path.join('/', path.relative(publicDir, filename));
             data[key] = value;
         });

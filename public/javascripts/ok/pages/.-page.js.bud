@@ -6,13 +6,13 @@ var u = require('apeman-util'),
     path = u.core.path,
     string = u.string,
     format = u.core.util.format,
-    meta = require('../.meta'),
+    ok = require('../.ok'),
     names = require('../../../.pages');
 
 "use strict";
 
 module.exports = names.map(function (name) {
-    var prefix = meta.prefix,
+    var prefix = ok.prefix,
         filename = format('%s-page.js', string.paramString(name));
     return {
         path: path.resolve(__dirname, filename),
