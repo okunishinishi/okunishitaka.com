@@ -90,7 +90,7 @@
  * @requires angular
  */
 
-(function (ng) {
+(function (ng, ap) {
     "use strict";
 
     ng
@@ -102,14 +102,17 @@
             'ok.services',
             'ok.utils'
         ])
-        .factory(function global(metaConstant, partialConstant, langDetectService, localeLoadService, locationChangeService, locationResolveService) {
+        .factory('global', function global(metaConstant, partialConstant, pageTitleLogic, langDetectService, localeLoadService, locationChangeService, locationResolveService) {
             var lang = langDetectService.detectLang(),
                 locale = localeLoadService.localeForLang(lang);
             return {
                 meta: metaConstant,
                 lang: lang,
                 locale: locale,
-                l: locale, //alias of locale
+                get l() {
+                    //alias of locale
+                    return locale;
+                },
                 title: function (page) {
                     return pageTitleLogic.tilteForPage(locale, page);
                 },
@@ -148,7 +151,7 @@
         .controller('FootControl', function ($scope) {
 
         });
-})(angular);
+})(angular, apeman);
 
 /**
 * Page script for work.

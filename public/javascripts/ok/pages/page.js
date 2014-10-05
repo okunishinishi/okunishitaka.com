@@ -22,7 +22,10 @@
                 meta: metaConstant,
                 lang: lang,
                 locale: locale,
-                l: locale, //alias of locale
+                get l() {
+                    //alias of locale
+                    return locale;
+                },
                 title: function (page) {
                     return pageTitleLogic.tilteForPage(locale, page);
                 },

@@ -1,0 +1,39 @@
+/**
+ * Bud file for models.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    fs = u.core.fs,
+    path = u.core.path,
+    string = u.string,
+    filtering = u.filtering;
+
+var data = require('./.indices.json');
+
+module.exports = Object.keys(data).map(function (key) {
+    var dirname = path.resolve(__dirname, '..', string.snakeString(key)),
+        name = key + 'Index';
+    return {
+        mode: '444',
+        force: true,
+        path: [
+            __dirname,
+            (string.paramString(name) + '.js')
+        ].join('/'),
+        data: {
+            module: 'ok.indices',
+            description: string.sentenceString(name),
+            name: string.camelString(name),
+            Name: string.pascalString(name),
+            subModules: fs.readdirSync(dirname)
+                .filter(filtering.patternRejectFilter(/^_/))
+                .filter(filtering.patternAcceptFilter(/\.js$/))
+                .map(function (filename) {
+                    var name = string.camelString(path.basename(filename, '.js'));
+                    return name;
+                })
+        }
+    }
+});

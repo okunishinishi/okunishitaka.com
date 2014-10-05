@@ -28,6 +28,7 @@
         "public/javascripts/ok/datasources",
         "public/javascripts/ok/entities",
         "public/javascripts/ok/errors",
+        "public/javascripts/ok/indices",
         "public/javascripts/ok/logics",
         "public/javascripts/ok/pages",
         "public/javascripts/ok/services",

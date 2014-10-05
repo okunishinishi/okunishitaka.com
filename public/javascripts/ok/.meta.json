@@ -13,6 +13,12 @@
         "errors": [
             "ok.constants"
         ],
+        "indices": [
+            "ok.constants",
+            "ok.entities",
+            "ok.logics",
+            "ok.utils"
+        ],
         "logics": [
             "ok.constants",
             "ok.entities",
