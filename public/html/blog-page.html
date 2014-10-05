@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="ok.blogPage">
-<head lang="en">
+<head ng-attr-lang="{{lang}}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
 
@@ -22,7 +22,7 @@
     <script src="/javascripts/ok/utils.js?v=0.0.0"></script>
     <script src="/javascripts/ok/pages/page.js?v=0.0.0"></script>
     <script src="/javascripts/ok/pages/blog-page.js?v=0.0.0"></script>
-    <title>{{title("blog")}}</title>
+    <title ng-bind="title('blog')"></title>
 
 </head>
 <body>

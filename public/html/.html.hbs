@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="{{prefix}}.{{name}}Page">
-<head lang="en">
+<head ng-attr-lang="{{lang}}">
     <meta charset="UTF-8">
     <meta name="viewport" CONTENT="width=device-width, user-scalable=no"/>
 
@@ -12,7 +12,7 @@
 {{#each javascripts}}    <script src="/javascripts/{{this}}"></script>
 {{/each}}
 
-    <title>{{{title}}}</title>
+    <title ng-bind="title('{{name}}')"></title>
 
 </head>
 <body>
