@@ -8,9 +8,9 @@
     ng
         .module('ok.constants')
         .constant('pageUrlConstant', {
-		    "blog": "/blog.html",
-		    "index": "/index.html",
-		    "work": "/work.html"
+		    "BLOG": "/blog.html",
+		    "INDEX": "/index.html",
+		    "WORK": "/work.html"
 		});
 
 })(angular);

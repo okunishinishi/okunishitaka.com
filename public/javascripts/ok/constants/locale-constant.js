@@ -9,7 +9,9 @@
         .module('ok.constants')
         .constant('localeConstant', {
 		    "en": {
-		        "appName": "okunishitaka.com",
+		        "meta": {
+		            "NAME": "okunishitaka.com"
+		        },
 		        "pageNames": {
 		            "INDEX": "Top",
 		            "BLOG": "Blog",
@@ -38,7 +40,9 @@
 		        }
 		    },
 		    "ja": {
-		        "appName": "okunishitaka.com",
+		        "meta": {
+		            "NAME": "okunishitaka.com"
+		        },
 		        "pageNames": {
 		            "INDEX": "Top",
 		            "BLOG": "Blog",

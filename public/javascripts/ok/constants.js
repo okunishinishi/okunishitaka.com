@@ -52,7 +52,9 @@
         .module('ok.constants')
         .constant('localeConstant', {
 		    "en": {
-		        "appName": "okunishitaka.com",
+		        "meta": {
+		            "NAME": "okunishitaka.com"
+		        },
 		        "pageNames": {
 		            "INDEX": "Top",
 		            "BLOG": "Blog",
@@ -81,7 +83,9 @@
 		        }
 		    },
 		    "ja": {
-		        "appName": "okunishitaka.com",
+		        "meta": {
+		            "NAME": "okunishitaka.com"
+		        },
 		        "pageNames": {
 		            "INDEX": "Top",
 		            "BLOG": "Blog",
@@ -124,15 +128,16 @@
     ng
         .module('ok.constants')
         .constant('metaConstant', {
-		    "supportedLangs": [
+		    "SUPPORTED_LANGS": [
 		        "ja",
 		        "en"
 		    ],
-		    "name": "okunishitaka.com",
-		    "version": "0.0.0",
-		    "author": "Taka Okunishi",
-		    "license": "GNU",
-		    "homepage": "https://github.com/okunishinishi/okunishitaka.com"
+		    "NAME": "okunishitaka.com",
+		    "VERSION": "0.0.0",
+		    "DESCRIPTION": "Homepage for Taka Okunishi",
+		    "AUTHOR": "Taka Okunishi",
+		    "LICENSE": "GNU",
+		    "HOMEPAGE": "https://github.com/okunishinishi/okunishitaka.com"
 		});
 
 })(angular);
@@ -148,9 +153,9 @@
     ng
         .module('ok.constants')
         .constant('pageUrlConstant', {
-		    "blog": "/blog.html",
-		    "index": "/index.html",
-		    "work": "/work.html"
+		    "BLOG": "/blog.html",
+		    "INDEX": "/index.html",
+		    "WORK": "/work.html"
 		});
 
 })(angular);
@@ -166,8 +171,8 @@
     ng
         .module('ok.constants')
         .constant('partialUrlConstant', {
-		    "footer": "/html/partials/footer.html",
-		    "header": "/html/partials/header.html"
+		    "FOOTER": "/html/partials/footer.html",
+		    "HEADER": "/html/partials/header.html"
 		});
 
 })(angular);

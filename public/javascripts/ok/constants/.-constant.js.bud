@@ -38,13 +38,13 @@ module.exports = [
     constantBud('code', require('../../../../app/codes')),
     constantBud('locale', require('../../../../app/locales')),
     constantBud('meta', {
-        supportedLangs: appSettings.supportedLangs,
-        name: pkg.name,
-        version: pkg.version,
-        descripton: pkg.descripton,
-        author: pkg.author,
-        license: pkg.license,
-        homepage: pkg.homepage,
+        SUPPORTED_LANGS: appSettings.supportedLangs,
+        NAME: pkg.name,
+        VERSION: pkg.version,
+        DESCRIPTION: pkg.description,
+        AUTHOR: pkg.author,
+        LICENSE: pkg.license,
+        HOMEPAGE: pkg.homepage,
     })
 ];
 

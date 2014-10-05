@@ -8,8 +8,8 @@
     ng
         .module('ok.constants')
         .constant('partialUrlConstant', {
-		    "footer": "/html/partials/footer.html",
-		    "header": "/html/partials/header.html"
+		    "FOOTER": "/html/partials/footer.html",
+		    "HEADER": "/html/partials/header.html"
 		});
 
 })(angular);

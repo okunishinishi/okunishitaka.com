@@ -8,6 +8,9 @@
             "ok.entities",
             "ok.utils"
         ],
+        "directives": [
+            "ok.constants"
+        ],
         "entities": [
         ],
         "errors": [

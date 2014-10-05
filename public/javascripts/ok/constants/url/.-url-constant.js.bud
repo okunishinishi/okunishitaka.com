@@ -40,7 +40,7 @@ function fileUrlData(dirname, pattern) {
     var data = {};
     glob.sync(pattern)
         .forEach(function (filename) {
-            var key = string.camelString(path.basename(filename, path.extname(filename))),
+            var key = string.snakeString(path.basename(filename, path.extname(filename))).toUpperCase(),
                 value = path.join('/', path.relative(publicDir, filename));
             data[key] = value;
         });

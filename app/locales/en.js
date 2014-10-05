@@ -14,7 +14,9 @@ var pkg = require('../../package');
 
 var l = {};
 
-l.appName = pkg.name;
+l.meta = {
+    NAME: pkg.name
+};
 
 l.pageNames = {
     INDEX: 'Top',

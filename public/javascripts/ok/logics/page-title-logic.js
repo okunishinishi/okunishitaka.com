@@ -16,7 +16,7 @@
                  * @param {string} pageName - Page name.
                  */
                 tilteForPage: function (l, pageName) {
-                    var appName = l.appName;
+                    var appName = l.meta.NAME;
                     if (!pageName) {
                         return appName;
                     }

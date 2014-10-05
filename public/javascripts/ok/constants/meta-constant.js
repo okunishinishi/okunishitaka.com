@@ -8,15 +8,16 @@
     ng
         .module('ok.constants')
         .constant('metaConstant', {
-		    "supportedLangs": [
+		    "SUPPORTED_LANGS": [
 		        "ja",
 		        "en"
 		    ],
-		    "name": "okunishitaka.com",
-		    "version": "0.0.0",
-		    "author": "Taka Okunishi",
-		    "license": "GNU",
-		    "homepage": "https://github.com/okunishinishi/okunishitaka.com"
+		    "NAME": "okunishitaka.com",
+		    "VERSION": "0.0.0",
+		    "DESCRIPTION": "Homepage for Taka Okunishi",
+		    "AUTHOR": "Taka Okunishi",
+		    "LICENSE": "GNU",
+		    "HOMEPAGE": "https://github.com/okunishinishi/okunishitaka.com"
 		});
 
 })(angular);

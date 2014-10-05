@@ -27,6 +27,7 @@
         "public/javascripts/ok/constants",
         "public/javascripts/ok/constants/url",
         "public/javascripts/ok/datasources",
+        "public/javascripts/ok/directives",
         "public/javascripts/ok/entities",
         "public/javascripts/ok/errors",
         "public/javascripts/ok/indices",
