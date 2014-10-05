@@ -22,49 +22,44 @@
             var lang = 'en'; //FIXME
             $rootScope.l = apLocaleService.localeForLang(lang);
         })
-        .run(function title($rootScope) {
+        .run(function title($rootScope, pageTitleLogic) {
             $rootScope.title = function (page) {
-                var name = $rootScope.l.meta.name;
-                return [page, name].join(' - ');
+                return pageTitleLogic.tilteForPage($rootScope.l, page);
             }
         })
         .run(function partials($rootScope, partialConstant) {
             $rootScope.partials = partialConstant;
         })
-        .run(function goTop($rootScope, locationService) {
+        .run(function goTop($rootScope, locationChangeService) {
             $rootScope.goTop = function () {
-                locationService.changeToTopPage();
+                locationChangeService.changeToTopPage();
             };
         })
-        .run(function url($rootScope, locationService, $window, urlUtil) {
-            var location = $window.location;
-//            $rootScope.baseURL = locationService.baseUrl;
+        .run(function url($rootScope, locationResolveService) {
+            $rootScope.baseURL = locationResolveService.baseUrl;
             $rootScope.url = function (url) {
-                if (url.match(/^\//)) {
-                    return urlUtil.joinUrl($rootScope.baseURL, url);
-                }
-                return urlUtil.joinUrl(location.href, url);
+                return locationResolveService.resolveUrl(url);
             }
         })
-        .run(function scrollTo($rootScope, locationService) {
+        .run(function scrollTo($rootScope, locationChangeService) {
             $rootScope.scrollTo = function (id) {
-                locationService.scrollToHash(id);
+                locationChangeService.scrollToHash(id);
             };
         })
-        .controller('HeadControl', function ($scope, locationService) {
+        .controller('HeadControl', function ($scope) {
             var l = $scope.l;
             $scope.navItem = [
                 {
                     href: '/',
-                    title: l.pageNames.index
+                    title: l.pageNames.INDEX
                 },
                 {
                     href: '/blog',
-                    title: l.pageNames.blog
+                    title: l.pageNames.BLOG
                 },
                 {
                     href: '/work',
-                    title: l.pageNames.work
+                    title: l.pageNames.WORK
                 }
             ]
         })

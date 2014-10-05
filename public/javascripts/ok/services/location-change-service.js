@@ -1,5 +1,5 @@
 /**
- * Location service.
+ * Location change service.
  * @requires angular
  * @requires apeman
  */
@@ -8,9 +8,8 @@
 
     ng
         .module('ok.services')
-        .service('locationService', function LocationService($window, $anchorScroll, urlUtil) {
+        .service('locationChangeService', function LocationChangeService($window, $anchorScroll, $location) {
             var s = this;
-
             /**
              * Change windows location.
              * @param {string} url - URL
@@ -35,14 +34,6 @@
                 $location.hash(hash);
                 $anchorScroll();
             }
-
-
-            s.baseUrl = urlUtil.baseUrlWithLocation($window.location);
-
-            s.resolveUrl = function (url) {
-
-            }
-
         });
 
 })(angular, apeman);

@@ -101,7 +101,7 @@
 
 })(angular);
 /**
- * Location service.
+ * Location change service.
  * @requires angular
  * @requires apeman
  */
@@ -110,9 +110,8 @@
 
     ng
         .module('ok.services')
-        .service('locationService', function LocationService($window, $anchorScroll, urlUtil) {
+        .service('locationChangeService', function LocationChangeService($window, $anchorScroll, $location) {
             var s = this;
-
             /**
              * Change windows location.
              * @param {string} url - URL
@@ -137,12 +136,29 @@
                 $location.hash(hash);
                 $anchorScroll();
             }
+        });
 
+})(angular, apeman);
+/**
+ * Location resolve service.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('locationResolveService', function LocationResolveService($window, urlUtil) {
+            var s = this;
 
             s.baseUrl = urlUtil.baseUrlWithLocation($window.location);
 
             s.resolveUrl = function (url) {
-
+                if (url.match(/^\//)) {
+                    return urlUtil.joinUrl(s.baseURL, url);
+                }
+                return urlUtil.joinUrl($window.location.href, url);
             }
 
         });
