@@ -31,6 +31,7 @@ module.exports = pages.map(function (page) {
                 'ok/constants.js',
                 'ok/entities.js',
                 'ok/errors.js',
+                'ok/indices.js',
                 'ok/datasources.js',
                 'ok/logics.js',
                 'ok/services.js',

@@ -9,6 +9,7 @@
         .module('ok.logics', [
             'ok.constants',
             'ok.entities',
+            'ok.errors',
             'ok.utils'
         ]);
 })(angular);

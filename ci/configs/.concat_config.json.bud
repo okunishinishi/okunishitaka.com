@@ -45,6 +45,10 @@ module.exports = {
                 dest: 'errors.js'
             },
             {
+                src: 'indices/*.js',
+                dest: 'indices.js'
+            },
+            {
                 src: 'logics/*.js',
                 dest: 'logics.js'
             },

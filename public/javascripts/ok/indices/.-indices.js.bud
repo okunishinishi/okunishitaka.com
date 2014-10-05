@@ -32,6 +32,10 @@ module.exports = Object.keys(data).map(function (key) {
                 .filter(filtering.patternAcceptFilter(/\.js$/))
                 .map(function (filename) {
                     var name = string.camelString(path.basename(filename, '.js'));
+                    var pascal = data[key].pascal;
+                    if (pascal) {
+                        name = string.pascalString(name);
+                    }
                     return name;
                 })
         }

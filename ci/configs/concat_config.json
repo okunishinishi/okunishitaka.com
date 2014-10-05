@@ -20,6 +20,10 @@
         "dest": "public/javascripts/ok/errors.js"
     },
     {
+        "src": "public/javascripts/ok/indices/*.js",
+        "dest": "public/javascripts/ok/indices.js"
+    },
+    {
         "src": "public/javascripts/ok/logics/*.js",
         "dest": "public/javascripts/ok/logics.js"
     },

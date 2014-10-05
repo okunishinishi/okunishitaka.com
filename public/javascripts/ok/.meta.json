@@ -1,11 +1,11 @@
 {
     "prefix": "ok",
     "modules": {
-        "constants": [],
+        "constants": [
+        ],
         "datasources": [
             "ok.constants",
             "ok.entities",
-            "ok.datasources",
             "ok.utils"
         ],
         "entities": [
@@ -15,13 +15,17 @@
         ],
         "indices": [
             "ok.constants",
+            "ok.datasources",
             "ok.entities",
+            "ok.errors",
             "ok.logics",
+            "ok.services",
             "ok.utils"
         ],
         "logics": [
             "ok.constants",
             "ok.entities",
+            "ok.errors",
             "ok.utils"
         ],
         "services": [

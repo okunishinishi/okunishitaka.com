@@ -1,4 +1,19 @@
 {
-    "logics": {},
-    "utils": {}
+    "constants": {
+    },
+    "errors": {
+        "pascal": true
+    },
+    "entities": {
+        "pascal": true
+    },
+    "datasources": {
+        "pascal": true
+    },
+    "logics": {
+    },
+    "services": {
+    },
+    "utils": {
+    }
 }

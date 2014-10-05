@@ -99,35 +99,44 @@
             'ok.constants',
             'ok.datasources',
             'ok.entities',
+            'ok.errors',
+            "ok.indices",
+            "ok.logics",
             'ok.services',
             'ok.utils'
         ])
-        .factory('global', function global(metaConstant, partialConstant, pageTitleLogic, langDetectService, localeLoadService, locationChangeService, locationResolveService) {
-            var lang = langDetectService.detectLang(),
-                locale = localeLoadService.localeForLang(lang);
-            return {
-                meta: metaConstant,
-                lang: lang,
-                locale: locale,
-                get l() {
-                    //alias of locale
-                    return locale;
-                },
-                title: function (page) {
-                    return pageTitleLogic.tilteForPage(locale, page);
-                },
-                partials: partialConstant,
-                goTopPage: function () {
-                    locationChangeService.changeToTopPage();
-                },
-                url: function (url) {
-                    return locationResolveService.resolveUrl(url);
-                },
-                scrollTo: function (id) {
-                    locationChangeService.scrollToHash(id);
+        .factory('global', [
+            'constantsIndex',
+            'logicsIndex',
+            'servicesIndex',
+            function global(cn, lg, sv) {
+
+                var lang = sv.langDetectService.detectLang(),
+                    locale = sv.localeLoadService.localeForLang(lang);
+                return {
+                    meta: cn.metaConstant,
+                    lang: lang,
+                    locale: locale,
+                    get l() {
+                        //alias of locale
+                        return locale;
+                    },
+                    title: function (page) {
+                        return lg.pageTitleLogic.tilteForPage(locale, page);
+                    },
+                    partials: cn.partialConstant,
+                    goTopPage: function () {
+                        sv.locationChangeService.changeToTopPage();
+                    },
+                    url: function (url) {
+                        return sv.locationResolveService.resolveUrl(url);
+                    },
+                    scrollTo: function (id) {
+                        sv.locationChangeService.scrollToHash(id);
+                    }
                 }
             }
-        })
+        ])
         .run(function exportsGlobal($rootScope, global) {
             ap.copy(global, $rootScope);
         })
