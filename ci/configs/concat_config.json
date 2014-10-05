@@ -16,6 +16,14 @@
         "dest": "public/javascripts/ok/entities.js"
     },
     {
+        "src": "public/javascripts/ok/errors/*.js",
+        "dest": "public/javascripts/ok/errors.js"
+    },
+    {
+        "src": "public/javascripts/ok/logics/*.js",
+        "dest": "public/javascripts/ok/logics.js"
+    },
+    {
         "src": "public/javascripts/ok/pages/*.js",
         "dest": "public/javascripts/ok/pages.js"
     },
@@ -24,11 +32,10 @@
         "dest": "public/javascripts/ok/services.js"
     },
     {
-        "src": "public/javascripts/ok/utils/**/*.js",
+        "src": "public/javascripts/ok/utils/*.js",
         "dest": "public/javascripts/ok/utils.js"
     },
     {
-
         "src": "public/stylesheets/base/*.css",
         "dest": "public/stylesheets/base.css"
     }

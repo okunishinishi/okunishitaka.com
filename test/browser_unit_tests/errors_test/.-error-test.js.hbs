@@ -1,0 +1,21 @@
+/**
+ * Test for {{name}}
+ * Runs with karma.
+ */
+
+"use strict";
+
+
+var ng = angular,
+    mock = ng.mock;
+
+describe('{{Name}}Error', function () {
+
+    beforeEach(mock.module('ok.errors'));
+    it('Create an error.', inject(function ({{Name}}Error) {
+        var error = new {{Name}}Error(123, 'foo');
+        expect(error).toBeDefined();
+        expect(error.code).toEqual(123);
+        expect(error.message).toEqual('foo');
+    }));
+});

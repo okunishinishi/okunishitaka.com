@@ -5,6 +5,7 @@
         "datasources": [
             "ok.constants",
             "ok.entities",
+            "ok.datasources",
             "ok.utils"
         ],
         "entities": [
@@ -22,12 +23,14 @@
             "ok.constants",
             "ok.datasources",
             "ok.entities",
+            "ok.errors",
             "ok.services",
             "ok.utils"
         ],
         "services": [
             "ok.constants",
             "ok.entities",
+            "ok.errors",
             "ok.logics",
             "ok.utils"
         ],

@@ -11,6 +11,7 @@
             'ok.constants',
             'ok.datasources',
             'ok.entities',
+            'ok.errors',
             'ok.services',
             'ok.utils'
         ]);

@@ -6,14 +6,10 @@
     "use strict";
     ng
         .module('ok.services')
-        .service('blogApiService', function BlogApiService($http) {
+        .service('blogApiService', function BlogApiService(apiService) {
             var s = this;
-            s.list = function list(params) {
-                return $http({
-                    method: 'GET',
-                    url: '/blogs/',
-                    params: params
-                });
+            s.list = function list(params, callback) {
+                return apiService.get('/blogs/', params, callback);
             }
         });
 })(angular);

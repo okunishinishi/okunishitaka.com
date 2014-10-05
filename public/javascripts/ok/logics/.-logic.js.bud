@@ -5,7 +5,6 @@
 "use strict";
 
 var u = require('apeman-util'),
-    format = u.core.util.format,
     string = u.string;
 
 var names = require('./.logics.json');
@@ -16,10 +15,11 @@ module.exports = names.map(function (name) {
         force: false,
         path: [
             __dirname,
-            (string.paramString(name) + '-logic.js')
+            (string.paramString(name) + '.js')
         ].join('/'),
         data: {
             module: 'ok.logics',
+            description: string.sentenceString(name),
             name: string.camelString(name),
             Name: string.pascalString(name)
         }

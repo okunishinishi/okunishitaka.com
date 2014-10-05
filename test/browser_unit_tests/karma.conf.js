@@ -20,6 +20,7 @@ module.exports = function (config) {
             'public/javascripts/ok/datasources/*.js',
             'public/javascripts/ok/logics/*.js',
             'public/javascripts/ok/entities/*.js',
+            'public/javascripts/ok/errors/*.js',
             'public/javascripts/ok/pages/*.js',
             'public/javascripts/ok/services/**/*.js',
             'public/javascripts/ok/utils/**/*.js',

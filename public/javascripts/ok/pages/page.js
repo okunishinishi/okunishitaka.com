@@ -31,9 +31,9 @@
         .run(function partials($rootScope, partialConstant) {
             $rootScope.partials = partialConstant;
         })
-        .run(function goTop($rootScope, $window) {
+        .run(function goTop($rootScope,locationService) {
             $rootScope.goTop = function () {
-                $window.location.href = '/';
+                locationService.changeToTopPage();
             };
         })
         .run(function url($rootScope, $window, urlUtil) {
@@ -46,10 +46,9 @@
                 return urlUtil.joinUrl(location.href, url);
             }
         })
-        .run(function scrollTo($rootScope, $location, $anchorScroll) {
+        .run(function scrollTo($rootScope, locationService) {
             $rootScope.scrollTo = function (id) {
-                $location.hash(id);
-                $anchorScroll();
+                locationService.scrollToHash(id);
             };
         })
         .controller('HeadControl', function ($scope) {

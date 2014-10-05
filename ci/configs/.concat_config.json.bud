@@ -1,0 +1,72 @@
+/**
+ * Bud fiel for concat config.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    reducing = u.reducing,
+    path = u.core.path;
+
+function concatData(basedir, data) {
+    return data.map(function (data) {
+        return {
+            src: path.join(basedir, data.src),
+            dest: path.join(basedir, data.dest)
+        }
+    });
+}
+
+module.exports = {
+    mode: '444',
+    force: true,
+    data: [
+        concatData('public/javascripts', [
+            {
+                src: 'lib/*.js',
+                dest: 'lib.js'
+            }
+        ]),
+        concatData('public/javascripts/ok', [
+            {
+                src: 'constants/*.js',
+                dest: 'constants.js'
+            },
+            {
+                src: 'datasources/*.js',
+                dest: 'datasources.js'
+            },
+            {
+                src: 'entities/*.js',
+                dest: 'entities.js'
+            },
+            {
+                src: 'errors/*.js',
+                dest: 'errors.js'
+            },
+            {
+                src: 'logics/*.js',
+                dest: 'logics.js'
+            },
+            {
+                src: 'pages/*.js',
+                dest: 'pages.js'
+            },
+            {
+                src: 'services/**/*.js',
+                dest: 'services.js'
+            },
+            {
+                src: 'utils/*.js',
+                dest: 'utils.js'
+            }
+        ]),
+        concatData('public/stylesheets', [
+            {
+                src: 'base/*.css',
+                dest: 'base.css'
+            }
+        ])
+    ].reduce(reducing.concatReduce(), [])
+}
+

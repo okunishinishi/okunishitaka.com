@@ -5,10 +5,9 @@
 "use strict";
 
 var u = require('apeman-util'),
-    format = u.core.util.format,
     string = u.string;
 
-var names = require('./.errors.json');
+var names = require('./.services.json');
 
 module.exports = names.map(function (name) {
     return {
@@ -19,7 +18,7 @@ module.exports = names.map(function (name) {
             (string.paramString(name) + '.js')
         ].join('/'),
         data: {
-            module: 'ok.errors',
+            module: 'ok.services',
             description: string.sentenceString(name),
             name: string.camelString(name),
             Name: string.pascalString(name)

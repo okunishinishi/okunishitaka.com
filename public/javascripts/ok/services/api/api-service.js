@@ -7,46 +7,50 @@
     "use strict";
 
 
-    /**
-     * Abstract api service.
-     * @param $http
-     * @constructor
-     */
-    function ApiService($http, codeConstant, httpStatusCodeLogic) {
-        var s = this;
-
-        s._request = function (config, callback) {
-            return $http(config)
-                .success(function (data, status) {
-                    callback(null, data);
-                })
-                .error(function (data, status) {
-
-                    var statusName = s.httpStatusCodeLogic.nameForStatusCode(status),
-                        error = ApiService.errorWithName(statusName);
-                    callback();
-                });
-        };
-        s.get = function (url, params, callback) {
-            s._request({
-                method: 'GET',
-                params: params
-            }, callback);
-        }
-    }
-
-    ap.copy(
-        {
-            errorWithName: function (name) {
-                var err = new Error(name);
-                err.name = name;
-                return err;
-            }
-        },
-        ApiService
-    )
-
     ng
         .module('ok.services')
-        .service('apiService', ApiService);
+        .service('apiService', function ApiService($http, errorCodeLogic, AppApiError) {
+            var s = this;
+            ap.copy(
+                /**
+                 * @lends apiService
+                 */
+                {
+                    _newError: function (data, status) {
+                        var s = this;
+                        var code = errorCodeLogic.errorCodeWithHttpStatus(status);
+                        if (code === null) {
+                            code = errorCodeLogic.UNEXPECTED_ERROR;
+                        }
+                        return new AppApiError(code);
+                    },
+
+                    _request: function (config, callback) {
+                        var s = this;
+                        if(!config.url){
+                            // angular.js標準のエラーが分かりにくいのでここで明示的にthrowしている。
+                            throw new Error('url is required.');
+                        }
+                        return $http(config)
+                            .success(function (data, status) {
+                                callback(null, data);
+                            })
+                            .error(function (data, status) {
+                                var err = s._newError(data, status);
+                                callback(err, data);
+                            });
+                    },
+                    get: function (url, params, callback) {
+                        var s = this;
+                        s._request({
+                            url:url,
+                            method: 'GET',
+                            params: params
+                        }, callback);
+                    }
+                },
+                s
+            );
+        }
+    );
 })(angular, apeman);

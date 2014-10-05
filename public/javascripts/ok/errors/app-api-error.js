@@ -1,5 +1,5 @@
 /**
- * AppApiError error.
+ * App api error.
  * @requires angular
  * @requires apeman
  */
@@ -19,7 +19,7 @@
             var AppApiError = AppError.define(
                 /** @lends AppApiError.prototype */
                 {
-
+                    name: 'AppApiError'
                 }
             );
 

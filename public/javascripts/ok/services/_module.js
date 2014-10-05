@@ -9,6 +9,7 @@
         .module('ok.services', [
             'ok.constants',
             'ok.entities',
+            'ok.errors',
             'ok.logics',
             'ok.utils'
         ]);

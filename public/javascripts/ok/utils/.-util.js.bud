@@ -16,10 +16,11 @@ module.exports = names.map(function (name) {
         force: false,
         path: [
             __dirname,
-            (string.paramString(name) + '-util.js')
+            (string.paramString(name) + '.js')
         ].join('/'),
         data: {
             module: 'ok.utils',
+            description: string.sentenceString(name),
             name: string.camelString(name),
             Name: string.pascalString(name)
         }

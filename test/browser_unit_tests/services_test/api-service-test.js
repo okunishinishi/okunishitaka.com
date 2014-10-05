@@ -12,8 +12,13 @@ var ng = angular,
 describe('apiService', function () {
 
     beforeEach(mock.module('ok.services'));
-    
+
     it('Inject a service.', inject(function (apiService) {
         expect(apiService).toBeDefined();
+    }));
+
+    it('New error.', inject(function (apiService) {
+        var err = apiService._newError({foo: 'bar'}, 409);
+        expect(err).toBeDefined();
     }));
 });

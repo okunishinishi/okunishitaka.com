@@ -11,6 +11,7 @@
             'ok.constants',
             'ok.datasources',
             'ok.entities',
+            'ok.errors',
             'ok.services',
             'ok.utils'
         ]);
@@ -38,20 +39,12 @@
                     return data.map(BlogEntity.new);
                 },
                 fetch: function (query, callback) {
-                    blogApiService.list(query)
-                        .success(function (data, status) {
-                            callback(null, data);
-                        })
-                        .error(function () {
-                            callback(new Error('Failed to fetch'));
-                        });
+                    blogApiService.list(query, callback);
                 }
             });
         })
         .controller('BlogCtrl', function ($scope, blogListDatasource) {
-
             var listDatasource = blogListDatasource;
-
             ap.copy({
                 listDatasource: listDatasource,
                 edit: function (blog) {
@@ -62,7 +55,6 @@
             listDatasource.load();
         })
         .controller('BlogListCtrl', function ($scope) {
-
             ap.copy({
                 /**
                  * Load more data.
@@ -145,9 +137,9 @@
         .run(function partials($rootScope, partialConstant) {
             $rootScope.partials = partialConstant;
         })
-        .run(function goTop($rootScope, $window) {
+        .run(function goTop($rootScope,locationService) {
             $rootScope.goTop = function () {
-                $window.location.href = '/';
+                locationService.changeToTopPage();
             };
         })
         .run(function url($rootScope, $window, urlUtil) {
@@ -160,10 +152,9 @@
                 return urlUtil.joinUrl(location.href, url);
             }
         })
-        .run(function scrollTo($rootScope, $location, $anchorScroll) {
+        .run(function scrollTo($rootScope, locationService) {
             $rootScope.scrollTo = function (id) {
-                $location.hash(id);
-                $anchorScroll();
+                locationService.scrollToHash(id);
             };
         })
         .controller('HeadControl', function ($scope) {
