@@ -21,7 +21,7 @@
 
     ng
         .module('ok.utils')
-        .factory('objectUtil', function () {
+        .factory('objectUtil', function defineObjectUtil() {
             return {
                 /**
                  * Get key of object for a value.
@@ -58,7 +58,7 @@
 
     ng
         .module('ok.utils')
-        .factory('urlUtil', function urlUtil() {
+        .factory('urlUtil', function defineUrlUtil() {
             return {
                 /**
                  * Get base url for a location.

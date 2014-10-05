@@ -8,7 +8,7 @@
 
     ng
         .module('ok.entities')
-        .factory('SettingEntity', function (Entity) {
+        .factory('SettingEntity', function defineSettingEntity(Entity) {
 
             /**
              * @augments Entity

@@ -8,7 +8,7 @@
 
     ng
         .module('ok.logics')
-        .factory('httpStatusCodeLogic', function httpStatusCodeLogic(codeConstant, objectUtil) {
+        .factory('httpStatusCodeLogic', function defineHttpStatusCodeLogic(codeConstant, objectUtil) {
 
             var codes = codeConstant.httpStatusCodes;
             return {

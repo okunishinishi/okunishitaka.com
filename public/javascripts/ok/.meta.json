@@ -2,13 +2,15 @@
     "prefix": "ok",
     "modules": {
         "constants": [],
-        "entities": [
-
-        ],
         "datasources": [
             "ok.constants",
             "ok.entities",
             "ok.utils"
+        ],
+        "entities": [
+        ],
+        "errors": [
+            "ok.constants"
         ],
         "logics": [
             "ok.constants",

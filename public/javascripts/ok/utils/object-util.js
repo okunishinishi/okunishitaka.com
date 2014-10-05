@@ -8,7 +8,7 @@
 
     ng
         .module('ok.utils')
-        .factory('objectUtil', function () {
+        .factory('objectUtil', function defineObjectUtil() {
             return {
                 /**
                  * Get key of object for a value.

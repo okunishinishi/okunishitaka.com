@@ -21,7 +21,7 @@
 
     ng
         .module('ok.entities')
-        .factory('BlogEntity', function (Entity) {
+        .factory('BlogEntity', function defineBlogEntity(Entity) {
 
             /**
              * @augments Entity
@@ -99,7 +99,7 @@
 
     ng
         .module('ok.entities')
-        .factory('SettingEntity', function (Entity) {
+        .factory('SettingEntity', function defineSettingEntity(Entity) {
 
             /**
              * @augments Entity

@@ -1,0 +1,30 @@
+/**
+ * {{Name}} error.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.errors')
+        .factory('{{Name}}', function define{{Name}} (AppError) {
+
+            /**
+             * @augments Error
+             * @constructor {{Name}}
+             * @param {number} code - App error code.
+             * @param {object} message - Error message.
+             */
+            var {{Name}} = AppError.define(
+                /** @lends {{Name}}.prototype */
+                {
+
+                }
+            );
+
+            return {{Name}};
+
+        });
+
+})(angular, apeman);

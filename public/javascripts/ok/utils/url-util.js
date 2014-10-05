@@ -9,7 +9,7 @@
 
     ng
         .module('ok.utils')
-        .factory('urlUtil', function urlUtil() {
+        .factory('urlUtil', function defineUrlUtil() {
             return {
                 /**
                  * Get base url for a location.
