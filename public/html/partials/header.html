@@ -2,8 +2,8 @@
 <div class="container">
     <h1 class="header-logo" ng-click="goTopPage()">{{l.meta.NAME}}</h1>
     <nav class="header-nav">
-        <a class="nav-item">{{l.pageNames.INDEX}}</a>
-        <a class="nav-item" href="{{item.href}}"
-           ng-repeat="item in navItem">{{item.title}}</a>
+        <a class="nav-item" href="{{pages.INDEX}}">{{l.pageNames.INDEX}}</a>
+        <a class="nav-item" href="{{pages.BLOG}}">{{l.pageNames.BLOG}}</a>
+        <a class="nav-item" href="{{pages.WORK}}">{{l.pageNames.WORK}}</a>
     </nav>
 </div>

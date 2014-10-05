@@ -30,6 +30,7 @@
         "public/javascripts/ok/directives",
         "public/javascripts/ok/entities",
         "public/javascripts/ok/errors",
+        "public/javascripts/ok/filters",
         "public/javascripts/ok/indices",
         "public/javascripts/ok/logics",
         "public/javascripts/ok/pages",

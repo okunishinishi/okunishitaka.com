@@ -11,3 +11,4 @@
             'ok.filters'
         ]);
 })(angular);
+

@@ -11,8 +11,10 @@
             'apeman',
             'ok.constants',
             'ok.datasources',
+            'ok.directives',
             'ok.entities',
             'ok.errors',
+            'ok.filters',
             "ok.indices",
             "ok.logics",
             'ok.services',
@@ -36,6 +38,7 @@
                     title: function (page) {
                         return lg.pageTitleLogic.tilteForPage(locale, page);
                     },
+                    pages: cn.pageUrlConstant,
                     partials: cn.partialUrlConstant,
                     goTopPage: function () {
                         sv.locationChangeService.changeToTopPage();
@@ -52,24 +55,9 @@
         .run(function exportsGlobal($rootScope, global) {
             ap.copy(global, $rootScope);
         })
-        .controller('HeadControl', function ($scope) {
-            var l = $scope.l;
-            $scope.navItem = [
-                {
-                    href: '/',
-                    title: l.pageNames.INDEX
-                },
-                {
-                    href: '/blog',
-                    title: l.pageNames.BLOG
-                },
-                {
-                    href: '/work',
-                    title: l.pageNames.WORK
-                }
-            ]
+        .controller('HeaderControl', function ($scope) {
         })
-        .controller('FootControl', function ($scope) {
+        .controller('FooterControl', function ($scope) {
 
         });
 })(angular, apeman);

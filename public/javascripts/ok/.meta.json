@@ -9,12 +9,16 @@
             "ok.utils"
         ],
         "directives": [
-            "ok.constants"
+            "ok.constants",
+            "ok.filters"
         ],
         "entities": [
         ],
         "errors": [
             "ok.constants"
+        ],
+        "filters": [
+
         ],
         "indices": [
             "ok.constants",

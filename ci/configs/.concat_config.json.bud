@@ -27,44 +27,14 @@ module.exports = {
                 dest: 'lib.js'
             }
         ]),
-        concatData('public/javascripts/ok', [
-            {
-                src: 'constants/**/*.js',
-                dest: 'constants.js'
-            },
-            {
-                src: 'datasources/*.js',
-                dest: 'datasources.js'
-            },
-            {
-                src: 'entities/*.js',
-                dest: 'entities.js'
-            },
-            {
-                src: 'errors/*.js',
-                dest: 'errors.js'
-            },
-            {
-                src: 'indices/*.js',
-                dest: 'indices.js'
-            },
-            {
-                src: 'logics/*.js',
-                dest: 'logics.js'
-            },
-            {
-                src: 'pages/*.js',
-                dest: 'pages.js'
-            },
-            {
-                src: 'services/**/*.js',
-                dest: 'services.js'
-            },
-            {
-                src: 'utils/*.js',
-                dest: 'utils.js'
-            }
-        ]),
+        concatData('public/javascripts/ok',
+            Object.keys(require('../../public/javascripts/ok/.meta').modules).map(function (moduleName) {
+                return {
+                    src: moduleName + '/**/*.js',
+                    dest: moduleName + '.js'
+                }
+            })
+        ),
         concatData('public/stylesheets', [
             {
                 src: 'base/*.css',

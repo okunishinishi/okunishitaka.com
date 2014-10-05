@@ -8,6 +8,7 @@ var u = require('apeman-util'),
     string = u.string,
     path = u.core.path,
     format = u.core.util.format,
+    reducing = u.reducing,
     pages = require('../.pages');
 
 
@@ -27,18 +28,19 @@ module.exports = pages.map(function (page) {
                 [name, 'page.css'].join('-')
             ],
             javascripts: [
-                'lib.js',
-                'ok/constants.js',
-                'ok/entities.js',
-                'ok/errors.js',
-                'ok/indices.js',
-                'ok/datasources.js',
-                'ok/logics.js',
-                'ok/services.js',
-                'ok/utils.js',
-                'ok/pages/' + ['page.js'].join('-'),
-                'ok/pages/' + [name, 'page.js'].join('-')
-            ],
+                [
+                    'lib.js'
+                ],
+                Object.keys(require('../javascripts/ok/.meta').modules).map(function (moduleName) {
+                    return 'ok/' + string.paramString(moduleName) + '.js'
+                }),
+                [
+                    'page.js',
+                    [name, 'page.js'].join('-')
+                ].map(function (filename) {
+                        return 'ok/pages/' + filename;
+                    })
+            ].reduce(reducing.concatReduce(), []),
             title: format('{{title("%s")}}', name)
         }
     }

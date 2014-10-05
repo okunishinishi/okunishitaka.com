@@ -8,7 +8,7 @@
                 "attr": "src"
             },
             {
-                "tag": "script",
+                "tag": "link",
                 "attr": "href"
             }
         ]
