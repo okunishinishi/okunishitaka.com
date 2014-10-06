@@ -13,6 +13,7 @@
             'ok.errors',
             'ok.logics',
             'ok.services',
+            'ok.templates',
             'ok.utils'
         ]);
 })(angular);
@@ -126,7 +127,26 @@
                 get langDetectService() { return $injector.get('langDetectService'); },
                 get localeLoadService() { return $injector.get('localeLoadService'); },
                 get locationChangeService() { return $injector.get('locationChangeService'); },
-                get locationResolveService() { return $injector.get('locationResolveService'); }
+                get locationResolveService() { return $injector.get('locationResolveService'); },
+                get templateCacheService() { return $injector.get('templateCacheService'); }
+            }
+        });
+})(angular, apeman);
+/**
+ * Templates index.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.indices')
+        .factory('templatesIndex', function defineTemplatesIndex($injector) {
+            return {
+                get footerHtmlTemplate() { return $injector.get('footerHtmlTemplate'); },
+                get headerHtmlTemplate() { return $injector.get('headerHtmlTemplate'); },
+                get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); }
             }
         });
 })(angular, apeman);

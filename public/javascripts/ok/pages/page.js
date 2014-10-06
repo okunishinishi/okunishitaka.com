@@ -15,16 +15,17 @@
             'ok.entities',
             'ok.errors',
             'ok.filters',
-            "ok.indices",
-            "ok.logics",
+            'ok.indices',
+            'ok.logics',
             'ok.services',
+            'ok.templates',
             'ok.utils'
         ])
         .factory('global', [
             'constantsIndex',
             'logicsIndex',
             'servicesIndex',
-            function global(cn, lg, sv) {
+            function global(cn, lg, sv, tm) {
                 var lang = sv.langDetectService.detectLang(),
                     locale = sv.localeLoadService.localeForLang(lang);
                 return {
@@ -55,6 +56,12 @@
         ])
         .run(function exportsGlobal($rootScope, global) {
             ap.copy(global, $rootScope);
+        })
+        .run(function cahcheTemplates(templatesIndex, templateCacheService) {
+            Object.keys(templatesIndex).forEach(function (key) {
+                var template = templatesIndex[key];
+                templateCacheService.register(template.name, template.content);
+            });
         })
         .controller('HeadControl', function HeadControl($scope) {
         })

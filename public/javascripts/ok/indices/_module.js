@@ -13,6 +13,7 @@
             'ok.errors',
             'ok.logics',
             'ok.services',
+            'ok.templates',
             'ok.utils'
         ]);
 })(angular);

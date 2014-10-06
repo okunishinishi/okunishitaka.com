@@ -36,6 +36,10 @@
         "dest": "public/javascripts/ok/services.js"
     },
     {
+        "src": "public/javascripts/ok/templates/**/*.js",
+        "dest": "public/javascripts/ok/templates.js"
+    },
+    {
         "src": "public/javascripts/ok/utils/**/*.js",
         "dest": "public/javascripts/ok/utils.js"
     },

@@ -37,6 +37,7 @@
         "public/javascripts/ok/pages",
         "public/javascripts/ok/services",
         "public/javascripts/ok/services/api",
+        "public/javascripts/ok/templates",
         "public/javascripts/ok/utils",
         "public/json",
         "public/stylesheets",

@@ -1,0 +1,44 @@
+/**
+ * Bud file for teampltes.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    string = u.string,
+    path = u.core.path,
+    glob = u.ext.glob,
+    os = u.core.os,
+    fs = u.core.fs;
+
+var basedir = path.resolve(__dirname, '../../../../'),
+    publicDir = path.resolve(basedir, 'public'),
+    partialsDir = path.resolve(publicDir, 'html/partials');
+
+
+function templateData(filename) {
+    return {
+        name: '/' + path.relative(publicDir, filename),
+        content: fs.readFileSync(filename).toString()
+    }
+}
+
+
+module.exports = glob
+    .sync('**/*.html', {
+        cwd: partialsDir
+    })
+    .map(function (filename) {
+        var name = string.camelString(filename.split(path.sep).join('_')),
+            data = templateData(path.resolve(partialsDir, filename));
+        return {
+            path: path.resolve(__dirname, string.paramString(name) + '-template.js'),
+            force: true,
+            mode: '444',
+            data: {
+                module: 'ok.templates',
+                name: name,
+                data: JSON.stringify(data, null, 4).replace(/\n/g, "\n\t\t")
+            }
+        }
+    });

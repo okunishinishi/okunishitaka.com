@@ -26,6 +26,7 @@ module.exports = function (config) {
             'public/javascripts/ok/logics/*.js',
             'public/javascripts/ok/pages/*.js',
             'public/javascripts/ok/services/**/*.js',
+            'public/javascripts/ok/templates/*.js',
             'public/javascripts/ok/utils/**/*.js',
             'test/browser_unit_tests/angular-mocks.js',
             'test/browser_unit_tests/**/*-test.js'

@@ -16,7 +16,8 @@
                 get langDetectService() { return $injector.get('langDetectService'); },
                 get localeLoadService() { return $injector.get('localeLoadService'); },
                 get locationChangeService() { return $injector.get('locationChangeService'); },
-                get locationResolveService() { return $injector.get('locationResolveService'); }
+                get locationResolveService() { return $injector.get('locationResolveService'); },
+                get templateCacheService() { return $injector.get('templateCacheService'); }
             }
         });
 })(angular, apeman);

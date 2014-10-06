@@ -16,6 +16,7 @@ var h = require('../_helper'),
 process.chdir(h.basedir);
 
 var filenames = [
+    'ci/bin/watch_to_bud',
     'ci/bin/watch_to_concat',
     'ci/bin/watch_to_format',
     'ci/bin/watch_to_test',

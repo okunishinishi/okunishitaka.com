@@ -25,6 +25,7 @@
             "ok.errors",
             "ok.logics",
             "ok.services",
+            "ok.templates",
             "ok.utils"
         ],
         "logics": [
@@ -40,6 +41,9 @@
             "ok.errors",
             "ok.logics",
             "ok.utils"
+        ],
+        "templates": [
+
         ],
         "utils": [
         ]
