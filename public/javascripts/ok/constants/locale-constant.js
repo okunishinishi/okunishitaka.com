@@ -1,6 +1,6 @@
 /**
- * constant for locale.
- * @requires angular
+ * Constant for locale.
+ * @ngdoc object
  */
 (function (ng) {
     "use strict";

@@ -1,0 +1,42 @@
+/**
+ * Take screen shots.
+ */
+
+"use strict";
+
+var h = require('../_helper'),
+    async = h.async,
+    glob = h.glob,
+    path = h.path,
+    data = require('../../server'),
+    takeScreenshot = require('../../app/utils/take_screenshot');
+
+
+process.chdir(h.basedir);
+
+var screenshotsDir = 'public/images/screenshots';
+
+
+async.each(
+    glob.sync('*.html', {
+        cwd: 'public'
+    }),
+    function (src, callback) {
+        var name = path.basename(src, '.html'),
+            url = 'http://localhost:' + data.port + '/' + src,
+            dest = path.resolve(screenshotsDir, name + '-screenshot.png');
+        takeScreenshot(
+            url, dest, {
+                width: 320,
+                height: 480
+            },
+            function (err) {
+                if (!err) {
+                    console.log('Screenshot taken:', dest);
+                }
+                callback(err);
+            }
+        )
+    },
+    h.done('Screenshots done.')
+)

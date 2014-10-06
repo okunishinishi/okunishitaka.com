@@ -1,6 +1,6 @@
 /**
- * constant for app.
- * @requires angular
+ * Constant for app.
+ * @ngdoc object
  */
 (function (ng) {
     "use strict";

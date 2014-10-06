@@ -1,6 +1,6 @@
 /**
- * constant for pageUrl.
- * @requires angular
+ * Constant for pageUrl.
+ * @ngdoc object
  */
 (function (ng) {
     "use strict";

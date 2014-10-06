@@ -9,19 +9,13 @@
 
 var args = require('system').args,
     url = args[1],
-    filename = args[2],
-    width = args[3],
-    height = args[4];
+    filename = args[2];
 
 var page = require('webpage').create(),
     fs = require('fs');
 
-page.viewportSize = {
-    width: width,
-    height: height
-};
 page.open(url, function () {
-    fs.write(filename, page.content, 'w');
+    page.render(filename);
     phantom.exit();
 });
 

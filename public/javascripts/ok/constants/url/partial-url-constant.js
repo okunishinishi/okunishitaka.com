@@ -1,6 +1,6 @@
 /**
- * constant for partialUrl.
- * @requires angular
+ * Constant for partialUrl.
+ * @ngdoc object
  */
 (function (ng) {
     "use strict";

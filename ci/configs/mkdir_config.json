@@ -22,7 +22,7 @@
         "public/html/partials",
         "public/html/error",
         "public/images",
-        "public/images/thumbnails",
+        "public/images/screenshots",
         "public/javascripts",
         "public/javascripts/lib",
         "public/javascripts/ok/constants",

@@ -12,8 +12,8 @@
 })(angular);
 
 /**
- * constant for app.
- * @requires angular
+ * Constant for app.
+ * @ngdoc object
  */
 (function (ng) {
     "use strict";
@@ -33,8 +33,8 @@
 
 
 /**
- * constant for code.
- * @requires angular
+ * Constant for code.
+ * @ngdoc object
  */
 (function (ng) {
     "use strict";
@@ -63,8 +63,8 @@
 
 
 /**
- * constant for locale.
- * @requires angular
+ * Constant for locale.
+ * @ngdoc object
  */
 (function (ng) {
     "use strict";
@@ -144,8 +144,8 @@
 
 
 /**
- * constant for pageUrl.
- * @requires angular
+ * Constant for pageUrl.
+ * @ngdoc object
  */
 (function (ng) {
     "use strict";
@@ -162,8 +162,8 @@
 
 
 /**
- * constant for partialUrl.
- * @requires angular
+ * Constant for partialUrl.
+ * @ngdoc object
  */
 (function (ng) {
     "use strict";

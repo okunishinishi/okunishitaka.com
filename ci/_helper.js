@@ -23,6 +23,7 @@ copy(require('./tasks'), h.tasks);
 h.copyDir = require('../app/utils/copy_dir');
 h.dateformat = dateformat;
 h.fs = u.core.fs;
+h.glob=glob;
 h.path = u.core.path;
 h.filtering = u.filtering;
 h.mapping = u.mapping;

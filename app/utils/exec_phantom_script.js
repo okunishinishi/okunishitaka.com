@@ -1,6 +1,6 @@
 /**
  * Execute a phantomjs script.
- * @memberof okunishitaka/app/utils
+ * @memberof okunishitaka-dot-com/app/utils
  * @function execPhantomScript
  * @param {string} filename - Script file name to execute.
  * @param {string[]} args - Args.
