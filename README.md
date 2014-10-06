@@ -9,7 +9,7 @@ okunishitaka.com
 [![Git tip][my_gittip_budge_url]][my_gittip_url]
 <!-- Badge end -->
 
-Homepage for Taka Okunishi
+Homepage of Taka Okunishi
 
 
 <!-- Banner start -->

@@ -1,17 +1,4 @@
 /**
- * ok directives module.
- * @requires angular
- */
-
-(function (ng) {
-    "use strict";
-    ng
-        .module('ok.directives', [
-            
-        ]);
-})(angular);
-
-/**
  * @ngdoc directive
  * @name okReplace
  * @param {string} ngReplace - angular expression evaluating to external HTML URL.

@@ -38,7 +38,7 @@
                         return lg.pageTitleLogic.tilteForPage(locale, page);
                     },
                     app: cn.appConstant,
-                    meta: {},
+                    page: '',
                     pages: cn.pageUrlConstant,
                     partials: cn.partialUrlConstant,
                     goTopPage: function () {
@@ -57,17 +57,9 @@
             ap.copy(global, $rootScope);
         })
         .controller('HeadControl', function HeadControl($scope) {
-            $scope.meta = {
-                foo: 'bar'
-            }
-            $scope.charset = 'UTF-8';
-            $scope.viewport = 'width=device-width, user-scalable=no';
         })
         .controller('HeaderControl', function HeaderControl($scope) {
         })
         .controller('FooterControl', function FooterControl($scope) {
-            $scope.meta = {
-                foo: 'bar in footer'
-            }
         });
 })(angular, apeman);

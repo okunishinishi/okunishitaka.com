@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html ng-app="ok.blogPage">
-<head ng-attr-lang="{{lang}}" ng-controller="HeadControl">
-    <meta ng-attr-charset="{{charset}}">
-    <meta name="viewport" ng-attr-content="{{viewport}}">
+<html ng:app="ok.blogPage">
+<head ng:attr-lang="{{lang}}" ng:controller="HeadControl">
 
+    <meta ok:replace="url(partials.META)">
+
+    <title ng:bind="title(page)"></title>
 
     <link rel="icon" href="/images/favicon.png?v=0.0.0">
 
@@ -23,29 +24,25 @@
     <script src="/javascripts/ok/utils.js?v=0.0.0"></script>
     <script src="/javascripts/ok/pages/page.js?v=0.0.0"></script>
     <script src="/javascripts/ok/pages/blog-page.js?v=0.0.0"></script>
-    <title ng-bind="title('blog')"></title>
-
-    <meta ok-meta="'a'" ok-config="meta">
-
 
 </head>
 <body>
-<header ng-include="url(partials.HEADER)" ng-controller="HeaderControl"></header>
+<header ng:include="url(partials.HEADER)" ng:controller="HeaderControl"></header>
 
-<div class="container positioned" ng-controller="BlogCtrl">
+<div class="container positioned" ng:controller="BlogCtrl">
     <aside>
-        <div ng-controller="BlogListCtrl">
+        <div ng:controller="BlogListCtrl">
             <ul>
-                <li ng-repeat="b in blogs">
-                    <a href="javascript:void(0)" ng-click="scrollTo('blog-dt-' + b._id)">{{b.title}}</a>
+                <li ng:repeat="b in blogs">
+                    <a href="javascript:void(0)" ng:click="scrollTo('blog-dt-' + b._id)">{{b.title}}</a>
                 </li>
             </ul>
-            <a id="aside-blog-more-button" href="javascript:void(0)" ng-click="more()">{{l.buttons.MORE}}</a>
+            <a id="aside-blog-more-button" href="javascript:void(0)" ng:click="more()">{{l.buttons.MORE}}</a>
         </div>
     </aside>
     <main>
         <article id="blog-article">
-            <section id="blog-edit-setion" ng-controller="BlogEditCtrl">
+            <section id="blog-edit-setion" ng:controller="BlogEditCtrl">
                 <div>
                     <input type="text" id="blog-title-input" class="wide-input">
                 </div>
@@ -57,19 +54,19 @@
                     <a id="blog-save-button" class="button" href="">{{l.buttons.SAVE}}</a>
                 </div>
             </section>
-            <section id="blog-list-section" ng-controller="BlogListCtrl">
+            <section id="blog-list-section" ng:controller="BlogListCtrl">
                 <dl id="blog-list">
-                    <dt ng-repeat-start="b in blogs" id="blog-dt-{{b._id}}">
+                    <dt ng:repeat-start="b in blogs" id="blog-dt-{{b._id}}">
                         {{b.title}}
                     </dt>
-                    <dd ng-repeat-end="">{{b.content}}</dd>
+                    <dd ng:repeat-end="">{{b.content}}</dd>
                 </dl>
             </section>
         </article>
     </main>
 </div>
 
-<footer ng-include="url(partials.FOOTER)" ng-controller="FooterControl"></footer>
+<footer ng:include="url(partials.FOOTER)" ng:controller="FooterControl"></footer>
 
 </body>
 </html>

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html ng-app="{{prefix}}.{{name}}Page">
-<head ng-attr-lang="{{{lang}}}" ng-controller="HeadControl">
-    <meta charset="{{{charset}}}">
-    <meta name="viewport" ng-attr-content="{{{viewport}}}">
+<html ng:app="{{prefix}}.{{name}}Page">
+<head ng:attr-lang="{{{lang}}}" ng:controller="HeadControl">
+
+    <meta ok:replace="url(partials.META)">
+
+    <title ng:bind="title(page)"></title>
 
     <link rel="icon" href="/images/favicon.png"/>
 
@@ -12,15 +14,13 @@
 {{#each javascripts}}    <script src="/javascripts/{{this}}"></script>
 {{/each}}
 
-    <title ng-bind="title('{{name}}')"></title>
-
 </head>
 <body>
-<header ng-include="url(partials.HEADER)" ng-controller="HeaderControl"></header>
-<main class="container" ng-controller="{{Name}}Ctrl">
+<header ng:include="url(partials.HEADER)" ng:controller="HeaderControl"></header>
+<main class="container" ng:controller="{{Name}}Ctrl">
 </main>
 
-<footer ng-include="url(partials.FOOTER)" ng-controller="FooterControl"></footer>
+<footer ng:include="url(partials.FOOTER)" ng:controller="FooterControl"></footer>
 
 </body>
 </html>

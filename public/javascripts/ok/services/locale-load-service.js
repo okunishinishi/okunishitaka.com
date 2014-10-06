@@ -16,6 +16,8 @@
 
             /**
              * Get locale data for a lang.
+             * @param {string} lang - Lang.
+             * @returns {object} - Locale data.
              */
             s.localeForLang = function (lang) {
                 return apLocaleService.localeForLang(lang);

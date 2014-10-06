@@ -9,8 +9,6 @@
             "ok.utils"
         ],
         "directives": [
-            "ok.constants",
-            "ok.filters"
         ],
         "entities": [
         ],

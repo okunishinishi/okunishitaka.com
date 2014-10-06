@@ -8,5 +8,6 @@ var appSettings = require('../../../../app/app_settings'),
 
 module.exports = {
     SUPPORTED_LANGS: appSettings.supportedLangs,
-    VERSION: pkg.version
+    VERSION: pkg.version,
+    HOMEPAGE:pkg.homepage
 }

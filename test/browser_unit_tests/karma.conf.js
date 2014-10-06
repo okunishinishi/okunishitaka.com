@@ -16,10 +16,12 @@ module.exports = function (config) {
         // list of files / patterns to load in the browser
         files: [
             'public/javascripts/lib/*.js',
-            'public/javascripts/ok/constants/*.js',
+            'public/javascripts/ok/constants/**/*.js',
             'public/javascripts/ok/datasources/*.js',
+            'public/javascripts/ok/directives/*.js',
             'public/javascripts/ok/entities/*.js',
             'public/javascripts/ok/errors/*.js',
+            'public/javascripts/ok/filters/*.js',
             'public/javascripts/ok/indices/*.js',
             'public/javascripts/ok/logics/*.js',
             'public/javascripts/ok/pages/*.js',

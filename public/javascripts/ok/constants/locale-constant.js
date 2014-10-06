@@ -11,7 +11,7 @@
 		    "en": {
 		        "meta": {
 		            "NAME": "okunishitaka.com",
-		            "DESCRIPTION": "Homepage for Taka Okunishi",
+		            "DESCRIPTION": "Homepage of Taka Okunishi",
 		            "AUTHOR": "Taka Okunishi"
 		        },
 		        "pageNames": {
@@ -44,7 +44,7 @@
 		    "ja": {
 		        "meta": {
 		            "NAME": "okunishitaka.com",
-		            "DESCRIPTION": "Homepage for Taka Okunishi",
+		            "DESCRIPTION": "Homepage of Taka Okunishi",
 		            "AUTHOR": "Taka Okunishi"
 		        },
 		        "pageNames": {

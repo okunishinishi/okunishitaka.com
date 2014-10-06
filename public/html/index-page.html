@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html ng-app="ok.indexPage">
-<head ng-attr-lang="{{lang}}" ng-controller="HeadControl">
-    <meta charset="{{charset}}">
-    <meta name="viewport" ng-attr-content="{{viewport}}">
+<html ng:app="ok.indexPage">
+<head ng:attr-lang="{{lang}}" ng:controller="HeadControl">
+
+    <meta ok:replace="url(partials.META)">
+
+    <title ng:bind="title(page)"></title>
 
     <link rel="icon" href="/images/favicon.png?v=0.0.0">
 
@@ -23,15 +25,13 @@
     <script src="/javascripts/ok/pages/page.js?v=0.0.0"></script>
     <script src="/javascripts/ok/pages/index-page.js?v=0.0.0"></script>
 
-    <title ng-bind="title('index')"></title>
-
 </head>
 <body>
-<header ng-include="url(partials.HEADER)" ng-controller="HeaderControl"></header>
-<main class="container" ng-controller="IndexCtrl">
+<header ng:include="url(partials.HEADER)" ng:controller="HeaderControl"></header>
+<main class="container" ng:controller="IndexCtrl">
 </main>
 
-<footer ng-include="url(partials.FOOTER)" ng-controller="FooterControl"></footer>
+<footer ng:include="url(partials.FOOTER)" ng:controller="FooterControl"></footer>
 
 </body>
 </html>

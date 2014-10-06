@@ -12,7 +12,8 @@
 		        "ja",
 		        "en"
 		    ],
-		    "VERSION": "0.0.0"
+		    "VERSION": "0.0.0",
+		    "HOMEPAGE": "http://okunishitaka.com"
 		});
 
 })(angular);

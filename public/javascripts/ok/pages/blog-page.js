@@ -12,7 +12,7 @@
             'ok.page',
         ])
         .run(function ($rootScope) {
-
+            $rootScope.page = 'blog';
         })
         .factory('blogListDatasource', function (ListDatasource, BlogEntity, blogApiService) {
             return new ListDatasource({
