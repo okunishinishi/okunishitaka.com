@@ -1,0 +1,8 @@
+<section id="blog-list-section" ng:controller="BlogListCtrl" >
+    <dl id="blog-list">
+        <dt ng:repeat-start="b in blogs" id="blog-dt-{{b._id}}">
+            {{b.title}}
+        </dt>
+        <dd ng:repeat-end="">{{b.content}}</dd>
+    </dl>
+</section>

@@ -171,6 +171,9 @@
     ng
         .module('ok.constants')
         .constant('partialUrlConstant', {
+		    "BLOG_ASIDE_CONTENT": "/html/partials/blog/blog-aside-content.html",
+		    "BLOG_EDIT_SECTION": "/html/partials/blog/blog-edit-section.html",
+		    "BLOG_LIST_SECTION": "/html/partials/blog/blog-list-section.html",
 		    "FOOTER": "/html/partials/footer.html",
 		    "HEADER": "/html/partials/header.html",
 		    "META": "/html/partials/meta.html"
@@ -862,6 +865,11 @@
         .module('ok.indices')
         .factory('templatesIndex', function defineTemplatesIndex($injector) {
             return {
+                get blogBlogAsideContentHtmlTemplate() { return $injector.get('blogBlogAsideContentHtmlTemplate'); },
+                get blogBlogEditSectionContentHtmlTemplate() { return $injector.get('blogBlogEditSectionContentHtmlTemplate'); },
+                get blogBlogEditSectionHtmlTemplate() { return $injector.get('blogBlogEditSectionHtmlTemplate'); },
+                get blogBlogListSectionContentHtmlTemplate() { return $injector.get('blogBlogListSectionContentHtmlTemplate'); },
+                get blogBlogListSectionHtmlTemplate() { return $injector.get('blogBlogListSectionHtmlTemplate'); },
                 get footerHtmlTemplate() { return $injector.get('footerHtmlTemplate'); },
                 get headerHtmlTemplate() { return $injector.get('headerHtmlTemplate'); },
                 get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); }
@@ -1437,6 +1445,81 @@
         ]);
 })(angular);
 
+/**
+ * Template for blogBlogAsideContentHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('blogBlogAsideContentHtmlTemplate', {
+		    "name": "/html/partials/blog/blog-aside-content.html",
+		    "content": "<div ng:controller=\"BlogAsideCtrl\" >\n    <ul>\n        <li ng:repeat=\"b in blogs\">\n            <a href=\"javascript:void(0)\" ng:click=\"scrollTo('blog-dt-' + b._id)\">{{b.title}}</a>\n        </li>\n    </ul>\n    <a id=\"aside-blog-more-button\" href=\"javascript:void(0)\" ng:click=\"more()\">{{l.buttons.MORE}}</a>\n</div>"
+		});
+
+})(angular);
+/**
+ * Template for blogBlogEditSectionContentHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('blogBlogEditSectionContentHtmlTemplate', {
+		    "name": "/html/partials/blog/blog-edit-section-content.html",
+		    "content": "<div>\n    <div>\n        <input type=\"text\" id=\"blog-title-input\" class=\"wide-input\">\n    </div>\n    <textarea name=\"blog-text\" id=\"blog-text-textarea\" class=\"wide-textarea\" cols=\"30\" rows=\"20\"></textarea>\n\n    <div id=\"blog-edti-preview\"></div>\n    <div class=\"text-center\">\n        <a id=\"blog-cancel-button\" class=\"button\" href=\"\">{{l.buttons.CANCEL}}</a>\n        <a id=\"blog-save-button\" class=\"button\" href=\"\">{{l.buttons.SAVE}}</a>\n    </div>\n</div>\n"
+		});
+
+})(angular);
+/**
+ * Template for blogBlogEditSectionHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('blogBlogEditSectionHtmlTemplate', {
+		    "name": "/html/partials/blog/blog-edit-section.html",
+		    "content": "<section id=\"blog-edit-setion\" ng:controller=\"BlogEditCtrl\">\n    <div>\n        <input type=\"text\" id=\"blog-title-input\" class=\"wide-input\">\n    </div>\n    <textarea name=\"blog-text\" id=\"blog-text-textarea\" class=\"wide-textarea\" cols=\"30\" rows=\"20\"></textarea>\n\n    <div id=\"blog-edti-preview\"></div>\n    <div class=\"text-center\">\n        <a id=\"blog-cancel-button\" class=\"button\" href=\"\">{{l.buttons.CANCEL}}</a>\n        <a id=\"blog-save-button\" class=\"button\" href=\"\">{{l.buttons.SAVE}}</a>\n    </div>\n</section>"
+		});
+
+})(angular);
+/**
+ * Template for blogBlogListSectionContentHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('blogBlogListSectionContentHtmlTemplate', {
+		    "name": "/html/partials/blog/blog-list-section-content.html",
+		    "content": "<div>\n    <dl id=\"blog-list\">\n        <dt ng:repeat-start=\"b in blogs\" id=\"blog-dt-{{b._id}}\">\n            {{b.title}}\n        </dt>\n        <dd ng:repeat-end=\"\">{{b.content}}</dd>\n    </dl>\n</div>"
+		});
+
+})(angular);
+/**
+ * Template for blogBlogListSectionHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('blogBlogListSectionHtmlTemplate', {
+		    "name": "/html/partials/blog/blog-list-section.html",
+		    "content": "<section id=\"blog-list-section\" ng:controller=\"BlogListCtrl\" >\n    <dl id=\"blog-list\">\n        <dt ng:repeat-start=\"b in blogs\" id=\"blog-dt-{{b._id}}\">\n            {{b.title}}\n        </dt>\n        <dd ng:repeat-end=\"\">{{b.content}}</dd>\n    </dl>\n</section>"
+		});
+
+})(angular);
 /**
  * Template for footerHtml
  * @ngdoc object

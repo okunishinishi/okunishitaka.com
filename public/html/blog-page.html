@@ -31,38 +31,14 @@
 <header ng:include="url(partials.HEADER)" ng:controller="HeaderControl"></header>
 
 <div class="container positioned" ng:controller="BlogCtrl">
-    <aside>
-        <div ng:controller="BlogListCtrl">
-            <ul>
-                <li ng:repeat="b in blogs">
-                    <a href="javascript:void(0)" ng:click="scrollTo('blog-dt-' + b._id)">{{b.title}}</a>
-                </li>
-            </ul>
-            <a id="aside-blog-more-button" href="javascript:void(0)" ng:click="more()">{{l.buttons.MORE}}</a>
+    <aside id="blog-aside">
+        <div ng-include="partials.BLOG_ASIDE_CONTENT">
         </div>
     </aside>
     <main>
         <article id="blog-article">
-            <section id="blog-edit-setion" ng:controller="BlogEditCtrl">
-                <div>
-                    <input type="text" id="blog-title-input" class="wide-input">
-                </div>
-                <textarea name="blog-text" id="blog-text-textarea" class="wide-textarea" cols="30" rows="20"></textarea>
-
-                <div id="blog-edti-preview"></div>
-                <div class="text-center">
-                    <a id="blog-cancel-button" class="button" href="">{{l.buttons.CANCEL}}</a>
-                    <a id="blog-save-button" class="button" href="">{{l.buttons.SAVE}}</a>
-                </div>
-            </section>
-            <section id="blog-list-section" ng:controller="BlogListCtrl">
-                <dl id="blog-list">
-                    <dt ng:repeat-start="b in blogs" id="blog-dt-{{b._id}}">
-                        {{b.title}}
-                    </dt>
-                    <dd ng:repeat-end="">{{b.content}}</dd>
-                </dl>
-            </section>
+            <div ng-include="partials.BLOG_EDIT_SECTION"></div>
+            <div ng-include="partials.BLOG_LIST_SECTION"></div>
         </article>
     </main>
 </div>

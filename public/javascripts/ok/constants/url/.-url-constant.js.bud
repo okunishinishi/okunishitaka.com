@@ -49,7 +49,7 @@ function fileUrlData(dirname, pattern) {
 
 
 module.exports = [
-    constantBud('partialUrl', fileUrlData('html/partials', '*.html')),
+    constantBud('partialUrl', fileUrlData('html/partials', '**/*.html')),
     constantBud('pageUrl', fileUrlData('', '*.html'))
 
 ]

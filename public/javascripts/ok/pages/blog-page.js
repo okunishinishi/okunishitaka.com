@@ -25,33 +25,43 @@
             });
         })
         .controller('BlogCtrl', function ($scope, blogListDatasource) {
-            var listDatasource = blogListDatasource;
             ap.copy({
-                listDatasource: listDatasource,
                 edit: function (blog) {
 
                 }
             }, $scope);
 
-            listDatasource.load();
+            blogListDatasource.load();
         })
-        .controller('BlogListCtrl', function ($scope) {
+        .controller('BlogListCtrl', function ($scope,blogListDatasource) {
             ap.copy({
                 /**
                  * Load more data.
                  */
                 more: function () {
-                    $scope.listDatasource.load();
+                    blogListDatasource.load();
                 }
             }, $scope);
 
             Object.defineProperties($scope, {
-                /**
-                 * Blog data.
-                 */
                 blogs: {
                     get: function () {
-                        return $scope.listDatasource.data;
+                        return blogListDatasource.data;
+                    }
+                }
+            });
+        })
+        .controller('BlogAsideCtrl', function ($scope, blogListDatasource) {
+            ap.copy({
+                more: function () {
+                    blogListDatasource.load();
+                }
+            }, $scope);
+
+            Object.defineProperties($scope, {
+                blogs: {
+                    get: function () {
+                        return blogListDatasource.data;
                     }
                 }
             });
