@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!--
+    HTML for blog page.
+-->
 <html ng:app="ok.blogPage">
 <head ng:attr-lang="{{lang}}" ng:controller="HeadControl">
 
@@ -28,7 +31,7 @@
 
 </head>
 <body>
-<header ng:include="url(partials.HEADER)" ng:controller="HeaderControl"></header>
+<header ng:include="partials.HEADER" ng:controller="HeaderControl"></header>
 
 <div class="container positioned" ng:controller="BlogCtrl">
     <aside id="blog-aside">
@@ -43,7 +46,7 @@
     </main>
 </div>
 
-<footer ng:include="url(partials.FOOTER)" ng:controller="FooterControl"></footer>
+<footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>
 
 </body>
 </html>

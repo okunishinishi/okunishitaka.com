@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!--
+    HTML for index page.
+-->
 <html ng:app="ok.indexPage">
 <head ng:attr-lang="{{lang}}" ng:controller="HeadControl">
 
@@ -21,17 +24,22 @@
     <script src="/javascripts/ok/indices.js?v=0.0.0"></script>
     <script src="/javascripts/ok/logics.js?v=0.0.0"></script>
     <script src="/javascripts/ok/services.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/templates.js?v=0.0.0"></script>
     <script src="/javascripts/ok/utils.js?v=0.0.0"></script>
     <script src="/javascripts/ok/pages/page.js?v=0.0.0"></script>
     <script src="/javascripts/ok/pages/index-page.js?v=0.0.0"></script>
 
 </head>
 <body>
-<header ng:include="url(partials.HEADER)" ng:controller="HeaderControl"></header>
+
+<header ng:include="partials.HEADER" ng:controller="HeaderControl"></header>
+
 <main class="container" ng:controller="IndexCtrl">
+
+
 </main>
 
-<footer ng:include="url(partials.FOOTER)" ng:controller="FooterControl"></footer>
+<footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>
 
 </body>
 </html>
