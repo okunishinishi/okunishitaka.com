@@ -17,6 +17,7 @@ var h = new TestHelper({
 });
 h.basedir = basedir;
 h.request = request;
+h.cheerio = require('cheerio');
 h.test = require('assert');
 h.path = require('path');
 

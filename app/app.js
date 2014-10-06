@@ -46,9 +46,7 @@ app.start = function (port, settings, callback) {
                 },
                 prerenderMiddleware({
                     cacheDirectory: settings.prerenderCacheDir,
-                    baseUrl: [
-                        ['http://localhost', port].join(':')
-                    ]
+                    baseUrl: ['http://localhost', port].join(':') //FIXME
                 }),
                 mw.serveStaticMiddleware({
                     root: settings.publicDir,

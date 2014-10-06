@@ -25,7 +25,7 @@
     ],
     "homepage": "http://okunishitaka.com",
     "dependencies": {
-        "apeman-util": "0.0.27",
+        "apeman-util": "0.0.28",
         "apeman-storage": "0.0.7",
         "apeman-front": "0.0.10",
         "apeman-web": "0.0.9",

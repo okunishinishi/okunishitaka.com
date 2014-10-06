@@ -23,7 +23,7 @@ copy(require('./tasks'), h.tasks);
 h.copyDir = require('../app/utils/copy_dir');
 h.dateformat = dateformat;
 h.fs = u.core.fs;
-h.glob=glob;
+h.glob = glob;
 h.path = u.core.path;
 h.filtering = u.filtering;
 h.mapping = u.mapping;
@@ -31,7 +31,7 @@ h.sorting = u.sorting;
 h.rmdirRecursive = file.rmdirRecursive;
 h.yesno = u.ext.yesno;
 h.pkg = require('../package.json')
-
+h.takePngScreenshot = u.browsing.takePngScreenshot;
 h.watchAll = file.watchAll;
 
 h.writeJsonFile = u.json.writeJsonFile;

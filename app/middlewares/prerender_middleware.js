@@ -21,7 +21,7 @@ var u = require('apeman-util'),
     path = u.core.path,
     fallbackCopy = u.object.fallbackCopy,
     _shouldShowPrerenderedPage = require('./_should_show_prerendered_page'),
-    execPhantomScript = require('../../app/utils/exec_phantom_script');
+    takeHtmlSnapshot = u.browsing.takeHtmlSnapshot;
 
 /** @lends prerenderMiddleware */
 function prerenderMiddleware(options) {
@@ -32,6 +32,7 @@ function prerenderMiddleware(options) {
             next();
             return;
         }
+        console.log(o.baseUrl, req.url);
         prerenderMiddleware.prerender(
             url.resolve(o.baseUrl, req.url),
             o.cacheDirectory,
@@ -45,7 +46,9 @@ function prerenderMiddleware(options) {
                 console.log('prerender page with url:', req.url);
                 console.log(' cached saved:', prerendered);
                 fs.createReadStream(prerendered).pipe(res);
-            });
+            }
+        )
+        ;
     }
 }
 
@@ -72,8 +75,7 @@ prerenderMiddleware.restoreURL = function (urlString) {
 
 prerenderMiddleware.prerender = function (incomingURL, cacheDirectory, cacheDuration, callback) {
     var restoredURL = prerenderMiddleware.restoreURL(incomingURL),
-        filename = path.join(cacheDirectory, prerenderMiddleware._filenameForUrl(restoredURL)),
-        bin = require.resolve('./bin/prerender.phantom.js');
+        filename = path.join(cacheDirectory, prerenderMiddleware._filenameForUrl(restoredURL));
     prerenderMiddleware._isValidCache(filename, cacheDuration, function (cached) {
         if (cached) {
             callback(null, filename);
@@ -85,10 +87,7 @@ prerenderMiddleware.prerender = function (incomingURL, cacheDirectory, cacheDura
                 mkdirp(path.dirname(filename), callback);
             },
             function (callback) {
-                execPhantomScript(bin, [
-                    restoredURL,
-                    filename
-                ], callback);
+                takeHtmlSnapshot(restoredURL, filename, callback);
             }
         ], function (err) {
             callback(err, filename);
