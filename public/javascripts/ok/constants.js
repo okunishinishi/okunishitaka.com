@@ -78,6 +78,18 @@
 		            "DESCRIPTION": "Homepage of Taka Okunishi",
 		            "AUTHOR": "Taka Okunishi"
 		        },
+		        "placeholders": {
+		            "blog": {
+		                "TITLE": "Title",
+		                "CONTENT": "Content "
+		            }
+		        },
+		        "labels": {
+		            "blogstatus": {
+		                "PUBLIC": "public",
+		                "PRIVATE": "private"
+		            }
+		        },
 		        "pageNames": {
 		            "INDEX": "Top",
 		            "BLOG": "Blog",
@@ -111,6 +123,18 @@
 		            "DESCRIPTION": "Homepage of Taka Okunishi",
 		            "AUTHOR": "Taka Okunishi"
 		        },
+		        "placeholders": {
+		            "blog": {
+		                "TITLE": "Title",
+		                "CONTENT": "Content "
+		            }
+		        },
+		        "labels": {
+		            "blogstatus": {
+		                "PUBLIC": "public",
+		                "PRIVATE": "private"
+		            }
+		        },
 		        "pageNames": {
 		            "INDEX": "Top",
 		            "BLOG": "Blog",
@@ -138,6 +162,22 @@
 		            "VALIDATION_ERROR": ""
 		        }
 		    }
+		});
+
+})(angular);
+
+
+/**
+ * Constant for links.
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.constants')
+        .constant('linksConstant', {
+		    "ABOUT_MARK_DOWN": "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"
 		});
 
 })(angular);

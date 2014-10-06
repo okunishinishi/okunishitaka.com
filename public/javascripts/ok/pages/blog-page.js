@@ -24,6 +24,11 @@
                 }
             });
         })
+        .factory('blogOneDatasource', function (OneDatasource, BlogEntity, blogApiService) {
+            return new OneDatasource({
+
+            });
+        })
         .controller('BlogCtrl', function ($scope, blogListDatasource) {
             ap.copy({
                 edit: function (blog) {
@@ -33,7 +38,7 @@
 
             blogListDatasource.load();
         })
-        .controller('BlogListCtrl', function ($scope,blogListDatasource) {
+        .controller('BlogListCtrl', function ($scope, blogListDatasource) {
             ap.copy({
                 /**
                  * Load more data.

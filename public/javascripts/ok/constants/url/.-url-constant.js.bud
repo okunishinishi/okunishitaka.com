@@ -50,8 +50,8 @@ function fileUrlData(dirname, pattern) {
 
 module.exports = [
     constantBud('partialUrl', fileUrlData('html/partials', '**/*.html')),
-    constantBud('pageUrl', fileUrlData('', '*.html'))
-
+    constantBud('pageUrl', fileUrlData('', '*.html')),
+    constantBud('links', require('./.links.data'))
 ]
 ;
 

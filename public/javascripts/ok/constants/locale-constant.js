@@ -14,6 +14,18 @@
 		            "DESCRIPTION": "Homepage of Taka Okunishi",
 		            "AUTHOR": "Taka Okunishi"
 		        },
+		        "placeholders": {
+		            "blog": {
+		                "TITLE": "Title",
+		                "CONTENT": "Content "
+		            }
+		        },
+		        "labels": {
+		            "blogstatus": {
+		                "PUBLIC": "public",
+		                "PRIVATE": "private"
+		            }
+		        },
 		        "pageNames": {
 		            "INDEX": "Top",
 		            "BLOG": "Blog",
@@ -46,6 +58,18 @@
 		            "NAME": "okunishitaka.com",
 		            "DESCRIPTION": "Homepage of Taka Okunishi",
 		            "AUTHOR": "Taka Okunishi"
+		        },
+		        "placeholders": {
+		            "blog": {
+		                "TITLE": "Title",
+		                "CONTENT": "Content "
+		            }
+		        },
+		        "labels": {
+		            "blogstatus": {
+		                "PUBLIC": "public",
+		                "PRIVATE": "private"
+		            }
 		        },
 		        "pageNames": {
 		            "INDEX": "Top",

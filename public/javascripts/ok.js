@@ -78,6 +78,18 @@
 		            "DESCRIPTION": "Homepage of Taka Okunishi",
 		            "AUTHOR": "Taka Okunishi"
 		        },
+		        "placeholders": {
+		            "blog": {
+		                "TITLE": "Title",
+		                "CONTENT": "Content "
+		            }
+		        },
+		        "labels": {
+		            "blogstatus": {
+		                "PUBLIC": "public",
+		                "PRIVATE": "private"
+		            }
+		        },
 		        "pageNames": {
 		            "INDEX": "Top",
 		            "BLOG": "Blog",
@@ -111,6 +123,18 @@
 		            "DESCRIPTION": "Homepage of Taka Okunishi",
 		            "AUTHOR": "Taka Okunishi"
 		        },
+		        "placeholders": {
+		            "blog": {
+		                "TITLE": "Title",
+		                "CONTENT": "Content "
+		            }
+		        },
+		        "labels": {
+		            "blogstatus": {
+		                "PUBLIC": "public",
+		                "PRIVATE": "private"
+		            }
+		        },
 		        "pageNames": {
 		            "INDEX": "Top",
 		            "BLOG": "Blog",
@@ -138,6 +162,22 @@
 		            "VALIDATION_ERROR": ""
 		        }
 		    }
+		});
+
+})(angular);
+
+
+/**
+ * Constant for links.
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.constants')
+        .constant('linksConstant', {
+		    "ABOUT_MARK_DOWN": "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"
 		});
 
 })(angular);
@@ -754,6 +794,7 @@
                 get appConstant() { return $injector.get('appConstant'); },
                 get codeConstant() { return $injector.get('codeConstant'); },
                 get localeConstant() { return $injector.get('localeConstant'); },
+                get linksConstant() { return $injector.get('linksConstant'); },
                 get pageUrlConstant() { return $injector.get('pageUrlConstant'); },
                 get partialUrlConstant() { return $injector.get('partialUrlConstant'); }
             }
@@ -1486,7 +1527,7 @@
         .module('ok.templates')
         .value('blogBlogEditSectionHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-edit-section.html",
-		    "content": "<section id=\"blog-edit-setion\" ng:controller=\"BlogEditCtrl\">\n    <div>\n        <input type=\"text\" id=\"blog-title-input\" class=\"wide-input\">\n    </div>\n    <textarea name=\"blog-text\" id=\"blog-text-textarea\" class=\"wide-textarea\" cols=\"30\" rows=\"20\"></textarea>\n\n    <div id=\"blog-edti-preview\"></div>\n    <div class=\"text-center\">\n        <a id=\"blog-cancel-button\" class=\"button\" href=\"\">{{l.buttons.CANCEL}}</a>\n        <a id=\"blog-save-button\" class=\"button\" href=\"\">{{l.buttons.SAVE}}</a>\n    </div>\n</section>"
+		    "content": "<section id=\"blog-edit-setion\" ng:controller=\"BlogEditCtrl\">\n    <div>\n        <input type=\"text\" id=\"blog-title-input\"\n               placeholder=\"{{l.placeholders.blog.TITLE}}\"\n               class=\"wide-input\">\n    </div>\n    <div>\n        <label for=\"blog-status-radio-true\">\n            <input id=\"blog-status-radio-true\" type=\"radio\" name=\"blog-status-radio\" value=\"1\"/>\n            {{l.labels.blogstatus.PUBLIC}}\n        </label>\n        <label for=\"blog-status-radio-false\">\n            <input id=\"blog-status-radio-false\" type=\"radio\" name=\"blog-status-radio\" value=\"0\"/>\n            {{l.labels.blogstatus.PRIVATE}}\n        </label>\n    </div>\n    <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n              placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n              class=\"wide-textarea\" cols=\"30\" rows=\"20\"\n            ></textarea>\n\n    <div id=\"blog-edti-preview\"></div>\n    <div class=\"text-center\">\n        <a id=\"blog-cancel-button\" class=\"button\" href=\"\">{{l.buttons.CANCEL}}</a>\n        <a id=\"blog-save-button\" class=\"button\" href=\"\">{{l.buttons.SAVE}}</a>\n    </div>\n</section>"
 		});
 
 })(angular);

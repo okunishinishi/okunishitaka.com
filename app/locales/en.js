@@ -20,6 +20,20 @@ l.meta = {
     AUTHOR: pkg.author
 };
 
+l.placeholders = {
+    blog: {
+        TITLE: 'Title',
+        CONTENT: 'Content '
+    }
+};
+
+l.labels = {
+    blogstatus: {
+        PUBLIC: 'public',
+        PRIVATE: 'private'
+    }
+};
+
 l.pageNames = {
     INDEX: 'Top',
     BLOG: 'Blog',

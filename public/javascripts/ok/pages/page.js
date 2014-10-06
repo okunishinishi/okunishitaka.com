@@ -39,6 +39,7 @@
                         return lg.pageTitleLogic.tilteForPage(locale, page);
                     },
                     app: cn.appConstant,
+                    link: cn.linksConstant,
                     page: '',
                     pages: cn.pageUrlConstant,
                     partials: cn.partialUrlConstant,
