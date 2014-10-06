@@ -1,9 +1,5 @@
 [
     {
-        "src": "public/javascripts/lib/*.js",
-        "dest": "public/javascripts/lib.js"
-    },
-    {
         "src": "public/javascripts/ok/constants/**/*.js",
         "dest": "public/javascripts/ok/constants.js"
     },
@@ -42,6 +38,14 @@
     {
         "src": "public/javascripts/ok/utils/**/*.js",
         "dest": "public/javascripts/ok/utils.js"
+    },
+    {
+        "src": "public/javascripts/lib/*.js",
+        "dest": "public/javascripts/lib.js"
+    },
+    {
+        "src": "public/javascripts/ok/*.js",
+        "dest": "public/javascripts/ok.js"
     },
     {
         "src": "public/stylesheets/base/*.css",

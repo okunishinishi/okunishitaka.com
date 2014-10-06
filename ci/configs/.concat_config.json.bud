@@ -21,12 +21,6 @@ module.exports = {
     mode: '444',
     force: true,
     data: [
-        concatData('public/javascripts', [
-            {
-                src: 'lib/*.js',
-                dest: 'lib.js'
-            }
-        ]),
         concatData('public/javascripts/ok',
             Object.keys(require('../../public/javascripts/ok/.ok').modules).map(function (moduleName) {
                 return {
@@ -35,6 +29,16 @@ module.exports = {
                 }
             })
         ),
+        concatData('public/javascripts', [
+            {
+                src: 'lib/*.js',
+                dest: 'lib.js'
+            },
+            {
+                src: 'ok/*.js',
+                dest: 'ok.js'
+            }
+        ]),
         concatData('public/stylesheets', [
             {
                 src: 'base/*.css',
