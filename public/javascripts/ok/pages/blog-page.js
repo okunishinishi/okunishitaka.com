@@ -40,14 +40,23 @@
                 }
             });
         })
-        .controller('BlogCtrl', function ($scope, blogListDatasource) {
+        .controller('BlogCtrl', function ($scope, blogListDatasource, blogOneDatasource) {
             ap.copy({
                 edit: function (blog) {
-
+                    blogOneDatasource.id = blog._id;
+                    blogOneDatasource.data = blog;
                 }
             }, $scope);
 
             blogListDatasource.load();
+
+
+            $scope.edit({
+                title: 'blog-test00',
+                content: 'blog-content00',
+                status: '0'
+            }); //FIXME
+
         })
         .controller('BlogListCtrl', function ($scope, blogListDatasource) {
             ap.copy({
@@ -85,8 +94,22 @@
         .controller('BlogDetailCtrl', function ($scope) {
 
         })
-        .controller('BlogEditCtrl', function ($scope) {
+        .controller('BlogEditCtrl', function ($scope, blogOneDatasource) {
+            ap.copy({
+                save: function (blog) {
 
+                },
+                cancel: function () {
+
+                }
+            }, $scope);
+            Object.defineProperties($scope, {
+                blog: {
+                    get: function () {
+                        return blogOneDatasource.data;
+                    }
+                }
+            });
         })
     ;
 

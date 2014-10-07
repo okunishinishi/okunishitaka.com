@@ -2,26 +2,36 @@
     <div>
         <input type="text" id="blog-title-input"
                placeholder="{{l.placeholders.blog.TITLE}}"
+               ng-model="blog.title"
                class="wide-input">
     </div>
     <div>
         <label for="blog-status-radio-true">
-            <input id="blog-status-radio-true" type="radio" name="blog-status-radio" value="1"/>
+            <input id="blog-status-radio-true"
+                   ng-model="blog.status"
+                   type="radio" name="blog-status-radio" value="1"/>
             {{l.labels.blogstatus.PUBLIC}}
         </label>
         <label for="blog-status-radio-false">
-            <input id="blog-status-radio-false" type="radio" name="blog-status-radio" value="0"/>
+            <input id="blog-status-radio-false"
+                   ng-model="blog.status"
+                   type="radio" name="blog-status-radio" value="0"/>
             {{l.labels.blogstatus.PRIVATE}}
         </label>
     </div>
     <textarea name="blog-text" id="blog-text-textarea"
               placeholder="{{l.placeholders.blog.CONTENT}}"
               class="wide-textarea" cols="30" rows="20"
+              ng-model="blog.content"
             ></textarea>
 
     <div id="blog-edti-preview"></div>
     <div class="text-center">
-        <a id="blog-cancel-button" class="button" href="">{{l.buttons.CANCEL}}</a>
-        <a id="blog-save-button" class="button" href="">{{l.buttons.SAVE}}</a>
+        <a id="blog-cancel-button" class="button"
+           ng-click="save(blog)"
+                >{{l.buttons.CANCEL}}</a>
+        <a id="blog-save-button" class="button"
+           ng-click="cancel()"
+                >{{l.buttons.SAVE}}</a>
     </div>
 </section>
