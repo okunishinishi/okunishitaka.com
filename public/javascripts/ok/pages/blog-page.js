@@ -29,8 +29,14 @@
                 convert: function (data) {
                     return BlogEntity.new(data);
                 },
-                fetch:function(){
-
+                fetch: function (id, callback) {
+                    blogApiService.one(id, callback);
+                },
+                create: function (data, callback) {
+                    blogApiService.create(data, callback);
+                },
+                update: function (id, data, callback) {
+                    blogApiService.update(id, data, callback);
                 }
             });
         })

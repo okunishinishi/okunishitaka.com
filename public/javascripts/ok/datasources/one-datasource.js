@@ -84,6 +84,26 @@
                             callback(err);
                         });
                     },
+                    create: function (data, callback) {
+                        callback(null, data);
+                    },
+                    update: function (id, data, callback) {
+                        callback(null, data);
+                    },
+                    /**
+                     * Save data.
+                     * @param callback
+                     */
+                    save: function (callback) {
+                        var s = this,
+                            id = s.id,
+                            data = s.data || {};
+                        if (id) {
+                            s.update(id, data, callback);
+                        } else {
+                            s.create(data, callback);
+                        }
+                    },
                     /**
                      * Clear and fetch data.
                      * @param {function} callback

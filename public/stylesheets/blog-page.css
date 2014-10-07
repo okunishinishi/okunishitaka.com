@@ -5,6 +5,12 @@
     margin: 20px 0;
 }
 
-#blog-list dd{
+#blog-list dd {
     margin: 0 0 20px;
+}
+
+#blog-list .blog-dt-anchor {
+    position: relative;
+    padding-top: 45px;
+    margin-top: -45px;
 }
