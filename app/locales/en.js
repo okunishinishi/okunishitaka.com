@@ -64,4 +64,10 @@ l.errorDescriptions = {
     VALIDATION_ERROR: ''
 };
 
+l.pages = {
+    blog: {
+        PREVIEW_LEGEND: 'Preview'
+    }
+}
+
 module.exports = Object.seal(l);

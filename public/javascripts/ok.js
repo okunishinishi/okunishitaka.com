@@ -115,6 +115,11 @@
 		            "SERVER_ERROR": "Something wrong within our server. Plase try again later.",
 		            "UNEXPECTED_ERROR": "Something seems to be wrong.",
 		            "VALIDATION_ERROR": ""
+		        },
+		        "pages": {
+		            "blog": {
+		                "PREVIEW_LEGEND": "Preview"
+		            }
 		        }
 		    },
 		    "ja": {
@@ -160,6 +165,11 @@
 		            "SERVER_ERROR": "Something wrong within our server. Plase try again later.",
 		            "UNEXPECTED_ERROR": "Something seems to be wrong.",
 		            "VALIDATION_ERROR": ""
+		        },
+		        "pages": {
+		            "blog": {
+		                "PREVIEW_LEGEND": "Preview"
+		            }
 		        }
 		    }
 		});
@@ -1386,23 +1396,22 @@
                         }
                         return new AppApiError(code);
                     },
-                    _request: function (url, method, params, callback) {
+                    /**
+                     * Send request.
+                     * @param {object} config - Request configuration.
+                     * @param {fnction} callback - Callback when done.
+                     * @returns {*}
+                     * @private
+                     */
+                    _request: function (config, callback) {
                         var s = this;
 
-                        var noParams = (!params) || (typeof(params) == 'function');
-                        if (noParams) {
-                            return s._request(url, method, {}, callback);
-                        }
-
-                        if (!url) {
+                        if (!config.url) {
                             // angular.js標準のエラーが分かりにくいのでここで明示的にthrowしている。
                             throw new Error('url is required.');
                         }
-                        return $http({
-                            url:url,
-                            method:method,
-                            params:params
-                        })
+                        callback = callback || ap.doNothing;
+                        return $http(config)
                             .success(function (data, status) {
                                 callback(null, data);
                             })
@@ -1410,6 +1419,47 @@
                                 var err = s._newError(data, status);
                                 callback(err, data);
                             });
+                    },
+                    /**
+                     * Request with params.
+                     * @param url
+                     * @param method
+                     * @param params
+                     * @param callback
+                     * @returns {*}
+                     * @private
+                     */
+                    _paramsRequest: function (url, method, params, callback) {
+                        var s = this;
+                        var noParams = (!params) || (typeof(params) == 'function');
+                        if (noParams) {
+                            return s._paramsRequest(url, method, {}, callback);
+                        }
+                        return s._request({
+                            url: url,
+                            method: method,
+                            params: params
+                        }, callback);
+                    },
+                    /**
+                     * Request with data.
+                     * @param url
+                     * @param method
+                     * @param data
+                     * @param callback
+                     * @private
+                     */
+                    _dataRequest: function (url, method, data, callback) {
+                        var s = this;
+                        var noData = (!data) || (typeof(data) == 'function');
+                        if (noData) {
+                            return s._dataRequest(url, method, {}, callback);
+                        }
+                        return s._request({
+                            url: url,
+                            method: method,
+                            data: data
+                        }, callback);
                     },
                     /**
                      * Get request.
@@ -1420,37 +1470,37 @@
                      */
                     get: function (url, params, callback) {
                         var s = this;
-                        return s._request(url, 'GET', params, callback);
+                        return s._paramsRequest(url, 'GET', params, callback);
                     },
                     /**
                      * Post request.
                      * @param {string} url - URL to get.
-                     * @param {object} [params] - Parameters.
+                     * @param {object} [data] - Parameters.
                      * @param {function} callback - Callback when done.
                      */
-                    post: function (url, params, callback) {
+                    post: function (url, data, callback) {
                         var s = this;
-                        return s._request(url, 'POST', params, callback);
+                        return s._dataRequest(url, 'POST', data, callback);
                     },
                     /**
                      * Put request.
                      * @param {string} url - URL to get.
-                     * @param {object} [params] - Parameters.
+                     * @param {object} [data] - Parameters.
                      * @param {function} callback - Callback when done.
                      */
-                    put: function (url, params, callback) {
+                    put: function (url, data, callback) {
                         var s = this;
-                        return s._request(url, 'PUT', params, callback);
+                        return s._dataRequest(url, 'PUT', data, callback);
                     },
                     /**
                      * Delete request.
                      * @param {string} url - URL to get.
-                     * @param {object} [params] - Parameters.
+                     * @param {object} [data] - Parameters.
                      * @param {function} callback - Callback when done.
                      */
-                    delete: function (url, params, callback) {
+                    delete: function (url, data, callback) {
                         var s = this;
-                        return s._request(url, 'DELETE', params, callback);
+                        return s._dataRequest(url, 'DELETE', data, callback);
                     }
                 },
                 s
@@ -1756,7 +1806,7 @@
         .module('ok.templates')
         .value('blogBlogEditSectionHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-edit-section.html",
-		    "content": "<section id=\"blog-edit-section\" ng:controller=\"BlogEditCtrl\" class=\"cover\">\n    <fieldset>\n        <div>\n            <input type=\"text\" id=\"blog-title-input\"\n                   placeholder=\"{{l.placeholders.blog.TITLE}}\"\n                   ng:model=\"blog.title\"\n                   class=\"wide-input\">\n        </div>\n        <div>\n            <label for=\"blog-status-radio-true\">\n                <input id=\"blog-status-radio-true\"\n                       ng:model=\"blog.status\"\n                       type=\"radio\" name=\"blog-status-radio\" value=\"1\"/>\n                {{l.labels.blogstatus.PUBLIC}}\n            </label>\n            <label for=\"blog-status-radio-false\">\n                <input id=\"blog-status-radio-false\"\n                       ng:model=\"blog.status\"\n                       type=\"radio\" name=\"blog-status-radio\" value=\"0\"/>\n                {{l.labels.blogstatus.PRIVATE}}\n            </label>\n        </div>\n        <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n                  placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n                  class=\"wide-textarea\" cols=\"30\" rows=\"20\"\n                  ng:model=\"blog.content\"\n                ></textarea>\n\n        <div class=\"text-center\">\n            <a id=\"blog-cancel-button\" class=\"button\"\n               ng:click=\"save(blog)\"\n                    >{{l.buttons.CANCEL}}</a>\n            <a id=\"blog-save-button\" class=\"button\"\n               ng:click=\"cancel()\"\n                    >{{l.buttons.SAVE}}</a>\n        </div>\n    </fieldset>\n    <fieldset>\n\n        <div id=\"blog-edit-preview-div\">\n            <h2>{{preview.title}}</h2>\n\n            <div ng:bind-html=\"preview.content\"></div>\n        </div>\n    </fieldset>\n\n</section>"
+		    "content": "<section id=\"blog-edit-section\" ng:controller=\"BlogEditCtrl\" class=\"cover\">\n    <div id=\"blog-edit-section-content\" class=\"container\">\n\n\n        <div class=\"\">\n\n        </div>\n        <div class=\"\">\n            <fieldset class=\"no-style-fieldset\">\n                <div>\n                    <input type=\"text\" id=\"blog-title-input\"\n                           placeholder=\"{{l.placeholders.blog.TITLE}}\"\n                           ng:model=\"blog.title\"\n                           class=\"wide-input\">\n                </div>\n                <div>\n                    <label for=\"blog-status-radio-true\">\n                        <input id=\"blog-status-radio-true\"\n                               ng:model=\"blog.status\"\n                               type=\"radio\" name=\"blog-status-radio\" value=\"1\"/>\n                        {{l.labels.blogstatus.PUBLIC}}\n                    </label>\n                    <label for=\"blog-status-radio-false\">\n                        <input id=\"blog-status-radio-false\"\n                               ng:model=\"blog.status\"\n                               type=\"radio\" name=\"blog-status-radio\" value=\"0\"/>\n                        {{l.labels.blogstatus.PRIVATE}}\n                    </label>\n                </div>\n                <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n                          placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n                          class=\"wide-textarea\" cols=\"30\" rows=\"20\"\n                          ng:model=\"blog.content\"\n                        ></textarea>\n\n                <div class=\"text-center\">\n                    <a id=\"blog-cancel-button\" class=\"button\"\n                       ng:click=\"cancel()\"\n                            >{{l.buttons.CANCEL}}</a>\n                    <a id=\"blog-save-button\" class=\"button\"\n                       ng:click=\"save(blog)\"\n                            >{{l.buttons.SAVE}}</a>\n                </div>\n            </fieldset>\n            <fieldset>\n                <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>\n                <div id=\"blog-edit-preview-div\">\n                    <h2>{{preview.title}}</h2>\n\n                    <div ng:bind-html=\"preview.content\"></div>\n                </div>\n            </fieldset>\n            <br class=\"clear\"/>\n        </div>\n    </div>\n</section>"
 		});
 
 })(angular);

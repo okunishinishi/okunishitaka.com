@@ -46,7 +46,8 @@
                 edit: function (blog) {
                     blogOneDatasource.id = blog._id;
                     blogOneDatasource.data = blog;
-                }
+                    $scope.isEditing = true;
+                },
             }, $scope);
 
             blogListDatasource.load();
@@ -99,7 +100,9 @@
             ap.copy({
                 save: function (blog) {
                     blogOneDatasource.data = blog;
-                    blogOneDatasource.save();
+                    blogOneDatasource.save(function (err, data) {
+
+                    });
                 },
                 cancel: function () {
                 }

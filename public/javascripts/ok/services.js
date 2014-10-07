@@ -42,23 +42,22 @@
                         }
                         return new AppApiError(code);
                     },
-                    _request: function (url, method, params, callback) {
+                    /**
+                     * Send request.
+                     * @param {object} config - Request configuration.
+                     * @param {fnction} callback - Callback when done.
+                     * @returns {*}
+                     * @private
+                     */
+                    _request: function (config, callback) {
                         var s = this;
 
-                        var noParams = (!params) || (typeof(params) == 'function');
-                        if (noParams) {
-                            return s._request(url, method, {}, callback);
-                        }
-
-                        if (!url) {
+                        if (!config.url) {
                             // angular.js標準のエラーが分かりにくいのでここで明示的にthrowしている。
                             throw new Error('url is required.');
                         }
-                        return $http({
-                            url:url,
-                            method:method,
-                            params:params
-                        })
+                        callback = callback || ap.doNothing;
+                        return $http(config)
                             .success(function (data, status) {
                                 callback(null, data);
                             })
@@ -66,6 +65,47 @@
                                 var err = s._newError(data, status);
                                 callback(err, data);
                             });
+                    },
+                    /**
+                     * Request with params.
+                     * @param url
+                     * @param method
+                     * @param params
+                     * @param callback
+                     * @returns {*}
+                     * @private
+                     */
+                    _paramsRequest: function (url, method, params, callback) {
+                        var s = this;
+                        var noParams = (!params) || (typeof(params) == 'function');
+                        if (noParams) {
+                            return s._paramsRequest(url, method, {}, callback);
+                        }
+                        return s._request({
+                            url: url,
+                            method: method,
+                            params: params
+                        }, callback);
+                    },
+                    /**
+                     * Request with data.
+                     * @param url
+                     * @param method
+                     * @param data
+                     * @param callback
+                     * @private
+                     */
+                    _dataRequest: function (url, method, data, callback) {
+                        var s = this;
+                        var noData = (!data) || (typeof(data) == 'function');
+                        if (noData) {
+                            return s._dataRequest(url, method, {}, callback);
+                        }
+                        return s._request({
+                            url: url,
+                            method: method,
+                            data: data
+                        }, callback);
                     },
                     /**
                      * Get request.
@@ -76,37 +116,37 @@
                      */
                     get: function (url, params, callback) {
                         var s = this;
-                        return s._request(url, 'GET', params, callback);
+                        return s._paramsRequest(url, 'GET', params, callback);
                     },
                     /**
                      * Post request.
                      * @param {string} url - URL to get.
-                     * @param {object} [params] - Parameters.
+                     * @param {object} [data] - Parameters.
                      * @param {function} callback - Callback when done.
                      */
-                    post: function (url, params, callback) {
+                    post: function (url, data, callback) {
                         var s = this;
-                        return s._request(url, 'POST', params, callback);
+                        return s._dataRequest(url, 'POST', data, callback);
                     },
                     /**
                      * Put request.
                      * @param {string} url - URL to get.
-                     * @param {object} [params] - Parameters.
+                     * @param {object} [data] - Parameters.
                      * @param {function} callback - Callback when done.
                      */
-                    put: function (url, params, callback) {
+                    put: function (url, data, callback) {
                         var s = this;
-                        return s._request(url, 'PUT', params, callback);
+                        return s._dataRequest(url, 'PUT', data, callback);
                     },
                     /**
                      * Delete request.
                      * @param {string} url - URL to get.
-                     * @param {object} [params] - Parameters.
+                     * @param {object} [data] - Parameters.
                      * @param {function} callback - Callback when done.
                      */
-                    delete: function (url, params, callback) {
+                    delete: function (url, data, callback) {
                         var s = this;
-                        return s._request(url, 'DELETE', params, callback);
+                        return s._dataRequest(url, 'DELETE', data, callback);
                     }
                 },
                 s

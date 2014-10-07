@@ -115,6 +115,11 @@
 		            "SERVER_ERROR": "Something wrong within our server. Plase try again later.",
 		            "UNEXPECTED_ERROR": "Something seems to be wrong.",
 		            "VALIDATION_ERROR": ""
+		        },
+		        "pages": {
+		            "blog": {
+		                "PREVIEW_LEGEND": "Preview"
+		            }
 		        }
 		    },
 		    "ja": {
@@ -160,6 +165,11 @@
 		            "SERVER_ERROR": "Something wrong within our server. Plase try again later.",
 		            "UNEXPECTED_ERROR": "Something seems to be wrong.",
 		            "VALIDATION_ERROR": ""
+		        },
+		        "pages": {
+		            "blog": {
+		                "PREVIEW_LEGEND": "Preview"
+		            }
 		        }
 		    }
 		});
