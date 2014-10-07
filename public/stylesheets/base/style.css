@@ -88,3 +88,11 @@ aside ul {
 .clear {
     clear: both;
 }
+
+.close-button {
+    position: absolute;
+    padding: 4px 8px;
+    right: 8px;
+    top: 8px;
+    cursor: pointer;
+}

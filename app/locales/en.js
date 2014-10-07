@@ -43,7 +43,8 @@ l.pageNames = {
 l.buttons = {
     MORE: 'See more',
     CANCEL: 'Cancel',
-    SAVE: 'Save'
+    SAVE: 'Save',
+    CLOSE: 'close'
 }
 
 l.errors = {

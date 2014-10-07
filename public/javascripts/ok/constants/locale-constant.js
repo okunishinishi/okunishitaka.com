@@ -34,7 +34,8 @@
 		        "buttons": {
 		            "MORE": "See more",
 		            "CANCEL": "Cancel",
-		            "SAVE": "Save"
+		            "SAVE": "Save",
+		            "CLOSE": "close"
 		        },
 		        "errors": {
 		            "CONFLICT_ERROR": "Conflict occured.",
@@ -84,7 +85,8 @@
 		        "buttons": {
 		            "MORE": "See more",
 		            "CANCEL": "Cancel",
-		            "SAVE": "Save"
+		            "SAVE": "Save",
+		            "CLOSE": "close"
 		        },
 		        "errors": {
 		            "CONFLICT_ERROR": "Conflict occured.",

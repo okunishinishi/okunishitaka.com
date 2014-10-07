@@ -105,6 +105,10 @@
                     });
                 },
                 cancel: function () {
+                    $scope.close();
+                },
+                close: function () {
+
                 }
             }, $scope);
             Object.defineProperties($scope, {
