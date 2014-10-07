@@ -26,7 +26,12 @@
         })
         .factory('blogOneDatasource', function (OneDatasource, BlogEntity, blogApiService) {
             return new OneDatasource({
+                convert: function (data) {
+                    return BlogEntity.new(data);
+                },
+                fetch:function(){
 
+                }
             });
         })
         .controller('BlogCtrl', function ($scope, blogListDatasource) {

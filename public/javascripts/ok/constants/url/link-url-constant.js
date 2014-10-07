@@ -1,5 +1,5 @@
 /**
- * Constant for links.
+ * Constant for linkUrl.
  * @ngdoc object
  */
 (function (ng) {
@@ -7,7 +7,7 @@
 
     ng
         .module('ok.constants')
-        .constant('linksConstant', {
+        .constant('linkUrlConstant', {
 		    "ABOUT_MARK_DOWN": "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"
 		});
 

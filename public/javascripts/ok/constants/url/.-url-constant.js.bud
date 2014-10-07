@@ -11,7 +11,8 @@ var u = require('apeman-util'),
 
 var ok = require('../../.ok'),
     basedir = path.resolve(__dirname, '../../../../..'),
-    publicDir = path.resolve(basedir, 'public');
+    publicDir = path.resolve(basedir, 'public'),
+    endpoints = require('../../../../../app/app_endpoints');
 
 function constantBud(name, data) {
     return {
@@ -47,11 +48,29 @@ function fileUrlData(dirname, pattern) {
     return data;
 }
 
+function endpointData(endpoints) {
+    var data = {};
+    Object.keys(endpoints).forEach(function (url) {
+        var endpoint = endpoints[url];
+        Object.keys(endpoint).forEach(function (method) {
+            var namespace = string.snakeString(url.split(':')[0].replace(/^\//, '').replace(/\//, '_')).toUpperCase(),
+                name = [namespace, method].join('_').toUpperCase(),
+                param = string.snakeString(url.split(':').slice(1).join('_')).toUpperCase();
+            if (param) {
+                name = [name, param].join('_WITH_').replace(/__/g, '_');
+            }
+            data[name] = url;
+        });
+    });
+    return  data;
+}
+
 
 module.exports = [
     constantBud('partialUrl', fileUrlData('html/partials', '**/*.html')),
     constantBud('pageUrl', fileUrlData('', '*.html')),
-    constantBud('links', require('./.links.data'))
+    constantBud('linkUrl', require('./.links.data')),
+    constantBud('apiUrl', endpointData(endpoints))
 ]
 ;
 

@@ -41,18 +41,57 @@
             OneDatasource.prototype = ap.copy(
                 /** @lends OneDatasource.prototype */
                 {
+                    /**
+                     * Data identifier
+                     */
+                    id: null,
+                    /**
+                     * Clear fetched data.
+                     */
                     clear: function () {
                         var s = this;
                         s.data = null;
                     },
-                    fetch: function (query, callback) {
+                    /**
+                     * Fech data.
+                     * @param {string} id - Data identifier
+                     * @param {function} callback - Callback when done.
+                     */
+                    fetch: function (id, callback) {
                         callback(null, null);
                     },
+                    /**
+                     * Convert a data.
+                     * @param data
+                     * @returns {*}
+                     */
                     convert: function (data) {
                         return data;
                     },
+                    /**
+                     * Load data.
+                     * @param {function} callback
+                     */
                     load: function (callback) {
+                        var s = this,
+                            id = s.id;
+                        s.loading = true;
+                        s.fetch(id, function (err, data) {
+                            s.loading = false;
+                            if (!err) {
+                                s.data = data;
+                            }
+                            callback(err);
+                        });
+                    },
+                    /**
+                     * Clear and fetch data.
+                     * @param {function} callback
+                     */
+                    reload: function (callback) {
                         var s = this;
+                        s.clear();
+                        s.load(callback);
                     }
                 },
                 new Datasource({})

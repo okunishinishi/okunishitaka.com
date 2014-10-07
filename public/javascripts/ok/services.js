@@ -42,14 +42,23 @@
                         }
                         return new AppApiError(code);
                     },
-
-                    _request: function (config, callback) {
+                    _request: function (url, method, params, callback) {
                         var s = this;
-                        if(!config.url){
+
+                        var noParams = (!params) || (typeof(params) == 'function');
+                        if (noParams) {
+                            return s._request(url, method, {}, callback);
+                        }
+
+                        if (!url) {
                             // angular.js標準のエラーが分かりにくいのでここで明示的にthrowしている。
                             throw new Error('url is required.');
                         }
-                        return $http(config)
+                        return $http({
+                            url:url,
+                            method:method,
+                            params:params
+                        })
                             .success(function (data, status) {
                                 callback(null, data);
                             })
@@ -58,13 +67,46 @@
                                 callback(err, data);
                             });
                     },
+                    /**
+                     * Get request.
+                     * @param {string} url - URL to get.
+                     * @param {object} [params] - Parameters.
+                     * @param {function} callback - Callback when done.
+                     * @returns {*}
+                     */
                     get: function (url, params, callback) {
                         var s = this;
-                        s._request({
-                            url:url,
-                            method: 'GET',
-                            params: params
-                        }, callback);
+                        return s._request(url, 'GET', params, callback);
+                    },
+                    /**
+                     * Post request.
+                     * @param {string} url - URL to get.
+                     * @param {object} [params] - Parameters.
+                     * @param {function} callback - Callback when done.
+                     */
+                    post: function (url, params, callback) {
+                        var s = this;
+                        return s._request(url, 'POST', params, callback);
+                    },
+                    /**
+                     * Put request.
+                     * @param {string} url - URL to get.
+                     * @param {object} [params] - Parameters.
+                     * @param {function} callback - Callback when done.
+                     */
+                    put: function (url, params, callback) {
+                        var s = this;
+                        return s._request(url, 'PUT', params, callback);
+                    },
+                    /**
+                     * Delete request.
+                     * @param {string} url - URL to get.
+                     * @param {object} [params] - Parameters.
+                     * @param {function} callback - Callback when done.
+                     */
+                    delete: function (url, params, callback) {
+                        var s = this;
+                        return s._request(url, 'DELETE', params, callback);
                     }
                 },
                 s
@@ -80,11 +122,35 @@
     "use strict";
     ng
         .module('ok.services')
-        .service('blogApiService', function BlogApiService(apiService) {
-            var s = this;
-            s.list = function list(params, callback) {
-                return apiService.get('/blogs/', params, callback);
+        .service('blogApiService', function BlogApiService(apiService, apiUrlConstant, urlFormatLogic) {
+            var s = this,
+                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
+
+            s.one = function one(id, callback) {
+                var url = formatUrl(apiUrlConstant.BLOGS_GET_WITH_ID, {_id: id});
+                return apiService.get(url, callback);
+            };
+
+            s.create = function create(data, callback) {
+                var url = apiUrlConstant.BLOGS_POST;
+                return apiService.post(url, data, callback);
             }
+
+            s.update = function update(id, data, callback) {
+                var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
+                return apiService.update(url, data, callback);
+            }
+
+            s.delete = function del(id, callback) {
+                var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
+                return apiService.delete(url, callback);
+            }
+
+            s.list = function list(params, callback) {
+                var url = apiUrlConstant.BLOGS_GET;
+                return apiService.get(url, params, callback);
+            }
+
         });
 })(angular);
 /**

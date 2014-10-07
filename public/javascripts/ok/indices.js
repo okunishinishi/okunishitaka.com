@@ -33,7 +33,8 @@
                 get appConstant() { return $injector.get('appConstant'); },
                 get codeConstant() { return $injector.get('codeConstant'); },
                 get localeConstant() { return $injector.get('localeConstant'); },
-                get linksConstant() { return $injector.get('linksConstant'); },
+                get apiUrlConstant() { return $injector.get('apiUrlConstant'); },
+                get linkUrlConstant() { return $injector.get('linkUrlConstant'); },
                 get pageUrlConstant() { return $injector.get('pageUrlConstant'); },
                 get partialUrlConstant() { return $injector.get('partialUrlConstant'); }
             }
@@ -106,7 +107,8 @@
             return {
                 get errorCodeLogic() { return $injector.get('errorCodeLogic'); },
                 get multiLangUrlLogic() { return $injector.get('multiLangUrlLogic'); },
-                get pageTitleLogic() { return $injector.get('pageTitleLogic'); }
+                get pageTitleLogic() { return $injector.get('pageTitleLogic'); },
+                get urlFormatLogic() { return $injector.get('urlFormatLogic'); }
             }
         });
 })(angular, apeman);

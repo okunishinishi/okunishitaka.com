@@ -12,7 +12,8 @@
             return {
                 get errorCodeLogic() { return $injector.get('errorCodeLogic'); },
                 get multiLangUrlLogic() { return $injector.get('multiLangUrlLogic'); },
-                get pageTitleLogic() { return $injector.get('pageTitleLogic'); }
+                get pageTitleLogic() { return $injector.get('pageTitleLogic'); },
+                get urlFormatLogic() { return $injector.get('urlFormatLogic'); }
             }
         });
 })(angular, apeman);

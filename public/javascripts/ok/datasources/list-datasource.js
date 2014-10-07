@@ -96,7 +96,7 @@
                         return data;
                     },
                     /**
-                     * Fetch data.
+                     * Load data.
                      * @param {function} callback
                      */
                     load: function (callback) {

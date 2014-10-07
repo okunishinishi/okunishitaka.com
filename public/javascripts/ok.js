@@ -168,7 +168,7 @@
 
 
 /**
- * Constant for links.
+ * Constant for apiUrl.
  * @ngdoc object
  */
 (function (ng) {
@@ -176,7 +176,29 @@
 
     ng
         .module('ok.constants')
-        .constant('linksConstant', {
+        .constant('apiUrlConstant', {
+		    "BLOGS_GET": "/blogs",
+		    "BLOGS_POST": "/blogs",
+		    "BLOGS_GET_WITH_ID": "/blogs/:_id",
+		    "BLOGS_PUT_WITH_ID": "/blogs/:_id",
+		    "BLOGS_DELETE_WITH_ID": "/blogs/:_id",
+		    "SETTINGS_GET": "/settings",
+		    "SETTINGS_PUT": "/settings"
+		});
+
+})(angular);
+
+
+/**
+ * Constant for linkUrl.
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.constants')
+        .constant('linkUrlConstant', {
 		    "ABOUT_MARK_DOWN": "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"
 		});
 
@@ -369,7 +391,7 @@
                         return data;
                     },
                     /**
-                     * Fetch data.
+                     * Load data.
                      * @param {function} callback
                      */
                     load: function (callback) {
@@ -446,18 +468,57 @@
             OneDatasource.prototype = ap.copy(
                 /** @lends OneDatasource.prototype */
                 {
+                    /**
+                     * Data identifier
+                     */
+                    id: null,
+                    /**
+                     * Clear fetched data.
+                     */
                     clear: function () {
                         var s = this;
                         s.data = null;
                     },
-                    fetch: function (query, callback) {
+                    /**
+                     * Fech data.
+                     * @param {string} id - Data identifier
+                     * @param {function} callback - Callback when done.
+                     */
+                    fetch: function (id, callback) {
                         callback(null, null);
                     },
+                    /**
+                     * Convert a data.
+                     * @param data
+                     * @returns {*}
+                     */
                     convert: function (data) {
                         return data;
                     },
+                    /**
+                     * Load data.
+                     * @param {function} callback
+                     */
                     load: function (callback) {
+                        var s = this,
+                            id = s.id;
+                        s.loading = true;
+                        s.fetch(id, function (err, data) {
+                            s.loading = false;
+                            if (!err) {
+                                s.data = data;
+                            }
+                            callback(err);
+                        });
+                    },
+                    /**
+                     * Clear and fetch data.
+                     * @param {function} callback
+                     */
+                    reload: function (callback) {
                         var s = this;
+                        s.clear();
+                        s.load(callback);
                     }
                 },
                 new Datasource({})
@@ -794,7 +855,8 @@
                 get appConstant() { return $injector.get('appConstant'); },
                 get codeConstant() { return $injector.get('codeConstant'); },
                 get localeConstant() { return $injector.get('localeConstant'); },
-                get linksConstant() { return $injector.get('linksConstant'); },
+                get apiUrlConstant() { return $injector.get('apiUrlConstant'); },
+                get linkUrlConstant() { return $injector.get('linkUrlConstant'); },
                 get pageUrlConstant() { return $injector.get('pageUrlConstant'); },
                 get partialUrlConstant() { return $injector.get('partialUrlConstant'); }
             }
@@ -867,7 +929,8 @@
             return {
                 get errorCodeLogic() { return $injector.get('errorCodeLogic'); },
                 get multiLangUrlLogic() { return $injector.get('multiLangUrlLogic'); },
-                get pageTitleLogic() { return $injector.get('pageTitleLogic'); }
+                get pageTitleLogic() { return $injector.get('pageTitleLogic'); },
+                get urlFormatLogic() { return $injector.get('urlFormatLogic'); }
             }
         });
 })(angular, apeman);
@@ -1043,6 +1106,43 @@
                     }
                     pageName = l.pageNames[pageName.toUpperCase()] || pageName;
                     return [pageName, appName].join(' - ');
+                }
+            }
+        });
+})(angular, apeman);
+/**
+ * Url format logic.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.logics')
+        .factory('urlFormatLogic', function defineUrlFormatLogic() {
+            return {
+                /**
+                 * Format a url
+                 * @param {string} urlString - Url string.
+                 * @param {object} data - Data to format.
+                 */
+                formatUrl: function (urlString, data) {
+                    var joiner = '/';
+                    return urlString
+                        .split(joiner)
+                        .map(function (pathname) {
+                            var isVariable = pathname.match(/^:/);
+                            if (isVariable) {
+                                var key = pathname.replace(/^:/, '');
+                                if (!data.hasOwnProperty(key)) {
+                                    throw new Errror('Missing key:', pathname);
+                                }
+                                return data[key];
+                            }
+                            return pathname;
+                        })
+                        .join(joiner);
                 }
             }
         });
@@ -1264,14 +1364,23 @@
                         }
                         return new AppApiError(code);
                     },
-
-                    _request: function (config, callback) {
+                    _request: function (url, method, params, callback) {
                         var s = this;
-                        if(!config.url){
+
+                        var noParams = (!params) || (typeof(params) == 'function');
+                        if (noParams) {
+                            return s._request(url, method, {}, callback);
+                        }
+
+                        if (!url) {
                             // angular.js標準のエラーが分かりにくいのでここで明示的にthrowしている。
                             throw new Error('url is required.');
                         }
-                        return $http(config)
+                        return $http({
+                            url:url,
+                            method:method,
+                            params:params
+                        })
                             .success(function (data, status) {
                                 callback(null, data);
                             })
@@ -1280,13 +1389,46 @@
                                 callback(err, data);
                             });
                     },
+                    /**
+                     * Get request.
+                     * @param {string} url - URL to get.
+                     * @param {object} [params] - Parameters.
+                     * @param {function} callback - Callback when done.
+                     * @returns {*}
+                     */
                     get: function (url, params, callback) {
                         var s = this;
-                        s._request({
-                            url:url,
-                            method: 'GET',
-                            params: params
-                        }, callback);
+                        return s._request(url, 'GET', params, callback);
+                    },
+                    /**
+                     * Post request.
+                     * @param {string} url - URL to get.
+                     * @param {object} [params] - Parameters.
+                     * @param {function} callback - Callback when done.
+                     */
+                    post: function (url, params, callback) {
+                        var s = this;
+                        return s._request(url, 'POST', params, callback);
+                    },
+                    /**
+                     * Put request.
+                     * @param {string} url - URL to get.
+                     * @param {object} [params] - Parameters.
+                     * @param {function} callback - Callback when done.
+                     */
+                    put: function (url, params, callback) {
+                        var s = this;
+                        return s._request(url, 'PUT', params, callback);
+                    },
+                    /**
+                     * Delete request.
+                     * @param {string} url - URL to get.
+                     * @param {object} [params] - Parameters.
+                     * @param {function} callback - Callback when done.
+                     */
+                    delete: function (url, params, callback) {
+                        var s = this;
+                        return s._request(url, 'DELETE', params, callback);
                     }
                 },
                 s
@@ -1302,11 +1444,35 @@
     "use strict";
     ng
         .module('ok.services')
-        .service('blogApiService', function BlogApiService(apiService) {
-            var s = this;
-            s.list = function list(params, callback) {
-                return apiService.get('/blogs/', params, callback);
+        .service('blogApiService', function BlogApiService(apiService, apiUrlConstant, urlFormatLogic) {
+            var s = this,
+                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
+
+            s.one = function one(id, callback) {
+                var url = formatUrl(apiUrlConstant.BLOGS_GET_WITH_ID, {_id: id});
+                return apiService.get(url, callback);
+            };
+
+            s.create = function create(data, callback) {
+                var url = apiUrlConstant.BLOGS_POST;
+                return apiService.post(url, data, callback);
             }
+
+            s.update = function update(id, data, callback) {
+                var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
+                return apiService.update(url, data, callback);
+            }
+
+            s.delete = function del(id, callback) {
+                var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
+                return apiService.delete(url, callback);
+            }
+
+            s.list = function list(params, callback) {
+                var url = apiUrlConstant.BLOGS_GET;
+                return apiService.get(url, params, callback);
+            }
+
         });
 })(angular);
 /**
