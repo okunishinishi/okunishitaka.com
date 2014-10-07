@@ -1,37 +1,47 @@
-<section id="blog-edit-setion" ng:controller="BlogEditCtrl">
-    <div>
-        <input type="text" id="blog-title-input"
-               placeholder="{{l.placeholders.blog.TITLE}}"
-               ng-model="blog.title"
-               class="wide-input">
-    </div>
-    <div>
-        <label for="blog-status-radio-true">
-            <input id="blog-status-radio-true"
-                   ng-model="blog.status"
-                   type="radio" name="blog-status-radio" value="1"/>
-            {{l.labels.blogstatus.PUBLIC}}
-        </label>
-        <label for="blog-status-radio-false">
-            <input id="blog-status-radio-false"
-                   ng-model="blog.status"
-                   type="radio" name="blog-status-radio" value="0"/>
-            {{l.labels.blogstatus.PRIVATE}}
-        </label>
-    </div>
-    <textarea name="blog-text" id="blog-text-textarea"
-              placeholder="{{l.placeholders.blog.CONTENT}}"
-              class="wide-textarea" cols="30" rows="20"
-              ng-model="blog.content"
-            ></textarea>
+<section id="blog-edit-section" ng:controller="BlogEditCtrl" class="cover">
+    <fieldset>
+        <div>
+            <input type="text" id="blog-title-input"
+                   placeholder="{{l.placeholders.blog.TITLE}}"
+                   ng:model="blog.title"
+                   class="wide-input">
+        </div>
+        <div>
+            <label for="blog-status-radio-true">
+                <input id="blog-status-radio-true"
+                       ng:model="blog.status"
+                       type="radio" name="blog-status-radio" value="1"/>
+                {{l.labels.blogstatus.PUBLIC}}
+            </label>
+            <label for="blog-status-radio-false">
+                <input id="blog-status-radio-false"
+                       ng:model="blog.status"
+                       type="radio" name="blog-status-radio" value="0"/>
+                {{l.labels.blogstatus.PRIVATE}}
+            </label>
+        </div>
+        <textarea name="blog-text" id="blog-text-textarea"
+                  placeholder="{{l.placeholders.blog.CONTENT}}"
+                  class="wide-textarea" cols="30" rows="20"
+                  ng:model="blog.content"
+                ></textarea>
 
-    <div id="blog-edti-preview"></div>
-    <div class="text-center">
-        <a id="blog-cancel-button" class="button"
-           ng-click="save(blog)"
-                >{{l.buttons.CANCEL}}</a>
-        <a id="blog-save-button" class="button"
-           ng-click="cancel()"
-                >{{l.buttons.SAVE}}</a>
-    </div>
+        <div class="text-center">
+            <a id="blog-cancel-button" class="button"
+               ng:click="save(blog)"
+                    >{{l.buttons.CANCEL}}</a>
+            <a id="blog-save-button" class="button"
+               ng:click="cancel()"
+                    >{{l.buttons.SAVE}}</a>
+        </div>
+    </fieldset>
+    <fieldset>
+
+        <div id="blog-edit-preview-div">
+            <h2>{{preview.title}}</h2>
+
+            <div ng:bind-html="preview.content"></div>
+        </div>
+    </fieldset>
+
 </section>

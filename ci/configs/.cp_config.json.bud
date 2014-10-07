@@ -24,6 +24,7 @@ module.exports = {
         budForFile(f.paths.fonts.fontawesomeWebfontWoff, 'public/fonts'),
         budForFile(f.paths.html.somethingWrongHtml, 'public/html/error'),
         budForFile(f.paths.javascripts.angularMocksJs, 'test/browser_unit_tests'),
+        budForFile(f.paths.javascripts.angularSanitizeJs, 'public/javascripts/lib'),
         budForFile(f.paths.javascripts.angularJs, 'public/javascripts/lib'),
         budForFile(f.paths.javascripts.apemanJs, 'public/javascripts/lib'),
         budForFile(f.paths.javascripts.markedJs, 'public/javascripts/lib'),

@@ -10,6 +10,7 @@
     ng
         .module('ok.blogPage', [
             'ok.page',
+            'ngSanitize' // ng-bind-html requires ng sanitize.
         ])
         .run(function ($rootScope) {
             $rootScope.page = 'blog';
@@ -94,19 +95,28 @@
         .controller('BlogDetailCtrl', function ($scope) {
 
         })
-        .controller('BlogEditCtrl', function ($scope, blogOneDatasource) {
+        .controller('BlogEditCtrl', function ($scope, blogOneDatasource, markdownRenderService) {
             ap.copy({
                 save: function (blog) {
-
+                    blogOneDatasource.data = blog;
+                    blogOneDatasource.save();
                 },
                 cancel: function () {
-
                 }
             }, $scope);
             Object.defineProperties($scope, {
                 blog: {
                     get: function () {
                         return blogOneDatasource.data;
+                    }
+                },
+                preview: {
+                    get: function () {
+                        var blog = $scope.blog;
+                        return {
+                            title: blog.title,
+                            content: markdownRenderService.render(blog.content)
+                        }
                     }
                 }
             });

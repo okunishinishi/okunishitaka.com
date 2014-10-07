@@ -969,10 +969,12 @@
                 get apiService() { return $injector.get('apiService'); },
                 get blogApiService() { return $injector.get('blogApiService'); },
                 get settingApiService() { return $injector.get('settingApiService'); },
+                get browserDetectService() { return $injector.get('browserDetectService'); },
                 get langDetectService() { return $injector.get('langDetectService'); },
                 get localeLoadService() { return $injector.get('localeLoadService'); },
                 get locationChangeService() { return $injector.get('locationChangeService'); },
                 get locationResolveService() { return $injector.get('locationResolveService'); },
+                get markdownRenderService() { return $injector.get('markdownRenderService'); },
                 get templateCacheService() { return $injector.get('templateCacheService'); }
             }
         });
@@ -1510,6 +1512,22 @@
 
 })(angular);
 /**
+ * Browser detect service.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('browserDetectService', function BrowserDetectService() {
+            var s = this;
+
+        });
+
+})(angular, apeman);
+/**
  * Lang detect service.
  * @requires angular
  * @requires apeman
@@ -1629,6 +1647,31 @@
 
 })(angular, apeman);
 /**
+ * Markdown render service.
+ * @requires angular
+ * @requires apeman
+ * @requires marked
+ */
+(function (ng, ap, marked) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('markdownRenderService', function MarkdownRenderService() {
+            var s = this;
+
+            /**
+             * Render a markdonw text.
+             * @param {string} text - Text to render.
+             * @returns {string} - Rendered text.
+             */
+            s.render = function (text) {
+                return marked(text || '');
+            };
+        });
+
+})(angular, apeman, marked);
+/**
  * Template cache service.
  * @requires angular
  * @requires apeman
@@ -1713,7 +1756,7 @@
         .module('ok.templates')
         .value('blogBlogEditSectionHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-edit-section.html",
-		    "content": "<section id=\"blog-edit-setion\" ng:controller=\"BlogEditCtrl\">\n    <div>\n        <input type=\"text\" id=\"blog-title-input\"\n               placeholder=\"{{l.placeholders.blog.TITLE}}\"\n               ng-model=\"blog.title\"\n               class=\"wide-input\">\n    </div>\n    <div>\n        <label for=\"blog-status-radio-true\">\n            <input id=\"blog-status-radio-true\"\n                   ng-model=\"blog.status\"\n                   type=\"radio\" name=\"blog-status-radio\" value=\"1\"/>\n            {{l.labels.blogstatus.PUBLIC}}\n        </label>\n        <label for=\"blog-status-radio-false\">\n            <input id=\"blog-status-radio-false\"\n                   ng-model=\"blog.status\"\n                   type=\"radio\" name=\"blog-status-radio\" value=\"0\"/>\n            {{l.labels.blogstatus.PRIVATE}}\n        </label>\n    </div>\n    <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n              placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n              class=\"wide-textarea\" cols=\"30\" rows=\"20\"\n              ng-model=\"blog.content\"\n            ></textarea>\n\n    <div id=\"blog-edti-preview\"></div>\n    <div class=\"text-center\">\n        <a id=\"blog-cancel-button\" class=\"button\" href=\"\">{{l.buttons.CANCEL}}</a>\n        <a id=\"blog-save-button\" class=\"button\" href=\"\">{{l.buttons.SAVE}}</a>\n    </div>\n</section>"
+		    "content": "<section id=\"blog-edit-section\" ng:controller=\"BlogEditCtrl\" class=\"cover\">\n    <fieldset>\n        <div>\n            <input type=\"text\" id=\"blog-title-input\"\n                   placeholder=\"{{l.placeholders.blog.TITLE}}\"\n                   ng:model=\"blog.title\"\n                   class=\"wide-input\">\n        </div>\n        <div>\n            <label for=\"blog-status-radio-true\">\n                <input id=\"blog-status-radio-true\"\n                       ng:model=\"blog.status\"\n                       type=\"radio\" name=\"blog-status-radio\" value=\"1\"/>\n                {{l.labels.blogstatus.PUBLIC}}\n            </label>\n            <label for=\"blog-status-radio-false\">\n                <input id=\"blog-status-radio-false\"\n                       ng:model=\"blog.status\"\n                       type=\"radio\" name=\"blog-status-radio\" value=\"0\"/>\n                {{l.labels.blogstatus.PRIVATE}}\n            </label>\n        </div>\n        <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n                  placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n                  class=\"wide-textarea\" cols=\"30\" rows=\"20\"\n                  ng:model=\"blog.content\"\n                ></textarea>\n\n        <div class=\"text-center\">\n            <a id=\"blog-cancel-button\" class=\"button\"\n               ng:click=\"save(blog)\"\n                    >{{l.buttons.CANCEL}}</a>\n            <a id=\"blog-save-button\" class=\"button\"\n               ng:click=\"cancel()\"\n                    >{{l.buttons.SAVE}}</a>\n        </div>\n    </fieldset>\n    <fieldset>\n\n        <div id=\"blog-edit-preview-div\">\n            <h2>{{preview.title}}</h2>\n\n            <div ng:bind-html=\"preview.content\"></div>\n        </div>\n    </fieldset>\n\n</section>"
 		});
 
 })(angular);

@@ -14,3 +14,17 @@
     padding-top: 45px;
     margin-top: -45px;
 }
+
+#blog-edit-section {
+    position: fixed;
+    top: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#blog-edit-section fieldset {
+    display: inline-block;
+    width: 40%;
+    display: inline-block;
+    margin: 20px;
+    float: left;
+}

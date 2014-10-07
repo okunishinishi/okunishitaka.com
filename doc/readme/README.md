@@ -7,7 +7,6 @@ okunishitaka.com
 [![Code Coverage][my_codeclimate_coverage_badge_url]][my_codeclimate_url]
 [![dependencies][my_gemnasium_badge_url]][my_gemnasium_url]
 [![Git tip][my_gittip_budge_url]][my_gittip_url]
-
 <!-- Badge end -->
 
 Homepage of Taka Okunishi
@@ -17,7 +16,6 @@ Homepage of Taka Okunishi
 
 <a href="https://github.com/tick-tack/apeman"><img style="height:40px;" src="https://raw.githubusercontent.com/tick-tack/apeman/master/doc/images/apeman.png" height="40"></a>&nbsp;
 <a href="http://nodejs.org/"><img style="height:40px;" src="http://nodejs.org/images/logos/nodejs-dark.png" height="40"></a>&nbsp;
-
 <!-- Banner end -->
 
 Table of Contents
@@ -25,14 +23,11 @@ Table of Contents
 - [Requirements](#02-requirements)
 
 
-
-
 <a name="02-requirements"></a>
 Requirements
 ------
 
 + [node.js][nodejs_url]
-
 
 
 
@@ -53,5 +48,4 @@ Requirements
 [my_tag_badge_url]: http://img.shields.io/github/tag/okunishinishi/okunishitaka.com.svg?style=flat
 [my_gemnasium_url]: http://gemnasium.com/okunishinishi/okunishitaka.com
 [my_gemnasium_badge_url]: http://img.shields.io/gemnasium/okunishinishi/okunishitaka.com.svg?style=flat
-
 <!-- Links end-->

@@ -3,5 +3,7 @@
     "locationResolveService",
     "localeLoadService",
     "langDetectService",
-    "templateCacheService"
+    "templateCacheService",
+    "markdownRenderService",
+    "browserDetectService"
 ]

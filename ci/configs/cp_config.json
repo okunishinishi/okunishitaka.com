@@ -30,6 +30,11 @@
         "mode": "444"
     },
     {
+        "src": "node_modules/apeman-front/assets/javascripts/angular-sanitize.js",
+        "dest": "public/javascripts/lib/angular-sanitize.js",
+        "mode": "444"
+    },
+    {
         "src": "node_modules/apeman-front/assets/javascripts/angular.js",
         "dest": "public/javascripts/lib/angular.js",
         "mode": "444"
