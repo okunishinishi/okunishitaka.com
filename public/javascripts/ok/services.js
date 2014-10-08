@@ -79,6 +79,7 @@
                         var s = this;
                         var noParams = (!params) || (typeof(params) == 'function');
                         if (noParams) {
+                            callback = callback || params;
                             return s._paramsRequest(url, method, {}, callback);
                         }
                         return s._request({
@@ -99,6 +100,7 @@
                         var s = this;
                         var noData = (!data) || (typeof(data) == 'function');
                         if (noData) {
+                            callback = callback || data;
                             return s._dataRequest(url, method, {}, callback);
                         }
                         return s._request({
@@ -194,6 +196,26 @@
         });
 })(angular);
 /**
+ * Profile api service.
+ * @requires angular
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('profileApiService', function ProfileApiService($http, apiService, jsonUrlConstant) {
+            var s = this;
+
+            s.singleton = function singleton(callback) {
+                var url = jsonUrlConstant.PROFILE;
+                return apiService.get(url, callback);
+
+            }
+        });
+
+})(angular);
+/**
  * Setting api service.
  * @requires angular
  */
@@ -203,6 +225,20 @@
     ng
         .module('ok.services')
         .service('settingApiService', function SettingApiService ($http) {
+            var s = this;
+        });
+
+})(angular);
+/**
+ * Work api service.
+ * @requires angular
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('workApiService', function WorkApiService ($http) {
             var s = this;
         });
 

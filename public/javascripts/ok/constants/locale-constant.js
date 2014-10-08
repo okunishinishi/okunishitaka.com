@@ -58,6 +58,9 @@
 		            "index": {
 		                "TITLE": "okunishitaka.com"
 		            },
+		            "profile": {
+		                "NAME": "name"
+		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"
 		            }
@@ -112,6 +115,9 @@
 		        "pages": {
 		            "index": {
 		                "TITLE": "okunishitaka.com"
+		            },
+		            "profile": {
+		                "NAME": "name"
 		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"

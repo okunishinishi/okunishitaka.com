@@ -12,7 +12,9 @@
             return {
                 get apiService() { return $injector.get('apiService'); },
                 get blogApiService() { return $injector.get('blogApiService'); },
+                get profileApiService() { return $injector.get('profileApiService'); },
                 get settingApiService() { return $injector.get('settingApiService'); },
+                get workApiService() { return $injector.get('workApiService'); },
                 get browserDetectService() { return $injector.get('browserDetectService'); },
                 get langDetectService() { return $injector.get('langDetectService'); },
                 get localeLoadService() { return $injector.get('localeLoadService'); },

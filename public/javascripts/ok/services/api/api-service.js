@@ -61,6 +61,7 @@
                         var s = this;
                         var noParams = (!params) || (typeof(params) == 'function');
                         if (noParams) {
+                            callback = callback || params;
                             return s._paramsRequest(url, method, {}, callback);
                         }
                         return s._request({
@@ -81,6 +82,7 @@
                         var s = this;
                         var noData = (!data) || (typeof(data) == 'function');
                         if (noData) {
+                            callback = callback || data;
                             return s._dataRequest(url, method, {}, callback);
                         }
                         return s._request({

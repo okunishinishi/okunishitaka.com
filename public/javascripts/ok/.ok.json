@@ -55,6 +55,8 @@
     ],
     "endpoints": [
         "blog",
-        "setting"
+        "setting",
+        "profile",
+        "work"
     ]
 }

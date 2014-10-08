@@ -50,6 +50,15 @@
             </ul>
         </div>
     </section>
+
+
+    <section id="thumbnails-section" ng:controller="IndexThumbnailsCtrl">
+        <div class="container text-center">
+            <div class="thumbnail-img-container" ng:repeat="thumbnail in thumbnails"><img class="thumbnail-img" ng:src="{{thumbnail}}" alt="">
+            </div>
+            <br class="clear">
+        </div>
+    </section>
 </main>
 <footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>
 

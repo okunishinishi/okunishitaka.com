@@ -122,6 +122,9 @@
 		            "index": {
 		                "TITLE": "okunishitaka.com"
 		            },
+		            "profile": {
+		                "NAME": "name"
+		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"
 		            }
@@ -177,6 +180,9 @@
 		            "index": {
 		                "TITLE": "okunishitaka.com"
 		            },
+		            "profile": {
+		                "NAME": "name"
+		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"
 		            }
@@ -210,6 +216,49 @@
 
 
 /**
+ * Constant for imageUrl.
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.constants')
+        .constant('imageUrlConstant', {
+		    "BLOG_SCREENSHOT": "/images/screenshots/blog-screenshot.png",
+		    "INDEX_SCREENSHOT": "/images/screenshots/index-screenshot.png",
+		    "WORK_SCREENSHOT": "/images/screenshots/work-screenshot.png",
+		    "WORKS_CHESS_THUMBNAIL": "/images/works/works-chess-thumbnail.png",
+		    "WORKS_CSS_GALLERY_THUMBNAIL": "/images/works/works-css-gallery-thumbnail.png",
+		    "WORKS_DOC_GALLERY_THUMBNAIL": "/images/works/works-doc-gallery-thumbnail.png",
+		    "WORKS_MOCK_MONKEY_THUMBNAIL": "/images/works/works-mock-monkey-thumbnail.png",
+		    "WORKS_OTHERO_THUMBNAIL": "/images/works/works-othero-thumbnail.png",
+		    "WORKS_PLANING_PORKER_THUMBNAIL": "/images/works/works-planing-porker-thumbnail.png",
+		    "WORKS_SHOT_THUMBNAIL": "/images/works/works-shot-thumbnail.png",
+		    "WORKS_TYPE_THUMBNAIL": "/images/works/works-type-thumbnail.png"
+		});
+
+})(angular);
+
+
+/**
+ * Constant for jsonUrl.
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.constants')
+        .constant('jsonUrlConstant', {
+		    "PROFILE": "/json/profile.json",
+		    "WORKS": "/json/works.json"
+		});
+
+})(angular);
+
+
+/**
  * Constant for linkUrl.
  * @ngdoc object
  */
@@ -237,6 +286,7 @@
         .constant('pageUrlConstant', {
 		    "BLOG": "/blog.html",
 		    "INDEX": "/index.html",
+		    "PROFILE": "/profile.html",
 		    "WORK": "/work.html"
 		});
 
@@ -913,6 +963,8 @@
                 get codeConstant() { return $injector.get('codeConstant'); },
                 get localeConstant() { return $injector.get('localeConstant'); },
                 get apiUrlConstant() { return $injector.get('apiUrlConstant'); },
+                get imageUrlConstant() { return $injector.get('imageUrlConstant'); },
+                get jsonUrlConstant() { return $injector.get('jsonUrlConstant'); },
                 get linkUrlConstant() { return $injector.get('linkUrlConstant'); },
                 get pageUrlConstant() { return $injector.get('pageUrlConstant'); },
                 get partialUrlConstant() { return $injector.get('partialUrlConstant'); }
@@ -1005,7 +1057,9 @@
             return {
                 get apiService() { return $injector.get('apiService'); },
                 get blogApiService() { return $injector.get('blogApiService'); },
+                get profileApiService() { return $injector.get('profileApiService'); },
                 get settingApiService() { return $injector.get('settingApiService'); },
+                get workApiService() { return $injector.get('workApiService'); },
                 get browserDetectService() { return $injector.get('browserDetectService'); },
                 get langDetectService() { return $injector.get('langDetectService'); },
                 get localeLoadService() { return $injector.get('localeLoadService'); },
@@ -1462,6 +1516,7 @@
                         var s = this;
                         var noParams = (!params) || (typeof(params) == 'function');
                         if (noParams) {
+                            callback = callback || params;
                             return s._paramsRequest(url, method, {}, callback);
                         }
                         return s._request({
@@ -1482,6 +1537,7 @@
                         var s = this;
                         var noData = (!data) || (typeof(data) == 'function');
                         if (noData) {
+                            callback = callback || data;
                             return s._dataRequest(url, method, {}, callback);
                         }
                         return s._request({
@@ -1577,6 +1633,26 @@
         });
 })(angular);
 /**
+ * Profile api service.
+ * @requires angular
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('profileApiService', function ProfileApiService($http, apiService, jsonUrlConstant) {
+            var s = this;
+
+            s.singleton = function singleton(callback) {
+                var url = jsonUrlConstant.PROFILE;
+                return apiService.get(url, callback);
+
+            }
+        });
+
+})(angular);
+/**
  * Setting api service.
  * @requires angular
  */
@@ -1586,6 +1662,20 @@
     ng
         .module('ok.services')
         .service('settingApiService', function SettingApiService ($http) {
+            var s = this;
+        });
+
+})(angular);
+/**
+ * Work api service.
+ * @requires angular
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('workApiService', function WorkApiService ($http) {
             var s = this;
         });
 

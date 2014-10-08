@@ -1,5 +1,5 @@
 /**
- * Test for plofile
+ * Test for profile
  * Runs with karma.
  */
 
@@ -9,12 +9,12 @@
 var ng = angular,
     mock = ng.mock;
 
-describe('plofilePage', function () {
+describe('profilePage', function () {
     var scope;
-    beforeEach(mock.module('ok.plofilePage'));
+    beforeEach(mock.module('ok.profilePage'));
     beforeEach(inject(function($controller, $rootScope) {
         scope = $rootScope.$new();
-        $controller('PlofileCtrl', {$scope: scope});
+        $controller('ProfileCtrl', {$scope: scope});
     }));
 
     it('Create scope.', inject(function () {

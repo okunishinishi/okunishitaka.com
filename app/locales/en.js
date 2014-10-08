@@ -36,7 +36,7 @@ l.labels = {
 
 l.pageNames = {
     INDEX: 'Top',
-    PROFILE:'Profile',
+    PROFILE: 'Profile',
     BLOG: 'Blog',
     WORK: 'Works'
 }
@@ -69,6 +69,9 @@ l.errorDescriptions = {
 l.pages = {
     index: {
         TITLE: pkg.name
+    },
+    profile: {
+        NAME:'name'
     },
     blog: {
         PREVIEW_LEGEND: 'Preview'

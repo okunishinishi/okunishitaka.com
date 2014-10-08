@@ -34,6 +34,8 @@
                 get codeConstant() { return $injector.get('codeConstant'); },
                 get localeConstant() { return $injector.get('localeConstant'); },
                 get apiUrlConstant() { return $injector.get('apiUrlConstant'); },
+                get imageUrlConstant() { return $injector.get('imageUrlConstant'); },
+                get jsonUrlConstant() { return $injector.get('jsonUrlConstant'); },
                 get linkUrlConstant() { return $injector.get('linkUrlConstant'); },
                 get pageUrlConstant() { return $injector.get('pageUrlConstant'); },
                 get partialUrlConstant() { return $injector.get('partialUrlConstant'); }
@@ -126,7 +128,9 @@
             return {
                 get apiService() { return $injector.get('apiService'); },
                 get blogApiService() { return $injector.get('blogApiService'); },
+                get profileApiService() { return $injector.get('profileApiService'); },
                 get settingApiService() { return $injector.get('settingApiService'); },
+                get workApiService() { return $injector.get('workApiService'); },
                 get browserDetectService() { return $injector.get('browserDetectService'); },
                 get langDetectService() { return $injector.get('langDetectService'); },
                 get localeLoadService() { return $injector.get('localeLoadService'); },

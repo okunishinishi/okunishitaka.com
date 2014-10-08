@@ -40,6 +40,7 @@
                     },
                     app: cn.appConstant,
                     link: cn.linksConstant,
+                    images:cn.imageUrlConstant,
                     page: '',
                     pages: cn.pageUrlConstant,
                     partials: cn.partialUrlConstant,
