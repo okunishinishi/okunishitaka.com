@@ -40,25 +40,30 @@
         </div>
     </div>
 
-    <section id="menu-list-section">
-        <div class="container text-right">
-
-            <ul id="menu-list" class="a-list">
-                <li><a class="nav-item" href="{{pages.PROFILE}}">{{l.pageNames.PROFILE}}</a></li>
-                <li><a class="nav-item" href="{{pages.BLOG}}">{{l.pageNames.BLOG}}</a></li>
-                <li><a class="nav-item" href="{{pages.WORK}}">{{l.pageNames.WORK}}</a></li>
-            </ul>
-        </div>
-    </section>
-
 
     <section id="thumbnails-section" ng:controller="IndexThumbnailsCtrl">
-        <div class="container text-center">
-            <div class="thumbnail-img-container" ng:repeat="thumbnail in thumbnails"><img class="thumbnail-img" ng:src="{{thumbnail}}" alt="">
+        <div class="positioned">
+
+            <div class="container" id="thumbnails-list-container">
+                <ul id="thumbnails-list" style="width:{{thumbnails.length * 250}}px;" ok:image-list="">
+                    <li class="thumbnail-list-item" ng:repeat="thumbnail in thumbnails">
+                        <img class="thumbnail-img" ng:src="{{thumbnail}}" alt="">
+                    </li>
+                </ul>
+                <br class="clear">
             </div>
-            <br class="clear">
         </div>
     </section>
+
+    <div class="container">
+        <section id="menu-section">
+
+            <span class="menu-item"><a class="" href="{{pages.PROFILE}}">{{l.pageNames.PROFILE}}</a></span>
+            <span class="menu-item"><a class="" href="{{pages.BLOG}}">{{l.pageNames.BLOG}}</a></span>
+            <span class="menu-item"><a class="" href="{{pages.WORK}}">{{l.pageNames.WORK}}</a></span>
+            <br class="clear">
+        </section>
+    </div>
 </main>
 <footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>
 
