@@ -1,1 +1,63 @@
 /** Style for index page. **/
+
+body {
+    margin-top: 0;
+}
+
+#main-title {
+    font-family: 'source-code-pro-extra-light';
+    font-size: 14em;
+    line-height: 0.9em;
+    margin: 0 auto;
+    text-align: center;
+    word-wrap: break-word;
+    color: #666;
+    height: 100%;
+}
+
+#menu-list-section {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#menu-list {
+    font-size: 2.5em;
+    display: inline-block;
+    text-align: left;
+    color: white;
+}
+
+#menu-list li {
+    margin: 1px 0;
+    list-style: none;
+
+}
+
+#menu-list a {
+    display: inline-block;
+    min-width: 220px;
+    height: 80px;
+    line-height: 80px;
+    padding: 5px 20px;
+    -webkit-transition: font-size 300ms;
+    -moz-transition: font-size 300ms;
+    -ms-transition: font-size 300ms;
+    -o-transition: font-size 300ms;
+    transition: font-size 300ms;
+    color: white;
+    background-color: #333;
+    opacity: 0.9;
+}
+
+#menu-list a:hover {
+    font-size: 1.25em;
+    text-decoration: none;
+    background-color: #222;
+}
+
+#menu-list a:active {
+    background-color: #000;
+}

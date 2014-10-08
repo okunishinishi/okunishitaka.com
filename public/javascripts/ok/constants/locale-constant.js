@@ -28,6 +28,7 @@
 		        },
 		        "pageNames": {
 		            "INDEX": "Top",
+		            "PROFILE": "Profile",
 		            "BLOG": "Blog",
 		            "WORK": "Works"
 		        },
@@ -54,6 +55,9 @@
 		            "VALIDATION_ERROR": ""
 		        },
 		        "pages": {
+		            "index": {
+		                "TITLE": "okunishitaka.com"
+		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"
 		            }
@@ -79,6 +83,7 @@
 		        },
 		        "pageNames": {
 		            "INDEX": "Top",
+		            "PROFILE": "Profile",
 		            "BLOG": "Blog",
 		            "WORK": "Works"
 		        },
@@ -105,6 +110,9 @@
 		            "VALIDATION_ERROR": ""
 		        },
 		        "pages": {
+		            "index": {
+		                "TITLE": "okunishitaka.com"
+		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"
 		            }

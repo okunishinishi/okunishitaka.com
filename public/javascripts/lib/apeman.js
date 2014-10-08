@@ -1,7 +1,7 @@
 /**
  * @file Apeman client side scripts.
  * @namespace apeman
- * @version 0.0.9
+ * @version 0.0.12
  */
 window.apeman = (function (apeman) {
     "use strict";

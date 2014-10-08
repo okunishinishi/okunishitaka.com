@@ -28,16 +28,16 @@ header {
 
 body {
     margin-top: 49px;
-
+    font-family: 'Ubuntu', Tahoma, sans-serif;
 }
 
 main {
-    width: 600px;
 }
 
 .positioned {
     position: relative;
 }
+
 
 a {
     text-decoration: none;
@@ -60,6 +60,14 @@ aside {
 
 aside ul {
     padding-left: 20px;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
 }
 
 .text-center {

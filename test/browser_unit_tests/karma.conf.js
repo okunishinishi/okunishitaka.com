@@ -15,7 +15,7 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'public/javascripts/lib/*.js',
+            'public/javascripts/lib.js',
             'public/javascripts/ok/constants/**/*.js',
             'public/javascripts/ok/datasources/*.js',
             'public/javascripts/ok/directives/*.js',

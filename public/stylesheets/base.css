@@ -1,6 +1,6 @@
 /**
  * Style for apeman.
- * @version 0.0.9
+ * @version 0.0.12
  */
 
 
@@ -1922,6 +1922,70 @@ Styleguide 1.
   content: "\f20c";
 }
 
+/***
+ * Font styles.
+ */
+/** Josefin Slab Bold */
+@font-face {
+    font-family: 'josefin-slab-bold';
+    src: url('../../fonts/Josefin Slab Bold.woff');
+}
+.font-josefin-slab-bold {
+    font-family: 'josefin-slab-bold';
+}
+
+
+/** Lato Hairline */
+@font-face {
+    font-family: 'lato-hairline';
+    src: url('../../fonts/Lato Hairline.woff');
+}
+.font-lato-hairline {
+    font-family: 'lato-hairline';
+}
+
+
+/** Source Code Pro Extra Light */
+@font-face {
+    font-family: 'source-code-pro-extra-light';
+    src: url('../../fonts/Source Code Pro Extra Light.woff');
+}
+.font-source-code-pro-extra-light {
+    font-family: 'source-code-pro-extra-light';
+}
+
+
+/** Ubuntu Bold */
+@font-face {
+    font-family: 'ubuntu-bold';
+    src: url('../../fonts/Ubuntu Bold.woff');
+}
+.font-ubuntu-bold {
+    font-family: 'ubuntu-bold';
+}
+
+
+/** fontawesome-webfont */
+@font-face {
+    font-family: 'fontawesome-webfont';
+    src: url('../../fonts/fontawesome-webfont.woff');
+}
+.font-fontawesome-webfont {
+    font-family: 'fontawesome-webfont';
+}
+
+
+/** ionicons */
+@font-face {
+    font-family: 'ionicons';
+    src: url('../../fonts/ionicons.woff');
+}
+.font-ionicons {
+    font-family: 'ionicons';
+}
+
+
+
 /** Style of okunishinishi.com */
 
 header {
@@ -1952,16 +2016,16 @@ header {
 
 body {
     margin-top: 49px;
-
+    font-family: 'Ubuntu', Tahoma, sans-serif;
 }
 
 main {
-    width: 600px;
 }
 
 .positioned {
     position: relative;
 }
+
 
 a {
     text-decoration: none;
@@ -1984,6 +2048,14 @@ aside {
 
 aside ul {
     padding-left: 20px;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
 }
 
 .text-center {

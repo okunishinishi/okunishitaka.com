@@ -60,6 +60,11 @@
         "mode": "444"
     },
     {
+        "src": "node_modules/apeman-front/assets/javascripts/jquery.js",
+        "dest": "public/javascripts/lib/jquery.js",
+        "mode": "444"
+    },
+    {
         "src": "node_modules/apeman-front/assets/stylesheets/apeman.css",
         "dest": "public/stylesheets/base/apeman.css",
         "mode": "444"

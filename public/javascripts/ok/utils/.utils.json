@@ -1,4 +1,6 @@
 [
     "objectUtil",
-    "urlUtil"
+    "urlUtil",
+    "canvasUtil",
+    "mathUtil"
 ]

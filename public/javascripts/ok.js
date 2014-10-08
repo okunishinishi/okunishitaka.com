@@ -92,6 +92,7 @@
 		        },
 		        "pageNames": {
 		            "INDEX": "Top",
+		            "PROFILE": "Profile",
 		            "BLOG": "Blog",
 		            "WORK": "Works"
 		        },
@@ -118,6 +119,9 @@
 		            "VALIDATION_ERROR": ""
 		        },
 		        "pages": {
+		            "index": {
+		                "TITLE": "okunishitaka.com"
+		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"
 		            }
@@ -143,6 +147,7 @@
 		        },
 		        "pageNames": {
 		            "INDEX": "Top",
+		            "PROFILE": "Profile",
 		            "BLOG": "Blog",
 		            "WORK": "Works"
 		        },
@@ -169,6 +174,9 @@
 		            "VALIDATION_ERROR": ""
 		        },
 		        "pages": {
+		            "index": {
+		                "TITLE": "okunishitaka.com"
+		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"
 		            }
@@ -569,7 +577,7 @@
     "use strict";
     ng
         .module('ok.directives', [
-            
+            'ok.utils'
         ]);
 })(angular);
 
@@ -601,6 +609,23 @@
                         })
                     ;
                 }
+            }
+        });
+
+})(angular, apeman);
+/**
+ * @ngdoc directive
+ * @name okStarFlow
+ * @description Ok star flow.
+*/
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okStarFlow', function defineOkStarFlow() {
+            return {
+
             }
         });
 
@@ -1026,6 +1051,8 @@
         .module('ok.indices')
         .factory('utilsIndex', function defineUtilsIndex($injector) {
             return {
+                get canvasUtil() { return $injector.get('canvasUtil'); },
+                get mathUtil() { return $injector.get('mathUtil'); },
                 get objectUtil() { return $injector.get('objectUtil'); },
                 get urlUtil() { return $injector.get('urlUtil'); }
             }
@@ -1901,6 +1928,92 @@
         ]);
 })(angular);
 
+/**
+ * Canvas util.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.utils')
+        .factory('canvasUtil', function defineCanvasUtil($window) {
+            var canvasUtil = {
+                get devicePixelRatio() {
+                    return $window.devicePixelRatio || 1
+                },
+                /**
+                 * Optimize canvas pixel rate.
+                 * @param {HTMLElement} canvas
+                 */
+                optimizeCanvasRatio: function (canvas) {
+                    var ratio = canvasUtil.devicePixelRatio;
+                    if (!ratio) {
+                        return;
+                    }
+                    var w = canvas.width,
+                        h = canvas.height;
+                    canvas.width = w * ratio;
+                    canvas.height = h * ratio;
+                    canvas.getContext('2d').scale(ratio, ratio);
+                    canvas.style.width = w + 'px';
+                    canvas.style.height = h + 'px';
+                },
+                /**
+                 * Create a new canvas.
+                 * @param {nubmer} width - Canvas width.
+                 * @param {number} height - Canvas height.
+                 * @returns {*}
+                 */
+                newCanvas: function (width, height) {
+                    var canvas = document.createElement('canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+                    canvasUtil.optimizeCanvasRatio(canvas);
+                    return canvas;
+                }
+            }
+            return canvasUtil;
+        });
+})(angular, apeman);
+/**
+ * Math util.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.utils')
+        .factory('mathUtil', function defineMathUtil() {
+            return {
+                /**
+                 * Get random value.
+                 * @returns {number} - Random value.
+                 */
+                random: Math.random.bind(Math),
+                /**
+                 * Get random int.
+                 * @param {number} [min=0] - Min value.
+                 * @param {number} [max=Infinity] - Max value.
+                 */
+                randomInt: function (min, max) {
+                    min = (min === undefined) ? 0 : min;
+                    max = (max === undefined) ? Infinity : max;
+                    var range = max - min;
+                    return parseInt(Math.random() * range, 10) + min;
+                },
+                /**
+                 * Round a value.
+                 * @param {number} value - Value to round.
+                 * @returns {number} - Rounded value.
+                 */
+                round: Math.round.bind(Math)
+            }
+        });
+})(angular, apeman);
 /**
  * Object utility.
  * @requires angular

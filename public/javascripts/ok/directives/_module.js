@@ -7,6 +7,6 @@
     "use strict";
     ng
         .module('ok.directives', [
-            
+            'ok.utils'
         ]);
 })(angular);

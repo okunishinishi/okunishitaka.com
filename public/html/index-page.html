@@ -7,7 +7,7 @@
 
     <meta ok:replace="url(partials.META)">
 
-    <title ng:bind="title(page)"></title>
+    <title ng:bind="title()"></title>
 
     <link rel="icon" href="/images/favicon.png?v=0.0.0">
 
@@ -32,14 +32,27 @@
 </head>
 <body>
 
-<header ng:include="partials.HEADER" ng:controller="HeaderControl"></header>
 
-<main class="container" ng:controller="IndexCtrl">
+<main ng:controller="IndexCtrl">
+    <div id="main-title">
+        <div class="container">
+            {{l.pages.index.TITLE}}
+        </div>
+    </div>
 
+    <section id="menu-list-section">
+        <div class="container text-right">
 
+            <ul id="menu-list" class="a-list">
+                <li><a class="nav-item" href="{{pages.PROFILE}}">{{l.pageNames.PROFILE}}</a></li>
+                <li><a class="nav-item" href="{{pages.BLOG}}">{{l.pageNames.BLOG}}</a></li>
+                <li><a class="nav-item" href="{{pages.WORK}}">{{l.pageNames.WORK}}</a></li>
+            </ul>
+        </div>
+    </section>
 </main>
-
 <footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>
+
 
 </body>
 </html>
