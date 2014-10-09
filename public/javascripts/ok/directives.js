@@ -58,24 +58,97 @@
                 link: function (scope, elm, attr) {
                     elm = $(elm);
 
-                    var top, bottom, winHeight, fixed = false;
+                    var top, fixed = false;
                     var window = $($window);
 
-                    window.scroll(function () {
+                    function clear() {
+                        top = null;
+                        elm.css('height', 'auto');
+                    }
+
+                    function update() {
                         if (!top) {
                             top = positionUtil.offsetSum(elm).top;
-
                         }
-                        var winTop = window.scrollTop(),
-                            winBottom = winTop + winHeight;
+                        var winTop = window.scrollTop();
                         var needsFix = top < winTop;
                         if (fixed != needsFix) {
                             fixed = needsFix;
-                            elm.toggleClass('ok-scroll-to-fixed', fixed);
+                            elm.height(elm.height());
+                            $(attr.okScrollToFixed).toggleClass('ok-fixed', fixed);
                         }
+                    }
+
+
+                    window.resize(function () {
+                        clear();
+                    });
+                    window.scroll(function () {
+                        update();
                     });
                 }
             }
         });
 
 })(angular, apeman, jQuery);
+/**
+ * @ngdoc directive
+ * @name okScrollToStay
+ * @description Ok scroll to stay.
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okScrollToStay', function defineOkScrollToStay($window, $document, positionUtil) {
+            return {
+                compile: function () {
+                    return {
+                        post: function (scope, elm, attr) {
+                            elm = $(elm);
+                            var window = $($window)
+                            elm.css({
+                                width: elm.width(),
+                                height: elm.height()
+                            });
+                            var content = $(attr.okScrollToStay);
+                            content.addClass('ok-fixed');
+
+
+                            var ready = false,
+                                winHeight,
+                                contentHeight,
+                                scrollHeight;
+
+                            function clear() {
+                                ready = false;
+                            };
+                            function update() {
+                                if (!ready) {
+                                    winHeight = window.height();
+                                    contentHeight = content.outerHeight(true);
+                                    scrollHeight = $('body,html').prop('scrollHeight');
+                                    ready = true;
+                                }
+                                var scrollRate = window.scrollTop() / (scrollHeight - winHeight);
+                                var contentTop = (contentHeight - winHeight) * scrollRate;
+                                if (contentTop > 0) {
+                                    content.css({top: -contentTop});
+                                }
+                            }
+
+                            window.scroll(function () {
+                                update();
+                            });
+                            window.resize(function () {
+                                clear();
+                                update();
+                            });
+                        }
+                    }
+                }
+            }
+        });
+
+})(angular, apeman);

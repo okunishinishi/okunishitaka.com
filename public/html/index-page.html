@@ -36,16 +36,18 @@
 
 <main ng:controller="IndexCtrl">
 
-    <section id="title-section">
-        <div id="main-title" class="outlined-text-white">
-            <div class="container">
-                {{l.pages.index.TITLE}}
+    <section id="title-section" ok:scroll-to-stay="#title-section-inner">
+        <div id="title-section-inner">
+            <div id="main-title" class="outlined-text-white">
+                <div class="container">
+                    {{l.pages.index.TITLE}}
+                </div>
             </div>
         </div>
     </section>
 
 
-    <section id="menu-section" ok:scroll-to-fixed="">
+    <section id="menu-section" ok:scroll-to-fixed="#menu-section-inner">
         <div id="menu-section-inner">
 
             <div class="container">
@@ -58,7 +60,6 @@
             </div>
         </div>
     </section>
-
 
 
 </main>

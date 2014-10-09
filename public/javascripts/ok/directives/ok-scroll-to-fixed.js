@@ -13,21 +13,33 @@
                 link: function (scope, elm, attr) {
                     elm = $(elm);
 
-                    var top, bottom, winHeight, fixed = false;
+                    var top, fixed = false;
                     var window = $($window);
 
-                    window.scroll(function () {
+                    function clear() {
+                        top = null;
+                        elm.css('height', 'auto');
+                    }
+
+                    function update() {
                         if (!top) {
                             top = positionUtil.offsetSum(elm).top;
-
                         }
-                        var winTop = window.scrollTop(),
-                            winBottom = winTop + winHeight;
+                        var winTop = window.scrollTop();
                         var needsFix = top < winTop;
                         if (fixed != needsFix) {
                             fixed = needsFix;
-                            elm.toggleClass('ok-scroll-to-fixed', fixed);
+                            elm.height(elm.height());
+                            $(attr.okScrollToFixed).toggleClass('ok-fixed', fixed);
                         }
+                    }
+
+
+                    window.resize(function () {
+                        clear();
+                    });
+                    window.scroll(function () {
+                        update();
                     });
                 }
             }

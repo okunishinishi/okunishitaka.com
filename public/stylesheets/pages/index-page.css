@@ -11,6 +11,16 @@
     -1px -1px 1px rgba(255, 255, 255, 1);
 }
 
+#title-section {
+    position: relative;
+}
+
+#title-section-inner {
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
 #main-title {
     font-family: 'source-code-pro-extra-light';
     font-size: 14em;
@@ -23,7 +33,6 @@
 }
 
 #menu-section {
-    height: 80px;
     position: relative;
 }
 
@@ -34,7 +43,7 @@
     left: 0;
 }
 
-#menu-section.ok-scroll-to-fixed #menu-section-inner {
+.ok-fixed {
     position: fixed;
 }
 
@@ -50,12 +59,13 @@
     color: #FFF;
     padding: 0.5em 1em;
     border: 1px solid #FFF;
+    opacity: 0.95;
 }
 
 .menu-nav-item:hover {
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
 .menu-nav-item:active {
-    opacity: 0.8;
+    opacity: 0.7;
 }
