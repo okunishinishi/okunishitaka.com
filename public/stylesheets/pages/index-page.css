@@ -1,7 +1,7 @@
 /** Style for index page. **/
 
 #index-page-body {
-    height: 2000px;
+
 }
 
 .outlined-text-white {
@@ -38,10 +38,10 @@
 
 #menu-section-inner {
     width: 100%;
-    position: absolute;
     top: 0;
     left: 0;
 }
+
 .ok-fixed {
     position: fixed !important;
 }
@@ -57,7 +57,7 @@
     background-color: #444;
     color: #FFF;
     padding: 0.5em 1em;
-    border: 1px solid #FFF;
+    margin:1px;
     opacity: 0.95;
 }
 
@@ -67,4 +67,12 @@
 
 .menu-nav-item:active {
     opacity: 0.7;
+}
+
+#main-content-background {
+    /*background-color: rgba(244, 244, 244, 0.5);*/
+    position: relative;
+    z-index: 2;
+    /** FIXME **/
+    height: 2000px;
 }

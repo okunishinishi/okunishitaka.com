@@ -46,25 +46,23 @@
         </div>
     </section>
 
+    <div id="main-content-background">
+        <section id="menu-section" ok:scroll-to-fixed="#menu-section-inner">
+            <div id="menu-section-inner">
 
-    <section id="menu-section" ok:scroll-to-fixed="#menu-section-inner">
-        <div id="menu-section-inner">
-
-            <div class="container">
-                <nav class="grid-row" id="menu-nav">
-                    <a class="grid-col menu-nav-item" href="{{pages.PROFILE}}">{{l.pageNames.PROFILE}}</a>
-                    <a class="grid-col menu-nav-item" href="{{pages.BLOG}}">{{l.pageNames.BLOG}}</a>
-                    <a class="grid-col menu-nav-item" href="{{pages.WORK}}">{{l.pageNames.WORK}}</a>
-                </nav>
-                <br class="clear">
+                <div class="container">
+                    <nav class="grid-row" id="menu-nav">
+                        <a class="grid-col menu-nav-item" href="{{pages.PROFILE}}">{{l.pageNames.PROFILE}}</a>
+                        <a class="grid-col menu-nav-item" href="{{pages.BLOG}}">{{l.pageNames.BLOG}}</a>
+                        <a class="grid-col menu-nav-item" href="{{pages.WORK}}">{{l.pageNames.WORK}}</a>
+                    </nav>
+                    <br class="clear">
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+    </div>
 
 
 </main>
-<footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>
-
-
-</body>
-</html>
+</body></html>

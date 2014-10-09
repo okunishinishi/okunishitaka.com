@@ -55,38 +55,43 @@
         .module('ok.directives')
         .directive('okScrollToFixed', function defineOkScrollToFixed($window, positionUtil) {
             return {
-                link: function (scope, elm, attr) {
-                    elm = $(elm);
+                compile: function () {
+                    return {
+                        post: function (scope, elm, attr) {
+                            elm = $(elm);
 
-                    var top, fixed = false;
-                    var window = $($window);
+                            var top, fixed = false, ready = false;
+                            var window = $($window);
+                            var content = $(attr.okScrollToFixed);
 
-                    function clear() {
-                        top = null;
-                        elm.css('height', 'auto');
-                    }
+                            function clear() {
+                                ready = false;
+                                elm.css('height', 'auto');
+                            }
 
-                    function update() {
-                        if (!top) {
-                            top = positionUtil.offsetSum(elm).top;
+                            function update() {
+                                if (!ready) {
+                                    top = positionUtil.offsetSum(elm).top;
+                                    elm.height(elm.height());
+                                    ready = true;
+                                }
+                                var winTop = window.scrollTop();
+                                var needsFix = top < winTop;
+                                if (fixed != needsFix) {
+                                    fixed = needsFix;
+                                    content.toggleClass('ok-fixed', fixed);
+                                }
+                            }
+
+                            window.resize(function () {
+                                clear();
+                                update();
+                            });
+                            window.scroll(function () {
+                                update();
+                            });
                         }
-                        var winTop = window.scrollTop();
-                        var needsFix = top < winTop;
-                        console.log(needsFix, top, winTop);
-                        if (fixed != needsFix) {
-                            fixed = needsFix;
-                            elm.height(elm.height());
-                            $(attr.okScrollToFixed).toggleClass('ok-fixed', fixed);
-                        }
                     }
-
-
-                    window.resize(function () {
-                        clear();
-                    });
-                    window.scroll(function () {
-                        update();
-                    });
                 }
             }
         });
