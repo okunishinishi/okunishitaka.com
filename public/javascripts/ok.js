@@ -100,7 +100,8 @@
 		            "MORE": "See more",
 		            "CANCEL": "Cancel",
 		            "SAVE": "Save",
-		            "CLOSE": "close"
+		            "CLOSE": "Close",
+		            "DETAIL": "See more detail"
 		        },
 		        "errors": {
 		            "CONFLICT_ERROR": "Conflict occured.",
@@ -158,7 +159,8 @@
 		            "MORE": "See more",
 		            "CANCEL": "Cancel",
 		            "SAVE": "Save",
-		            "CLOSE": "close"
+		            "CLOSE": "Close",
+		            "DETAIL": "See more detail"
 		        },
 		        "errors": {
 		            "CONFLICT_ERROR": "Conflict occured.",
@@ -308,6 +310,7 @@
 		    "BLOG_LIST_SECTION": "/html/partials/blog/blog-list-section.html",
 		    "FOOTER": "/html/partials/footer.html",
 		    "HEADER": "/html/partials/header.html",
+		    "INDEX_MENU_SECTION": "/html/partials/index/index-menu-section.html",
 		    "META": "/html/partials/meta.html"
 		});
 
@@ -686,7 +689,9 @@
 
                             function clear() {
                                 ready = false;
-                                elm.css('height', 'auto');
+                                fixed = false;
+                                content.removeClass('ok-fixed');
+                                elm.removeAttr('style');
                             }
 
                             function update() {
@@ -734,33 +739,42 @@
                         post: function (scope, elm, attr) {
                             elm = $(elm);
                             var window = $($window)
-                            elm.css({
-                                width: elm.width(),
-                                height: elm.height()
-                            });
-                            var content = $(attr.okScrollToStay);
-                            content.addClass('ok-fixed');
 
+                            var content = $(attr.okScrollToStay);
 
                             var ready = false,
                                 winHeight,
                                 contentHeight,
-                                scrollHeight;
+                                scrollHeight,
+                                _contentTop;
 
                             function clear() {
                                 ready = false;
+                                content.removeClass('ok-fixed');
+                                elm.removeAttr('style');
                             };
                             function update() {
                                 if (!ready) {
+                                    elm.height(elm.height());
+                                    elm.width(elm.width());
+                                    content.addClass('ok-fixed');
                                     winHeight = window.height();
                                     contentHeight = content.outerHeight(true);
                                     scrollHeight = $('body,html').prop('scrollHeight');
+                                    _contentTop = null;
+
                                     ready = true;
                                 }
                                 var scrollRate = window.scrollTop() / (scrollHeight - winHeight);
-                                var contentTop = (contentHeight - winHeight) * scrollRate;
+                                var contentTop = Math.round((contentHeight - winHeight) * scrollRate);
                                 if (contentTop < 0) contentTop = 0;
-                                content.css({top: -contentTop});
+
+                                if (_contentTop != contentTop) {
+                                    content.css({
+                                        top: -contentTop
+                                    });
+                                    _contentTop = contentTop;
+                                }
                             }
 
                             window.scroll(function () {
@@ -870,6 +884,35 @@
         })
 })(angular, apeman);
 /**
+ * Profile entity.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.entities')
+        .factory('ProfileEntity', function defineProfileEntity(Entity) {
+
+            /**
+             * @augments Entity
+             * @constructor ProfileEntity
+             * @param {object} data - Entity data.
+             */
+            var ProfileEntity = Entity.define(
+                /** @lends ProfileEntity.prototype */
+                {
+
+                }
+            );
+
+            return ProfileEntity;
+
+        });
+
+})(angular, apeman);
+/**
  * Setting entity.
  * @requires angular
  * @requires apeman
@@ -894,6 +937,34 @@
             );
 
             return SettingEntity;
+
+        });
+
+})(angular, apeman);
+/**
+ * Work entity.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.entities')
+        .factory('WorkEntity', function defineWorkEntity(Entity) {
+
+            /**
+             * @augments Entity
+             * @constructor WorkEntity
+             * @param {object} data - Entity data.
+             */
+            var WorkEntity = Entity.define(
+                /** @lends WorkEntity.prototype */
+                {
+
+                }
+            );
+            return WorkEntity;
 
         });
 
@@ -1100,7 +1171,9 @@
             return {
                 get BlogEntity() { return $injector.get('BlogEntity'); },
                 get Entity() { return $injector.get('Entity'); },
-                get SettingEntity() { return $injector.get('SettingEntity'); }
+                get ProfileEntity() { return $injector.get('ProfileEntity'); },
+                get SettingEntity() { return $injector.get('SettingEntity'); },
+                get WorkEntity() { return $injector.get('WorkEntity'); }
             }
         });
 })(angular, apeman);
@@ -1186,6 +1259,7 @@
                 get blogBlogListSectionHtmlTemplate() { return $injector.get('blogBlogListSectionHtmlTemplate'); },
                 get footerHtmlTemplate() { return $injector.get('footerHtmlTemplate'); },
                 get headerHtmlTemplate() { return $injector.get('headerHtmlTemplate'); },
+                get indexIndexMenuSectionHtmlTemplate() { return $injector.get('indexIndexMenuSectionHtmlTemplate'); },
                 get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); }
             }
         });
@@ -1742,6 +1816,10 @@
         .service('profileApiService', function ProfileApiService($http, apiService, jsonUrlConstant) {
             var s = this;
 
+            /**
+             * Get the singleton profile data.
+             * @param {function} callback - Callback when done.
+             */
             s.singleton = function singleton(callback) {
                 var url = jsonUrlConstant.PROFILE;
                 return apiService.get(url, callback);
@@ -1773,8 +1851,13 @@
 
     ng
         .module('ok.services')
-        .service('workApiService', function WorkApiService ($http) {
+        .service('workApiService', function WorkApiService($http, apiService, jsonUrlConstant) {
             var s = this;
+            s.singleton = function singleton(callback) {
+                var url = jsonUrlConstant.WORKS;
+                return apiService.get(url, callback);
+
+            }
         });
 
 })(angular);
@@ -2084,6 +2167,21 @@
         .value('headerHtmlTemplate', {
 		    "name": "/html/partials/header.html",
 		    "content": "<!-- Header HTML -->\n<div class=\"container\">\n    <h1 class=\"header-logo\" ng-click=\"goTopPage()\">{{l.meta.NAME}}</h1>\n    <nav class=\"header-nav\">\n        <a class=\"nav-item\" href=\"{{pages.INDEX}}\">{{l.pageNames.INDEX}}</a>\n        <a class=\"nav-item\" href=\"{{pages.BLOG}}\">{{l.pageNames.BLOG}}</a>\n        <a class=\"nav-item\" href=\"{{pages.WORK}}\">{{l.pageNames.WORK}}</a>\n    </nav>\n</div>"
+		});
+
+})(angular);
+/**
+ * Template for indexIndexMenuSectionHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('indexIndexMenuSectionHtmlTemplate', {
+		    "name": "/html/partials/index/index-menu-section.html",
+		    "content": "<section id=\"menu-section\" ok:scroll-to-fixed=\"#menu-section-inner\">\n    <div id=\"menu-section-inner\">\n        <div class=\"container\">\n            <h3 id=\"small-title\">{{l.pages.index.TITLE}}</h3>\n            <nav class=\"grid-row\" id=\"menu-nav\">\n                <a class=\"grid-col menu-nav-item\" href=\"{{pages.PROFILE}}\">{{l.pageNames.PROFILE}}</a>\n                <a class=\"grid-col menu-nav-item\" href=\"{{pages.BLOG}}\">{{l.pageNames.BLOG}}</a>\n                <a class=\"grid-col menu-nav-item\" href=\"{{pages.WORK}}\">{{l.pageNames.WORK}}</a>\n            </nav>\n            <br class=\"clear\">\n        </div>\n    </div>\n</section>"
 		});
 
 })(angular);

@@ -21,7 +21,9 @@
 
                             function clear() {
                                 ready = false;
-                                elm.css('height', 'auto');
+                                fixed = false;
+                                content.removeClass('ok-fixed');
+                                elm.removeAttr('style');
                             }
 
                             function update() {

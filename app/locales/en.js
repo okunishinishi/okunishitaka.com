@@ -45,7 +45,8 @@ l.buttons = {
     MORE: 'See more',
     CANCEL: 'Cancel',
     SAVE: 'Save',
-    CLOSE: 'close'
+    CLOSE: 'Close',
+    DETAIL: 'See more detail'
 }
 
 l.errors = {
@@ -71,7 +72,7 @@ l.pages = {
         TITLE: pkg.name
     },
     profile: {
-        NAME:'name'
+        NAME: 'name'
     },
     blog: {
         PREVIEW_LEGEND: 'Preview'

@@ -1,3 +1,10 @@
 [
-    
+    {
+        "name": "ChessTek",
+        "thumbnail": "WORKS_CHESS_THUMBNAIL"
+    },
+    {
+        "name": "ShoTek",
+        "thumbnail": "WORKS_SHOT_THUMBNAIL"
+    }
 ]

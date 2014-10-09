@@ -12,7 +12,9 @@
             return {
                 get BlogEntity() { return $injector.get('BlogEntity'); },
                 get Entity() { return $injector.get('Entity'); },
-                get SettingEntity() { return $injector.get('SettingEntity'); }
+                get ProfileEntity() { return $injector.get('ProfileEntity'); },
+                get SettingEntity() { return $injector.get('SettingEntity'); },
+                get WorkEntity() { return $injector.get('WorkEntity'); }
             }
         });
 })(angular, apeman);

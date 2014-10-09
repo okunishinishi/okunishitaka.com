@@ -74,7 +74,9 @@
             return {
                 get BlogEntity() { return $injector.get('BlogEntity'); },
                 get Entity() { return $injector.get('Entity'); },
-                get SettingEntity() { return $injector.get('SettingEntity'); }
+                get ProfileEntity() { return $injector.get('ProfileEntity'); },
+                get SettingEntity() { return $injector.get('SettingEntity'); },
+                get WorkEntity() { return $injector.get('WorkEntity'); }
             }
         });
 })(angular, apeman);
@@ -160,6 +162,7 @@
                 get blogBlogListSectionHtmlTemplate() { return $injector.get('blogBlogListSectionHtmlTemplate'); },
                 get footerHtmlTemplate() { return $injector.get('footerHtmlTemplate'); },
                 get headerHtmlTemplate() { return $injector.get('headerHtmlTemplate'); },
+                get indexIndexMenuSectionHtmlTemplate() { return $injector.get('indexIndexMenuSectionHtmlTemplate'); },
                 get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); }
             }
         });

@@ -36,7 +36,8 @@
 		            "MORE": "See more",
 		            "CANCEL": "Cancel",
 		            "SAVE": "Save",
-		            "CLOSE": "close"
+		            "CLOSE": "Close",
+		            "DETAIL": "See more detail"
 		        },
 		        "errors": {
 		            "CONFLICT_ERROR": "Conflict occured.",
@@ -94,7 +95,8 @@
 		            "MORE": "See more",
 		            "CANCEL": "Cancel",
 		            "SAVE": "Save",
-		            "CLOSE": "close"
+		            "CLOSE": "Close",
+		            "DETAIL": "See more detail"
 		        },
 		        "errors": {
 		            "CONFLICT_ERROR": "Conflict occured.",

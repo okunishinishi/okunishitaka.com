@@ -30,13 +30,21 @@
     <script src="/javascripts/ok/pages/page.js?v=0.0.0"></script>
     <script src="/javascripts/ok/pages/index-page.js?v=0.0.0"></script>
 
+
+    <script type="x-ng-template" id="see-more-button-template">
+        <a class="see-more-button" href="{{href}}">
+            <span class="see-more-button-label">
+                <span class="see-more-button-label-inner fa fa-chevron-right"></span>
+            </span>
+        </a>
+    </script>
 </head>
 <body id="index-page-body">
 
 
 <main ng:controller="IndexCtrl">
 
-    <section id="title-section" ok:scroll-to-stay="#title-section-inner">
+    <section id="title-section" ok:scroll-to-stay="#title-section-inner" style="">
         <div id="title-section-inner">
             <div id="main-title" class="outlined-text-white">
                 <div class="container">
@@ -47,22 +55,34 @@
     </section>
 
     <div id="main-content-background">
-        <section id="menu-section" ok:scroll-to-fixed="#menu-section-inner">
-            <div id="menu-section-inner">
+        <div ng-include="partials.INDEX_MENU_SECTION"></div>
 
-                <div class="container">
-                    <nav class="grid-row" id="menu-nav">
-                        <a class="grid-col menu-nav-item" href="{{pages.PROFILE}}">{{l.pageNames.PROFILE}}</a>
-                        <a class="grid-col menu-nav-item" href="{{pages.BLOG}}">{{l.pageNames.BLOG}}</a>
-                        <a class="grid-col menu-nav-item" href="{{pages.WORK}}">{{l.pageNames.WORK}}</a>
-                    </nav>
-                    <br class="clear">
-                </div>
-            </div>
-        </section>
+        <div class="container">
+            <section id="profile-section" ng:controller="IndexProfileCtrl" class="content-section">
+                <h1 class="content-section-title">{{l.pageNames.PROFILE}}</h1>
 
+                <a ok:see-more="pages.PROFILE"></a>
+            </section>
+
+            <section id="blog-section" ng:controller="IndexBlogCtrl" class="content-section">
+                <h1 class="content-section-title">{{l.pageNames.BLOG}}</h1>
+
+                <a ok:see-more="pages.BLOG"></a>
+
+            </section>
+
+            <section id="work-section" ng:controller="IndexWorkCtrl" class="content-section">
+                <h1 class="content-section-title">{{l.pageNames.WORK}}</h1>
+
+            <span ng:repeat="w in works">
+                <img ng:src="{{images[w.thumbnail]}}" class="work-thumbanil-img">
+            </span>
+                <a ok:see-more="pages.WORK"></a>
+            </section>
+        </div>
     </div>
 
 
 </main>
-</body></html>
+</body>
+</html>

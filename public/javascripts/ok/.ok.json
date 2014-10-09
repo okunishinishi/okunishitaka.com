@@ -51,7 +51,9 @@
     },
     "entities": [
         "blog",
-        "setting"
+        "setting",
+        "profile",
+        "work"
     ],
     "endpoints": [
         "blog",

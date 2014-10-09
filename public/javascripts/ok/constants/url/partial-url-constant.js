@@ -13,6 +13,7 @@
 		    "BLOG_LIST_SECTION": "/html/partials/blog/blog-list-section.html",
 		    "FOOTER": "/html/partials/footer.html",
 		    "HEADER": "/html/partials/header.html",
+		    "INDEX_MENU_SECTION": "/html/partials/index/index-menu-section.html",
 		    "META": "/html/partials/meta.html"
 		});
 

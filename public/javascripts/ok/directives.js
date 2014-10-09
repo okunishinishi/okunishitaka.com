@@ -66,7 +66,9 @@
 
                             function clear() {
                                 ready = false;
-                                elm.css('height', 'auto');
+                                fixed = false;
+                                content.removeClass('ok-fixed');
+                                elm.removeAttr('style');
                             }
 
                             function update() {
@@ -114,33 +116,42 @@
                         post: function (scope, elm, attr) {
                             elm = $(elm);
                             var window = $($window)
-                            elm.css({
-                                width: elm.width(),
-                                height: elm.height()
-                            });
-                            var content = $(attr.okScrollToStay);
-                            content.addClass('ok-fixed');
 
+                            var content = $(attr.okScrollToStay);
 
                             var ready = false,
                                 winHeight,
                                 contentHeight,
-                                scrollHeight;
+                                scrollHeight,
+                                _contentTop;
 
                             function clear() {
                                 ready = false;
+                                content.removeClass('ok-fixed');
+                                elm.removeAttr('style');
                             };
                             function update() {
                                 if (!ready) {
+                                    elm.height(elm.height());
+                                    elm.width(elm.width());
+                                    content.addClass('ok-fixed');
                                     winHeight = window.height();
                                     contentHeight = content.outerHeight(true);
                                     scrollHeight = $('body,html').prop('scrollHeight');
+                                    _contentTop = null;
+
                                     ready = true;
                                 }
                                 var scrollRate = window.scrollTop() / (scrollHeight - winHeight);
-                                var contentTop = (contentHeight - winHeight) * scrollRate;
+                                var contentTop = Math.round((contentHeight - winHeight) * scrollRate);
                                 if (contentTop < 0) contentTop = 0;
-                                content.css({top: -contentTop});
+
+                                if (_contentTop != contentTop) {
+                                    content.css({
+                                        top: -contentTop
+                                    });
+                                    _contentTop = contentTop;
+                                }
                             }
 
                             window.scroll(function () {

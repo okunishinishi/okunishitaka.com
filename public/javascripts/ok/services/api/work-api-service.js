@@ -7,8 +7,13 @@
 
     ng
         .module('ok.services')
-        .service('workApiService', function WorkApiService ($http) {
+        .service('workApiService', function WorkApiService($http, apiService, jsonUrlConstant) {
             var s = this;
+            s.singleton = function singleton(callback) {
+                var url = jsonUrlConstant.WORKS;
+                return apiService.get(url, callback);
+
+            }
         });
 
 })(angular);

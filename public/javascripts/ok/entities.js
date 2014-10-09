@@ -90,6 +90,35 @@
         })
 })(angular, apeman);
 /**
+ * Profile entity.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.entities')
+        .factory('ProfileEntity', function defineProfileEntity(Entity) {
+
+            /**
+             * @augments Entity
+             * @constructor ProfileEntity
+             * @param {object} data - Entity data.
+             */
+            var ProfileEntity = Entity.define(
+                /** @lends ProfileEntity.prototype */
+                {
+
+                }
+            );
+
+            return ProfileEntity;
+
+        });
+
+})(angular, apeman);
+/**
  * Setting entity.
  * @requires angular
  * @requires apeman
@@ -114,6 +143,34 @@
             );
 
             return SettingEntity;
+
+        });
+
+})(angular, apeman);
+/**
+ * Work entity.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.entities')
+        .factory('WorkEntity', function defineWorkEntity(Entity) {
+
+            /**
+             * @augments Entity
+             * @constructor WorkEntity
+             * @param {object} data - Entity data.
+             */
+            var WorkEntity = Entity.define(
+                /** @lends WorkEntity.prototype */
+                {
+
+                }
+            );
+            return WorkEntity;
 
         });
 
