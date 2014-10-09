@@ -31,7 +31,7 @@ module.exports = {
         budForFile(f.paths.javascripts.ngApemanJs, 'public/javascripts/lib'),
         budForFile(f.paths.javascripts.oneColorJs, 'public/javascripts/lib'),
         budForFile(f.paths.javascripts.jqueryJs, 'public/javascripts/lib'),
-        budForFile(f.paths.stylesheets.apemanCss, 'public/stylesheets/base'),
-        budForFile(f.paths.stylesheets.fontAwesomeCss, 'public/stylesheets/base'),
+        budForFile(f.paths.stylesheets.apemanCss, 'public/stylesheets'),
+        budForFile(f.paths.stylesheets.fontAwesomeCss, 'public/stylesheets'),
     ]
 };

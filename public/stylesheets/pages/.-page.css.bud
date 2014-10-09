@@ -7,7 +7,7 @@
 var u = require('apeman-util'),
     string = u.string,
     path = u.core.path,
-    pages = require('../.pages');
+    pages = require('../../.pages.json');
 
 
 module.exports = pages.map(function (page) {

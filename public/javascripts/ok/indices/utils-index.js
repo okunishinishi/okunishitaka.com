@@ -13,6 +13,7 @@
                 get canvasUtil() { return $injector.get('canvasUtil'); },
                 get mathUtil() { return $injector.get('mathUtil'); },
                 get objectUtil() { return $injector.get('objectUtil'); },
+                get positionUtil() { return $injector.get('positionUtil'); },
                 get urlUtil() { return $injector.get('urlUtil'); }
             }
         });

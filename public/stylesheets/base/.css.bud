@@ -1,0 +1,39 @@
+/**
+ * Bud file for css.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    format = u.core.util.format,
+    string = u.string;
+
+var data = require('./.css.js');
+
+function cssBud(name, data) {
+    return {
+        path: format('%s/%s.css', __dirname, string.paramString(name)),
+        force: true,
+        mode: '444',
+        data: data
+    }
+}
+
+module.exports = [
+    cssBud('text-align', {
+        description: 'Style for text aligning.',
+        styles: data.textAlign
+    }),
+    cssBud('float', {
+        description: 'Style for floating.',
+        styles: data.float
+    }),
+    cssBud('clear', {
+        description: 'Style for clearing.',
+        styles: data.clear
+    }),
+    cssBud('font-faces', {
+        description: 'Font faces.',
+        styles: data.fontFaces
+    }),
+];

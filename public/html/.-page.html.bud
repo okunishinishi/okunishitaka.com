@@ -26,7 +26,8 @@ module.exports = pages.map(function (page) {
             Name: string.pascalString(page),
             stylesheets: [
                 'base.css',
-                [name, 'page.css'].join('-')
+                'font-awesome.css',
+                format('pages/%s-page.css', name)
             ],
             javascripts: [
                 [

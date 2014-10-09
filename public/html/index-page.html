@@ -12,7 +12,8 @@
     <link rel="icon" href="/images/favicon.png?v=0.0.0">
 
     <link rel="stylesheet" href="/stylesheets/base.css?v=0.0.0">
-    <link rel="stylesheet" href="/stylesheets/index-page.css?v=0.0.0">
+    <link rel="stylesheet" href="/stylesheets/font-awesome.css?v=0.0.0">
+    <link rel="stylesheet" href="/stylesheets/pages/index-page.css?v=0.0.0">
 
     <script src="/javascripts/lib.js?v=0.0.0"></script>
     <script src="/javascripts/ok/constants.js?v=0.0.0"></script>
@@ -30,40 +31,36 @@
     <script src="/javascripts/ok/pages/index-page.js?v=0.0.0"></script>
 
 </head>
-<body>
+<body id="index-page-body">
 
 
 <main ng:controller="IndexCtrl">
-    <div id="main-title">
-        <div class="container">
-            {{l.pages.index.TITLE}}
+
+    <section id="title-section">
+        <div id="main-title" class="outlined-text-white">
+            <div class="container">
+                {{l.pages.index.TITLE}}
+            </div>
         </div>
-    </div>
+    </section>
 
 
-    <section id="thumbnails-section" ng:controller="IndexThumbnailsCtrl">
-        <div class="positioned">
+    <section id="menu-section" ok:scroll-to-fixed="">
+        <div id="menu-section-inner">
 
-            <div class="container" id="thumbnails-list-container">
-                <ul id="thumbnails-list" style="width:{{thumbnails.length * 250}}px;" ok:image-list="">
-                    <li class="thumbnail-list-item" ng:repeat="thumbnail in thumbnails">
-                        <img class="thumbnail-img" ng:src="{{thumbnail}}" alt="">
-                    </li>
-                </ul>
+            <div class="container">
+                <nav class="grid-row" id="menu-nav">
+                    <a class="grid-col menu-nav-item" href="{{pages.PROFILE}}">{{l.pageNames.PROFILE}}</a>
+                    <a class="grid-col menu-nav-item" href="{{pages.BLOG}}">{{l.pageNames.BLOG}}</a>
+                    <a class="grid-col menu-nav-item" href="{{pages.WORK}}">{{l.pageNames.WORK}}</a>
+                </nav>
                 <br class="clear">
             </div>
         </div>
     </section>
 
-    <div class="container">
-        <section id="menu-section">
 
-            <span class="menu-item"><a class="" href="{{pages.PROFILE}}">{{l.pageNames.PROFILE}}</a></span>
-            <span class="menu-item"><a class="" href="{{pages.BLOG}}">{{l.pageNames.BLOG}}</a></span>
-            <span class="menu-item"><a class="" href="{{pages.WORK}}">{{l.pageNames.WORK}}</a></span>
-            <br class="clear">
-        </section>
-    </div>
+
 </main>
 <footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>
 

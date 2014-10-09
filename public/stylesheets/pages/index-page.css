@@ -1,0 +1,61 @@
+/** Style for index page. **/
+
+#index-page-body {
+    height: 2000px;
+}
+
+.outlined-text-white {
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 1),
+    -1px 1px 1px rgba(255, 255, 255, 1),
+    1px -1px 1px rgba(255, 255, 255, 1),
+    -1px -1px 1px rgba(255, 255, 255, 1);
+}
+
+#main-title {
+    font-family: 'source-code-pro-extra-light';
+    font-size: 14em;
+    line-height: 0.9em;
+    margin: 0 auto;
+    text-align: center;
+    word-wrap: break-word;
+    color: #444;
+    padding: 20px 0;
+}
+
+#menu-section {
+    height: 80px;
+    position: relative;
+}
+
+#menu-section-inner {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#menu-section.ok-scroll-to-fixed #menu-section-inner {
+    position: fixed;
+}
+
+#menu-nav {
+    padding: 20px 0;
+}
+
+.menu-nav-item {
+    text-align: center;
+    font-size: 1.5em;
+    text-decoration: none;
+    background-color: #444;
+    color: #FFF;
+    padding: 0.5em 1em;
+    border: 1px solid #FFF;
+}
+
+.menu-nav-item:hover {
+    opacity: 0.9;
+}
+
+.menu-nav-item:active {
+    opacity: 0.8;
+}

@@ -66,12 +66,12 @@
     },
     {
         "src": "node_modules/apeman-front/assets/stylesheets/apeman.css",
-        "dest": "public/stylesheets/base/apeman.css",
+        "dest": "public/stylesheets/apeman.css",
         "mode": "444"
     },
     {
         "src": "node_modules/apeman-front/assets/stylesheets/font-awesome.css",
-        "dest": "public/stylesheets/base/font-awesome.css",
+        "dest": "public/stylesheets/font-awesome.css",
         "mode": "444"
     }
 ]

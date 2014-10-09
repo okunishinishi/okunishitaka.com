@@ -42,6 +42,7 @@
         "public/json",
         "public/stylesheets",
         "public/stylesheets/base",
+        "public/stylesheets/pages",
         "test",
         "test/.work",
         "test/mocks",
