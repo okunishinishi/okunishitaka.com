@@ -692,6 +692,7 @@
                         }
                         var winTop = window.scrollTop();
                         var needsFix = top < winTop;
+                        console.log(needsFix, top, winTop);
                         if (fixed != needsFix) {
                             fixed = needsFix;
                             elm.height(elm.height());
@@ -753,9 +754,8 @@
                                 }
                                 var scrollRate = window.scrollTop() / (scrollHeight - winHeight);
                                 var contentTop = (contentHeight - winHeight) * scrollRate;
-                                if (contentTop > 0) {
-                                    content.css({top: -contentTop});
-                                }
+                                if (contentTop < 0) contentTop = 0;
+                                content.css({top: -contentTop});
                             }
 
                             window.scroll(function () {

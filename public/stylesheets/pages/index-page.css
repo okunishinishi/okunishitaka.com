@@ -42,9 +42,8 @@
     top: 0;
     left: 0;
 }
-
 .ok-fixed {
-    position: fixed;
+    position: fixed !important;
 }
 
 #menu-nav {

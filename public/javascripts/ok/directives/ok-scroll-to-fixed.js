@@ -27,6 +27,7 @@
                         }
                         var winTop = window.scrollTop();
                         var needsFix = top < winTop;
+                        console.log(needsFix, top, winTop);
                         if (fixed != needsFix) {
                             fixed = needsFix;
                             elm.height(elm.height());
