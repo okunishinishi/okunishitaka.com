@@ -9,6 +9,7 @@ var h = require('./_helper'),
     settingStorage = h.storages.settingStorage,
     schemas = h.schemas,
     async = h.async,
+    rest = require('./handlers/rest'),
     SchemaHandler = require('./handlers/schema_handler'),
     StorageHandler = require('./handlers/storage_handler');
 

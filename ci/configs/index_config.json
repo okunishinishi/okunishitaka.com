@@ -35,7 +35,16 @@
             "module": "okunishitaka-dot-com/app/routes/handlers"
         },
         "descProperties": true,
-        "pascalPattern": "*_handlers"
+        "pascalPattern": "*_handler"
+    },
+    {
+        "dirname": "app/routes/handlers/rest",
+        "doc": {
+            "file": "App rest handlers",
+            "module": "okunishitaka-dot-com/app/routes/handlers/rest"
+        },
+        "descProperties": true,
+        "pascalPattern": "*_handler"
     },
     {
         "dirname": "ci/configs",

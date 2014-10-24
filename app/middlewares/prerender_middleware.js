@@ -32,7 +32,6 @@ function prerenderMiddleware(options) {
             next();
             return;
         }
-        console.log(o.baseUrl, req.url);
         prerenderMiddleware.prerender(
             url.resolve(o.baseUrl, req.url),
             o.cacheDirectory,

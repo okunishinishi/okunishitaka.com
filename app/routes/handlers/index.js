@@ -2,13 +2,15 @@
  * @file App handlers
  * @module okunishitaka-dot-com/app/routes/handlers
  *
- * @property schemaHandler {object} - {@link module:okunishitaka-dot-com/app/routes/handlers/schemaHandler|schemaHandler module}.
- * @property storageHandler {object} - {@link module:okunishitaka-dot-com/app/routes/handlers/storageHandler|storageHandler module}.
+ * @property rest {object} - {@link module:okunishitaka-dot-com/app/routes/handlers/rest|rest module}.
+ * @property SchemaHandler {object} - {@link module:okunishitaka-dot-com/app/routes/handlers.SchemaHandler|SchemaHandler module}.
+ * @property StorageHandler {object} - {@link module:okunishitaka-dot-com/app/routes/handlers.StorageHandler|StorageHandler module}.
  */
 
 "use strict";
 
 module.exports = {
-    get schemaHandler() { return require('./schema_handler'); },
-    get storageHandler() { return require('./storage_handler'); }
+    get rest() { return require('./rest'); },
+    get SchemaHandler() { return require('./schema_handler'); },
+    get StorageHandler() { return require('./storage_handler'); }
 };

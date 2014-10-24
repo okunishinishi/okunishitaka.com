@@ -1,3 +1,8 @@
-{
-    "pattern": "test/scenario_tests/**/*.js"
-}
+[
+    {
+        "pattern": "test/scenario_tests/crawl_scenario/*.js"
+    },
+    {
+        "pattern": "test/scenario_tests/prerender_scenario/*.js"
+    }
+]
