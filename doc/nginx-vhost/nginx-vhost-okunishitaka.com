@@ -8,10 +8,6 @@ server {
     access_log okunishitaka.com-access.log;
     error_log okunishitaka.com-error.log;
 
-    location ~* ^.+\.(jpg|jpeg|gif|png|ico|css|zip|tgz|gz|rar|bz2|pdf|txt|tar|wav|bmp|rtf|js|flv|swf|html|htm)$ {
-        limit_req   zone=one  burst=5;
-        root /Users/okuni/WebstormProjects/okunishitaka.com/doc/..public;
-    }
 
     location / {
         limit_req   zone=one  burst=5;
