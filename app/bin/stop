@@ -13,28 +13,4 @@ var h = require('./_helper'),
 
 process.chdir(h.basedir);
 
-async.waterfall([
-    function (callback) {
-        h.readStatus(callback);
-    },
-    function (data, callback) {
-        var pid = data.pid,
-            valid = pid && !data.dead;
-        if (!valid) {
-            callback(null, {});
-            return;
-        }
-        h.kill(['-SIGUSR2'], pid, function () {
-            callback(data);
-        });
-    },
-    function (data, callback) {
-        data.dead = false;
-        h.writeStatus(data, callback);
-    }
-], function (err, data) {
-    if (err) {
-        console.error(err);
-    }
-    console.log('Stop done.');
-});
+h.persist.kill(h.basedir, h.done('Stop done.'));

@@ -8,55 +8,30 @@
 "use strict";
 
 var h = require('./_helper'),
-    cluster = require('cluster'),
     data = require('../../server');
-
 
 process.chdir(h.basedir);
 process.env.NODE_ENV = 'production';
 
-var shouldStopAll = false;
+var app = require('../app'),
+    port = data.port,
+    settings = require('../app_settings');
 
-if (cluster.isMaster) {
+var cluster = require('cluster');
+cluster.isMaster
+h.persist(cluster, {
+    basedir: h.basedir,
+    start: function () {
+        console.log('Cluster server start with port:', port);
+    },
+    stop: function () {
+        console.log('Cluster server killed.');
+    },
+    wokerStart: function () {
+        app.start(port, settings);
+    },
+    workerStop: function () {
+        app.close();
+    }
+});
 
-    var numberOfWorkers = h.numberOfCPUs();
-    h.forkClusterWorkers(cluster, numberOfWorkers, function (workers) {
-        workers.forEach(function (worker) {
-            console.log('\tWork start with pid:', worker.process.pid);
-        });
-        console.log('Server listening at port:', data.port);
-        h.writeStatus({
-            pid: process.pid,
-            numberOfWorkers: numberOfWorkers,
-            startAt: new Date
-        });
-    });
-
-    h.bindReforkClusterWorker(cluster, function refork(worker) {
-        var pid = worker.process.pid;
-        console.error('Work dead:', pid);
-        console.log('Restart worker:', pid);
-        return !shouldStopAll;
-    });
-
-    process.on('SIGUSR2', function () {
-        shouldStopAll = true;
-        console.log('Stop server.');
-        h.sendToAllClusterWorkers(cluster, {
-            cmd: 'stop'
-        })
-    });
-
-} else {
-    var app = require('../app'),
-        settings = require('../app_settings'),
-        server = app.start(data.port, settings);
-    process.on('message', function (msg) {
-        var shouldStop = msg.cmd && msg.cmd == 'stop';
-        if (shouldStop) {
-            console.log("\tWork stopped with pid:", process.pid);
-            server.close();
-            process.exit();
-        }
-    });
-}

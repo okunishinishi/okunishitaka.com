@@ -13,14 +13,6 @@ var u = require('apeman-util'),
 
 h.async = u.ext.async;
 h.file = u.file;
-h.done = function (msg) {
-    return function (err) {
-        if (err) {
-            console.error(err)
-        } else {
-            console.log(msg);
-        }
-        process.exit(err ? 1 : 0);
-    }
-}
+h.persist = clustering.persist;
+
 module.exports = h;

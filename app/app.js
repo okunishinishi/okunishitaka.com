@@ -105,7 +105,7 @@ app.start = function (port, settings, callback) {
         if (err) {
             console.error(err);
         }
-        callback(app);
+        callback && callback(app);
     });
 };
 
