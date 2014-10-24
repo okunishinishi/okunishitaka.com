@@ -15,7 +15,6 @@ module.exports = {
     tmpl: tmpl,
     data: {
         port: server.port,
-        domain: server.domain,
-        publicDir: path.resolve(__dirname, '../../public')
+        domain: server.domain
     }
 }
