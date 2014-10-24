@@ -1,11 +1,11 @@
 /**
- * @file Test for schema_interceptor.js.
+ * @file Test for storage_handler.js.
  * Runs with node unit.
  */
 
 "use strict";
 
-var SchemaInterceptor = require('./../../app/routes/interceptors/schema_interceptor.js'),
+var StorageHandler = require('./../../app/routes/handlers/storage_handler.js'),
     h = require('../_helper');
 
 exports.setUp = function (done) {
@@ -18,8 +18,8 @@ exports.tearDown = function (done) {
     done();
 };
 
-exports['Schema interceptor.'] = function (test) {
-    var interceptor = new SchemaInterceptor({});
-    test.ok(interceptor);
+exports['Storage handler.'] = function (test) {
+    var handler = new StorageHandler({});
+    test.ok(handler);
     test.done();
 };

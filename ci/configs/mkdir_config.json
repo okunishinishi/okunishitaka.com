@@ -6,7 +6,7 @@
         "app/locales",
         "app/middlewares",
         "app/routes",
-        "app/routes/interceptors",
+        "app/routes/handlers",
         "app/schemas",
         "app/utils",
         "ci/bin",

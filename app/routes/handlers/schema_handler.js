@@ -1,7 +1,7 @@
 /**
- * Interceptor to validate with schemas.
- * @memberof module:okunishitaka-dot-com/app/routes/interceptors
- * @constructor SchemaInterceptor
+ * Handler to validate with schemas.
+ * @memberof module:okunishitaka-dot-com/app/routes/handlers
+ * @constructor SchemaHandler
  * @param {JsonSchema} schema
  */
 
@@ -11,13 +11,13 @@ var h = require('./../_helper'),
     codes = h.codes,
     async = h.async;
 
-/** @lends SchemaInterceptor */
-function SchemaInterceptor(schema) {
+/** @lends SchemaHandler */
+function SchemaHandler(schema) {
     var s = this;
     s.schema = schema || {};
 }
 
-SchemaInterceptor.prototype = {
+SchemaHandler.prototype = {
     /**
      * Validate request.
      * @param {http.ServerRequest} req - Request to validate.
@@ -45,4 +45,4 @@ SchemaInterceptor.prototype = {
     }
 }
 
-module.exports = SchemaInterceptor;
+module.exports = SchemaHandler;

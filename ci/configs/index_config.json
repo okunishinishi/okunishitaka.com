@@ -29,13 +29,13 @@
         "descProperties": true
     },
     {
-        "dirname": "app/routes/interceptors",
+        "dirname": "app/routes/handlers",
         "doc": {
-            "file": "App interceptor",
-            "module": "okunishitaka-dot-com/app/routes/interceptors"
+            "file": "App handlers",
+            "module": "okunishitaka-dot-com/app/routes/handlers"
         },
         "descProperties": true,
-        "pascalPattern": "*_interceptor"
+        "pascalPattern": "*_handlers"
     },
     {
         "dirname": "ci/configs",

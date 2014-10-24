@@ -21,7 +21,7 @@ var app = {};
  * @param {number} port - Server port number.
  * @param {object} settings - App settings.
  * @param {string} settings.basedir - App base directory path.
- * @param {string} settings.settings - Data directory path.
+ * @param {string} settings.dataDir - Data directory path.
  * @param {string} settings.prerenderCacheDir - Directory path to save prerender cache.
  * @param {string} settings.accessLogFile - Access log file path.
  * @param {string} settings.errorLogFile - Error log file path.

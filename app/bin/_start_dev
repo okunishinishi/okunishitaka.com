@@ -30,6 +30,7 @@ async.series([
     function (callback) {
         app.start(data.port, settings, function () {
             console.log('Dev server listening at port:', data.port);
+            callback();
         });
 
         process.on('uncaughtException', function (err) {

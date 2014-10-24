@@ -3,7 +3,7 @@
  * @module okunishitaka-dot-com/app/routes
  *
  * @property blogRoute {object} - {@link module:okunishitaka-dot-com/app/routes/blogRoute|blogRoute module}.
- * @property interceptors {object} - {@link module:okunishitaka-dot-com/app/routes/interceptors|interceptors module}.
+ * @property handlers {object} - {@link module:okunishitaka-dot-com/app/routes/handlers|handlers module}.
  * @property settingRoute {object} - {@link module:okunishitaka-dot-com/app/routes/settingRoute|settingRoute module}.
  */
 
@@ -11,6 +11,6 @@
 
 module.exports = {
     get blogRoute() { return require('./blog_route'); },
-    get interceptors() { return require('./interceptors'); },
+    get handlers() { return require('./handlers'); },
     get settingRoute() { return require('./setting_route'); }
 };

@@ -22,6 +22,6 @@ exports['App settings.'] = function (test) {
     Object.keys(appSettings).forEach(function (key) {
         var value = appSettings[key];
         test.ok(value);
-    })
+    });
     test.done();
 };

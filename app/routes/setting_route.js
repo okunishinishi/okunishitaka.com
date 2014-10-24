@@ -9,9 +9,8 @@ var h = require('./_helper'),
     settingStorage = h.storages.settingStorage,
     schemas = h.schemas,
     async = h.async,
-    interceptors = require('./interceptors'),
-    SchemaInterceptor = interceptors.SchemaInterceptor,
-    StorageInterceptor = interceptors.StorageInterceptor;
+    SchemaHandler = require('./handlers/schema_handler'),
+    StorageHandler = require('./handlers/storage_handler');
 
 exports._singletonId = '00000';
 
@@ -23,10 +22,10 @@ exports._singletonId = '00000';
  */
 exports.one = function (req, res, next) {
     req.params._id = exports._singletonId;
-    var storageInterceptor = new StorageInterceptor(settingStorage);
+    var storageHandler = new StorageHandler(settingStorage);
     async.series([
         function (callback) {
-            storageInterceptor.one(req, res, next);
+            storageHandler.one(req, res, next);
         }
     ], next);
 }
@@ -38,11 +37,11 @@ exports.one = function (req, res, next) {
  * @param next
  */
 exports.save = function (req, res, next) {
-    var schemaInterceptor = new SchemaInterceptor(schemas.settingSaveSchema),
-        storageInterceptor = new StorageInterceptor(settingStorage);
+    var schemaHandler = new SchemaHandler(schemas.settingSaveSchema),
+        storageHandler = new StorageHandler(settingStorage);
     async.series([
         function (callback) {
-            schemaInterceptor.validate(req, res, callback);
+            schemaHandler.validate(req, res, callback);
         },
         function (callback) {
             var id = exports._singletonId;
@@ -53,9 +52,9 @@ exports.save = function (req, res, next) {
                 function (data, callback) {
                     req.body._id = id;
                     if (data) {
-                        storageInterceptor.update(req, res, callback);
+                        storageHandler.update(req, res, callback);
                     } else {
-                        storageInterceptor.create(req, res, callback);
+                        storageHandler.create(req, res, callback);
                     }
                 }
             ])

@@ -8,9 +8,8 @@
 var h = require('./_helper'),
     blogStorage = h.storages.blogStorage,
     async = h.async,
-    interceptors = require('./interceptors'),
-    SchemaInterceptor = interceptors.SchemaInterceptor,
-    StorageInterceptor = interceptors.StorageInterceptor;
+    SchemaHandler = require('./handlers/schema_handler'),
+    StorageHandler = require('./handlers/storage_handler');
 
 /** @lends blogRoute */
 exports = module.exports = {};
@@ -22,13 +21,13 @@ exports = module.exports = {};
  * @param {function} next - Call next.
  */
 exports.one = function one(req, res, next) {
-    var storageInterceptor = new StorageInterceptor(blogStorage);
+    var storageHandler = new StorageHandler(blogStorage);
     async.series([
         function (callback) {
-            storageInterceptor.checkIdentity(req, res, callback);
+            storageHandler.checkIdentity(req, res, callback);
         },
         function (callback) {
-            storageInterceptor.one(req, res, callback);
+            storageHandler.one(req, res, callback);
         }
     ], next);
 }
@@ -40,10 +39,10 @@ exports.one = function one(req, res, next) {
  * @param {function} next - Call next.
  */
 exports.list = function list(req, res, next) {
-    var storageInterceptor = new StorageInterceptor(blogStorage);
+    var storageHandler = new StorageHandler(blogStorage);
     async.series([
         function (callback) {
-            storageInterceptor.list(req, res, next);
+            storageHandler.list(req, res, callback);
         }
     ], next);
 }
@@ -56,10 +55,10 @@ exports.list = function list(req, res, next) {
  * @param {function} next - Call next.
  */
 exports.create = function create(req, res, next) {
-    var storageInterceptor = new StorageInterceptor(blogStorage);
+    var storageHandler = new StorageHandler(blogStorage);
     async.series([
         function (callback) {
-            storageInterceptor.create(req, res, callback);
+            storageHandler.create(req, res, callback);
         }
     ], next);
 }
@@ -71,16 +70,16 @@ exports.create = function create(req, res, next) {
  * @param {function} next - Call next.
  */
 exports.update = function update(req, res, next) {
-    var storageInterceptor = new StorageInterceptor(blogStorage);
+    var storageHandler = new StorageHandler(blogStorage);
     async.series([
         function (callback) {
-            storageInterceptor.checkIdentity(req, res, callback);
+            storageHandler.checkIdentity(req, res, callback);
         },
         function (callback) {
-            storageInterceptor.checkConflict(req, res, callback);
+            storageHandler.checkConflict(req, res, callback);
         },
         function (callback) {
-            storageInterceptor.update(req, res, callback);
+            storageHandler.update(req, res, callback);
         }
     ], next);
 }
@@ -92,13 +91,13 @@ exports.update = function update(req, res, next) {
  * @param {function} next - Call next.
  */
 exports.destroy = function destroy(req, res, next) {
-    var storageInterceptor = new StorageInterceptor(blogStorage);
+    var storageHandler = new StorageHandler(blogStorage);
     async.series([
         function (callback) {
-            storageInterceptor.checkIdentity(req, res, callback);
+            storageHandler.checkIdentity(req, res, callback);
         },
         function (callback) {
-            storageInterceptor.destroy(req, res, next);
+            storageHandler.destroy(req, res, callback);
         }
     ], next);
 }

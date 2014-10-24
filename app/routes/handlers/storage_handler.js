@@ -1,7 +1,7 @@
 /**
- * Interceptor to access storage.
- * @memberof module:okunishitaka-dot-com/app/routes/interceptors
- * @constructor StorageInterceptor
+ * Handler to access storage.
+ * @memberof module:okunishitaka-dot-com/app/routes/handlers
+ * @constructor StorageHandler
  * @param {JsonStorage} storage
  */
 
@@ -12,12 +12,12 @@ var h = require('../_helper'),
     async = h.async;
 
 
-function StorageInterceptor(storage) {
+function StorageHandler(storage) {
     var s = this;
     s.storage = storage;
 }
 
-StorageInterceptor.valuesWithKeys = function (object, keys) {
+StorageHandler.valuesWithKeys = function (object, keys) {
     var result = {};
     for (var i = 0, len = keys.length; i < len; i++) {
         var key = keys[i];
@@ -29,7 +29,7 @@ StorageInterceptor.valuesWithKeys = function (object, keys) {
 }
 
 
-StorageInterceptor.prototype = {
+StorageHandler.prototype = {
     /**
      * Check data identitiy.
      * @param req
@@ -113,7 +113,7 @@ StorageInterceptor.prototype = {
     list: function (req, res, next) {
         var s = this;
         var q = req.query || {};
-        var condition = StorageInterceptor.valuesWithKeys(q, s.storage.indices),
+        var condition = StorageHandler.valuesWithKeys(q, s.storage.indices),
             chopper = {
                 skip: Number(q._skip || 0),
                 limit: Number(q._limit || Infinity)
@@ -192,4 +192,4 @@ StorageInterceptor.prototype = {
     }
 };
 
-module.exports = StorageInterceptor;
+module.exports = StorageHandler;
