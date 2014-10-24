@@ -16,6 +16,6 @@ module.exports = {
     data: {
         port: server.port,
         domain: server.domain,
-        publicDir: path.resolve(__dirname, '../..public')
+        publicDir: path.resolve(__dirname, '../../public')
     }
 }
