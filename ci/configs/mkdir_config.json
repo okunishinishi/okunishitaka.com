@@ -15,6 +15,7 @@
         "doc",
         "doc/apiguide",
         "doc/coverage",
+        "doc/nginx-vhost",
         "doc/readme",
         "public",
         "public/fonts",

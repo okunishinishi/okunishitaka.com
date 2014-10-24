@@ -1,0 +1,21 @@
+/**
+ * Bud file for nginx confg.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    path = u.core.path,
+    tmpl = require('apeman-tasks/lib/paths').nginxVhostConfTmpl,
+    server = require('../../server.json');
+
+module.exports = {
+    force: true,
+    mode: '444',
+    tmpl: tmpl,
+    data: {
+        port: server.port,
+        domain: server.domain,
+        publicDir: path.resolve(__dirname, '../..public')
+    }
+}
