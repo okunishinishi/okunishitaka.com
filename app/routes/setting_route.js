@@ -9,9 +9,7 @@ var h = require('./_helper'),
     settingStorage = h.storages.settingStorage,
     schemas = h.schemas,
     async = h.async,
-    rest = require('./handlers/rest'),
-    SchemaHandler = require('./handlers/schema_handler'),
-    StorageHandler = require('./handlers/storage_handler');
+    rest = require('./handlers/rest');
 
 exports._singletonId = '00000';
 
@@ -22,13 +20,11 @@ exports._singletonId = '00000';
  * @param next
  */
 exports.one = function (req, res, next) {
-    req.params._id = exports._singletonId;
-    var storageHandler = new StorageHandler(settingStorage);
-    async.series([
-        function (callback) {
-            storageHandler.one(req, res, next);
-        }
-    ], next);
+    var handler = new rest.SingletonRestHandler({
+        storage: settingStorage,
+        id: exports._singletonId
+    });
+    handler.one(req, res, next);
 }
 
 /**
@@ -38,27 +34,10 @@ exports.one = function (req, res, next) {
  * @param next
  */
 exports.save = function (req, res, next) {
-    var schemaHandler = new SchemaHandler(schemas.settingSaveSchema),
-        storageHandler = new StorageHandler(settingStorage);
-    async.series([
-        function (callback) {
-            schemaHandler.validate(req, res, callback);
-        },
-        function (callback) {
-            var id = exports._singletonId;
-            async.waterfall([
-                function (callback) {
-                    settingStorage.one(id, callback);
-                },
-                function (data, callback) {
-                    req.body._id = id;
-                    if (data) {
-                        storageHandler.update(req, res, callback);
-                    } else {
-                        storageHandler.create(req, res, callback);
-                    }
-                }
-            ])
-        }
-    ], next);
+    var handler = new rest.SingletonRestHandler({
+        storage: settingStorage,
+        schema: schemas.settingSaveSchema,
+        id: exports._singletonId
+    });
+    handler.save(req, res, next);
 }

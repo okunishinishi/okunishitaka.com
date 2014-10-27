@@ -20,6 +20,11 @@
         "mode": "444"
     },
     {
+        "src": "node_modules/apeman-front/assets/fonts/fontawesome-webfont.ttf",
+        "dest": "public/fonts/fontawesome-webfont.ttf",
+        "mode": "444"
+    },
+    {
         "src": "node_modules/apeman-front/assets/html/something-wrong.html",
         "dest": "public/html/error/something-wrong.html",
         "mode": "444"
