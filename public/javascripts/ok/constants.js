@@ -227,6 +227,7 @@
     ng
         .module('ok.constants')
         .constant('imageUrlConstant', {
+		    "OKUNISHITAKA": "/images/okunishitaka.com-favicon.png",
 		    "BLOG_SCREENSHOT": "/images/screenshots/blog-screenshot.png",
 		    "INDEX_SCREENSHOT": "/images/screenshots/index-screenshot.png",
 		    "WORK_SCREENSHOT": "/images/screenshots/work-screenshot.png",
@@ -286,7 +287,6 @@
     ng
         .module('ok.constants')
         .constant('pageUrlConstant', {
-		    "A": "/a.html",
 		    "BLOG": "/blog.html",
 		    "INDEX": "/index.html",
 		    "PROFILE": "/profile.html",

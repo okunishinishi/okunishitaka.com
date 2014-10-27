@@ -14,5 +14,9 @@
     {
         "src": "public/html/work-page.html",
         "dest": "public/work.html"
+    },
+    {
+        "src": "public/images/okunishitaka.com-favicon.png",
+        "dest": "public/favicon.png"
     }
 ]

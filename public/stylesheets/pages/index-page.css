@@ -4,7 +4,7 @@
 
 }
 
-#menu-nav{
+#menu-nav {
     display: none;
 }
 
@@ -66,10 +66,10 @@
     width: 100%;
     top: 0;
     left: 0;
+    z-index: 101;
 }
 
 #menu-section-inner.ok-fixed #small-title {
-    opacity: 1;
 }
 
 .ok-fixed {
@@ -122,6 +122,18 @@
     margin: 20px;
 }
 
+.see-more-button-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 2;
+    box-sizing: border-box;
+
+}
+
 .see-more-button {
     padding: 0;
     box-sizing: border-box;
@@ -129,15 +141,16 @@
     position: absolute;
     right: 0;
     top: 0;
-    width: 80px;
+    width: 100%;
     height: 100%;
 }
 
 .see-more-button-label {
-    position: relative;
+    position: absolute;
     font-family: monospace;
     top: 50%;
     font-size: 40px;
+    right: 20px;
 }
 
 .see-more-button-label-inner {

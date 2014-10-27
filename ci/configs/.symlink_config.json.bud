@@ -14,14 +14,25 @@ var basedir = path.resolve(__dirname, '../..'),
 module.exports = {
     mode: '444',
     force: true,
-    data: fs.readdirSync(publicHtmlDir)
-        .filter(filtering.patternAcceptFilter(/\.html$/))
-        .map(mapping.pathResolveMap(publicHtmlDir))
-        .map(function (filename) {
-            var linkName = path.join(publicDir, path.basename(filename, '.html').replace(/\-page$/, '')) + '.html';
-            return {
-                src: path.relative(basedir, filename),
-                dest: path.relative(basedir, linkName)
+    data: [
+
+    ]
+        .concat(fs.readdirSync(publicHtmlDir)
+            .filter(filtering.patternAcceptFilter(/\.html$/))
+            .map(mapping.pathResolveMap(publicHtmlDir))
+            .map(function (filename) {
+                var linkName = path.join(publicDir, path.basename(filename, '.html').replace(/\-page$/, '')) + '.html';
+                return {
+                    src: path.relative(basedir, filename),
+                    dest: path.relative(basedir, linkName)
+                }
+            })
+    )
+        .concat([
+            {
+                src: 'public/images/okunishitaka.com-favicon.png',
+                dest: 'public/favicon.png'
+
             }
-        })
+        ])
 }

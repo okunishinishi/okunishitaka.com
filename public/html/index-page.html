@@ -9,7 +9,7 @@
 
     <title ng:bind="title()"></title>
 
-    <link rel="icon" href="/images/favicon.png?v=0.0.0">
+    <link rel="icon" href="/favicon.png?v=0.0.0">
 
     <link rel="stylesheet" href="/stylesheets/base.css?v=0.0.0">
     <link rel="stylesheet" href="/stylesheets/font-awesome.css?v=0.0.0">
@@ -61,23 +61,20 @@
             <section id="profile-section" ng:controller="IndexProfileCtrl" class="content-section">
                 <h1 class="content-section-title">{{l.pageNames.PROFILE}}</h1>
 
-                <a ok:see-more="pages.PROFILE"></a>
+                <span ok:see-more="pages.PROFILE"></span>
             </section>
 
             <section id="blog-section" ng:controller="IndexBlogCtrl" class="content-section">
                 <h1 class="content-section-title">{{l.pageNames.BLOG}}</h1>
 
-                <a ok:see-more="pages.BLOG"></a>
+                <span ok:see-more="pages.BLOG"></span>
 
             </section>
 
             <section id="work-section" ng:controller="IndexWorkCtrl" class="content-section">
                 <h1 class="content-section-title">{{l.pageNames.WORK}}</h1>
 
-            <span ng:repeat="w in works">
-                <img ng:src="{{images[w.thumbnail]}}" class="work-thumbanil-img">
-            </span>
-                <a ok:see-more="pages.WORK"></a>
+                <span ok:see-more="pages.WORK"></span>
             </section>
         </div>
     </div>

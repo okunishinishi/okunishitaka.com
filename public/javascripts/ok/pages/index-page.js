@@ -3,7 +3,7 @@
  * @requires angular
  */
 
-(function (ng) {
+(function (ng, $) {
     "use strict";
 
     ng
@@ -18,8 +18,11 @@
         })
         .directive('okSeeMore', function () {
             return {
-                scope:{
-                    href:'=okSeeMore'
+                scope: {
+                    href: '=okSeeMore'
+                },
+                link: function (scope, elm, attr) {
+                    $(elm).addClass('see-more-button-container');
                 },
                 template: $('#see-more-button-template').html()
             }
@@ -49,4 +52,4 @@
 
     ;
 
-})(angular);
+})(angular, jQuery);
