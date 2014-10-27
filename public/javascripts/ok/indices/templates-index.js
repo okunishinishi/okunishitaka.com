@@ -18,7 +18,8 @@
                 get footerHtmlTemplate() { return $injector.get('footerHtmlTemplate'); },
                 get headerHtmlTemplate() { return $injector.get('headerHtmlTemplate'); },
                 get indexIndexMenuSectionHtmlTemplate() { return $injector.get('indexIndexMenuSectionHtmlTemplate'); },
-                get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); }
+                get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); },
+                get profileProfileTableHtmlTemplate() { return $injector.get('profileProfileTableHtmlTemplate'); }
             }
         });
 })(angular, apeman);

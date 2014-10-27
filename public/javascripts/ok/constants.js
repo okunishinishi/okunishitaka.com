@@ -124,7 +124,12 @@
 		                "TITLE": "okunishitaka.com"
 		            },
 		            "profile": {
-		                "NAME": "name"
+		                "NAME": "name",
+		                "captions": {
+		                    "PERSONEL": "Personel",
+		                    "EDUCATION": "Eductation",
+		                    "JOB_HISTORY": "Job History"
+		                }
 		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"
@@ -183,7 +188,12 @@
 		                "TITLE": "okunishitaka.com"
 		            },
 		            "profile": {
-		                "NAME": "name"
+		                "NAME": "name",
+		                "captions": {
+		                    "PERSONEL": "Personel",
+		                    "EDUCATION": "Eductation",
+		                    "JOB_HISTORY": "Job History"
+		                }
 		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"
@@ -312,7 +322,8 @@
 		    "FOOTER": "/html/partials/footer.html",
 		    "HEADER": "/html/partials/header.html",
 		    "INDEX_MENU_SECTION": "/html/partials/index/index-menu-section.html",
-		    "META": "/html/partials/meta.html"
+		    "META": "/html/partials/meta.html",
+		    "PROFILE_TABLE": "/html/partials/profile/profile-table.html"
 		});
 
 })(angular);

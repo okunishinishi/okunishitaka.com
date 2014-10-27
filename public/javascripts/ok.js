@@ -124,7 +124,12 @@
 		                "TITLE": "okunishitaka.com"
 		            },
 		            "profile": {
-		                "NAME": "name"
+		                "NAME": "name",
+		                "captions": {
+		                    "PERSONEL": "Personel",
+		                    "EDUCATION": "Eductation",
+		                    "JOB_HISTORY": "Job History"
+		                }
 		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"
@@ -183,7 +188,12 @@
 		                "TITLE": "okunishitaka.com"
 		            },
 		            "profile": {
-		                "NAME": "name"
+		                "NAME": "name",
+		                "captions": {
+		                    "PERSONEL": "Personel",
+		                    "EDUCATION": "Eductation",
+		                    "JOB_HISTORY": "Job History"
+		                }
 		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"
@@ -312,7 +322,8 @@
 		    "FOOTER": "/html/partials/footer.html",
 		    "HEADER": "/html/partials/header.html",
 		    "INDEX_MENU_SECTION": "/html/partials/index/index-menu-section.html",
-		    "META": "/html/partials/meta.html"
+		    "META": "/html/partials/meta.html",
+		    "PROFILE_TABLE": "/html/partials/profile/profile-table.html"
 		});
 
 })(angular);
@@ -1261,7 +1272,8 @@
                 get footerHtmlTemplate() { return $injector.get('footerHtmlTemplate'); },
                 get headerHtmlTemplate() { return $injector.get('headerHtmlTemplate'); },
                 get indexIndexMenuSectionHtmlTemplate() { return $injector.get('indexIndexMenuSectionHtmlTemplate'); },
-                get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); }
+                get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); },
+                get profileProfileTableHtmlTemplate() { return $injector.get('profileProfileTableHtmlTemplate'); }
             }
         });
 })(angular, apeman);
@@ -2167,7 +2179,7 @@
         .module('ok.templates')
         .value('headerHtmlTemplate', {
 		    "name": "/html/partials/header.html",
-		    "content": "<!-- Header HTML -->\n<div class=\"container\">\n    <h1 class=\"header-logo\" ng-click=\"goTopPage()\">{{l.meta.NAME}}</h1>\n    <nav class=\"header-nav\">\n        <a class=\"nav-item\" href=\"{{pages.INDEX}}\">{{l.pageNames.INDEX}}</a>\n        <a class=\"nav-item\" href=\"{{pages.BLOG}}\">{{l.pageNames.BLOG}}</a>\n        <a class=\"nav-item\" href=\"{{pages.WORK}}\">{{l.pageNames.WORK}}</a>\n    </nav>\n</div>"
+		    "content": "<!-- Header HTML -->\n<div class=\"container\">\n    <nav class=\"header-nav\">\n        <a class=\"header-nav-item nav-item\" href=\"{{pages.PROFILE}}\">{{l.pageNames.PROFILE}}</a>\n        <a class=\"header-nav-item nav-item\" href=\"{{pages.BLOG}}\">{{l.pageNames.BLOG}}</a>\n        <a class=\"header-nav-item nav-item\" href=\"{{pages.WORK}}\">{{l.pageNames.WORK}}</a>\n    </nav>\n    <h1 class=\"header-logo\" ng-click=\"goTopPage()\">{{l.meta.NAME}}</h1>\n</div>"
 		});
 
 })(angular);
@@ -2198,6 +2210,21 @@
         .value('metaHtmlTemplate', {
 		    "name": "/html/partials/meta.html",
 		    "content": "<!-- Meta HTML -->\n<meta ng:attr-charset=\"UTF-8\">\n<meta name=\"application-name\" content=\"{{l.meta.NAME}}\"/>\n<meta name=\"description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"generator\" content=\"apeman\"/>\n<meta name=\"author\" content=\"{{l.meta.AUTHOR}}\"/>\n<meta name=\"viewport\" content=\"width=device-width, user-scalable=no\"/>\n\n<!-- Open graph tags -->\n<meta property=\"og:title\" content=\"{{title(page)}}\"/>\n<meta property=\"og:type\" content=\"website\"/>\n<meta property=\"og:image\" content=\"\"/> <!-- FIXME -->\n<meta property=\"og:url\" content=\"{{app.HOMEPAGE}}\"/>\n<meta property=\"og:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n\n\n<!-- Twitter tags -->\n<meta name=\"twitter:card\" content=\"summary\">\n<meta name=\"twitter:title\" content=\"{{title(page)}}\">\n<meta name=\"twitter:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"twitter:image\" content=\"\"/> <!-- FIXME -->\n\n"
+		});
+
+})(angular);
+/**
+ * Template for profileProfileTableHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('profileProfileTableHtmlTemplate', {
+		    "name": "/html/partials/profile/profile-table.html",
+		    "content": "<table id=\"{{id}}\" class=\"prfile-table\">\n    <caption>{{caption}}</caption>\n    <tbody>\n    <tr ng-repeat=\"(key, val) in data\">\n        <th>{{key}}</th>\n        <td>{{val}}</td>\n    </tr>\n    </tbody>\n</table>"
 		});
 
 })(angular);

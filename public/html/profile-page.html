@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/stylesheets/base.css?v=0.0.0">
     <link rel="stylesheet" href="/stylesheets/font-awesome.css?v=0.0.0">
     <link rel="stylesheet" href="/stylesheets/pages/profile-page.css?v=0.0.0">
-    
+
     <script src="/javascripts/lib.js?v=0.0.0"></script>
     <script src="/javascripts/ok/constants.js?v=0.0.0"></script>
     <script src="/javascripts/ok/datasources.js?v=0.0.0"></script>
@@ -36,19 +36,20 @@
 
 <main class="container" ng:controller="ProfileCtrl">
 
-    <table>
-        <caption></caption>
-        <tbody>
-        <tr>
-            <th>{{l.pages.profile.NAME}}</th>
-            <td>{{profile.personel.name}}</td>
-        </tr>
-        <tr>
-            <th></th>
-            <td>{{profile.personel.birthdate}}</td>
-        </tr>
-        </tbody>
-    </table>
+    <div ng-show="!!profile">
+
+        <div ok:profile-table="" ok:id="personel-table" ok:data="profile.personel" ok:caption="l.pages.profile.captions.PERSONEL">
+        </div>
+
+        <div ok:profile-table="" ok:id="education-table" ok:data="profile.education" ok:caption="l.pages.profile.captions.EDUCATION">
+        </div>
+
+        <div ok:profile-table="" ok:id="job-history-table" ok:data="profile.jobHistory" ok:caption="l.pages.profile.captions.JOB_HISTORY">
+        </div>
+
+    </div>
+    <br class="clear-both">
+
 </main>
 
 <footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>

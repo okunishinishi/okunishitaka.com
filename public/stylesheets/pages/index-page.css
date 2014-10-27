@@ -1,4 +1,11 @@
 /** Style for index page. **/
+header {
+    display: none;
+}
+
+body {
+    margin-top: 0;
+}
 
 #index-page-body {
 

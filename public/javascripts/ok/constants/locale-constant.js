@@ -60,7 +60,12 @@
 		                "TITLE": "okunishitaka.com"
 		            },
 		            "profile": {
-		                "NAME": "name"
+		                "NAME": "name",
+		                "captions": {
+		                    "PERSONEL": "Personel",
+		                    "EDUCATION": "Eductation",
+		                    "JOB_HISTORY": "Job History"
+		                }
 		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"
@@ -119,7 +124,12 @@
 		                "TITLE": "okunishitaka.com"
 		            },
 		            "profile": {
-		                "NAME": "name"
+		                "NAME": "name",
+		                "captions": {
+		                    "PERSONEL": "Personel",
+		                    "EDUCATION": "Eductation",
+		                    "JOB_HISTORY": "Job History"
+		                }
 		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"

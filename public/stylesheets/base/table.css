@@ -1,0 +1,29 @@
+table {
+    border-collapse: collapse;
+    margin: 25px 10px;
+}
+
+caption {
+    color: #FCA100;
+    padding: 4px 8px;
+    font-weight: 100;
+}
+
+th {
+    color: #999;
+    font-weight: 100;
+}
+
+td, th {
+    padding: 10px 15px;
+    background-color: #FFF;
+    border: 1px solid #EEE;
+}
+
+th:first-child {
+    border-left: none;
+}
+
+td:last-child {
+    border-right: none;
+}

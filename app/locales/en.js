@@ -72,7 +72,12 @@ l.pages = {
         TITLE: pkg.name
     },
     profile: {
-        NAME: 'name'
+        NAME: 'name',
+        captions: {
+            PERSONEL: "Personel",
+            EDUCATION: "Eductation",
+            JOB_HISTORY: "Job History"
+        }
     },
     blog: {
         PREVIEW_LEGEND: 'Preview'

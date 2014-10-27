@@ -1,0 +1,31 @@
+header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.9);
+    height: 48px;
+    border-bottom: 1px solid #FAFAFA;
+}
+
+header h1 {
+    line-height: 48px;
+    height: 48px;
+    margin: 0;
+    color: #EEE;
+    font-family: 'source-code-pro-extra-light';
+}
+
+.header-nav {
+    float: right;
+}
+
+.header-nav-item {
+    text-decoration: none;
+    display: inline-block;
+    padding: 4px 8px;
+    text-align: center;
+    line-height: 40px;
+}

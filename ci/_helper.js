@@ -57,6 +57,7 @@ h.loadHtmlFile = function (filename, callback) {
         },
         function (buffer, callback) {
             var $ = cheerio.load(buffer.toString(), {
+                normalizeWhitespace: false,
                 decodeEntities: false,
                 xmlMode: false
             });
