@@ -8,6 +8,7 @@
     ng
         .module('ok.constants')
         .constant('pageUrlConstant', {
+		    "A": "/a.html",
 		    "BLOG": "/blog.html",
 		    "INDEX": "/index.html",
 		    "PROFILE": "/profile.html",
