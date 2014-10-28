@@ -1,9 +1,14 @@
-<table id="{{id}}" class="prfile-table">
+<table id="{{id}}" class="profile-table">
     <caption>{{caption}}</caption>
+    <thead>
+    <tr ng:if="!!data.head">
+        <th ng:repeat="head in data.head">{{head}}</th>
+    </tr>
+    </thead>
     <tbody>
-    <tr ng-repeat="(key, val) in data">
-        <th>{{key}}</th>
-        <td>{{val}}</td>
+    <tr ng:repeat="row in data.body" ng:init="headed=!!data.headedBody">
+        <th ng:repeat="cell in row" ng:if="(headed && $first)" ok:linked="data.links" ng:bind="cell"></th>
+        <td ng:repeat="cell in row" ng:if="!(headed && $first)"  ok:linked="data.links" ng:bind="cell"></td>
     </tr>
     </tbody>
 </table>

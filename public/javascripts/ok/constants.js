@@ -128,7 +128,8 @@
 		                "captions": {
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
-		                    "JOB_HISTORY": "Job History"
+		                    "JOB_HISTORY": "Job History",
+		                    "QUALIFICATION": "保有資格"
 		                }
 		            },
 		            "blog": {
@@ -192,7 +193,8 @@
 		                "captions": {
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
-		                    "JOB_HISTORY": "Job History"
+		                    "JOB_HISTORY": "Job History",
+		                    "QUALIFICATION": "保有資格"
 		                }
 		            },
 		            "blog": {
@@ -240,6 +242,7 @@
 		    "OKUNISHITAKA": "/images/okunishitaka.com-favicon.png",
 		    "BLOG_SCREENSHOT": "/images/screenshots/blog-screenshot.png",
 		    "INDEX_SCREENSHOT": "/images/screenshots/index-screenshot.png",
+		    "PROFILE_SCREENSHOT": "/images/screenshots/profile-screenshot.png",
 		    "WORK_SCREENSHOT": "/images/screenshots/work-screenshot.png",
 		    "WORKS_CHESS_THUMBNAIL": "/images/works/works-chess-thumbnail.png",
 		    "WORKS_CSS_GALLERY_THUMBNAIL": "/images/works/works-css-gallery-thumbnail.png",
@@ -281,7 +284,10 @@
     ng
         .module('ok.constants')
         .constant('linkUrlConstant', {
-		    "ABOUT_MARK_DOWN": "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"
+		    "ABOUT_MARK_DOWN": "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet",
+		    "TIS_HOMEPAGE": "http://www.tis.co.jp/",
+		    "REAL_GLOBE_HOMEPAGE": "http://realglobe.jp/",
+		    "IPA_HOMEPAGE": "http://www.ipa.go.jp/"
 		});
 
 })(angular);

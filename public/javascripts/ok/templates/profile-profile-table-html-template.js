@@ -9,7 +9,7 @@
         .module('ok.templates')
         .value('profileProfileTableHtmlTemplate', {
 		    "name": "/html/partials/profile/profile-table.html",
-		    "content": "<table id=\"{{id}}\" class=\"prfile-table\">\n    <caption>{{caption}}</caption>\n    <tbody>\n    <tr ng-repeat=\"(key, val) in data\">\n        <th>{{key}}</th>\n        <td>{{val}}</td>\n    </tr>\n    </tbody>\n</table>"
+		    "content": "<table id=\"{{id}}\" class=\"profile-table\">\n    <caption>{{caption}}</caption>\n    <thead>\n    <tr ng:if=\"!!data.head\">\n        <th ng:repeat=\"head in data.head\">{{head}}</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr ng:repeat=\"row in data.body\" ng:init=\"headed=!!data.headedBody\">\n        <th ng:repeat=\"cell in row\" ng:if=\"(headed && $first)\" ok:linked=\"data.links\" ng:bind=\"cell\"></th>\n        <td ng:repeat=\"cell in row\" ng:if=\"!(headed && $first)\"  ok:linked=\"data.links\" ng:bind=\"cell\"></td>\n    </tr>\n    </tbody>\n</table>"
 		});
 
 })(angular);

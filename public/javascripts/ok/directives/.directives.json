@@ -1,5 +1,6 @@
 [
     "okReplace",
     "okScrollToFixed",
-    "okScrollToStay"
+    "okScrollToStay",
+    "okLinked"
 ]

@@ -9,6 +9,7 @@
     ng
         .module('ok.profilePage', [
             'ok.page',
+            'ngSanitize' // ng-bind-html requires ng sanitize.
         ])
         .run(function ($rootScope) {
             $rootScope.page = 'profile';

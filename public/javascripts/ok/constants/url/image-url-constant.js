@@ -11,6 +11,7 @@
 		    "OKUNISHITAKA": "/images/okunishitaka.com-favicon.png",
 		    "BLOG_SCREENSHOT": "/images/screenshots/blog-screenshot.png",
 		    "INDEX_SCREENSHOT": "/images/screenshots/index-screenshot.png",
+		    "PROFILE_SCREENSHOT": "/images/screenshots/profile-screenshot.png",
 		    "WORK_SCREENSHOT": "/images/screenshots/work-screenshot.png",
 		    "WORKS_CHESS_THUMBNAIL": "/images/works/works-chess-thumbnail.png",
 		    "WORKS_CSS_GALLERY_THUMBNAIL": "/images/works/works-css-gallery-thumbnail.png",

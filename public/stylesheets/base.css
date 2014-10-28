@@ -1,3 +1,15 @@
+a {
+    text-decoration: none;
+}
+
+a:link:hover,
+a:visited:hover {
+    text-decoration: underline;
+}
+
+a:link, a:visited {
+    color: #38A;
+}
 body {
     padding: 0;
     margin: 60px 0 0;
@@ -162,12 +174,24 @@ td, th {
     border: 1px solid #EEE;
 }
 
-th:first-child {
+th:first-child,
+td:first-child {
     border-left: none;
 }
 
+th:last-child,
 td:last-child {
     border-right: none;
+}
+
+tr:first-child th,
+tr:first-child td {
+    border-top: none;
+}
+
+tbody tr:last-child th,
+tbody tr:last-child td {
+    border-bottom: none;
 }
 /**
  * Style for text aligning.

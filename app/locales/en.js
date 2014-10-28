@@ -76,7 +76,8 @@ l.pages = {
         captions: {
             PERSONEL: "Personel",
             EDUCATION: "Eductation",
-            JOB_HISTORY: "Job History"
+            JOB_HISTORY: "Job History",
+            QUALIFICATION: "保有資格"
         }
     },
     blog: {

@@ -36,7 +36,7 @@
 
 <main class="container" ng:controller="ProfileCtrl">
 
-    <div ng-show="!!profile">
+    <div ng:show="!!profile">
 
         <div ok:profile-table="" ok:id="personel-table" ok:data="profile.personel" ok:caption="l.pages.profile.captions.PERSONEL">
         </div>
@@ -45,6 +45,9 @@
         </div>
 
         <div ok:profile-table="" ok:id="job-history-table" ok:data="profile.jobHistory" ok:caption="l.pages.profile.captions.JOB_HISTORY">
+        </div>
+
+        <div ok:profile-table="" ok:id="qualification-table" ok:data="profile.qualification" ok:caption="l.pages.profile.captions.QUALIFICATION">
         </div>
 
     </div>

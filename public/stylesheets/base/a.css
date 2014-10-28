@@ -1,0 +1,12 @@
+a {
+    text-decoration: none;
+}
+
+a:link:hover,
+a:visited:hover {
+    text-decoration: underline;
+}
+
+a:link, a:visited {
+    color: #38A;
+}

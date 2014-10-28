@@ -128,7 +128,8 @@
 		                "captions": {
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
-		                    "JOB_HISTORY": "Job History"
+		                    "JOB_HISTORY": "Job History",
+		                    "QUALIFICATION": "保有資格"
 		                }
 		            },
 		            "blog": {
@@ -192,7 +193,8 @@
 		                "captions": {
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
-		                    "JOB_HISTORY": "Job History"
+		                    "JOB_HISTORY": "Job History",
+		                    "QUALIFICATION": "保有資格"
 		                }
 		            },
 		            "blog": {
@@ -240,6 +242,7 @@
 		    "OKUNISHITAKA": "/images/okunishitaka.com-favicon.png",
 		    "BLOG_SCREENSHOT": "/images/screenshots/blog-screenshot.png",
 		    "INDEX_SCREENSHOT": "/images/screenshots/index-screenshot.png",
+		    "PROFILE_SCREENSHOT": "/images/screenshots/profile-screenshot.png",
 		    "WORK_SCREENSHOT": "/images/screenshots/work-screenshot.png",
 		    "WORKS_CHESS_THUMBNAIL": "/images/works/works-chess-thumbnail.png",
 		    "WORKS_CSS_GALLERY_THUMBNAIL": "/images/works/works-css-gallery-thumbnail.png",
@@ -281,7 +284,10 @@
     ng
         .module('ok.constants')
         .constant('linkUrlConstant', {
-		    "ABOUT_MARK_DOWN": "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"
+		    "ABOUT_MARK_DOWN": "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet",
+		    "TIS_HOMEPAGE": "http://www.tis.co.jp/",
+		    "REAL_GLOBE_HOMEPAGE": "http://realglobe.jp/",
+		    "IPA_HOMEPAGE": "http://www.ipa.go.jp/"
 		});
 
 })(angular);
@@ -646,6 +652,32 @@
         ]);
 })(angular);
 
+/**
+ * @ngdoc directive
+ * @name okLinked
+ * @description Ok linked.
+ */
+(function (ng, ap, $) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okLinked', function defineOkLinked(textLinkLogic) {
+            return {
+                link: function (scope, elm, attr) {
+                    scope.$watch(function (scope) {
+                        var text = $(elm).text(),
+                            html = textLinkLogic.toLinkedHtml(text, scope.links || {});
+                        $(elm).html(html).find('a').attr({target: '_blank'});
+                    });
+                },
+                scope: {
+                    links: "=okLinked"
+                }
+            }
+        });
+
+})(angular, apeman, jQuery);
 /**
  * @ngdoc directive
  * @name okReplace
@@ -1221,6 +1253,7 @@
                 get errorCodeLogic() { return $injector.get('errorCodeLogic'); },
                 get multiLangUrlLogic() { return $injector.get('multiLangUrlLogic'); },
                 get pageTitleLogic() { return $injector.get('pageTitleLogic'); },
+                get textLinkLogic() { return $injector.get('textLinkLogic'); },
                 get urlFormatLogic() { return $injector.get('urlFormatLogic'); }
             }
         });
@@ -1406,6 +1439,36 @@
                     }
                     pageName = l.pageNames[pageName.toUpperCase()] || pageName;
                     return [pageName, appName].join(' - ');
+                }
+            }
+        });
+})(angular, apeman);
+/**
+ * Text link logic.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.logics')
+        .factory('textLinkLogic', function defineTextLinkLogic(linkUrlConstant) {
+            return {
+                toLinkedHtml: function (text, links) {
+                    var html = String(text);
+                    Object.keys(links).forEach(function (key) {
+                        html = html.replace(new RegExp(key, 'g'), function (text) {
+                            var href = linkUrlConstant[links[key]];
+                            if (href) {
+                                return '<a href="' + href + '">' + text + '</a>';
+                            } else {
+                                return text;
+                            }
+                        });
+                    });
+                    return html;
+
                 }
             }
         });
@@ -2224,7 +2287,7 @@
         .module('ok.templates')
         .value('profileProfileTableHtmlTemplate', {
 		    "name": "/html/partials/profile/profile-table.html",
-		    "content": "<table id=\"{{id}}\" class=\"prfile-table\">\n    <caption>{{caption}}</caption>\n    <tbody>\n    <tr ng-repeat=\"(key, val) in data\">\n        <th>{{key}}</th>\n        <td>{{val}}</td>\n    </tr>\n    </tbody>\n</table>"
+		    "content": "<table id=\"{{id}}\" class=\"profile-table\">\n    <caption>{{caption}}</caption>\n    <thead>\n    <tr ng:if=\"!!data.head\">\n        <th ng:repeat=\"head in data.head\">{{head}}</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr ng:repeat=\"row in data.body\" ng:init=\"headed=!!data.headedBody\">\n        <th ng:repeat=\"cell in row\" ng:if=\"(headed && $first)\" ok:linked=\"data.links\" ng:bind=\"cell\"></th>\n        <td ng:repeat=\"cell in row\" ng:if=\"!(headed && $first)\"  ok:linked=\"data.links\" ng:bind=\"cell\"></td>\n    </tr>\n    </tbody>\n</table>"
 		});
 
 })(angular);

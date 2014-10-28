@@ -2,5 +2,6 @@
     "errorCodeLogic",
     "multiLangUrlLogic",
     "pageTitleLogic",
-    "urlFormatLogic"
+    "urlFormatLogic",
+    "textLinkLogic"
 ]
