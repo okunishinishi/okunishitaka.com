@@ -8,6 +8,7 @@
     ng
         .module('ok.constants')
         .constant('imageUrlConstant', {
+		    "ME": "/images/me.jpg",
 		    "OKUNISHITAKA": "/images/okunishitaka.com-favicon.png",
 		    "QUALIFICATION_0159_FULL": "/images/qualification/full/qualification_0159_full.jpg",
 		    "QUALIFICATION_0160_FULL": "/images/qualification/full/qualification_0160_full.jpg",

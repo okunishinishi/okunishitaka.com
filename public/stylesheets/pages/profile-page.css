@@ -7,3 +7,14 @@ main {
 .profile-table-container {
     float: left;
 }
+
+#my-img-section {
+    display: inline-block;
+    float: left;
+    padding: 20px 10px;
+}
+
+#my-img {
+    width: 160px;
+    height: 160px;
+}

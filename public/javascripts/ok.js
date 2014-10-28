@@ -239,6 +239,7 @@
     ng
         .module('ok.constants')
         .constant('imageUrlConstant', {
+		    "ME": "/images/me.jpg",
 		    "OKUNISHITAKA": "/images/okunishitaka.com-favicon.png",
 		    "QUALIFICATION_0159_FULL": "/images/qualification/full/qualification_0159_full.jpg",
 		    "QUALIFICATION_0160_FULL": "/images/qualification/full/qualification_0160_full.jpg",
@@ -299,7 +300,12 @@
 		    "ABOUT_MARK_DOWN": "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet",
 		    "TIS_HOMEPAGE": "http://www.tis.co.jp/",
 		    "REAL_GLOBE_HOMEPAGE": "http://realglobe.jp/",
-		    "IPA_HOMEPAGE": "http://www.ipa.go.jp/"
+		    "IPA_HOMEPAGE": "http://www.ipa.go.jp/",
+		    "WORKS_CHESS": "http://okunishinishi.github.io/ChessTek/",
+		    "WORKS_SHOT": "http://okunishinishi.github.io/SHOTek/",
+		    "WORKS_CSS_GALLERY": "http://okunishinishi.github.io/css-art-gallery/",
+		    "WORKS_OTHERO": "http://okunishinishi.github.io/OthelloTek/",
+		    "WORKS_TYPE": "http://okunishinishi.github.io/TouchTypeTraining/"
 		});
 
 })(angular);
@@ -1465,13 +1471,14 @@
 
     ng
         .module('ok.logics')
-        .factory('textLinkLogic', function defineTextLinkLogic(linkUrlConstant) {
+        .factory('textLinkLogic', function defineTextLinkLogic(linkUrlConstant, imageUrlConstant) {
             return {
                 toLinkedHtml: function (text, links) {
                     var html = String(text);
                     Object.keys(links).forEach(function (key) {
                         html = html.replace(new RegExp(key, 'g'), function (text) {
-                            var href = linkUrlConstant[links[key]];
+                            var name = links[key],
+                                href = linkUrlConstant[name] || imageUrlConstant[name];
                             if (href) {
                                 return '<a href="' + href + '">' + text + '</a>';
                             } else {

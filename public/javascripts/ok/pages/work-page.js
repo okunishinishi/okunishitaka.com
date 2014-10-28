@@ -1,7 +1,7 @@
 /**
-* Page script for work.
-* @requires angular
-*/
+ * Page script for work.
+ * @requires angular
+ */
 
 (function (ng) {
     "use strict";
@@ -13,7 +13,11 @@
         .run(function ($rootScope) {
             $rootScope.page = 'work';
         })
-        .controller('WorkCtrl', function ($scope) {
+        .controller('WorkCtrl', function ($scope, workApiService) {
+
+            workApiService.singleton(function (err, works) {
+                $scope.works = works;
+            });
         });
 
 })(angular);

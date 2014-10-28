@@ -36,7 +36,10 @@
 
 <main class="container" ng:controller="WorkCtrl">
 
-
+    <div ng:repeat="work in works" class="work-list-item">
+        <span>{{work.name}}</span>
+        <img ng:src="{{images[work.thumbnail]}}" class="work-thumbnail">
+    </div>
 </main>
 
 <footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>

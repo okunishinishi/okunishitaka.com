@@ -36,6 +36,10 @@
 
 <main class="container" ng:controller="ProfileCtrl">
 
+    <section id="my-img-section">
+        <img id="my-img" ng-src="{{images.ME}}">
+    </section>
+
     <div ng:show="!!profile">
 
         <div ok:profile-table="" ok:id="personel-table" ok:data="profile.personel" ok:caption="l.pages.profile.captions.PERSONEL">

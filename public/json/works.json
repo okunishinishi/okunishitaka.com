@@ -1,10 +1,27 @@
 [
     {
         "name": "ChessTek",
-        "thumbnail": "WORKS_CHESS_THUMBNAIL"
+        "thumbnail": "WORKS_CHESS_THUMBNAIL",
+        "link": "WORKS_CHESS"
     },
     {
-        "name": "ShoTek",
-        "thumbnail": "WORKS_SHOT_THUMBNAIL"
+        "name": "SHOTek",
+        "thumbnail": "WORKS_SHOT_THUMBNAIL",
+        "link": "WORKS_SHOT"
+    },
+    {
+        "name": "CSS Gallery",
+        "thumbnail": "WORKS_CSS_GALLERY_THUMBNAIL",
+        "link": "WORKS_CSS_GALLERY"
+    },
+    {
+        "name": "OtheroTek",
+        "thumbnail": "WORKS_OTHERO_THUMBNAIL",
+        "link": "WORKS_OTHERO"
+    },
+    {
+        "name": "TouchTypeTraining",
+        "thumbnail": "WORKS_TYPE_THUMBNAIL",
+        "link": "WORKS_TYPE"
     }
 ]
