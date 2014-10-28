@@ -28,6 +28,7 @@
             }
         })
         .controller('ProfileCtrl', function ($scope, profileApiService) {
+
             profileApiService.singleton(function (err, profile) {
                 $scope.profile = profile;
             });

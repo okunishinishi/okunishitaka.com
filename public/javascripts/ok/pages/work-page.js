@@ -14,7 +14,6 @@
             $rootScope.page = 'work';
         })
         .controller('WorkCtrl', function ($scope) {
-
         });
 
 })(angular);

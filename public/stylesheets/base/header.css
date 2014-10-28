@@ -29,3 +29,7 @@ header h1 {
     text-align: center;
     line-height: 40px;
 }
+
+.header-nav-item.nav-item-selected {
+    opacity: 0.5;
+}
