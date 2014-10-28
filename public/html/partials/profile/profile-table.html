@@ -8,7 +8,11 @@
     <tbody>
     <tr ng:repeat="row in data.body" ng:init="headed=!!data.headedBody">
         <th ng:repeat="cell in row" ng:if="(headed && $first)" ok:linked="data.links" ng:bind="cell"></th>
-        <td ng:repeat="cell in row" ng:if="!(headed && $first)"  ok:linked="data.links" ng:bind="cell"></td>
+        <td ng:repeat="cell in row" ng:if="!(headed && $first)"
+            ok:linked="data.links">
+            <span ng:hide="cell.image">{{cell}}</span>
+            <span ng:show="cell.image"><a href="{{images['QUALIFICATION_0160']}}" target="_blank">{{cell.title}}</a></span>
+        </td>
     </tr>
     </tbody>
 </table>

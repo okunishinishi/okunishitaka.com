@@ -14,15 +14,16 @@
         .run(function ($rootScope) {
             $rootScope.page = 'profile';
         })
-        .directive('okProfileTable', function (partialUrlConstant) {
+        .directive('okProfileTable', function (partialUrlConstant, imageUrlConstant) {
             return {
                 link: function (scope, elm, attr) {
+                    scope.images = imageUrlConstant;
                     $(elm).addClass('profile-table-container');
                 },
                 scope: {
                     id: '=okId',
                     caption: '=okCaption',
-                    data: '=okData'
+                    data: '=okData',
                 },
                 templateUrl: partialUrlConstant.PROFILE_TABLE
             }

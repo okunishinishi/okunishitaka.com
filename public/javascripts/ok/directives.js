@@ -25,7 +25,7 @@
             return {
                 link: function (scope, elm, attr) {
                     scope.$watch(function (scope) {
-                        var text = $(elm).text(),
+                        var text = $(elm).html(),
                             html = textLinkLogic.toLinkedHtml(text, scope.links || {});
                         $(elm).html(html).find('a').attr({target: '_blank'});
                     });
