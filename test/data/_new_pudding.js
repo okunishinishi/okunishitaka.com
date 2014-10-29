@@ -5,7 +5,7 @@
 "use strict";
 
 
-var p = require('pudding'),
+var p = require('apeman-dev/lib/ext').pudding,
     Pudding = p.Pudding;
 
 module.exports = function _newPudding() {

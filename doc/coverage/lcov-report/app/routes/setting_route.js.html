@@ -195,20 +195,20 @@
     </style>
 </head>
 <body>
-<div class="header low">
+<div class="header medium">
     <h1>Code coverage report for <span class="entity">app/routes/setting_route.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">22.22% <small>(4 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">50% <small>(4 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">0% <small>(0 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">100% <small>(0 / 0)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class="metric">0% <small>(0 / 7)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">0% <small>(0 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">22.22% <small>(4 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">50% <small>(4 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
@@ -258,28 +258,7 @@
 40
 41
 42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+43</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -287,8 +266,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -304,12 +281,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -321,27 +296,10 @@
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * Route for settings.
  * @module module:okunishitaka-dot-com/app/routes/settingRoute
@@ -353,9 +311,7 @@ var h = require('./_helper'),
     settingStorage = h.storages.settingStorage,
     schemas = h.schemas,
     async = h.async,
-    interceptors = require('./interceptors'),
-    SchemaInterceptor = interceptors.SchemaInterceptor,
-    StorageInterceptor = interceptors.StorageInterceptor;
+    rest = require('./handlers/rest');
 &nbsp;
 exports._singletonId = '00000';
 &nbsp;
@@ -366,13 +322,11 @@ exports._singletonId = '00000';
  * @param next
  */
 exports.one = <span class="fstat-no" title="function not covered" >function (req, res, next) {</span>
-<span class="cstat-no" title="statement not covered" >    req.params._id = exports._singletonId;</span>
-<span class="cstat-no" title="statement not covered" >    var storageInterceptor = new StorageInterceptor(settingStorage);</span>
-<span class="cstat-no" title="statement not covered" >    async.series([</span>
-<span class="fstat-no" title="function not covered" >        function (callback) {</span>
-<span class="cstat-no" title="statement not covered" >            storageInterceptor.one(req, res, next);</span>
-        }
-    ], next);
+<span class="cstat-no" title="statement not covered" >    var handler = new rest.SingletonRestHandler({</span>
+        storage: settingStorage,
+        id: exports._singletonId
+    });
+<span class="cstat-no" title="statement not covered" >    handler.one(req, res, next);</span>
 }
 &nbsp;
 /**
@@ -382,35 +336,18 @@ exports.one = <span class="fstat-no" title="function not covered" >function (req
  * @param next
  */
 exports.save = <span class="fstat-no" title="function not covered" >function (req, res, next) {</span>
-<span class="cstat-no" title="statement not covered" >    var schemaInterceptor = new SchemaInterceptor(schemas.settingSaveSchema),</span>
-        storageInterceptor = new StorageInterceptor(settingStorage);
-<span class="cstat-no" title="statement not covered" >    async.series([</span>
-<span class="fstat-no" title="function not covered" >        function (callback) {</span>
-<span class="cstat-no" title="statement not covered" >            schemaInterceptor.validate(req, res, callback);</span>
-        },
-<span class="fstat-no" title="function not covered" >        function (callback) {</span>
-<span class="cstat-no" title="statement not covered" >            var id = exports._singletonId;</span>
-<span class="cstat-no" title="statement not covered" >            async.waterfall([</span>
-<span class="fstat-no" title="function not covered" >                function (callback) {</span>
-<span class="cstat-no" title="statement not covered" >                    settingStorage.one(id, callback);</span>
-                },
-<span class="fstat-no" title="function not covered" >                function (data, callback) {</span>
-<span class="cstat-no" title="statement not covered" >                    req.body._id = id;</span>
-<span class="cstat-no" title="statement not covered" >                    if (data) {</span>
-<span class="cstat-no" title="statement not covered" >                        storageInterceptor.update(req, res, callback);</span>
-                    } else {
-<span class="cstat-no" title="statement not covered" >                        storageInterceptor.create(req, res, callback);</span>
-                    }
-                }
-            ])
-        }
-    ], next);
+<span class="cstat-no" title="statement not covered" >    var handler = new rest.SingletonRestHandler({</span>
+        storage: settingStorage,
+        schema: schemas.settingSaveSchema,
+        id: exports._singletonId
+    });
+<span class="cstat-no" title="statement not covered" >    handler.save(req, res, next);</span>
 }</pre></td></tr>
 </table></pre>
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Oct 03 2014 18:45:19 GMT+0900 (JST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Oct 29 2014 16:05:26 GMT+0900 (JST)</div>
 </div>
 
 <script src="../../prettify.js"></script>
