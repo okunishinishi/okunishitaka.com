@@ -13,6 +13,7 @@ module.exports = {
     get cpConfig() { return require('./cp_config'); },
     get formatConfig() { return require('./format_config'); },
     get indexConfig() { return require('./index_config'); },
+    get istanbulConfig() { return require('./istanbul_config'); },
     get jsdocConfig() { return require('./jsdoc_config'); },
     get mkdirConfig() { return require('./mkdir_config'); },
     get mochaConfig() { return require('./mocha_config'); },

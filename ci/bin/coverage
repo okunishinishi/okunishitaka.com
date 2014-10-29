@@ -1,4 +1,26 @@
-#!/bin/bash
+#!/usr/bin/env node
 
-cd "$(dirname $0)/../../"
-npm run coverage
+/**
+ *  Create coverage report.
+ */
+
+"use strict";
+
+
+var h = require('../_helper'),
+    async = h.async,
+    tasks = h.tasks,
+    configs = require('../configs');
+
+
+process.chdir(h.basedir);
+
+
+async.eachSeries([
+    {
+        config: configs.istanbulConfig,
+        task: tasks.IstanbulTask
+    }
+], function (data, callback) {
+    new (data.task)(data.config).run(callback);
+}, h.done('Coverage done!'));
