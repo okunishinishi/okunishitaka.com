@@ -11,7 +11,7 @@ var u = require('apeman-util'),
     TaskHelper = u.tasking.TaskHelper,
     async = u.ext.async,
     glob = u.ext.glob,
-    dateformat = require('dateformat'),
+    dateformat = u.ext.dateformat,
     fs = u.core.fs,
     copy = u.object.copy;
 
