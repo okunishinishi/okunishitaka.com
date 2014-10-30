@@ -68,7 +68,11 @@
 						</li>
 						
 						<li>
-							<a href="interceptors.html">okunishitaka-dot-com/app/routes/interceptors</a>
+							<a href="handlers.html">okunishitaka-dot-com/app/routes/handlers</a>
+						</li>
+						
+						<li>
+							<a href="rest.html">okunishitaka-dot-com/app/routes/handlers/rest</a>
 						</li>
 						
 						<li>
@@ -94,11 +98,35 @@
 						</li>
 						
 						<li>
-							<a href="interceptors.SchemaInterceptor.html">okunishitaka-dot-com/app/routes/interceptors.SchemaInterceptor</a>
+							<a href="handlers.CreateRestHandler.html">okunishitaka-dot-com/app/routes/handlers.CreateRestHandler</a>
 						</li>
 						
 						<li>
-							<a href="interceptors.StorageInterceptor.html">okunishitaka-dot-com/app/routes/interceptors.StorageInterceptor</a>
+							<a href="handlers.SchemaHandler.html">okunishitaka-dot-com/app/routes/handlers.SchemaHandler</a>
+						</li>
+						
+						<li>
+							<a href="handlers.StorageHandler.html">okunishitaka-dot-com/app/routes/handlers.StorageHandler</a>
+						</li>
+						
+						<li>
+							<a href="rest.DestroyRestHandler.html">okunishitaka-dot-com/app/routes/handlers/rest.DestroyRestHandler</a>
+						</li>
+						
+						<li>
+							<a href="rest.ListRestHandler.html">okunishitaka-dot-com/app/routes/handlers/rest.ListRestHandler</a>
+						</li>
+						
+						<li>
+							<a href="rest.OneRestHandler.html">okunishitaka-dot-com/app/routes/handlers/rest.OneRestHandler</a>
+						</li>
+						
+						<li>
+							<a href="rest.RestHandler.html">okunishitaka-dot-com/app/routes/handlers/rest.RestHandler</a>
+						</li>
+						
+						<li>
+							<a href="rest.UpdateRestHandler.html">okunishitaka-dot-com/app/routes/handlers/rest.UpdateRestHandler</a>
 						</li>
 						
 
@@ -132,10 +160,8 @@
 
 var h = require('./_helper'),
     blogStorage = h.storages.blogStorage,
-    async = h.async,
-    interceptors = require('./interceptors'),
-    SchemaInterceptor = interceptors.SchemaInterceptor,
-    StorageInterceptor = interceptors.StorageInterceptor;
+    rest = require('./handlers/rest'),
+    async = h.async;
 
 /** @lends blogRoute */
 exports = module.exports = {};
@@ -147,15 +173,10 @@ exports = module.exports = {};
  * @param {function} next - Call next.
  */
 exports.one = function one(req, res, next) {
-    var storageInterceptor = new StorageInterceptor(blogStorage);
-    async.series([
-        function (callback) {
-            storageInterceptor.checkIdentity(req, res, callback);
-        },
-        function (callback) {
-            storageInterceptor.one(req, res, callback);
-        }
-    ], next);
+    var handler = new rest.OneRestHandler({
+        storage: blogStorage
+    });
+    handler.handle(req, res, next);
 }
 
 /**
@@ -165,12 +186,10 @@ exports.one = function one(req, res, next) {
  * @param {function} next - Call next.
  */
 exports.list = function list(req, res, next) {
-    var storageInterceptor = new StorageInterceptor(blogStorage);
-    async.series([
-        function (callback) {
-            storageInterceptor.list(req, res, next);
-        }
-    ], next);
+    var handler = new rest.ListRestHandler({
+        storage: blogStorage
+    });
+    handler.handle(req, res, next);
 }
 
 
@@ -181,12 +200,10 @@ exports.list = function list(req, res, next) {
  * @param {function} next - Call next.
  */
 exports.create = function create(req, res, next) {
-    var storageInterceptor = new StorageInterceptor(blogStorage);
-    async.series([
-        function (callback) {
-            storageInterceptor.create(req, res, callback);
-        }
-    ], next);
+    var handler = new rest.CreateRestHandler({
+        storage: blogStorage
+    });
+    handler.handle(req, res, next);
 }
 
 /**
@@ -196,18 +213,10 @@ exports.create = function create(req, res, next) {
  * @param {function} next - Call next.
  */
 exports.update = function update(req, res, next) {
-    var storageInterceptor = new StorageInterceptor(blogStorage);
-    async.series([
-        function (callback) {
-            storageInterceptor.checkIdentity(req, res, callback);
-        },
-        function (callback) {
-            storageInterceptor.checkConflict(req, res, callback);
-        },
-        function (callback) {
-            storageInterceptor.update(req, res, callback);
-        }
-    ], next);
+    var handler = new rest.UpdateRestHandler({
+        storage: blogStorage
+    });
+    handler.handle(req, res, next);
 }
 
 /**
@@ -217,15 +226,10 @@ exports.update = function update(req, res, next) {
  * @param {function} next - Call next.
  */
 exports.destroy = function destroy(req, res, next) {
-    var storageInterceptor = new StorageInterceptor(blogStorage);
-    async.series([
-        function (callback) {
-            storageInterceptor.checkIdentity(req, res, callback);
-        },
-        function (callback) {
-            storageInterceptor.destroy(req, res, next);
-        }
-    ], next);
+    var handler = new rest.DestroyRestHandler({
+        storage: blogStorage
+    });
+    handler.handle(req, res, next);
 }</pre>
 	</article>
 </section>
@@ -250,7 +254,7 @@ exports.destroy = function destroy(req, res, next) {
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a>
-		on 2014-10-05 using the <a
+		on 2014-10-30 using the <a
 			href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>

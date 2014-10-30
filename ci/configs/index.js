@@ -9,6 +9,7 @@ module.exports = {
     get backupConfig() { return require('./backup_config'); },
     get budConfig() { return require('./bud_config'); },
     get chmodConfig() { return require('./chmod_config'); },
+    get codeclimateConfig() { return require('./codeclimate_config'); },
     get concatConfig() { return require('./concat_config'); },
     get cpConfig() { return require('./cp_config'); },
     get formatConfig() { return require('./format_config'); },

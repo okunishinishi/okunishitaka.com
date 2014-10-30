@@ -125,5 +125,5 @@ app._newServer = function (middlewares) {
     });
     return  server;
 }
-
+app.close = u.doNothing;
 module.exports = app;

@@ -1,9 +1,14 @@
 language: node_js
 node_js:
 - '0.11'
-before_install:
+before_install: 
 install:
 - npm install
 script:
-- ./ci/bin/build
-- ./ci/bin/test
+- "./ci/bin/build"
+- "./ci/bin/test"
+- "./ci/bin/coverage"
+- "./ci/bin/send_coverage"
+env:
+  global:
+    secure: kGtDZtFKFndcG4OnNWCL8FuS8RHb8EWMPAfwUt7ziVOJ4ND3TKHBgBIHO7Q+7Wed9StxO/czx9uSrSiPhoTP6dW6YtFy8pEV3n8OI1EiyZQbLGUqN6w2hxi+033qGO377a/zknJiUUu20ZOgxdkQ+T5uDmMnxm1i/Nyfu7wIRNQ=

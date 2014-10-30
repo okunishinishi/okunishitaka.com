@@ -11,8 +11,6 @@ var u = require('apeman-util'),
     basedir = require('../app_settings').basedir,
     h = new clustering.ClusterHelper(basedir);
 
-h.async = u.ext.async;
 h.file = u.file;
-h.persist = clustering.persist;
 
 module.exports = h;
