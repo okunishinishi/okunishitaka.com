@@ -17,4 +17,4 @@ new tasks.ForkTask({
         'ci/bin/test_unit_tests',
         'ci/bin/test_scenario_tests'
     ]
-}).run(h.done('Doc done!'));
+}).run(h.done('Doc done!', true));

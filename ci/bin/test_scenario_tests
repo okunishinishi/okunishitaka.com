@@ -21,4 +21,4 @@ async.eachSeries([
     }
 ], function (data, callback) {
     new (data.task)(data.config).run(callback);
-}, h.done('Scenario tests done!'));
+}, h.done('Scenario tests done!', true));
