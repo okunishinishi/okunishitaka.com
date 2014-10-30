@@ -1,6 +1,6 @@
 {
     "nodejs_url": "http://nodejs.org/",
-    "apemna-url": "https://github.com/tick-tack/apeman",
+    "apemna_url": "https://github.com/tick-tack/apeman",
     "apeman_badge_url": "http://tick-tack.github.io/apeman/images/apeman-badge-flat.svg",
     "my_license_url": "http://raw.github.com/okunishinishi/okunishitaka.com/master/LICENSE",
     "my_travis_url": "http://travis-ci.org/okunishinishi/okunishitaka.com",
