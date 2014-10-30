@@ -20,9 +20,15 @@
         "link": "my_gemnasium_url"
     },
     {
+        "alt": "Powerd by apeman",
+        "img": "apeman_badge_url",
+        "link": ""
+    },
+    {
         "alt": "Git tip",
         "img": "my_gittip_budge_url",
         "link": "my_gittip_url"
     }
+
 
 ]

@@ -6,6 +6,7 @@ okunishitaka.com
 [![Code Climate][my_codeclimate_badge_url]][my_codeclimate_url]
 [![Code Coverage][my_codeclimate_coverage_badge_url]][my_codeclimate_url]
 [![dependencies][my_gemnasium_badge_url]][my_gemnasium_url]
+[![Powerd by apeman][apeman_badge_url]][]
 [![Git tip][my_gittip_budge_url]][my_gittip_url]
 <!-- Badge end -->
 
@@ -34,6 +35,8 @@ Requirements
 <!-- Links start -->
 
 [nodejs_url]: http://nodejs.org/
+[apemna-url]: https://github.com/tick-tack/apeman
+[apeman_badge_url]: http://tick-tack.github.io/apeman/images/apeman-badge-flat.svg
 [my_license_url]: http://raw.github.com/okunishinishi/okunishitaka.com/master/LICENSE
 [my_travis_url]: http://travis-ci.org/okunishinishi/okunishitaka.com
 [my_travis_badge_url]: http://img.shields.io/travis/okunishinishi/okunishitaka.com.svg?style=flat
