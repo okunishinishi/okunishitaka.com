@@ -6,7 +6,7 @@
 
 var u = require('apeman-util'),
     path = u.core.path,
-    tmpl = require('apeman-tasks/lib/paths').nginxVhostConfTmpl,
+    tmpl = require('apeman-web/lib/paths').nginxVhostConfTmpl,
     server = require('../../server.json');
 
 module.exports = {

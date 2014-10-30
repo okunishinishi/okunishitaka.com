@@ -17,7 +17,7 @@ h.yesno.ask('Are you sure to load test data ? [y/n]', null, function (ok) {
         return;
     }
 
-    console.log('Destory all data...');
+    console.log('Destroy all data...');
     h.rmdirRecursive(settings.dataDir, function () {
         storages.connect(settings.dataDir, function () {
             async.eachSeries(
