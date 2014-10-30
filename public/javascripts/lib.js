@@ -22679,7 +22679,7 @@ angular.module('ngSanitize').filter('linky', ['$sanitize', function($sanitize) {
 /**
  * @file Apeman client side scripts.
  * @namespace apeman
- * @version 0.0.15
+ * @version 0.0.17
  */
 window.apeman = (function (apeman) {
     "use strict";
@@ -33192,7 +33192,7 @@ if (typeof exports === 'object') {
 /**
  * @file Apeman module for angular.js
  * @namespace ng-apeman
- * @version 0.0.15
+ * @version 0.0.17
  * @requires angular
  */
 

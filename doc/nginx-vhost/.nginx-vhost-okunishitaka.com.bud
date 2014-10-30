@@ -9,12 +9,27 @@ var u = require('apeman-util'),
     tmpl = require('apeman-web/lib/paths').nginxVhostConfTmpl,
     server = require('../../server.json');
 
+var basedir = path.resolve(__dirname, '../../');
+
 module.exports = {
     force: true,
     mode: '444',
     tmpl: tmpl,
     data: {
         port: server.port,
-        domain: server.domain
+        domain: server.domain,
+        get errorPages() {
+            var data = {
+                '502 503': 'error-something-wrong.html'
+            };
+            return Object.keys(data).map(function (key) {
+                return {
+                    statusCode: key,
+                    filename: '/' + data[key],
+                    root: path.resolve(basedir, 'public/html/error'),
+                    internal: false
+                }
+            });
+        }
     }
 }

@@ -20,6 +20,12 @@ server {
         proxy_redirect off;
     }
 
+    error_page 502 503 /error-something-wrong.html;
+    location = /error-something-wrong.html {
+        root /Users/okuni/WebstormProjects/okunishitaka.com/public/html/error;
+    }
+
+
 }
 
 

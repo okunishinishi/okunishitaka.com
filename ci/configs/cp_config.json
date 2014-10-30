@@ -25,8 +25,13 @@
         "mode": "444"
     },
     {
-        "src": "node_modules/apeman-front/assets/html/something-wrong.html",
-        "dest": "public/html/error/something-wrong.html",
+        "src": "node_modules/apeman-front/assets/html/error/error-something-wrong.html",
+        "dest": "public/html/error/error-something-wrong.html",
+        "mode": "444"
+    },
+    {
+        "src": "node_modules/apeman-front/assets/html/error/error-under-maintenance.html",
+        "dest": "public/html/error/error-under-maintenance.html",
         "mode": "444"
     },
     {

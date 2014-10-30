@@ -1,6 +1,6 @@
 /**
  * Style for apeman.
- * @version 0.0.15
+ * @version 0.0.17
  */
 
 
@@ -62,6 +62,36 @@ button,
     color: white;
     border-color: #5c7bdf;
 }
+/**
+ * Style for clearing.
+ */
+
+.clear-left {
+  clear: left;
+}
+.clear-both {
+  clear: both;
+}
+.clear-right {
+  clear: right;
+}
+
+
+/**
+ * Style for floating.
+ */
+
+.float-left {
+  float: left;
+}
+.float-none {
+  float: none;
+}
+.float-right {
+  float: right;
+}
+
+
 /*
 Footer
 
@@ -241,3 +271,18 @@ th, td {
     padding: 4px 8px;
     border: 1px solid #AAA;
 }
+/**
+ * Style for text aligning.
+ */
+
+.text-align-left {
+  text-align: left;
+}
+.text-align-center {
+  text-align: center;
+}
+.text-align-right {
+  text-align: right;
+}
+
+
