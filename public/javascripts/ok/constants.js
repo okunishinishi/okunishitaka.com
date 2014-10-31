@@ -76,7 +76,8 @@
 		        "meta": {
 		            "NAME": "okunishitaka.com",
 		            "DESCRIPTION": "Homepage of Taka Okunishi",
-		            "AUTHOR": "Taka Okunishi"
+		            "AUTHOR": "Taka Okunishi",
+		            "COPY_RIGHT": "Copyright © 2014 Taka Okunishi"
 		        },
 		        "placeholders": {
 		            "blog": {
@@ -141,7 +142,8 @@
 		        "meta": {
 		            "NAME": "okunishitaka.com",
 		            "DESCRIPTION": "Homepage of Taka Okunishi",
-		            "AUTHOR": "Taka Okunishi"
+		            "AUTHOR": "Taka Okunishi",
+		            "COPY_RIGHT": "Copyright © 2014 Taka Okunishi"
 		        },
 		        "placeholders": {
 		            "blog": {

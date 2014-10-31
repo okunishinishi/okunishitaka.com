@@ -76,7 +76,8 @@
 		        "meta": {
 		            "NAME": "okunishitaka.com",
 		            "DESCRIPTION": "Homepage of Taka Okunishi",
-		            "AUTHOR": "Taka Okunishi"
+		            "AUTHOR": "Taka Okunishi",
+		            "COPY_RIGHT": "Copyright © 2014 Taka Okunishi"
 		        },
 		        "placeholders": {
 		            "blog": {
@@ -141,7 +142,8 @@
 		        "meta": {
 		            "NAME": "okunishitaka.com",
 		            "DESCRIPTION": "Homepage of Taka Okunishi",
-		            "AUTHOR": "Taka Okunishi"
+		            "AUTHOR": "Taka Okunishi",
+		            "COPY_RIGHT": "Copyright © 2014 Taka Okunishi"
 		        },
 		        "placeholders": {
 		            "blog": {
@@ -2246,7 +2248,7 @@
         .module('ok.templates')
         .value('footerHtmlTemplate', {
 		    "name": "/html/partials/footer.html",
-		    "content": "<div class=\"container\" id=\"footer-content\">\n    <small id=\"small-copyright\">Copyright © 2014 Taka Okunishi All Rights Reserved</small>\n</div>\n"
+		    "content": "<div class=\"container\" id=\"footer-content\">\n    <small id=\"small-copyright\">{{l.meta.COPY_RIGHT}}</small>\n</div>\n"
 		});
 
 })(angular);

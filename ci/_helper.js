@@ -50,7 +50,7 @@ h.eachFiles = function (filenames, handler, done) {
 }
 
 h.loadHtmlFile = function (filename, callback) {
-    var cheerio = require('cheerio');
+    var cheerio = u.ext.cheerio;
     async.waterfall([
         function (callback) {
             fs.readFile(filename, callback);

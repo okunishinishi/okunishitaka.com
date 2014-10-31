@@ -17,7 +17,8 @@ var l = {};
 l.meta = {
     NAME: pkg.name,
     DESCRIPTION: pkg.description,
-    AUTHOR: pkg.author
+    AUTHOR: pkg.author,
+    COPY_RIGHT: require('./_copy_right')
 };
 
 l.placeholders = {
