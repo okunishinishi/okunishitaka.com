@@ -11,11 +11,12 @@ main {
     min-height: 180px;
 }
 
-.profile-list-container .caption{
-    margin:4px 0;
+.profile-list-container .caption {
+    margin: 4px 0;
 }
-.profile-list-container ul{
-    margin:0;
+
+.profile-list-container ul {
+    margin: 0;
 }
 
 #my-img-section {
@@ -27,4 +28,16 @@ main {
 #my-img {
     width: 160px;
     height: 160px;
+}
+
+th,td {
+    min-width: 60px;
+}
+
+@media (max-width: 568px) {
+    .profile-list-container,
+    .profile-table-container {
+        float: none;
+        margin: 10px 0 20px;
+    }
 }

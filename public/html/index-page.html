@@ -29,58 +29,53 @@
     <script src="/javascripts/ok/utils.js?v=0.0.0"></script>
     <script src="/javascripts/ok/pages/page.js?v=0.0.0"></script>
     <script src="/javascripts/ok/pages/index-page.js?v=0.0.0"></script>
-
-
-    <script type="x-ng-template" id="see-more-button-template">
-        <a class="see-more-button" href="{{href}}">
-            <span class="see-more-button-label">
-                <span class="see-more-button-label-inner fa fa-chevron-right"></span>
-            </span>
-        </a>
-    </script>
 </head>
 <body id="index-page-body">
 
 
 <main ng:controller="IndexCtrl">
+    <div class="container">
+        <div id="page-caption" ng:click="goTopPage();">
+            <div id="page-caption-inner">
+                <div ng-repeat="c in l.pages.index.CAPTION">{{c}}</div>
+            </div>
+        </div>
+    </div>
 
     <section id="title-section" ok:scroll-to-stay="#title-section-inner" style="">
         <div id="title-section-inner">
-            <div id="main-title" class="outlined-text-white">
+            <div id="main-title">
                 <div class="container">
-                    {{l.pages.index.TITLE}}
+                    <span id="main-title-text" class="outlined-text-white">
+                        {{l.pages.index.TITLE}}
+                    </span>
                 </div>
             </div>
         </div>
     </section>
 
     <div id="main-content-background">
-        <div ng-include="partials.INDEX_MENU_SECTION"></div>
 
         <div class="container">
             <section id="profile-section" ng:controller="IndexProfileCtrl" class="content-section">
-                <h1 class="content-section-title">{{l.pageNames.PROFILE}}</h1>
-
+                <div ok:content-title="l.pageNames.PROFILE" ok:content-subtitle="l.pageDescriptions.PROFILE"></div>
                 <span ok:see-more="pages.PROFILE"></span>
             </section>
 
             <section id="blog-section" ng:controller="IndexBlogCtrl" class="content-section">
-                <h1 class="content-section-title">{{l.pageNames.BLOG}}</h1>
-
+                <div ok:content-title="l.pageNames.BLOG" ok:content-subtitle="l.pageDescriptions.BLOG"></div>
                 <span ok:see-more="pages.BLOG"></span>
-
             </section>
 
             <section id="work-section" ng:controller="IndexWorkCtrl" class="content-section">
-                <h1 class="content-section-title">{{l.pageNames.WORK}}</h1>
-
+                <div ok:content-title="l.pageNames.WORK" ok:content-subtitle="l.pageDescriptions.WORK"></div>
                 <span ok:see-more="pages.WORK"></span>
             </section>
         </div>
     </div>
 
-    <footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>
 
 </main>
+<footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>
 </body>
 </html>

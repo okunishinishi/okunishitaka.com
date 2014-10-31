@@ -37,7 +37,7 @@
 <main class="container" ng:controller="ProfileCtrl">
 
     <section id="my-img-section">
-        <img id="my-img" ng-src="{{images.ME}}">
+        <img id="my-img" ng:src="{{images.ME}}">
     </section>
 
     <div ng:show="!!profile">
@@ -45,7 +45,7 @@
         <div ok:profile-table="" ok:id="personel-table" ok:data="profile.personel" ok:caption="l.pages.profile.captions.PERSONEL">
         </div>
 
-        <div ok:profile-list="" ok:id="about-list" ok:data="profile.about.texts" ok:caption="l.pages.profile.captions.ABOUT">
+        <div ok:profile-list="" ok:id="about-list" ok:data="profile.about" ok:caption="l.pages.profile.captions.ABOUT">
         </div>
 
         <div ok:profile-table="" ok:id="education-table" ok:data="profile.education" ok:caption="l.pages.profile.captions.EDUCATION">

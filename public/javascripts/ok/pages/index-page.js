@@ -16,7 +16,19 @@
         .controller('IndexCtrl', function ($scope) {
 
         })
-        .directive('okSeeMore', function () {
+        .directive('okContentTitle', function (partialUrlConstant) {
+            return {
+                scope: {
+                    title: '=okContentTitle',
+                    subtitle: '=okContentSubtitle'
+                },
+                link: function (scope, elm, attr) {
+                    $(elm).addClass('content-section-title-container');
+                },
+                templateUrl: partialUrlConstant.INDEX_CONTENT_TITLE
+            }
+        })
+        .directive('okSeeMore', function (partialUrlConstant) {
             return {
                 scope: {
                     href: '=okSeeMore'
@@ -24,7 +36,7 @@
                 link: function (scope, elm, attr) {
                     $(elm).addClass('see-more-button-container');
                 },
-                template: $('#see-more-button-template').html()
+                templateUrl: partialUrlConstant.INDEX_SEE_MORE_BUTTON
             }
         })
         .controller('IndexProfileCtrl', function ($scope) {

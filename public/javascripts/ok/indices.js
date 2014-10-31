@@ -163,7 +163,10 @@
                 get blogBlogListSectionHtmlTemplate() { return $injector.get('blogBlogListSectionHtmlTemplate'); },
                 get footerHtmlTemplate() { return $injector.get('footerHtmlTemplate'); },
                 get headerHtmlTemplate() { return $injector.get('headerHtmlTemplate'); },
+                get indexIndexContentTitleHtmlTemplate() { return $injector.get('indexIndexContentTitleHtmlTemplate'); },
                 get indexIndexMenuSectionHtmlTemplate() { return $injector.get('indexIndexMenuSectionHtmlTemplate'); },
+                get indexIndexSeeMoreButtonHtmlTemplate() { return $injector.get('indexIndexSeeMoreButtonHtmlTemplate'); },
+                get indexIndexTitleHtmlTemplate() { return $injector.get('indexIndexTitleHtmlTemplate'); },
                 get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); },
                 get profileProfileListHtmlTemplate() { return $injector.get('profileProfileListHtmlTemplate'); },
                 get profileProfileTableHtmlTemplate() { return $injector.get('profileProfileTableHtmlTemplate'); }

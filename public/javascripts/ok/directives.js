@@ -118,6 +118,7 @@
                             window.scroll(function () {
                                 update();
                             });
+
                         }
                     }
                 }
@@ -187,6 +188,7 @@
                                 clear();
                                 update();
                             });
+                            clear();
                         }
                     }
                 }

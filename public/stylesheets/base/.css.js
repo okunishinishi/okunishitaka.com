@@ -37,7 +37,7 @@ exports.float = valueStyle('float', [
 exports.clear = valueStyle('clear', [
     'left', 'both', 'right'
 ]);
-exports.positioned = valueStyle('position', [
+exports.position = valueStyle('position', [
     'static', 'relative', 'absolute', 'fixed'
 ]);
 

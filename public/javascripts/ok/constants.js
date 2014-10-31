@@ -100,6 +100,12 @@
 		            "BLOG": "Blog",
 		            "WORK": "Works"
 		        },
+		        "pageDescriptions": {
+		            "INDEX": "Top page.",
+		            "PROFILE": "Who am I?",
+		            "BLOG": "What I think?",
+		            "WORK": "What I've made."
+		        },
 		        "buttons": {
 		            "MORE": "See more",
 		            "CANCEL": "Cancel",
@@ -125,6 +131,9 @@
 		        },
 		        "pages": {
 		            "index": {
+		                "CAPTION": [
+		                    "Homepage of Taka Okunishi"
+		                ],
 		                "TITLE": "okunishitaka.com"
 		            },
 		            "profile": {
@@ -170,6 +179,12 @@
 		            "BLOG": "Blog",
 		            "WORK": "Works"
 		        },
+		        "pageDescriptions": {
+		            "INDEX": "Top page.",
+		            "PROFILE": "Who am I?",
+		            "BLOG": "What I think?",
+		            "WORK": "What I've made."
+		        },
 		        "buttons": {
 		            "MORE": "See more",
 		            "CANCEL": "Cancel",
@@ -195,6 +210,9 @@
 		        },
 		        "pages": {
 		            "index": {
+		                "CAPTION": [
+		                    "Homepage of Taka Okunishi"
+		                ],
 		                "TITLE": "okunishitaka.com"
 		            },
 		            "profile": {
@@ -356,7 +374,8 @@
 		    "BLOG_LIST_SECTION": "/html/partials/blog/blog-list-section.html",
 		    "FOOTER": "/html/partials/footer.html",
 		    "HEADER": "/html/partials/header.html",
-		    "INDEX_MENU_SECTION": "/html/partials/index/index-menu-section.html",
+		    "INDEX_CONTENT_TITLE": "/html/partials/index/index-content-title.html",
+		    "INDEX_SEE_MORE_BUTTON": "/html/partials/index/index-see-more-button.html",
 		    "META": "/html/partials/meta.html",
 		    "PROFILE_LIST": "/html/partials/profile/profile-list.html",
 		    "PROFILE_TABLE": "/html/partials/profile/profile-table.html"

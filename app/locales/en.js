@@ -10,7 +10,9 @@
 
 "use strict";
 
-var pkg = require('../../package');
+var pkg = require('../../package'),
+    u = require('apeman-util'),
+    format = u.core.util.format;
 
 var l = {};
 
@@ -45,6 +47,13 @@ l.pageNames = {
     WORK: 'Works'
 }
 
+l.pageDescriptions = {
+    INDEX: 'Top page.',
+    PROFILE: 'Who am I?',
+    BLOG: 'What I think?',
+    WORK: "What I've made."
+};
+
 l.buttons = {
     MORE: 'See more',
     CANCEL: 'Cancel',
@@ -73,6 +82,9 @@ l.errorDescriptions = {
 
 l.pages = {
     index: {
+        CAPTION: [
+            'Homepage of ' + pkg.author
+        ],
         TITLE: pkg.name
     },
     profile: {

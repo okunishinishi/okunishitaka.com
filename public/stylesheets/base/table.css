@@ -4,6 +4,7 @@ table {
 
 .caption,
 caption {
+    text-align: center;
     color: #E5E5E5;
     padding: 4px 8px;
     font-weight: 100;

@@ -60,6 +60,7 @@
                                 clear();
                                 update();
                             });
+                            clear();
                         }
                     }
                 }

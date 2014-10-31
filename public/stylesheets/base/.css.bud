@@ -24,6 +24,10 @@ module.exports = [
         description: 'Style for text aligning.',
         styles: data.textAlign
     }),
+    cssBud('position', {
+        description: 'Style for position.',
+        styles: data.position
+    }),
     cssBud('float', {
         description: 'Style for floating.',
         styles: data.float
