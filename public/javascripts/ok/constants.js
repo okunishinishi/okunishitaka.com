@@ -130,6 +130,7 @@
 		            "profile": {
 		                "NAME": "name",
 		                "captions": {
+		                    "ABOUT": "About",
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
 		                    "JOB_HISTORY": "Job History",
@@ -199,6 +200,7 @@
 		            "profile": {
 		                "NAME": "name",
 		                "captions": {
+		                    "ABOUT": "About",
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
 		                    "JOB_HISTORY": "Job History",
@@ -356,6 +358,7 @@
 		    "HEADER": "/html/partials/header.html",
 		    "INDEX_MENU_SECTION": "/html/partials/index/index-menu-section.html",
 		    "META": "/html/partials/meta.html",
+		    "PROFILE_LIST": "/html/partials/profile/profile-list.html",
 		    "PROFILE_TABLE": "/html/partials/profile/profile-table.html"
 		});
 

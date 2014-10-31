@@ -130,6 +130,7 @@
 		            "profile": {
 		                "NAME": "name",
 		                "captions": {
+		                    "ABOUT": "About",
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
 		                    "JOB_HISTORY": "Job History",
@@ -199,6 +200,7 @@
 		            "profile": {
 		                "NAME": "name",
 		                "captions": {
+		                    "ABOUT": "About",
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
 		                    "JOB_HISTORY": "Job History",
@@ -356,6 +358,7 @@
 		    "HEADER": "/html/partials/header.html",
 		    "INDEX_MENU_SECTION": "/html/partials/index/index-menu-section.html",
 		    "META": "/html/partials/meta.html",
+		    "PROFILE_LIST": "/html/partials/profile/profile-list.html",
 		    "PROFILE_TABLE": "/html/partials/profile/profile-table.html"
 		});
 
@@ -1333,6 +1336,7 @@
                 get headerHtmlTemplate() { return $injector.get('headerHtmlTemplate'); },
                 get indexIndexMenuSectionHtmlTemplate() { return $injector.get('indexIndexMenuSectionHtmlTemplate'); },
                 get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); },
+                get profileProfileListHtmlTemplate() { return $injector.get('profileProfileListHtmlTemplate'); },
                 get profileProfileTableHtmlTemplate() { return $injector.get('profileProfileTableHtmlTemplate'); }
             }
         });
@@ -2301,6 +2305,21 @@
         .value('metaHtmlTemplate', {
 		    "name": "/html/partials/meta.html",
 		    "content": "<!-- Meta HTML -->\n<meta ng:attr-charset=\"UTF-8\">\n<meta name=\"application-name\" content=\"{{l.meta.NAME}}\"/>\n<meta name=\"description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"generator\" content=\"apeman\"/>\n<meta name=\"author\" content=\"{{l.meta.AUTHOR}}\"/>\n<meta name=\"viewport\" content=\"width=device-width, user-scalable=no\"/>\n\n<!-- Open graph tags -->\n<meta property=\"og:title\" content=\"{{title(page)}}\"/>\n<meta property=\"og:type\" content=\"website\"/>\n<meta property=\"og:image\" content=\"\"/> <!-- FIXME -->\n<meta property=\"og:url\" content=\"{{app.HOMEPAGE}}\"/>\n<meta property=\"og:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n\n\n<!-- Twitter tags -->\n<meta name=\"twitter:card\" content=\"summary\">\n<meta name=\"twitter:title\" content=\"{{title(page)}}\">\n<meta name=\"twitter:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"twitter:image\" content=\"\"/> <!-- FIXME -->\n\n"
+		});
+
+})(angular);
+/**
+ * Template for profileProfileListHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('profileProfileListHtmlTemplate', {
+		    "name": "/html/partials/profile/profile-list.html",
+		    "content": "<h3 class=\"caption\">{{caption}}</h3>\n<ul id=\"{{id}}\">\n    <li ng-repeat=\"line in data\">{{line}}</li>\n</ul>"
 		});
 
 })(angular);

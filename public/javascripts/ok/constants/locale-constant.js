@@ -66,6 +66,7 @@
 		            "profile": {
 		                "NAME": "name",
 		                "captions": {
+		                    "ABOUT": "About",
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
 		                    "JOB_HISTORY": "Job History",
@@ -135,6 +136,7 @@
 		            "profile": {
 		                "NAME": "name",
 		                "captions": {
+		                    "ABOUT": "About",
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
 		                    "JOB_HISTORY": "Job History",

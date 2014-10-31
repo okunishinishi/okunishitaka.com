@@ -4,12 +4,18 @@ main {
     min-height: 300px;
 }
 
-table{
+.profile-list-container,
+.profile-table-container {
     margin: 10px 20px 30px;
+    float: left;
+    min-height: 180px;
 }
 
-.profile-table-container {
-    float: left;
+.profile-list-container .caption{
+    margin:4px 0;
+}
+.profile-list-container ul{
+    margin:0;
 }
 
 #my-img-section {

@@ -14,6 +14,19 @@
         .run(function ($rootScope) {
             $rootScope.page = 'profile';
         })
+        .directive('okProfileList', function (partialUrlConstant) {
+            return {
+                link: function (scope, elm, attr) {
+                    $(elm).addClass('profile-list-container');
+                },
+                scope: {
+                    id: '=okId',
+                    caption: '=okCaption',
+                    data: '=okData',
+                },
+                templateUrl: partialUrlConstant.PROFILE_LIST
+            }
+        })
         .directive('okProfileTable', function (partialUrlConstant, imageUrlConstant) {
             return {
                 link: function (scope, elm, attr) {
