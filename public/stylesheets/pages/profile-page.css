@@ -4,6 +4,10 @@ main {
     min-height: 300px;
 }
 
+table{
+    margin: 10px 20px 30px;
+}
+
 .profile-table-container {
     float: left;
 }

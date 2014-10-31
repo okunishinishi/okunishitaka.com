@@ -11,7 +11,7 @@
         <td ng:repeat="cell in row" ng:if="!(headed && $first)"
             ok:linked="data.links">
             <span ng:hide="cell.image">{{cell}}</span>
-            <span ng:show="cell.image"><a href="{{images['QUALIFICATION_0160']}}" target="_blank">{{cell.title}}</a></span>
+            <span ng:show="cell.image"><a href="{{images[cell.image]}}" target="_blank">{{cell.title}}</a></span>
         </td>
     </tr>
     </tbody>

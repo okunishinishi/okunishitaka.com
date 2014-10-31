@@ -29,31 +29,29 @@
         }
     },
     "qualification": {
-        "head": ["資格", "取得年月日", ""],
         "body": [
-            ["情報処理技術者試験ネットワークスペシャリスト", "2009年12月", {
+            ["2009年12月", {
                 "image": "QUALIFICATION_0160",
-                "title": "証書"
+                "title": "情報処理技術者試験ネットワークスペシャリスト 取得"
             }],
-            ["Sun Certified Programmer for Java 6", "2010年02月", {
+            ["2010年02月", {
                 "image": "QUALIFICATION_0163",
-                "title": "証書"
+                "title": "Sun Certified Programmer for Java 6 取得"
             }],
-            ["情報処理技術者試験データーベーススペシャリスト", "2010年06月", {
+            ["2010年06月", {
                 "image": "QUALIFICATION_0159",
-                "title": "証書"
+                "title": "情報処理技術者試験データーベーススペシャリスト 取得"
             }],
-            ["LPIC-2", "2010年08月", {
-                "image": "QUALIFICATION_0161",
-                "title": "証書"
-            }],
-            ["情報処理技術者試験情報セキュリティスペシャリスト", "2010年12月", {
+            ["2010年08月", {
                 "image": "QUALIFICATION_0162",
-                "title": "証書"
+                "title": "LPIC-2 取得"
+            }],
+            ["2010年12月", {
+                "image": "QUALIFICATION_0161",
+                "title": "情報処理技術者試験情報セキュリティスペシャリスト 取得"
             }]
         ],
         "links": {
-            "情報処理技術者試験": "IPA_HOMEPAGE"
         }
     }
 }

@@ -89,6 +89,9 @@
 		            "blogstatus": {
 		                "PUBLIC": "public",
 		                "PRIVATE": "private"
+		            },
+		            "footer": {
+		                "LINKS": "Links"
 		            }
 		        },
 		        "pageNames": {
@@ -130,7 +133,7 @@
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
 		                    "JOB_HISTORY": "Job History",
-		                    "QUALIFICATION": "保有資格"
+		                    "QUALIFICATION": "Qualification"
 		                }
 		            },
 		            "blog": {
@@ -155,6 +158,9 @@
 		            "blogstatus": {
 		                "PUBLIC": "public",
 		                "PRIVATE": "private"
+		            },
+		            "footer": {
+		                "LINKS": "Links"
 		            }
 		        },
 		        "pageNames": {
@@ -196,7 +202,7 @@
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
 		                    "JOB_HISTORY": "Job History",
-		                    "QUALIFICATION": "保有資格"
+		                    "QUALIFICATION": "Qualification"
 		                }
 		            },
 		            "blog": {
@@ -307,7 +313,8 @@
 		    "WORKS_SHOT": "http://okunishinishi.github.io/SHOTek/",
 		    "WORKS_CSS_GALLERY": "http://okunishinishi.github.io/css-art-gallery/",
 		    "WORKS_OTHERO": "http://okunishinishi.github.io/OthelloTek/",
-		    "WORKS_TYPE": "http://okunishinishi.github.io/TouchTypeTraining/"
+		    "WORKS_TYPE": "http://okunishinishi.github.io/TouchTypeTraining/",
+		    "MY_GITHUB": "https://github.com/okunishinishi"
 		});
 
 })(angular);

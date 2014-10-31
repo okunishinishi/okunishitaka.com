@@ -89,6 +89,9 @@
 		            "blogstatus": {
 		                "PUBLIC": "public",
 		                "PRIVATE": "private"
+		            },
+		            "footer": {
+		                "LINKS": "Links"
 		            }
 		        },
 		        "pageNames": {
@@ -130,7 +133,7 @@
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
 		                    "JOB_HISTORY": "Job History",
-		                    "QUALIFICATION": "保有資格"
+		                    "QUALIFICATION": "Qualification"
 		                }
 		            },
 		            "blog": {
@@ -155,6 +158,9 @@
 		            "blogstatus": {
 		                "PUBLIC": "public",
 		                "PRIVATE": "private"
+		            },
+		            "footer": {
+		                "LINKS": "Links"
 		            }
 		        },
 		        "pageNames": {
@@ -196,7 +202,7 @@
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
 		                    "JOB_HISTORY": "Job History",
-		                    "QUALIFICATION": "保有資格"
+		                    "QUALIFICATION": "Qualification"
 		                }
 		            },
 		            "blog": {
@@ -307,7 +313,8 @@
 		    "WORKS_SHOT": "http://okunishinishi.github.io/SHOTek/",
 		    "WORKS_CSS_GALLERY": "http://okunishinishi.github.io/css-art-gallery/",
 		    "WORKS_OTHERO": "http://okunishinishi.github.io/OthelloTek/",
-		    "WORKS_TYPE": "http://okunishinishi.github.io/TouchTypeTraining/"
+		    "WORKS_TYPE": "http://okunishinishi.github.io/TouchTypeTraining/",
+		    "MY_GITHUB": "https://github.com/okunishinishi"
 		});
 
 })(angular);
@@ -2248,7 +2255,7 @@
         .module('ok.templates')
         .value('footerHtmlTemplate', {
 		    "name": "/html/partials/footer.html",
-		    "content": "<div class=\"container\" id=\"footer-content\">\n    <small id=\"small-copyright\">{{l.meta.COPY_RIGHT}}</small>\n</div>\n"
+		    "content": "<div class=\"container\" id=\"footer-content\">\n    <small id=\"small-copyright\">{{l.meta.COPY_RIGHT}}</small>\n\n    <div class=\"float-right\">\n        <a ng-href=\"{{links.MY_GITHUB}}\">Repo</a>\n    </div>\n</div>\n"
 		});
 
 })(angular);
@@ -2308,7 +2315,7 @@
         .module('ok.templates')
         .value('profileProfileTableHtmlTemplate', {
 		    "name": "/html/partials/profile/profile-table.html",
-		    "content": "<table id=\"{{id}}\" class=\"profile-table\">\n    <caption>{{caption}}</caption>\n    <thead>\n    <tr ng:if=\"!!data.head\">\n        <th ng:repeat=\"head in data.head\">{{head}}</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr ng:repeat=\"row in data.body\" ng:init=\"headed=!!data.headedBody\">\n        <th ng:repeat=\"cell in row\" ng:if=\"(headed && $first)\" ok:linked=\"data.links\" ng:bind=\"cell\"></th>\n        <td ng:repeat=\"cell in row\" ng:if=\"!(headed && $first)\"\n            ok:linked=\"data.links\">\n            <span ng:hide=\"cell.image\">{{cell}}</span>\n            <span ng:show=\"cell.image\"><a href=\"{{images['QUALIFICATION_0160']}}\" target=\"_blank\">{{cell.title}}</a></span>\n        </td>\n    </tr>\n    </tbody>\n</table>"
+		    "content": "<table id=\"{{id}}\" class=\"profile-table\">\n    <caption>{{caption}}</caption>\n    <thead>\n    <tr ng:if=\"!!data.head\">\n        <th ng:repeat=\"head in data.head\">{{head}}</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr ng:repeat=\"row in data.body\" ng:init=\"headed=!!data.headedBody\">\n        <th ng:repeat=\"cell in row\" ng:if=\"(headed && $first)\" ok:linked=\"data.links\" ng:bind=\"cell\"></th>\n        <td ng:repeat=\"cell in row\" ng:if=\"!(headed && $first)\"\n            ok:linked=\"data.links\">\n            <span ng:hide=\"cell.image\">{{cell}}</span>\n            <span ng:show=\"cell.image\"><a href=\"{{images[cell.image]}}\" target=\"_blank\">{{cell.title}}</a></span>\n        </td>\n    </tr>\n    </tbody>\n</table>"
 		});
 
 })(angular);

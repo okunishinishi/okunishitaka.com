@@ -1,12 +1,12 @@
 table {
     border-collapse: collapse;
-    margin: 25px 10px;
 }
 
 caption {
-    color: #FCA100;
+    color: #E5E5E5;
     padding: 4px 8px;
     font-weight: 100;
+    font-size: 1.5em;
 }
 
 th {

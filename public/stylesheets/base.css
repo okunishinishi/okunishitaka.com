@@ -2,19 +2,22 @@ a {
     text-decoration: none;
 }
 
+a:link, a:visited {
+    color: #26777B;
+}
+
 a:link:hover,
 a:visited:hover {
     text-decoration: underline;
 }
 
-a:link, a:visited {
-    color: #B5B5B5;
-}
+
 body {
     padding: 0;
     margin: 60px 0 0;
     overflow-x: hidden;
-    font-family: Tahoma, Geneva, sans-serif;
+    font-family: sans-serif;
+    font-weight: 100;
 }
 /**
  * Style for clearing.
@@ -81,11 +84,12 @@ body {
 
 
 footer {
-    padding: 10px 4px;
+    padding: 32px 4px;
     border-top: 1px solid #F5F5F5;
     margin: 40px 10px 0;
     color: #B0B0B0;
 }
+
 .footer-logo{
 
 }
@@ -171,6 +175,7 @@ header h1 {
 .header-nav-item:link,
 .header-nav-item:visited{
     color:#DADADA;
+    text-decoration: none;
 }
 
 .header-nav-item:hover {
@@ -203,15 +208,18 @@ header h1 {
 .header-nav-item.nav-item-selected:after {
     background-color: #F90;
 }
+main {
+    min-height: 400px;
+}
 table {
     border-collapse: collapse;
-    margin: 25px 10px;
 }
 
 caption {
-    color: #FCA100;
+    color: #E5E5E5;
     padding: 4px 8px;
     font-weight: 100;
+    font-size: 1.5em;
 }
 
 th {

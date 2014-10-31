@@ -25,6 +25,9 @@
 		            "blogstatus": {
 		                "PUBLIC": "public",
 		                "PRIVATE": "private"
+		            },
+		            "footer": {
+		                "LINKS": "Links"
 		            }
 		        },
 		        "pageNames": {
@@ -66,7 +69,7 @@
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
 		                    "JOB_HISTORY": "Job History",
-		                    "QUALIFICATION": "保有資格"
+		                    "QUALIFICATION": "Qualification"
 		                }
 		            },
 		            "blog": {
@@ -91,6 +94,9 @@
 		            "blogstatus": {
 		                "PUBLIC": "public",
 		                "PRIVATE": "private"
+		            },
+		            "footer": {
+		                "LINKS": "Links"
 		            }
 		        },
 		        "pageNames": {
@@ -132,7 +138,7 @@
 		                    "PERSONEL": "Personel",
 		                    "EDUCATION": "Eductation",
 		                    "JOB_HISTORY": "Job History",
-		                    "QUALIFICATION": "保有資格"
+		                    "QUALIFICATION": "Qualification"
 		                }
 		            },
 		            "blog": {

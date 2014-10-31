@@ -38,6 +38,7 @@ header h1 {
 .header-nav-item:link,
 .header-nav-item:visited{
     color:#DADADA;
+    text-decoration: none;
 }
 
 .header-nav-item:hover {

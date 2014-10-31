@@ -32,6 +32,9 @@ l.labels = {
     blogstatus: {
         PUBLIC: 'public',
         PRIVATE: 'private'
+    },
+    footer: {
+        LINKS: 'Links'
     }
 };
 
@@ -78,7 +81,7 @@ l.pages = {
             PERSONEL: "Personel",
             EDUCATION: "Eductation",
             JOB_HISTORY: "Job History",
-            QUALIFICATION: "保有資格"
+            QUALIFICATION: "Qualification"
         }
     },
     blog: {
