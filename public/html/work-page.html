@@ -35,11 +35,15 @@
 <header ng:include="partials.HEADER" ng:controller="HeaderControl"></header>
 
 <main class="container" ng:controller="WorkCtrl">
+    <ul id="work-list">
 
-    <div ng:repeat="work in works" class="work-list-item">
-        <span>{{work.name}}</span>
-        <img ng:src="{{images[work.thumbnail]}}" class="work-thumbnail">
-    </div>
+        <li ng:repeat="work in works" class="work-list-item">
+            <div class="work-background-image-container">
+                <img ng:src="{{images[work.thumbnail]}}" class="work-background-image">
+            </div>
+            <h3 class="work-list-item-title">{{work.name}}</h3>
+        </li>
+    </ul>
 </main>
 
 <footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>
