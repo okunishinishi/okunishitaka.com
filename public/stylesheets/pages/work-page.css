@@ -1,8 +1,9 @@
 /** Style for work page. **/
 
-.work-list {
+#work-list {
     margin: 0;
     padding: 0;
+    max-width: 480px;
 }
 
 .work-list-item {
@@ -10,11 +11,14 @@
     border: 1px solid #DDD;
     margin: 4px 8px;
     position: relative;
-    padding: 5px 10px;
+    min-height: 140px;
 }
 
 .work-list-item-title {
     margin: 0;
+    padding: 4px 8px;
+    border-bottom: 1px solid #EEE;
+    color: #999;
 }
 
 .work-background-image-container {
@@ -27,9 +31,30 @@
     overflow: hidden;
 }
 
+.work-thumbnail-image-container {
+    position: absolute;
+    left: 10px;
+    top: 40px;
+    border-radius: 50%;
+    border: 1px solid #DDD;
+    overflow: hidden;
+    width: 80px;
+    height: 80px;
+}
+
+.work-thumbnail-image {
+    position: relative;
+    top: -40px;
+    left: -10px;
+}
+
+.work-background-image,
+.work-thumbnail-image {
+    max-width: 480px;
+}
+
 .work-background-image {
     opacity: 0.1;
-    max-width: 400px;
 }
 
 .work-thumbnail {
