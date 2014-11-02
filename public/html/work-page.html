@@ -34,19 +34,9 @@
 
 <header ng:include="partials.HEADER" ng:controller="HeaderControl"></header>
 
-<main class="container" ng:controller="WorkCtrl">
-    <ul id="work-list">
-
-        <li ng:repeat="work in works" class="work-list-item">
-            <div class="work-background-image-container">
-                <img ng:src="{{images[work.thumbnail]}}" class="work-background-image">
-            </div>
-            <div class="work-thumbnail-image-container">
-                <img ng:src="{{images[work.thumbnail]}}" class="work-thumbnail-image">
-            </div>
-            <h3 class="work-list-item-title">{{work.name}}</h3>
-        </li>
-    </ul>
+<main ng:controller="WorkCtrl">
+    <section id="work-list-section" ng:include="partials.WORK_LIST"></section>
+    <br class="clear-both">
 </main>
 
 <footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>

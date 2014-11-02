@@ -2,26 +2,46 @@
     {
         "name": "ChessTek",
         "thumbnail": "WORKS_CHESS_THUMBNAIL",
+        "description": [
+            "AIチェス。JavaScriptで実装。",
+            "駒や盤の絵には画像やHTMLキャンバスを一切使わず、DOM要素をCSS変形させて描いている。"
+        ],
         "link": "WORKS_CHESS"
     },
     {
         "name": "SHOTek",
         "thumbnail": "WORKS_SHOT_THUMBNAIL",
+        "description": [
+            "シューテイングゲーム。Javascriptで実装。",
+            "HTMLキャンバスを使って描画している。キャンバス系のライブラリを一切使わず、自前で頑張ってみた。"
+        ],
         "link": "WORKS_SHOT"
     },
     {
         "name": "CSS Gallery",
         "thumbnail": "WORKS_CSS_GALLERY_THUMBNAIL",
+        "description": [
+            "CSSでのお絵描き。キャンバスや画像を使わずに、DOM要素をCSS変形させていろんな形を作った。"
+        ],
         "link": "WORKS_CSS_GALLERY"
     },
     {
         "name": "OtheroTek",
         "thumbnail": "WORKS_OTHERO_THUMBNAIL",
+        "description": [
+            "AIオセロ。Javascriptで実装した。初めて作ったブラウザゲーム。マウスオーバー時のエフェクトとか頑張った記憶がある。"
+        ],
         "link": "WORKS_OTHERO"
     },
     {
         "name": "TouchTypeTraining",
         "thumbnail": "WORKS_TYPE_THUMBNAIL",
+        "description": [
+            "タイピングゲーム。Javascriptで実装。",
+            "上から降ってくるブロックはDOM要素を移動させているのでパフォーマンスがいまいち。",
+            "今ならキャンバスで書くけど、これ作った当時はまだサポートブラウザが少なかったので使えなかった。。。"
+
+        ],
         "link": "WORKS_TYPE"
     }
 ]

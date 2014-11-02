@@ -1,0 +1,26 @@
+<ul id="work-list" ng:controller="WorkListCtrl">
+
+    <li ng:repeat="work in works" class="work-list-item">
+
+        <div class="work-background-image-container">
+            <img ng:src="{{images[work.thumbnail]}}" class="work-background-image">
+        </div>
+
+        <h3 class="work-list-item-title">
+            <a ng:href="{{links[work.link]}}">{{work.name}}</a>
+        </h3>
+
+        <div class="work-thumbnail-image-container">
+            <a ng:href="{{links[work.link]}}">
+                <img ng:src="{{images[work.thumbnail]}}" class="work-thumbnail-image">
+            </a>
+        </div>
+
+        <div class="work-list-item-content">
+            <div class="work-description">
+                <div ng:repeat="d in work.description">{{d}}</div>
+            </div>
+        </div>
+    </li>
+    <li class="clear-both"></li>
+</ul>

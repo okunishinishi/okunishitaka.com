@@ -17,7 +17,8 @@
 		    "INDEX_SEE_MORE_BUTTON": "/html/partials/index/index-see-more-button.html",
 		    "META": "/html/partials/meta.html",
 		    "PROFILE_LIST": "/html/partials/profile/profile-list.html",
-		    "PROFILE_TABLE": "/html/partials/profile/profile-table.html"
+		    "PROFILE_TABLE": "/html/partials/profile/profile-table.html",
+		    "WORK_LIST": "/html/partials/work/work-list.html"
 		});
 
 })(angular);

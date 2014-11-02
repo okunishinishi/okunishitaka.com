@@ -378,7 +378,8 @@
 		    "INDEX_SEE_MORE_BUTTON": "/html/partials/index/index-see-more-button.html",
 		    "META": "/html/partials/meta.html",
 		    "PROFILE_LIST": "/html/partials/profile/profile-list.html",
-		    "PROFILE_TABLE": "/html/partials/profile/profile-table.html"
+		    "PROFILE_TABLE": "/html/partials/profile/profile-table.html",
+		    "WORK_LIST": "/html/partials/work/work-list.html"
 		});
 
 })(angular);
@@ -1361,7 +1362,8 @@
                 get indexIndexTitleHtmlTemplate() { return $injector.get('indexIndexTitleHtmlTemplate'); },
                 get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); },
                 get profileProfileListHtmlTemplate() { return $injector.get('profileProfileListHtmlTemplate'); },
-                get profileProfileTableHtmlTemplate() { return $injector.get('profileProfileTableHtmlTemplate'); }
+                get profileProfileTableHtmlTemplate() { return $injector.get('profileProfileTableHtmlTemplate'); },
+                get workWorkListHtmlTemplate() { return $injector.get('workWorkListHtmlTemplate'); }
             }
         });
 })(angular, apeman);
@@ -2404,6 +2406,21 @@
         .value('profileProfileTableHtmlTemplate', {
 		    "name": "/html/partials/profile/profile-table.html",
 		    "content": "<table id=\"{{id}}\" class=\"profile-table\">\n    <caption>{{caption}}</caption>\n    <thead>\n    <tr ng:if=\"!!data.head\">\n        <th ng:repeat=\"head in data.head\">{{head}}</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr ng:repeat=\"row in data.body\" ng:init=\"headed=!!data.headedBody\">\n        <th ng:repeat=\"cell in row\" ng:if=\"(headed && $first)\" ok:linked=\"data.links\" ng:bind=\"cell\"></th>\n        <td ng:repeat=\"cell in row\" ng:if=\"!(headed && $first)\"\n            ok:linked=\"data.links\">\n            <span ng:hide=\"cell.image\">{{cell}}</span>\n            <span ng:show=\"cell.image\"><a href=\"{{images[cell.image]}}\" target=\"_blank\">{{cell.title}}</a></span>\n        </td>\n    </tr>\n    </tbody>\n</table>"
+		});
+
+})(angular);
+/**
+ * Template for workWorkListHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('workWorkListHtmlTemplate', {
+		    "name": "/html/partials/work/work-list.html",
+		    "content": "<ul id=\"work-list\" ng:controller=\"WorkListCtrl\">\n\n    <li ng:repeat=\"work in works\" class=\"work-list-item\">\n\n        <div class=\"work-background-image-container\">\n            <img ng:src=\"{{images[work.thumbnail]}}\" class=\"work-background-image\">\n        </div>\n\n        <h3 class=\"work-list-item-title\">\n            <a ng:href=\"{{links[work.link]}}\">{{work.name}}</a>\n        </h3>\n\n        <div class=\"work-thumbnail-image-container\">\n            <a ng:href=\"{{links[work.link]}}\">\n                <img ng:src=\"{{images[work.thumbnail]}}\" class=\"work-thumbnail-image\">\n            </a>\n        </div>\n\n        <div class=\"work-list-item-content\">\n            <div class=\"work-description\">\n                <div ng:repeat=\"d in work.description\">{{d}}</div>\n            </div>\n        </div>\n    </li>\n    <li class=\"clear-both\"></li>\n</ul>"
 		});
 
 })(angular);

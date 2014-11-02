@@ -1,24 +1,39 @@
 /** Style for work page. **/
 
+#work-list-section {
+    background-color: #F0F0F0;
+    padding: 10px 0;
+}
+
 #work-list {
     margin: 0;
     padding: 0;
-    max-width: 480px;
+    text-align: center;
 }
 
 .work-list-item {
+    text-align: left;
     list-style: none;
-    border: 1px solid #DDD;
-    margin: 4px 8px;
+    margin: 4px;
     position: relative;
-    min-height: 140px;
+    min-height: 180px;
+    max-width: 300px;
+    display: inline-block;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    vertical-align: middle;
 }
 
 .work-list-item-title {
     margin: 0;
-    padding: 4px 8px;
-    border-bottom: 1px solid #EEE;
-    color: #999;
+    border-bottom: 1px solid #DDD;
+    width: 100%;
+    display: block;
+}
+
+.work-list-item-title a {
+    color: #888;
+    display: inline-block;
+    padding: 5px 10px;
 }
 
 .work-background-image-container {
@@ -29,17 +44,26 @@
     height: 100%;
     box-sizing: border-box;
     overflow: hidden;
+    z-index: 0;
+}
+
+.work-background-image {
+    opacity: 0.1;
+}
+
+.work-list-item-content {
+    padding: 4px 10px 10px 120px;
 }
 
 .work-thumbnail-image-container {
     position: absolute;
-    left: 10px;
-    top: 40px;
+    left: 9px;
+    top: 39px;
     border-radius: 50%;
     border: 1px solid #DDD;
     overflow: hidden;
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
 }
 
 .work-thumbnail-image {
@@ -53,11 +77,16 @@
     max-width: 480px;
 }
 
-.work-background-image {
-    opacity: 0.1;
-}
-
 .work-thumbnail {
     max-width: 80px;
     max-height: 80px;
+}
+
+.work-description {
+}
+
+@media (max-width: 568px) {
+    #work-list {
+        width: 100%;
+    }
 }

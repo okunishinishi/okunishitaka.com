@@ -169,7 +169,8 @@
                 get indexIndexTitleHtmlTemplate() { return $injector.get('indexIndexTitleHtmlTemplate'); },
                 get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); },
                 get profileProfileListHtmlTemplate() { return $injector.get('profileProfileListHtmlTemplate'); },
-                get profileProfileTableHtmlTemplate() { return $injector.get('profileProfileTableHtmlTemplate'); }
+                get profileProfileTableHtmlTemplate() { return $injector.get('profileProfileTableHtmlTemplate'); },
+                get workWorkListHtmlTemplate() { return $injector.get('workWorkListHtmlTemplate'); }
             }
         });
 })(angular, apeman);
