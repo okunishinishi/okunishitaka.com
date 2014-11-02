@@ -47,7 +47,10 @@
 		            "CANCEL": "Cancel",
 		            "SAVE": "Save",
 		            "CLOSE": "Close",
-		            "DETAIL": "See more detail"
+		            "DETAIL": "See more detail",
+		            "TRY_DEMO": "Try demo",
+		            "VIEW_SOURCE_CODE": "View the source code",
+		            "VISIT_SITE": "Visit the site"
 		        },
 		        "errors": {
 		            "CONFLICT_ERROR": "Conflict occured.",
@@ -86,7 +89,7 @@
 		                "PREVIEW_LEGEND": "Preview"
 		            },
 		            "work": {
-		                "VISIT_SITE": "Visit the site"
+		                "DESCRIPTION": "Personal works."
 		            }
 		        }
 		    },
@@ -129,7 +132,10 @@
 		            "CANCEL": "Cancel",
 		            "SAVE": "Save",
 		            "CLOSE": "Close",
-		            "DETAIL": "See more detail"
+		            "DETAIL": "See more detail",
+		            "TRY_DEMO": "Try demo",
+		            "VIEW_SOURCE_CODE": "View the source code",
+		            "VISIT_SITE": "Visit the site"
 		        },
 		        "errors": {
 		            "CONFLICT_ERROR": "Conflict occured.",
@@ -168,7 +174,7 @@
 		                "PREVIEW_LEGEND": "Preview"
 		            },
 		            "work": {
-		                "VISIT_SITE": "Visit the site"
+		                "DESCRIPTION": "Personal works."
 		            }
 		        }
 		    }

@@ -1,5 +1,9 @@
 /** Style for work page. **/
 
+p {
+    padding: 2px 4px;
+}
+
 #work-list-section {
     background-color: #F0F0F0;
     padding: 10px 0;
@@ -87,6 +91,7 @@
     text-align: right;
     position: relative;
     z-index: 1;
+    border-bottom: 1px solid #EEE;
 }
 
 .work-link {
@@ -124,6 +129,6 @@
     .work-list-item {
         display: block;
         box-sizing: border-box;
-        max-width:none;
+        max-width: none;
     }
 }

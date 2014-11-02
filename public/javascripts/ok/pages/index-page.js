@@ -3,7 +3,7 @@
  * @requires angular
  */
 
-(function (ng, $) {
+(function (ng, ap, $) {
     "use strict";
 
     ng
@@ -64,4 +64,4 @@
 
     ;
 
-})(angular, jQuery);
+})(angular, apeman, jQuery);

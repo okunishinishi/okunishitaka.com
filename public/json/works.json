@@ -1,13 +1,25 @@
 [
     {
+        "name": "kurokawa",
+        "thumbnail": "WORKS_KUROKAWA_THUMBNAIL",
+        "description": [
+            "顧客管理システム。",
+            "営業部向けのWebアプリで、お客さんの趣味や出身地など、世間話から得た情報を管理するためのシステムです。",
+            "このシステムに情報を入力するとポイントが与えられ、営業マン同士で競い合う、といった使い方ができます。"
+        ],
+        "demo": "WORKS_KUROKAWA",
+        "repo": "WORKS_KUROKAWA_REPO"
+    },
+    {
         "name": "File Drop",
-        "thumbnail": "WORK_FILEDROP_THUMBNAIL",
+        "thumbnail": "WORKS_FILEDROP_THUMBNAIL",
         "description": [
             "ファイル受け渡しサイト。",
             "ドラッグ&ドロップでファイルをアップロードできる。ファイルは数日で勝手に消える。",
             "チーム内でちょろっと資料なんかを渡す用に作った。"
         ],
-        "link": "WORKS_FILEDROP"
+        "demo": "WORKS_FILEDROP",
+        "repo": "WORKS_FILEDROP_REPO"
     },
     {
         "name": "Mock Monkey",
@@ -17,7 +29,8 @@
             "クエリパラメータの値をデータに動的に埋め込むことができる。",
             "テストや開発においての利用を想定している。"
         ],
-        "link": "WORKS_MOCK_MONKEY"
+        "demo": "WORKS_MOCK_MONKEY",
+        "repo": "WORKS_MOCK_MONKEY_REPO"
     },
     {
         "name": "ChessTek",
@@ -27,7 +40,8 @@
             "駒や盤の絵には画像やHTMLキャンバスを一切使わず、DOM要素をCSS変形させて描いている。",
             "三手ぐらいしか読んでいないので、正直あんまり強くない。"
         ],
-        "link": "WORKS_CHESS"
+        "link": "WORKS_CHESS",
+        "repo": "WORKS_CHESS_REPO"
     },
     {
         "name": "SHOTek",
@@ -37,7 +51,8 @@
             "HTMLキャンバスを使って描画している。キャンバス系のライブラリを一切使わず、自前で頑張ってみた。",
             "ブラウザのウィンドウ幅を狭くすると敵の密集度が増えて難易度があがる。"
         ],
-        "link": "WORKS_SHOT"
+        "link": "WORKS_SHOT",
+        "repo": "WORKS_SHOT_REPO"
     },
     {
         "name": "CSS Gallery",
@@ -56,7 +71,8 @@
             "初めて作ったブラウザゲーム。マウスオーバー時のエフェクトとか頑張った記憶がある。",
             "AIの指し手が速すぎたので、スリープ処理を挟んで調整している。"
         ],
-        "link": "WORKS_OTHERO"
+        "link": "WORKS_OTHERO",
+        "repo": "WORKS_CSS_GALLERY_REPO"
     },
     {
         "name": "TouchTypeTraining",
@@ -67,6 +83,7 @@
             "今ならキャンバスで書くけど、これ作った当時はまだサポートブラウザが少なかったので使えなかった。。。"
 
         ],
-        "link": "WORKS_TYPE"
+        "link": "WORKS_TYPE",
+        "repo": "WORKS_TYPE_REPO"
     }
 ]

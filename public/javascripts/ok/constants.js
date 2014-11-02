@@ -111,7 +111,10 @@
 		            "CANCEL": "Cancel",
 		            "SAVE": "Save",
 		            "CLOSE": "Close",
-		            "DETAIL": "See more detail"
+		            "DETAIL": "See more detail",
+		            "TRY_DEMO": "Try demo",
+		            "VIEW_SOURCE_CODE": "View the source code",
+		            "VISIT_SITE": "Visit the site"
 		        },
 		        "errors": {
 		            "CONFLICT_ERROR": "Conflict occured.",
@@ -150,7 +153,7 @@
 		                "PREVIEW_LEGEND": "Preview"
 		            },
 		            "work": {
-		                "VISIT_SITE": "Visit the site"
+		                "DESCRIPTION": "Personal works."
 		            }
 		        }
 		    },
@@ -193,7 +196,10 @@
 		            "CANCEL": "Cancel",
 		            "SAVE": "Save",
 		            "CLOSE": "Close",
-		            "DETAIL": "See more detail"
+		            "DETAIL": "See more detail",
+		            "TRY_DEMO": "Try demo",
+		            "VIEW_SOURCE_CODE": "View the source code",
+		            "VISIT_SITE": "Visit the site"
 		        },
 		        "errors": {
 		            "CONFLICT_ERROR": "Conflict occured.",
@@ -232,7 +238,7 @@
 		                "PREVIEW_LEGEND": "Preview"
 		            },
 		            "work": {
-		                "VISIT_SITE": "Visit the site"
+		                "DESCRIPTION": "Personal works."
 		            }
 		        }
 		    }
@@ -291,10 +297,11 @@
 		    "INDEX_SCREENSHOT": "/images/screenshots/index-screenshot.png",
 		    "PROFILE_SCREENSHOT": "/images/screenshots/profile-screenshot.png",
 		    "WORK_SCREENSHOT": "/images/screenshots/work-screenshot.png",
-		    "WORK_FILEDROP_THUMBNAIL": "/images/works/work-filedrop-thumbnail.png",
 		    "WORKS_CHESS_THUMBNAIL": "/images/works/works-chess-thumbnail.png",
 		    "WORKS_CSS_GALLERY_THUMBNAIL": "/images/works/works-css-gallery-thumbnail.png",
 		    "WORKS_DOC_GALLERY_THUMBNAIL": "/images/works/works-doc-gallery-thumbnail.png",
+		    "WORKS_FILEDROP_THUMBNAIL": "/images/works/works-filedrop-thumbnail.png",
+		    "WORKS_KUROKAWA_THUMBNAIL": "/images/works/works-kurokawa-thumbnail.png",
 		    "WORKS_MOCK_MONKEY_THUMBNAIL": "/images/works/works-mock-monkey-thumbnail.png",
 		    "WORKS_OTHERO_THUMBNAIL": "/images/works/works-othero-thumbnail.png",
 		    "WORKS_PLANING_PORKER_THUMBNAIL": "/images/works/works-planing-porker-thumbnail.png",
@@ -338,14 +345,21 @@
 		    "IPA_HOMEPAGE": "http://www.ipa.go.jp/",
 		    "MY_GITHUB": "https://github.com/okunishinishi",
 		    "WORKS_CHESS": "http://okunishinishi.github.io/ChessTek/",
+		    "WORKS_CHESS_REPO": "https://github.com/okunishinishi/ChessTek",
 		    "WORKS_SHOT": "http://okunishinishi.github.io/SHOTek/",
+		    "WORKS_SHOT_REPO": "https://github.com/okunishinishi/SHOTek",
 		    "WORKS_CSS_GALLERY": "http://okunishinishi.github.io/css-art-gallery/",
+		    "WORKS_CSS_GALLERY_REPO": "https://github.com/okunishinishi/css-art-gallery",
 		    "WORKS_OTHERO": "http://okunishinishi.github.io/OthelloTek/",
+		    "WORKS_OTHERO_REPO": "https://github.com/okunishinishi/OthelloTek",
 		    "WORKS_TYPE": "http://okunishinishi.github.io/TouchTypeTraining/",
+		    "WORKS_TYPE_REPO": "https://github.com/okunishinishi/TouchTypeTraining",
 		    "WORKS_MOCK_MONKEY": "http://mockmonkey.demo.okunishitaka.com/",
 		    "WORKS_MOCK_MONKEY_REPO": "https://github.com/okunishinishi/mock-monkey",
 		    "WORKS_FILEDROP": "http://filedrop.demo.okunishitaka.com/",
-		    "WORKS_FILEDROP_REPO": "https://github.com/okunishinishi/filedrop"
+		    "WORKS_FILEDROP_REPO": "https://github.com/okunishinishi/filedrop",
+		    "WORKS_KUROKAWA": "http://kurokawa.demo.okunishitaka.com/",
+		    "WORKS_KUROKAWA_REPO": "https://github.com/okunishinishi/kurokawa"
 		});
 
 })(angular);
@@ -391,6 +405,7 @@
 		    "META": "/html/partials/meta.html",
 		    "PROFILE_LIST": "/html/partials/profile/profile-list.html",
 		    "PROFILE_TABLE": "/html/partials/profile/profile-table.html",
+		    "WORK_LINK": "/html/partials/work/work-link.html",
 		    "WORK_LIST": "/html/partials/work/work-list.html"
 		});
 

@@ -35,6 +35,9 @@
 <header ng:include="partials.HEADER" ng:controller="HeaderControl"></header>
 
 <main ng:controller="WorkCtrl">
+    <div class="container">
+        <p>{{l.pages.work.DESCRIPTION}}</p>
+    </div>
     <section id="work-list-section" ng:include="partials.WORK_LIST"></section>
     <br class="clear-both">
 </main>

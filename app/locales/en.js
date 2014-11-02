@@ -40,6 +40,7 @@ l.labels = {
     }
 };
 
+
 l.pageNames = {
     INDEX: 'Top',
     PROFILE: 'Profile',
@@ -59,7 +60,10 @@ l.buttons = {
     CANCEL: 'Cancel',
     SAVE: 'Save',
     CLOSE: 'Close',
-    DETAIL: 'See more detail'
+    DETAIL: 'See more detail',
+    TRY_DEMO: 'Try demo',
+    VIEW_SOURCE_CODE: 'View the source code',
+    VISIT_SITE: 'Visit the site'
 }
 
 l.errors = {
@@ -101,7 +105,7 @@ l.pages = {
         PREVIEW_LEGEND: 'Preview'
     },
     work: {
-        VISIT_SITE: 'Visit the site'
+        DESCRIPTION: 'Personal works.'
     }
 }
 

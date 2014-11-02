@@ -3,7 +3,7 @@
  * @requires angular
  */
 
-(function (ng, ap) {
+(function (ng, ap, $) {
     "use strict";
 
     ng
@@ -23,17 +23,40 @@
                 }
             })
         })
+        .directive('okWorkLink', function (partialUrlConstant, linkUrlConstant) {
+            return {
+                scope: {
+                    href: '=okWorkHref',
+                    title: '=okWorkTitle',
+                },
+                link: function (scope, elm, attr) {
+                    scope.links = linkUrlConstant;
+                    $(elm).addClass('work-link-container');
+                },
+                templateUrl: partialUrlConstant.WORK_LINK
+            }
+        })
         .controller('WorkCtrl', function ($scope, workListDatasource) {
             workListDatasource.load();
         })
         .controller('WorkListCtrl', function ($scope, workListDatasource) {
+            ap.copy({
+                hrefForWork: function (work) {
+                    if (!work) {
+                        return null;
+                    }
+                    var links = $scope.links;
+                    return links[work.demo] || links[work.link] || links[work.repo];
+                }
+            }, $scope);
             Object.defineProperties($scope, {
                 works: {
                     get: function () {
                         return workListDatasource.data;
                     }
                 }
+
             });
         });
 
-})(angular, apeman);
+})(angular, apeman, jQuery);
