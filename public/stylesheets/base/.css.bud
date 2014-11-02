@@ -40,4 +40,8 @@ module.exports = [
         description: 'Font faces.',
         styles: data.fontFaces
     }),
+    cssBud('wide', {
+        description: 'Wide size.',
+        styles: data.wide
+    })
 ];

@@ -24,3 +24,18 @@
     display: block;
     overflow: auto;
 }
+
+#blog-edit-close-button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    display: inline-block;
+    padding: 4px 8px;
+    cursor: default;
+    color: #AAA;
+    font-size: 0.75em;
+}
+
+#blog-edit-close-button:hover {
+    color: #333;
+}

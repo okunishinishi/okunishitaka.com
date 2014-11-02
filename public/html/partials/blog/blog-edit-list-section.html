@@ -1,0 +1,11 @@
+<section id="blog-edit-list-section" ng:controller="BlogEditListCtrl">
+    <dl id="blog-edit-list">
+        <dt ng:repeat-start="b in blogs">
+            <a class="blog-dt-anchor"
+               name="blog-{{b._id}}">
+                {{b.title}}
+            </a>
+        </dt>
+        <dd ng:repeat-end="">{{b.content}}</dd>
+    </dl>
+</section>

@@ -1,7 +1,7 @@
 <section id="blog-edit-section"
          ng:class=""
-         ng:controller="BlogEditCtrl" class="cover">
-    <div id="blog-edit-section-content" class="container">
+         ng:controller="BlogEditEditorCtrl" class="cover">
+    <div id="blog-edit-section-content" class="container position-relative">
 
         <a ng:click="close()" id="blog-edit-close-button" class="close-button">{{l.buttons.CLOSE}}</a>
 
@@ -16,27 +16,13 @@
                            ng:model="blog.title"
                            class="wide-input">
                 </div>
-                <div>
-                    <label for="blog-status-radio-true">
-                        <input id="blog-status-radio-true"
-                               ng:model="blog.status"
-                               type="radio" name="blog-status-radio" value="1"/>
-                        {{l.labels.blogstatus.PUBLIC}}
-                    </label>
-                    <label for="blog-status-radio-false">
-                        <input id="blog-status-radio-false"
-                               ng:model="blog.status"
-                               type="radio" name="blog-status-radio" value="0"/>
-                        {{l.labels.blogstatus.PRIVATE}}
-                    </label>
-                </div>
                 <textarea name="blog-text" id="blog-text-textarea"
                           placeholder="{{l.placeholders.blog.CONTENT}}"
-                          class="wide-textarea" cols="30" rows="20"
+                          class="wide-textarea" cols="20" rows="10"
                           ng:model="blog.content"
                         ></textarea>
 
-                <div class="text-center">
+                <div class="text-align-center">
                     <a id="blog-cancel-button" class="button"
                        ng:click="cancel()"
                             >{{l.buttons.CANCEL}}</a>

@@ -65,3 +65,18 @@ exports.fontFaces = fonts.map(function (font) {
         }
     }
 });
+
+exports.wide = [
+    'input',
+    'textarea'
+]
+    .map(function (name) {
+        return {
+            selector: format('.wide-%s', name),
+            values: {
+                width: '100%',
+                'box-sizing': 'border-box',
+                'margin': '0 auto',
+            }
+        }
+    });

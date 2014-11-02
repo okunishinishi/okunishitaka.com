@@ -19,6 +19,48 @@ body {
     font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
     font-weight: 100;
 }
+button,
+.button {
+    border-radius: 4px;
+    border: 1px solid #B0B0B0;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    background-color: #FFF;
+    padding: 0.25em 0.5em;
+    cursor: default;
+}
+
+.button-hover,
+.button:hover {
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.button-active,
+.button:active {
+    text-decoration: none;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25) inset;
+    opacity: .5;
+}
+
+.button-disabled,
+.button-disabled.button-hover,
+.button-disabled:hover,
+.button-disabled:active
+.button-disabled.button-active {
+    opacity: 1;
+    box-shadow: none;
+    background-color: #F3F3F3;
+    border-color: #F0F0F0;
+    color: #DDD;
+}
+
+.button-primary {
+    background: #698DFF;
+    color: white;
+    border-color: #5c7bdf;
+}
 /**
  * Style for clearing.
  */
@@ -387,3 +429,19 @@ tbody tr:last-child td {
 .theme-font {
     font-family: 'source-code-pro-extra-light';
 }
+/**
+ * Wide size.
+ */
+
+.wide-input {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+.wide-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+

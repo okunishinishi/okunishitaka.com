@@ -9,7 +9,8 @@
         .module('ok.constants')
         .constant('partialUrlConstant', {
 		    "BLOG_ASIDE_CONTENT": "/html/partials/blog/blog-aside-content.html",
-		    "BLOG_EDIT_SECTION": "/html/partials/blog/blog-edit-section.html",
+		    "BLOG_EDIT_EDITOR_SECTION": "/html/partials/blog/blog-edit-editor-section.html",
+		    "BLOG_EDIT_LIST_SECTION": "/html/partials/blog/blog-edit-list-section.html",
 		    "BLOG_LIST_SECTION": "/html/partials/blog/blog-list-section.html",
 		    "FOOTER": "/html/partials/footer.html",
 		    "HEADER": "/html/partials/header.html",

@@ -29,7 +29,21 @@
                 }
             });
         })
-        .controller('BlogEditCtrl', function ($scope, blogOneDatasource, markdownRenderService, BlogEntity) {
+        .factory('blogListDatasource', function (ListDatasource, BlogEntity, blogApiService) {
+            return new ListDatasource({
+                convert: function (data) {
+                    return data.map(BlogEntity.new);
+                },
+                fetch: function (query, callback) {
+                    blogApiService.list(query, callback);
+                }
+            });
+        })
+        .controller('BlogEditCtrl', function ($scope, blogListDatasource) {
+            blogListDatasource.load();
+
+        })
+        .controller('BlogEditEditorCtrl', function ($scope, blogOneDatasource, markdownRenderService, BlogEntity) {
             ap.copy({
                 save: function (blog) {
                     blogOneDatasource.data = blog;
@@ -60,6 +74,24 @@
                             title: blog.title,
                             content: markdownRenderService.render(blog.content)
                         }
+                    }
+                }
+            });
+        })
+        .controller('BlogEditListCtrl', function ($scope, blogListDatasource) {
+            ap.copy({
+                /**
+                 * Load more data.
+                 */
+                more: function () {
+                    blogListDatasource.load();
+                }
+            }, $scope);
+
+            Object.defineProperties($scope, {
+                blogs: {
+                    get: function () {
+                        return blogListDatasource.data;
                     }
                 }
             });
