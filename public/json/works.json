@@ -29,7 +29,8 @@
         "name": "OtheroTek",
         "thumbnail": "WORKS_OTHERO_THUMBNAIL",
         "description": [
-            "AIオセロ。Javascriptで実装した。初めて作ったブラウザゲーム。マウスオーバー時のエフェクトとか頑張った記憶がある。"
+            "AIオセロ。Javascriptで実装した。",
+            "初めて作ったブラウザゲーム。マウスオーバー時のエフェクトとか頑張った記憶がある。"
         ],
         "link": "WORKS_OTHERO"
     },

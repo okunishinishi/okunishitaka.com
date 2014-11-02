@@ -6,19 +6,18 @@
             <img ng:src="{{images[work.thumbnail]}}" class="work-background-image">
         </div>
 
-        <h3 class="work-list-item-title theme-font">
+        <h3 class="work-list-item-title work-white-back theme-font">
             <a ng:href="{{links[work.link]}}">{{work.name}}</a>
         </h3>
 
-        <div class="work-thumbnail-image-container">
-            <a ng:href="{{links[work.link]}}">
-                <img ng:src="{{images[work.thumbnail]}}" class="work-thumbnail-image">
-            </a>
-        </div>
-
         <div class="work-list-item-content">
-            <div class="work-description">
+            <div class="work-description work-white-back">
                 <div ng:repeat="d in work.description">{{d}}</div>
+            </div>
+
+            <div class="work-link-container">
+                <a ng:href="{{links[work.link]}}" class="work-link">{{l.pages.work.VISIT_SITE}}<span
+                        class="work-link-icon fa fa-angle-right"></span></a>
             </div>
         </div>
     </li>

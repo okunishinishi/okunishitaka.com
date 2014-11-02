@@ -84,6 +84,9 @@
 		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"
+		            },
+		            "work": {
+		                "VISIT_SITE": "Visit the site"
 		            }
 		        }
 		    },
@@ -163,6 +166,9 @@
 		            },
 		            "blog": {
 		                "PREVIEW_LEGEND": "Preview"
+		            },
+		            "work": {
+		                "VISIT_SITE": "Visit the site"
 		            }
 		        }
 		    }

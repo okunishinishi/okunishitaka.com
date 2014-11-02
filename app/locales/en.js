@@ -83,7 +83,7 @@ l.errorDescriptions = {
 l.pages = {
     index: {
         CAPTION: [
-            'Homepage of ' + pkg.author
+                'Homepage of ' + pkg.author
         ],
         TITLE: pkg.name
     },
@@ -99,6 +99,9 @@ l.pages = {
     },
     blog: {
         PREVIEW_LEGEND: 'Preview'
+    },
+    work: {
+        VISIT_SITE: 'Visit the site'
     }
 }
 
