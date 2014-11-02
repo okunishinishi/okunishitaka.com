@@ -37,13 +37,17 @@ main {
     color: #AAA;
 }
 
+#blog-list {
+    margin: 0 8px;
+}
+
 #blog-list dt {
     font-size: 1.5em;
     margin: 20px 0;
 }
 
 #blog-list dd {
-    margin: 0 0 20px;
+    margin: 0 0 40px;
 }
 
 #blog-list .blog-dt-anchor {
@@ -52,3 +56,15 @@ main {
     margin-top: -55px;
 }
 
+@media (max-width: 568px) {
+    #blog-aside {
+        position: relative;
+        width: auto;
+        display: block;
+        z-index: 9;
+    }
+
+    main {
+        margin: 0;
+    }
+}

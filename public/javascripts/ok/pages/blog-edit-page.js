@@ -3,7 +3,7 @@
  * @requires angular
  */
 
-(function (ng) {
+(function (ng, ap) {
     "use strict";
 
     ng
@@ -29,7 +29,7 @@
                 }
             });
         })
-        .controller('BlogEditCtrl', function ($scope, blogOneDatasource, markdownRenderService) {
+        .controller('BlogEditCtrl', function ($scope, blogOneDatasource, markdownRenderService, BlogEntity) {
             ap.copy({
                 save: function (blog) {
                     blogOneDatasource.data = blog;
@@ -53,6 +53,9 @@
                 preview: {
                     get: function () {
                         var blog = $scope.blog;
+                        if (!blog) {
+                            return {};
+                        }
                         return {
                             title: blog.title,
                             content: markdownRenderService.render(blog.content)
@@ -62,4 +65,4 @@
             });
         })
 
-})(angular);
+})(angular, apeman);
