@@ -3,7 +3,9 @@
     <li ng:repeat="work in works" class="work-list-item">
 
         <div class="work-background-image-container">
-            <img ng:src="{{images[work.thumbnail]}}" class="work-background-image">
+            <a ng:href="{{links[work.link]}}" class="image-link">
+                <img ng:src="{{images[work.thumbnail]}}" class="work-background-image">
+            </a>
         </div>
 
         <h3 class="work-list-item-title work-white-back theme-font">
@@ -16,7 +18,7 @@
             </div>
 
             <div class="work-link-container">
-                <a ng:href="{{links[work.link]}}" class="work-link">{{l.pages.work.VISIT_SITE}}<span
+                <a ng:href="{{links[work.link]}}" class="work-link work-white-back">{{l.pages.work.VISIT_SITE}}<span
                         class="work-link-icon fa fa-angle-right"></span></a>
             </div>
         </div>
