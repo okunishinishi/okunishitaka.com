@@ -59,7 +59,7 @@
         "thumbnail": "WORKS_CSS_GALLERY_THUMBNAIL",
         "description": [
             "CSSでのお絵描き。キャンバスや画像を使わずに、DOM要素をCSS変形させていろんな形を作った。",
-            "正直使い道の無いテクニックだが、CSSの勉強という意味では有意義な試みだった。"
+            "正直使い道の無いテクニックだが、CSSの勉強としては悪くなかった。"
         ],
         "link": "WORKS_CSS_GALLERY"
     },
