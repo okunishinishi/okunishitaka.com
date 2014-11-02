@@ -3,7 +3,7 @@
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -13,6 +13,6 @@
                 get Datasource() { return $injector.get('Datasource'); },
                 get ListDatasource() { return $injector.get('ListDatasource'); },
                 get OneDatasource() { return $injector.get('OneDatasource'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);

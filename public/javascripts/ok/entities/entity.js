@@ -21,7 +21,7 @@
             Entity.prototype.init = function (data) {
                 var s = this;
                 ap.copy(data || {}, s);
-            }
+            };
 
             Entity.define = function (properties) {
 
@@ -42,8 +42,8 @@
                 }
 
                 return Defined;
-            }
+            };
 
             return Entity;
-        })
+        });
 })(angular, apeman);

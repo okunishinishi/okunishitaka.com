@@ -3,7 +3,7 @@
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -15,6 +15,6 @@
                 get ProfileEntity() { return $injector.get('ProfileEntity'); },
                 get SettingEntity() { return $injector.get('SettingEntity'); },
                 get WorkEntity() { return $injector.get('WorkEntity'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);

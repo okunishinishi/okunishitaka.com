@@ -305,6 +305,7 @@
 		    "WORKS_MOCK_MONKEY_THUMBNAIL": "/images/works/works-mock-monkey-thumbnail.png",
 		    "WORKS_OTHERO_THUMBNAIL": "/images/works/works-othero-thumbnail.png",
 		    "WORKS_PLANING_PORKER_THUMBNAIL": "/images/works/works-planing-porker-thumbnail.png",
+		    "WORKS_SELLIT_THUMBNAIL": "/images/works/works-sellit-thumbnail.png",
 		    "WORKS_SHOT_THUMBNAIL": "/images/works/works-shot-thumbnail.png",
 		    "WORKS_TYPE_THUMBNAIL": "/images/works/works-type-thumbnail.png"
 		});
@@ -368,7 +369,13 @@
 		    "WORKS_FILEDROP_FAVICON": "http://filedrop.demo.okunishitaka.com/fav.ico",
 		    "WORKS_KUROKAWA": "http://kurokawa.demo.okunishitaka.com/",
 		    "WORKS_KUROKAWA_REPO": "https://github.com/okunishinishi/kurokawa",
-		    "WORKS_KUROKAWA_FAVICON": "http://kurokawa.demo.okunishitaka.com/fav.ico"
+		    "WORKS_KUROKAWA_FAVICON": "http://kurokawa.demo.okunishitaka.com/fav.ico",
+		    "WORKS_SELLIT": "http://sellit.demo.okunishitaka.com/",
+		    "WORKS_SELLIT_REPO": "https://github.com/okunishinishi/sellit",
+		    "WORKS_SELLIT_FAVICON": "http://sellit.demo.okunishitaka.com/fav.ico",
+		    "WORKS_OKUNISHITAKA": "http://okunishitaka.com/",
+		    "WORKS_OKUNISHITAKA_REPO": "https://github.com/okunishinishi/okunishitaka.com",
+		    "WORKS_OKUNISHITAKA_FAVICON": "http://okunishitaka.com/favicon.png"
 		});
 
 })(angular);

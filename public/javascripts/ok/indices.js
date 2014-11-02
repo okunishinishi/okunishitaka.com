@@ -23,7 +23,7 @@
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -39,15 +39,15 @@
                 get linkUrlConstant() { return $injector.get('linkUrlConstant'); },
                 get pageUrlConstant() { return $injector.get('pageUrlConstant'); },
                 get partialUrlConstant() { return $injector.get('partialUrlConstant'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);
 /**
  * Datasources index.
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -57,15 +57,15 @@
                 get Datasource() { return $injector.get('Datasource'); },
                 get ListDatasource() { return $injector.get('ListDatasource'); },
                 get OneDatasource() { return $injector.get('OneDatasource'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);
 /**
  * Entities index.
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -77,15 +77,15 @@
                 get ProfileEntity() { return $injector.get('ProfileEntity'); },
                 get SettingEntity() { return $injector.get('SettingEntity'); },
                 get WorkEntity() { return $injector.get('WorkEntity'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);
 /**
  * Errors index.
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -94,15 +94,15 @@
             return {
                 get AppApiError() { return $injector.get('AppApiError'); },
                 get AppError() { return $injector.get('AppError'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);
 /**
  * Logics index.
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -114,15 +114,15 @@
                 get pageTitleLogic() { return $injector.get('pageTitleLogic'); },
                 get textLinkLogic() { return $injector.get('textLinkLogic'); },
                 get urlFormatLogic() { return $injector.get('urlFormatLogic'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);
 /**
  * Services index.
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -141,15 +141,15 @@
                 get locationResolveService() { return $injector.get('locationResolveService'); },
                 get markdownRenderService() { return $injector.get('markdownRenderService'); },
                 get templateCacheService() { return $injector.get('templateCacheService'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);
 /**
  * Templates index.
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -175,15 +175,15 @@
                 get socialHtmlTemplate() { return $injector.get('socialHtmlTemplate'); },
                 get workWorkLinkHtmlTemplate() { return $injector.get('workWorkLinkHtmlTemplate'); },
                 get workWorkListHtmlTemplate() { return $injector.get('workWorkListHtmlTemplate'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);
 /**
  * Utils index.
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -195,6 +195,6 @@
                 get objectUtil() { return $injector.get('objectUtil'); },
                 get positionUtil() { return $injector.get('positionUtil'); },
                 get urlUtil() { return $injector.get('urlUtil'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);

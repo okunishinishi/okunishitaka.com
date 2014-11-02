@@ -12,6 +12,7 @@ okunishitaka.com
 
 Homepage of Taka Okunishi
 
+![capture](doc/img/capture.png "capture")
 
 <!-- Banner start -->
 

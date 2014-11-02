@@ -9,6 +9,7 @@
     ng
         .module('ok.blogEditPage', [
             'ok.page',
+            'ngSanitize' // ng-bind-html requires ng sanitize.
         ])
         .run(function ($rootScope) {
             $rootScope.page = 'blogEdit';
@@ -39,9 +40,24 @@
                 }
             });
         })
-        .controller('BlogEditCtrl', function ($scope, blogListDatasource) {
+        .controller('BlogEditCtrl', function ($scope, blogListDatasource, blogOneDatasource) {
+            $scope.status = {};
+            $scope.status.isEditing = false;
             blogListDatasource.load();
 
+            ap.copy({
+                edit: function (blog) {
+                    $scope.status.isEditing = true;
+                    blogOneDatasource.clear();
+                    var id = blog && blog.id;
+                    if (!id) {
+                        return;
+                    }
+                    blogOneDatasource.fetch(id, function () {
+
+                    });
+                }
+            }, $scope);
         })
         .controller('BlogEditEditorCtrl', function ($scope, blogOneDatasource, markdownRenderService, BlogEntity) {
             ap.copy({
@@ -55,13 +71,16 @@
                     $scope.close();
                 },
                 close: function () {
-
+                    $scope.status.isEditing = false;
                 }
             }, $scope);
             Object.defineProperties($scope, {
                 blog: {
                     get: function () {
                         return blogOneDatasource.data;
+                    },
+                    set: function (blog) {
+                        blogOneDatasource.data = blog;
                     }
                 },
                 preview: {
@@ -95,6 +114,8 @@
                     }
                 }
             });
-        })
+
+            $scope.edit();//FIXME
+        });
 
 })(angular, apeman);

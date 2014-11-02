@@ -1,7 +1,7 @@
-<section id="blog-edit-section"
-         ng:class=""
+<section id="blog-edit-editor-section"
+         ng:class="{'blog-editor-visible':status.isEditing}"
          ng:controller="BlogEditEditorCtrl" class="cover">
-    <div id="blog-edit-section-content" class="container position-relative">
+    <div id="blog-edit-editor-section-content" class="container position-relative">
 
         <a ng:click="close()" id="blog-edit-close-button" class="close-button">{{l.buttons.CLOSE}}</a>
 

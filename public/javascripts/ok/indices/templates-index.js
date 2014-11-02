@@ -3,7 +3,7 @@
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -29,6 +29,6 @@
                 get socialHtmlTemplate() { return $injector.get('socialHtmlTemplate'); },
                 get workWorkLinkHtmlTemplate() { return $injector.get('workWorkLinkHtmlTemplate'); },
                 get workWorkListHtmlTemplate() { return $injector.get('workWorkListHtmlTemplate'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);

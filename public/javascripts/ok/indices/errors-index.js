@@ -3,7 +3,7 @@
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -12,6 +12,6 @@
             return {
                 get AppApiError() { return $injector.get('AppApiError'); },
                 get AppError() { return $injector.get('AppError'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);

@@ -41,7 +41,7 @@
                     var s = this;
                     ap.copy(properties || {}, s);
                 }
-            }
+            };
 
             return Datasource;
         });
@@ -82,7 +82,7 @@
                 Defined.prototype = new ListDatasource(properties);
 
                 return Defined;
-            }
+            };
 
             ListDatasource.prototype = ap.copy(
                 /** @lends ListDatasource.prototype */
@@ -173,7 +173,7 @@
                     }
                 },
                 new Datasource({})
-            )
+            );
 
             return ListDatasource;
         });
@@ -198,7 +198,7 @@
                 var s = this;
                 s.init.apply(s, arguments);
                 s.clear();
-            };
+            }
 
 
             /**
@@ -216,7 +216,7 @@
                 Defined.prototype = new OneDatasource(properties);
 
                 return Defined;
-            }
+            };
 
             OneDatasource.prototype = ap.copy(
                 /** @lends OneDatasource.prototype */

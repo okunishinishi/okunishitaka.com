@@ -305,6 +305,7 @@
 		    "WORKS_MOCK_MONKEY_THUMBNAIL": "/images/works/works-mock-monkey-thumbnail.png",
 		    "WORKS_OTHERO_THUMBNAIL": "/images/works/works-othero-thumbnail.png",
 		    "WORKS_PLANING_PORKER_THUMBNAIL": "/images/works/works-planing-porker-thumbnail.png",
+		    "WORKS_SELLIT_THUMBNAIL": "/images/works/works-sellit-thumbnail.png",
 		    "WORKS_SHOT_THUMBNAIL": "/images/works/works-shot-thumbnail.png",
 		    "WORKS_TYPE_THUMBNAIL": "/images/works/works-type-thumbnail.png"
 		});
@@ -368,7 +369,13 @@
 		    "WORKS_FILEDROP_FAVICON": "http://filedrop.demo.okunishitaka.com/fav.ico",
 		    "WORKS_KUROKAWA": "http://kurokawa.demo.okunishitaka.com/",
 		    "WORKS_KUROKAWA_REPO": "https://github.com/okunishinishi/kurokawa",
-		    "WORKS_KUROKAWA_FAVICON": "http://kurokawa.demo.okunishitaka.com/fav.ico"
+		    "WORKS_KUROKAWA_FAVICON": "http://kurokawa.demo.okunishitaka.com/fav.ico",
+		    "WORKS_SELLIT": "http://sellit.demo.okunishitaka.com/",
+		    "WORKS_SELLIT_REPO": "https://github.com/okunishinishi/sellit",
+		    "WORKS_SELLIT_FAVICON": "http://sellit.demo.okunishitaka.com/fav.ico",
+		    "WORKS_OKUNISHITAKA": "http://okunishitaka.com/",
+		    "WORKS_OKUNISHITAKA_REPO": "https://github.com/okunishinishi/okunishitaka.com",
+		    "WORKS_OKUNISHITAKA_FAVICON": "http://okunishitaka.com/favicon.png"
 		});
 
 })(angular);
@@ -467,7 +474,7 @@
                     var s = this;
                     ap.copy(properties || {}, s);
                 }
-            }
+            };
 
             return Datasource;
         });
@@ -508,7 +515,7 @@
                 Defined.prototype = new ListDatasource(properties);
 
                 return Defined;
-            }
+            };
 
             ListDatasource.prototype = ap.copy(
                 /** @lends ListDatasource.prototype */
@@ -599,7 +606,7 @@
                     }
                 },
                 new Datasource({})
-            )
+            );
 
             return ListDatasource;
         });
@@ -624,7 +631,7 @@
                 var s = this;
                 s.init.apply(s, arguments);
                 s.clear();
-            };
+            }
 
 
             /**
@@ -642,7 +649,7 @@
                 Defined.prototype = new OneDatasource(properties);
 
                 return Defined;
-            }
+            };
 
             OneDatasource.prototype = ap.copy(
                 /** @lends OneDatasource.prototype */
@@ -1103,7 +1110,7 @@
             Entity.prototype.init = function (data) {
                 var s = this;
                 ap.copy(data || {}, s);
-            }
+            };
 
             Entity.define = function (properties) {
 
@@ -1124,10 +1131,10 @@
                 }
 
                 return Defined;
-            }
+            };
 
             return Entity;
-        })
+        });
 })(angular, apeman);
 /**
  * Profile entity.
@@ -1366,7 +1373,7 @@
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -1382,15 +1389,15 @@
                 get linkUrlConstant() { return $injector.get('linkUrlConstant'); },
                 get pageUrlConstant() { return $injector.get('pageUrlConstant'); },
                 get partialUrlConstant() { return $injector.get('partialUrlConstant'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);
 /**
  * Datasources index.
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -1400,15 +1407,15 @@
                 get Datasource() { return $injector.get('Datasource'); },
                 get ListDatasource() { return $injector.get('ListDatasource'); },
                 get OneDatasource() { return $injector.get('OneDatasource'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);
 /**
  * Entities index.
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -1420,15 +1427,15 @@
                 get ProfileEntity() { return $injector.get('ProfileEntity'); },
                 get SettingEntity() { return $injector.get('SettingEntity'); },
                 get WorkEntity() { return $injector.get('WorkEntity'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);
 /**
  * Errors index.
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -1437,15 +1444,15 @@
             return {
                 get AppApiError() { return $injector.get('AppApiError'); },
                 get AppError() { return $injector.get('AppError'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);
 /**
  * Logics index.
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -1457,15 +1464,15 @@
                 get pageTitleLogic() { return $injector.get('pageTitleLogic'); },
                 get textLinkLogic() { return $injector.get('textLinkLogic'); },
                 get urlFormatLogic() { return $injector.get('urlFormatLogic'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);
 /**
  * Services index.
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -1484,15 +1491,15 @@
                 get locationResolveService() { return $injector.get('locationResolveService'); },
                 get markdownRenderService() { return $injector.get('markdownRenderService'); },
                 get templateCacheService() { return $injector.get('templateCacheService'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);
 /**
  * Templates index.
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -1518,15 +1525,15 @@
                 get socialHtmlTemplate() { return $injector.get('socialHtmlTemplate'); },
                 get workWorkLinkHtmlTemplate() { return $injector.get('workWorkLinkHtmlTemplate'); },
                 get workWorkListHtmlTemplate() { return $injector.get('workWorkListHtmlTemplate'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);
 /**
  * Utils index.
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -1538,9 +1545,9 @@
                 get objectUtil() { return $injector.get('objectUtil'); },
                 get positionUtil() { return $injector.get('positionUtil'); },
                 get urlUtil() { return $injector.get('urlUtil'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);
 
 /**
  * ok logics module.
@@ -2379,7 +2386,7 @@
         .module('ok.templates')
         .value('blogBlogEditEditorSectionHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-edit-editor-section.html",
-		    "content": "<section id=\"blog-edit-section\"\n         ng:class=\"\"\n         ng:controller=\"BlogEditEditorCtrl\" class=\"cover\">\n    <div id=\"blog-edit-section-content\" class=\"container position-relative\">\n\n        <a ng:click=\"close()\" id=\"blog-edit-close-button\" class=\"close-button\">{{l.buttons.CLOSE}}</a>\n\n        <div class=\"\">\n\n        </div>\n        <div class=\"\">\n            <fieldset class=\"no-style-fieldset\">\n                <div>\n                    <input type=\"text\" id=\"blog-title-input\"\n                           placeholder=\"{{l.placeholders.blog.TITLE}}\"\n                           ng:model=\"blog.title\"\n                           class=\"wide-input\">\n                </div>\n                <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n                          placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n                          class=\"wide-textarea\" cols=\"20\" rows=\"10\"\n                          ng:model=\"blog.content\"\n                        ></textarea>\n\n                <div class=\"text-align-center\">\n                    <a id=\"blog-cancel-button\" class=\"button\"\n                       ng:click=\"cancel()\"\n                            >{{l.buttons.CANCEL}}</a>\n                    <a id=\"blog-save-button\" class=\"button\"\n                       ng:click=\"save(blog)\"\n                            >{{l.buttons.SAVE}}</a>\n                </div>\n            </fieldset>\n            <fieldset>\n                <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>\n                <div id=\"blog-edit-preview-div\">\n                    <h2>{{preview.title}}</h2>\n\n                    <div ng:bind-html=\"preview.content\"></div>\n                </div>\n            </fieldset>\n            <br class=\"clear\"/>\n        </div>\n    </div>\n</section>"
+		    "content": "<section id=\"blog-edit-editor-section\"\n         ng:class=\"{'blog-editor-visible':status.isEditing}\"\n         ng:controller=\"BlogEditEditorCtrl\" class=\"cover\">\n    <div id=\"blog-edit-editor-section-content\" class=\"container position-relative\">\n\n        <a ng:click=\"close()\" id=\"blog-edit-close-button\" class=\"close-button\">{{l.buttons.CLOSE}}</a>\n\n        <div class=\"\">\n\n        </div>\n        <div class=\"\">\n            <fieldset class=\"no-style-fieldset\">\n                <div>\n                    <input type=\"text\" id=\"blog-title-input\"\n                           placeholder=\"{{l.placeholders.blog.TITLE}}\"\n                           ng:model=\"blog.title\"\n                           class=\"wide-input\">\n                </div>\n                <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n                          placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n                          class=\"wide-textarea\" cols=\"20\" rows=\"10\"\n                          ng:model=\"blog.content\"\n                        ></textarea>\n\n                <div class=\"text-align-center\">\n                    <a id=\"blog-cancel-button\" class=\"button\"\n                       ng:click=\"cancel()\"\n                            >{{l.buttons.CANCEL}}</a>\n                    <a id=\"blog-save-button\" class=\"button\"\n                       ng:click=\"save(blog)\"\n                            >{{l.buttons.SAVE}}</a>\n                </div>\n            </fieldset>\n            <fieldset>\n                <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>\n                <div id=\"blog-edit-preview-div\">\n                    <h2>{{preview.title}}</h2>\n\n                    <div ng:bind-html=\"preview.content\"></div>\n                </div>\n            </fieldset>\n            <br class=\"clear\"/>\n        </div>\n    </div>\n</section>"
 		});
 
 })(angular);

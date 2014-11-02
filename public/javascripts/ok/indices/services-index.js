@@ -3,7 +3,7 @@
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -22,6 +22,6 @@
                 get locationResolveService() { return $injector.get('locationResolveService'); },
                 get markdownRenderService() { return $injector.get('markdownRenderService'); },
                 get templateCacheService() { return $injector.get('templateCacheService'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);

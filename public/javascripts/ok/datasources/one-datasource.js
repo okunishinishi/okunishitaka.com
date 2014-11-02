@@ -18,7 +18,7 @@
                 var s = this;
                 s.init.apply(s, arguments);
                 s.clear();
-            };
+            }
 
 
             /**
@@ -36,7 +36,7 @@
                 Defined.prototype = new OneDatasource(properties);
 
                 return Defined;
-            }
+            };
 
             OneDatasource.prototype = ap.copy(
                 /** @lends OneDatasource.prototype */

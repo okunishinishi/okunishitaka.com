@@ -3,7 +3,7 @@
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -15,6 +15,6 @@
                 get objectUtil() { return $injector.get('objectUtil'); },
                 get positionUtil() { return $injector.get('positionUtil'); },
                 get urlUtil() { return $injector.get('urlUtil'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);

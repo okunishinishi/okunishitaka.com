@@ -26,7 +26,7 @@
                     var s = this;
                     ap.copy(properties || {}, s);
                 }
-            }
+            };
 
             return Datasource;
         });

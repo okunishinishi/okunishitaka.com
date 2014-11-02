@@ -28,5 +28,11 @@
     "WORKS_FILEDROP_FAVICON": "http://filedrop.demo.okunishitaka.com/fav.ico",
     "WORKS_KUROKAWA": "http://kurokawa.demo.okunishitaka.com/",
     "WORKS_KUROKAWA_REPO": "https://github.com/okunishinishi/kurokawa",
-    "WORKS_KUROKAWA_FAVICON": "http://kurokawa.demo.okunishitaka.com/fav.ico"
+    "WORKS_KUROKAWA_FAVICON": "http://kurokawa.demo.okunishitaka.com/fav.ico",
+    "WORKS_SELLIT": "http://sellit.demo.okunishitaka.com/",
+    "WORKS_SELLIT_REPO": "https://github.com/okunishinishi/sellit",
+    "WORKS_SELLIT_FAVICON": "http://sellit.demo.okunishitaka.com/fav.ico",
+    "WORKS_OKUNISHITAKA": "http://okunishitaka.com/",
+    "WORKS_OKUNISHITAKA_REPO": "https://github.com/okunishinishi/okunishitaka.com",
+    "WORKS_OKUNISHITAKA_FAVICON": "http://okunishitaka.com/favicon.png"
 }

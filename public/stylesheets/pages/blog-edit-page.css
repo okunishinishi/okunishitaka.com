@@ -39,3 +39,20 @@
 #blog-edit-close-button:hover {
     color: #333;
 }
+
+#blog-edit-editor-section {
+    display: none;
+}
+
+#blog-edit-editor-section.blog-editor-visible {
+    display: block;
+}
+
+#blog-edit-editor-section-content {
+    padding-top: 40px;
+    border: 1px solid #DDD;
+}
+
+fieldset {
+    border: 1px groove #AAA;
+}

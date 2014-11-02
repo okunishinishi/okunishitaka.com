@@ -3,7 +3,7 @@
  * @requires angular
  * @requires apeman
  */
-(function (ng, ap) {
+(function (ng) {
     "use strict";
 
     ng
@@ -15,6 +15,6 @@
                 get pageTitleLogic() { return $injector.get('pageTitleLogic'); },
                 get textLinkLogic() { return $injector.get('textLinkLogic'); },
                 get urlFormatLogic() { return $injector.get('urlFormatLogic'); }
-            }
+            };
         });
-})(angular, apeman);
+})(angular);

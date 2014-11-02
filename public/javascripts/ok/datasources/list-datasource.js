@@ -34,7 +34,7 @@
                 Defined.prototype = new ListDatasource(properties);
 
                 return Defined;
-            }
+            };
 
             ListDatasource.prototype = ap.copy(
                 /** @lends ListDatasource.prototype */
@@ -125,7 +125,7 @@
                     }
                 },
                 new Datasource({})
-            )
+            );
 
             return ListDatasource;
         });
