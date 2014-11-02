@@ -303,6 +303,7 @@
 		    "WORKS_FILEDROP_THUMBNAIL": "/images/works/works-filedrop-thumbnail.png",
 		    "WORKS_KUROKAWA_THUMBNAIL": "/images/works/works-kurokawa-thumbnail.png",
 		    "WORKS_MOCK_MONKEY_THUMBNAIL": "/images/works/works-mock-monkey-thumbnail.png",
+		    "WORKS_OKUNISHITAKA_THUMBNAIL": "/images/works/works-okunishitaka-thumbnail.png",
 		    "WORKS_OTHERO_THUMBNAIL": "/images/works/works-othero-thumbnail.png",
 		    "WORKS_PLANING_PORKER_THUMBNAIL": "/images/works/works-planing-porker-thumbnail.png",
 		    "WORKS_SELLIT_THUMBNAIL": "/images/works/works-sellit-thumbnail.png",
