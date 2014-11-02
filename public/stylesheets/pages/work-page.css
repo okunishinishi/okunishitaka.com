@@ -124,6 +124,13 @@ p {
     opacity: 0.9;
 }
 
+.work-list-favicon {
+    max-height: 16px;
+    margin-left: 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 @media (max-width: 568px) {
     #work-list {
         width: 100%;

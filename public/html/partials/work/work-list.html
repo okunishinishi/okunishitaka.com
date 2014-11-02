@@ -9,7 +9,9 @@
         </div>
 
         <h3 class="work-list-item-title work-white-back theme-font">
-            <a ng:href="{{hrefForWork(work)}}">{{work.name}}</a>
+            <a ng:href="{{hrefForWork(work)}}">{{work.name}}<img class="work-list-favicon" ng:src="{{links[work.favicon]}}"
+                                                    ng:if="!!links[work.favicon]"/>
+            </a>
         </h3>
 
         <div class="work-list-item-content">

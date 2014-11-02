@@ -347,20 +347,28 @@
 		    "OKUNISHITAKA_DOT_COM": "http://okunishitaka.com",
 		    "WORKS_CHESS": "http://okunishinishi.github.io/ChessTek/",
 		    "WORKS_CHESS_REPO": "https://github.com/okunishinishi/ChessTek",
+		    "WORKS_CHESS_FAVICON": "http://okunishinishi.github.io/ChessTek/fav.ico",
 		    "WORKS_SHOT": "http://okunishinishi.github.io/SHOTek/",
 		    "WORKS_SHOT_REPO": "https://github.com/okunishinishi/SHOTek",
+		    "WORKS_SHOT_FAVICON": "http://okunishinishi.github.io/SHOTek/fav.ico",
 		    "WORKS_CSS_GALLERY": "http://okunishinishi.github.io/css-art-gallery/",
 		    "WORKS_CSS_GALLERY_REPO": "https://github.com/okunishinishi/css-art-gallery",
+		    "WORKS_CSS_GALLERY_FAVICON": "http://okunishinishi.github.io/css-art-gallery/fav.ico",
 		    "WORKS_OTHERO": "http://okunishinishi.github.io/OthelloTek/",
 		    "WORKS_OTHERO_REPO": "https://github.com/okunishinishi/OthelloTek",
+		    "WORKS_OTHERO_FAVICON": "http://okunishinishi.github.io/OthelloTek/fav.ico",
 		    "WORKS_TYPE": "http://okunishinishi.github.io/TouchTypeTraining/",
 		    "WORKS_TYPE_REPO": "https://github.com/okunishinishi/TouchTypeTraining",
+		    "WORKS_TYPE_FAVICON": "http://okunishinishi.github.io/TouchTypeTraining/fav.ico",
 		    "WORKS_MOCK_MONKEY": "http://mockmonkey.demo.okunishitaka.com/",
 		    "WORKS_MOCK_MONKEY_REPO": "https://github.com/okunishinishi/mock-monkey",
+		    "WORKS_MOCK_MONKEY_FAVICON": "http://mockmonkey.demo.okunishitaka.com/fav.ico",
 		    "WORKS_FILEDROP": "http://filedrop.demo.okunishitaka.com/",
 		    "WORKS_FILEDROP_REPO": "https://github.com/okunishinishi/filedrop",
+		    "WORKS_FILEDROP_FAVICON": "http://filedrop.demo.okunishitaka.com/fav.ico",
 		    "WORKS_KUROKAWA": "http://kurokawa.demo.okunishitaka.com/",
-		    "WORKS_KUROKAWA_REPO": "https://github.com/okunishinishi/kurokawa"
+		    "WORKS_KUROKAWA_REPO": "https://github.com/okunishinishi/kurokawa",
+		    "WORKS_KUROKAWA_FAVICON": "http://kurokawa.demo.okunishitaka.com/fav.ico"
 		});
 
 })(angular);
@@ -2626,7 +2634,7 @@
         .module('ok.templates')
         .value('workWorkListHtmlTemplate', {
 		    "name": "/html/partials/work/work-list.html",
-		    "content": "<ul id=\"work-list\" ng:controller=\"WorkListCtrl\">\n\n    <li ng:repeat=\"work in works\" class=\"work-list-item\">\n\n        <div class=\"work-background-image-container\">\n            <a ng:href=\"{{hrefForWork(work)}}\" class=\"image-link\">\n                <img ng:src=\"{{images[work.thumbnail]}}\" class=\"work-background-image\">\n            </a>\n        </div>\n\n        <h3 class=\"work-list-item-title work-white-back theme-font\">\n            <a ng:href=\"{{hrefForWork(work)}}\">{{work.name}}</a>\n        </h3>\n\n        <div class=\"work-list-item-content\">\n            <div class=\"work-description work-white-back\">\n                <div ng:repeat=\"d in work.description\">{{d}}</div>\n            </div>\n\n            <div ok:work-link ok:work-href=\"work.link\" ok:work-title=\"l.buttons.VISIT_SITE\">\n            </div>\n            <div ok:work-link ok:work-href=\"work.demo\" ok:work-title=\"l.buttons.TRY_DEMO\">\n            </div>\n            <div ok:work-link ok:work-href=\"work.repo\" ok:work-title=\"l.buttons.VIEW_SOURCE_CODE\">\n            </div>\n        </div>\n\n    </li>\n    <li class=\"clear-both\"></li>\n</ul>"
+		    "content": "<ul id=\"work-list\" ng:controller=\"WorkListCtrl\">\n\n    <li ng:repeat=\"work in works\" class=\"work-list-item\">\n\n        <div class=\"work-background-image-container\">\n            <a ng:href=\"{{hrefForWork(work)}}\" class=\"image-link\">\n                <img ng:src=\"{{images[work.thumbnail]}}\" class=\"work-background-image\">\n            </a>\n        </div>\n\n        <h3 class=\"work-list-item-title work-white-back theme-font\">\n            <a ng:href=\"{{hrefForWork(work)}}\">{{work.name}}<img class=\"work-list-favicon\" ng:src=\"{{links[work.favicon]}}\"\n                                                    ng:if=\"!!links[work.favicon]\"/>\n            </a>\n        </h3>\n\n        <div class=\"work-list-item-content\">\n            <div class=\"work-description work-white-back\">\n                <div ng:repeat=\"d in work.description\">{{d}}</div>\n            </div>\n\n            <div ok:work-link ok:work-href=\"work.link\" ok:work-title=\"l.buttons.VISIT_SITE\">\n            </div>\n            <div ok:work-link ok:work-href=\"work.demo\" ok:work-title=\"l.buttons.TRY_DEMO\">\n            </div>\n            <div ok:work-link ok:work-href=\"work.repo\" ok:work-title=\"l.buttons.VIEW_SOURCE_CODE\">\n            </div>\n        </div>\n\n    </li>\n    <li class=\"clear-both\"></li>\n</ul>"
 		});
 
 })(angular);

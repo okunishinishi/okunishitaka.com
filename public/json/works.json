@@ -1,6 +1,6 @@
 [
     {
-        "name": "kurokawa",
+        "name": "Kurokawa",
         "thumbnail": "WORKS_KUROKAWA_THUMBNAIL",
         "description": [
             "顧客管理システム。",
@@ -8,7 +8,8 @@
             "このシステムに情報を入力するとポイントが与えられ、営業マン同士で競い合う、といった使い方ができます。"
         ],
         "demo": "WORKS_KUROKAWA",
-        "repo": "WORKS_KUROKAWA_REPO"
+        "repo": "WORKS_KUROKAWA_REPO",
+        "favicon": "WORKS_KUROKAWA_FAVICON"
     },
     {
         "name": "File Drop",
@@ -19,7 +20,8 @@
             "チーム内でちょろっと資料なんかを渡す用に作った。"
         ],
         "demo": "WORKS_FILEDROP",
-        "repo": "WORKS_FILEDROP_REPO"
+        "repo": "WORKS_FILEDROP_REPO",
+        "favicon": "WORKS_FILEDROP_FAVICON"
     },
     {
         "name": "Mock Monkey",
@@ -30,7 +32,8 @@
             "テストや開発においての利用を想定している。"
         ],
         "demo": "WORKS_MOCK_MONKEY",
-        "repo": "WORKS_MOCK_MONKEY_REPO"
+        "repo": "WORKS_MOCK_MONKEY_REPO",
+        "favicon": "WORKS_MOCK_MONKEY_FAVICON"
     },
     {
         "name": "ChessTek",
@@ -41,7 +44,8 @@
             "三手ぐらいしか読んでいないので、正直あんまり強くない。"
         ],
         "link": "WORKS_CHESS",
-        "repo": "WORKS_CHESS_REPO"
+        "repo": "WORKS_CHESS_REPO",
+        "favicon": "WORKS_CHESS_FAVICON"
     },
     {
         "name": "SHOTek",
@@ -52,7 +56,8 @@
             "ブラウザのウィンドウ幅を狭くすると敵の密集度が増えて難易度があがる。"
         ],
         "link": "WORKS_SHOT",
-        "repo": "WORKS_SHOT_REPO"
+        "repo": "WORKS_SHOT_REPO",
+        "favicon": "WORKS_SHOT_FAVICON"
     },
     {
         "name": "CSS Gallery",
@@ -61,7 +66,8 @@
             "CSSでのお絵描き。キャンバスや画像を使わずに、DOM要素をCSS変形させていろんな形を作った。",
             "正直使い道の無いテクニックだが、CSSの勉強としては悪くなかった。"
         ],
-        "link": "WORKS_CSS_GALLERY"
+        "link": "WORKS_CSS_GALLERY",
+        "favicon": "WORKS_CSS_GALLERY_FAVICON"
     },
     {
         "name": "OtheroTek",
@@ -72,7 +78,8 @@
             "AIの指し手が速すぎたので、スリープ処理を挟んで調整している。"
         ],
         "link": "WORKS_OTHERO",
-        "repo": "WORKS_CSS_GALLERY_REPO"
+        "repo": "WORKS_CSS_GALLERY_REPO",
+        "favicon": "WORKS_OTHERO_FAVICON"
     },
     {
         "name": "TouchTypeTraining",
@@ -84,6 +91,7 @@
 
         ],
         "link": "WORKS_TYPE",
-        "repo": "WORKS_TYPE_REPO"
+        "repo": "WORKS_TYPE_REPO",
+        "favicon": "WORKS_TYPE_FAVICON"
     }
 ]
