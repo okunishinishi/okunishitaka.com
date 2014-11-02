@@ -26,6 +26,7 @@
 		    "INDEX_SCREENSHOT": "/images/screenshots/index-screenshot.png",
 		    "PROFILE_SCREENSHOT": "/images/screenshots/profile-screenshot.png",
 		    "WORK_SCREENSHOT": "/images/screenshots/work-screenshot.png",
+		    "WORK_FILEDROP_THUMBNAIL": "/images/works/work-filedrop-thumbnail.png",
 		    "WORKS_CHESS_THUMBNAIL": "/images/works/works-chess-thumbnail.png",
 		    "WORKS_CSS_GALLERY_THUMBNAIL": "/images/works/works-css-gallery-thumbnail.png",
 		    "WORKS_DOC_GALLERY_THUMBNAIL": "/images/works/works-doc-gallery-thumbnail.png",

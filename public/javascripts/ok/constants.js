@@ -291,6 +291,7 @@
 		    "INDEX_SCREENSHOT": "/images/screenshots/index-screenshot.png",
 		    "PROFILE_SCREENSHOT": "/images/screenshots/profile-screenshot.png",
 		    "WORK_SCREENSHOT": "/images/screenshots/work-screenshot.png",
+		    "WORK_FILEDROP_THUMBNAIL": "/images/works/work-filedrop-thumbnail.png",
 		    "WORKS_CHESS_THUMBNAIL": "/images/works/works-chess-thumbnail.png",
 		    "WORKS_CSS_GALLERY_THUMBNAIL": "/images/works/works-css-gallery-thumbnail.png",
 		    "WORKS_DOC_GALLERY_THUMBNAIL": "/images/works/works-doc-gallery-thumbnail.png",
@@ -335,12 +336,16 @@
 		    "TIS_HOMEPAGE": "http://www.tis.co.jp/",
 		    "REAL_GLOBE_HOMEPAGE": "http://realglobe.jp/",
 		    "IPA_HOMEPAGE": "http://www.ipa.go.jp/",
+		    "MY_GITHUB": "https://github.com/okunishinishi",
 		    "WORKS_CHESS": "http://okunishinishi.github.io/ChessTek/",
 		    "WORKS_SHOT": "http://okunishinishi.github.io/SHOTek/",
 		    "WORKS_CSS_GALLERY": "http://okunishinishi.github.io/css-art-gallery/",
 		    "WORKS_OTHERO": "http://okunishinishi.github.io/OthelloTek/",
 		    "WORKS_TYPE": "http://okunishinishi.github.io/TouchTypeTraining/",
-		    "MY_GITHUB": "https://github.com/okunishinishi"
+		    "WORKS_MOCK_MONKEY": "http://mockmonkey.demo.okunishitaka.com/",
+		    "WORKS_MOCK_MONKEY_REPO": "https://github.com/okunishinishi/mock-monkey",
+		    "WORKS_FILEDROP": "http://filedrop.demo.okunishitaka.com/",
+		    "WORKS_FILEDROP_REPO": "https://github.com/okunishinishi/filedrop"
 		});
 
 })(angular);

@@ -1,10 +1,31 @@
 [
     {
+        "name": "File Drop",
+        "thumbnail": "WORK_FILEDROP_THUMBNAIL",
+        "description": [
+            "ファイル受け渡しサイト。",
+            "ドラッグ&ドロップでファイルをアップロードできる。ファイルは数日で勝手に消える。",
+            "チーム内でちょろっと資料なんかを渡す用に作った。"
+        ],
+        "link": "WORKS_FILEDROP"
+    },
+    {
+        "name": "Mock Monkey",
+        "thumbnail": "WORKS_MOCK_MONKEY_THUMBNAIL",
+        "description": [
+            "WebAPIモックサイト。Webブラウザからモック用のWebAPIを作ることができる。",
+            "クエリパラメータの値をデータに動的に埋め込むことができる。",
+            "テストや開発においての利用を想定している。"
+        ],
+        "link": "WORKS_MOCK_MONKEY"
+    },
+    {
         "name": "ChessTek",
         "thumbnail": "WORKS_CHESS_THUMBNAIL",
         "description": [
             "AIチェス。JavaScriptで実装。",
-            "駒や盤の絵には画像やHTMLキャンバスを一切使わず、DOM要素をCSS変形させて描いている。"
+            "駒や盤の絵には画像やHTMLキャンバスを一切使わず、DOM要素をCSS変形させて描いている。",
+            "三手ぐらいしか読んでいないので、正直あんまり強くない。"
         ],
         "link": "WORKS_CHESS"
     },
@@ -13,7 +34,8 @@
         "thumbnail": "WORKS_SHOT_THUMBNAIL",
         "description": [
             "シューテイングゲーム。Javascriptで実装。",
-            "HTMLキャンバスを使って描画している。キャンバス系のライブラリを一切使わず、自前で頑張ってみた。"
+            "HTMLキャンバスを使って描画している。キャンバス系のライブラリを一切使わず、自前で頑張ってみた。",
+            "ブラウザのウィンドウ幅を狭くすると敵の密集度が増えて難易度があがる。"
         ],
         "link": "WORKS_SHOT"
     },
@@ -21,7 +43,8 @@
         "name": "CSS Gallery",
         "thumbnail": "WORKS_CSS_GALLERY_THUMBNAIL",
         "description": [
-            "CSSでのお絵描き。キャンバスや画像を使わずに、DOM要素をCSS変形させていろんな形を作った。"
+            "CSSでのお絵描き。キャンバスや画像を使わずに、DOM要素をCSS変形させていろんな形を作った。",
+            "正直使い道の無いテクニックだが、CSSの勉強という意味では有意義な試みだった。"
         ],
         "link": "WORKS_CSS_GALLERY"
     },
@@ -30,7 +53,8 @@
         "thumbnail": "WORKS_OTHERO_THUMBNAIL",
         "description": [
             "AIオセロ。Javascriptで実装した。",
-            "初めて作ったブラウザゲーム。マウスオーバー時のエフェクトとか頑張った記憶がある。"
+            "初めて作ったブラウザゲーム。マウスオーバー時のエフェクトとか頑張った記憶がある。",
+            "AIの指し手が速すぎたので、スリープ処理を挟んで調整している。"
         ],
         "link": "WORKS_OTHERO"
     },
