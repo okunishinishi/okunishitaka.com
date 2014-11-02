@@ -21,17 +21,22 @@
     display: inline-block;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     vertical-align: middle;
+    background-color: white;
 }
 
 .work-list-item-title {
     margin: 0;
-    border-bottom: 1px solid #DDD;
+    border-bottom: 1px solid #F0F0F0;
     width: 100%;
     display: block;
+    font-weight: 100;
+    position: relative;
+    z-index: 3;
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .work-list-item-title a {
-    color: #888;
+    color: #333;
     display: inline-block;
     padding: 5px 10px;
 }
@@ -52,24 +57,23 @@
 }
 
 .work-list-item-content {
-    padding: 4px 10px 10px 120px;
+    padding: 50px 0 0;
 }
 
 .work-thumbnail-image-container {
     position: absolute;
-    left: 9px;
-    top: 39px;
-    border-radius: 50%;
-    border: 1px solid #DDD;
+    left: 0;
+    top: 33px;
     overflow: hidden;
-    width: 100px;
-    height: 100px;
+    width: 300px;
+    height: 50px;
+    background-color: #E0E0E0;
 }
 
 .work-thumbnail-image {
     position: relative;
-    top: -40px;
-    left: -10px;
+    top: -34px;
+    left: 0;
 }
 
 .work-background-image,
@@ -83,6 +87,11 @@
 }
 
 .work-description {
+    position: relative;
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px;
+    border: 1px solid #F2F2F2;
 }
 
 @media (max-width: 568px) {
