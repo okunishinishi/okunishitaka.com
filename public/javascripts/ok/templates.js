@@ -232,7 +232,7 @@
         .module('ok.templates')
         .value('socialHtmlTemplate', {
 		    "name": "/html/partials/social.html",
-		    "content": "<div id=\"social-buttons-container\" class=\"container\">\n\n    <br/>\n\n    <div class=\"float-right\">\n        <div id=\"fb-root\"></div>\n\n        <div class=\"fb-like\" data-href=\"http://okunishitaka.com\" data-layout=\"button_count\" data-action=\"like\"\n             data-show-faces=\"true\" data-share=\"true\"></div>\n    </div>\n\n    <br class=\"clear-both\"/>\n</div>"
+		    "content": "<div id=\"social-buttons-container\" class=\"container\">\n    <div ok:fade-in ok:duration=\"400\" ok:delay=\"800\">\n\n        <div class=\"button-container\" id=\"facebook-button-container\">\n            <div ok:facebook-button ok:href=\"links['OKUNISHITAKA_DOT_COM']\"></div>\n        </div>\n\n\n        <div class=\"button-container\" id=\"twitter-button-container\">\n            <div ok:twitter-button ok:href=\"links['OKUNISHITAKA_DOT_COM']\" ok:via=\"okunishinishi\"></div>\n        </div>\n\n        <br class=\"clear-both\"/>\n    </div>\n</div>"
 		});
 
 })(angular);

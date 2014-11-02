@@ -2,5 +2,8 @@
     "okReplace",
     "okScrollToFixed",
     "okScrollToStay",
-    "okLinked"
+    "okLinked",
+    "okFacebookButton",
+    "okTwitterButton",
+    "okFadeIn"
 ]

@@ -1,13 +1,15 @@
 <div id="social-buttons-container" class="container">
+    <div ok:fade-in ok:duration="400" ok:delay="800">
 
-    <br/>
+        <div class="button-container" id="facebook-button-container">
+            <div ok:facebook-button ok:href="links['OKUNISHITAKA_DOT_COM']"></div>
+        </div>
 
-    <div class="float-right">
-        <div id="fb-root"></div>
 
-        <div class="fb-like" data-href="http://okunishitaka.com" data-layout="button_count" data-action="like"
-             data-show-faces="true" data-share="true"></div>
+        <div class="button-container" id="twitter-button-container">
+            <div ok:twitter-button ok:href="links['OKUNISHITAKA_DOT_COM']" ok:via="okunishinishi"></div>
+        </div>
+
+        <br class="clear-both"/>
     </div>
-
-    <br class="clear-both"/>
 </div>
