@@ -405,6 +405,7 @@
 		    "META": "/html/partials/meta.html",
 		    "PROFILE_LIST": "/html/partials/profile/profile-list.html",
 		    "PROFILE_TABLE": "/html/partials/profile/profile-table.html",
+		    "SOCIAL": "/html/partials/social.html",
 		    "WORK_LINK": "/html/partials/work/work-link.html",
 		    "WORK_LIST": "/html/partials/work/work-list.html"
 		});
@@ -1390,6 +1391,7 @@
                 get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); },
                 get profileProfileListHtmlTemplate() { return $injector.get('profileProfileListHtmlTemplate'); },
                 get profileProfileTableHtmlTemplate() { return $injector.get('profileProfileTableHtmlTemplate'); },
+                get socialHtmlTemplate() { return $injector.get('socialHtmlTemplate'); },
                 get workWorkLinkHtmlTemplate() { return $injector.get('workWorkLinkHtmlTemplate'); },
                 get workWorkListHtmlTemplate() { return $injector.get('workWorkListHtmlTemplate'); }
             }
@@ -2434,6 +2436,21 @@
         .value('profileProfileTableHtmlTemplate', {
 		    "name": "/html/partials/profile/profile-table.html",
 		    "content": "<table id=\"{{id}}\" class=\"profile-table\">\n    <caption>{{caption}}</caption>\n    <thead>\n    <tr ng:if=\"!!data.head\">\n        <th ng:repeat=\"head in data.head\">{{head}}</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr ng:repeat=\"row in data.body\" ng:init=\"headed=!!data.headedBody\">\n        <th ng:repeat=\"cell in row\" ng:if=\"(headed && $first)\" ok:linked=\"data.links\" ng:bind=\"cell\"></th>\n        <td ng:repeat=\"cell in row\" ng:if=\"!(headed && $first)\"\n            ok:linked=\"data.links\">\n            <span ng:hide=\"cell.image\">{{cell}}</span>\n            <span ng:show=\"cell.image\"><a href=\"{{images[cell.image]}}\" target=\"_blank\">{{cell.title}}</a></span>\n        </td>\n    </tr>\n    </tbody>\n</table>"
+		});
+
+})(angular);
+/**
+ * Template for socialHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('socialHtmlTemplate', {
+		    "name": "/html/partials/social.html",
+		    "content": "<div id=\"social-buttons-container\" class=\"container\">\n\n    <br/>\n\n    <div class=\"float-right\">\n        <div id=\"fb-root\"></div>\n\n        <div class=\"fb-like\" data-href=\"http://okunishitaka.com\" data-layout=\"button_count\" data-action=\"like\"\n             data-show-faces=\"true\" data-share=\"true\"></div>\n    </div>\n\n    <br class=\"clear-both\"/>\n</div>"
 		});
 
 })(angular);

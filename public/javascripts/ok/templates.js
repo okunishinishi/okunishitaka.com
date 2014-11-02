@@ -222,6 +222,21 @@
 
 })(angular);
 /**
+ * Template for socialHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('socialHtmlTemplate', {
+		    "name": "/html/partials/social.html",
+		    "content": "<div id=\"social-buttons-container\" class=\"container\">\n\n    <br/>\n\n    <div class=\"float-right\">\n        <div id=\"fb-root\"></div>\n\n        <div class=\"fb-like\" data-href=\"http://okunishitaka.com\" data-layout=\"button_count\" data-action=\"like\"\n             data-show-faces=\"true\" data-share=\"true\"></div>\n    </div>\n\n    <br class=\"clear-both\"/>\n</div>"
+		});
+
+})(angular);
+/**
  * Template for workWorkLinkHtml
  * @ngdoc object
  */

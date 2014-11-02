@@ -24,6 +24,7 @@
                 get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); },
                 get profileProfileListHtmlTemplate() { return $injector.get('profileProfileListHtmlTemplate'); },
                 get profileProfileTableHtmlTemplate() { return $injector.get('profileProfileTableHtmlTemplate'); },
+                get socialHtmlTemplate() { return $injector.get('socialHtmlTemplate'); },
                 get workWorkLinkHtmlTemplate() { return $injector.get('workWorkLinkHtmlTemplate'); },
                 get workWorkListHtmlTemplate() { return $injector.get('workWorkListHtmlTemplate'); }
             }
