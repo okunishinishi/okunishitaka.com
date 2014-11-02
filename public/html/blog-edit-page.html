@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <!--
-    HTML for blog page.
+    HTML for blog-edit page.
 -->
-<html ng:app="ok.blogPage">
+<html ng:app="ok.blogEditPage">
 <head ng:attr-lang="{{lang}}" ng:controller="HeadControl">
 
     <meta ok:replace="url(partials.META)">
@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="/stylesheets/base.css?v=0.0.0">
     <link rel="stylesheet" href="/stylesheets/font-awesome.css?v=0.0.0">
-    <link rel="stylesheet" href="/stylesheets/pages/blog-page.css?v=0.0.0">
+    <link rel="stylesheet" href="/stylesheets/pages/blog-edit-page.css?v=0.0.0">
 
     <script src="/javascripts/lib.js?v=0.0.0"></script>
     <script src="/javascripts/ok/constants.js?v=0.0.0"></script>
@@ -28,22 +28,15 @@
     <script src="/javascripts/ok/templates.js?v=0.0.0"></script>
     <script src="/javascripts/ok/utils.js?v=0.0.0"></script>
     <script src="/javascripts/ok/pages/page.js?v=0.0.0"></script>
-    <script src="/javascripts/ok/pages/blog-page.js?v=0.0.0"></script>
-
+    <script src="/javascripts/ok/pages/blog-edit-page.js?v=0.0.0"></script>
 </head>
 <body>
+
 <header ng:include="partials.HEADER" ng:controller="HeaderControl"></header>
 
-<div class="container position-relative" ng:controller="BlogCtrl">
-    <aside id="blog-aside">
-        <div ng-include="partials.BLOG_ASIDE_CONTENT"></div>
-    </aside>
-    <main>
-        <article id="blog-article">
-            <div ng-include="partials.BLOG_LIST_SECTION"></div>
-        </article>
-    </main>
-</div>
+<main class="container" ng:controller="BlogEditCtrl">
+    <div ng-include="partials.BLOG_EDIT_SECTION"></div>
+</main>
 
 <footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>
 

@@ -1,0 +1,26 @@
+/** Style for blog-edit page. **/
+
+#blog-edit-section {
+    position: fixed;
+    background-color: rgba(232, 232, 232, 0.67);
+    z-index: 101;
+}
+
+#blog-edit-section fieldset {
+    display: inline-block;
+    width: 40%;
+    display: inline-block;
+    margin: 20px;
+    float: left;
+}
+
+#blog-edit-section-content {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.92);
+    margin: auto;
+    border: 1px solid #F0F0F0;
+    top: 5%;
+    height: 90%;
+    display: block;
+    overflow: auto;
+}

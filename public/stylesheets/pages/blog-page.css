@@ -1,4 +1,41 @@
 /** Style for blog page. **/
+body {
+}
+
+main {
+    margin-right: 340px;
+}
+
+#blog-aside {
+    position: absolute;
+    border: 1px solid #EEE;
+    padding: 10px;
+    margin: 0;
+    top: 0;
+    right: 0;
+    width: 280px;
+}
+
+#blog-aside ul {
+    padding: 0;
+    margin: 0;
+}
+
+#blog-aside li {
+    list-style: none;
+}
+
+#blog-aside li a {
+    display: block;
+    padding: 4px 8px;
+}
+
+#aside-blog-more-button {
+    display: block;
+    padding: 4px 8px;
+    text-align: center;
+    color: #AAA;
+}
 
 #blog-list dt {
     font-size: 1.5em;
@@ -11,31 +48,7 @@
 
 #blog-list .blog-dt-anchor {
     position: relative;
-    padding-top: 45px;
-    margin-top: -45px;
+    padding-top: 55px;
+    margin-top: -55px;
 }
 
-#blog-edit-section {
-    position: fixed;
-    background-color: rgba(232, 232, 232, 0.67);
-    z-index: 101;
-}
-
-#blog-edit-section fieldset {
-    display: inline-block;
-    width: 40%;
-    display: inline-block;
-    margin: 20px;
-    float: left;
-}
-
-#blog-edit-section-content {
-    position: relative;
-    background-color: rgba(255, 255, 255, 0.92);
-    margin: auto;
-    border: 1px solid #F0F0F0;
-    top: 5%;
-    height: 90%;
-    display: block;
-    overflow: auto;
-}

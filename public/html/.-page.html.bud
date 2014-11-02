@@ -22,7 +22,7 @@ module.exports = pages.map(function (page) {
         data: {
             prefix: prefix,
             lang: '{{lang}}',
-            name: name,
+            name: string.camelString(name),
             Name: string.pascalString(page),
             stylesheets: [
                 'base.css',
