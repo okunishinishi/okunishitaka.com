@@ -2,7 +2,7 @@
 <!--
     HTML for admin page.
 -->
-<html ng:app="ok.adminPage">
+<html ng:app="ok.adminBlogPage">
 <head ng:attr-lang="{{lang}}" ng:controller="HeadControl">
 
     <meta ok:replace="url(partials.META)">
@@ -29,13 +29,13 @@
     <script src="/javascripts/ok/utils.js?v=0.0.0"></script>
     <script src="/javascripts/ok/pages/page.js?v=0.0.0"></script>
     <script src="/javascripts/ok/pages/admin-page.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/pages/admin-blog-page.js?v=0.0.0"></script>
 </head>
 <body>
 
 <header ng:include="partials.HEADER" ng:controller="HeaderControl"></header>
 
 <main class="container" ng:controller="AdminCtrl">
-
     <div ng:include="partials.ADMIN_BLOG_LIST_SECTION"></div>
 </main>
 

@@ -14,34 +14,6 @@
         .run(function ($rootScope) {
             $rootScope.page = 'blogEdit';
         })
-        .factory('blogOneDatasource', function (OneDatasource, BlogEntity, blogApiService) {
-            return new OneDatasource({
-                convert: function (data) {
-                    return BlogEntity.new(data);
-                },
-                fetch: function (id, callback) {
-                    blogApiService.one(id, callback);
-                },
-                create: function (data, callback) {
-                    blogApiService.create(data, callback);
-                },
-                update: function (id, data, callback) {
-                    blogApiService.update(id, data, callback);
-                }
-            });
-        })
-        .factory('blogListDatasource', function (ListDatasource, BlogEntity, blogApiService) {
-            return new ListDatasource({
-                convert: function (data) {
-                    return data.map(BlogEntity.new);
-                },
-                fetch: function (query, callback) {
-                    query._sort = '_at';
-                    query._reverse = 'true';
-                    blogApiService.list(query, callback);
-                }
-            });
-        })
         .controller('BlogEditCtrl', function ($scope, blogListDatasource, blogOneDatasource) {
             $scope.status = {};
             $scope.status.isEditing = false;
@@ -101,25 +73,5 @@
                 }
             });
         })
-        .controller('BlogEditListCtrl', function ($scope, blogListDatasource, textSummarizeLogic) {
-            ap.copy({
-                more: function () {
-                    blogListDatasource.load();
-                },
-                summarize: function (text) {
-                    return textSummarizeLogic.summaize(text, 30);
-                }
-            }, $scope);
-
-            Object.defineProperties($scope, {
-                blogs: {
-                    get: function () {
-                        return blogListDatasource.data;
-                    }
-                }
-            });
-
-            $scope.edit();//FIXME
-        });
 
 })(angular, apeman);

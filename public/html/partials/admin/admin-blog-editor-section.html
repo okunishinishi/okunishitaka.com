@@ -1,9 +1,9 @@
-<section id="blog-edit-editor-section"
+<section id="admin-blog-editor-section"
          ng:class="{'blog-editor-visible':status.isEditing}"
          ng:controller="BlogEditEditorCtrl" class="cover">
-    <div id="blog-edit-editor-section-content" class="container position-relative">
+    <div id="admin-blog-editor-section-content" class="container position-relative">
 
-        <a ng:click="close()" id="blog-edit-close-button" class="close-button">{{l.buttons.CLOSE}}</a>
+        <a ng:click="close()" id="admin-blog-close-button" class="close-button">{{l.buttons.CLOSE}}</a>
 
         <div class="grid-row">
             <div class="grid-col">
@@ -38,7 +38,7 @@
             <div class="grid-col">
                 <fieldset>
                     <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>
-                    <div id="blog-edit-preview-div">
+                    <div id="admin-blog-preview-div">
                         <h2>{{preview.title}}</h2>
 
                         <div ng:bind-html="preview.content"></div>
