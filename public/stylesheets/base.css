@@ -20,9 +20,12 @@ body {
     font-weight: 100;
 }
 button,
-.button {
+.button,
+.button:visited,
+.button:link {
     border-radius: 4px;
-    border: 1px solid #B0B0B0;
+    border: 1px solid #26777B;
+    color: #26777B;
     text-decoration: none;
     display: inline-block;
     text-align: center;
@@ -32,7 +35,9 @@ button,
 }
 
 .button-hover,
-.button:hover {
+.button:hover,
+.button:link:hover,
+.button:visited:hover {
     text-decoration: none;
     opacity: 0.8;
 }
@@ -56,10 +61,12 @@ button,
     color: #DDD;
 }
 
-.button-primary {
-    background: #698DFF;
+.button-primary,
+.button-primary:link,
+.button-primary:visited {
+    background: #26777B;
     color: white;
-    border-color: #5c7bdf;
+    border-color: #26777B;
 }
 /**
  * Style for clearing.

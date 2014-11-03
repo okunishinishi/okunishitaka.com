@@ -114,6 +114,7 @@
                 get pageTitleLogic() { return $injector.get('pageTitleLogic'); },
                 get tagColorLogic() { return $injector.get('tagColorLogic'); },
                 get textLinkLogic() { return $injector.get('textLinkLogic'); },
+                get textSummarizeLogic() { return $injector.get('textSummarizeLogic'); },
                 get urlFormatLogic() { return $injector.get('urlFormatLogic'); }
             };
         });
@@ -157,6 +158,8 @@
         .module('ok.indices')
         .factory('templatesIndex', function defineTemplatesIndex($injector) {
             return {
+                get adminAdminBlogListSectionHtmlTemplate() { return $injector.get('adminAdminBlogListSectionHtmlTemplate'); },
+                get adminAdminEditorSectionHtmlTemplate() { return $injector.get('adminAdminEditorSectionHtmlTemplate'); },
                 get blogBlogAsideContentHtmlTemplate() { return $injector.get('blogBlogAsideContentHtmlTemplate'); },
                 get blogBlogEditEditorSectionHtmlTemplate() { return $injector.get('blogBlogEditEditorSectionHtmlTemplate'); },
                 get blogBlogEditListSectionHtmlTemplate() { return $injector.get('blogBlogEditListSectionHtmlTemplate'); },

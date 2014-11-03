@@ -118,6 +118,11 @@ fieldset {
     padding: 0;
 }
 
+.field {
+    display: block;
+    padding: 4px 0;
+}
+
 @media (max-width: 568px) {
     #blog-edit-editor-section-content .grid-row,
     #blog-edit-editor-section-content .grid-col {

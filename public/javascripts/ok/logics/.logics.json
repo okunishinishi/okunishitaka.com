@@ -4,5 +4,6 @@
     "pageTitleLogic",
     "urlFormatLogic",
     "textLinkLogic",
-    "tagColorLogic"
+    "tagColorLogic",
+    "textSummarizeLogic"
 ]

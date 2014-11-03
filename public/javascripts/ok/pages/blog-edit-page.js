@@ -36,6 +36,8 @@
                     return data.map(BlogEntity.new);
                 },
                 fetch: function (query, callback) {
+                    query._sort = '_at';
+                    query._reverse = 'true';
                     blogApiService.list(query, callback);
                 }
             });
@@ -44,7 +46,6 @@
             $scope.status = {};
             $scope.status.isEditing = false;
             blogListDatasource.load();
-
             ap.copy({
                 edit: function (blog) {
                     $scope.status.isEditing = true;
@@ -100,17 +101,13 @@
                 }
             });
         })
-        .controller('BlogEditListCtrl', function ($scope, blogListDatasource) {
+        .controller('BlogEditListCtrl', function ($scope, blogListDatasource, textSummarizeLogic) {
             ap.copy({
-                /**
-                 * Load more data.
-                 */
                 more: function () {
                     blogListDatasource.load();
                 },
                 summarize: function (text) {
-                    var max = 30;
-                    return text.substr(0, max) + '...';
+                    return textSummarizeLogic.summaize(text, 30);
                 }
             }, $scope);
 

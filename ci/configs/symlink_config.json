@@ -1,5 +1,9 @@
 [
     {
+        "src": "public/html/admin-page.html",
+        "dest": "public/admin.html"
+    },
+    {
         "src": "public/html/blog-edit-page.html",
         "dest": "public/blog-edit.html"
     },

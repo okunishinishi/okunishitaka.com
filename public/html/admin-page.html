@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+    HTML for admin page.
+-->
+<html ng:app="ok.adminPage">
+<head ng:attr-lang="{{lang}}" ng:controller="HeadControl">
+
+    <meta ok:replace="url(partials.META)">
+
+    <title ng:bind="title(page)"></title>
+
+    <link rel="icon" href="/favicon.png?v=0.0.0">
+
+    <link rel="stylesheet" href="/stylesheets/base.css?v=0.0.0">
+    <link rel="stylesheet" href="/stylesheets/font-awesome.css?v=0.0.0">
+    <link rel="stylesheet" href="/stylesheets/pages/admin-page.css?v=0.0.0">
+
+    <script src="/javascripts/lib.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/constants.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/datasources.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/directives.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/entities.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/errors.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/filters.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/indices.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/logics.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/services.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/templates.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/utils.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/pages/page.js?v=0.0.0"></script>
+    <script src="/javascripts/ok/pages/admin-page.js?v=0.0.0"></script>
+</head>
+<body>
+
+<header ng:include="partials.HEADER" ng:controller="HeaderControl"></header>
+
+<main class="container" ng:controller="AdminCtrl">
+
+    <div ng:include="partials.ADMIN_BLOG_LIST_SECTION"></div>
+</main>
+
+<footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>
+
+</body>
+</html>

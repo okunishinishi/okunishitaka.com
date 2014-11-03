@@ -1,21 +1,21 @@
-<section id="blog-edit-list-section" ng:controller="BlogEditListCtrl">
-    <ul id="blog-edit-list">
-        <li ng:repeat="b in blogs" class="blog-edit-list-item">
+<section id="admin-blog-list-section" ng:controller="AdminBlogListCtrl">
+    <ul id="admin-blog-list">
+        <li ng:repeat="b in blogs" class="admin-blog-list-item">
 
-            <span class="blog-edit-list-action-area">
+            <span class="admin-blog-list-action-area">
                 <a href="javascript:void(0)" class="link-button" ng:click="edit(b)"><i class="fa fa-pencil"></i>{{l.buttons.EDIT}}</a>
                 <a href="javascript:void(0)" class="link-button" ng:click="destroy(b)"><i class="fa fa-trash-o"></i>{{l.buttons.DELETE}}</a>
             </span>
 
-            <div class="blog-edit-list-item-inner">
+            <div class="admin-blog-list-item-inner">
 
 
-                <h3 class="blog-edit-list-title">
+                <h3 class="admin-blog-list-title">
                     <a class="blog-dt-anchor"
                        name="blog-{{b._id}}">{{b.title}}</a>
                 </h3>
 
-            <span class="blog-edit-list-content">
+            <span class="admin-blog-list-content">
             {{summarize(b.content)}}
             </span>
 

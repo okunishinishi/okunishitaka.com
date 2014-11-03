@@ -1,0 +1,46 @@
+/** Style for admin page. **/
+
+#admin-blog-list-section {
+    max-width: 600px;
+}
+
+#admin-blog-list {
+    margin: 4px;
+    padding: 0;
+}
+
+.admin-blog-list-item {
+    border-bottom: 1px solid #EEE;
+    list-style: none;
+    position: relative;
+    padding: 2px 4px 8px;
+}
+
+.admin-blog-list-title {
+    font-size: 1em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.admin-blog-list-item-inner {
+    margin-right: 160px;
+}
+
+.admin-blog-list-content {
+    margin: 0;
+    padding: 0 0 10px;
+    position: relative;
+    font-size: 0.75em;
+}
+
+.admin-blog-list-action-area {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 150px;
+    opacity: 0.5;
+}
+
+.admin-blog-list-item:hover .admin-blog-list-action-area {
+    opacity: 1;
+}
