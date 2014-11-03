@@ -1,4 +1,7 @@
 <a ng:href="{{links[href]}}"
    ng:if="!!links[href]"
-   class="work-link work-white-back">{{title}}<span
-        class="work-link-icon fa fa-angle-right"></span></a>
+   class="work-link work-white-back"><span class="work-link-icon-container"><img
+        ng:if="!!links[icon]"
+        ng:src="{{links[icon]}}"
+        class="work-link-icon"/></span>{{title}}<span
+        class="work-link-disclosure fa fa-angle-right"></span></a>

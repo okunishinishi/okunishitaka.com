@@ -115,7 +115,20 @@ p {
     text-decoration: none;
 }
 
+.work-link-icon-container {
+    display: inline-block;
+    min-width: 12px;
+    float: left;
+}
+
 .work-link-icon {
+    display: inline-block;
+    margin-right: 4px;
+    max-height: 12px;
+    vertical-align: baseline;
+}
+
+.work-link-disclosure {
     display: inline-block;
     width: 9px;
 }

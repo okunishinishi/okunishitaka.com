@@ -28,6 +28,7 @@
                 scope: {
                     href: '=okWorkHref',
                     title: '=okWorkTitle',
+                    icon:'=okWorkIcon'
                 },
                 link: function (scope, elm, attr) {
                     scope.links = linkUrlConstant;

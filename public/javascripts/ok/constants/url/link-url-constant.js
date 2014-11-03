@@ -13,6 +13,7 @@
 		    "REAL_GLOBE_HOMEPAGE": "http://realglobe.jp/",
 		    "IPA_HOMEPAGE": "http://www.ipa.go.jp/",
 		    "MY_GITHUB": "https://github.com/okunishinishi",
+		    "GITHUB_FAVICON": "https://assets-cdn.github.com/favicon.ico",
 		    "OKUNISHITAKA_DOT_COM": "http://okunishitaka.com",
 		    "WORKS_CHESS": "http://okunishinishi.github.io/ChessTek/",
 		    "WORKS_CHESS_REPO": "https://github.com/okunishinishi/ChessTek",

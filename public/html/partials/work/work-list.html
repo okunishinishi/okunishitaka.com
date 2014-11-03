@@ -9,8 +9,9 @@
         </div>
 
         <h3 class="work-list-item-title work-white-back theme-font">
-            <a ng:href="{{hrefForWork(work)}}">{{work.name}}<img class="work-list-favicon" ng:src="{{links[work.favicon]}}"
-                                                    ng:if="!!links[work.favicon]"/>
+            <a ng:href="{{hrefForWork(work)}}">{{work.name}}<img class="work-list-favicon"
+                                                                 ng:src="{{links[work.favicon]}}"
+                                                                 ng:if="!!links[work.favicon]"/>
             </a>
         </h3>
 
@@ -19,11 +20,14 @@
                 <div ng:repeat="d in work.description">{{d}}</div>
             </div>
 
-            <div ok:work-link ok:work-href="work.link" ok:work-title="l.buttons.VISIT_SITE">
+            <div ok:work-link ok:work-href="work.link" ok:work-title="l.buttons.VISIT_SITE"
+                 ok:work-icon="work.favicon">
             </div>
-            <div ok:work-link ok:work-href="work.demo" ok:work-title="l.buttons.TRY_DEMO">
+            <div ok:work-link ok:work-href="work.demo" ok:work-title="l.buttons.TRY_DEMO"
+                 ok:work-icon="work.favicon">
             </div>
-            <div ok:work-link ok:work-href="work.repo" ok:work-title="l.buttons.VIEW_SOURCE_CODE">
+            <div ok:work-link ok:work-href="work.repo" ok:work-title="l.buttons.VIEW_SOURCE_CODE"
+                 ok:work-icon="work.repoFavicon">
             </div>
         </div>
 
