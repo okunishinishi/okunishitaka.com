@@ -745,7 +745,8 @@
     "use strict";
     ng
         .module('ok.directives', [
-            'ok.utils'
+            'ok.utils',
+            'ok.logics'
         ]);
 })(angular);
 
@@ -1004,6 +1005,34 @@
                         }
                     }
                 }
+            }
+        });
+
+})(angular, apeman);
+/**
+ * @ngdoc directive
+ * @name okTag
+ * @description Ok tag.
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okTag', function defineOkTag(tagColorLogic) {
+            return {
+                scope: {
+                    title: '=okTitle'
+                },
+                link: function (scope, elm) {
+                    scope.color = tagColorLogic.tagColor(scope.title);
+                },
+                template: [
+                    '<span class="ok-tag" style="border-color: {{color}};color:{{color}};">',
+                    '<span class="ok-tag-icon" style="background-color: {{color}};"></span>',
+                    '{{title}}',
+                    '</span>'
+                ].join('')
             }
         });
 
@@ -1464,6 +1493,7 @@
                 get errorCodeLogic() { return $injector.get('errorCodeLogic'); },
                 get multiLangUrlLogic() { return $injector.get('multiLangUrlLogic'); },
                 get pageTitleLogic() { return $injector.get('pageTitleLogic'); },
+                get tagColorLogic() { return $injector.get('tagColorLogic'); },
                 get textLinkLogic() { return $injector.get('textLinkLogic'); },
                 get urlFormatLogic() { return $injector.get('urlFormatLogic'); }
             };
@@ -1543,6 +1573,7 @@
         .factory('utilsIndex', function defineUtilsIndex($injector) {
             return {
                 get canvasUtil() { return $injector.get('canvasUtil'); },
+                get hashUtil() { return $injector.get('hashUtil'); },
                 get mathUtil() { return $injector.get('mathUtil'); },
                 get objectUtil() { return $injector.get('objectUtil'); },
                 get positionUtil() { return $injector.get('positionUtil'); },
@@ -1663,6 +1694,31 @@
             }
         });
 })(angular, apeman);
+/**
+ * Tag color logic.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap, one) {
+    "use strict";
+
+    ng
+        .module('ok.logics')
+        .factory('tagColorLogic', function defineTagColorLogic(hashUtil) {
+            return {
+                tagColor: function (title, namespace) {
+                    var seed = [title, namespace || ''].join('-'),
+                        hashCode = hashUtil.toHashCode(seed);
+                    var hue = parseInt(hashCode % 50 + 100) / 100.0;
+                    var color = one.color('#a9d91d').hue(hue, true).hex();
+                    if (!color.match(/^#/)) {
+                        color = '#' + color;
+                    }
+                    return  color;
+                }
+            }
+        });
+})(angular, apeman, one);
 /**
  * Text link logic.
  * @requires angular
@@ -2643,7 +2699,7 @@
         .module('ok.templates')
         .value('workWorkListHtmlTemplate', {
 		    "name": "/html/partials/work/work-list.html",
-		    "content": "<ul id=\"work-list\" ng:controller=\"WorkListCtrl\">\n\n    <li ng:repeat=\"work in works\" class=\"work-list-item\">\n\n        <div class=\"work-background-image-container\">\n            <a ng:href=\"{{hrefForWork(work)}}\" class=\"image-link\">\n                <img ng:src=\"{{images[work.thumbnail]}}\" class=\"work-background-image\">\n            </a>\n        </div>\n\n        <h3 class=\"work-list-item-title work-white-back theme-font\">\n            <a ng:href=\"{{hrefForWork(work)}}\">{{work.name}}<img class=\"work-list-favicon\"\n                                                                 ng:src=\"{{links[work.favicon]}}\"\n                                                                 ng:if=\"!!links[work.favicon]\"/>\n            </a>\n        </h3>\n\n        <div class=\"work-list-item-content\">\n            <div class=\"work-description work-white-back\">\n                <div ng:repeat=\"d in work.description\">{{d}}</div>\n            </div>\n\n            <div ok:work-link ok:work-href=\"work.link\" ok:work-title=\"l.buttons.VISIT_SITE\"\n                 ok:work-icon=\"work.favicon\">\n            </div>\n            <div ok:work-link ok:work-href=\"work.demo\" ok:work-title=\"l.buttons.TRY_DEMO\"\n                 ok:work-icon=\"work.favicon\">\n            </div>\n            <div ok:work-link ok:work-href=\"work.repo\" ok:work-title=\"l.buttons.VIEW_SOURCE_CODE\"\n                 ok:work-icon=\"work.repoFavicon\">\n            </div>\n        </div>\n\n    </li>\n    <li class=\"clear-both\"></li>\n</ul>"
+		    "content": "<ul id=\"work-list\" ng:controller=\"WorkListCtrl\">\n\n    <li ng:repeat=\"work in works\" class=\"work-list-item\">\n\n        <div class=\"work-background-image-container\">\n            <a ng:href=\"{{hrefForWork(work)}}\" class=\"image-link\">\n                <img ng:src=\"{{images[work.thumbnail]}}\" class=\"work-background-image\">\n            </a>\n        </div>\n\n        <h3 class=\"work-list-item-title work-white-back theme-font\">\n            <a ng:href=\"{{hrefForWork(work)}}\">{{work.name}}<img class=\"work-list-favicon\"\n                                                                 ng:src=\"{{links[work.favicon]}}\"\n                                                                 ng:if=\"!!links[work.favicon]\"/>\n            </a>\n        </h3>\n\n        <div class=\"work-list-item-content\">\n            <div class=\"work-description work-white-back\">\n                <div class=\"work-tags-container\">\n                    <span ok:tag ok:title=\"t\" ng:repeat=\"t in work.tag\"></span>\n                </div>\n\n                <div ng:repeat=\"d in work.description\">{{d}}</div>\n            </div>\n\n            <div ok:work-link ok:work-href=\"work.link\" ok:work-title=\"l.buttons.VISIT_SITE\"\n                 ok:work-icon=\"work.favicon\">\n            </div>\n            <div ok:work-link ok:work-href=\"work.demo\" ok:work-title=\"l.buttons.TRY_DEMO\"\n                 ok:work-icon=\"work.favicon\">\n            </div>\n            <div ok:work-link ok:work-href=\"work.repo\" ok:work-title=\"l.buttons.VIEW_SOURCE_CODE\"\n                 ok:work-icon=\"work.repoFavicon\">\n            </div>\n        </div>\n\n    </li>\n    <li class=\"clear-both\"></li>\n</ul>"
 		});
 
 })(angular);
@@ -2708,6 +2764,32 @@
                 }
             }
             return canvasUtil;
+        });
+})(angular, apeman);
+/**
+ * Hash util.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.utils')
+        .factory('hashUtil', function defineHashUtil() {
+            return {
+                /**
+                 * Get hash code for string value.
+                 * @param {string} value - String to hash.
+                 * @returns {number} - Hash code.
+                 */
+                toHashCode: function (value) {
+                    return value.split("").reduce(function (a, b) {
+                        a = ((a << 5) - a) + b.charCodeAt(0);
+                        return a & a
+                    }, 0);
+                }
+            }
         });
 })(angular, apeman);
 /**

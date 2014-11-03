@@ -10,7 +10,10 @@
         "link": "WORKS_OKUNISHITAKA",
         "repo": "WORKS_OKUNISHITAKA_REPO",
         "repoFavicon": "GITHUB_FAVICON",
-        "favicon": "WORKS_OKUNISHITAKA_FAVICON"
+        "favicon": "WORKS_OKUNISHITAKA_FAVICON",
+        "tag": [
+            "Webapp", "Node.js"
+        ]
     },
     {
         "name": "Kurokawa",
@@ -23,7 +26,10 @@
         "demo": "WORKS_KUROKAWA",
         "repo": "WORKS_KUROKAWA_REPO",
         "repoFavicon": "GITHUB_FAVICON",
-        "favicon": "WORKS_KUROKAWA_FAVICON"
+        "favicon": "WORKS_KUROKAWA_FAVICON",
+        "tag": [
+            "Webapp", "Node.js"
+        ]
     },
     {
         "name": "Sellit",
@@ -36,7 +42,10 @@
         "demo": "WORKS_SELLIT",
         "repo": "WORKS_SELLIT_REPO",
         "repoFavicon": "GITHUB_FAVICON",
-        "favicon": "WORKS_SELLIT_FAVICON"
+        "favicon": "WORKS_SELLIT_FAVICON",
+        "tag": [
+            "Webapp", "Node.js"
+        ]
     },
     {
         "name": "File Drop",
@@ -49,7 +58,10 @@
         "demo": "WORKS_FILEDROP",
         "repo": "WORKS_FILEDROP_REPO",
         "repoFavicon": "GITHUB_FAVICON",
-        "favicon": "WORKS_FILEDROP_FAVICON"
+        "favicon": "WORKS_FILEDROP_FAVICON",
+        "tag": [
+            "Webapp", "Node.js"
+        ]
     },
     {
         "name": "Mock Monkey",
@@ -62,7 +74,10 @@
         "demo": "WORKS_MOCK_MONKEY",
         "repo": "WORKS_MOCK_MONKEY_REPO",
         "repoFavicon": "GITHUB_FAVICON",
-        "favicon": "WORKS_MOCK_MONKEY_FAVICON"
+        "favicon": "WORKS_MOCK_MONKEY_FAVICON",
+        "tag": [
+            "Webapp", "Node.js"
+        ]
     },
     {
         "name": "ChessTek",
@@ -75,7 +90,10 @@
         "link": "WORKS_CHESS",
         "repo": "WORKS_CHESS_REPO",
         "repoFavicon": "GITHUB_FAVICON",
-        "favicon": "WORKS_CHESS_FAVICON"
+        "favicon": "WORKS_CHESS_FAVICON",
+        "tag": [
+            "Game", "Javascript"
+        ]
     },
     {
         "name": "SHOTek",
@@ -88,7 +106,10 @@
         "link": "WORKS_SHOT",
         "repo": "WORKS_SHOT_REPO",
         "repoFavicon": "GITHUB_FAVICON",
-        "favicon": "WORKS_SHOT_FAVICON"
+        "favicon": "WORKS_SHOT_FAVICON",
+        "tag": [
+            "Game", "Javascript", "Canvas"
+        ]
     },
     {
         "name": "CSS Gallery",
@@ -98,9 +119,12 @@
             "正直使い道の無いテクニックだが、CSSの勉強としては悪くなかった。"
         ],
         "link": "WORKS_CSS_GALLERY",
-        "repo":"WORKS_CSS_GALLERY_REPO",
+        "repo": "WORKS_CSS_GALLERY_REPO",
         "repoFavicon": "GITHUB_FAVICON",
-        "favicon": "WORKS_CSS_GALLERY_FAVICON"
+        "favicon": "WORKS_CSS_GALLERY_FAVICON",
+        "tag": [
+            "CSS"
+        ]
     },
     {
         "name": "OtheroTek",
@@ -113,7 +137,10 @@
         "link": "WORKS_OTHERO",
         "repo": "WORKS_CSS_GALLERY_REPO",
         "repoFavicon": "GITHUB_FAVICON",
-        "favicon": "WORKS_OTHERO_FAVICON"
+        "favicon": "WORKS_OTHERO_FAVICON",
+        "tag": [
+            "Game", "Javascript"
+        ]
     },
     {
         "name": "TouchTypeTraining",
@@ -127,6 +154,9 @@
         "link": "WORKS_TYPE",
         "repo": "WORKS_TYPE_REPO",
         "repoFavicon": "GITHUB_FAVICON",
-        "favicon": "WORKS_TYPE_FAVICON"
+        "favicon": "WORKS_TYPE_FAVICON",
+        "tag": [
+            "Game", "Javascript"
+        ]
     }
 ]

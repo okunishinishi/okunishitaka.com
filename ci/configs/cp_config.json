@@ -70,6 +70,11 @@
         "mode": "444"
     },
     {
+        "src": "node_modules/apeman-front/assets/javascripts/one-color.js",
+        "dest": "public/javascripts/lib/one-color.js",
+        "mode": "444"
+    },
+    {
         "src": "node_modules/apeman-front/assets/javascripts/jquery.js",
         "dest": "public/javascripts/lib/jquery.js",
         "mode": "444"

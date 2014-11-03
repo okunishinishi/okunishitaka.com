@@ -3,5 +3,6 @@
     "urlUtil",
     "canvasUtil",
     "mathUtil",
-    "positionUtil"
+    "positionUtil",
+    "hashUtil"
 ]

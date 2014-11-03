@@ -9,7 +9,8 @@
             "ok.utils"
         ],
         "directives": [
-            "ok.utils"
+            "ok.utils",
+            "ok.logics"
         ],
         "entities": [
         ],
