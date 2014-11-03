@@ -44,6 +44,8 @@
 		        },
 		        "buttons": {
 		            "MORE": "See more",
+		            "EDIT": "Edit",
+		            "DELETE": "Delete",
 		            "CANCEL": "Cancel",
 		            "SAVE": "Save",
 		            "CLOSE": "Close",
@@ -129,6 +131,8 @@
 		        },
 		        "buttons": {
 		            "MORE": "See more",
+		            "EDIT": "Edit",
+		            "DELETE": "Delete",
 		            "CANCEL": "Cancel",
 		            "SAVE": "Save",
 		            "CLOSE": "Close",

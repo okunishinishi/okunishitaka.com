@@ -1,11 +1,25 @@
 <section id="blog-edit-list-section" ng:controller="BlogEditListCtrl">
-    <dl id="blog-edit-list">
-        <dt ng:repeat-start="b in blogs">
-            <a class="blog-dt-anchor"
-               name="blog-{{b._id}}">
-                {{b.title}}
-            </a>
-        </dt>
-        <dd ng:repeat-end="">{{b.content}}</dd>
-    </dl>
+    <ul id="blog-edit-list">
+        <li ng:repeat="b in blogs" class="blog-edit-list-item">
+
+            <span class="blog-edit-list-action-area">
+                <a href="javascript:void(0)" class="link-button" ng:click="edit(b)"><i class="fa fa-pencil"></i>{{l.buttons.EDIT}}</a>
+                <a href="javascript:void(0)" class="link-button" ng:click="destroy(b)"><i class="fa fa-trash-o"></i>{{l.buttons.DELETE}}</a>
+            </span>
+
+            <div class="blog-edit-list-item-inner">
+
+
+                <h3 class="blog-edit-list-title">
+                    <a class="blog-dt-anchor"
+                       name="blog-{{b._id}}">{{b.title}}</a>
+                </h3>
+
+            <span class="blog-edit-list-content">
+            {{summarize(b.content)}}
+            </span>
+
+            </div>
+        </li>
+    </ul>
 </section>

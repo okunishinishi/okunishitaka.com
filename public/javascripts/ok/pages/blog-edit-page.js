@@ -56,6 +56,9 @@
                     blogOneDatasource.fetch(id, function () {
 
                     });
+                },
+                destroy: function (blog) {
+
                 }
             }, $scope);
         })
@@ -104,6 +107,10 @@
                  */
                 more: function () {
                     blogListDatasource.load();
+                },
+                summarize: function (text) {
+                    var max = 30;
+                    return text.substr(0, max) + '...';
                 }
             }, $scope);
 

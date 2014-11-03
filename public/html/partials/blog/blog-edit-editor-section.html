@@ -5,41 +5,46 @@
 
         <a ng:click="close()" id="blog-edit-close-button" class="close-button">{{l.buttons.CLOSE}}</a>
 
-        <div class="">
+        <div class="grid-row">
+            <div class="grid-col">
+                <fieldset class="no-style-fieldset">
+                    <div>
+                        <input type="text" id="blog-title-input"
+                               placeholder="{{l.placeholders.blog.TITLE}}"
+                               ng:model="blog.title"
+                               class="wide-input">
+                    </div>
+                    <textarea name="blog-text" id="blog-text-textarea"
+                              placeholder="{{l.placeholders.blog.CONTENT}}"
+                              class="wide-textarea" cols="20" rows="10"
+                              ng:model="blog.content"
+                            ></textarea>
 
-        </div>
-        <div class="">
-            <fieldset class="no-style-fieldset">
-                <div>
-                    <input type="text" id="blog-title-input"
-                           placeholder="{{l.placeholders.blog.TITLE}}"
-                           ng:model="blog.title"
-                           class="wide-input">
-                </div>
-                <textarea name="blog-text" id="blog-text-textarea"
-                          placeholder="{{l.placeholders.blog.CONTENT}}"
-                          class="wide-textarea" cols="20" rows="10"
-                          ng:model="blog.content"
-                        ></textarea>
+                    <div class="text-align-center">
+                        <a id="blog-cancel-button" class="button"
+                           href="javascript:void(0)"
+                           ng:click="cancel()"
+                                >{{l.buttons.CANCEL}}</a>
+                        <a id="blog-save-button" class="button"
+                           href="javascript:void(0)"
+                           ng:click="save(blog)"
+                                >{{l.buttons.SAVE}}</a>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="grid-col">
+                <fieldset>
+                    <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>
+                    <div id="blog-edit-preview-div">
+                        <h2>{{preview.title}}</h2>
 
-                <div class="text-align-center">
-                    <a id="blog-cancel-button" class="button"
-                       ng:click="cancel()"
-                            >{{l.buttons.CANCEL}}</a>
-                    <a id="blog-save-button" class="button"
-                       ng:click="save(blog)"
-                            >{{l.buttons.SAVE}}</a>
+                        <div ng:bind-html="preview.content"></div>
+                    </div>
+                </fieldset>
+                <div class="grid-col">
+                    <br class="clear"/>
                 </div>
-            </fieldset>
-            <fieldset>
-                <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>
-                <div id="blog-edit-preview-div">
-                    <h2>{{preview.title}}</h2>
-
-                    <div ng:bind-html="preview.content"></div>
-                </div>
-            </fieldset>
-            <br class="clear"/>
+            </div>
         </div>
     </div>
 </section>

@@ -108,6 +108,8 @@
 		        },
 		        "buttons": {
 		            "MORE": "See more",
+		            "EDIT": "Edit",
+		            "DELETE": "Delete",
 		            "CANCEL": "Cancel",
 		            "SAVE": "Save",
 		            "CLOSE": "Close",
@@ -193,6 +195,8 @@
 		        },
 		        "buttons": {
 		            "MORE": "See more",
+		            "EDIT": "Edit",
+		            "DELETE": "Delete",
 		            "CANCEL": "Cancel",
 		            "SAVE": "Save",
 		            "CLOSE": "Close",
@@ -2444,7 +2448,7 @@
         .module('ok.templates')
         .value('blogBlogEditEditorSectionHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-edit-editor-section.html",
-		    "content": "<section id=\"blog-edit-editor-section\"\n         ng:class=\"{'blog-editor-visible':status.isEditing}\"\n         ng:controller=\"BlogEditEditorCtrl\" class=\"cover\">\n    <div id=\"blog-edit-editor-section-content\" class=\"container position-relative\">\n\n        <a ng:click=\"close()\" id=\"blog-edit-close-button\" class=\"close-button\">{{l.buttons.CLOSE}}</a>\n\n        <div class=\"\">\n\n        </div>\n        <div class=\"\">\n            <fieldset class=\"no-style-fieldset\">\n                <div>\n                    <input type=\"text\" id=\"blog-title-input\"\n                           placeholder=\"{{l.placeholders.blog.TITLE}}\"\n                           ng:model=\"blog.title\"\n                           class=\"wide-input\">\n                </div>\n                <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n                          placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n                          class=\"wide-textarea\" cols=\"20\" rows=\"10\"\n                          ng:model=\"blog.content\"\n                        ></textarea>\n\n                <div class=\"text-align-center\">\n                    <a id=\"blog-cancel-button\" class=\"button\"\n                       ng:click=\"cancel()\"\n                            >{{l.buttons.CANCEL}}</a>\n                    <a id=\"blog-save-button\" class=\"button\"\n                       ng:click=\"save(blog)\"\n                            >{{l.buttons.SAVE}}</a>\n                </div>\n            </fieldset>\n            <fieldset>\n                <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>\n                <div id=\"blog-edit-preview-div\">\n                    <h2>{{preview.title}}</h2>\n\n                    <div ng:bind-html=\"preview.content\"></div>\n                </div>\n            </fieldset>\n            <br class=\"clear\"/>\n        </div>\n    </div>\n</section>"
+		    "content": "<section id=\"blog-edit-editor-section\"\n         ng:class=\"{'blog-editor-visible':status.isEditing}\"\n         ng:controller=\"BlogEditEditorCtrl\" class=\"cover\">\n    <div id=\"blog-edit-editor-section-content\" class=\"container position-relative\">\n\n        <a ng:click=\"close()\" id=\"blog-edit-close-button\" class=\"close-button\">{{l.buttons.CLOSE}}</a>\n\n        <div class=\"grid-row\">\n            <div class=\"grid-col\">\n                <fieldset class=\"no-style-fieldset\">\n                    <div>\n                        <input type=\"text\" id=\"blog-title-input\"\n                               placeholder=\"{{l.placeholders.blog.TITLE}}\"\n                               ng:model=\"blog.title\"\n                               class=\"wide-input\">\n                    </div>\n                    <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n                              placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n                              class=\"wide-textarea\" cols=\"20\" rows=\"10\"\n                              ng:model=\"blog.content\"\n                            ></textarea>\n\n                    <div class=\"text-align-center\">\n                        <a id=\"blog-cancel-button\" class=\"button\"\n                           href=\"javascript:void(0)\"\n                           ng:click=\"cancel()\"\n                                >{{l.buttons.CANCEL}}</a>\n                        <a id=\"blog-save-button\" class=\"button\"\n                           href=\"javascript:void(0)\"\n                           ng:click=\"save(blog)\"\n                                >{{l.buttons.SAVE}}</a>\n                    </div>\n                </fieldset>\n            </div>\n            <div class=\"grid-col\">\n                <fieldset>\n                    <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>\n                    <div id=\"blog-edit-preview-div\">\n                        <h2>{{preview.title}}</h2>\n\n                        <div ng:bind-html=\"preview.content\"></div>\n                    </div>\n                </fieldset>\n                <div class=\"grid-col\">\n                    <br class=\"clear\"/>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>"
 		});
 
 })(angular);
@@ -2459,7 +2463,7 @@
         .module('ok.templates')
         .value('blogBlogEditListSectionHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-edit-list-section.html",
-		    "content": "<section id=\"blog-edit-list-section\" ng:controller=\"BlogEditListCtrl\">\n    <dl id=\"blog-edit-list\">\n        <dt ng:repeat-start=\"b in blogs\">\n            <a class=\"blog-dt-anchor\"\n               name=\"blog-{{b._id}}\">\n                {{b.title}}\n            </a>\n        </dt>\n        <dd ng:repeat-end=\"\">{{b.content}}</dd>\n    </dl>\n</section>"
+		    "content": "<section id=\"blog-edit-list-section\" ng:controller=\"BlogEditListCtrl\">\n    <ul id=\"blog-edit-list\">\n        <li ng:repeat=\"b in blogs\" class=\"blog-edit-list-item\">\n\n            <span class=\"blog-edit-list-action-area\">\n                <a href=\"javascript:void(0)\" class=\"link-button\" ng:click=\"edit(b)\"><i class=\"fa fa-pencil\"></i>{{l.buttons.EDIT}}</a>\n                <a href=\"javascript:void(0)\" class=\"link-button\" ng:click=\"destroy(b)\"><i class=\"fa fa-trash-o\"></i>{{l.buttons.DELETE}}</a>\n            </span>\n\n            <div class=\"blog-edit-list-item-inner\">\n\n\n                <h3 class=\"blog-edit-list-title\">\n                    <a class=\"blog-dt-anchor\"\n                       name=\"blog-{{b._id}}\">{{b.title}}</a>\n                </h3>\n\n            <span class=\"blog-edit-list-content\">\n            {{summarize(b.content)}}\n            </span>\n\n            </div>\n        </li>\n    </ul>\n</section>"
 		});
 
 })(angular);
