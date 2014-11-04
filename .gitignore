@@ -26,3 +26,4 @@ test/.work
 /var/backup/*
 /var/log/*
 /var/data/*
+/var/cache/*
