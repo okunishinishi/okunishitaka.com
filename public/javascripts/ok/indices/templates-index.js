@@ -30,6 +30,7 @@
                 get profileProfileListHtmlTemplate() { return $injector.get('profileProfileListHtmlTemplate'); },
                 get profileProfileTableHtmlTemplate() { return $injector.get('profileProfileTableHtmlTemplate'); },
                 get socialHtmlTemplate() { return $injector.get('socialHtmlTemplate'); },
+                get trackHtmlTemplate() { return $injector.get('trackHtmlTemplate'); },
                 get workWorkLinkHtmlTemplate() { return $injector.get('workWorkLinkHtmlTemplate'); },
                 get workWorkListHtmlTemplate() { return $injector.get('workWorkListHtmlTemplate'); }
             };

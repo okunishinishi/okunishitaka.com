@@ -4,10 +4,6 @@
         "dest": "public/admin.html"
     },
     {
-        "src": "public/html/blog-edit-page.html",
-        "dest": "public/blog-edit.html"
-    },
-    {
         "src": "public/html/blog-page.html",
         "dest": "public/blog.html"
     },

@@ -1,14 +1,14 @@
 /**
  * @ngdoc directive
- * @name okGoogleAalytics
- * @description Ok google aalytics.
+ * @name okGoogleAnalytics
+ * @description Ok google analytics.
  */
 (function (ng, ap) {
     "use strict";
 
     ng
         .module('ok.directives')
-        .directive('okGoogleAalytics', function defineOkGoogleAalytics() {
+        .directive('okGoogleAnalytics', function defineOkGoogleAnalytics() {
             function loadSDK(i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
                 i[r] = i[r] || function () {
@@ -29,7 +29,7 @@
                     return {
                         post: function (scope, elm, attr) {
                             loadSDK(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-                            ga('create', sope.trakingId, 'auto');
+                            ga('create', scope.trakingId, 'auto');
                             ga('send', 'pageview');
                         }
                     }

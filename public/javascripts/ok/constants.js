@@ -432,6 +432,7 @@
 		    "PROFILE_LIST": "/html/partials/profile/profile-list.html",
 		    "PROFILE_TABLE": "/html/partials/profile/profile-table.html",
 		    "SOCIAL": "/html/partials/social.html",
+		    "TRACK": "/html/partials/track.html",
 		    "WORK_LINK": "/html/partials/work/work-link.html",
 		    "WORK_LIST": "/html/partials/work/work-list.html"
 		});
