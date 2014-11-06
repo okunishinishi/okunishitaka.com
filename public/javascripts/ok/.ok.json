@@ -36,6 +36,9 @@
             "ok.errors",
             "ok.utils"
         ],
+        "pages": [
+            "ok.page"
+        ],
         "services": [
             "apeman",
             "ok.constants",

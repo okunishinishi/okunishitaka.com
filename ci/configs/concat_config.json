@@ -32,6 +32,10 @@
         "dest": "public/javascripts/ok/logics.js"
     },
     {
+        "src": "public/javascripts/ok/pages/**/*.js",
+        "dest": "public/javascripts/ok/pages.js"
+    },
+    {
         "src": "public/javascripts/ok/services/**/*.js",
         "dest": "public/javascripts/ok/services.js"
     },

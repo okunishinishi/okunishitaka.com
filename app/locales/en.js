@@ -40,7 +40,6 @@ l.labels = {
     }
 };
 
-
 l.pageNames = {
     INDEX: 'Top',
     PROFILE: 'Profile',
@@ -58,7 +57,7 @@ l.pageDescriptions = {
 l.buttons = {
     MORE: 'See more',
     EDIT: 'Edit',
-    DELETE:'Delete',
+    DELETE: 'Delete',
     CANCEL: 'Cancel',
     SAVE: 'Save',
     CLOSE: 'Close',

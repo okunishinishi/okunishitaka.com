@@ -1863,6 +1863,150 @@
 })(angular, apeman);
 
 /**
+ * ok pages module.
+ * @requires angular
+ */
+
+(function (ng) {
+    "use strict";
+    ng
+        .module('ok.pages', [
+            'ok.page'
+        ]);
+})(angular);
+
+/**
+ * Page script for admin.
+ * @requires angular
+ */
+
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.adminBlogPage', [
+            'ok.adminPage',
+            'ngSanitize' // ng-bind-html requires ng sanitize.
+        ])
+        .run(function ($rootScope) {
+        })
+        .factory('blogOneDatasource', function (OneDatasource, BlogEntity, blogApiService) {
+            return new OneDatasource({
+                convert: function (data) {
+                    return BlogEntity.new(data);
+                },
+                fetch: function (id, callback) {
+                    blogApiService.one(id, callback);
+                },
+                create: function (data, callback) {
+                    blogApiService.create(data, callback);
+                },
+                update: function (id, data, callback) {
+                    blogApiService.update(id, data, callback);
+                }
+            });
+        })
+        .factory('blogListDatasource', function (ListDatasource, BlogEntity, blogApiService) {
+            return new ListDatasource({
+                convert: function (data) {
+                    return data.map(BlogEntity.new);
+                },
+                fetch: function (query, callback) {
+                    query._sort = '_at';
+                    query._reverse = 'true';
+                    blogApiService.list(query, callback);
+                }
+            });
+        })
+        .controller('AdminBlogCtrl', function ($scope, blogOneDatasource) {
+
+        })
+        .controller('AdminBlogEditCtrl', function ($scope, blogOneDatasource, markdownRenderService) {
+            ap.copy({
+                save: function (blog) {
+                    blogOneDatasource.data = blog;
+                    blogOneDatasource.save(function (err, data) {
+
+                    });
+                },
+                cancel: function () {
+                    $scope.close();
+                },
+                close: function () {
+                }
+            }, $scope);
+            Object.defineProperties($scope, {
+                blog: {
+                    get: function () {
+                        return blogOneDatasource.data;
+                    },
+                    set: function (blog) {
+                        blogOneDatasource.data = blog;
+                    }
+                },
+                preview: {
+                    get: function () {
+                        var blog = $scope.blog;
+                        if (!blog) {
+                            return {};
+                        }
+                        return {
+                            title: blog.title,
+                            content: markdownRenderService.render(blog.content)
+                        }
+                    }
+                }
+            });
+        })
+        .controller('AdminBlogListCtrl', function ($scope, blogListDatasource, textSummarizeLogic) {
+            ap.copy({
+                edit: function (blog) {
+
+                },
+                destroy: function (blog) {
+
+                },
+                more: function () {
+                    blogListDatasource.load();
+                },
+                summarize: function (text) {
+                    return textSummarizeLogic.summarize(text, 30);
+                }
+            }, $scope);
+
+            Object.defineProperties($scope, {
+                blogs: {
+                    get: function () {
+                        return blogListDatasource.data;
+                    }
+                }
+            });
+            blogListDatasource.load();
+        });
+
+})(angular, apeman);
+/**
+ * Page script for admin.
+ * @requires angular
+ */
+
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.adminPage', [
+            'ok.page',
+            'ngSanitize' // ng-bind-html requires ng sanitize.
+        ])
+        .run(function ($rootScope) {
+            $rootScope.page = 'admin';
+        })
+        .controller('AdminCtrl', function ($scope, blogListDatasource) {
+            blogListDatasource.load();
+        })
+    ;
+})(angular, apeman);
+/**
  * Page script for blog.
  * @requires angular
  * @retuires apeman
@@ -1874,9 +2018,10 @@
     ng
         .module('ok.blogPage', [
             'ok.page',
+            'ngSanitize' // ng-bind-html requires ng sanitize.
         ])
         .run(function ($rootScope) {
-
+            $rootScope.page = 'blog';
         })
         .factory('blogListDatasource', function (ListDatasource, BlogEntity, blogApiService) {
             return new ListDatasource({
@@ -1884,57 +2029,57 @@
                     return data.map(BlogEntity.new);
                 },
                 fetch: function (query, callback) {
+                    query._sort = '_at';
+                    query._reverse = 'true';
                     blogApiService.list(query, callback);
                 }
             });
         })
         .controller('BlogCtrl', function ($scope, blogListDatasource) {
-            var listDatasource = blogListDatasource;
-            ap.copy({
-                listDatasource: listDatasource,
-                edit: function (blog) {
-
-                }
-            }, $scope);
-
-            listDatasource.load();
+            blogListDatasource.load();
         })
-        .controller('BlogListCtrl', function ($scope) {
+        .controller('BlogListCtrl', function ($scope, blogListDatasource) {
             ap.copy({
                 /**
                  * Load more data.
                  */
                 more: function () {
-                    $scope.listDatasource.load();
+                    blogListDatasource.load();
                 }
             }, $scope);
 
             Object.defineProperties($scope, {
-                /**
-                 * Blog data.
-                 */
                 blogs: {
                     get: function () {
-                        return $scope.listDatasource.data;
+                        return blogListDatasource.data;
                     }
                 }
             });
         })
-        .controller('BlogDetailCtrl', function ($scope) {
+        .controller('BlogAsideCtrl', function ($scope, blogListDatasource) {
+            ap.copy({
+                more: function () {
+                    blogListDatasource.load();
+                }
+            }, $scope);
 
-        })
-        .controller('BlogEditCtrl', function ($scope) {
-
+            Object.defineProperties($scope, {
+                blogs: {
+                    get: function () {
+                        return blogListDatasource.data;
+                    }
+                }
+            });
         })
     ;
 
 })(angular, apeman);
 /**
-* Page script for index.
-* @requires angular
-*/
+ * Page script for index.
+ * @requires angular
+ */
 
-(function (ng) {
+(function (ng, ap, $) {
     "use strict";
 
     ng
@@ -1942,13 +2087,60 @@
             'ok.page',
         ])
         .run(function ($rootScope) {
+            $rootScope.page = 'index';
+        })
+        .controller('IndexCtrl', function ($scope) {
 
         })
-        .controller('IndexCtrl', function($scope) {
+        .directive('okContentTitle', function (partialUrlConstant) {
+            return {
+                scope: {
+                    title: '=okContentTitle',
+                    subtitle: '=okContentSubtitle'
+                },
+                link: function (scope, elm, attr) {
+                    $(elm).addClass('content-section-title-container');
+                },
+                templateUrl: partialUrlConstant.INDEX_CONTENT_TITLE
+            }
+        })
+        .directive('okSeeMore', function (partialUrlConstant) {
+            return {
+                scope: {
+                    href: '=okSeeMore'
+                },
+                link: function (scope, elm, attr) {
+                    $(elm).addClass('see-more-button-container');
+                },
+                templateUrl: partialUrlConstant.INDEX_SEE_MORE_BUTTON
+            }
+        })
+        .controller('IndexProfileCtrl', function ($scope) {
 
-        });
+            var images = $scope.images;
+            $scope.thumbnails = [
+                images.WORKS_CHESS_THUMBNAIL,
+                images.WORKS_CSS_GALLERY_THUMBNAIL,
+                images.WORKS_DOC_GALLERY_THUMBNAIL,
+                images.WORKS_MOCK_MONKEY_THUMBNAIL,
+                images.WORKS_PLANING_PORKER_THUMBNAIL,
+                images.WORKS_SHOT_THUMBNAIL,
+                images.WORKS_OTHERO_THUMBNAIL,
+                images.WORKS_TYPE_THUMBNAIL
+            ]
+        })
+        .controller('IndexBlogCtrl', function ($scope) {
 
-})(angular);
+        })
+        .controller('IndexWorkCtrl', function ($scope, workApiService, WorkEntity) {
+            workApiService.singleton(function (err, data) {
+                $scope.works = data.map(WorkEntity.new);
+            });
+        })
+
+    ;
+
+})(angular, apeman, jQuery);
 /**
  * okunishitaka.com abstract page script.
  * @requires angular
@@ -1966,20 +2158,20 @@
             'ok.entities',
             'ok.errors',
             'ok.filters',
-            "ok.indices",
-            "ok.logics",
+            'ok.indices',
+            'ok.logics',
             'ok.services',
+            'ok.templates',
             'ok.utils'
         ])
         .factory('global', [
             'constantsIndex',
             'logicsIndex',
             'servicesIndex',
-            function global(cn, lg, sv) {
+            function global(cn, lg, sv, tm) {
                 var lang = sv.langDetectService.detectLang(),
                     locale = sv.localeLoadService.localeForLang(lang);
                 return {
-                    meta: cn.metaConstant,
                     lang: lang,
                     locale: locale,
                     get l() {
@@ -1989,6 +2181,10 @@
                     title: function (page) {
                         return lg.pageTitleLogic.tilteForPage(locale, page);
                     },
+                    app: cn.appConstant,
+                    links: cn.linkUrlConstant,
+                    images: cn.imageUrlConstant,
+                    page: '',
                     pages: cn.pageUrlConstant,
                     partials: cn.partialUrlConstant,
                     goTopPage: function () {
@@ -2006,19 +2202,78 @@
         .run(function exportsGlobal($rootScope, global) {
             ap.copy(global, $rootScope);
         })
-        .controller('HeadControl', function ($scope) {
+        .run(function cahcheTemplates(templatesIndex, templateCacheService) {
+            Object.keys(templatesIndex).forEach(function (key) {
+                var template = templatesIndex[key];
+                templateCacheService.register(template.name, template.content);
+            });
         })
-        .controller('FootControl', function ($scope) {
+        .controller('HeadControl', function HeadControl($scope) {
 
+        })
+        .controller('HeaderControl', function HeaderControl($scope) {
+        })
+        .controller('FooterControl', function FooterControl($scope) {
         });
 })(angular, apeman);
 
 /**
-* Page script for work.
-* @requires angular
-*/
+ * Page script for profile.
+ * @requires angular
+ */
 
-(function (ng) {
+(function (ng, $) {
+    "use strict";
+
+    ng
+        .module('ok.profilePage', [
+            'ok.page',
+            'ngSanitize' // ng-bind-html requires ng sanitize.
+        ])
+        .run(function ($rootScope) {
+            $rootScope.page = 'profile';
+        })
+        .directive('okProfileList', function (partialUrlConstant) {
+            return {
+                link: function (scope, elm, attr) {
+                    $(elm).addClass('profile-list-container');
+                },
+                scope: {
+                    id: '=okId',
+                    caption: '=okCaption',
+                    data: '=okData',
+                },
+                templateUrl: partialUrlConstant.PROFILE_LIST
+            }
+        })
+        .directive('okProfileTable', function (partialUrlConstant, imageUrlConstant) {
+            return {
+                link: function (scope, elm, attr) {
+                    scope.images = imageUrlConstant;
+                    $(elm).addClass('profile-table-container');
+                },
+                scope: {
+                    id: '=okId',
+                    caption: '=okCaption',
+                    data: '=okData',
+                },
+                templateUrl: partialUrlConstant.PROFILE_TABLE
+            }
+        })
+        .controller('ProfileCtrl', function ($scope, profileApiService) {
+
+            profileApiService.singleton(function (err, profile) {
+                $scope.profile = profile;
+            });
+        });
+
+})(angular, jQuery);
+/**
+ * Page script for work.
+ * @requires angular
+ */
+
+(function (ng, ap, $) {
     "use strict";
 
     ng
@@ -2026,13 +2281,56 @@
             'ok.page',
         ])
         .run(function ($rootScope) {
-
+            $rootScope.page = 'work';
         })
-        .controller('WorkCtrl', function($scope) {
+        .factory('workListDatasource', function (ListDatasource, WorkEntity, workApiService) {
+            return new ListDatasource({
+                convert: function (data) {
+                    return data.map(WorkEntity.new);
+                },
+                fetch: function (query, callback) {
+                    workApiService.singleton(callback);
+                }
+            })
+        })
+        .directive('okWorkLink', function (partialUrlConstant, linkUrlConstant) {
+            return {
+                scope: {
+                    href: '=okWorkHref',
+                    title: '=okWorkTitle',
+                    icon:'=okWorkIcon'
+                },
+                link: function (scope, elm, attr) {
+                    scope.links = linkUrlConstant;
+                    $(elm).addClass('work-link-container');
+                },
+                templateUrl: partialUrlConstant.WORK_LINK
+            }
+        })
+        .controller('WorkCtrl', function ($scope, workListDatasource) {
+            workListDatasource.load();
+        })
+        .controller('WorkListCtrl', function ($scope, workListDatasource) {
+            ap.copy({
+                hrefForWork: function (work) {
+                    if (!work) {
+                        return null;
+                    }
+                    var links = $scope.links;
+                    return links[work.demo] || links[work.link] || links[work.repo];
+                }
+            }, $scope);
+            Object.defineProperties($scope, {
+                works: {
+                    get: function () {
+                        return workListDatasource.data;
+                    }
+                }
 
+            });
         });
 
-})(angular);
+})(angular, apeman, jQuery);
 
 /**
  * ok services module.
@@ -2653,7 +2951,7 @@
         .module('ok.templates')
         .value('footerHtmlTemplate', {
 		    "name": "/html/partials/footer.html",
-		    "content": "<div class=\"container\" id=\"footer-content\">\n    <small id=\"small-copyright\">{{l.meta.COPY_RIGHT}}</small>\n\n    <div class=\"float-right\">\n        <a ng-href=\"{{links.MY_GITHUB}}\">Repo</a>\n    </div>\n</div>\n"
+		    "content": "<div class=\"container\" id=\"footer-content\">\n    <small id=\"small-copyright\">{{l.meta.COPY_RIGHT}}</small>\n\n    <div class=\"float-right\">\n        <a ng-href=\"{{links.MY_GITHUB}}\">Repo on GitHub</a>\n    </div>\n</div>\n"
 		});
 
 })(angular);
@@ -2743,7 +3041,7 @@
         .module('ok.templates')
         .value('metaHtmlTemplate', {
 		    "name": "/html/partials/meta.html",
-		    "content": "<!-- Meta HTML -->\n<meta ng:attr-charset=\"UTF-8\">\n<meta name=\"application-name\" content=\"{{l.meta.NAME}}\"/>\n<meta name=\"description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"generator\" content=\"apeman\"/>\n<meta name=\"author\" content=\"{{l.meta.AUTHOR}}\"/>\n<meta name=\"viewport\" content=\"width=device-width, user-scalable=no\"/>\n\n<!-- Open graph tags -->\n<meta property=\"og:title\" content=\"{{title(page)}}\"/>\n<meta property=\"og:type\" content=\"website\"/>\n<meta property=\"og:image\" content=\"\"/> <!-- FIXME -->\n<meta property=\"og:url\" content=\"{{app.HOMEPAGE}}\"/>\n<meta property=\"og:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n\n\n<!-- Twitter tags -->\n<meta name=\"twitter:card\" content=\"summary\">\n<meta name=\"twitter:title\" content=\"{{title(page)}}\">\n<meta name=\"twitter:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"twitter:image\" content=\"\"/> <!-- FIXME -->\n\n"
+		    "content": "<!-- Meta HTML -->\n<meta ng:attr-charset=\"UTF-8\">\n<meta name=\"fragment\" content=\"!\">\n<meta name=\"application-name\" content=\"{{l.meta.NAME}}\"/>\n<meta name=\"description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"generator\" content=\"apeman\"/>\n<meta name=\"author\" content=\"{{l.meta.AUTHOR}}\"/>\n<meta name=\"viewport\" content=\"width=device-width, user-scalable=no\"/>\n\n<!-- Open graph tags -->\n<meta property=\"og:title\" content=\"{{title(page)}}\"/>\n<meta property=\"og:type\" content=\"website\"/>\n<meta property=\"og:image\" content=\"\"/> <!-- FIXME -->\n<meta property=\"og:url\" content=\"{{app.HOMEPAGE}}\"/>\n<meta property=\"og:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n\n\n<!-- Twitter tags -->\n<meta name=\"twitter:card\" content=\"summary\">\n<meta name=\"twitter:title\" content=\"{{title(page)}}\">\n<meta name=\"twitter:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"twitter:image\" content=\"\"/> <!-- FIXME -->\n\n"
 		});
 
 })(angular);

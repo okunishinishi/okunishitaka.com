@@ -31,17 +31,9 @@ module.exports = pages.map(function (page) {
             ],
             javascripts: [
                 [
-                    'lib.js'
-                ],
-                Object.keys(require('../javascripts/ok/.ok.json').modules).map(function (moduleName) {
-                    return 'ok/' + string.paramString(moduleName) + '.js'
-                }),
-                [
-                    'page.js',
-                    [name, 'page.js'].join('-')
-                ].map(function (filename) {
-                        return 'ok/pages/' + filename;
-                    })
+                    'lib.js',
+                    'ok.js'
+                ]
             ].reduce(reducing.concatReduce(), []),
             title: format('{{title("%s")}}', name)
         }
