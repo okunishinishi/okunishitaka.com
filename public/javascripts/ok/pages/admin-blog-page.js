@@ -8,10 +8,10 @@
 
     ng
         .module('ok.adminBlogPage', [
-            'ok.adminPage'
+            'ok.adminPage',
+            'ngSanitize' // ng-bind-html requires ng sanitize.
         ])
         .run(function ($rootScope) {
-            $rootScope.page = 'adminBlog';
         })
         .factory('blogOneDatasource', function (OneDatasource, BlogEntity, blogApiService) {
             return new OneDatasource({
@@ -41,11 +41,54 @@
                 }
             });
         })
-        .controller('AdminBlogCtrl', function ($scope) {
+        .controller('AdminBlogCtrl', function ($scope, blogOneDatasource) {
 
+        })
+        .controller('AdminBlogEditCtrl', function ($scope, blogOneDatasource, markdownRenderService) {
+            ap.copy({
+                save: function (blog) {
+                    blogOneDatasource.data = blog;
+                    blogOneDatasource.save(function (err, data) {
+
+                    });
+                },
+                cancel: function () {
+                    $scope.close();
+                },
+                close: function () {
+                }
+            }, $scope);
+            Object.defineProperties($scope, {
+                blog: {
+                    get: function () {
+                        return blogOneDatasource.data;
+                    },
+                    set: function (blog) {
+                        blogOneDatasource.data = blog;
+                    }
+                },
+                preview: {
+                    get: function () {
+                        var blog = $scope.blog;
+                        if (!blog) {
+                            return {};
+                        }
+                        return {
+                            title: blog.title,
+                            content: markdownRenderService.render(blog.content)
+                        }
+                    }
+                }
+            });
         })
         .controller('AdminBlogListCtrl', function ($scope, blogListDatasource, textSummarizeLogic) {
             ap.copy({
+                edit: function (blog) {
+
+                },
+                destroy: function (blog) {
+
+                },
                 more: function () {
                     blogListDatasource.load();
                 },
@@ -61,6 +104,7 @@
                     }
                 }
             });
+            blogListDatasource.load();
         });
 
 })(angular, apeman);

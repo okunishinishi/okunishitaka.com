@@ -1,5 +1,35 @@
 /** Style for admin page. **/
 
+.close-button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    display: inline-block;
+    padding: 4px 8px;
+    cursor: default;
+    color: #AAA;
+    font-size: 0.75em;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+fieldset {
+    border: 1px groove #AAA;
+    margin: 4px 8px;
+}
+
+.no-style-fieldset {
+    border: none;
+    padding: 0;
+}
+
+.field {
+    display: block;
+    padding: 4px 0;
+}
+
 #admin-blog-list-section {
     max-width: 600px;
 }
