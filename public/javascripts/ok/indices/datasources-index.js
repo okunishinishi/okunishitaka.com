@@ -16,7 +16,11 @@
                 get ProfileListDatasource() { return $injector.get('ProfileListDatasource'); },
                 get SettingListDatasource() { return $injector.get('SettingListDatasource'); },
                 get WorkListDatasource() { return $injector.get('WorkListDatasource'); },
-                get OneDatasource() { return $injector.get('OneDatasource'); }
+                get BlogOneDatasource() { return $injector.get('BlogOneDatasource'); },
+                get OneDatasource() { return $injector.get('OneDatasource'); },
+                get ProfileOneDatasource() { return $injector.get('ProfileOneDatasource'); },
+                get SettingOneDatasource() { return $injector.get('SettingOneDatasource'); },
+                get WorkOneDatasource() { return $injector.get('WorkOneDatasource'); }
             };
         });
 })(angular);

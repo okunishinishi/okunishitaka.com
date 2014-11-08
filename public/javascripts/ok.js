@@ -603,7 +603,7 @@
                      * @param {function} callback - Callback when done.
                      */
                     _getRequest: function (query, callback) {
-                        callback(null, null);
+                        ap.throwNotImplmentedError();
                     },
                     /**
                      * Parse data.
@@ -729,6 +729,39 @@
 
 })(angular, apeman);
 /**
+ * One data source for blog.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.datasources')
+        .factory('BlogOneDatasource', function (OneDatasource, BlogEntity, blogApiService) {
+            return OneDatasource.define(
+                /** @lends BlogOneDatasource.prototype */
+                {
+                    _getRequest: function (id, callback) {
+                        blogApiService.one(id, callback);
+                    },
+                    _postRequest: function (data, callback) {
+                        blogApiService.create(data, callback);
+                    },
+                    _putRequest: function (id, data, callback) {
+                        blogApiService.update(id, data, callback);
+                    },
+                    _deleteRequest: function (id, callback) {
+                        blogApiService.delete(id, callback);
+                    },
+                    _parse: function (data) {
+                        return data.map(BlogEntity.new);
+                    }
+                }
+            );
+        });
+})(angular, apeman);
+/**
  * Data source for one.
  * @requires angular
  * @requires apeman
@@ -778,26 +811,40 @@
                     data: null,
                     loading: false,
                     /**
-                     * Fech data.
-                     * @param {string} id - Data identifier
+                     * Send a get request.
+                     * @param {string} id - Data identifier.
                      * @param {function} callback - Callback when done.
                      */
                     _getRequest: function (id, callback) {
-                        callback(null, null);
-                    },
-                    _postRequest: function (data, callback) {
-
-                    },
-                    _putRequest: function (id, data, callback) {
-                        callback()
+                        ap.throwNotImplmentedError();
                     },
                     /**
-                     * Clear fetched data.
+                     * Send a post request.
+                     * @param {object} data - Resource data to create.
+                     * @param {function} callback - Callback when done.
+                     * @private
                      */
-                    clear: function () {
-                        var s = this;
-                        s.id = null;
-                        s.data = null;
+                    _postRequest: function (data, callback) {
+                        ap.throwNotImplmentedError();
+                    },
+                    /**
+                     * Send a put request.
+                     * @param {string} id - Data identifier.
+                     * @param {object} data - Data to create.
+                     * @param {function} callback - Callback when done.
+                     * @private
+                     */
+                    _putRequest: function (id, data, callback) {
+                        ap.throwNotImplmentedError();
+                    },
+                    /**
+                     * Send a delete request.
+                     * @param {string} id - Data identifier.
+                     * @param {function} callback - Callback when done.
+                     * @private
+                     */
+                    _deleteRequest: function (id, callback) {
+                        ap.throwNotImplmentedError();
                     },
                     /**
                      * Convert a data.
@@ -806,6 +853,14 @@
                      */
                     _parse: function (data) {
                         return data;
+                    },
+                    /**
+                     * Clear fetched data.
+                     */
+                    clear: function () {
+                        var s = this;
+                        s.id = null;
+                        s.data = null;
                     },
                     /**
                      * Load data.
@@ -832,10 +887,15 @@
                             id = s.id,
                             data = s.data || {};
                         if (id) {
-                            s._postRequest(id, data, callback);
+                            s._putRequest(id, data, callback);
                         } else {
-                            s._putRequest(data, callback);
+                            s._postRequest(data, callback);
                         }
+                    },
+                    destroy: function (callback) {
+                        var s = this,
+                            id = s.id;
+                        s._deleteRequest(id, callback);
                     },
                     /**
                      * Clear and fetch data.
@@ -853,6 +913,105 @@
             return OneDatasource;
         });
 })(angular, apeman);
+/**
+ * One data source for profile.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.datasources')
+        .factory('ProfileOneDatasource', function (OneDatasource, ProfileEntity, profileApiService) {
+            return OneDatasource.define(
+                /** @lends ProfileOneDatasource.prototype */
+                {
+                    _getRequest: function (id, callback) {
+                        profileApiService.one(id, callback);
+                    },
+                    _postRequest: function (data, callback) {
+                        profileApiService.create(data, callback);
+                    },
+                    _putRequest: function (id, data, callback) {
+                        profileApiService.update(id, data, callback);
+                    },
+                    _deleteRequest: function (id, callback) {
+                        profileApiService.delete(id, callback);
+                    },
+                    _parse: function (data) {
+                        return data.map(ProfileEntity.new);
+                    }
+                }
+            );
+        });
+});
+/**
+ * One data source for setting.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.datasources')
+        .factory('SettingOneDatasource', function (OneDatasource, SettingEntity, settingApiService) {
+            return OneDatasource.define(
+                /** @lends SettingOneDatasource.prototype */
+                {
+                    _getRequest: function (id, callback) {
+                        settingApiService.one(id, callback);
+                    },
+                    _postRequest: function (data, callback) {
+                        settingApiService.create(data, callback);
+                    },
+                    _putRequest: function (id, data, callback) {
+                        settingApiService.update(id, data, callback);
+                    },
+                    _deleteRequest: function (id, callback) {
+                        settingApiService.delete(id, callback);
+                    },
+                    _parse: function (data) {
+                        return data.map(SettingEntity.new);
+                    }
+                }
+            );
+        });
+});
+/**
+ * One data source for work.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.datasources')
+        .factory('WorkOneDatasource', function (OneDatasource, WorkEntity, workApiService) {
+            return OneDatasource.define(
+                /** @lends WorkOneDatasource.prototype */
+                {
+                    _getRequest: function (id, callback) {
+                        workApiService.one(id, callback);
+                    },
+                    _postRequest: function (data, callback) {
+                        workApiService.create(data, callback);
+                    },
+                    _putRequest: function (id, data, callback) {
+                        workApiService.update(id, data, callback);
+                    },
+                    _deleteRequest: function (id, callback) {
+                        workApiService.delete(id, callback);
+                    },
+                    _parse: function (data) {
+                        return data.map(WorkEntity.new);
+                    }
+                }
+            );
+        });
+});
 
 /**
  * ok directives module.
@@ -1599,7 +1758,11 @@
                 get ProfileListDatasource() { return $injector.get('ProfileListDatasource'); },
                 get SettingListDatasource() { return $injector.get('SettingListDatasource'); },
                 get WorkListDatasource() { return $injector.get('WorkListDatasource'); },
-                get OneDatasource() { return $injector.get('OneDatasource'); }
+                get BlogOneDatasource() { return $injector.get('BlogOneDatasource'); },
+                get OneDatasource() { return $injector.get('OneDatasource'); },
+                get ProfileOneDatasource() { return $injector.get('ProfileOneDatasource'); },
+                get SettingOneDatasource() { return $injector.get('SettingOneDatasource'); },
+                get WorkOneDatasource() { return $injector.get('WorkOneDatasource'); }
             };
         });
 })(angular);
@@ -2005,21 +2168,8 @@
         ])
         .run(function ($rootScope) {
         })
-        .factory('blogOneDatasource', function (OneDatasource, BlogEntity, blogApiService) {
-            return new OneDatasource({
-                convert: function (data) {
-                    return BlogEntity.new(data);
-                },
-                fetch: function (id, callback) {
-                    blogApiService.one(id, callback);
-                },
-                create: function (data, callback) {
-                    blogApiService.create(data, callback);
-                },
-                update: function (id, data, callback) {
-                    blogApiService.update(id, data, callback);
-                }
-            });
+        .factory('blogOneDatasource', function (BlogOneDatasource) {
+            return new BlogOneDatasource({});
         })
         .factory('blogListDatasource', function (BlogListDatasource) {
             return new BlogListDatasource({});
@@ -2625,7 +2775,7 @@
              */
             s.update = function update(id, data, callback) {
                 var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
-                return apiService.update(url, data, callback);
+                return apiService.put(url, data, callback);
             }
 
             /**

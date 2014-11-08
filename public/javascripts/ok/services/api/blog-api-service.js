@@ -41,7 +41,7 @@
              */
             s.update = function update(id, data, callback) {
                 var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
-                return apiService.update(url, data, callback);
+                return apiService.put(url, data, callback);
             }
 
             /**

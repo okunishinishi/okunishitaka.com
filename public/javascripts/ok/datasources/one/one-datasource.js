@@ -48,26 +48,40 @@
                     data: null,
                     loading: false,
                     /**
-                     * Fech data.
-                     * @param {string} id - Data identifier
+                     * Send a get request.
+                     * @param {string} id - Data identifier.
                      * @param {function} callback - Callback when done.
                      */
                     _getRequest: function (id, callback) {
-                        callback(null, null);
-                    },
-                    _postRequest: function (data, callback) {
-
-                    },
-                    _putRequest: function (id, data, callback) {
-                        callback()
+                        ap.throwNotImplmentedError();
                     },
                     /**
-                     * Clear fetched data.
+                     * Send a post request.
+                     * @param {object} data - Resource data to create.
+                     * @param {function} callback - Callback when done.
+                     * @private
                      */
-                    clear: function () {
-                        var s = this;
-                        s.id = null;
-                        s.data = null;
+                    _postRequest: function (data, callback) {
+                        ap.throwNotImplmentedError();
+                    },
+                    /**
+                     * Send a put request.
+                     * @param {string} id - Data identifier.
+                     * @param {object} data - Data to create.
+                     * @param {function} callback - Callback when done.
+                     * @private
+                     */
+                    _putRequest: function (id, data, callback) {
+                        ap.throwNotImplmentedError();
+                    },
+                    /**
+                     * Send a delete request.
+                     * @param {string} id - Data identifier.
+                     * @param {function} callback - Callback when done.
+                     * @private
+                     */
+                    _deleteRequest: function (id, callback) {
+                        ap.throwNotImplmentedError();
                     },
                     /**
                      * Convert a data.
@@ -76,6 +90,14 @@
                      */
                     _parse: function (data) {
                         return data;
+                    },
+                    /**
+                     * Clear fetched data.
+                     */
+                    clear: function () {
+                        var s = this;
+                        s.id = null;
+                        s.data = null;
                     },
                     /**
                      * Load data.
@@ -102,10 +124,15 @@
                             id = s.id,
                             data = s.data || {};
                         if (id) {
-                            s._postRequest(id, data, callback);
+                            s._putRequest(id, data, callback);
                         } else {
-                            s._putRequest(data, callback);
+                            s._postRequest(data, callback);
                         }
+                    },
+                    destroy: function (callback) {
+                        var s = this,
+                            id = s.id;
+                        s._deleteRequest(id, callback);
                     },
                     /**
                      * Clear and fetch data.

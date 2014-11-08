@@ -72,7 +72,7 @@
                      * @param {function} callback - Callback when done.
                      */
                     _getRequest: function (query, callback) {
-                        callback(null, null);
+                        ap.throwNotImplmentedError();
                     },
                     /**
                      * Parse data.

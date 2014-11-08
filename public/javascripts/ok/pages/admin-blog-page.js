@@ -13,21 +13,8 @@
         ])
         .run(function ($rootScope) {
         })
-        .factory('blogOneDatasource', function (OneDatasource, BlogEntity, blogApiService) {
-            return new OneDatasource({
-                convert: function (data) {
-                    return BlogEntity.new(data);
-                },
-                fetch: function (id, callback) {
-                    blogApiService.one(id, callback);
-                },
-                create: function (data, callback) {
-                    blogApiService.create(data, callback);
-                },
-                update: function (id, data, callback) {
-                    blogApiService.update(id, data, callback);
-                }
-            });
+        .factory('blogOneDatasource', function (BlogOneDatasource) {
+            return new BlogOneDatasource({});
         })
         .factory('blogListDatasource', function (BlogListDatasource) {
             return new BlogListDatasource({});
