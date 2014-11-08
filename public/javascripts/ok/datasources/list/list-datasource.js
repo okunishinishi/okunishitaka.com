@@ -67,11 +67,11 @@
                         return query;
                     },
                     /**
-                     * Fetch data.
+                     * Send a request to get list.
                      * @param {object} query - Query data.
                      * @param {function} callback - Callback when done.
                      */
-                    _getRequest: function (query, callback) {
+                    _listRequest: function (query, callback) {
                         ap.throwNotImplmentedError();
                     },
                     /**
@@ -79,7 +79,7 @@
                      * @param {object} data - Data to parsed.
                      * @returns {object} - Parsed data.
                      */
-                    _parse: function (data) {
+                    _parseData: function (data) {
                         return data;
                     },
                     /**
@@ -101,11 +101,11 @@
                             query = s._queryData();
                         s.loading = true;
                         callback = callback || ap.doNothing;
-                        s._getRequest(query, function (err, data) {
+                        s._listRequest(query, function (err, data) {
                             s.loading = false;
                             if (!err) {
                                 s.hasMore = s.limit <= data.length;
-                                s.data = s.data.concat(s._parse(data));
+                                s.data = s.data.concat(s._parseData(data));
                                 s.skip = s.data.length;
                             }
                             callback(err);

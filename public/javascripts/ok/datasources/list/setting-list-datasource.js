@@ -9,16 +9,19 @@
     ng
         .module('ok.datasources')
         .factory('SettingListDatasource', function (ListDatasource, SettingEntity, settingApiService) {
-            return ListDatasource.define({
-                _getRequest: function (query, callback) {
-                    query._sort = '_at';
-                    query._reverse = 'true';
-                    settingApiService.list(query, callback);
-                },
-                _parse: function (data) {
-                    return data.map(SettingEntity.new);
+            return ListDatasource.define(
+                /** @lends SettingListDatasource.prototype */
+                {
+                    _listRequest: function (query, callback) {
+                        query._sort = '_at';
+                        query._reverse = 'true';
+                        settingApiService.list(query, callback);
+                    },
+                    _parseData: function (data) {
+                        return data.map(SettingEntity.new);
+                    }
                 }
-            });
+            );
         });
 
 })(angular, apeman);

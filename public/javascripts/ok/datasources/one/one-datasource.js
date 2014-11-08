@@ -48,47 +48,47 @@
                     data: null,
                     loading: false,
                     /**
-                     * Send a get request.
+                     * Send a request to get one.
                      * @param {string} id - Data identifier.
                      * @param {function} callback - Callback when done.
                      */
-                    _getRequest: function (id, callback) {
+                    _oneRequest: function (id, callback) {
                         ap.throwNotImplmentedError();
                     },
                     /**
-                     * Send a post request.
+                     * Send a request to create a new resource.
                      * @param {object} data - Resource data to create.
                      * @param {function} callback - Callback when done.
                      * @private
                      */
-                    _postRequest: function (data, callback) {
+                    _createRequest: function (data, callback) {
                         ap.throwNotImplmentedError();
                     },
                     /**
-                     * Send a put request.
+                     * Send a request to update a exiting resource.
                      * @param {string} id - Data identifier.
                      * @param {object} data - Data to create.
                      * @param {function} callback - Callback when done.
                      * @private
                      */
-                    _putRequest: function (id, data, callback) {
+                    _updateRequest: function (id, data, callback) {
                         ap.throwNotImplmentedError();
                     },
                     /**
-                     * Send a delete request.
+                     * Send a request to destory a exiting resource.
                      * @param {string} id - Data identifier.
                      * @param {function} callback - Callback when done.
                      * @private
                      */
-                    _deleteRequest: function (id, callback) {
+                    _destroyRequest: function (id, callback) {
                         ap.throwNotImplmentedError();
                     },
                     /**
-                     * Convert a data.
-                     * @param data
-                     * @returns {*}
+                     * Parse data.
+                     * @param {object} data - Fethed data.
+                     * @returns {*} - Parsed data.
                      */
-                    _parse: function (data) {
+                    _parseData: function (data) {
                         return data;
                     },
                     /**
@@ -107,10 +107,10 @@
                         var s = this,
                             id = s.id;
                         s.loading = true;
-                        s._getRequest(id, function (err, data) {
+                        s._oneRequest(id, function (err, data) {
                             s.loading = false;
                             if (!err) {
-                                s.data = data;
+                                s.data = s._parseData(data);
                             }
                             callback(err);
                         });
@@ -124,15 +124,15 @@
                             id = s.id,
                             data = s.data || {};
                         if (id) {
-                            s._putRequest(id, data, callback);
+                            s._updateRequest(id, data, callback);
                         } else {
-                            s._postRequest(data, callback);
+                            s._createRequest(data, callback);
                         }
                     },
                     destroy: function (callback) {
                         var s = this,
                             id = s.id;
-                        s._deleteRequest(id, callback);
+                        s._destroyRequest(id, callback);
                     },
                     /**
                      * Clear and fetch data.

@@ -12,19 +12,19 @@
             return OneDatasource.define(
                 /** @lends {{Name}}OneDatasource.prototype */
                 {
-                    _getRequest: function (id, callback) {
+                    _oneRequest: function (id, callback) {
                         {{name}}ApiService.one(id, callback);
                     },
-                    _postRequest: function (data, callback) {
+                    _createRequest: function (data, callback) {
                         {{name}}ApiService.create(data, callback);
                     },
-                    _putRequest: function (id, data, callback) {
+                    _updateRequest: function (id, data, callback) {
                         {{name}}ApiService.update(id, data, callback);
                     },
-                    _deleteRequest: function (id, callback) {
-                        {{name}}ApiService.delete(id, callback);
+                    _destroyRequest: function (id, callback) {
+                        {{name}}ApiService.destroy(id, callback);
                     },
-                    _parse: function (data) {
+                    _parseData: function (data) {
                         return data.map({{Name}}Entity.new);
                     }
                 }

@@ -50,7 +50,7 @@
              * @param {function} callback - Callback when done.
              * @returns {$http} - Http module.
              */
-            s.delete = function del(id, callback) {
+            s.destroy = function del(id, callback) {
                 var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
                 return apiService.delete(url, callback);
             }

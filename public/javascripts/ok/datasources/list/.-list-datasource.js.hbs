@@ -12,12 +12,12 @@
             return ListDatasource.define(
                 /** @lends {{Name}}ListDatasource.prototype */
                 {
-                    _getRequest: function (query, callback) {
+                    _listRequest: function (query, callback) {
                         query._sort = '_at';
                         query._reverse = 'true';
                         {{name}}ApiService.list(query, callback);
                     },
-                    _parse: function (data) {
+                    _parseData: function (data) {
                         return data.map({{Name}}Entity.new);
                     }
                 }

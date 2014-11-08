@@ -1,68 +1,66 @@
 {
-    "prefix": "ok",
-    "modules": {
-        "constants": [
-        ],
-        "datasources": [
-            "ok.constants",
-            "ok.entities",
-            "ok.utils"
-        ],
-        "directives": [
-            "ok.utils",
-            "ok.logics"
-        ],
-        "entities": [
-        ],
-        "errors": [
-            "ok.constants"
-        ],
-        "filters": [
-
-        ],
-        "indices": [
-            "ok.constants",
-            "ok.datasources",
-            "ok.entities",
-            "ok.errors",
-            "ok.logics",
-            "ok.services",
-            "ok.templates",
-            "ok.utils"
-        ],
-        "logics": [
-            "ok.constants",
-            "ok.entities",
-            "ok.errors",
-            "ok.utils"
-        ],
-        "pages": [
-            "ok.page"
-        ],
-        "services": [
-            "apeman",
-            "ok.constants",
-            "ok.entities",
-            "ok.errors",
-            "ok.logics",
-            "ok.utils"
-        ],
-        "templates": [
-
-        ],
-        "utils": [
-        ]
-    },
-    "entities": [
-        "blog",
-        "setting",
-        "profile",
-        "work"
+  "prefix": "ok",
+  "modules": {
+    "constants": [
     ],
-    "endpoints": [
-        "blog",
-        "setting",
-        "profile",
-        "work"
+    "datasources": [
+      "ok.constants",
+      "ok.entities",
+      "ok.utils"
+    ],
+    "directives": [
+      "ok.utils",
+      "ok.logics"
+    ],
+    "entities": [
+    ],
+    "errors": [
+      "ok.constants"
+    ],
+    "filters": [
+    ],
+    "indices": [
+      "ok.constants",
+      "ok.datasources",
+      "ok.entities",
+      "ok.errors",
+      "ok.logics",
+      "ok.services",
+      "ok.templates",
+      "ok.utils"
+    ],
+    "logics": [
+      "ok.constants",
+      "ok.entities",
+      "ok.errors",
+      "ok.utils"
+    ],
+    "pages": [
+      "ok.page"
+    ],
+    "services": [
+      "apeman",
+      "ok.constants",
+      "ok.entities",
+      "ok.errors",
+      "ok.logics",
+      "ok.utils"
+    ],
+    "templates": [
+    ],
+    "utils": [
     ]
+  },
+  "entities": [
+    "blog",
+    "setting",
+    "profile",
+    "work"
+  ],
+  "endpoints": [
+    "blog",
+    "setting",
+    "profile",
+    "work"
+  ]
 }
