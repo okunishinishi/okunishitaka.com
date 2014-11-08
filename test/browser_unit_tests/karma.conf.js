@@ -17,7 +17,7 @@ module.exports = function (config) {
         files: [
             'public/javascripts/lib.js',
             'public/javascripts/ok/constants/**/*.js',
-            'public/javascripts/ok/datasources/*.js',
+            'public/javascripts/ok/datasources/**/*.js',
             'public/javascripts/ok/directives/*.js',
             'public/javascripts/ok/entities/*.js',
             'public/javascripts/ok/errors/*.js',
@@ -34,16 +34,12 @@ module.exports = function (config) {
 
 
         // list of files to exclude
-        exclude: [
-
-        ],
+        exclude: [],
 
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-        preprocessors: {
-
-        },
+        preprocessors: {},
 
 
         // test results reporter to use

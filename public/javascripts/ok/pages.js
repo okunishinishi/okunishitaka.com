@@ -42,17 +42,8 @@
                 }
             });
         })
-        .factory('blogListDatasource', function (ListDatasource, BlogEntity, blogApiService) {
-            return new ListDatasource({
-                convert: function (data) {
-                    return data.map(BlogEntity.new);
-                },
-                fetch: function (query, callback) {
-                    query._sort = '_at';
-                    query._reverse = 'true';
-                    blogApiService.list(query, callback);
-                }
-            });
+        .factory('blogListDatasource', function (BlogListDatasource) {
+            return new BlogListDatasource({});
         })
         .controller('AdminBlogCtrl', function ($scope, blogOneDatasource) {
 
@@ -140,8 +131,7 @@
         .run(function ($rootScope) {
             $rootScope.page = 'admin';
         })
-        .controller('AdminCtrl', function ($scope, blogListDatasource) {
-            blogListDatasource.load();
+        .controller('AdminCtrl', function ($scope) {
         })
     ;
 })(angular, apeman);
@@ -413,22 +403,15 @@
         .run(function ($rootScope) {
             $rootScope.page = 'work';
         })
-        .factory('workListDatasource', function (ListDatasource, WorkEntity, workApiService) {
-            return new ListDatasource({
-                convert: function (data) {
-                    return data.map(WorkEntity.new);
-                },
-                fetch: function (query, callback) {
-                    workApiService.singleton(callback);
-                }
-            })
+        .factory('workListDatasource', function (WorkListDatasource) {
+            return new WorkListDatasource({});
         })
         .directive('okWorkLink', function (partialUrlConstant, linkUrlConstant) {
             return {
                 scope: {
                     href: '=okWorkHref',
                     title: '=okWorkTitle',
-                    icon:'=okWorkIcon'
+                    icon: '=okWorkIcon'
                 },
                 link: function (scope, elm, attr) {
                     scope.links = linkUrlConstant;

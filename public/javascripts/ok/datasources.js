@@ -277,9 +277,7 @@
         .factory('WorkListDatasource', function (ListDatasource, WorkEntity, workApiService) {
             return ListDatasource.define({
                 _getRequest: function (query, callback) {
-                    query._sort = '_at';
-                    query._reverse = 'true';
-                    workApiService.list(query, callback);
+                    workApiService.singleton(callback);
                 },
                 _parse: function (data) {
                     return data.map(WorkEntity.new);

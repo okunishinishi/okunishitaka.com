@@ -14,8 +14,7 @@
         .run(function ($rootScope) {
             $rootScope.page = 'admin';
         })
-        .controller('AdminCtrl', function ($scope, blogListDatasource) {
-            blogListDatasource.load();
+        .controller('AdminCtrl', function ($scope) {
         })
     ;
 })(angular, apeman);
