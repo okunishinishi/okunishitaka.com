@@ -45,27 +45,36 @@
                      * Data identifier
                      */
                     id: null,
-                    /**
-                     * Clear fetched data.
-                     */
-                    clear: function () {
-                        var s = this;
-                        s.data = null;
-                    },
+                    data: null,
+                    loading: false,
                     /**
                      * Fech data.
                      * @param {string} id - Data identifier
                      * @param {function} callback - Callback when done.
                      */
-                    fetch: function (id, callback) {
+                    _getRequest: function (id, callback) {
                         callback(null, null);
+                    },
+                    _postRequest: function (data, callback) {
+
+                    },
+                    _putRequest: function (id, data, callback) {
+                        callback()
+                    },
+                    /**
+                     * Clear fetched data.
+                     */
+                    clear: function () {
+                        var s = this;
+                        s.id = null;
+                        s.data = null;
                     },
                     /**
                      * Convert a data.
                      * @param data
                      * @returns {*}
                      */
-                    convert: function (data) {
+                    _parse: function (data) {
                         return data;
                     },
                     /**
@@ -76,19 +85,13 @@
                         var s = this,
                             id = s.id;
                         s.loading = true;
-                        s.fetch(id, function (err, data) {
+                        s._getRequest(id, function (err, data) {
                             s.loading = false;
                             if (!err) {
                                 s.data = data;
                             }
                             callback(err);
                         });
-                    },
-                    create: function (data, callback) {
-                        callback(null, data);
-                    },
-                    update: function (id, data, callback) {
-                        callback(null, data);
                     },
                     /**
                      * Save data.
@@ -99,9 +102,9 @@
                             id = s.id,
                             data = s.data || {};
                         if (id) {
-                            s.update(id, data, callback);
+                            s._postRequest(id, data, callback);
                         } else {
-                            s.create(data, callback);
+                            s._putRequest(data, callback);
                         }
                     },
                     /**

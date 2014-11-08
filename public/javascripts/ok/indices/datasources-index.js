@@ -10,13 +10,13 @@
         .module('ok.indices')
         .factory('datasourcesIndex', function defineDatasourcesIndex($injector) {
             return {
-                get BlogListDataSource() { return $injector.get('BlogListDataSource'); },
                 get Datasource() { return $injector.get('Datasource'); },
+                get BlogListDatasource() { return $injector.get('BlogListDatasource'); },
                 get ListDatasource() { return $injector.get('ListDatasource'); },
-                get OneDatasource() { return $injector.get('OneDatasource'); },
-                get ProfileListDataSource() { return $injector.get('ProfileListDataSource'); },
-                get SettingListDataSource() { return $injector.get('SettingListDataSource'); },
-                get WorkListDataSource() { return $injector.get('WorkListDataSource'); }
+                get ProfileListDatasource() { return $injector.get('ProfileListDatasource'); },
+                get SettingListDatasource() { return $injector.get('SettingListDatasource'); },
+                get WorkListDatasource() { return $injector.get('WorkListDatasource'); },
+                get OneDatasource() { return $injector.get('OneDatasource'); }
             };
         });
 })(angular);

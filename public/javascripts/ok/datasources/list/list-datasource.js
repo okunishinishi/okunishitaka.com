@@ -1,5 +1,5 @@
 /**
- * Data source for list.
+ * Data source to list resouces.
  * @requires angular
  * @requires apeman
  */
@@ -39,27 +39,24 @@
             ListDatasource.prototype = ap.copy(
                 /** @lends ListDatasource.prototype */
                 {
-                    /**
-                     * Limit count for fetching.
-                     */
+                    /** Limit count for fetching. */
                     limit: 20,
-                    /**
-                     * Skip count for fething.
-                     */
+                    /** Skip count for fething. */
                     skip: null,
-                    /**
-                     * Feched data.
-                     */
+                    /** Feched data. */
                     data: null,
-                    /**
-                     * Has more data to fetch or not.
-                     */
+                    /** Has more data to fetch or not. */
                     hasMore: true,
+                    /** Search condition. */
+                    condition: {},
+                    /** Is loading or not. */
+                    loading: false,
                     /**
-                     * Create a query object.
-                     * @returns {{}}
+                     * Get query.
+                     * @returns {object}
+                     * @private
                      */
-                    createQuery: function () {
+                    _queryData: function () {
                         var s = this,
                             query = {};
                         ap.copy({
@@ -68,6 +65,22 @@
                         }, query);
                         ap.copy(s.condition, query);
                         return query;
+                    },
+                    /**
+                     * Fetch data.
+                     * @param {object} query - Query data.
+                     * @param {function} callback - Callback when done.
+                     */
+                    _getRequest: function (query, callback) {
+                        callback(null, null);
+                    },
+                    /**
+                     * Parse data.
+                     * @param {object} data - Data to parsed.
+                     * @returns {object} - Parsed data.
+                     */
+                    _parse: function (data) {
+                        return data;
                     },
                     /**
                      * Clear fecthed data and condition.
@@ -80,35 +93,19 @@
                         s.hasMore = true;
                     },
                     /**
-                     * Fetch data.
-                     * @param query
-                     * @param callback
-                     */
-                    fetch: function (query, callback) {
-                        callback(null, null);
-                    },
-                    /**
-                     * Convert data.
-                     * @param data
-                     * @returns {*}
-                     */
-                    convert: function (data) {
-                        return data;
-                    },
-                    /**
                      * Load data.
                      * @param {function} callback
                      */
                     load: function (callback) {
                         var s = this,
-                            query = s.createQuery();
+                            query = s._queryData();
                         s.loading = true;
                         callback = callback || ap.doNothing;
-                        s.fetch(query, function (err, data) {
+                        s._getRequest(query, function (err, data) {
                             s.loading = false;
                             if (!err) {
                                 s.hasMore = s.limit <= data.length;
-                                s.data = s.data.concat(s.convert(data));
+                                s.data = s.data.concat(s._parse(data));
                                 s.skip = s.data.length;
                             }
                             callback(err);

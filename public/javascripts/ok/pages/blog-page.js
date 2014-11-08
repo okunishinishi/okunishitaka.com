@@ -15,17 +15,8 @@
         .run(function ($rootScope) {
             $rootScope.page = 'blog';
         })
-        .factory('blogListDatasource', function (ListDatasource, BlogEntity, blogApiService) {
-            return new ListDatasource({
-                convert: function (data) {
-                    return data.map(BlogEntity.new);
-                },
-                fetch: function (query, callback) {
-                    query._sort = '_at';
-                    query._reverse = 'true';
-                    blogApiService.list(query, callback);
-                }
-            });
+        .factory('blogListDatasource', function (BlogListDatasource) {
+            return new BlogListDatasource({});
         })
         .controller('BlogCtrl', function ($scope, blogListDatasource) {
             blogListDatasource.load();

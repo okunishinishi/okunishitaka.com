@@ -1,0 +1,25 @@
+/**
+ * Bud for list datasource.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    format = u.core.util.format,
+    string = u.string;
+
+var ok = require('../../.ok.json');
+
+module.exports = ok.entities.map(function (name) {
+    return {
+        mode: '644',
+        force: false,
+        path: format('%s/%s-list-datasource.js',
+            __dirname, string.paramString(name)),
+        data: {
+            module: 'ok.datasources',
+            name: string.camelString(name),
+            Name: string.pascalString(name)
+        }
+    }
+});
