@@ -456,6 +456,109 @@
 })(angular);
 
 /**
+ * Data source for list.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.datasources')
+        .factory('BlogListDatasource', function (Datasource) {
+
+            return Datasource.define(
+                /** @lends BlogListDatasource.prototype */
+                {
+                    /**
+                     * Limit count for fetching.
+                     */
+                    limit: 20,
+                    /**
+                     * Skip count for fething.
+                     */
+                    skip: null,
+                    /**
+                     * Feched data.
+                     */
+                    data: null,
+                    /**
+                     * Has more data to fetch or not.
+                     */
+                    hasMore: true,
+                    /**
+                     * Create a query object.
+                     * @returns {object}
+                     */
+                    createQuery: function () {
+                        var s = this,
+                            query = {};
+                        ap.copy({
+                            _limit: s.limit,
+                            _skip: s.skip
+                        }, query);
+                        ap.copy(s.condition, query);
+                        return query;
+                    },
+                    /**
+                     * Clear fecthed data and condition.
+                     */
+                    clear: function () {
+                        var s = this;
+                        s.data = [];
+                        s.skip = 0;
+                        s.condition = {};
+                        s.hasMore = true;
+                    },
+                    /**
+                     * Fetch data.
+                     * @param query
+                     * @param callback
+                     */
+                    fetch: function (query, callback) {
+                        callback(null, null);
+                    },
+                    /**
+                     * Convert data.
+                     * @param data
+                     * @returns {*}
+                     */
+                    convert: function (data) {
+                        return data;
+                    },
+                    /**
+                     * Load data.
+                     * @param {function} callback
+                     */
+                    load: function (callback) {
+                        var s = this,
+                            query = s.createQuery();
+                        s.loading = true;
+                        callback = callback || ap.doNothing;
+                        s.fetch(query, function (err, data) {
+                            s.loading = false;
+                            if (!err) {
+                                s.hasMore = s.limit <= data.length;
+                                s.data = s.data.concat(s.convert(data));
+                                s.skip = s.data.length;
+                            }
+                            callback(err);
+                        });
+                    },
+                    /**
+                     * Clear and fetch data.
+                     * @param {function} callback
+                     */
+                    reload: function (callback) {
+                        var s = this;
+                        s.clear();
+                        s.load(callback);
+                    }
+                }
+            );
+        });
+})(angular, apeman);
+/**
  * Abstract data source.
  * @requires angular
  * @retuires apeman
@@ -483,6 +586,23 @@
                     var s = this;
                     ap.copy(properties || {}, s);
                 }
+            };
+
+
+            /**
+             * Define a data source constructor.
+             * @param {object} properties - Data source properties.
+             * @returns {function} Defined constructor
+             */
+            Datasource.define = function (properties) {
+                function Defined() {
+                    var s = this;
+                    s.init.apply(s, arguments);
+                }
+
+                Defined.prototype = new Datasource(properties);
+
+                return Defined;
             };
 
             return Datasource;
@@ -740,6 +860,315 @@
             );
 
             return OneDatasource;
+        });
+})(angular, apeman);
+/**
+ * Data source for list.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.datasources')
+        .factory('ProfileListDatasource', function (Datasource) {
+
+            return Datasource.define(
+                /** @lends ProfileListDatasource.prototype */
+                {
+                    /**
+                     * Limit count for fetching.
+                     */
+                    limit: 20,
+                    /**
+                     * Skip count for fething.
+                     */
+                    skip: null,
+                    /**
+                     * Feched data.
+                     */
+                    data: null,
+                    /**
+                     * Has more data to fetch or not.
+                     */
+                    hasMore: true,
+                    /**
+                     * Create a query object.
+                     * @returns {object}
+                     */
+                    createQuery: function () {
+                        var s = this,
+                            query = {};
+                        ap.copy({
+                            _limit: s.limit,
+                            _skip: s.skip
+                        }, query);
+                        ap.copy(s.condition, query);
+                        return query;
+                    },
+                    /**
+                     * Clear fecthed data and condition.
+                     */
+                    clear: function () {
+                        var s = this;
+                        s.data = [];
+                        s.skip = 0;
+                        s.condition = {};
+                        s.hasMore = true;
+                    },
+                    /**
+                     * Fetch data.
+                     * @param query
+                     * @param callback
+                     */
+                    fetch: function (query, callback) {
+                        callback(null, null);
+                    },
+                    /**
+                     * Convert data.
+                     * @param data
+                     * @returns {*}
+                     */
+                    convert: function (data) {
+                        return data;
+                    },
+                    /**
+                     * Load data.
+                     * @param {function} callback
+                     */
+                    load: function (callback) {
+                        var s = this,
+                            query = s.createQuery();
+                        s.loading = true;
+                        callback = callback || ap.doNothing;
+                        s.fetch(query, function (err, data) {
+                            s.loading = false;
+                            if (!err) {
+                                s.hasMore = s.limit <= data.length;
+                                s.data = s.data.concat(s.convert(data));
+                                s.skip = s.data.length;
+                            }
+                            callback(err);
+                        });
+                    },
+                    /**
+                     * Clear and fetch data.
+                     * @param {function} callback
+                     */
+                    reload: function (callback) {
+                        var s = this;
+                        s.clear();
+                        s.load(callback);
+                    }
+                }
+            );
+        });
+})(angular, apeman);
+/**
+ * Data source for list.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.datasources')
+        .factory('SettingListDatasource', function (Datasource) {
+
+            return Datasource.define(
+                /** @lends SettingListDatasource.prototype */
+                {
+                    /**
+                     * Limit count for fetching.
+                     */
+                    limit: 20,
+                    /**
+                     * Skip count for fething.
+                     */
+                    skip: null,
+                    /**
+                     * Feched data.
+                     */
+                    data: null,
+                    /**
+                     * Has more data to fetch or not.
+                     */
+                    hasMore: true,
+                    /**
+                     * Create a query object.
+                     * @returns {object}
+                     */
+                    createQuery: function () {
+                        var s = this,
+                            query = {};
+                        ap.copy({
+                            _limit: s.limit,
+                            _skip: s.skip
+                        }, query);
+                        ap.copy(s.condition, query);
+                        return query;
+                    },
+                    /**
+                     * Clear fecthed data and condition.
+                     */
+                    clear: function () {
+                        var s = this;
+                        s.data = [];
+                        s.skip = 0;
+                        s.condition = {};
+                        s.hasMore = true;
+                    },
+                    /**
+                     * Fetch data.
+                     * @param query
+                     * @param callback
+                     */
+                    fetch: function (query, callback) {
+                        callback(null, null);
+                    },
+                    /**
+                     * Convert data.
+                     * @param data
+                     * @returns {*}
+                     */
+                    convert: function (data) {
+                        return data;
+                    },
+                    /**
+                     * Load data.
+                     * @param {function} callback
+                     */
+                    load: function (callback) {
+                        var s = this,
+                            query = s.createQuery();
+                        s.loading = true;
+                        callback = callback || ap.doNothing;
+                        s.fetch(query, function (err, data) {
+                            s.loading = false;
+                            if (!err) {
+                                s.hasMore = s.limit <= data.length;
+                                s.data = s.data.concat(s.convert(data));
+                                s.skip = s.data.length;
+                            }
+                            callback(err);
+                        });
+                    },
+                    /**
+                     * Clear and fetch data.
+                     * @param {function} callback
+                     */
+                    reload: function (callback) {
+                        var s = this;
+                        s.clear();
+                        s.load(callback);
+                    }
+                }
+            );
+        });
+})(angular, apeman);
+/**
+ * Data source for list.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.datasources')
+        .factory('WorkListDatasource', function (Datasource) {
+
+            return Datasource.define(
+                /** @lends WorkListDatasource.prototype */
+                {
+                    /**
+                     * Limit count for fetching.
+                     */
+                    limit: 20,
+                    /**
+                     * Skip count for fething.
+                     */
+                    skip: null,
+                    /**
+                     * Feched data.
+                     */
+                    data: null,
+                    /**
+                     * Has more data to fetch or not.
+                     */
+                    hasMore: true,
+                    /**
+                     * Create a query object.
+                     * @returns {object}
+                     */
+                    createQuery: function () {
+                        var s = this,
+                            query = {};
+                        ap.copy({
+                            _limit: s.limit,
+                            _skip: s.skip
+                        }, query);
+                        ap.copy(s.condition, query);
+                        return query;
+                    },
+                    /**
+                     * Clear fecthed data and condition.
+                     */
+                    clear: function () {
+                        var s = this;
+                        s.data = [];
+                        s.skip = 0;
+                        s.condition = {};
+                        s.hasMore = true;
+                    },
+                    /**
+                     * Fetch data.
+                     * @param query
+                     * @param callback
+                     */
+                    fetch: function (query, callback) {
+                        callback(null, null);
+                    },
+                    /**
+                     * Convert data.
+                     * @param data
+                     * @returns {*}
+                     */
+                    convert: function (data) {
+                        return data;
+                    },
+                    /**
+                     * Load data.
+                     * @param {function} callback
+                     */
+                    load: function (callback) {
+                        var s = this,
+                            query = s.createQuery();
+                        s.loading = true;
+                        callback = callback || ap.doNothing;
+                        s.fetch(query, function (err, data) {
+                            s.loading = false;
+                            if (!err) {
+                                s.hasMore = s.limit <= data.length;
+                                s.data = s.data.concat(s.convert(data));
+                                s.skip = s.data.length;
+                            }
+                            callback(err);
+                        });
+                    },
+                    /**
+                     * Clear and fetch data.
+                     * @param {function} callback
+                     */
+                    reload: function (callback) {
+                        var s = this;
+                        s.clear();
+                        s.load(callback);
+                    }
+                }
+            );
         });
 })(angular, apeman);
 
@@ -1482,9 +1911,13 @@
         .module('ok.indices')
         .factory('datasourcesIndex', function defineDatasourcesIndex($injector) {
             return {
+                get BlogListDataSource() { return $injector.get('BlogListDataSource'); },
                 get Datasource() { return $injector.get('Datasource'); },
                 get ListDatasource() { return $injector.get('ListDatasource'); },
-                get OneDatasource() { return $injector.get('OneDatasource'); }
+                get OneDatasource() { return $injector.get('OneDatasource'); },
+                get ProfileListDataSource() { return $injector.get('ProfileListDataSource'); },
+                get SettingListDataSource() { return $injector.get('SettingListDataSource'); },
+                get WorkListDataSource() { return $injector.get('WorkListDataSource'); }
             };
         });
 })(angular);
@@ -1921,18 +2354,21 @@
         .controller('AdminBlogCtrl', function ($scope, blogOneDatasource) {
 
         })
-        .controller('AdminBlogEditCtrl', function ($scope, blogOneDatasource, markdownRenderService) {
+        .controller('AdminBlogEditCtrl', function ($scope, blogOneDatasource, blogListDatasource, markdownRenderService) {
             ap.copy({
+                editing: false,
                 save: function (blog) {
                     blogOneDatasource.data = blog;
                     blogOneDatasource.save(function (err, data) {
-
+                        blogOneDatasource.clear();
+                        blogListDatasource.load();
                     });
                 },
                 cancel: function () {
                     $scope.close();
                 },
                 close: function () {
+                    $scope.editing = false;
                 }
             }, $scope);
             Object.defineProperties($scope, {
@@ -2502,26 +2938,57 @@
             var s = this,
                 formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
 
+            /**
+             * File a resource.
+             * @param {string} id - Resource id.
+             * @param {function} callback - Callback when done.
+             * @returns {$http} - Http module.
+             */
             s.one = function one(id, callback) {
                 var url = formatUrl(apiUrlConstant.BLOGS_GET_WITH_ID, {_id: id});
                 return apiService.get(url, callback);
             };
 
+            /**
+             * Create a resource.
+             * @param {object} data - Data to create.
+             * @param {function} callback - Callback when done.
+             * @returns {$http} - Http module.
+             */
             s.create = function create(data, callback) {
                 var url = apiUrlConstant.BLOGS_POST;
                 return apiService.post(url, data, callback);
             }
 
+            /**
+             * Update a resouce.
+             * @param {string} id - Resource id.
+             * @param {object} data - Data to update.
+             * @param {function} callback - Callback when done.
+             * @returns {$http} - Http module.
+             */
             s.update = function update(id, data, callback) {
                 var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
                 return apiService.update(url, data, callback);
             }
 
+            /**
+             * Delete a resouce.
+             * @param {string} id - Resource id.
+             * @param {function} callback - Callback when done.
+             * @returns {$http} - Http module.
+             */
             s.delete = function del(id, callback) {
                 var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
                 return apiService.delete(url, callback);
             }
 
+            /**
+             * List resources.
+             * @param {object} params - Query data.
+             * @param {function} callback - Callback when done.
+             * @returns {$http} - Http module.
+             */
             s.list = function list(params, callback) {
                 var url = apiUrlConstant.BLOGS_GET;
                 return apiService.get(url, params, callback);

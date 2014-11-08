@@ -48,11 +48,7 @@ async.eachSeries([
         task: tasks.SymlinkTask
     },
     {
-        config: {
-            files: [
-                'ci/bin/format'
-            ]
-        },
+        config: configs.forkConfig.build,
         task: tasks.ForkTask
     }
 ], function (data, callback) {

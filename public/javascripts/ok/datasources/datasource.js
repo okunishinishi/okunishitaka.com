@@ -28,6 +28,23 @@
                 }
             };
 
+
+            /**
+             * Define a data source constructor.
+             * @param {object} properties - Data source properties.
+             * @returns {function} Defined constructor
+             */
+            Datasource.define = function (properties) {
+                function Defined() {
+                    var s = this;
+                    s.init.apply(s, arguments);
+                }
+
+                Defined.prototype = new Datasource(properties);
+
+                return Defined;
+            };
+
             return Datasource;
         });
 })(angular, apeman);

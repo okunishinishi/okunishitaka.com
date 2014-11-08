@@ -1,7 +1,7 @@
 /**
  * @file Apeman client side scripts.
  * @namespace apeman
- * @version 0.0.17
+ * @version 0.0.18
  */
 window.apeman = (function (apeman) {
     "use strict";
@@ -49,6 +49,13 @@ window.apeman = (function (apeman) {
 	    }
 	
 	}
+    /**
+	 * Throw not implemented error.
+	 * @throws - Not implmented error.
+	 */
+	ap.throwNotImplmentedError = function () {
+	    throw new Error('Not implmented!');
+	};
 
     return apeman;
 })(window.apeman = window.apeman || {});

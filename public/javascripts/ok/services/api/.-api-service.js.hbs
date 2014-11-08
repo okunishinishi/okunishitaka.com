@@ -7,8 +7,59 @@
 
     ng
         .module('{{module}}')
-        .service('{{name}}ApiService', function {{Name}}ApiService ($http) {
-            var s = this;
-        });
+        .service('{{name}}ApiService', function {{Name}}ApiService ($http, apiUrlConstant, urlFormatLogic) {
+            var s = this,
+            formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
 
+            /**
+             * File a resource.
+             * @param {string} id - Resource id.
+             * @param {function} callback - Callback when done.
+             * @returns {$http} - Http module.
+             */
+            s.one = function one(id, callback) {
+                ap.throwNotImplmentedError();
+            };
+
+            /**
+             * Create a resource.
+             * @param {object} data - Data to create.
+             * @param {function} callback - Callback when done.
+             * @returns {$http} - Http module.
+             */
+            s.create = function create(data, callback) {
+                ap.throwNotImplmentedError();
+            }
+
+            /**
+             * Update a resouce.
+             * @param {string} id - Resource id.
+             * @param {object} data - Data to update.
+             * @param {function} callback - Callback when done.
+             * @returns {$http} - Http module.
+             */
+            s.update = function update(id, data, callback) {
+                ap.throwNotImplmentedError();
+            }
+
+            /**
+             * Delete a resouce.
+             * @param {string} id - Resource id.
+             * @param {function} callback - Callback when done.
+             * @returns {$http} - Http module.
+             */
+            s.delete = function del(id, callback) {
+                ap.throwNotImplmentedError();
+            }
+
+            /**
+             * List resources.
+             * @param {object} params - Query data.
+             * @param {function} callback - Callback when done.
+             * @returns {$http} - Http module.
+             */
+            s.list = function list(params, callback) {
+                ap.throwNotImplmentedError();
+            }
+        });
 })(angular);

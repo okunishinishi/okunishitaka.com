@@ -44,18 +44,21 @@
         .controller('AdminBlogCtrl', function ($scope, blogOneDatasource) {
 
         })
-        .controller('AdminBlogEditCtrl', function ($scope, blogOneDatasource, markdownRenderService) {
+        .controller('AdminBlogEditCtrl', function ($scope, blogOneDatasource, blogListDatasource, markdownRenderService) {
             ap.copy({
+                editing: false,
                 save: function (blog) {
                     blogOneDatasource.data = blog;
                     blogOneDatasource.save(function (err, data) {
-
+                        blogOneDatasource.clear();
+                        blogListDatasource.load();
                     });
                 },
                 cancel: function () {
                     $scope.close();
                 },
                 close: function () {
+                    $scope.editing = false;
                 }
             }, $scope);
             Object.defineProperties($scope, {

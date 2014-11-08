@@ -22,6 +22,7 @@ test/.work
 
 .cluster_status.json
 .format_status.json
+.minify_status.json
 
 /var/backup/*
 /var/log/*

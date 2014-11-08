@@ -1,0 +1,8 @@
+{
+    "build": {
+        "files": [
+            "ci/bin/format",
+            "ci/bin/minify"
+        ]
+    }
+}
