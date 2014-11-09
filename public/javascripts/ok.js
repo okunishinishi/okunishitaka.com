@@ -263,15 +263,16 @@
     ng
         .module('ok.constants')
         .constant('apiUrlConstant', {
-		    "BLOGS_GET": "/blogs",
-		    "BLOGS_POST": "/blogs",
-		    "BLOGS_GET_WITH_ID": "/blogs/:_id",
-		    "BLOGS_PUT_WITH_ID": "/blogs/:_id",
-		    "BLOGS_DELETE_WITH_ID": "/blogs/:_id",
-		    "SETTINGS_GET": "/settings",
-		    "SETTINGS_PUT": "/settings",
-		    "PROFILES_GET": "/profiles",
-		    "WORKS_GET": "/works"
+		    "API_BLOGS_GET": "/api/blogs",
+		    "API_BLOGS_POST": "/api/blogs",
+		    "API_BLOGS_GET_WITH_ID": "/api/blogs/:_id",
+		    "API_BLOGS_PUT_WITH_ID": "/api/blogs/:_id",
+		    "API_BLOGS_DELETE_WITH_ID": "/api/blogs/:_id",
+		    "API_SETTINGS_GET": "/api/settings",
+		    "API_SETTINGS_PUT": "/api/settings",
+		    "API_PROFILES_GET": "/api/profiles",
+		    "API_PROFILES_PUT": "/api/profiles",
+		    "API_WORKS_GET": "/api/works"
 		});
 
 })(angular);
@@ -2723,7 +2724,7 @@
              * @returns {$http} - Http module.
              */
             s.list = function list(params, callback) {
-                var url = apiUrlConstant.BLOGS_GET;
+                var url = apiUrlConstant.API_BLOGS_GET;
                 return apiService.get(url, params, callback);
             }
 
@@ -2734,7 +2735,7 @@
              * @returns {$http} - Http module.
              */
             s.one = function one(id, callback) {
-                var url = formatUrl(apiUrlConstant.BLOGS_GET_WITH_ID, {_id: id});
+                var url = formatUrl(apiUrlConstant.API_BLOGS_GET_WITH_ID, {_id: id});
                 return apiService.get(url, callback);
             };
 
@@ -2745,7 +2746,7 @@
              * @returns {$http} - Http module.
              */
             s.create = function create(data, callback) {
-                var url = apiUrlConstant.BLOGS_POST;
+                var url = apiUrlConstant.API_BLOGS_POST;
                 return apiService.post(url, data, callback);
             }
 
@@ -2757,7 +2758,7 @@
              * @returns {$http} - Http module.
              */
             s.update = function update(id, data, callback) {
-                    var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
+                    var url = formatUrl(apiUrlConstant.API_BLOGS_PUT_WITH_ID, {_id: id});
                     return apiService.put(url, data, callback);
             }
 
@@ -2768,7 +2769,7 @@
              * @returns {$http} - Http module.
              */
             s.destroy = function destroy(id, callback) {
-                var url = formatUrl(apiUrlConstant.BLOGS_DELETE_WITH_ID, {_id: id});
+                var url = formatUrl(apiUrlConstant.API_BLOGS_DELETE_WITH_ID, {_id: id});
                 return apiService.delete(url, callback);
             }
 
@@ -2792,7 +2793,7 @@
              * @param {function} callback - Callback when done.
              */
             s.singleton = function singleton(callback) {
-                var url = apiUrlConstant.PROFILES_GET;
+                var url = apiUrlConstant.API_PROFILES_GET;
                 return apiService.get(url, callback);
             }
 
@@ -2833,7 +2834,7 @@
              * @returns {$http} - Http module.
              */
             s.list = function list(params, callback) {
-                var url = apiUrlConstant.WORKS_GET;
+                var url = apiUrlConstant.API_WORKS_GET;
                 return apiService.get(url, params, callback);
             }
 

@@ -53,20 +53,20 @@
   },
   "endpoints": {
     "blog": {
-      "list": "apiUrlConstant.BLOGS_GET",
-      "one": "apiUrlConstant.BLOGS_GET_WITH_ID",
-      "create": "apiUrlConstant.BLOGS_POST",
-      "update": "apiUrlConstant.BLOGS_PUT_WITH_ID",
-      "destroy": "apiUrlConstant.BLOGS_DELETE_WITH_ID"
+      "list": "apiUrlConstant.API_BLOGS_GET",
+      "one": "apiUrlConstant.API_BLOGS_GET_WITH_ID",
+      "create": "apiUrlConstant.API_BLOGS_POST",
+      "update": "apiUrlConstant.API_BLOGS_PUT_WITH_ID",
+      "destroy": "apiUrlConstant.API_BLOGS_DELETE_WITH_ID"
     },
     "setting": {
     },
     "profile": {
-      "singleton": "apiUrlConstant.PROFILES_GET",
-      "save": ""
+      "singleton": "apiUrlConstant.API_PROFILES_GET",
+      "save": "apiUrlConstant.API_PROFILES_PUT"
     },
     "work": {
-      "list": "apiUrlConstant.WORKS_GET"
+      "list": "apiUrlConstant.API_WORKS_GET"
     }
   }
 }

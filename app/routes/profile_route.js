@@ -13,3 +13,7 @@ var profile = require('../../public/json/profile.json');
 exports.singleton = function (req, res, next) {
     res.sendJson(profile);
 }
+
+exports.save = function (req, res, next) {
+    //TODO
+};

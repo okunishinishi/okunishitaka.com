@@ -18,7 +18,7 @@
              * @returns {$http} - Http module.
              */
             s.list = function list(params, callback) {
-                var url = apiUrlConstant.BLOGS_GET;
+                var url = apiUrlConstant.API_BLOGS_GET;
                 return apiService.get(url, params, callback);
             }
 
@@ -29,7 +29,7 @@
              * @returns {$http} - Http module.
              */
             s.one = function one(id, callback) {
-                var url = formatUrl(apiUrlConstant.BLOGS_GET_WITH_ID, {_id: id});
+                var url = formatUrl(apiUrlConstant.API_BLOGS_GET_WITH_ID, {_id: id});
                 return apiService.get(url, callback);
             };
 
@@ -40,7 +40,7 @@
              * @returns {$http} - Http module.
              */
             s.create = function create(data, callback) {
-                var url = apiUrlConstant.BLOGS_POST;
+                var url = apiUrlConstant.API_BLOGS_POST;
                 return apiService.post(url, data, callback);
             }
 
@@ -52,7 +52,7 @@
              * @returns {$http} - Http module.
              */
             s.update = function update(id, data, callback) {
-                    var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
+                    var url = formatUrl(apiUrlConstant.API_BLOGS_PUT_WITH_ID, {_id: id});
                     return apiService.put(url, data, callback);
             }
 
@@ -63,7 +63,7 @@
              * @returns {$http} - Http module.
              */
             s.destroy = function destroy(id, callback) {
-                var url = formatUrl(apiUrlConstant.BLOGS_DELETE_WITH_ID, {_id: id});
+                var url = formatUrl(apiUrlConstant.API_BLOGS_DELETE_WITH_ID, {_id: id});
                 return apiService.delete(url, callback);
             }
 

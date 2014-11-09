@@ -18,7 +18,7 @@
              * @returns {$http} - Http module.
              */
             s.list = function list(params, callback) {
-                var url = apiUrlConstant.WORKS_GET;
+                var url = apiUrlConstant.API_WORKS_GET;
                 return apiService.get(url, params, callback);
             }
 

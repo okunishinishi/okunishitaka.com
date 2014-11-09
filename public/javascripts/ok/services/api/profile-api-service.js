@@ -16,7 +16,7 @@
              * @param {function} callback - Callback when done.
              */
             s.singleton = function singleton(callback) {
-                var url = apiUrlConstant.PROFILES_GET;
+                var url = apiUrlConstant.API_PROFILES_GET;
                 return apiService.get(url, callback);
             }
 

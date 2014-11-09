@@ -18,7 +18,7 @@ module.exports = Object.seal(
          * @property {function} GET - List blogs.
          * @property {function} POST - Create a new blog.
          */
-        '/blogs': {
+        '/api/blogs': {
             GET: r.blogRoute.list,
             POST: r.blogRoute.create
         },
@@ -29,7 +29,7 @@ module.exports = Object.seal(
          * @property (function} PUT - Update a blog.
          * @property {function} DELTE - Destory a blog.
          */
-        '/blogs/:_id': {
+        '/api/blogs/:_id': {
             GET: r.blogRoute.one,
             PUT: r.blogRoute.update,
             DELETE: r.blogRoute.destroy
@@ -39,14 +39,15 @@ module.exports = Object.seal(
          * @property {function} GET - Get settings.
          * @property {function} PUT - Update settings.
          */
-        '/settings': {
+        '/api/settings': {
             GET: r.settingRoute.singleton,
             PUT: r.settingRoute.save
         },
-        '/profiles':{
-            GET: r.profileRoute.singleton
+        '/api/profiles': {
+            GET: r.profileRoute.singleton,
+            PUT: r.profileRoute.save
         },
-        '/works': {
+        '/api/works': {
             GET: r.workRoute.list
         }
     });

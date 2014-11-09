@@ -263,15 +263,16 @@
     ng
         .module('ok.constants')
         .constant('apiUrlConstant', {
-		    "BLOGS_GET": "/blogs",
-		    "BLOGS_POST": "/blogs",
-		    "BLOGS_GET_WITH_ID": "/blogs/:_id",
-		    "BLOGS_PUT_WITH_ID": "/blogs/:_id",
-		    "BLOGS_DELETE_WITH_ID": "/blogs/:_id",
-		    "SETTINGS_GET": "/settings",
-		    "SETTINGS_PUT": "/settings",
-		    "PROFILES_GET": "/profiles",
-		    "WORKS_GET": "/works"
+		    "API_BLOGS_GET": "/api/blogs",
+		    "API_BLOGS_POST": "/api/blogs",
+		    "API_BLOGS_GET_WITH_ID": "/api/blogs/:_id",
+		    "API_BLOGS_PUT_WITH_ID": "/api/blogs/:_id",
+		    "API_BLOGS_DELETE_WITH_ID": "/api/blogs/:_id",
+		    "API_SETTINGS_GET": "/api/settings",
+		    "API_SETTINGS_PUT": "/api/settings",
+		    "API_PROFILES_GET": "/api/profiles",
+		    "API_PROFILES_PUT": "/api/profiles",
+		    "API_WORKS_GET": "/api/works"
 		});
 
 })(angular);
