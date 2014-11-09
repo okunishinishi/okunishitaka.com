@@ -19,7 +19,7 @@
         .factory('blogListDatasource', function (BlogListDatasource) {
             return new BlogListDatasource({});
         })
-        .factory('blogEditor', function () {
+        .factory('blogEditor', function (blogOneDatasource) {
             function BlogEditor() {
                 var s = this;
             }
