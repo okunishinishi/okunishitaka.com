@@ -88,7 +88,7 @@ l.errorDescriptions = {
 l.pages = {
     index: {
         CAPTION: [
-                'Homepage of ' + pkg.author
+            'Homepage of ' + pkg.author
         ],
         TITLE: pkg.name
     },
@@ -107,6 +107,9 @@ l.pages = {
     },
     work: {
         DESCRIPTION: 'Personal works.'
+    },
+    admin: {
+        LOGO: ["admin", l.meta.NAME].join('.')
     }
 }
 

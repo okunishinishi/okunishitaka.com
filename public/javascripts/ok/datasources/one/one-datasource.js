@@ -98,6 +98,7 @@
                     load: function (callback) {
                         var s = this,
                             id = s.id;
+                        callback = callback || ap.doNothing;
                         s.loading = true;
                         s._oneRequest(id, function (err, data) {
                             s.loading = false;
@@ -115,6 +116,7 @@
                         var s = this,
                             id = s.id,
                             data = s.data || {};
+                        callback = callback || ap.doNothing;
                         if (id) {
                             s._updateRequest(id, data, callback);
                         } else {
@@ -124,6 +126,7 @@
                     destroy: function (callback) {
                         var s = this,
                             id = s.id;
+                        callback = callback || ap.doNothing;
                         s._destroyRequest(id, callback);
                     },
                     /**
@@ -132,6 +135,7 @@
                      */
                     reload: function (callback) {
                         var s = this;
+                        callback = callback || ap.doNothing;
                         s.clear();
                         s.load(callback);
                     }

@@ -92,6 +92,9 @@
 		            },
 		            "work": {
 		                "DESCRIPTION": "Personal works."
+		            },
+		            "admin": {
+		                "LOGO": "admin.okunishitaka.com"
 		            }
 		        }
 		    },
@@ -179,6 +182,9 @@
 		            },
 		            "work": {
 		                "DESCRIPTION": "Personal works."
+		            },
+		            "admin": {
+		                "LOGO": "admin.okunishitaka.com"
 		            }
 		        }
 		    }

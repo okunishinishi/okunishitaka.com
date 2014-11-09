@@ -158,6 +158,9 @@
 		            },
 		            "work": {
 		                "DESCRIPTION": "Personal works."
+		            },
+		            "admin": {
+		                "LOGO": "admin.okunishitaka.com"
 		            }
 		        }
 		    },
@@ -245,6 +248,9 @@
 		            },
 		            "work": {
 		                "DESCRIPTION": "Personal works."
+		            },
+		            "admin": {
+		                "LOGO": "admin.okunishitaka.com"
 		            }
 		        }
 		    }
@@ -424,6 +430,7 @@
         .constant('partialUrlConstant', {
 		    "ADMIN_BLOG_EDITOR_SECTION": "/html/partials/admin/admin-blog-editor-section.html",
 		    "ADMIN_BLOG_LIST_SECTION": "/html/partials/admin/admin-blog-list-section.html",
+		    "ADMIN_HEADER": "/html/partials/admin/admin-header.html",
 		    "BLOG_ASIDE_CONTENT": "/html/partials/blog/blog-aside-content.html",
 		    "BLOG_LIST_SECTION": "/html/partials/blog/blog-list-section.html",
 		    "FOOTER": "/html/partials/footer.html",
@@ -714,7 +721,7 @@
                         blogApiService.destroy(id, callback);
                     },
                     _parseData: function (data) {
-                        return data.map(BlogEntity.new);
+                        return BlogEntity.new(data);
                     }
                 }
             );
@@ -820,6 +827,7 @@
                     load: function (callback) {
                         var s = this,
                             id = s.id;
+                        callback = callback || ap.doNothing;
                         s.loading = true;
                         s._oneRequest(id, function (err, data) {
                             s.loading = false;
@@ -837,6 +845,7 @@
                         var s = this,
                             id = s.id,
                             data = s.data || {};
+                        callback = callback || ap.doNothing;
                         if (id) {
                             s._updateRequest(id, data, callback);
                         } else {
@@ -846,6 +855,7 @@
                     destroy: function (callback) {
                         var s = this,
                             id = s.id;
+                        callback = callback || ap.doNothing;
                         s._destroyRequest(id, callback);
                     },
                     /**
@@ -854,6 +864,7 @@
                      */
                     reload: function (callback) {
                         var s = this;
+                        callback = callback || ap.doNothing;
                         s.clear();
                         s.load(callback);
                     }
@@ -1836,6 +1847,7 @@
                 get adminAdminBlogEditorSectionHtmlTemplate() { return $injector.get('adminAdminBlogEditorSectionHtmlTemplate'); },
                 get adminAdminBlogListSectionHtmlTemplate() { return $injector.get('adminAdminBlogListSectionHtmlTemplate'); },
                 get adminAdminEditorSectionHtmlTemplate() { return $injector.get('adminAdminEditorSectionHtmlTemplate'); },
+                get adminAdminHeaderHtmlTemplate() { return $injector.get('adminAdminHeaderHtmlTemplate'); },
                 get blogBlogAsideContentHtmlTemplate() { return $injector.get('blogBlogAsideContentHtmlTemplate'); },
                 get blogBlogEditEditorSectionHtmlTemplate() { return $injector.get('blogBlogEditEditorSectionHtmlTemplate'); },
                 get blogBlogEditListSectionHtmlTemplate() { return $injector.get('blogBlogEditListSectionHtmlTemplate'); },
@@ -2143,38 +2155,10 @@
         .factory('blogListDatasource', function (BlogListDatasource) {
             return new BlogListDatasource({});
         })
-        .factory('blogEditor', function (blogOneDatasource) {
-            function BlogEditor() {
-                var s = this;
-            }
-
-            BlogEditor.prototype = {
-                blog: null,
-                visible: false,
-                show: function () {
-                    var s = this;
-                    s.visible = true;
-                },
-                hide: function () {
-                    var s = this;
-                    s.visible = false;
-                },
-                edit: function (id) {
-
-                },
-                save: function (callback) {
-
-                }
-            }
-
-            return new BlogEditor();
-        })
-        .controller('AdminBlogCtrl', function ($scope, blogOneDatasource) {
-
+        .controller('AdminBlogCtrl', function ($scope, BlogEditor) {
         })
         .controller('AdminBlogEditCtrl', function ($scope, blogOneDatasource, blogListDatasource, markdownRenderService) {
             ap.copy({
-                editing: false,
                 save: function (blog) {
                     blogOneDatasource.data = blog;
                     blogOneDatasource.save(function (err, data) {
@@ -2212,13 +2196,11 @@
                 }
             });
         })
-        .controller('AdminBlogListCtrl', function ($scope, blogListDatasource, textSummarizeLogic) {
+        .controller('AdminBlogListCtrl', function ($scope, blogOneDatasource, blogListDatasource, textSummarizeLogic) {
             ap.copy({
                 edit: function (blog) {
-
-                },
-                destroy: function (blog) {
-
+                    blogOneDatasource.id = blog._id;
+                    blogOneDatasource.load();
                 },
                 more: function () {
                     blogListDatasource.load();
@@ -3086,6 +3068,21 @@
         .value('adminAdminEditorSectionHtmlTemplate', {
 		    "name": "/html/partials/admin/admin-editor-section.html",
 		    "content": "<section id=\"blog-edit-editor-section\"\n         ng:class=\"{'blog-editor-visible':status.isEditing}\"\n         ng:controller=\"BlogEditEditorCtrl\" class=\"cover\">\n    <div id=\"blog-edit-editor-section-content\" class=\"container position-relative\">\n\n        <a ng:click=\"close()\" id=\"blog-edit-close-button\" class=\"close-button\">{{l.buttons.CLOSE}}</a>\n\n        <div class=\"grid-row\">\n            <div class=\"grid-col\">\n                <fieldset class=\"no-style-fieldset\">\n                    <div class=\"field\">\n                        <input type=\"text\" id=\"blog-title-input\"\n                               placeholder=\"{{l.placeholders.blog.TITLE}}\"\n                               ng:model=\"blog.title\"\n                               class=\"wide-input\">\n                    </div>\n                    <div class=\"field\">\n                        <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n                                  placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n                                  class=\"wide-textarea\" cols=\"20\" rows=\"10\"\n                                  ng:model=\"blog.content\"\n                                ></textarea>\n                    </div>\n                    <div class=\"field\">\n                        <div class=\"text-align-center\">\n                            <a id=\"blog-cancel-button\" class=\"button\"\n                               href=\"javascript:void(0)\"\n                               ng:click=\"cancel()\"\n                                    >{{l.buttons.CANCEL}}</a>\n                            <a id=\"blog-save-button\" class=\"button button-primary\"\n                               href=\"javascript:void(0)\"\n                               ng:click=\"save(blog)\"\n                                    >{{l.buttons.SAVE}}</a>\n                        </div>\n                    </div>\n                </fieldset>\n            </div>\n            <div class=\"grid-col\">\n                <fieldset>\n                    <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>\n                    <div id=\"blog-edit-preview-div\">\n                        <h2>{{preview.title}}</h2>\n\n                        <div ng:bind-html=\"preview.content\"></div>\n                    </div>\n                </fieldset>\n                <div class=\"grid-col\">\n                    <br class=\"clear\"/>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>"
+		});
+
+})(angular);
+/**
+ * Template for adminAdminHeaderHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('adminAdminHeaderHtmlTemplate', {
+		    "name": "/html/partials/admin/admin-header.html",
+		    "content": "<!-- Header HTML -->\n<div class=\"container\">\n    <nav class=\"header-nav\">\n    </nav>\n    <h1 class=\"header-logo\" ng:click=\"goTopPage();\">{{l.pages.admin.LOGO}}</h1>\n</div>"
 		});
 
 })(angular);

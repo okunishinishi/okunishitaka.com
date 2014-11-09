@@ -1,5 +1,13 @@
 /** Style for admin page. **/
 
+header {
+    background-color: rgba(51, 136, 170, 0.96);
+}
+
+header h1 {
+    color: #24637C;
+}
+
 .close-button {
     position: absolute;
     right: 5px;

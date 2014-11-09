@@ -25,7 +25,7 @@
                         blogApiService.destroy(id, callback);
                     },
                     _parseData: function (data) {
-                        return data.map(BlogEntity.new);
+                        return BlogEntity.new(data);
                     }
                 }
             );

@@ -32,38 +32,10 @@
         .factory('blogListDatasource', function (BlogListDatasource) {
             return new BlogListDatasource({});
         })
-        .factory('blogEditor', function (blogOneDatasource) {
-            function BlogEditor() {
-                var s = this;
-            }
-
-            BlogEditor.prototype = {
-                blog: null,
-                visible: false,
-                show: function () {
-                    var s = this;
-                    s.visible = true;
-                },
-                hide: function () {
-                    var s = this;
-                    s.visible = false;
-                },
-                edit: function (id) {
-
-                },
-                save: function (callback) {
-
-                }
-            }
-
-            return new BlogEditor();
-        })
-        .controller('AdminBlogCtrl', function ($scope, blogOneDatasource) {
-
+        .controller('AdminBlogCtrl', function ($scope, BlogEditor) {
         })
         .controller('AdminBlogEditCtrl', function ($scope, blogOneDatasource, blogListDatasource, markdownRenderService) {
             ap.copy({
-                editing: false,
                 save: function (blog) {
                     blogOneDatasource.data = blog;
                     blogOneDatasource.save(function (err, data) {
@@ -101,13 +73,11 @@
                 }
             });
         })
-        .controller('AdminBlogListCtrl', function ($scope, blogListDatasource, textSummarizeLogic) {
+        .controller('AdminBlogListCtrl', function ($scope, blogOneDatasource, blogListDatasource, textSummarizeLogic) {
             ap.copy({
                 edit: function (blog) {
-
-                },
-                destroy: function (blog) {
-
+                    blogOneDatasource.id = blog._id;
+                    blogOneDatasource.load();
                 },
                 more: function () {
                     blogListDatasource.load();

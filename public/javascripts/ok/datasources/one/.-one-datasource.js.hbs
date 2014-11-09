@@ -25,7 +25,7 @@
                         {{name}}ApiService.destroy(id, callback);
                     },
 {{/if}}                    _parseData: function (data) {
-                        return data.map({{Name}}Entity.new);
+                        return {{Name}}Entity.new(data);
                     }
                 }
             );

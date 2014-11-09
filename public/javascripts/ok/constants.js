@@ -158,6 +158,9 @@
 		            },
 		            "work": {
 		                "DESCRIPTION": "Personal works."
+		            },
+		            "admin": {
+		                "LOGO": "admin.okunishitaka.com"
 		            }
 		        }
 		    },
@@ -245,6 +248,9 @@
 		            },
 		            "work": {
 		                "DESCRIPTION": "Personal works."
+		            },
+		            "admin": {
+		                "LOGO": "admin.okunishitaka.com"
 		            }
 		        }
 		    }
@@ -424,6 +430,7 @@
         .constant('partialUrlConstant', {
 		    "ADMIN_BLOG_EDITOR_SECTION": "/html/partials/admin/admin-blog-editor-section.html",
 		    "ADMIN_BLOG_LIST_SECTION": "/html/partials/admin/admin-blog-list-section.html",
+		    "ADMIN_HEADER": "/html/partials/admin/admin-header.html",
 		    "BLOG_ASIDE_CONTENT": "/html/partials/blog/blog-aside-content.html",
 		    "BLOG_LIST_SECTION": "/html/partials/blog/blog-list-section.html",
 		    "FOOTER": "/html/partials/footer.html",
