@@ -4,11 +4,23 @@
  */
 (function (ng) {
     "use strict";
+
     ng
         .module('ok.services')
-        .service('blogApiService', function BlogApiService(apiService, apiUrlConstant, urlFormatLogic) {
+        .service('blogApiService', function BlogApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
             var s = this,
                 formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
+
+            /**
+             * List resources.
+             * @param {object} params - Query data.
+             * @param {function} callback - Callback when done.
+             * @returns {$http} - Http module.
+             */
+            s.list = function list(params, callback) {
+                var url = apiUrlConstant.BLOGS_GET;
+                return apiService.get(url, params, callback);
+            }
 
             /**
              * File a resource.
@@ -40,30 +52,19 @@
              * @returns {$http} - Http module.
              */
             s.update = function update(id, data, callback) {
-                var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
-                return apiService.put(url, data, callback);
+                    var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
+                    return apiService.put(url, data, callback);
             }
 
             /**
-             * Delete a resouce.
+             * Destroy a resouce.
              * @param {string} id - Resource id.
              * @param {function} callback - Callback when done.
              * @returns {$http} - Http module.
              */
-            s.destroy = function del(id, callback) {
-                var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
+            s.destroy = function destroy(id, callback) {
+                var url = formatUrl(apiUrlConstant.BLOGS_DELETE_WITH_ID, {_id: id});
                 return apiService.delete(url, callback);
-            }
-
-            /**
-             * List resources.
-             * @param {object} params - Query data.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
-             */
-            s.list = function list(params, callback) {
-                var url = apiUrlConstant.BLOGS_GET;
-                return apiService.get(url, params, callback);
             }
 
         });

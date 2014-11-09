@@ -19,6 +19,32 @@
         .factory('blogListDatasource', function (BlogListDatasource) {
             return new BlogListDatasource({});
         })
+        .factory('blogEditor', function () {
+            function BlogEditor() {
+                var s = this;
+            }
+
+            BlogEditor.prototype = {
+                blog: null,
+                visible: false,
+                show: function () {
+                    var s = this;
+                    s.visible = true;
+                },
+                hide: function () {
+                    var s = this;
+                    s.visible = false;
+                },
+                edit: function (id) {
+
+                },
+                save: function (callback) {
+
+                }
+            }
+
+            return new BlogEditor();
+        })
         .controller('AdminBlogCtrl', function ($scope, blogOneDatasource) {
 
         })

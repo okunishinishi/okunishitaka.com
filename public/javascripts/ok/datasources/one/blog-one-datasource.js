@@ -12,19 +12,19 @@
             return OneDatasource.define(
                 /** @lends BlogOneDatasource.prototype */
                 {
-                    _getRequest: function (id, callback) {
+                    _oneRequest: function (id, callback) {
                         blogApiService.one(id, callback);
                     },
-                    _postRequest: function (data, callback) {
+                    _createRequest: function (data, callback) {
                         blogApiService.create(data, callback);
                     },
-                    _putRequest: function (id, data, callback) {
+                    _updateRequest: function (id, data, callback) {
                         blogApiService.update(id, data, callback);
                     },
-                    _deleteRequest: function (id, callback) {
-                        blogApiService.delete(id, callback);
+                    _destroyRequest: function (id, callback) {
+                        blogApiService.destroy(id, callback);
                     },
-                    _parse: function (data) {
+                    _parseData: function (data) {
                         return data.map(BlogEntity.new);
                     }
                 }

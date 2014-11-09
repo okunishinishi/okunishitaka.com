@@ -26,14 +26,7 @@
              * @returns {function} Defined constructor
              */
             ListDatasource.define = function (properties) {
-                function Defined() {
-                    var s = this;
-                    s.init.apply(s, arguments);
-                }
-
-                Defined.prototype = new ListDatasource(properties);
-
-                return Defined;
+                return Datasource.define(properties, ListDatasource);
             };
 
             ListDatasource.prototype = ap.copy(

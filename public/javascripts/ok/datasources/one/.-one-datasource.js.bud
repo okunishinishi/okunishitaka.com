@@ -10,16 +10,26 @@ var u = require('apeman-util'),
 
 var ok = require('../../.ok.json');
 
-module.exports = ok.entities.map(function (name) {
-    return {
-        mode: '644',
-        force: false,
-        path: format('%s/%s-one-datasource.js',
-            __dirname, string.paramString(name)),
-        data: {
-            module: 'ok.datasources',
-            name: string.camelString(name),
-            Name: string.pascalString(name)
+module.exports = Object.keys(ok.endpoints)
+    .filter(function (name) {
+        var endpoint = ok.endpoints[name];
+        return !!endpoint.one;
+    })
+    .map(function (name) {
+        var endpoint = ok.endpoints[name];
+        return {
+            mode: '644',
+            force: false,
+            path: format('%s/%s-one-datasource.js',
+                __dirname, string.paramString(name)),
+            data: {
+                module: 'ok.datasources',
+                name: string.camelString(name),
+                Name: string.pascalString(name),
+                one: endpoint.one,
+                create: endpoint.create,
+                update: endpoint.update,
+                destroy: endpoint.destroy,
+            }
         }
-    }
-});
+    });

@@ -1,5 +1,5 @@
 /**
- * Bud for list datasource.
+ * Bud for singleton datasource.
  */
 
 "use strict";
@@ -13,18 +13,21 @@ var ok = require('../../.ok.json');
 module.exports = Object.keys(ok.endpoints)
     .filter(function (name) {
         var endpoint = ok.endpoints[name];
-        return !!endpoint.list;
+        return !!endpoint.singleton;
     })
     .map(function (name) {
+        var endpoint = ok.endpoints[name];
         return {
             mode: '644',
             force: false,
-            path: format('%s/%s-list-datasource.js',
+            path: format('%s/%s-singleton-datasource.js',
                 __dirname, string.paramString(name)),
             data: {
                 module: 'ok.datasources',
                 name: string.camelString(name),
-                Name: string.pascalString(name)
+                Name: string.pascalString(name),
+                singleton: endpoint.singleton,
+                save: endpoint.save
             }
         }
     });

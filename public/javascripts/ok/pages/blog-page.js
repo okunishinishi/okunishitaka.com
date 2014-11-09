@@ -19,40 +19,25 @@
             return new BlogListDatasource({});
         })
         .controller('BlogCtrl', function ($scope, blogListDatasource) {
+            ap.copy({
+                more: function () {
+                    blogListDatasource.load();
+                }
+            }, $scope);
+
+            Object.defineProperties($scope, {
+                blogs: {
+                    get: function () {
+                        return blogListDatasource.data;
+                    }
+                }
+            });
+
             blogListDatasource.load();
         })
         .controller('BlogListCtrl', function ($scope, blogListDatasource) {
-            ap.copy({
-                /**
-                 * Load more data.
-                 */
-                more: function () {
-                    blogListDatasource.load();
-                }
-            }, $scope);
-
-            Object.defineProperties($scope, {
-                blogs: {
-                    get: function () {
-                        return blogListDatasource.data;
-                    }
-                }
-            });
         })
         .controller('BlogAsideCtrl', function ($scope, blogListDatasource) {
-            ap.copy({
-                more: function () {
-                    blogListDatasource.load();
-                }
-            }, $scope);
-
-            Object.defineProperties($scope, {
-                blogs: {
-                    get: function () {
-                        return blogListDatasource.data;
-                    }
-                }
-            });
         })
     ;
 

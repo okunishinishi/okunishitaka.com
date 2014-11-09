@@ -162,11 +162,23 @@
  */
 (function (ng) {
     "use strict";
+
     ng
         .module('ok.services')
-        .service('blogApiService', function BlogApiService(apiService, apiUrlConstant, urlFormatLogic) {
+        .service('blogApiService', function BlogApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
             var s = this,
                 formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
+
+            /**
+             * List resources.
+             * @param {object} params - Query data.
+             * @param {function} callback - Callback when done.
+             * @returns {$http} - Http module.
+             */
+            s.list = function list(params, callback) {
+                var url = apiUrlConstant.BLOGS_GET;
+                return apiService.get(url, params, callback);
+            }
 
             /**
              * File a resource.
@@ -198,30 +210,19 @@
              * @returns {$http} - Http module.
              */
             s.update = function update(id, data, callback) {
-                var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
-                return apiService.put(url, data, callback);
+                    var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
+                    return apiService.put(url, data, callback);
             }
 
             /**
-             * Delete a resouce.
+             * Destroy a resouce.
              * @param {string} id - Resource id.
              * @param {function} callback - Callback when done.
              * @returns {$http} - Http module.
              */
-            s.destroy = function del(id, callback) {
-                var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
+            s.destroy = function destroy(id, callback) {
+                var url = formatUrl(apiUrlConstant.BLOGS_DELETE_WITH_ID, {_id: id});
                 return apiService.delete(url, callback);
-            }
-
-            /**
-             * List resources.
-             * @param {object} params - Query data.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
-             */
-            s.list = function list(params, callback) {
-                var url = apiUrlConstant.BLOGS_GET;
-                return apiService.get(url, params, callback);
             }
 
         });
@@ -235,20 +236,20 @@
 
     ng
         .module('ok.services')
-        .service('profileApiService', function ProfileApiService($http, apiService, jsonUrlConstant) {
-            var s = this;
+        .service('profileApiService', function ProfileApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
+            var s = this,
+                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
 
             /**
-             * Get the singleton profile data.
+             * Get the singleton data.
              * @param {function} callback - Callback when done.
              */
             s.singleton = function singleton(callback) {
-                var url = jsonUrlConstant.PROFILE;
+                var url = apiUrlConstant.PROFILES_GET;
                 return apiService.get(url, callback);
-
             }
-        });
 
+        });
 })(angular);
 /**
  * Setting api service.
@@ -259,10 +260,11 @@
 
     ng
         .module('ok.services')
-        .service('settingApiService', function SettingApiService ($http) {
-            var s = this;
-        });
+        .service('settingApiService', function SettingApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
+            var s = this,
+                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
 
+        });
 })(angular);
 /**
  * Work api service.
@@ -273,15 +275,22 @@
 
     ng
         .module('ok.services')
-        .service('workApiService', function WorkApiService($http, apiService, jsonUrlConstant) {
-            var s = this;
-            s.singleton = function singleton(callback) {
-                var url = jsonUrlConstant.WORKS;
-                return apiService.get(url, callback);
+        .service('workApiService', function WorkApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
+            var s = this,
+                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
 
+            /**
+             * List resources.
+             * @param {object} params - Query data.
+             * @param {function} callback - Callback when done.
+             * @returns {$http} - Http module.
+             */
+            s.list = function list(params, callback) {
+                var url = apiUrlConstant.WORKS_GET;
+                return apiService.get(url, params, callback);
             }
-        });
 
+        });
 })(angular);
 /**
  * Browser detect service.

@@ -14,7 +14,9 @@
             $rootScope.page = 'work';
         })
         .factory('workListDatasource', function (WorkListDatasource) {
-            return new WorkListDatasource({});
+            return new WorkListDatasource({
+                limit: 100
+            });
         })
         .directive('okWorkLink', function (partialUrlConstant, linkUrlConstant) {
             return {

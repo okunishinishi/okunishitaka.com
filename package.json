@@ -31,7 +31,7 @@
         "phantomjs": "^1.9.7-15",
         "apeman-web": "0.0.15",
         "apeman-storage": "0.0.13",
-        "apeman-util": "0.0.39",
+        "apeman-util": "0.0.40",
         "apeman-front": "0.0.19"
     },
     "devDependencies": {

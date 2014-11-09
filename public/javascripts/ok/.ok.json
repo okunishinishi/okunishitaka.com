@@ -51,16 +51,22 @@
     "utils": [
     ]
   },
-  "entities": [
-    "blog",
-    "setting",
-    "profile",
-    "work"
-  ],
-  "endpoints": [
-    "blog",
-    "setting",
-    "profile",
-    "work"
-  ]
+  "endpoints": {
+    "blog": {
+      "list": "apiUrlConstant.BLOGS_GET",
+      "one": "apiUrlConstant.BLOGS_GET_WITH_ID",
+      "create": "apiUrlConstant.BLOGS_POST",
+      "update": "apiUrlConstant.BLOGS_PUT_WITH_ID",
+      "destroy": "apiUrlConstant.BLOGS_DELETE_WITH_ID"
+    },
+    "setting": {
+    },
+    "profile": {
+      "singleton": "apiUrlConstant.PROFILES_GET",
+      "save": ""
+    },
+    "work": {
+      "list": "apiUrlConstant.WORKS_GET"
+    }
+  }
 }

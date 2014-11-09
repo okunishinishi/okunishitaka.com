@@ -269,7 +269,9 @@
 		    "BLOGS_PUT_WITH_ID": "/blogs/:_id",
 		    "BLOGS_DELETE_WITH_ID": "/blogs/:_id",
 		    "SETTINGS_GET": "/settings",
-		    "SETTINGS_PUT": "/settings"
+		    "SETTINGS_PUT": "/settings",
+		    "PROFILES_GET": "/profiles",
+		    "WORKS_GET": "/works"
 		});
 
 })(angular);
@@ -491,13 +493,16 @@
              * @param {object} properties - Data source properties.
              * @returns {function} Defined constructor
              */
-            Datasource.define = function (properties) {
+            Datasource.define = function (properties, Prototype) {
+                if (!Prototype) {
+                    Prototype = Datasource;
+                }
                 function Defined() {
                     var s = this;
                     s.init.apply(s, arguments);
                 }
 
-                Defined.prototype = new Datasource(properties);
+                Defined.prototype = new Prototype(properties);
 
                 return Defined;
             };
@@ -560,14 +565,7 @@
              * @returns {function} Defined constructor
              */
             ListDatasource.define = function (properties) {
-                function Defined() {
-                    var s = this;
-                    s.init.apply(s, arguments);
-                }
-
-                Defined.prototype = new ListDatasource(properties);
-
-                return Defined;
+                return Datasource.define(properties, ListDatasource);
             };
 
             ListDatasource.prototype = ap.copy(
@@ -662,60 +660,6 @@
         });
 })(angular, apeman);
 /**
- * List data source for profile.
- * @requires angular
- * @requires apeman
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('ProfileListDatasource', function (ListDatasource, ProfileEntity, profileApiService) {
-            return ListDatasource.define(
-                /** @lends ProfileListDatasource.prototype */
-                {
-                    _listRequest: function (query, callback) {
-                        query._sort = '_at';
-                        query._reverse = 'true';
-                        profileApiService.list(query, callback);
-                    },
-                    _parseData: function (data) {
-                        return data.map(ProfileEntity.new);
-                    }
-                }
-            );
-        });
-
-})(angular, apeman);
-/**
- * List data source for setting.
- * @requires angular
- * @requires apeman
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('SettingListDatasource', function (ListDatasource, SettingEntity, settingApiService) {
-            return ListDatasource.define(
-                /** @lends SettingListDatasource.prototype */
-                {
-                    _listRequest: function (query, callback) {
-                        query._sort = '_at';
-                        query._reverse = 'true';
-                        settingApiService.list(query, callback);
-                    },
-                    _parseData: function (data) {
-                        return data.map(SettingEntity.new);
-                    }
-                }
-            );
-        });
-
-})(angular, apeman);
-/**
  * List data source for work.
  * @requires angular
  * @requires apeman
@@ -756,19 +700,19 @@
             return OneDatasource.define(
                 /** @lends BlogOneDatasource.prototype */
                 {
-                    _getRequest: function (id, callback) {
+                    _oneRequest: function (id, callback) {
                         blogApiService.one(id, callback);
                     },
-                    _postRequest: function (data, callback) {
+                    _createRequest: function (data, callback) {
                         blogApiService.create(data, callback);
                     },
-                    _putRequest: function (id, data, callback) {
+                    _updateRequest: function (id, data, callback) {
                         blogApiService.update(id, data, callback);
                     },
-                    _deleteRequest: function (id, callback) {
-                        blogApiService.delete(id, callback);
+                    _destroyRequest: function (id, callback) {
+                        blogApiService.destroy(id, callback);
                     },
-                    _parse: function (data) {
+                    _parseData: function (data) {
                         return data.map(BlogEntity.new);
                     }
                 }
@@ -804,15 +748,7 @@
              * @returns {function} Defined constructor
              */
             OneDatasource.define = function (properties) {
-                function Defined() {
-                    var s = this;
-                    s.init.apply(s, arguments);
-                    s.clear;
-                }
-
-                Defined.prototype = new OneDatasource(properties);
-
-                return Defined;
+                return Datasource.define(properties, OneDatasource);
             };
 
             OneDatasource.prototype = ap.copy(
@@ -928,7 +864,7 @@
         });
 })(angular, apeman);
 /**
- * One data source for profile.
+ * Singleton data source for profile.
  * @requires angular
  * @requires apeman
  */
@@ -937,31 +873,22 @@
 
     ng
         .module('ok.datasources')
-        .factory('ProfileOneDatasource', function (OneDatasource, ProfileEntity, profileApiService) {
-            return OneDatasource.define(
-                /** @lends ProfileOneDatasource.prototype */
+        .factory('ProfileSingletonDatasource', function (SingletonDatasource, ProfileEntity, profileApiService) {
+            return SingletonDatasource.define(
+                /** @lends ProfileSingletonDatasource.prototype */
                 {
-                    _getRequest: function (id, callback) {
-                        profileApiService.one(id, callback);
+                    _singletonRequest: function (callback) {
+                        profileApiService.singleton(callback);
                     },
-                    _postRequest: function (data, callback) {
-                        profileApiService.create(data, callback);
-                    },
-                    _putRequest: function (id, data, callback) {
-                        profileApiService.update(id, data, callback);
-                    },
-                    _deleteRequest: function (id, callback) {
-                        profileApiService.delete(id, callback);
-                    },
-                    _parse: function (data) {
-                        return data.map(ProfileEntity.new);
+                    _parseData: function (data) {
+                        return ProfileEntity.new(data);
                     }
                 }
             );
         });
-});
+})(angular, apeman);
 /**
- * One data source for setting.
+ * Data source for one.
  * @requires angular
  * @requires apeman
  */
@@ -970,62 +897,91 @@
 
     ng
         .module('ok.datasources')
-        .factory('SettingOneDatasource', function (OneDatasource, SettingEntity, settingApiService) {
-            return OneDatasource.define(
-                /** @lends SettingOneDatasource.prototype */
-                {
-                    _getRequest: function (id, callback) {
-                        settingApiService.one(id, callback);
-                    },
-                    _postRequest: function (data, callback) {
-                        settingApiService.create(data, callback);
-                    },
-                    _putRequest: function (id, data, callback) {
-                        settingApiService.update(id, data, callback);
-                    },
-                    _deleteRequest: function (id, callback) {
-                        settingApiService.delete(id, callback);
-                    },
-                    _parse: function (data) {
-                        return data.map(SettingEntity.new);
-                    }
-                }
-            );
-        });
-});
-/**
- * One data source for work.
- * @requires angular
- * @requires apeman
- */
-(function (ng, ap) {
-    "use strict";
+        .factory('SingletonDatasource', function (Datasource) {
 
-    ng
-        .module('ok.datasources')
-        .factory('WorkOneDatasource', function (OneDatasource, WorkEntity, workApiService) {
-            return OneDatasource.define(
-                /** @lends WorkOneDatasource.prototype */
+            /**
+             * @agutments Datasource
+             * @constructor SingletonDatasource
+             */
+            function SingletonDatasource(properties) {
+                var s = this;
+                s.init.apply(s, arguments);
+            }
+
+
+            /**
+             * Define an one data source.
+             * @param {object} properties - Data source properties.
+             * @returns {function} Defined constructor
+             */
+            SingletonDatasource.define = function (properties) {
+                return Datasource.define(properties, SingletonDatasource);
+            };
+
+            SingletonDatasource.prototype = ap.copy(
+                /** @lends SingletonDatasource.prototype */
                 {
-                    _getRequest: function (id, callback) {
-                        workApiService.one(id, callback);
+                    /**
+                     * Data identifier
+                     */
+                    data: null,
+                    loading: false,
+                    /**
+                     * Send a request to get the resource.
+                     * @param {string} id - Data identifier.
+                     * @param {function} callback - Callback when done.
+                     */
+                    _singletonRequest: function (id, callback) {
+                        ap.throwNotImplmentedError();
                     },
-                    _postRequest: function (data, callback) {
-                        workApiService.create(data, callback);
+                    /**
+                     * Send a request to save resource.
+                     * @param {object} data - Resource data to create.
+                     * @param {function} callback - Callback when done.
+                     * @private
+                     */
+                    _saveRequest: function (data, callback) {
+                        ap.throwNotImplmentedError();
                     },
-                    _putRequest: function (id, data, callback) {
-                        workApiService.update(id, data, callback);
+                    /**
+                     * Parse data.
+                     * @param {object} data - Fethed data.
+                     * @returns {*} - Parsed data.
+                     */
+                    _parseData: function (data) {
+                        return data;
                     },
-                    _deleteRequest: function (id, callback) {
-                        workApiService.delete(id, callback);
+                    /**
+                     * Load data.
+                     * @param {function} callback
+                     */
+                    load: function (callback) {
+                        var s = this;
+                        s.loading = true;
+                        s._singletonRequest(function (err, data) {
+                            s.loading = false;
+                            if (!err) {
+                                s.data = s._parseData(data);
+                            }
+                            callback(err);
+                        });
                     },
-                    _parse: function (data) {
-                        return data.map(WorkEntity.new);
+                    /**
+                     * Save data.
+                     * @param callback
+                     */
+                    save: function (callback) {
+                        var s = this,
+                            data = s.data || {};
+                        s._saveRequest(data, callback);
                     }
-                }
+                },
+                new Datasource({})
             );
+
+            return SingletonDatasource;
         });
-});
+})(angular, apeman);
 
 /**
  * ok directives module.
@@ -1579,6 +1535,7 @@
 
                 }
             );
+
             return WorkEntity;
 
         });
@@ -1769,14 +1726,11 @@
                 get Datasource() { return $injector.get('Datasource'); },
                 get BlogListDatasource() { return $injector.get('BlogListDatasource'); },
                 get ListDatasource() { return $injector.get('ListDatasource'); },
-                get ProfileListDatasource() { return $injector.get('ProfileListDatasource'); },
-                get SettingListDatasource() { return $injector.get('SettingListDatasource'); },
                 get WorkListDatasource() { return $injector.get('WorkListDatasource'); },
                 get BlogOneDatasource() { return $injector.get('BlogOneDatasource'); },
                 get OneDatasource() { return $injector.get('OneDatasource'); },
-                get ProfileOneDatasource() { return $injector.get('ProfileOneDatasource'); },
-                get SettingOneDatasource() { return $injector.get('SettingOneDatasource'); },
-                get WorkOneDatasource() { return $injector.get('WorkOneDatasource'); }
+                get ProfileSingletonDatasource() { return $injector.get('ProfileSingletonDatasource'); },
+                get SingletonDatasource() { return $injector.get('SingletonDatasource'); }
             };
         });
 })(angular);
@@ -2188,6 +2142,32 @@
         .factory('blogListDatasource', function (BlogListDatasource) {
             return new BlogListDatasource({});
         })
+        .factory('blogEditor', function () {
+            function BlogEditor() {
+                var s = this;
+            }
+
+            BlogEditor.prototype = {
+                blog: null,
+                visible: false,
+                show: function () {
+                    var s = this;
+                    s.visible = true;
+                },
+                hide: function () {
+                    var s = this;
+                    s.visible = false;
+                },
+                edit: function (id) {
+
+                },
+                save: function (callback) {
+
+                }
+            }
+
+            return new BlogEditor();
+        })
         .controller('AdminBlogCtrl', function ($scope, blogOneDatasource) {
 
         })
@@ -2299,40 +2279,25 @@
             return new BlogListDatasource({});
         })
         .controller('BlogCtrl', function ($scope, blogListDatasource) {
+            ap.copy({
+                more: function () {
+                    blogListDatasource.load();
+                }
+            }, $scope);
+
+            Object.defineProperties($scope, {
+                blogs: {
+                    get: function () {
+                        return blogListDatasource.data;
+                    }
+                }
+            });
+
             blogListDatasource.load();
         })
         .controller('BlogListCtrl', function ($scope, blogListDatasource) {
-            ap.copy({
-                /**
-                 * Load more data.
-                 */
-                more: function () {
-                    blogListDatasource.load();
-                }
-            }, $scope);
-
-            Object.defineProperties($scope, {
-                blogs: {
-                    get: function () {
-                        return blogListDatasource.data;
-                    }
-                }
-            });
         })
         .controller('BlogAsideCtrl', function ($scope, blogListDatasource) {
-            ap.copy({
-                more: function () {
-                    blogListDatasource.load();
-                }
-            }, $scope);
-
-            Object.defineProperties($scope, {
-                blogs: {
-                    get: function () {
-                        return blogListDatasource.data;
-                    }
-                }
-            });
         })
     ;
 
@@ -2379,28 +2344,11 @@
             }
         })
         .controller('IndexProfileCtrl', function ($scope) {
-
-            var images = $scope.images;
-            $scope.thumbnails = [
-                images.WORKS_CHESS_THUMBNAIL,
-                images.WORKS_CSS_GALLERY_THUMBNAIL,
-                images.WORKS_DOC_GALLERY_THUMBNAIL,
-                images.WORKS_MOCK_MONKEY_THUMBNAIL,
-                images.WORKS_PLANING_PORKER_THUMBNAIL,
-                images.WORKS_SHOT_THUMBNAIL,
-                images.WORKS_OTHERO_THUMBNAIL,
-                images.WORKS_TYPE_THUMBNAIL
-            ]
         })
         .controller('IndexBlogCtrl', function ($scope) {
-
         })
-        .controller('IndexWorkCtrl', function ($scope, workApiService, WorkEntity) {
-            workApiService.singleton(function (err, data) {
-                $scope.works = data.map(WorkEntity.new);
-            });
+        .controller('IndexWorkCtrl', function ($scope) {
         })
-
     ;
 
 })(angular, apeman, jQuery);
@@ -2523,10 +2471,17 @@
                 templateUrl: partialUrlConstant.PROFILE_TABLE
             }
         })
-        .controller('ProfileCtrl', function ($scope, profileApiService) {
-
-            profileApiService.singleton(function (err, profile) {
-                $scope.profile = profile;
+        .factory('profileSingletonDatasource', function (ProfileSingletonDatasource) {
+            return new ProfileSingletonDatasource({});
+        })
+        .controller('ProfileCtrl', function ($scope, profileSingletonDatasource) {
+            profileSingletonDatasource.load();
+            Object.defineProperties($scope, {
+                profile: {
+                    get: function () {
+                        return profileSingletonDatasource.data;
+                    }
+                }
             });
         });
 
@@ -2547,7 +2502,9 @@
             $rootScope.page = 'work';
         })
         .factory('workListDatasource', function (WorkListDatasource) {
-            return new WorkListDatasource({});
+            return new WorkListDatasource({
+                limit: 100
+            });
         })
         .directive('okWorkLink', function (partialUrlConstant, linkUrlConstant) {
             return {
@@ -2752,11 +2709,23 @@
  */
 (function (ng) {
     "use strict";
+
     ng
         .module('ok.services')
-        .service('blogApiService', function BlogApiService(apiService, apiUrlConstant, urlFormatLogic) {
+        .service('blogApiService', function BlogApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
             var s = this,
                 formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
+
+            /**
+             * List resources.
+             * @param {object} params - Query data.
+             * @param {function} callback - Callback when done.
+             * @returns {$http} - Http module.
+             */
+            s.list = function list(params, callback) {
+                var url = apiUrlConstant.BLOGS_GET;
+                return apiService.get(url, params, callback);
+            }
 
             /**
              * File a resource.
@@ -2788,30 +2757,19 @@
              * @returns {$http} - Http module.
              */
             s.update = function update(id, data, callback) {
-                var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
-                return apiService.put(url, data, callback);
+                    var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
+                    return apiService.put(url, data, callback);
             }
 
             /**
-             * Delete a resouce.
+             * Destroy a resouce.
              * @param {string} id - Resource id.
              * @param {function} callback - Callback when done.
              * @returns {$http} - Http module.
              */
-            s.destroy = function del(id, callback) {
-                var url = formatUrl(apiUrlConstant.BLOGS_PUT_WITH_ID, {_id: id});
+            s.destroy = function destroy(id, callback) {
+                var url = formatUrl(apiUrlConstant.BLOGS_DELETE_WITH_ID, {_id: id});
                 return apiService.delete(url, callback);
-            }
-
-            /**
-             * List resources.
-             * @param {object} params - Query data.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
-             */
-            s.list = function list(params, callback) {
-                var url = apiUrlConstant.BLOGS_GET;
-                return apiService.get(url, params, callback);
             }
 
         });
@@ -2825,20 +2783,20 @@
 
     ng
         .module('ok.services')
-        .service('profileApiService', function ProfileApiService($http, apiService, jsonUrlConstant) {
-            var s = this;
+        .service('profileApiService', function ProfileApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
+            var s = this,
+                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
 
             /**
-             * Get the singleton profile data.
+             * Get the singleton data.
              * @param {function} callback - Callback when done.
              */
             s.singleton = function singleton(callback) {
-                var url = jsonUrlConstant.PROFILE;
+                var url = apiUrlConstant.PROFILES_GET;
                 return apiService.get(url, callback);
-
             }
-        });
 
+        });
 })(angular);
 /**
  * Setting api service.
@@ -2849,10 +2807,11 @@
 
     ng
         .module('ok.services')
-        .service('settingApiService', function SettingApiService ($http) {
-            var s = this;
-        });
+        .service('settingApiService', function SettingApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
+            var s = this,
+                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
 
+        });
 })(angular);
 /**
  * Work api service.
@@ -2863,15 +2822,22 @@
 
     ng
         .module('ok.services')
-        .service('workApiService', function WorkApiService($http, apiService, jsonUrlConstant) {
-            var s = this;
-            s.singleton = function singleton(callback) {
-                var url = jsonUrlConstant.WORKS;
-                return apiService.get(url, callback);
+        .service('workApiService', function WorkApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
+            var s = this,
+                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
 
+            /**
+             * List resources.
+             * @param {object} params - Query data.
+             * @param {function} callback - Callback when done.
+             * @returns {$http} - Http module.
+             */
+            s.list = function list(params, callback) {
+                var url = apiUrlConstant.WORKS_GET;
+                return apiService.get(url, params, callback);
             }
-        });
 
+        });
 })(angular);
 /**
  * Browser detect service.
@@ -3133,7 +3099,7 @@
         .module('ok.templates')
         .value('blogBlogAsideContentHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-aside-content.html",
-		    "content": "<div ng:controller=\"BlogAsideCtrl\" >\n    <ul>\n        <li ng:repeat=\"b in blogs\">\n            <a href=\"javascript:void(0)\" ng:click=\"scrollTo('blog-' + b._id)\">{{b.title}}</a>\n        </li>\n    </ul>\n    <a id=\"aside-blog-more-button\" href=\"javascript:void(0)\" ng:click=\"more()\">{{l.buttons.MORE}}</a>\n</div>"
+		    "content": "<div ng:controller=\"BlogAsideCtrl\">\n    <ul>\n        <li ng:repeat=\"b in blogs\">\n            <a href=\"javascript:void(0)\" ng:click=\"scrollTo('blog-' + b._id)\">{{b.title}}</a>\n        </li>\n    </ul>\n    <a id=\"aside-blog-more-button\"\n       href=\"javascript:void(0)\"\n       ng:click=\"more()\"\n            >{{l.buttons.MORE}}</a>\n</div>"
 		});
 
 })(angular);

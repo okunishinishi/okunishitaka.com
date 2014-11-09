@@ -269,7 +269,9 @@
 		    "BLOGS_PUT_WITH_ID": "/blogs/:_id",
 		    "BLOGS_DELETE_WITH_ID": "/blogs/:_id",
 		    "SETTINGS_GET": "/settings",
-		    "SETTINGS_PUT": "/settings"
+		    "SETTINGS_PUT": "/settings",
+		    "PROFILES_GET": "/profiles",
+		    "WORKS_GET": "/works"
 		});
 
 })(angular);

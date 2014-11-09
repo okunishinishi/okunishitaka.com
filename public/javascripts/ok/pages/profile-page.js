@@ -41,10 +41,17 @@
                 templateUrl: partialUrlConstant.PROFILE_TABLE
             }
         })
-        .controller('ProfileCtrl', function ($scope, profileApiService) {
-
-            profileApiService.singleton(function (err, profile) {
-                $scope.profile = profile;
+        .factory('profileSingletonDatasource', function (ProfileSingletonDatasource) {
+            return new ProfileSingletonDatasource({});
+        })
+        .controller('ProfileCtrl', function ($scope, profileSingletonDatasource) {
+            profileSingletonDatasource.load();
+            Object.defineProperties($scope, {
+                profile: {
+                    get: function () {
+                        return profileSingletonDatasource.data;
+                    }
+                }
             });
         });
 

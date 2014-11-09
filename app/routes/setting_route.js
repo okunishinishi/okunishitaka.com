@@ -19,7 +19,7 @@ exports._singletonId = '00000';
  * @param res
  * @param next
  */
-exports.one = function (req, res, next) {
+exports.singleton = function (req, res, next) {
     var handler = new rest.SingletonRestHandler({
         storage: settingStorage,
         id: exports._singletonId

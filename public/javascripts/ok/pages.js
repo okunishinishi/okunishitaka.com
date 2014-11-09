@@ -32,6 +32,32 @@
         .factory('blogListDatasource', function (BlogListDatasource) {
             return new BlogListDatasource({});
         })
+        .factory('blogEditor', function () {
+            function BlogEditor() {
+                var s = this;
+            }
+
+            BlogEditor.prototype = {
+                blog: null,
+                visible: false,
+                show: function () {
+                    var s = this;
+                    s.visible = true;
+                },
+                hide: function () {
+                    var s = this;
+                    s.visible = false;
+                },
+                edit: function (id) {
+
+                },
+                save: function (callback) {
+
+                }
+            }
+
+            return new BlogEditor();
+        })
         .controller('AdminBlogCtrl', function ($scope, blogOneDatasource) {
 
         })
@@ -143,40 +169,25 @@
             return new BlogListDatasource({});
         })
         .controller('BlogCtrl', function ($scope, blogListDatasource) {
+            ap.copy({
+                more: function () {
+                    blogListDatasource.load();
+                }
+            }, $scope);
+
+            Object.defineProperties($scope, {
+                blogs: {
+                    get: function () {
+                        return blogListDatasource.data;
+                    }
+                }
+            });
+
             blogListDatasource.load();
         })
         .controller('BlogListCtrl', function ($scope, blogListDatasource) {
-            ap.copy({
-                /**
-                 * Load more data.
-                 */
-                more: function () {
-                    blogListDatasource.load();
-                }
-            }, $scope);
-
-            Object.defineProperties($scope, {
-                blogs: {
-                    get: function () {
-                        return blogListDatasource.data;
-                    }
-                }
-            });
         })
         .controller('BlogAsideCtrl', function ($scope, blogListDatasource) {
-            ap.copy({
-                more: function () {
-                    blogListDatasource.load();
-                }
-            }, $scope);
-
-            Object.defineProperties($scope, {
-                blogs: {
-                    get: function () {
-                        return blogListDatasource.data;
-                    }
-                }
-            });
         })
     ;
 
@@ -223,28 +234,11 @@
             }
         })
         .controller('IndexProfileCtrl', function ($scope) {
-
-            var images = $scope.images;
-            $scope.thumbnails = [
-                images.WORKS_CHESS_THUMBNAIL,
-                images.WORKS_CSS_GALLERY_THUMBNAIL,
-                images.WORKS_DOC_GALLERY_THUMBNAIL,
-                images.WORKS_MOCK_MONKEY_THUMBNAIL,
-                images.WORKS_PLANING_PORKER_THUMBNAIL,
-                images.WORKS_SHOT_THUMBNAIL,
-                images.WORKS_OTHERO_THUMBNAIL,
-                images.WORKS_TYPE_THUMBNAIL
-            ]
         })
         .controller('IndexBlogCtrl', function ($scope) {
-
         })
-        .controller('IndexWorkCtrl', function ($scope, workApiService, WorkEntity) {
-            workApiService.singleton(function (err, data) {
-                $scope.works = data.map(WorkEntity.new);
-            });
+        .controller('IndexWorkCtrl', function ($scope) {
         })
-
     ;
 
 })(angular, apeman, jQuery);
@@ -367,10 +361,17 @@
                 templateUrl: partialUrlConstant.PROFILE_TABLE
             }
         })
-        .controller('ProfileCtrl', function ($scope, profileApiService) {
-
-            profileApiService.singleton(function (err, profile) {
-                $scope.profile = profile;
+        .factory('profileSingletonDatasource', function (ProfileSingletonDatasource) {
+            return new ProfileSingletonDatasource({});
+        })
+        .controller('ProfileCtrl', function ($scope, profileSingletonDatasource) {
+            profileSingletonDatasource.load();
+            Object.defineProperties($scope, {
+                profile: {
+                    get: function () {
+                        return profileSingletonDatasource.data;
+                    }
+                }
             });
         });
 
@@ -391,7 +392,9 @@
             $rootScope.page = 'work';
         })
         .factory('workListDatasource', function (WorkListDatasource) {
-            return new WorkListDatasource({});
+            return new WorkListDatasource({
+                limit: 100
+            });
         })
         .directive('okWorkLink', function (partialUrlConstant, linkUrlConstant) {
             return {

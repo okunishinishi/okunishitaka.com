@@ -34,13 +34,16 @@
              * @param {object} properties - Data source properties.
              * @returns {function} Defined constructor
              */
-            Datasource.define = function (properties) {
+            Datasource.define = function (properties, Prototype) {
+                if (!Prototype) {
+                    Prototype = Datasource;
+                }
                 function Defined() {
                     var s = this;
                     s.init.apply(s, arguments);
                 }
 
-                Defined.prototype = new Datasource(properties);
+                Defined.prototype = new Prototype(properties);
 
                 return Defined;
             };

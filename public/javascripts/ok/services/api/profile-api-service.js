@@ -7,18 +7,18 @@
 
     ng
         .module('ok.services')
-        .service('profileApiService', function ProfileApiService($http, apiService, jsonUrlConstant) {
-            var s = this;
+        .service('profileApiService', function ProfileApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
+            var s = this,
+                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
 
             /**
-             * Get the singleton profile data.
+             * Get the singleton data.
              * @param {function} callback - Callback when done.
              */
             s.singleton = function singleton(callback) {
-                var url = jsonUrlConstant.PROFILE;
+                var url = apiUrlConstant.PROFILES_GET;
                 return apiService.get(url, callback);
-
             }
-        });
 
+        });
 })(angular);

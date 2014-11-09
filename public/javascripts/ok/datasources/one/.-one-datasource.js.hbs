@@ -12,22 +12,22 @@
             return OneDatasource.define(
                 /** @lends {{Name}}OneDatasource.prototype */
                 {
-                    _oneRequest: function (id, callback) {
+{{#if one}}                    _oneRequest: function (id, callback) {
                         {{name}}ApiService.one(id, callback);
                     },
-                    _createRequest: function (data, callback) {
+{{/if}}{{#if create}}                    _createRequest: function (data, callback) {
                         {{name}}ApiService.create(data, callback);
                     },
-                    _updateRequest: function (id, data, callback) {
+{{/if}}{{#if update}}                    _updateRequest: function (id, data, callback) {
                         {{name}}ApiService.update(id, data, callback);
                     },
-                    _destroyRequest: function (id, callback) {
+{{/if}}{{#if destroy}}                    _destroyRequest: function (id, callback) {
                         {{name}}ApiService.destroy(id, callback);
                     },
-                    _parseData: function (data) {
+{{/if}}                    _parseData: function (data) {
                         return data.map({{Name}}Entity.new);
                     }
                 }
             );
         });
-});
+})(angular, apeman);

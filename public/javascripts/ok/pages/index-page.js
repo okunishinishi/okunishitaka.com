@@ -40,28 +40,11 @@
             }
         })
         .controller('IndexProfileCtrl', function ($scope) {
-
-            var images = $scope.images;
-            $scope.thumbnails = [
-                images.WORKS_CHESS_THUMBNAIL,
-                images.WORKS_CSS_GALLERY_THUMBNAIL,
-                images.WORKS_DOC_GALLERY_THUMBNAIL,
-                images.WORKS_MOCK_MONKEY_THUMBNAIL,
-                images.WORKS_PLANING_PORKER_THUMBNAIL,
-                images.WORKS_SHOT_THUMBNAIL,
-                images.WORKS_OTHERO_THUMBNAIL,
-                images.WORKS_TYPE_THUMBNAIL
-            ]
         })
         .controller('IndexBlogCtrl', function ($scope) {
-
         })
-        .controller('IndexWorkCtrl', function ($scope, workApiService, WorkEntity) {
-            workApiService.singleton(function (err, data) {
-                $scope.works = data.map(WorkEntity.new);
-            });
+        .controller('IndexWorkCtrl', function ($scope) {
         })
-
     ;
 
 })(angular, apeman, jQuery);

@@ -27,15 +27,7 @@
              * @returns {function} Defined constructor
              */
             OneDatasource.define = function (properties) {
-                function Defined() {
-                    var s = this;
-                    s.init.apply(s, arguments);
-                    s.clear;
-                }
-
-                Defined.prototype = new OneDatasource(properties);
-
-                return Defined;
+                return Datasource.define(properties, OneDatasource);
             };
 
             OneDatasource.prototype = ap.copy(

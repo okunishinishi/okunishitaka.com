@@ -40,7 +40,13 @@ module.exports = Object.seal(
          * @property {function} PUT - Update settings.
          */
         '/settings': {
-            GET: r.settingRoute.one,
+            GET: r.settingRoute.singleton,
             PUT: r.settingRoute.save
+        },
+        '/profiles':{
+            GET: r.profileRoute.singleton
+        },
+        '/works': {
+            GET: r.workRoute.list
         }
     });
