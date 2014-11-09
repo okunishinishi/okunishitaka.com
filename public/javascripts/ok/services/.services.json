@@ -1,9 +1,10 @@
 [
-    "locationChangeService",
-    "locationResolveService",
-    "localeLoadService",
-    "langDetectService",
-    "templateCacheService",
-    "markdownRenderService",
-    "browserDetectService"
+  "locationChangeService",
+  "locationResolveService",
+  "localeLoadService",
+  "langDetectService",
+  "templateCacheService",
+  "markdownRenderService",
+  "browserDetectService",
+  "confirmMessageService"
 ]

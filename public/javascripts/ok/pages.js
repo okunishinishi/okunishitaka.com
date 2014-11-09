@@ -73,11 +73,23 @@
                 }
             });
         })
-        .controller('AdminBlogListCtrl', function ($scope, blogOneDatasource, blogListDatasource, textSummarizeLogic) {
+        .controller('AdminBlogListCtrl', function ($scope, blogOneDatasource, blogListDatasource, textSummarizeLogic, confirmMessageService) {
+            var l = $scope.locale;
             ap.copy({
                 edit: function (blog) {
                     blogOneDatasource.id = blog._id;
                     blogOneDatasource.load();
+                },
+                destroy: function (blog) {
+                    //var sure = confirmMessageService.confirm(l.pages.admin.ASK_SURE);
+                    //if (!sure) {
+                    //    return;
+                    //}
+
+                    blogOneDatasource.id = blog._id;
+                    blogOneDatasource.load(function () {
+                        blogOneDatasource.destroy();
+                    })
                 },
                 more: function () {
                     blogListDatasource.load();

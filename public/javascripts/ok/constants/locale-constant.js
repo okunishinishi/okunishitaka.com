@@ -94,7 +94,8 @@
 		                "DESCRIPTION": "Personal works."
 		            },
 		            "admin": {
-		                "LOGO": "admin.okunishitaka.com"
+		                "LOGO": "admin.okunishitaka.com",
+		                "ASK_SURE": "Are you sure?"
 		            }
 		        }
 		    },
@@ -184,7 +185,8 @@
 		                "DESCRIPTION": "Personal works."
 		            },
 		            "admin": {
-		                "LOGO": "admin.okunishitaka.com"
+		                "LOGO": "admin.okunishitaka.com",
+		                "ASK_SURE": "Are you sure?"
 		            }
 		        }
 		    }

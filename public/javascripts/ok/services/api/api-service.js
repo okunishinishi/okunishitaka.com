@@ -59,10 +59,10 @@
                      */
                     _paramsRequest: function (url, method, params, callback) {
                         var s = this;
-                        var noParams = (!params) || (typeof(params) == 'function');
+                        var noParams = (params === undefined) || (typeof(params) == 'function');
                         if (noParams) {
                             callback = callback || params;
-                            return s._paramsRequest(url, method, {}, callback);
+                            return s._paramsRequest(url, method, null, callback);
                         }
                         return s._request({
                             url: url,
@@ -80,10 +80,10 @@
                      */
                     _dataRequest: function (url, method, data, callback) {
                         var s = this;
-                        var noData = (!data) || (typeof(data) == 'function');
+                        var noData = (data === undefined) || (typeof(data) == 'function');
                         if (noData) {
                             callback = callback || data;
-                            return s._dataRequest(url, method, {}, callback);
+                            return s._dataRequest(url, method, null, callback);
                         }
                         return s._request({
                             url: url,

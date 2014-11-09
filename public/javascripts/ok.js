@@ -160,7 +160,8 @@
 		                "DESCRIPTION": "Personal works."
 		            },
 		            "admin": {
-		                "LOGO": "admin.okunishitaka.com"
+		                "LOGO": "admin.okunishitaka.com",
+		                "ASK_SURE": "Are you sure?"
 		            }
 		        }
 		    },
@@ -250,7 +251,8 @@
 		                "DESCRIPTION": "Personal works."
 		            },
 		            "admin": {
-		                "LOGO": "admin.okunishitaka.com"
+		                "LOGO": "admin.okunishitaka.com",
+		                "ASK_SURE": "Are you sure?"
 		            }
 		        }
 		    }
@@ -1823,6 +1825,7 @@
                 get settingApiService() { return $injector.get('settingApiService'); },
                 get workApiService() { return $injector.get('workApiService'); },
                 get browserDetectService() { return $injector.get('browserDetectService'); },
+                get confirmMessageService() { return $injector.get('confirmMessageService'); },
                 get langDetectService() { return $injector.get('langDetectService'); },
                 get localeLoadService() { return $injector.get('localeLoadService'); },
                 get locationChangeService() { return $injector.get('locationChangeService'); },
@@ -2196,11 +2199,23 @@
                 }
             });
         })
-        .controller('AdminBlogListCtrl', function ($scope, blogOneDatasource, blogListDatasource, textSummarizeLogic) {
+        .controller('AdminBlogListCtrl', function ($scope, blogOneDatasource, blogListDatasource, textSummarizeLogic, confirmMessageService) {
+            var l = $scope.locale;
             ap.copy({
                 edit: function (blog) {
                     blogOneDatasource.id = blog._id;
                     blogOneDatasource.load();
+                },
+                destroy: function (blog) {
+                    //var sure = confirmMessageService.confirm(l.pages.admin.ASK_SURE);
+                    //if (!sure) {
+                    //    return;
+                    //}
+
+                    blogOneDatasource.id = blog._id;
+                    blogOneDatasource.load(function () {
+                        blogOneDatasource.destroy();
+                    })
                 },
                 more: function () {
                     blogListDatasource.load();
@@ -2607,10 +2622,10 @@
                      */
                     _paramsRequest: function (url, method, params, callback) {
                         var s = this;
-                        var noParams = (!params) || (typeof(params) == 'function');
+                        var noParams = (params === undefined) || (typeof(params) == 'function');
                         if (noParams) {
                             callback = callback || params;
-                            return s._paramsRequest(url, method, {}, callback);
+                            return s._paramsRequest(url, method, null, callback);
                         }
                         return s._request({
                             url: url,
@@ -2628,10 +2643,10 @@
                      */
                     _dataRequest: function (url, method, data, callback) {
                         var s = this;
-                        var noData = (!data) || (typeof(data) == 'function');
+                        var noData = (data === undefined) || (typeof(data) == 'function');
                         if (noData) {
                             callback = callback || data;
-                            return s._dataRequest(url, method, {}, callback);
+                            return s._dataRequest(url, method, null, callback);
                         }
                         return s._request({
                             url: url,
@@ -2835,6 +2850,24 @@
         .service('browserDetectService', function BrowserDetectService() {
             var s = this;
 
+        });
+
+})(angular, apeman);
+/**
+ * Confirm message service.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('confirmMessageService', function ConfirmMessageService($window) {
+            var s = this;
+            s.confirm = function (msg) {
+                return $window.confirm(msg);
+            }
         });
 
 })(angular, apeman);

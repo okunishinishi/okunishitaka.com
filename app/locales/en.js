@@ -109,7 +109,8 @@ l.pages = {
         DESCRIPTION: 'Personal works.'
     },
     admin: {
-        LOGO: ["admin", l.meta.NAME].join('.')
+        LOGO: ["admin", l.meta.NAME].join('.'),
+        ASK_SURE: 'Are you sure?'
     }
 }
 
