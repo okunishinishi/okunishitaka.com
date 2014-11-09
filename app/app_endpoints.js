@@ -43,10 +43,19 @@ module.exports = Object.seal(
             GET: r.settingRoute.singleton,
             PUT: r.settingRoute.save
         },
+        /**
+         * Routes for the profiles.
+         * @property {function} GET - Get profile.
+         * @property {function} PUT - Update profile.
+         */
         '/api/profiles': {
             GET: r.profileRoute.singleton,
             PUT: r.profileRoute.save
         },
+        /**
+         * Routes for works.
+         * @property {function} GET - List works.
+         */
         '/api/works': {
             GET: r.workRoute.list
         }

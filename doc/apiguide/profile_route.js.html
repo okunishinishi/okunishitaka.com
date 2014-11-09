@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>okunishitaka.com Source: app/routes/handlers/index.js</title>
+	<title>okunishitaka.com Source: app/routes/profile_route.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -154,26 +154,29 @@
 					
 
 
-		<h1 class="page-title">Source: app/routes/handlers/index.js</h1>
+		<h1 class="page-title">Source: app/routes/profile_route.js</h1>
     
 <section>
 	<article>
 		<pre
 			class="sunlight-highlight-javascript linenums">/**
- * @file App handlers
- * @module okunishitaka-dot-com/app/routes/handlers
- *
- * @property rest {object} - {@link module:okunishitaka-dot-com/app/routes/handlers/rest|rest module}.
- * @property SchemaHandler {object} - {@link module:okunishitaka-dot-com/app/routes/handlers.SchemaHandler|SchemaHandler module}.
- * @property StorageHandler {object} - {@link module:okunishitaka-dot-com/app/routes/handlers.StorageHandler|StorageHandler module}.
+ * Route for profiles.
+ * @module module:okunishitaka-dot-com/app/routes/profileRoute
  */
 
 "use strict";
 
-module.exports = {
-    get rest() { return require('./rest'); },
-    get SchemaHandler() { return require('./schema_handler'); },
-    get StorageHandler() { return require('./storage_handler'); }
+
+var h = require('./_helper');
+
+var profile = require('../../public/json/profile.json');
+
+exports.singleton = function (req, res, next) {
+    res.sendJson(profile);
+}
+
+exports.save = function (req, res, next) {
+    //TODO
 };</pre>
 	</article>
 </section>
