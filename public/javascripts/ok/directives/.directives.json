@@ -1,11 +1,12 @@
 [
-    "okReplace",
-    "okScrollToFixed",
-    "okScrollToStay",
-    "okLinked",
-    "okFacebookButton",
-    "okTwitterButton",
-    "okFadeIn",
-    "okTag",
-    "okGoogleAnalytics"
+  "okReplace",
+  "okScrollToFixed",
+  "okScrollToStay",
+  "okLinked",
+  "okFacebookButton",
+  "okTwitterButton",
+  "okFadeIn",
+  "okTag",
+  "okGoogleAnalytics",
+  "okToast"
 ]

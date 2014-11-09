@@ -443,6 +443,7 @@
 		    "PROFILE_LIST": "/html/partials/profile/profile-list.html",
 		    "PROFILE_TABLE": "/html/partials/profile/profile-table.html",
 		    "SOCIAL": "/html/partials/social.html",
+		    "TOAST": "/html/partials/toast.html",
 		    "TRACK": "/html/partials/track.html",
 		    "WORK_LINK": "/html/partials/work/work-link.html",
 		    "WORK_LIST": "/html/partials/work/work-list.html"
@@ -1340,6 +1341,29 @@
 })(angular, apeman);
 /**
  * @ngdoc directive
+ * @name okToast
+ * @description Ok toast.
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okToast', function defineOkToast() {
+            return {
+                scope: {
+                    'messages': '=okToastMessages'
+                },
+                link: function (scope) {
+                    console.log('scope', scope);
+                },
+                template: '<div ng-repeat="m in [].concat(messages)">{{m}}</div>'
+            }
+        });
+
+})(angular, apeman);
+/**
+ * @ngdoc directive
  * @name okTwitterButton
  * @description Ok twitter button.
  */
@@ -1868,6 +1892,7 @@
                 get profileProfileListHtmlTemplate() { return $injector.get('profileProfileListHtmlTemplate'); },
                 get profileProfileTableHtmlTemplate() { return $injector.get('profileProfileTableHtmlTemplate'); },
                 get socialHtmlTemplate() { return $injector.get('socialHtmlTemplate'); },
+                get toastHtmlTemplate() { return $injector.get('toastHtmlTemplate'); },
                 get trackHtmlTemplate() { return $injector.get('trackHtmlTemplate'); },
                 get workWorkLinkHtmlTemplate() { return $injector.get('workWorkLinkHtmlTemplate'); },
                 get workWorkListHtmlTemplate() { return $injector.get('workWorkListHtmlTemplate'); }
@@ -3371,6 +3396,21 @@
         .value('socialHtmlTemplate', {
 		    "name": "/html/partials/social.html",
 		    "content": "<div id=\"social-buttons-container\" class=\"container\">\n    <div ok:fade-in ok:duration=\"400\" ok:delay=\"800\">\n\n        <div class=\"button-container\" id=\"facebook-button-container\">\n            <div ok:facebook-button ok:href=\"links['OKUNISHITAKA_DOT_COM']\"></div>\n        </div>\n\n\n        <div class=\"button-container\" id=\"twitter-button-container\">\n            <div ok:twitter-button ok:href=\"links['OKUNISHITAKA_DOT_COM']\" ok:via=\"okunishinishi\"></div>\n        </div>\n\n        <br class=\"clear-both\"/>\n    </div>\n</div>"
+		});
+
+})(angular);
+/**
+ * Template for toastHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('toastHtmlTemplate', {
+		    "name": "/html/partials/toast.html",
+		    "content": "<div class=\"toast-container container\">\n    <div class=\"toast error-toast\" ok:toast ok:toast-messages=\"toasts.error\"></div>\n    <div class=\"toast warn-toast\" ok:toast ok:toast-messages=\"toasts.warn\"></div>\n    <div class=\"toast info-toast\" ok:toast ok:toast-messages=\"toasts.info\"></div>\n</div>"
 		});
 
 })(angular);
