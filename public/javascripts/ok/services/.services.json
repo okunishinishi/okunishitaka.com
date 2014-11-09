@@ -6,5 +6,6 @@
   "templateCacheService",
   "markdownRenderService",
   "browserDetectService",
-  "confirmMessageService"
+  "confirmMessageService",
+  "toastMessageService"
 ]

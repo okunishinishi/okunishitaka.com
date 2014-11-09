@@ -19,7 +19,7 @@
         .factory('blogListDatasource', function (BlogListDatasource) {
             return new BlogListDatasource({});
         })
-        .controller('AdminBlogCtrl', function ($scope, BlogEditor) {
+        .controller('AdminBlogCtrl', function ($scope, blogListDatasource) {
         })
         .controller('AdminBlogEditCtrl', function ($scope, blogOneDatasource, blogListDatasource, markdownRenderService) {
             ap.copy({
@@ -27,7 +27,7 @@
                     blogOneDatasource.data = blog;
                     blogOneDatasource.save(function (err, data) {
                         blogOneDatasource.clear();
-                        blogListDatasource.load();
+                        blogListDatasource.reload();
                     });
                 },
                 cancel: function () {
@@ -60,7 +60,9 @@
                 }
             });
         })
-        .controller('AdminBlogListCtrl', function ($scope, blogOneDatasource, blogListDatasource, textSummarizeLogic, confirmMessageService) {
+        .controller('AdminBlogListCtrl', function ($scope, blogOneDatasource, blogListDatasource, textSummarizeLogic,
+                                                   toastMessageService,
+                                                   confirmMessageService) {
             var l = $scope.locale;
             ap.copy({
                 edit: function (blog) {
@@ -75,8 +77,14 @@
 
                     blogOneDatasource.id = blog._id;
                     blogOneDatasource.load(function () {
-                        blogOneDatasource.destroy();
-                    })
+                        blogOneDatasource.destroy(function (err) {
+                            if (!err) {
+                                var msg = l.pages.admin.DESTROY_BLOG_DONE;
+                                toastMessageService.showInfoMessage(msg);
+                                blogListDatasource.reload();
+                            }
+                        });
+                    });
                 },
                 more: function () {
                     blogListDatasource.load();

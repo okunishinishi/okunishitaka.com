@@ -148,7 +148,8 @@
                 get locationChangeService() { return $injector.get('locationChangeService'); },
                 get locationResolveService() { return $injector.get('locationResolveService'); },
                 get markdownRenderService() { return $injector.get('markdownRenderService'); },
-                get templateCacheService() { return $injector.get('templateCacheService'); }
+                get templateCacheService() { return $injector.get('templateCacheService'); },
+                get toastMessageService() { return $injector.get('toastMessageService'); }
             };
         });
 })(angular);

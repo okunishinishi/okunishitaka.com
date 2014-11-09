@@ -161,7 +161,8 @@
 		            },
 		            "admin": {
 		                "LOGO": "admin.okunishitaka.com",
-		                "ASK_SURE": "Are you sure?"
+		                "ASK_SURE": "Are you sure?",
+		                "DESTROY_BLOG_DONE": "The entry has been deleted."
 		            }
 		        }
 		    },
@@ -252,7 +253,8 @@
 		            },
 		            "admin": {
 		                "LOGO": "admin.okunishitaka.com",
-		                "ASK_SURE": "Are you sure?"
+		                "ASK_SURE": "Are you sure?",
+		                "DESTROY_BLOG_DONE": "The entry has been deleted."
 		            }
 		        }
 		    }

@@ -161,7 +161,8 @@
 		            },
 		            "admin": {
 		                "LOGO": "admin.okunishitaka.com",
-		                "ASK_SURE": "Are you sure?"
+		                "ASK_SURE": "Are you sure?",
+		                "DESTROY_BLOG_DONE": "The entry has been deleted."
 		            }
 		        }
 		    },
@@ -252,7 +253,8 @@
 		            },
 		            "admin": {
 		                "LOGO": "admin.okunishitaka.com",
-		                "ASK_SURE": "Are you sure?"
+		                "ASK_SURE": "Are you sure?",
+		                "DESTROY_BLOG_DONE": "The entry has been deleted."
 		            }
 		        }
 		    }
@@ -1344,7 +1346,7 @@
  * @name okToast
  * @description Ok toast.
  */
-(function (ng, ap) {
+(function (ng, ap, $) {
     "use strict";
 
     ng
@@ -1354,14 +1356,20 @@
                 scope: {
                     'messages': '=okToastMessages'
                 },
-                link: function (scope) {
-                    console.log('scope', scope);
+                link: function (scope, elm) {
+                    var $elm = $(elm).addClass('ok-toast');
+                    scope.$watch('messages', function (messages) {
+                        var hasMessage = !!messages && (messages.length > 0);
+                        $elm.toggleClass('ok-toast-visible', hasMessage);
+                    }, true);
                 },
-                template: '<div ng-repeat="m in [].concat(messages)">{{m}}</div>'
+                template: [
+                    '<div ng-repeat="m in [].concat(messages)">{{m}}</div>',
+                ].join('')
             }
         });
 
-})(angular, apeman);
+})(angular, apeman, jQuery);
 /**
  * @ngdoc directive
  * @name okTwitterButton
@@ -1855,7 +1863,8 @@
                 get locationChangeService() { return $injector.get('locationChangeService'); },
                 get locationResolveService() { return $injector.get('locationResolveService'); },
                 get markdownRenderService() { return $injector.get('markdownRenderService'); },
-                get templateCacheService() { return $injector.get('templateCacheService'); }
+                get templateCacheService() { return $injector.get('templateCacheService'); },
+                get toastMessageService() { return $injector.get('toastMessageService'); }
             };
         });
 })(angular);
@@ -2183,7 +2192,7 @@
         .factory('blogListDatasource', function (BlogListDatasource) {
             return new BlogListDatasource({});
         })
-        .controller('AdminBlogCtrl', function ($scope, BlogEditor) {
+        .controller('AdminBlogCtrl', function ($scope, blogListDatasource) {
         })
         .controller('AdminBlogEditCtrl', function ($scope, blogOneDatasource, blogListDatasource, markdownRenderService) {
             ap.copy({
@@ -2191,7 +2200,7 @@
                     blogOneDatasource.data = blog;
                     blogOneDatasource.save(function (err, data) {
                         blogOneDatasource.clear();
-                        blogListDatasource.load();
+                        blogListDatasource.reload();
                     });
                 },
                 cancel: function () {
@@ -2224,7 +2233,9 @@
                 }
             });
         })
-        .controller('AdminBlogListCtrl', function ($scope, blogOneDatasource, blogListDatasource, textSummarizeLogic, confirmMessageService) {
+        .controller('AdminBlogListCtrl', function ($scope, blogOneDatasource, blogListDatasource, textSummarizeLogic,
+                                                   toastMessageService,
+                                                   confirmMessageService) {
             var l = $scope.locale;
             ap.copy({
                 edit: function (blog) {
@@ -2239,8 +2250,14 @@
 
                     blogOneDatasource.id = blog._id;
                     blogOneDatasource.load(function () {
-                        blogOneDatasource.destroy();
-                    })
+                        blogOneDatasource.destroy(function (err) {
+                            if (!err) {
+                                var msg = l.pages.admin.DESTROY_BLOG_DONE;
+                                toastMessageService.showInfoMessage(msg);
+                                blogListDatasource.reload();
+                            }
+                        });
+                    });
                 },
                 more: function () {
                     blogListDatasource.load();
@@ -2443,7 +2460,6 @@
             });
         })
         .controller('HeadControl', function HeadControl($scope) {
-
         })
         .controller('HeaderControl', function HeaderControl($scope) {
         })
@@ -3070,6 +3086,53 @@
         });
 
 })(angular, apeman);
+/**
+ * Toast message service.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('toastMessageService', function ToastMessageService($rootScope, $timeout) {
+            var s = this;
+            s._dismissTimer = null;
+            s._dismissDuration = 2000;
+            s._showMessage = function (message, type) {
+                $rootScope.toasts = $rootScope.toasts || {};
+                var queue = $rootScope.toasts[type] = $rootScope.toasts[type] || [];
+                queue.push(message);
+                s._dismissTimer = $timeout(function () {
+                    queue.shift();
+                }, s._dismissDuration);
+            }
+
+            /**
+             * Show infor message.
+             * @param {string} message - Message to show.
+             */
+            s.showInfoMessage = function (message) {
+                s._showMessage(message, 'info');
+            }
+            /**
+             * Show warn message.
+             * @param {string} message - Message to show.
+             */
+            s.showWarnMessage = function (message) {
+                s._showMessage(message, 'warn');
+            }
+            /**
+             * Show error message.
+             * @param {string} message - Message to show.
+             */
+            s.showErrorMessage = function (message) {
+                s._showMessage(message, 'error');
+            }
+        });
+
+})(angular, apeman);
 
 /**
  * ok templates module.
@@ -3410,7 +3473,7 @@
         .module('ok.templates')
         .value('toastHtmlTemplate', {
 		    "name": "/html/partials/toast.html",
-		    "content": "<div class=\"toast-container container\">\n    <div class=\"toast error-toast\" ok:toast ok:toast-messages=\"toasts.error\"></div>\n    <div class=\"toast warn-toast\" ok:toast ok:toast-messages=\"toasts.warn\"></div>\n    <div class=\"toast info-toast\" ok:toast ok:toast-messages=\"toasts.info\"></div>\n</div>"
+		    "content": "<div class=\"toast-container\">\n    <div class=\"container\">\n        <div class=\"toast error-toast\" ok:toast ok:toast-messages=\"toasts.error\"></div>\n        <div class=\"toast warn-toast\" ok:toast ok:toast-messages=\"toasts.warn\"></div>\n        <div class=\"toast info-toast\" ok:toast ok:toast-messages=\"toasts.info\"></div>\n    </div>\n</div>"
 		});
 
 })(angular);

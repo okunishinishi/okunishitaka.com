@@ -66,7 +66,6 @@
             });
         })
         .controller('HeadControl', function HeadControl($scope) {
-
         })
         .controller('HeaderControl', function HeaderControl($scope) {
         })
