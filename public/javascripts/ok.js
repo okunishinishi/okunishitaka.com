@@ -527,33 +527,6 @@
         });
 })(angular, apeman);
 /**
- * List data source for blog.
- * @requires angular
- * @requires apeman
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('BlogListDatasource', function (ListDatasource, BlogEntity, blogApiService) {
-            return ListDatasource.define(
-                /** @lends BlogListDatasource.prototype */
-                {
-                    _listRequest: function (query, callback) {
-                        query._sort = '_at';
-                        query._reverse = 'true';
-                        blogApiService.list(query, callback);
-                    },
-                    _parseData: function (data) {
-                        return data.map(BlogEntity.new);
-                    }
-                }
-            );
-        });
-
-})(angular, apeman);
-/**
  * Data source to list resouces.
  * @requires angular
  * @requires apeman
@@ -746,7 +719,6 @@
             function ListDatasource() {
                 var s = this;
                 s.init.apply(s, arguments);
-                s.clear();
             }
 
             /**
@@ -764,7 +736,7 @@
                     /** Limit count for fetching. */
                     limit: 20,
                     /** Skip count for fething. */
-                    skip: null,
+                    skip: 0,
                     /** Feched data. */
                     data: null,
                     /** Has more data to fetch or not. */
@@ -833,6 +805,11 @@
                      */
                     _discard: function () {
                         var s = this;
+                        s.init({});
+                    },
+                    init: function () {
+                        var s = this;
+                        Datasource.prototype.init.apply(s, arguments);
                         s.hasMore = true;
                         s.data = [];
                         s.skip = 0;
@@ -1957,7 +1934,6 @@
         .factory('datasourcesIndex', function defineDatasourcesIndex($injector) {
             return {
                 get Datasource() { return $injector.get('Datasource'); },
-                get BlogListDatasource() { return $injector.get('BlogListDatasource'); },
                 get ListDatasource() { return $injector.get('ListDatasource'); },
                 get WorkListDatasource() { return $injector.get('WorkListDatasource'); },
                 get BlogListingDatasource() { return $injector.get('BlogListingDatasource'); },
@@ -2380,9 +2356,6 @@
         .factory('blogOneDatasource', function (BlogOneDatasource) {
             return new BlogOneDatasource({});
         })
-        .factory('blogListDatasource', function (BlogListDatasource) {
-            return new BlogListDatasource({});
-        })
         .factory('blogEditor', function (blogOneDatasource, markdownRenderService) {
             return {
                 getBlog: function () {
@@ -2418,14 +2391,12 @@
                 }
             }
         })
-        .controller('AdminBlogCtrl', function ($scope,
-                                               blogListDatasource) {
+        .controller('AdminBlogCtrl', function ($scope) {
         })
-        .controller('AdminBlogEditCtrl', function ($scope, blogEditor, blogListDatasource) {
+        .controller('AdminBlogEditCtrl', function ($scope, blogEditor) {
             ap.copy({
                 save: function (blog) {
                     blogEditor.saveBlog(blog, function (err, data) {
-                        blogListDatasource.reload();
                     });
                 },
                 cancel: function () {
@@ -2449,12 +2420,17 @@
         })
         .controller('AdminBlogListCtrl', function ($scope,
                                                    blogOneDatasource,
-                                                   blogListDatasource,
+                                                   BlogListingDatasource,
                                                    textSummarizeLogic,
                                                    toastMessageService,
                                                    confirmMessageService) {
             var l = $scope.locale;
+            var list = new BlogListingDatasource({
+                _sort: '_at',
+                _revert: true
+            });
             ap.copy({
+                list: list,
                 edit: function (blog) {
                     blogOneDatasource.id = blog._id;
                     blogOneDatasource.load();
@@ -2471,27 +2447,17 @@
                             if (!err) {
                                 var msg = l.pages.admin.DESTROY_BLOG_DONE;
                                 toastMessageService.showInfoMessage(msg);
-                                blogListDatasource.reload();
+                                list.load();
                             }
                         });
                     });
-                },
-                more: function () {
-                    blogListDatasource.load();
                 },
                 summarize: function (text) {
                     return textSummarizeLogic.summarize(text, 30);
                 }
             }, $scope);
 
-            Object.defineProperties($scope, {
-                blogs: {
-                    get: function () {
-                        return blogListDatasource.data;
-                    }
-                }
-            });
-            blogListDatasource.load();
+            list.load();
         });
 
 })(angular, apeman);
@@ -2532,29 +2498,22 @@
         .run(function ($rootScope) {
             $rootScope.page = 'blog';
         })
-        .factory('blogListDatasource', function (BlogListDatasource) {
-            return new BlogListDatasource({});
-        })
-        .controller('BlogCtrl', function ($scope, blogListDatasource) {
-            ap.copy({
-                more: function () {
-                    blogListDatasource.load();
-                }
-            }, $scope);
-
-            Object.defineProperties($scope, {
-                blogs: {
-                    get: function () {
-                        return blogListDatasource.data;
-                    }
-                }
+        .controller('BlogCtrl', function ($scope, BlogListingDatasource) {
+            var list = new BlogListingDatasource({
+                _sort: '_at',
+                _revert: true
             });
 
-            blogListDatasource.load();
+            ap.copy({
+                list: list
+            }, $scope);
+
+            list.load();
         })
-        .controller('BlogListCtrl', function ($scope, blogListDatasource) {
+        .controller('BlogListCtrl', function ($scope) {
+
         })
-        .controller('BlogAsideCtrl', function ($scope, blogListDatasource) {
+        .controller('BlogAsideCtrl', function ($scope) {
         })
     ;
 
@@ -3390,7 +3349,7 @@
         .module('ok.templates')
         .value('adminAdminBlogListSectionHtmlTemplate', {
 		    "name": "/html/partials/admin/admin-blog-list-section.html",
-		    "content": "<section id=\"admin-blog-list-section\" ng:controller=\"AdminBlogListCtrl\">\n    <ul id=\"admin-blog-list\">\n        <li ng:repeat=\"b in blogs\" class=\"admin-blog-list-item\">\n\n            <span class=\"admin-blog-list-action-area\">\n                <a href=\"javascript:void(0)\" class=\"link-button\" ng:click=\"edit(b)\"><i class=\"fa fa-pencil\"></i>{{l.buttons.EDIT}}</a>\n                <a href=\"javascript:void(0)\" class=\"link-button\" ng:click=\"destroy(b)\"><i class=\"fa fa-trash-o\"></i>{{l.buttons.DELETE}}</a>\n            </span>\n\n            <div class=\"admin-blog-list-item-inner\">\n\n\n                <h3 class=\"admin-blog-list-title\">\n                    <a class=\"blog-dt-anchor\"\n                       name=\"blog-{{b._id}}\">{{b.title}}</a>\n                </h3>\n\n            <span class=\"admin-blog-list-content\">\n            {{summarize(b.content)}}\n            </span>\n\n            </div>\n        </li>\n    </ul>\n</section>"
+		    "content": "<section id=\"admin-blog-list-section\" ng:controller=\"AdminBlogListCtrl\">\n    <ul id=\"admin-blog-list\">\n        <li ng:repeat=\"b in list.data\" class=\"admin-blog-list-item\">\n\n            <span class=\"admin-blog-list-action-area\">\n                <a href=\"javascript:void(0)\" class=\"link-button\" ng:click=\"edit(b)\"><i class=\"fa fa-pencil\"></i>{{l.buttons.EDIT}}</a>\n                <a href=\"javascript:void(0)\" class=\"link-button\" ng:click=\"destroy(b)\"><i class=\"fa fa-trash-o\"></i>{{l.buttons.DELETE}}</a>\n            </span>\n\n            <div class=\"admin-blog-list-item-inner\">\n\n\n                <h3 class=\"admin-blog-list-title\">\n                    <a class=\"blog-dt-anchor\"\n                       name=\"blog-{{b._id}}\">{{b.title}}</a>\n                </h3>\n\n            <span class=\"admin-blog-list-content\">\n            {{summarize(b.content)}}\n            </span>\n\n            </div>\n        </li>\n    </ul>\n</section>"
 		});
 
 })(angular);
@@ -3435,7 +3394,7 @@
         .module('ok.templates')
         .value('blogBlogAsideContentHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-aside-content.html",
-		    "content": "<div ng:controller=\"BlogAsideCtrl\">\n    <ul>\n        <li ng:repeat=\"b in blogs\">\n            <a href=\"javascript:void(0)\" ng:click=\"scrollTo('blog-' + b._id)\">{{b.title}}</a>\n        </li>\n    </ul>\n    <a id=\"aside-blog-more-button\"\n       href=\"javascript:void(0)\"\n       ng:click=\"more()\"\n            >{{l.buttons.MORE}}</a>\n</div>"
+		    "content": "<div ng:controller=\"BlogAsideCtrl\">\n    <ul>\n        <li ng:repeat=\"b in list.data\">\n            <a href=\"javascript:void(0)\" ng:click=\"scrollTo('blog-' + b._id)\">{{b.title}}</a>\n        </li>\n    </ul>\n    <a id=\"aside-blog-more-button\"\n       href=\"javascript:void(0)\"\n       ng:show=\"list.hasMore\"\n       ng:click=\"list.loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</div>"
 		});
 
 })(angular);
@@ -3525,7 +3484,7 @@
         .module('ok.templates')
         .value('blogBlogListSectionHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-list-section.html",
-		    "content": "<section id=\"blog-list-section\" ng:controller=\"BlogListCtrl\">\n    <dl id=\"blog-list\">\n        <dt ng:repeat-start=\"b in blogs\">\n            <a class=\"blog-dt-anchor\"\n               name=\"blog-{{b._id}}\">\n                {{b.title}}\n            </a>\n        </dt>\n        <dd ng:repeat-end=\"\">{{b.content}}</dd>\n    </dl>\n</section>"
+		    "content": "<section id=\"blog-list-section\" ng:controller=\"BlogListCtrl\">\n    <dl id=\"blog-list\">\n        <dt ng:repeat-start=\"b in list.data\">\n            <a class=\"blog-dt-anchor\"\n               name=\"blog-{{b._id}}\">\n                {{b.title}}\n            </a>\n        </dt>\n        <dd ng:repeat-end=\"\">{{b.content}}</dd>\n    </dl>\n</section>"
 		});
 
 })(angular);

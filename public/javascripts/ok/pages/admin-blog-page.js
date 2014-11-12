@@ -17,9 +17,6 @@
         .factory('blogOneDatasource', function (BlogOneDatasource) {
             return new BlogOneDatasource({});
         })
-        .factory('blogListDatasource', function (BlogListDatasource) {
-            return new BlogListDatasource({});
-        })
         .factory('blogEditor', function (blogOneDatasource, markdownRenderService) {
             return {
                 getBlog: function () {
@@ -55,14 +52,12 @@
                 }
             }
         })
-        .controller('AdminBlogCtrl', function ($scope,
-                                               blogListDatasource) {
+        .controller('AdminBlogCtrl', function ($scope) {
         })
-        .controller('AdminBlogEditCtrl', function ($scope, blogEditor, blogListDatasource) {
+        .controller('AdminBlogEditCtrl', function ($scope, blogEditor) {
             ap.copy({
                 save: function (blog) {
                     blogEditor.saveBlog(blog, function (err, data) {
-                        blogListDatasource.reload();
                     });
                 },
                 cancel: function () {
@@ -86,12 +81,17 @@
         })
         .controller('AdminBlogListCtrl', function ($scope,
                                                    blogOneDatasource,
-                                                   blogListDatasource,
+                                                   BlogListingDatasource,
                                                    textSummarizeLogic,
                                                    toastMessageService,
                                                    confirmMessageService) {
             var l = $scope.locale;
+            var list = new BlogListingDatasource({
+                _sort: '_at',
+                _revert: true
+            });
             ap.copy({
+                list: list,
                 edit: function (blog) {
                     blogOneDatasource.id = blog._id;
                     blogOneDatasource.load();
@@ -108,27 +108,17 @@
                             if (!err) {
                                 var msg = l.pages.admin.DESTROY_BLOG_DONE;
                                 toastMessageService.showInfoMessage(msg);
-                                blogListDatasource.reload();
+                                list.load();
                             }
                         });
                     });
-                },
-                more: function () {
-                    blogListDatasource.load();
                 },
                 summarize: function (text) {
                     return textSummarizeLogic.summarize(text, 30);
                 }
             }, $scope);
 
-            Object.defineProperties($scope, {
-                blogs: {
-                    get: function () {
-                        return blogListDatasource.data;
-                    }
-                }
-            });
-            blogListDatasource.load();
+            list.load();
         });
 
 })(angular, apeman);

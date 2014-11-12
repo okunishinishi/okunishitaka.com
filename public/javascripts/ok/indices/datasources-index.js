@@ -11,7 +11,6 @@
         .factory('datasourcesIndex', function defineDatasourcesIndex($injector) {
             return {
                 get Datasource() { return $injector.get('Datasource'); },
-                get BlogListDatasource() { return $injector.get('BlogListDatasource'); },
                 get ListDatasource() { return $injector.get('ListDatasource'); },
                 get WorkListDatasource() { return $injector.get('WorkListDatasource'); },
                 get BlogListingDatasource() { return $injector.get('BlogListingDatasource'); },

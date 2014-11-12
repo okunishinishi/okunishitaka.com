@@ -15,29 +15,22 @@
         .run(function ($rootScope) {
             $rootScope.page = 'blog';
         })
-        .factory('blogListDatasource', function (BlogListDatasource) {
-            return new BlogListDatasource({});
-        })
-        .controller('BlogCtrl', function ($scope, blogListDatasource) {
-            ap.copy({
-                more: function () {
-                    blogListDatasource.load();
-                }
-            }, $scope);
-
-            Object.defineProperties($scope, {
-                blogs: {
-                    get: function () {
-                        return blogListDatasource.data;
-                    }
-                }
+        .controller('BlogCtrl', function ($scope, BlogListingDatasource) {
+            var list = new BlogListingDatasource({
+                _sort: '_at',
+                _revert: true
             });
 
-            blogListDatasource.load();
+            ap.copy({
+                list: list
+            }, $scope);
+
+            list.load();
         })
-        .controller('BlogListCtrl', function ($scope, blogListDatasource) {
+        .controller('BlogListCtrl', function ($scope) {
+
         })
-        .controller('BlogAsideCtrl', function ($scope, blogListDatasource) {
+        .controller('BlogAsideCtrl', function ($scope) {
         })
     ;
 

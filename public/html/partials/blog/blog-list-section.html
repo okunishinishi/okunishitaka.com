@@ -1,6 +1,6 @@
 <section id="blog-list-section" ng:controller="BlogListCtrl">
     <dl id="blog-list">
-        <dt ng:repeat-start="b in blogs">
+        <dt ng:repeat-start="b in list.data">
             <a class="blog-dt-anchor"
                name="blog-{{b._id}}">
                 {{b.title}}

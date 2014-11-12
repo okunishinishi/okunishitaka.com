@@ -17,7 +17,6 @@
             function ListDatasource() {
                 var s = this;
                 s.init.apply(s, arguments);
-                s.clear();
             }
 
             /**
@@ -35,7 +34,7 @@
                     /** Limit count for fetching. */
                     limit: 20,
                     /** Skip count for fething. */
-                    skip: null,
+                    skip: 0,
                     /** Feched data. */
                     data: null,
                     /** Has more data to fetch or not. */
@@ -104,6 +103,11 @@
                      */
                     _discard: function () {
                         var s = this;
+                        s.init({});
+                    },
+                    init: function () {
+                        var s = this;
+                        Datasource.prototype.init.apply(s, arguments);
                         s.hasMore = true;
                         s.data = [];
                         s.skip = 0;

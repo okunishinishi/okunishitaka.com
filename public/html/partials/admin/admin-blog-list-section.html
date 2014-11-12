@@ -1,6 +1,6 @@
 <section id="admin-blog-list-section" ng:controller="AdminBlogListCtrl">
     <ul id="admin-blog-list">
-        <li ng:repeat="b in blogs" class="admin-blog-list-item">
+        <li ng:repeat="b in list.data" class="admin-blog-list-item">
 
             <span class="admin-blog-list-action-area">
                 <a href="javascript:void(0)" class="link-button" ng:click="edit(b)"><i class="fa fa-pencil"></i>{{l.buttons.EDIT}}</a>

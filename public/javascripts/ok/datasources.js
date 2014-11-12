@@ -68,33 +68,6 @@
         });
 })(angular, apeman);
 /**
- * List data source for blog.
- * @requires angular
- * @requires apeman
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('BlogListDatasource', function (ListDatasource, BlogEntity, blogApiService) {
-            return ListDatasource.define(
-                /** @lends BlogListDatasource.prototype */
-                {
-                    _listRequest: function (query, callback) {
-                        query._sort = '_at';
-                        query._reverse = 'true';
-                        blogApiService.list(query, callback);
-                    },
-                    _parseData: function (data) {
-                        return data.map(BlogEntity.new);
-                    }
-                }
-            );
-        });
-
-})(angular, apeman);
-/**
  * Data source to list resouces.
  * @requires angular
  * @requires apeman
@@ -287,7 +260,6 @@
             function ListDatasource() {
                 var s = this;
                 s.init.apply(s, arguments);
-                s.clear();
             }
 
             /**
@@ -305,7 +277,7 @@
                     /** Limit count for fetching. */
                     limit: 20,
                     /** Skip count for fething. */
-                    skip: null,
+                    skip: 0,
                     /** Feched data. */
                     data: null,
                     /** Has more data to fetch or not. */
@@ -374,6 +346,11 @@
                      */
                     _discard: function () {
                         var s = this;
+                        s.init({});
+                    },
+                    init: function () {
+                        var s = this;
+                        Datasource.prototype.init.apply(s, arguments);
                         s.hasMore = true;
                         s.data = [];
                         s.skip = 0;

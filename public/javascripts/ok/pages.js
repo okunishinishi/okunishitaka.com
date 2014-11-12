@@ -30,9 +30,6 @@
         .factory('blogOneDatasource', function (BlogOneDatasource) {
             return new BlogOneDatasource({});
         })
-        .factory('blogListDatasource', function (BlogListDatasource) {
-            return new BlogListDatasource({});
-        })
         .factory('blogEditor', function (blogOneDatasource, markdownRenderService) {
             return {
                 getBlog: function () {
@@ -68,14 +65,12 @@
                 }
             }
         })
-        .controller('AdminBlogCtrl', function ($scope,
-                                               blogListDatasource) {
+        .controller('AdminBlogCtrl', function ($scope) {
         })
-        .controller('AdminBlogEditCtrl', function ($scope, blogEditor, blogListDatasource) {
+        .controller('AdminBlogEditCtrl', function ($scope, blogEditor) {
             ap.copy({
                 save: function (blog) {
                     blogEditor.saveBlog(blog, function (err, data) {
-                        blogListDatasource.reload();
                     });
                 },
                 cancel: function () {
@@ -99,12 +94,17 @@
         })
         .controller('AdminBlogListCtrl', function ($scope,
                                                    blogOneDatasource,
-                                                   blogListDatasource,
+                                                   BlogListingDatasource,
                                                    textSummarizeLogic,
                                                    toastMessageService,
                                                    confirmMessageService) {
             var l = $scope.locale;
+            var list = new BlogListingDatasource({
+                _sort: '_at',
+                _revert: true
+            });
             ap.copy({
+                list: list,
                 edit: function (blog) {
                     blogOneDatasource.id = blog._id;
                     blogOneDatasource.load();
@@ -121,27 +121,17 @@
                             if (!err) {
                                 var msg = l.pages.admin.DESTROY_BLOG_DONE;
                                 toastMessageService.showInfoMessage(msg);
-                                blogListDatasource.reload();
+                                list.load();
                             }
                         });
                     });
-                },
-                more: function () {
-                    blogListDatasource.load();
                 },
                 summarize: function (text) {
                     return textSummarizeLogic.summarize(text, 30);
                 }
             }, $scope);
 
-            Object.defineProperties($scope, {
-                blogs: {
-                    get: function () {
-                        return blogListDatasource.data;
-                    }
-                }
-            });
-            blogListDatasource.load();
+            list.load();
         });
 
 })(angular, apeman);
@@ -182,29 +172,22 @@
         .run(function ($rootScope) {
             $rootScope.page = 'blog';
         })
-        .factory('blogListDatasource', function (BlogListDatasource) {
-            return new BlogListDatasource({});
-        })
-        .controller('BlogCtrl', function ($scope, blogListDatasource) {
-            ap.copy({
-                more: function () {
-                    blogListDatasource.load();
-                }
-            }, $scope);
-
-            Object.defineProperties($scope, {
-                blogs: {
-                    get: function () {
-                        return blogListDatasource.data;
-                    }
-                }
+        .controller('BlogCtrl', function ($scope, BlogListingDatasource) {
+            var list = new BlogListingDatasource({
+                _sort: '_at',
+                _revert: true
             });
 
-            blogListDatasource.load();
+            ap.copy({
+                list: list
+            }, $scope);
+
+            list.load();
         })
-        .controller('BlogListCtrl', function ($scope, blogListDatasource) {
+        .controller('BlogListCtrl', function ($scope) {
+
         })
-        .controller('BlogAsideCtrl', function ($scope, blogListDatasource) {
+        .controller('BlogAsideCtrl', function ($scope) {
         })
     ;
 
