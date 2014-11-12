@@ -79,19 +79,22 @@
                 }
             });
         })
+        .factory('blogListingDatasource', function (BlogListingDatasource) {
+            return new BlogListingDatasource({
+                _sort: '_at',
+                _revert: true
+            });
+        })
         .controller('AdminBlogListCtrl', function ($scope,
                                                    blogOneDatasource,
-                                                   BlogListingDatasource,
+                                                   blogListingDatasource,
                                                    textSummarizeLogic,
                                                    toastMessageService,
                                                    confirmMessageService) {
             var l = $scope.locale;
-            var list = new BlogListingDatasource({
-                _sort: '_at',
-                _revert: true
-            });
+
             ap.copy({
-                list: list,
+                list: blogListingDatasource,
                 edit: function (blog) {
                     blogOneDatasource.id = blog._id;
                     blogOneDatasource.load();
@@ -118,7 +121,7 @@
                 }
             }, $scope);
 
-            list.load();
+            blogListingDatasource.load();
         });
 
 })(angular, apeman);

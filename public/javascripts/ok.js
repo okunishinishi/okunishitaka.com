@@ -527,155 +527,6 @@
         });
 })(angular, apeman);
 /**
- * Data source to list resouces.
- * @requires angular
- * @requires apeman
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('ListDatasource', function (Datasource) {
-
-            /**
-             * @augments Datasource
-             * @constructor ListDatasource
-             */
-            function ListDatasource() {
-                var s = this;
-                s.init.apply(s, arguments);
-                s.clear();
-            }
-
-            /**
-             * Define a list data source.
-             * @param {object} properties - Data source properties.
-             * @returns {function} Defined constructor
-             */
-            ListDatasource.define = function (properties) {
-                return Datasource.define(properties, ListDatasource);
-            };
-
-            ListDatasource.prototype = ap.copy(
-                /** @lends ListDatasource.prototype */
-                {
-                    /** Limit count for fetching. */
-                    limit: 20,
-                    /** Skip count for fething. */
-                    skip: null,
-                    /** Feched data. */
-                    data: null,
-                    /** Has more data to fetch or not. */
-                    hasMore: true,
-                    /** Search condition. */
-                    condition: {},
-                    /** Is loading or not. */
-                    loading: false,
-                    /**
-                     * Get query.
-                     * @returns {object}
-                     * @private
-                     */
-                    _queryData: function () {
-                        var s = this,
-                            query = {};
-                        ap.copy({
-                            _limit: s.limit,
-                            _skip: s.skip
-                        }, query);
-                        ap.copy(s.condition, query);
-                        return query;
-                    },
-                    /**
-                     * Send a request to get list.
-                     * @param {object} query - Query data.
-                     * @param {function} callback - Callback when done.
-                     */
-                    _listRequest: function (query, callback) {
-                        ap.throwNotImplmentedError();
-                    },
-                    /**
-                     * Parse data.
-                     * @param {object} data - Data to parsed.
-                     * @returns {object} - Parsed data.
-                     */
-                    _parseData: function (data) {
-                        return data;
-                    },
-                    /**
-                     * Clear fecthed data and condition.
-                     */
-                    clear: function () {
-                        var s = this;
-                        s.data = [];
-                        s.skip = 0;
-                        s.condition = {};
-                        s.hasMore = true;
-                    },
-                    /**
-                     * Load data.
-                     * @param {function} callback
-                     */
-                    load: function (callback) {
-                        var s = this,
-                            query = s._queryData();
-                        s.loading = true;
-                        callback = callback || ap.doNothing;
-                        s._listRequest(query, function (err, data) {
-                            s.loading = false;
-                            if (!err) {
-                                s.hasMore = s.limit <= data.length;
-                                s.data = s.data.concat(s._parseData(data));
-                                s.skip = s.data.length;
-                            }
-                            callback(err);
-                        });
-                    },
-                    /**
-                     * Clear and fetch data.
-                     * @param {function} callback
-                     */
-                    reload: function (callback) {
-                        var s = this;
-                        s.clear();
-                        s.load(callback);
-                    }
-                },
-                new Datasource({})
-            );
-
-            return ListDatasource;
-        });
-})(angular, apeman);
-/**
- * List data source for work.
- * @requires angular
- * @requires apeman
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('WorkListDatasource', function (ListDatasource, WorkEntity, workApiService) {
-            return ListDatasource.define(
-                /** @lends WorkListDatasource.prototype */
-                {
-                    _listRequest: function (query, callback) {
-                        query._sort = '_at';
-                        query._reverse = 'true';
-                        workApiService.list(query, callback);
-                    },
-                    _parseData: function (data) {
-                        return data.map(WorkEntity.new);
-                    }
-                }
-            );
-        });
-
-})(angular, apeman);
-/**
  * List data source for blog.
  * @requires angular
  * @requires apeman
@@ -1934,8 +1785,6 @@
         .factory('datasourcesIndex', function defineDatasourcesIndex($injector) {
             return {
                 get Datasource() { return $injector.get('Datasource'); },
-                get ListDatasource() { return $injector.get('ListDatasource'); },
-                get WorkListDatasource() { return $injector.get('WorkListDatasource'); },
                 get BlogListingDatasource() { return $injector.get('BlogListingDatasource'); },
                 get ListingDatasource() { return $injector.get('ListingDatasource'); },
                 get WorkListingDatasource() { return $injector.get('WorkListingDatasource'); },
@@ -2418,19 +2267,22 @@
                 }
             });
         })
+        .factory('blogListingDatasource', function (BlogListingDatasource) {
+            return new BlogListingDatasource({
+                _sort: '_at',
+                _revert: true
+            });
+        })
         .controller('AdminBlogListCtrl', function ($scope,
                                                    blogOneDatasource,
-                                                   BlogListingDatasource,
+                                                   blogListingDatasource,
                                                    textSummarizeLogic,
                                                    toastMessageService,
                                                    confirmMessageService) {
             var l = $scope.locale;
-            var list = new BlogListingDatasource({
-                _sort: '_at',
-                _revert: true
-            });
+
             ap.copy({
-                list: list,
+                list: blogListingDatasource,
                 edit: function (blog) {
                     blogOneDatasource.id = blog._id;
                     blogOneDatasource.load();
@@ -2457,7 +2309,7 @@
                 }
             }, $scope);
 
-            list.load();
+            blogListingDatasource.load();
         });
 
 })(angular, apeman);
@@ -2498,17 +2350,18 @@
         .run(function ($rootScope) {
             $rootScope.page = 'blog';
         })
-        .controller('BlogCtrl', function ($scope, BlogListingDatasource) {
-            var list = new BlogListingDatasource({
+        .factory('blogListingDatasource', function (BlogListingDatasource) {
+            return new BlogListingDatasource({
                 _sort: '_at',
                 _revert: true
             });
-
+        })
+        .controller('BlogCtrl', function ($scope, blogListingDatasource) {
             ap.copy({
-                list: list
+                list: blogListingDatasource
             }, $scope);
 
-            list.load();
+            blogListingDatasource.load();
         })
         .controller('BlogListCtrl', function ($scope) {
 
@@ -2716,8 +2569,10 @@
         .run(function ($rootScope) {
             $rootScope.page = 'work';
         })
-        .factory('workListDatasource', function (WorkListDatasource) {
-            return new WorkListDatasource({
+        .factory('workListDatasource', function (WorkListingDatasource) {
+            return new WorkListingDatasource({
+                _sort: '_at',
+                _revert: true,
                 limit: 100
             });
         })
@@ -2735,11 +2590,11 @@
                 templateUrl: partialUrlConstant.WORK_LINK
             }
         })
-        .controller('WorkCtrl', function ($scope, workListDatasource) {
-            workListDatasource.load();
+        .controller('WorkCtrl', function ($scope) {
         })
         .controller('WorkListCtrl', function ($scope, workListDatasource) {
             ap.copy({
+                list: workListDatasource,
                 hrefForWork: function (work) {
                     if (!work) {
                         return null;
@@ -2748,14 +2603,7 @@
                     return links[work.demo] || links[work.link] || links[work.repo];
                 }
             }, $scope);
-            Object.defineProperties($scope, {
-                works: {
-                    get: function () {
-                        return workListDatasource.data;
-                    }
-                }
-
-            });
+            workListDatasource.load();
         });
 
 })(angular, apeman, jQuery);
@@ -3694,7 +3542,7 @@
         .module('ok.templates')
         .value('workWorkListHtmlTemplate', {
 		    "name": "/html/partials/work/work-list.html",
-		    "content": "<ul id=\"work-list\" ng:controller=\"WorkListCtrl\">\n\n    <li ng:repeat=\"work in works\" class=\"work-list-item\">\n\n        <div class=\"work-background-image-container\">\n            <a ng:href=\"{{hrefForWork(work)}}\" class=\"image-link\">\n                <img ng:src=\"{{images[work.thumbnail]}}\" class=\"work-background-image\">\n            </a>\n        </div>\n\n        <h3 class=\"work-list-item-title work-white-back theme-font\">\n            <a ng:href=\"{{hrefForWork(work)}}\">{{work.name}}<img class=\"work-list-favicon\"\n                                                                 ng:src=\"{{links[work.favicon]}}\"\n                                                                 ng:if=\"!!links[work.favicon]\"/>\n            </a>\n        </h3>\n\n        <div class=\"work-list-item-content\">\n            <div class=\"work-description work-white-back\">\n                <div class=\"work-tags-container\">\n                    <span ok:tag ok:title=\"t\" ng:repeat=\"t in work.tag\"></span>\n                </div>\n\n                <div ng:repeat=\"d in work.description\">{{d}}</div>\n            </div>\n\n            <div ok:work-link ok:work-href=\"work.link\" ok:work-title=\"l.buttons.VISIT_SITE\"\n                 ok:work-icon=\"work.favicon\">\n            </div>\n            <div ok:work-link ok:work-href=\"work.demo\" ok:work-title=\"l.buttons.TRY_DEMO\"\n                 ok:work-icon=\"work.favicon\">\n            </div>\n            <div ok:work-link ok:work-href=\"work.repo\" ok:work-title=\"l.buttons.VIEW_SOURCE_CODE\"\n                 ok:work-icon=\"work.repoFavicon\">\n            </div>\n        </div>\n\n    </li>\n    <li class=\"clear-both\"></li>\n</ul>"
+		    "content": "<ul id=\"work-list\" ng:controller=\"WorkListCtrl\">\n\n    <li ng:repeat=\"work in list.data\" class=\"work-list-item\">\n\n        <div class=\"work-background-image-container\">\n            <a ng:href=\"{{hrefForWork(work)}}\" class=\"image-link\">\n                <img ng:src=\"{{images[work.thumbnail]}}\" class=\"work-background-image\">\n            </a>\n        </div>\n\n        <h3 class=\"work-list-item-title work-white-back theme-font\">\n            <a ng:href=\"{{hrefForWork(work)}}\">{{work.name}}<img class=\"work-list-favicon\"\n                                                                 ng:src=\"{{links[work.favicon]}}\"\n                                                                 ng:if=\"!!links[work.favicon]\"/>\n            </a>\n        </h3>\n\n        <div class=\"work-list-item-content\">\n            <div class=\"work-description work-white-back\">\n                <div class=\"work-tags-container\">\n                    <span ok:tag ok:title=\"t\" ng:repeat=\"t in work.tag\"></span>\n                </div>\n\n                <div ng:repeat=\"d in work.description\">{{d}}</div>\n            </div>\n\n            <div ok:work-link ok:work-href=\"work.link\" ok:work-title=\"l.buttons.VISIT_SITE\"\n                 ok:work-icon=\"work.favicon\">\n            </div>\n            <div ok:work-link ok:work-href=\"work.demo\" ok:work-title=\"l.buttons.TRY_DEMO\"\n                 ok:work-icon=\"work.favicon\">\n            </div>\n            <div ok:work-link ok:work-href=\"work.repo\" ok:work-title=\"l.buttons.VIEW_SOURCE_CODE\"\n                 ok:work-icon=\"work.repoFavicon\">\n            </div>\n        </div>\n\n    </li>\n    <li class=\"clear-both\"></li>\n</ul>"
 		});
 
 })(angular);

@@ -15,17 +15,18 @@
         .run(function ($rootScope) {
             $rootScope.page = 'blog';
         })
-        .controller('BlogCtrl', function ($scope, BlogListingDatasource) {
-            var list = new BlogListingDatasource({
+        .factory('blogListingDatasource', function (BlogListingDatasource) {
+            return new BlogListingDatasource({
                 _sort: '_at',
                 _revert: true
             });
-
+        })
+        .controller('BlogCtrl', function ($scope, blogListingDatasource) {
             ap.copy({
-                list: list
+                list: blogListingDatasource
             }, $scope);
 
-            list.load();
+            blogListingDatasource.load();
         })
         .controller('BlogListCtrl', function ($scope) {
 

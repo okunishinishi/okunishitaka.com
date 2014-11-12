@@ -13,8 +13,10 @@
         .run(function ($rootScope) {
             $rootScope.page = 'work';
         })
-        .factory('workListDatasource', function (WorkListDatasource) {
-            return new WorkListDatasource({
+        .factory('workListDatasource', function (WorkListingDatasource) {
+            return new WorkListingDatasource({
+                _sort: '_at',
+                _revert: true,
                 limit: 100
             });
         })
@@ -32,11 +34,11 @@
                 templateUrl: partialUrlConstant.WORK_LINK
             }
         })
-        .controller('WorkCtrl', function ($scope, workListDatasource) {
-            workListDatasource.load();
+        .controller('WorkCtrl', function ($scope) {
         })
         .controller('WorkListCtrl', function ($scope, workListDatasource) {
             ap.copy({
+                list: workListDatasource,
                 hrefForWork: function (work) {
                     if (!work) {
                         return null;
@@ -45,14 +47,7 @@
                     return links[work.demo] || links[work.link] || links[work.repo];
                 }
             }, $scope);
-            Object.defineProperties($scope, {
-                works: {
-                    get: function () {
-                        return workListDatasource.data;
-                    }
-                }
-
-            });
+            workListDatasource.load();
         });
 
 })(angular, apeman, jQuery);
