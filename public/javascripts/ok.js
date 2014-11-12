@@ -527,9 +527,8 @@
         });
 })(angular, apeman);
 /**
- * List data source for blog.
- * @requires angular
- * @requires apeman
+ * @ngdoc object
+ * @description List data source for blog.
  */
 (function (ng, ap) {
     "use strict";
@@ -552,9 +551,9 @@
 
 })(angular, apeman);
 /**
- * Data source to list resouces.
- * @requires angular
- * @requires apeman
+ * @ngdoc object
+ * @name ListingDatasource
+ * @description Data source to list resouces.
  */
 (function (ng, ap) {
     "use strict";
@@ -690,9 +689,8 @@
         });
 })(angular, apeman);
 /**
- * List data source for work.
- * @requires angular
- * @requires apeman
+ * @ngdoc object
+ * @description List data source for work.
  */
 (function (ng, ap) {
     "use strict";
@@ -896,20 +894,45 @@
         });
 })(angular, apeman);
 /**
- * Singleton data source for profile.
- * @requires angular
- * @requires apeman
+ * @ngdoc object
+ * @name BlogViewingDatasource
+ * @description View data source for blog.
  */
 (function (ng, ap) {
     "use strict";
 
     ng
         .module('ok.datasources')
-        .factory('ProfileSingletonDatasource', function (SingletonDatasource, ProfileEntity, profileApiService) {
-            return SingletonDatasource.define(
-                /** @lends ProfileSingletonDatasource.prototype */
+        .factory('BlogViewingDatasource', function (ViewingDatasource, BlogEntity, blogApiService) {
+            return ViewingDatasource.define(
+                /** @lends BlogViewingDatasource.prototype */
                 {
-                    _singletonRequest: function (callback) {
+                    _oneRequest: function (id, callback) {
+                        blogApiService.one(id, callback);
+                    },
+                    _parseData: function (data) {
+                        return BlogEntity.new(data);
+                    }
+                }
+            );
+        });
+
+})(angular, apeman);
+/**
+ * @ngdoc object
+ * @name ProfileViewingDatasource
+ * @description View data source for profile.
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.datasources')
+        .factory('ProfileViewingDatasource', function (ViewingDatasource, ProfileEntity, profileApiService) {
+            return ViewingDatasource.define(
+                /** @lends ProfileViewingDatasource.prototype */
+                {
+                    _oneRequest: function (id, callback) {
                         profileApiService.singleton(callback);
                     },
                     _parseData: function (data) {
@@ -918,106 +941,12 @@
                 }
             );
         });
+
 })(angular, apeman);
 /**
- * Data source for one.
- * @requires angular
- * @requires apeman
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('SingletonDatasource', function (Datasource) {
-
-            /**
-             * @agutments Datasource
-             * @constructor SingletonDatasource
-             */
-            function SingletonDatasource(properties) {
-                var s = this;
-                s.init.apply(s, arguments);
-            }
-
-
-            /**
-             * Define an one data source.
-             * @param {object} properties - Data source properties.
-             * @returns {function} Defined constructor
-             */
-            SingletonDatasource.define = function (properties) {
-                return Datasource.define(properties, SingletonDatasource);
-            };
-
-            SingletonDatasource.prototype = ap.copy(
-                /** @lends SingletonDatasource.prototype */
-                {
-                    /**
-                     * Data identifier
-                     */
-                    data: null,
-                    loading: false,
-                    /**
-                     * Send a request to get the resource.
-                     * @param {string} id - Data identifier.
-                     * @param {function} callback - Callback when done.
-                     */
-                    _singletonRequest: function (id, callback) {
-                        ap.throwNotImplmentedError();
-                    },
-                    /**
-                     * Send a request to save resource.
-                     * @param {object} data - Resource data to create.
-                     * @param {function} callback - Callback when done.
-                     * @private
-                     */
-                    _saveRequest: function (data, callback) {
-                        ap.throwNotImplmentedError();
-                    },
-                    /**
-                     * Parse data.
-                     * @param {object} data - Fethed data.
-                     * @returns {*} - Parsed data.
-                     */
-                    _parseData: function (data) {
-                        return data;
-                    },
-                    /**
-                     * Load data.
-                     * @param {function} callback
-                     */
-                    load: function (callback) {
-                        var s = this;
-                        s.loading = true;
-                        s._singletonRequest(function (err, data) {
-                            s.loading = false;
-                            if (!err) {
-                                s.data = s._parseData(data);
-                            }
-                            callback(err);
-                        });
-                    },
-                    /**
-                     * Save data.
-                     * @param callback
-                     */
-                    save: function (callback) {
-                        var s = this,
-                            data = s.data || {};
-                        s._saveRequest(data, callback);
-                    }
-                },
-                new Datasource({})
-            );
-
-            return SingletonDatasource;
-        });
-})(angular, apeman);
-/**
- * Data source for viewing.
- * @requires angular
- * @requires apeman
+ * @ngdoc object
+ * @name ViewingDatasource
+ * @description Data source for viewing.
  */
 (function (ng, ap) {
     "use strict";
@@ -1135,6 +1064,34 @@
         ]);
 })(angular);
 
+/**
+ * @ngdoc directive
+ * @name okAlias
+ * @description Ok alias.
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okAlias', function defineOkAlias($parse) {
+            return {
+                link: function (scope, elm, attr) {
+                    var alias = $parse(attr.okAlias)(scope);
+                    if (!alias) {
+                        return;
+                    }
+                    Object.keys(alias).forEach(function (key) {
+                        var expression = alias[key];
+                        scope.$watch(expression, function (value) {
+                            scope[key] = value;
+                        }, true);
+                    });
+                }
+            }
+        });
+
+})(angular, apeman);
 /**
  * @ngdoc directive
  * @name okFacebookButton
@@ -1896,8 +1853,8 @@
                 get WorkListingDatasource() { return $injector.get('WorkListingDatasource'); },
                 get BlogOneDatasource() { return $injector.get('BlogOneDatasource'); },
                 get OneDatasource() { return $injector.get('OneDatasource'); },
-                get ProfileSingletonDatasource() { return $injector.get('ProfileSingletonDatasource'); },
-                get SingletonDatasource() { return $injector.get('SingletonDatasource'); },
+                get BlogViewingDatasource() { return $injector.get('BlogViewingDatasource'); },
+                get ProfileViewingDatasource() { return $injector.get('ProfileViewingDatasource'); },
                 get ViewingDatasource() { return $injector.get('ViewingDatasource'); }
             };
         });
@@ -2421,8 +2378,9 @@
 
 })(angular, apeman);
 /**
- * Page script for admin.
- * @requires angular
+ * @ngdoc module
+ * @module ok.adminPage
+ * @description Page script for admin.
  */
 
 (function (ng, ap) {
@@ -2441,9 +2399,9 @@
     ;
 })(angular, apeman);
 /**
- * Page script for blog.
- * @requires angular
- * @retuires apeman
+ * @ngdoc module
+ * @module ok.blogPage
+ * @description Page script for blog.
  */
 
 (function (ng, ap) {
@@ -2479,8 +2437,9 @@
 
 })(angular, apeman);
 /**
- * Page script for index.
- * @requires angular
+ * @ngdoc module
+ * @module ok.indexPage
+ * @descrition Page script for index.
  */
 
 (function (ng, ap, $) {
@@ -2529,8 +2488,9 @@
 
 })(angular, apeman, jQuery);
 /**
- * okunishitaka.com abstract page script.
- * @requires angular
+ * @ngdoc module
+ * @module ok.page
+ * @descripton okunishitaka.com abstract page script.
  */
 
 (function (ng, ap) {
@@ -2604,8 +2564,9 @@
 })(angular, apeman);
 
 /**
- * Page script for profile.
- * @requires angular
+ * @ngdoc module
+ * @module ok.profilePage
+ * @description Page script for profile.
  */
 
 (function (ng, $) {
@@ -2646,24 +2607,20 @@
                 templateUrl: partialUrlConstant.PROFILE_TABLE
             }
         })
-        .factory('profileSingletonDatasource', function (ProfileSingletonDatasource) {
-            return new ProfileSingletonDatasource({});
+        .factory('profileViewingDatasource', function (ProfileViewingDatasource) {
+            return new ProfileViewingDatasource({});
         })
-        .controller('ProfileCtrl', function ($scope, profileSingletonDatasource) {
-            profileSingletonDatasource.load();
-            Object.defineProperties($scope, {
-                profile: {
-                    get: function () {
-                        return profileSingletonDatasource.data;
-                    }
-                }
+        .controller('ProfileCtrl', function ($scope, profileViewingDatasource) {
+            $scope.viewing = profileViewingDatasource;
+            profileViewingDatasource.load(function (err) {
             });
         });
 
 })(angular, jQuery);
 /**
- * Page script for work.
- * @requires angular
+ * @ngdoc module
+ * @module ok.workPage
+ * @description Page script for work.
  */
 
 (function (ng, ap, $) {

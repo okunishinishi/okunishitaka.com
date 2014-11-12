@@ -1,6 +1,7 @@
 /**
- * okunishitaka.com abstract page script.
- * @requires angular
+ * @ngdoc module
+ * @module ok.page
+ * @descripton okunishitaka.com abstract page script.
  */
 
 (function (ng, ap) {

@@ -1,6 +1,7 @@
 /**
- * Page script for work.
- * @requires angular
+ * @ngdoc module
+ * @module ok.workPage
+ * @description Page script for work.
  */
 
 (function (ng, ap, $) {

@@ -1,7 +1,7 @@
 /**
- * Data source to list resouces.
- * @requires angular
- * @requires apeman
+ * @ngdoc object
+ * @name ListingDatasource
+ * @description Data source to list resouces.
  */
 (function (ng, ap) {
     "use strict";

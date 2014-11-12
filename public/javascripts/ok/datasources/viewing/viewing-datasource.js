@@ -1,7 +1,7 @@
 /**
- * Data source for viewing.
- * @requires angular
- * @requires apeman
+ * @ngdoc object
+ * @name ViewingDatasource
+ * @description Data source for viewing.
  */
 (function (ng, ap) {
     "use strict";

@@ -1,18 +1,18 @@
 /**
- * Singleton data source for profile.
- * @requires angular
- * @requires apeman
+ * @ngdoc object
+ * @name ProfileViewingDatasource
+ * @description View data source for profile.
  */
 (function (ng, ap) {
     "use strict";
 
     ng
         .module('ok.datasources')
-        .factory('ProfileSingletonDatasource', function (SingletonDatasource, ProfileEntity, profileApiService) {
-            return SingletonDatasource.define(
-                /** @lends ProfileSingletonDatasource.prototype */
+        .factory('ProfileViewingDatasource', function (ViewingDatasource, ProfileEntity, profileApiService) {
+            return ViewingDatasource.define(
+                /** @lends ProfileViewingDatasource.prototype */
                 {
-                    _singletonRequest: function (callback) {
+                    _oneRequest: function (id, callback) {
                         profileApiService.singleton(callback);
                     },
                     _parseData: function (data) {
@@ -21,4 +21,5 @@
                 }
             );
         });
+
 })(angular, apeman);

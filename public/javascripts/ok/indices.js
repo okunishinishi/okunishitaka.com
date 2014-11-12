@@ -60,8 +60,8 @@
                 get WorkListingDatasource() { return $injector.get('WorkListingDatasource'); },
                 get BlogOneDatasource() { return $injector.get('BlogOneDatasource'); },
                 get OneDatasource() { return $injector.get('OneDatasource'); },
-                get ProfileSingletonDatasource() { return $injector.get('ProfileSingletonDatasource'); },
-                get SingletonDatasource() { return $injector.get('SingletonDatasource'); },
+                get BlogViewingDatasource() { return $injector.get('BlogViewingDatasource'); },
+                get ProfileViewingDatasource() { return $injector.get('ProfileViewingDatasource'); },
                 get ViewingDatasource() { return $injector.get('ViewingDatasource'); }
             };
         });

@@ -1,6 +1,7 @@
 /**
- * Page script for admin.
- * @requires angular
+ * @ngdoc module
+ * @module ok.adminPage
+ * @description Page script for admin.
  */
 
 (function (ng, ap) {

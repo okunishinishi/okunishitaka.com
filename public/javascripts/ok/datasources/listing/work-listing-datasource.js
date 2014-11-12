@@ -1,7 +1,6 @@
 /**
- * List data source for work.
- * @requires angular
- * @requires apeman
+ * @ngdoc object
+ * @description List data source for work.
  */
 (function (ng, ap) {
     "use strict";

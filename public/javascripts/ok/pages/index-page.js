@@ -1,6 +1,7 @@
 /**
- * Page script for index.
- * @requires angular
+ * @ngdoc module
+ * @module ok.indexPage
+ * @descrition Page script for index.
  */
 
 (function (ng, ap, $) {

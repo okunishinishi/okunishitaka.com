@@ -139,8 +139,9 @@
 
 })(angular, apeman);
 /**
- * Page script for admin.
- * @requires angular
+ * @ngdoc module
+ * @module ok.adminPage
+ * @description Page script for admin.
  */
 
 (function (ng, ap) {
@@ -159,9 +160,9 @@
     ;
 })(angular, apeman);
 /**
- * Page script for blog.
- * @requires angular
- * @retuires apeman
+ * @ngdoc module
+ * @module ok.blogPage
+ * @description Page script for blog.
  */
 
 (function (ng, ap) {
@@ -197,8 +198,9 @@
 
 })(angular, apeman);
 /**
- * Page script for index.
- * @requires angular
+ * @ngdoc module
+ * @module ok.indexPage
+ * @descrition Page script for index.
  */
 
 (function (ng, ap, $) {
@@ -247,8 +249,9 @@
 
 })(angular, apeman, jQuery);
 /**
- * okunishitaka.com abstract page script.
- * @requires angular
+ * @ngdoc module
+ * @module ok.page
+ * @descripton okunishitaka.com abstract page script.
  */
 
 (function (ng, ap) {
@@ -322,8 +325,9 @@
 })(angular, apeman);
 
 /**
- * Page script for profile.
- * @requires angular
+ * @ngdoc module
+ * @module ok.profilePage
+ * @description Page script for profile.
  */
 
 (function (ng, $) {
@@ -364,24 +368,20 @@
                 templateUrl: partialUrlConstant.PROFILE_TABLE
             }
         })
-        .factory('profileSingletonDatasource', function (ProfileSingletonDatasource) {
-            return new ProfileSingletonDatasource({});
+        .factory('profileViewingDatasource', function (ProfileViewingDatasource) {
+            return new ProfileViewingDatasource({});
         })
-        .controller('ProfileCtrl', function ($scope, profileSingletonDatasource) {
-            profileSingletonDatasource.load();
-            Object.defineProperties($scope, {
-                profile: {
-                    get: function () {
-                        return profileSingletonDatasource.data;
-                    }
-                }
+        .controller('ProfileCtrl', function ($scope, profileViewingDatasource) {
+            $scope.viewing = profileViewingDatasource;
+            profileViewingDatasource.load(function (err) {
             });
         });
 
 })(angular, jQuery);
 /**
- * Page script for work.
- * @requires angular
+ * @ngdoc module
+ * @module ok.workPage
+ * @description Page script for work.
  */
 
 (function (ng, ap, $) {

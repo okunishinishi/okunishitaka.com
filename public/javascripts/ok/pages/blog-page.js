@@ -1,7 +1,7 @@
 /**
- * Page script for blog.
- * @requires angular
- * @retuires apeman
+ * @ngdoc module
+ * @module ok.blogPage
+ * @description Page script for blog.
  */
 
 (function (ng, ap) {

@@ -23,29 +23,30 @@
 <div ng:include="partials.TRACK"></div>
 <header ng:include="partials.HEADER" ng:controller="HeaderControl"></header>
 <div ng:include="partials.TOAST"></div>
-<main class="container" ng:controller="ProfileCtrl">
+<main ng:controller="ProfileCtrl">
+    <div class="container" ok:alias="{profile:'viewing.data'}">
+        <section id="my-img-section">
+            <img id="my-img" ng:src="{{images.ME}}">
+        </section>
 
-    <section id="my-img-section">
-        <img id="my-img" ng:src="{{images.ME}}">
-    </section>
+        <div ng:show="!!profile">
 
-    <div ng:show="!!profile">
+            <div ok:profile-table="" ok:id="personel-table" ok:data="profile.personel" ok:caption="l.pages.profile.captions.PERSONEL">
+            </div>
 
-        <div ok:profile-table="" ok:id="personel-table" ok:data="profile.personel" ok:caption="l.pages.profile.captions.PERSONEL">
+            <div ok:profile-list="" ok:id="about-list" ok:data="profile.about" ok:caption="l.pages.profile.captions.ABOUT">
+            </div>
+
+            <div ok:profile-table="" ok:id="education-table" ok:data="profile.education" ok:caption="l.pages.profile.captions.EDUCATION">
+            </div>
+
+            <div ok:profile-table="" ok:id="job-history-table" ok:data="profile.jobHistory" ok:caption="l.pages.profile.captions.JOB_HISTORY">
+            </div>
+
+            <div ok:profile-table="" ok:id="qualification-table" ok:data="profile.qualification" ok:caption="l.pages.profile.captions.QUALIFICATION">
+            </div>
+
         </div>
-
-        <div ok:profile-list="" ok:id="about-list" ok:data="profile.about" ok:caption="l.pages.profile.captions.ABOUT">
-        </div>
-
-        <div ok:profile-table="" ok:id="education-table" ok:data="profile.education" ok:caption="l.pages.profile.captions.EDUCATION">
-        </div>
-
-        <div ok:profile-table="" ok:id="job-history-table" ok:data="profile.jobHistory" ok:caption="l.pages.profile.captions.JOB_HISTORY">
-        </div>
-
-        <div ok:profile-table="" ok:id="qualification-table" ok:data="profile.qualification" ok:caption="l.pages.profile.captions.QUALIFICATION">
-        </div>
-
     </div>
     <br class="clear-both">
 

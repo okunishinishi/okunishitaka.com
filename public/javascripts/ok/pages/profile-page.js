@@ -1,6 +1,7 @@
 /**
- * Page script for profile.
- * @requires angular
+ * @ngdoc module
+ * @module ok.profilePage
+ * @description Page script for profile.
  */
 
 (function (ng, $) {
@@ -41,17 +42,12 @@
                 templateUrl: partialUrlConstant.PROFILE_TABLE
             }
         })
-        .factory('profileSingletonDatasource', function (ProfileSingletonDatasource) {
-            return new ProfileSingletonDatasource({});
+        .factory('profileViewingDatasource', function (ProfileViewingDatasource) {
+            return new ProfileViewingDatasource({});
         })
-        .controller('ProfileCtrl', function ($scope, profileSingletonDatasource) {
-            profileSingletonDatasource.load();
-            Object.defineProperties($scope, {
-                profile: {
-                    get: function () {
-                        return profileSingletonDatasource.data;
-                    }
-                }
+        .controller('ProfileCtrl', function ($scope, profileViewingDatasource) {
+            $scope.viewing = profileViewingDatasource;
+            profileViewingDatasource.load(function (err) {
             });
         });
 
