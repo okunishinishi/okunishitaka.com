@@ -2,7 +2,6 @@
 
 /**
  * @file Start Server.
- * @see {@link http://nodejs.org/api/cluster.html | cluster}
  */
 
 "use strict";

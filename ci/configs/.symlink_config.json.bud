@@ -14,9 +14,7 @@ var basedir = path.resolve(__dirname, '../..'),
 module.exports = {
     mode: '444',
     force: true,
-    data: [
-
-    ]
+    data: []
         .concat(fs.readdirSync(publicHtmlDir)
             .filter(filtering.patternAcceptFilter(/\.html$/))
             .map(mapping.pathResolveMap(publicHtmlDir))
@@ -35,4 +33,4 @@ module.exports = {
 
             }
         ])
-}
+};
