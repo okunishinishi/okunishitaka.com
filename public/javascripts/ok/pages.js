@@ -273,7 +273,7 @@
             'constantsIndex',
             'logicsIndex',
             'servicesIndex',
-            function global(cn, lg, sv, tm) {
+            function global(cn, lg, sv) {
                 var lang = sv.langDetectService.detectLang(),
                     locale = sv.localeLoadService.localeForLang(lang);
                 return {
