@@ -25,6 +25,7 @@
             'ngSanitize' // ng-bind-html requires ng sanitize.
         ])
         .run(function ($rootScope) {
+
         })
         .factory('blogOneDatasource', function (BlogOneDatasource) {
             return new BlogOneDatasource({});
@@ -32,14 +33,48 @@
         .factory('blogListDatasource', function (BlogListDatasource) {
             return new BlogListDatasource({});
         })
-        .controller('AdminBlogCtrl', function ($scope, blogListDatasource) {
+        .factory('blogEditor', function (blogOneDatasource, markdownRenderService) {
+            return {
+                getBlog: function () {
+                    return blogOneDatasource.data;
+                },
+                setBlog: function (blog) {
+                    if (blog.id) {
+                        blogOneDatasource.id = blog.id;
+                    }
+                    blogOneDatasource.data = blog;
+                },
+                saveBlog: function (blog, callback) {
+                    var s = this;
+                    s.setBlog(blog);
+                    blogOneDatasource.save(function (err, data) {
+                        if (!err) {
+                            blogOneDatasource.clear();
+                        }
+                        callback(err);
+                    });
+                },
+                previewBlog: function (blog) {
+                    if (!blog) {
+                        return {};
+                    }
+                    return {
+                        title: blog.title,
+                        content: markdownRenderService.render(blog.content)
+                    }
+                },
+                clear: function () {
+                    blogOneDatasource.clear();
+                }
+            }
         })
-        .controller('AdminBlogEditCtrl', function ($scope, blogOneDatasource, blogListDatasource, markdownRenderService) {
+        .controller('AdminBlogCtrl', function ($scope,
+                                               blogListDatasource) {
+        })
+        .controller('AdminBlogEditCtrl', function ($scope, blogEditor, blogListDatasource) {
             ap.copy({
                 save: function (blog) {
-                    blogOneDatasource.data = blog;
-                    blogOneDatasource.save(function (err, data) {
-                        blogOneDatasource.clear();
+                    blogEditor.saveBlog(blog, function (err, data) {
                         blogListDatasource.reload();
                     });
                 },
@@ -47,33 +82,25 @@
                     $scope.close();
                 },
                 close: function () {
-                    $scope.editing = false;
+                    blogEditor.clear();
                 }
             }, $scope);
             Object.defineProperties($scope, {
                 blog: {
-                    get: function () {
-                        return blogOneDatasource.data;
-                    },
-                    set: function (blog) {
-                        blogOneDatasource.data = blog;
-                    }
+                    get: blogEditor.getBlog.bind(blogEditor),
+                    set: blogEditor.setBlog.bind(blogEditor)
                 },
                 preview: {
                     get: function () {
-                        var blog = $scope.blog;
-                        if (!blog) {
-                            return {};
-                        }
-                        return {
-                            title: blog.title,
-                            content: markdownRenderService.render(blog.content)
-                        }
+                        return blogEditor.previewBlog(blogEditor.getBlog())
                     }
                 }
             });
         })
-        .controller('AdminBlogListCtrl', function ($scope, blogOneDatasource, blogListDatasource, textSummarizeLogic,
+        .controller('AdminBlogListCtrl', function ($scope,
+                                                   blogOneDatasource,
+                                                   blogListDatasource,
+                                                   textSummarizeLogic,
                                                    toastMessageService,
                                                    confirmMessageService) {
             var l = $scope.locale;
@@ -83,10 +110,10 @@
                     blogOneDatasource.load();
                 },
                 destroy: function (blog) {
-                    //var sure = confirmMessageService.confirm(l.pages.admin.ASK_SURE);
-                    //if (!sure) {
-                    //    return;
-                    //}
+                    var sure = confirmMessageService.confirm(l.pages.admin.ASK_SURE);
+                    if (!sure) {
+                        return;
+                    }
 
                     blogOneDatasource.id = blog._id;
                     blogOneDatasource.load(function () {

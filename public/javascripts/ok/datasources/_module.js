@@ -9,6 +9,7 @@
         .module('ok.datasources', [
             'ok.constants',
             'ok.entities',
+            'ok.services',
             'ok.utils'
         ]);
 })(angular);

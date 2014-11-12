@@ -162,6 +162,7 @@
 		            "admin": {
 		                "LOGO": "admin.okunishitaka.com",
 		                "ASK_SURE": "Are you sure?",
+		                "SAVE_BLOG_DONE": "The entry has been saved.",
 		                "DESTROY_BLOG_DONE": "The entry has been deleted."
 		            }
 		        }
@@ -254,6 +255,7 @@
 		            "admin": {
 		                "LOGO": "admin.okunishitaka.com",
 		                "ASK_SURE": "Are you sure?",
+		                "SAVE_BLOG_DONE": "The entry has been saved.",
 		                "DESTROY_BLOG_DONE": "The entry has been deleted."
 		            }
 		        }
@@ -466,6 +468,7 @@
         .module('ok.datasources', [
             'ok.constants',
             'ok.entities',
+            'ok.services',
             'ok.utils'
         ]);
 })(angular);
@@ -689,6 +692,190 @@
                     _listRequest: function (query, callback) {
                         query._sort = '_at';
                         query._reverse = 'true';
+                        workApiService.list(query, callback);
+                    },
+                    _parseData: function (data) {
+                        return data.map(WorkEntity.new);
+                    }
+                }
+            );
+        });
+
+})(angular, apeman);
+/**
+ * List data source for blog.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.datasources')
+        .factory('BlogListingDatasource', function (ListingDatasource, BlogEntity, blogApiService) {
+            return ListingDatasource.define(
+                /** @lends BlogListingDatasource.prototype */
+                {
+                    _listRequest: function (query, callback) {
+                        blogApiService.list(query, callback);
+                    },
+                    _parseData: function (data) {
+                        return data.map(BlogEntity.new);
+                    }
+                }
+            );
+        });
+
+})(angular, apeman);
+/**
+ * Data source to list resouces.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.datasources')
+        .factory('ListingDatasource', function (Datasource) {
+
+            /**
+             * @augments Datasource
+             * @constructor ListDatasource
+             */
+            function ListDatasource() {
+                var s = this;
+                s.init.apply(s, arguments);
+                s.clear();
+            }
+
+            /**
+             * Define a list data source.
+             * @param {object} properties - Data source properties.
+             * @returns {function} Defined constructor
+             */
+            ListDatasource.define = function (properties) {
+                return Datasource.define(properties, ListDatasource);
+            };
+
+            ListDatasource.prototype = ap.copy(
+                /** @lends ListDatasource.prototype */
+                {
+                    /** Limit count for fetching. */
+                    limit: 20,
+                    /** Skip count for fething. */
+                    skip: null,
+                    /** Feched data. */
+                    data: null,
+                    /** Has more data to fetch or not. */
+                    hasMore: true,
+                    /** Search condition. */
+                    condition: {},
+                    /** Is loading or not. */
+                    loading: false,
+                    /**
+                     * Get query.
+                     * @returns {object}
+                     * @private
+                     */
+                    _queryData: function () {
+                        var s = this,
+                            query = {};
+                        ap.copy({
+                            _limit: s.limit,
+                            _skip: s.skip
+                        }, query);
+                        ap.copy(s.condition, query);
+                        return query;
+                    },
+                    /**
+                     * Send a request to get list.
+                     * @param {object} query - Query data.
+                     * @param {function} callback - Callback when done.
+                     */
+                    _listRequest: function (query, callback) {
+                        ap.throwNotImplmentedError();
+                    },
+                    /**
+                     * Parse data.
+                     * @param {object} data - Data to parsed.
+                     * @returns {object} - Parsed data.
+                     */
+                    _parseData: function (data) {
+                        return data;
+                    },
+                    _addFetchedData: function (data) {
+                        var s = this;
+                        s.hasMore = s.limit <= data.length;
+                        s.data = s.data.concat(s._parseData(data));
+                        s.skip = s.data.length;
+                    },
+                    /**
+                     * Load data.
+                     * @param {function} callback
+                     */
+                    _fetch: function (callback) {
+                        var s = this,
+                            query = s._queryData();
+                        s.loading = true;
+                        callback = callback || ap.doNothing;
+                        s._listRequest(query, function (err, data) {
+                            s.loading = false;
+                            if (!err) {
+                                s._addFetchedData(data);
+                            }
+                            callback(err);
+                        });
+                    },
+                    /**
+                     * Discard fethced data.
+                     * @private
+                     */
+                    _discard: function () {
+                        var s = this;
+                        s.hasMore = true;
+                        s.data = [];
+                        s.skip = 0;
+                    },
+                    /**
+                     * Clear and fetch data.
+                     * @param {function} callback
+                     */
+                    load: function (callback) {
+                        var s = this;
+                        s._discard();
+                        s._fetch(callback);
+                    },
+                    /**
+                     * Load next resources.
+                     * @param {function} callback - Callback when done.
+                     */
+                    loadMore: function (callback) {
+                        var s = this;
+                        s._fetch(callback);
+                    }
+                },
+                new Datasource({})
+            );
+
+            return ListDatasource;
+        });
+})(angular, apeman);
+/**
+ * List data source for work.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.datasources')
+        .factory('WorkListingDatasource', function (ListingDatasource, WorkEntity, workApiService) {
+            return ListingDatasource.define(
+                /** @lends WorkListingDatasource.prototype */
+                {
+                    _listRequest: function (query, callback) {
                         workApiService.list(query, callback);
                     },
                     _parseData: function (data) {
@@ -1773,6 +1960,9 @@
                 get BlogListDatasource() { return $injector.get('BlogListDatasource'); },
                 get ListDatasource() { return $injector.get('ListDatasource'); },
                 get WorkListDatasource() { return $injector.get('WorkListDatasource'); },
+                get BlogListingDatasource() { return $injector.get('BlogListingDatasource'); },
+                get ListingDatasource() { return $injector.get('ListingDatasource'); },
+                get WorkListingDatasource() { return $injector.get('WorkListingDatasource'); },
                 get BlogOneDatasource() { return $injector.get('BlogOneDatasource'); },
                 get OneDatasource() { return $injector.get('OneDatasource'); },
                 get ProfileSingletonDatasource() { return $injector.get('ProfileSingletonDatasource'); },
@@ -2185,6 +2375,7 @@
             'ngSanitize' // ng-bind-html requires ng sanitize.
         ])
         .run(function ($rootScope) {
+
         })
         .factory('blogOneDatasource', function (BlogOneDatasource) {
             return new BlogOneDatasource({});
@@ -2192,14 +2383,48 @@
         .factory('blogListDatasource', function (BlogListDatasource) {
             return new BlogListDatasource({});
         })
-        .controller('AdminBlogCtrl', function ($scope, blogListDatasource) {
+        .factory('blogEditor', function (blogOneDatasource, markdownRenderService) {
+            return {
+                getBlog: function () {
+                    return blogOneDatasource.data;
+                },
+                setBlog: function (blog) {
+                    if (blog.id) {
+                        blogOneDatasource.id = blog.id;
+                    }
+                    blogOneDatasource.data = blog;
+                },
+                saveBlog: function (blog, callback) {
+                    var s = this;
+                    s.setBlog(blog);
+                    blogOneDatasource.save(function (err, data) {
+                        if (!err) {
+                            blogOneDatasource.clear();
+                        }
+                        callback(err);
+                    });
+                },
+                previewBlog: function (blog) {
+                    if (!blog) {
+                        return {};
+                    }
+                    return {
+                        title: blog.title,
+                        content: markdownRenderService.render(blog.content)
+                    }
+                },
+                clear: function () {
+                    blogOneDatasource.clear();
+                }
+            }
         })
-        .controller('AdminBlogEditCtrl', function ($scope, blogOneDatasource, blogListDatasource, markdownRenderService) {
+        .controller('AdminBlogCtrl', function ($scope,
+                                               blogListDatasource) {
+        })
+        .controller('AdminBlogEditCtrl', function ($scope, blogEditor, blogListDatasource) {
             ap.copy({
                 save: function (blog) {
-                    blogOneDatasource.data = blog;
-                    blogOneDatasource.save(function (err, data) {
-                        blogOneDatasource.clear();
+                    blogEditor.saveBlog(blog, function (err, data) {
                         blogListDatasource.reload();
                     });
                 },
@@ -2207,33 +2432,25 @@
                     $scope.close();
                 },
                 close: function () {
-                    $scope.editing = false;
+                    blogEditor.clear();
                 }
             }, $scope);
             Object.defineProperties($scope, {
                 blog: {
-                    get: function () {
-                        return blogOneDatasource.data;
-                    },
-                    set: function (blog) {
-                        blogOneDatasource.data = blog;
-                    }
+                    get: blogEditor.getBlog.bind(blogEditor),
+                    set: blogEditor.setBlog.bind(blogEditor)
                 },
                 preview: {
                     get: function () {
-                        var blog = $scope.blog;
-                        if (!blog) {
-                            return {};
-                        }
-                        return {
-                            title: blog.title,
-                            content: markdownRenderService.render(blog.content)
-                        }
+                        return blogEditor.previewBlog(blogEditor.getBlog())
                     }
                 }
             });
         })
-        .controller('AdminBlogListCtrl', function ($scope, blogOneDatasource, blogListDatasource, textSummarizeLogic,
+        .controller('AdminBlogListCtrl', function ($scope,
+                                                   blogOneDatasource,
+                                                   blogListDatasource,
+                                                   textSummarizeLogic,
                                                    toastMessageService,
                                                    confirmMessageService) {
             var l = $scope.locale;
@@ -2243,10 +2460,10 @@
                     blogOneDatasource.load();
                 },
                 destroy: function (blog) {
-                    //var sure = confirmMessageService.confirm(l.pages.admin.ASK_SURE);
-                    //if (!sure) {
-                    //    return;
-                    //}
+                    var sure = confirmMessageService.confirm(l.pages.admin.ASK_SURE);
+                    if (!sure) {
+                        return;
+                    }
 
                     blogOneDatasource.id = blog._id;
                     blogOneDatasource.load(function () {

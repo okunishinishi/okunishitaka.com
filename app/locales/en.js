@@ -111,6 +111,7 @@ l.pages = {
     admin: {
         LOGO: ["admin", l.meta.NAME].join('.'),
         ASK_SURE: 'Are you sure?',
+        SAVE_BLOG_DONE: 'The entry has been saved.',
         DESTROY_BLOG_DONE: 'The entry has been deleted.'
     }
 }
