@@ -45,7 +45,7 @@ l.pageNames = {
     PROFILE: 'Profile',
     BLOG: 'Blog',
     WORK: 'Works'
-}
+};
 
 l.pageDescriptions = {
     INDEX: 'Top page.',
@@ -65,7 +65,7 @@ l.buttons = {
     TRY_DEMO: 'Try demo',
     VIEW_SOURCE_CODE: 'View the source code',
     VISIT_SITE: 'Visit the site'
-}
+};
 
 l.errors = {
     CONFLICT_ERROR: 'Conflict occured.',

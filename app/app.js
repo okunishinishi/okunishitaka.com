@@ -87,9 +87,7 @@ app.start = function (port, settings, callback) {
                     filename: settings.errorLogFile,
                     console: isDevelopment
                 }),
-                mw.sendServerErrorMiddleware({
-
-                })
+                mw.sendServerErrorMiddleware({})
             ])
                 .listen(port, function () {
                     /**
@@ -112,18 +110,18 @@ app.start = function (port, settings, callback) {
 app._clean = function (callback) {
     var clean = require.resolve('./bin/clean');
     childProcess.fork(clean).on('exit', callback);
-}
+};
 
 app._setupStorage = function (dataDir, callback) {
     storages.connect(dataDir, callback);
-}
+};
 
 app._newServer = function (middlewares) {
     var server = web.ext.connect();
     middlewares.forEach(function (middleare) {
         server.use(middleare);
     });
-    return  server;
-}
+    return server;
+};
 app.close = u.doNothing;
 module.exports = app;
