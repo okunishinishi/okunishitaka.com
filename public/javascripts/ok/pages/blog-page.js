@@ -23,7 +23,7 @@
         })
         .controller('BlogCtrl', function ($scope, blogListingDatasource) {
             ap.copy({
-                list: blogListingDatasource
+                listing: blogListingDatasource
             }, $scope);
 
             blogListingDatasource.load();

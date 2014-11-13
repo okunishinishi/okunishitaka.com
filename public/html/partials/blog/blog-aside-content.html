@@ -1,6 +1,6 @@
 <div ng:controller="BlogAsideCtrl">
     <ul>
-        <li ng:repeat="b in list.data">
+        <li ng:repeat="b in listing.data">
             <a href="javascript:void(0)" ng:click="scrollTo('blog-' + b._id)">{{b.title}}</a>
         </li>
     </ul>

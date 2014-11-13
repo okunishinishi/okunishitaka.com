@@ -94,7 +94,7 @@
             var l = $scope.locale;
 
             ap.copy({
-                list: blogListingDatasource,
+                listing: blogListingDatasource,
                 edit: function (blog) {
                     blogOneDatasource.id = blog._id;
                     blogOneDatasource.load();
@@ -111,7 +111,7 @@
                             if (!err) {
                                 var msg = l.pages.admin.DESTROY_BLOG_DONE;
                                 toastMessageService.showInfoMessage(msg);
-                                list.load();
+                                blogListingDatasource.load();
                             }
                         });
                     });

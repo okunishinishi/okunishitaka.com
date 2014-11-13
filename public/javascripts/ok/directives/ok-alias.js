@@ -15,11 +15,24 @@
                     if (!alias) {
                         return;
                     }
+                    var values = {};
                     Object.keys(alias).forEach(function (key) {
                         var expression = alias[key];
                         scope.$watch(expression, function (value) {
-                            scope[key] = value;
+                            values[key] = value;
                         }, true);
+                        Object.defineProperty(scope, key, {
+                            get: function () {
+                                return values[key];
+                            },
+                            set: function () {
+                                var msg = [
+                                    'You can not set value with key "' + key + '"',
+                                    'because it is defined as alias key by okAlias directive.'
+                                ].join(',');
+                                throw new Error(msg);
+                            }
+                        });
                     });
                 }
             }

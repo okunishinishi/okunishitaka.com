@@ -14,7 +14,7 @@
         .run(function ($rootScope) {
             $rootScope.page = 'work';
         })
-        .factory('workListDatasource', function (WorkListingDatasource) {
+        .factory('workListingDatasource', function (WorkListingDatasource) {
             return new WorkListingDatasource({
                 _sort: '_at',
                 _revert: true,
@@ -37,9 +37,9 @@
         })
         .controller('WorkCtrl', function ($scope) {
         })
-        .controller('WorkListCtrl', function ($scope, workListDatasource) {
+        .controller('WorkListCtrl', function ($scope, workListingDatasource) {
             ap.copy({
-                list: workListDatasource,
+                listing: workListingDatasource,
                 hrefForWork: function (work) {
                     if (!work) {
                         return null;
@@ -48,7 +48,7 @@
                     return links[work.demo] || links[work.link] || links[work.repo];
                 }
             }, $scope);
-            workListDatasource.load();
+            workListingDatasource.load();
         });
 
 })(angular, apeman, jQuery);

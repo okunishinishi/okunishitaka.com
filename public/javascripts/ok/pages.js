@@ -107,7 +107,7 @@
             var l = $scope.locale;
 
             ap.copy({
-                list: blogListingDatasource,
+                listing: blogListingDatasource,
                 edit: function (blog) {
                     blogOneDatasource.id = blog._id;
                     blogOneDatasource.load();
@@ -124,7 +124,7 @@
                             if (!err) {
                                 var msg = l.pages.admin.DESTROY_BLOG_DONE;
                                 toastMessageService.showInfoMessage(msg);
-                                list.load();
+                                blogListingDatasource.load();
                             }
                         });
                     });
@@ -184,7 +184,7 @@
         })
         .controller('BlogCtrl', function ($scope, blogListingDatasource) {
             ap.copy({
-                list: blogListingDatasource
+                listing: blogListingDatasource
             }, $scope);
 
             blogListingDatasource.load();
@@ -394,7 +394,7 @@
         .run(function ($rootScope) {
             $rootScope.page = 'work';
         })
-        .factory('workListDatasource', function (WorkListingDatasource) {
+        .factory('workListingDatasource', function (WorkListingDatasource) {
             return new WorkListingDatasource({
                 _sort: '_at',
                 _revert: true,
@@ -417,9 +417,9 @@
         })
         .controller('WorkCtrl', function ($scope) {
         })
-        .controller('WorkListCtrl', function ($scope, workListDatasource) {
+        .controller('WorkListCtrl', function ($scope, workListingDatasource) {
             ap.copy({
-                list: workListDatasource,
+                listing: workListingDatasource,
                 hrefForWork: function (work) {
                     if (!work) {
                         return null;
@@ -428,7 +428,7 @@
                     return links[work.demo] || links[work.link] || links[work.repo];
                 }
             }, $scope);
-            workListDatasource.load();
+            workListingDatasource.load();
         });
 
 })(angular, apeman, jQuery);
