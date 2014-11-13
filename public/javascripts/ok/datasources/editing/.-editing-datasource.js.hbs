@@ -1,0 +1,34 @@
+/**
+ * Editing data source for {{name}}.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.datasources')
+        .factory('{{Name}}EditingDatasource', function (EditingDatasource, {{Name}}Entity, {{name}}ApiService) {
+            return EditingDatasource.define(
+                /** @lends {{Name}}EditingDatasource.prototype */
+                {
+{{#if one}}                    _oneRequest: function (id, callback) {
+                        {{name}}ApiService.one(id, callback);
+                    },
+                    _createRequest: function (data, callback) {
+                        {{name}}ApiService.create(data, callback);
+                    },
+                    _updateRequest: function (id, data, callback) {
+                        {{name}}ApiService.update(id, data, callback);
+                    },
+{{/if}}{{#if singleton}}                    _oneRequest: function (id, callback) {
+                        {{name}}ApiService.singleton(callback);
+                    },
+                    _updateRequest: function (data, callback) {
+                        {{name}}ApiService.save(data, callback);
+                    },
+                    {{/if}}
+                }
+            );
+        });
+})(angular, apeman);

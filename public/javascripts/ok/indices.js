@@ -55,6 +55,9 @@
         .factory('datasourcesIndex', function defineDatasourcesIndex($injector) {
             return {
                 get Datasource() { return $injector.get('Datasource'); },
+                get BlogEditingDatasource() { return $injector.get('BlogEditingDatasource'); },
+                get EditingDatasource() { return $injector.get('EditingDatasource'); },
+                get ProfileEditingDatasource() { return $injector.get('ProfileEditingDatasource'); },
                 get BlogListingDatasource() { return $injector.get('BlogListingDatasource'); },
                 get ListingDatasource() { return $injector.get('ListingDatasource'); },
                 get WorkListingDatasource() { return $injector.get('WorkListingDatasource'); },

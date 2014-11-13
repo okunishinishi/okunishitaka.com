@@ -1,6 +1,7 @@
 /**
- * Page script for admin.
- * @requires angular
+ * @ngdoc module
+ * @module ok.adminBlogPage
+ * @description Page script for admin.
  */
 
 (function (ng, ap) {
@@ -14,8 +15,22 @@
         .run(function ($rootScope) {
 
         })
+        .factory('blogEditingDatasource', function (BlogEditingDatasource) {
+
+        })
         .factory('blogOneDatasource', function (BlogOneDatasource) {
             return new BlogOneDatasource({});
+        })
+        .factory('previewBlog', function (markdownRenderService) {
+            return function (blog) {
+                if (!blog) {
+                    return {};
+                }
+                return {
+                    title: blog.title,
+                    content: markdownRenderService.render(blog.content)
+                }
+            }
         })
         .factory('blogEditor', function (blogOneDatasource, markdownRenderService) {
             return {
