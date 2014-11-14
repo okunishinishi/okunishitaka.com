@@ -8,7 +8,7 @@
 
     ng
         .module('ok.datasources')
-        .factory('EditingDatasource', function (ViewingDatasource) {
+        .factory('EditingDatasource', function (Datasource, ViewingDatasource) {
 
             /**
              * @agutments Datasource
@@ -66,7 +66,7 @@
                             s._createRequest(data, callback);
                         }
                     },
-                    clear:function(){
+                    clear: function () {
                         var s = this;
                         s._discard()
                     }

@@ -24,9 +24,13 @@
 <header ng:include="partials.ADMIN_HEADER" ng:controller="HeaderControl"></header>
 <div ng:include="partials.TOAST"></div>
 
-<main class="container" ng:controller="AdminCtrl">
-    <div ng:include="partials.ADMIN_BLOG_EDITOR_SECTION"></div>
-    <div ng:include="partials.ADMIN_BLOG_LIST_SECTION"></div>
+<main ng:controller="AdminCtrl">
+    <div ng:controller="AdminBlogCtrl">
+        <div class="container" ng:alias="{blogs:'listing.data', blog:'editing.data'}">
+            <div ng:include="partials.ADMIN_BLOG_EDITOR_SECTION"></div>
+            <div ng:include="partials.ADMIN_BLOG_LIST_SECTION"></div>
+        </div>
+    </div>
 </main>
 
 <footer ng:include="partials.FOOTER" ng:controller="FooterControl"></footer>

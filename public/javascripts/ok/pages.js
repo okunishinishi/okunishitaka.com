@@ -29,10 +29,7 @@
 
         })
         .factory('blogEditingDatasource', function (BlogEditingDatasource) {
-
-        })
-        .factory('blogOneDatasource', function (BlogOneDatasource) {
-            return new BlogOneDatasource({});
+            return new BlogEditingDatasource({});
         })
         .factory('previewBlog', function (markdownRenderService) {
             return function (blog) {
@@ -45,67 +42,22 @@
                 }
             }
         })
-        .factory('blogEditor', function (blogOneDatasource, markdownRenderService) {
-            return {
-                getBlog: function () {
-                    return blogOneDatasource.data;
-                },
-                setBlog: function (blog) {
-                    if (blog.id) {
-                        blogOneDatasource.id = blog.id;
-                    }
-                    blogOneDatasource.data = blog;
-                },
-                saveBlog: function (blog, callback) {
-                    var s = this;
-                    s.setBlog(blog);
-                    blogOneDatasource.save(function (err, data) {
-                        if (!err) {
-                            blogOneDatasource.clear();
-                        }
-                        callback(err);
-                    });
-                },
-                previewBlog: function (blog) {
-                    if (!blog) {
-                        return {};
-                    }
-                    return {
-                        title: blog.title,
-                        content: markdownRenderService.render(blog.content)
-                    }
-                },
-                clear: function () {
-                    blogOneDatasource.clear();
-                }
-            }
-        })
         .controller('AdminBlogCtrl', function ($scope) {
         })
-        .controller('AdminBlogEditCtrl', function ($scope, blogEditor) {
+        .controller('AdminBlogEditCtrl', function ($scope, blogEditingDatasource) {
             ap.copy({
+                editing: blogEditingDatasource,
                 save: function (blog) {
-                    blogEditor.saveBlog(blog, function (err, data) {
+                    blogEditingDatasource.save(function (err, data) {
                     });
                 },
                 cancel: function () {
                     $scope.close();
                 },
                 close: function () {
-                    blogEditor.clear();
+                    blogEditingDatasource.clear();
                 }
             }, $scope);
-            Object.defineProperties($scope, {
-                blog: {
-                    get: blogEditor.getBlog.bind(blogEditor),
-                    set: blogEditor.setBlog.bind(blogEditor)
-                },
-                preview: {
-                    get: function () {
-                        return blogEditor.previewBlog(blogEditor.getBlog())
-                    }
-                }
-            });
         })
         .factory('blogListingDatasource', function (BlogListingDatasource) {
             return new BlogListingDatasource({
@@ -114,7 +66,7 @@
             });
         })
         .controller('AdminBlogListCtrl', function ($scope,
-                                                   blogOneDatasource,
+                                                   blogEditingDatasource,
                                                    blogListingDatasource,
                                                    textSummarizeLogic,
                                                    toastMessageService,
@@ -124,8 +76,8 @@
             ap.copy({
                 listing: blogListingDatasource,
                 edit: function (blog) {
-                    blogOneDatasource.id = blog._id;
-                    blogOneDatasource.load();
+                    blogEditingDatasource.id = blog._id;
+                    blogEditingDatasource.load();
                 },
                 destroy: function (blog) {
                     var sure = confirmMessageService.confirm(l.pages.admin.ASK_SURE);

@@ -21,6 +21,9 @@
                     _updateRequest: function (id, data, callback) {
                         blogApiService.update(id, data, callback);
                     },
+                    _parseData: function (data) {
+                        return BlogEntity.new(data);
+                    }
                 }
             );
         });
