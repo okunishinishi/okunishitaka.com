@@ -1,5 +1,5 @@
 <section id="admin-blog-editor-section"
-         ng:class="{'blog-editor-visible':status.isEditing}"
+         ng:class="{'blog-editor-visible':!!editing.data}"
          ng:controller="AdminBlogEditCtrl" class="cover">
     <div id="admin-blog-editor-section-content"
          ok:alias="{blog:'editing.data'}"
@@ -25,14 +25,13 @@
                     </div>
                     <div class="field">
                         <div class="text-align-center">
-                            <a id="blog-cancel-button" class="button"
-                               href="javascript:void(0)"
-                               ng:click="cancel()"
-                                    >{{l.buttons.CANCEL}}</a>
-                            <a id="blog-save-button" class="button button-primary"
-                               href="javascript:void(0)"
-                               ng:click="save(blog)"
-                                    >{{l.buttons.SAVE}}</a>
+                            <a id="blog-cancel-button"
+                               ok:button
+                               ng:click="cancel()">{{l.buttons.CANCEL}}</a>
+                            <a id="blog-save-button"
+                               ok:button
+                               ok:button-type="'primary'"
+                               ng:click="save(blog)">{{l.buttons.SAVE}}</a>
                         </div>
                     </div>
                 </fieldset>

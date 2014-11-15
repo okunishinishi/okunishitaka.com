@@ -41,6 +41,7 @@
                 editing: blogEditingDatasource,
                 save: function (blog) {
                     blogEditingDatasource.save(function (err, data) {
+                        $scope.close();
                     });
                 },
                 cancel: function () {
