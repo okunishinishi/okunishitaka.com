@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, user-scalable=no"/>
 
 <!-- Open graph tags -->
-<meta property="og:title" content="{{title(page)}}"/>
+<meta property="og:title" content="{{page | pageTitleFilter:l}}"/>
 <meta property="og:type" content="website"/>
 <meta property="og:image" content=""/> <!-- FIXME -->
 <meta property="og:url" content="{{app.HOMEPAGE}}"/>
@@ -17,7 +17,7 @@
 
 <!-- Twitter tags -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="{{title(page)}}">
+<meta name="twitter:title" content="{{page | pageTitleFilter:l}}">
 <meta name="twitter:description" content="{{l.meta.DESCRIPTION}}"/>
 <meta name="twitter:image" content=""/> <!-- FIXME -->
 

@@ -1,5 +1,5 @@
 /**
- * Test for {{name}}
+ * Test for pageTitle
  * Runs with karma.
  */
 
@@ -9,16 +9,16 @@
 var ng = angular,
     mock = ng.mock;
 
-describe('{{name}}Filter', function () {
+describe('pageTitleFilter', function () {
 
-    var {{name}}Filter;
+    var pageTitleFilter;
     beforeEach(mock.module('ok.filters'));
     beforeEach(function () {
         inject(function ($filter) {
-            {{name}}Filter = $filter('{{name}}Filter');
+            pageTitleFilter = $filter('pageTitleFilter');
         });
     });
     it('Inject the filter.', inject(function () {
-        expect({{name}}Filter).toBeDefined();
+        expect(pageTitleFilter).toBeDefined();
     }));
 });

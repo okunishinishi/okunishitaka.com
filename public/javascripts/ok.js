@@ -439,6 +439,7 @@
 		    "ADMIN_HEADER": "/html/partials/admin/admin-header.html",
 		    "BLOG_ASIDE_CONTENT": "/html/partials/blog/blog-aside-content.html",
 		    "BLOG_LIST_SECTION": "/html/partials/blog/blog-list-section.html",
+		    "FAVICON": "/html/partials/favicon.html",
 		    "FOOTER": "/html/partials/footer.html",
 		    "HEADER": "/html/partials/header.html",
 		    "INDEX_CONTENT_TITLE": "/html/partials/index/index-content-title.html",
@@ -447,6 +448,7 @@
 		    "PROFILE_LIST": "/html/partials/profile/profile-list.html",
 		    "PROFILE_TABLE": "/html/partials/profile/profile-table.html",
 		    "SOCIAL": "/html/partials/social.html",
+		    "TITLE": "/html/partials/title.html",
 		    "TOAST": "/html/partials/toast.html",
 		    "TRACK": "/html/partials/track.html",
 		    "WORK_LINK": "/html/partials/work/work-link.html",
@@ -1982,6 +1984,28 @@
 
 /**
  * @ngdoc filter
+ * @filter pageTitleFilter
+ * @description Page title filter
+ */
+
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.filters')
+        .filter('pageTitleFilter', function definePageTitleFilter() {
+            return function pageTitleFilter(pageName, l) {
+                var appName = l.meta.NAME;
+                if (!pageName) {
+                    return appName;
+                }
+                pageName = l.pageNames[pageName.toUpperCase()] || pageName;
+                return [pageName, appName].join(' - ');
+            };
+        });
+})(angular, apeman);
+/**
+ * @ngdoc filter
  * @filter tagColorFilter
  * @description Tag color filter
  */
@@ -2132,7 +2156,6 @@
             return {
                 get errorCodeLogic() { return $injector.get('errorCodeLogic'); },
                 get multiLangUrlLogic() { return $injector.get('multiLangUrlLogic'); },
-                get pageTitleLogic() { return $injector.get('pageTitleLogic'); },
                 get textLinkLogic() { return $injector.get('textLinkLogic'); },
                 get textSummarizeLogic() { return $injector.get('textSummarizeLogic'); },
                 get urlFormatLogic() { return $injector.get('urlFormatLogic'); }
@@ -2192,6 +2215,7 @@
                 get blogBlogEditSectionHtmlTemplate() { return $injector.get('blogBlogEditSectionHtmlTemplate'); },
                 get blogBlogListSectionContentHtmlTemplate() { return $injector.get('blogBlogListSectionContentHtmlTemplate'); },
                 get blogBlogListSectionHtmlTemplate() { return $injector.get('blogBlogListSectionHtmlTemplate'); },
+                get faviconHtmlTemplate() { return $injector.get('faviconHtmlTemplate'); },
                 get footerHtmlTemplate() { return $injector.get('footerHtmlTemplate'); },
                 get headerHtmlTemplate() { return $injector.get('headerHtmlTemplate'); },
                 get indexIndexContentTitleHtmlTemplate() { return $injector.get('indexIndexContentTitleHtmlTemplate'); },
@@ -2202,6 +2226,7 @@
                 get profileProfileListHtmlTemplate() { return $injector.get('profileProfileListHtmlTemplate'); },
                 get profileProfileTableHtmlTemplate() { return $injector.get('profileProfileTableHtmlTemplate'); },
                 get socialHtmlTemplate() { return $injector.get('socialHtmlTemplate'); },
+                get titleHtmlTemplate() { return $injector.get('titleHtmlTemplate'); },
                 get toastHtmlTemplate() { return $injector.get('toastHtmlTemplate'); },
                 get trackHtmlTemplate() { return $injector.get('trackHtmlTemplate'); },
                 get workWorkLinkHtmlTemplate() { return $injector.get('workWorkLinkHtmlTemplate'); },
@@ -2311,34 +2336,6 @@
                         }
                     }
                     return null;
-                }
-            }
-        });
-})(angular, apeman);
-/**
- * Page title logic.
- * @requires angular
- * @requires apeman
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.logics')
-        .factory('pageTitleLogic', function definePageTitleLogic() {
-            return {
-                /**
-                 * Get title for a page.
-                 * @param {object} l - Locale object.
-                 * @param {string} pageName - Page name.
-                 */
-                tilteForPage: function (l, pageName) {
-                    var appName = l.meta.NAME;
-                    if (!pageName) {
-                        return appName;
-                    }
-                    pageName = l.pageNames[pageName.toUpperCase()] || pageName;
-                    return [pageName, appName].join(' - ');
                 }
             }
         });
@@ -2684,9 +2681,6 @@
                     get l() {
                         //alias of locale
                         return locale;
-                    },
-                    title: function (page) {
-                        return lg.pageTitleLogic.tilteForPage(locale, page);
                     },
                     app: cn.appConstant,
                     links: cn.linkUrlConstant,
@@ -3589,6 +3583,21 @@
 
 })(angular);
 /**
+ * Template for faviconHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('faviconHtmlTemplate', {
+		    "name": "/html/partials/favicon.html",
+		    "content": "<link rel=\"icon\" href=\"/favicon.png?v=0.0.0\">"
+		});
+
+})(angular);
+/**
  * Template for footerHtml
  * @ngdoc object
  */
@@ -3689,7 +3698,7 @@
         .module('ok.templates')
         .value('metaHtmlTemplate', {
 		    "name": "/html/partials/meta.html",
-		    "content": "<!-- Meta HTML -->\n<meta ng:attr-charset=\"UTF-8\">\n<meta name=\"fragment\" content=\"!\">\n<meta name=\"application-name\" content=\"{{l.meta.NAME}}\"/>\n<meta name=\"description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"generator\" content=\"apeman\"/>\n<meta name=\"author\" content=\"{{l.meta.AUTHOR}}\"/>\n<meta name=\"viewport\" content=\"width=device-width, user-scalable=no\"/>\n\n<!-- Open graph tags -->\n<meta property=\"og:title\" content=\"{{title(page)}}\"/>\n<meta property=\"og:type\" content=\"website\"/>\n<meta property=\"og:image\" content=\"\"/> <!-- FIXME -->\n<meta property=\"og:url\" content=\"{{app.HOMEPAGE}}\"/>\n<meta property=\"og:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n\n\n<!-- Twitter tags -->\n<meta name=\"twitter:card\" content=\"summary\">\n<meta name=\"twitter:title\" content=\"{{title(page)}}\">\n<meta name=\"twitter:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"twitter:image\" content=\"\"/> <!-- FIXME -->\n\n"
+		    "content": "<!-- Meta HTML -->\n<meta ng:attr-charset=\"UTF-8\">\n<meta name=\"fragment\" content=\"!\">\n<meta name=\"application-name\" content=\"{{l.meta.NAME}}\"/>\n<meta name=\"description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"generator\" content=\"apeman\"/>\n<meta name=\"author\" content=\"{{l.meta.AUTHOR}}\"/>\n<meta name=\"viewport\" content=\"width=device-width, user-scalable=no\"/>\n\n<!-- Open graph tags -->\n<meta property=\"og:title\" content=\"{{page | pageTitleFilter:l}}\"/>\n<meta property=\"og:type\" content=\"website\"/>\n<meta property=\"og:image\" content=\"\"/> <!-- FIXME -->\n<meta property=\"og:url\" content=\"{{app.HOMEPAGE}}\"/>\n<meta property=\"og:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n\n\n<!-- Twitter tags -->\n<meta name=\"twitter:card\" content=\"summary\">\n<meta name=\"twitter:title\" content=\"{{page | pageTitleFilter:l}}\">\n<meta name=\"twitter:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"twitter:image\" content=\"\"/> <!-- FIXME -->\n\n"
 		});
 
 })(angular);
@@ -3735,6 +3744,21 @@
         .value('socialHtmlTemplate', {
 		    "name": "/html/partials/social.html",
 		    "content": "<div id=\"social-buttons-container\" class=\"container\">\n    <div ok:fade-in ok:duration=\"400\" ok:delay=\"800\">\n\n        <div class=\"button-container\" id=\"facebook-button-container\">\n            <div ok:facebook-button ok:href=\"links['OKUNISHITAKA_DOT_COM']\"></div>\n        </div>\n\n\n        <div class=\"button-container\" id=\"twitter-button-container\">\n            <div ok:twitter-button ok:href=\"links['OKUNISHITAKA_DOT_COM']\" ok:via=\"okunishinishi\"></div>\n        </div>\n\n        <br class=\"clear-both\"/>\n    </div>\n</div>"
+		});
+
+})(angular);
+/**
+ * Template for titleHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('titleHtmlTemplate', {
+		    "name": "/html/partials/title.html",
+		    "content": "<title ng:bind=\"page | pageTitleFilter:l\"></title>"
 		});
 
 })(angular);

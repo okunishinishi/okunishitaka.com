@@ -8,10 +8,8 @@
 <head ng:attr-lang="{{{lang}}}" ng:controller="HeadControl">
 
     <meta ok:replace="url(partials.META)">
-
-    <title ng:bind="title(page)"></title>
-
-    <link rel="icon" href="/favicon.png"/>
+    <title ok:replace="url(partials.TITLE)" ></title>
+    <link ok:replace="url(partials.FAVICON)">
 
 {{#each stylesheets}}    <link rel="stylesheet" href="/stylesheets/{{this}}"/>
 {{/each}}

@@ -249,9 +249,6 @@
                         //alias of locale
                         return locale;
                     },
-                    title: function (page) {
-                        return lg.pageTitleLogic.tilteForPage(locale, page);
-                    },
                     app: cn.appConstant,
                     links: cn.linkUrlConstant,
                     images: cn.imageUrlConstant,
