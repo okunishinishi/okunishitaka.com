@@ -87,6 +87,7 @@
                         var s = this;
                         Datasource.prototype.init.apply(s, arguments);
                         s.data = null;
+                        return s;
                     },
                     /**
                      * Load data.
@@ -96,6 +97,7 @@
                         var s = this;
                         s._discard();
                         s._fetch(callback);
+                        return s;
                     }
                 },
                 new Datasource({})

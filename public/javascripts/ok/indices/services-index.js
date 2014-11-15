@@ -15,6 +15,7 @@
                 get profileApiService() { return $injector.get('profileApiService'); },
                 get settingApiService() { return $injector.get('settingApiService'); },
                 get workApiService() { return $injector.get('workApiService'); },
+                get blogRenderService() { return $injector.get('blogRenderService'); },
                 get browserDetectService() { return $injector.get('browserDetectService'); },
                 get confirmMessageService() { return $injector.get('confirmMessageService'); },
                 get langDetectService() { return $injector.get('langDetectService'); },

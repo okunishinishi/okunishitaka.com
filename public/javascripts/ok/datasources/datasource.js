@@ -25,6 +25,7 @@
                 init: function (properties) {
                     var s = this;
                     ap.copy(properties || {}, s);
+                    return s;
                 }
             };
 

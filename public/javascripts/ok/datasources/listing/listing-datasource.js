@@ -111,6 +111,7 @@
                         s.hasMore = true;
                         s.data = [];
                         s.skip = 0;
+                        return s;
                     },
                     /**
                      * Clear and fetch data.
@@ -120,6 +121,7 @@
                         var s = this;
                         s._discard();
                         s._fetch(callback);
+                        return s;
                     },
                     /**
                      * Load next resources.
@@ -128,6 +130,7 @@
                     loadMore: function (callback) {
                         var s = this;
                         s._fetch(callback);
+                        return s;
                     }
                 },
                 new Datasource({})

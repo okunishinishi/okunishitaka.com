@@ -2,7 +2,7 @@
          ng:class="{'blog-editor-visible':status.isEditing}"
          ng:controller="AdminBlogEditCtrl" class="cover">
     <div id="admin-blog-editor-section-content"
-
+         ok:alias="{blog:'editing.data'}"
          class="container position-relative">
 
         <a ng:click="close()" id="admin-blog-close-button" class="close-button">{{l.buttons.CLOSE}}</a>
@@ -41,9 +41,9 @@
                 <fieldset>
                     <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>
                     <div id="admin-blog-preview-div">
-                        <h2>{{preview.title}}</h2>
+                        <h2>{{blog.title}}</h2>
 
-                        <div ng:bind-html="preview.content"></div>
+                        <div ng:bind-html="preview(blog).html"></div>
                     </div>
                 </fieldset>
                 <div class="grid-col">

@@ -31,21 +31,13 @@
         .factory('blogEditingDatasource', function (BlogEditingDatasource) {
             return new BlogEditingDatasource({});
         })
-        .factory('previewBlog', function (markdownRenderService) {
-            return function (blog) {
-                if (!blog) {
-                    return {};
-                }
-                return {
-                    title: blog.title,
-                    content: markdownRenderService.render(blog.content)
-                }
-            }
-        })
         .controller('AdminBlogCtrl', function ($scope) {
         })
-        .controller('AdminBlogEditCtrl', function ($scope, blogEditingDatasource) {
+        .controller('AdminBlogEditCtrl', function ($scope, blogEditingDatasource, blogRenderService) {
             ap.copy({
+                preview: function (blog) {
+                    return blogRenderService.renderBlog(blog);
+                },
                 editing: blogEditingDatasource,
                 save: function (blog) {
                     blogEditingDatasource.save(function (err, data) {
@@ -76,8 +68,10 @@
             ap.copy({
                 listing: blogListingDatasource,
                 edit: function (blog) {
-                    blogEditingDatasource.id = blog._id;
-                    blogEditingDatasource.load();
+                    blogEditingDatasource
+                        .init({id: blog._id})
+                        .load(function () {
+                        });
                 },
                 destroy: function (blog) {
                     var sure = confirmMessageService.confirm(l.pages.admin.ASK_SURE);

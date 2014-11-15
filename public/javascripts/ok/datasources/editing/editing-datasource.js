@@ -65,10 +65,12 @@
                         } else {
                             s._createRequest(data, callback);
                         }
+                        return s;
                     },
                     clear: function () {
                         var s = this;
                         s._discard()
+                        return s;
                     }
                 },
                 new ViewingDatasource({})

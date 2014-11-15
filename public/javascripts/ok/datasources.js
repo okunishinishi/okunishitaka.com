@@ -41,6 +41,7 @@
                 init: function (properties) {
                     var s = this;
                     ap.copy(properties || {}, s);
+                    return s;
                 }
             };
 
@@ -164,10 +165,12 @@
                         } else {
                             s._createRequest(data, callback);
                         }
+                        return s;
                     },
                     clear: function () {
                         var s = this;
                         s._discard()
+                        return s;
                     }
                 },
                 new ViewingDatasource({})
@@ -337,6 +340,7 @@
                         s.hasMore = true;
                         s.data = [];
                         s.skip = 0;
+                        return s;
                     },
                     /**
                      * Clear and fetch data.
@@ -346,6 +350,7 @@
                         var s = this;
                         s._discard();
                         s._fetch(callback);
+                        return s;
                     },
                     /**
                      * Load next resources.
@@ -354,6 +359,7 @@
                     loadMore: function (callback) {
                         var s = this;
                         s._fetch(callback);
+                        return s;
                     }
                 },
                 new Datasource({})
@@ -706,6 +712,7 @@
                         var s = this;
                         Datasource.prototype.init.apply(s, arguments);
                         s.data = null;
+                        return s;
                     },
                     /**
                      * Load data.
@@ -715,6 +722,7 @@
                         var s = this;
                         s._discard();
                         s._fetch(callback);
+                        return s;
                     }
                 },
                 new Datasource({})
