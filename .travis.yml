@@ -4,9 +4,13 @@ node_js:
 before_install: 
 install:
 - npm install
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 script:
 - "./ci/bin/build"
 - "./ci/bin/test"
+- "./node_modules/karma/bin/karma start test/browser_unit_tests/karma.conf.js --browsers Firefox --single-run"
 - "./ci/bin/coverage"
 - "./ci/bin/send_coverage"
 env:

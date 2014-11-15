@@ -17,6 +17,8 @@ describe('langDetectService', function () {
     }));
 
     it('Detecta a lang', inject(function (langDetectService) {
+        expect(langDetectService._langWithURL('http://en.blog.example.com', ['ja', 'en'])).toEqual('en');
+        expect(langDetectService._langWithURL('http://ja.blog.example.com', ['ja', 'en'])).toEqual('ja');
         expect(langDetectService.detectLang()).toBeDefined();
     }));
 });

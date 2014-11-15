@@ -2176,7 +2176,6 @@
         .factory('logicsIndex', function defineLogicsIndex($injector) {
             return {
                 get errorCodeLogic() { return $injector.get('errorCodeLogic'); },
-                get multiLangUrlLogic() { return $injector.get('multiLangUrlLogic'); },
                 get textLinkLogic() { return $injector.get('textLinkLogic'); },
                 get urlFormatLogic() { return $injector.get('urlFormatLogic'); }
             };
@@ -2323,36 +2322,6 @@
                         var hit = httpStatusCodes[key] === statusCode;
                         if (hit) {
                             return appErrorCodes[key];
-                        }
-                    }
-                    return null;
-                }
-            }
-        });
-})(angular, apeman);
-/**
- * Multi lang url logic.
- * @requires angular
- * @requires apeman
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.logics')
-        .factory('multiLangUrlLogic', function defineMultiLangUrlLogic(urlUtil) {
-            return {
-                /**
-                 * Get lang for url.
-                 */
-                langForUrl: function (url, supportedLangs) {
-                    supportedLangs = [].concat(supportedLangs);
-                    var hostname = urlUtil.hostnameInUrl(url),
-                        subdomain = hostname.split(/\./g).shift();
-                    for (var i = 0; i < supportedLangs.length; i++) {
-                        var lang = supportedLangs[i];
-                        if (lang === subdomain) {
-                            return lang;
                         }
                     }
                     return null;
@@ -3187,16 +3156,39 @@
 
     ng
         .module('ok.services')
-        .service('langDetectService', function LangDetectService(appConstant, $location, multiLangUrlLogic) {
+        .service('langDetectService', function LangDetectService(appConstant, $location) {
             var s = this,
                 SUPPORTED_LANGS = appConstant.SUPPORTED_LANGS,
                 DEFAULT_LANG = SUPPORTED_LANGS[0];
 
             s.SUPPORTED_LANGS = SUPPORTED_LANGS;
             s.DEFAULT_LANG = DEFAULT_LANG;
+            /**
+             * Get rang from url
+             * @param {string} url - Url to work with.
+             * @param {string[]} supportedLangs - Supported lang names.
+             * @returns {string} - Detected lang.
+             * @private
+             */
+            s._langWithURL = function (url, supportedLangs) {
+                supportedLangs = [].concat(supportedLangs);
+                var hostname = urlUtil.hostnameInUrl(url),
+                    subdomain = hostname.split(/\./g).shift();
+                for (var i = 0; i < supportedLangs.length; i++) {
+                    var lang = supportedLangs[i];
+                    if (lang === subdomain) {
+                        return lang;
+                    }
+                }
+                return null;
+            };
+            /**
+             * Detect a lang.
+             * @returns {string} - Detected lang.
+             */
             s.detectLang = function () {
                 var url = $location.href;
-                return multiLangUrlLogic.langForUrl(url, SUPPORTED_LANGS) || DEFAULT_LANG;
+                return s._langWithURL(url, SUPPORTED_LANGS) || DEFAULT_LANG;
             };
 
         });

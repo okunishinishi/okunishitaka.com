@@ -1,42 +1,42 @@
 {
-    "name": "okunishitaka.com",
-    "version": "0.0.0",
-    "description": "Homepage of Taka Okunishi",
-    "main": "index.js",
-    "private": true,
-    "scripts": {
-        "test": "./ci/bin/test",
-        "prestart": "ci/bin/build",
-        "start": "app/bin/start &",
-        "stop": "app/bin/stop",
-        "restart": "app/bin/restart"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/okunishinishi/okunishitaka.com.git"
-    },
-    "author": "Taka Okunishi",
-    "license": "GNU",
-    "bugs": {
-        "url": "https://github.com/okunishinishi/okunishitaka.com/issues"
-    },
-    "keywords": [
-        "homepage",
-        "blog",
-        "okunishi",
-        "person"
-    ],
-    "homepage": "http://okunishitaka.com",
-    "dependencies": {
-        "phantomjs": "^1.9.7-15",
-        "apeman-web": "0.0.15",
-        "apeman-storage": "0.0.13",
-        "apeman-util": "0.0.40",
-        "apeman-front": "0.0.19"
-    },
-    "devDependencies": {
-        "bower": "^1.3.10",
-        "apeman-dev": "0.0.5",
-        "apeman-tasks": "0.0.29"
-    }
+  "name": "okunishitaka.com",
+  "version": "0.0.0",
+  "description": "Homepage of Taka Okunishi",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "./ci/bin/test",
+    "prestart": "ci/bin/build",
+    "start": "app/bin/start &",
+    "stop": "app/bin/stop",
+    "restart": "app/bin/restart"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okunishinishi/okunishitaka.com.git"
+  },
+  "author": "Taka Okunishi",
+  "license": "GNU",
+  "bugs": {
+    "url": "https://github.com/okunishinishi/okunishitaka.com/issues"
+  },
+  "keywords": [
+    "homepage",
+    "blog",
+    "okunishi",
+    "person"
+  ],
+  "homepage": "http://okunishitaka.com",
+  "dependencies": {
+    "phantomjs": "^1.9.7-15",
+    "apeman-web": "0.0.15",
+    "apeman-storage": "0.0.13",
+    "apeman-util": "0.0.40",
+    "apeman-front": "0.0.19"
+  },
+  "devDependencies": {
+    "apeman-dev": "0.0.5",
+    "apeman-tasks": "0.0.29",
+    "karma": "^0.12.25"
+  }
 }

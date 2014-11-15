@@ -11,7 +11,6 @@
         .factory('logicsIndex', function defineLogicsIndex($injector) {
             return {
                 get errorCodeLogic() { return $injector.get('errorCodeLogic'); },
-                get multiLangUrlLogic() { return $injector.get('multiLangUrlLogic'); },
                 get textLinkLogic() { return $injector.get('textLinkLogic'); },
                 get urlFormatLogic() { return $injector.get('urlFormatLogic'); }
             };
