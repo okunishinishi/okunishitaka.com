@@ -165,9 +165,9 @@
 
     ng
         .module('ok.services')
-        .service('blogApiService', function BlogApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
+        .service('blogApiService', function BlogApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatService) {
             var s = this,
-                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
+                formatUrl = urlFormatService.formatUrl.bind(urlFormatService)
 
             /**
              * List resources.
@@ -236,9 +236,9 @@
 
     ng
         .module('ok.services')
-        .service('profileApiService', function ProfileApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
+        .service('profileApiService', function ProfileApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatService) {
             var s = this,
-                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
+                formatUrl = urlFormatService.formatUrl.bind(urlFormatService)
 
             /**
              * Get the singleton data.
@@ -260,9 +260,9 @@
 
     ng
         .module('ok.services')
-        .service('settingApiService', function SettingApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
+        .service('settingApiService', function SettingApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatService) {
             var s = this,
-                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
+                formatUrl = urlFormatService.formatUrl.bind(urlFormatService)
 
         });
 })(angular);
@@ -275,9 +275,9 @@
 
     ng
         .module('ok.services')
-        .service('workApiService', function WorkApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
+        .service('workApiService', function WorkApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatService) {
             var s = this,
-                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
+                formatUrl = urlFormatService.formatUrl.bind(urlFormatService)
 
             /**
              * List resources.
@@ -364,7 +364,7 @@
 
     ng
         .module('ok.services')
-        .service('langDetectService', function LangDetectService(appConstant, $location) {
+        .service('langDetectService', function LangDetectService(appConstant, $location, urlUtil) {
             var s = this,
                 SUPPORTED_LANGS = appConstant.SUPPORTED_LANGS,
                 DEFAULT_LANG = SUPPORTED_LANGS[0];
@@ -594,6 +594,43 @@
              */
             s.showErrorMessage = function (message) {
                 s._showMessage(message, 'error');
+            }
+        });
+
+})(angular, apeman);
+/**
+ * Url format service.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('urlFormatService', function UrlFormatService() {
+            var s = this;
+            /**
+             * Format a url
+             * @param {string} urlString - Url string.
+             * @param {object} data - Data to format.
+             */
+            s.formatUrl = function (urlString, data) {
+                var joiner = '/';
+                return urlString
+                    .split(joiner)
+                    .map(function (pathname) {
+                        var isVariable = pathname.match(/^:/);
+                        if (isVariable) {
+                            var key = pathname.replace(/^:/, '');
+                            if (!data.hasOwnProperty(key)) {
+                                throw new Errror('Missing key:', pathname);
+                            }
+                            return data[key];
+                        }
+                        return pathname;
+                    })
+                    .join(joiner);
             }
         });
 

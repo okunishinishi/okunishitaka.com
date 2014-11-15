@@ -7,9 +7,9 @@
 
     ng
         .module('{{module}}')
-        .service('{{name}}ApiService', function {{Name}}ApiService ($http, apiService, {{#each constants}}{{this}}, {{/each}} urlFormatLogic) {
+        .service('{{name}}ApiService', function {{Name}}ApiService ($http, apiService, {{#each constants}}{{this}}, {{/each}} urlFormatService) {
             var s = this,
-                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
+                formatUrl = urlFormatService.formatUrl.bind(urlFormatService)
 
 {{#if list}}            /**
              * List resources.

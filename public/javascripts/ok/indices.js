@@ -119,8 +119,7 @@
         .factory('logicsIndex', function defineLogicsIndex($injector) {
             return {
                 get errorCodeLogic() { return $injector.get('errorCodeLogic'); },
-                get textLinkLogic() { return $injector.get('textLinkLogic'); },
-                get urlFormatLogic() { return $injector.get('urlFormatLogic'); }
+                get textLinkLogic() { return $injector.get('textLinkLogic'); }
             };
         });
 })(angular);
@@ -150,7 +149,8 @@
                 get locationResolveService() { return $injector.get('locationResolveService'); },
                 get markdownRenderService() { return $injector.get('markdownRenderService'); },
                 get templateCacheService() { return $injector.get('templateCacheService'); },
-                get toastMessageService() { return $injector.get('toastMessageService'); }
+                get toastMessageService() { return $injector.get('toastMessageService'); },
+                get urlFormatService() { return $injector.get('urlFormatService'); }
             };
         });
 })(angular);

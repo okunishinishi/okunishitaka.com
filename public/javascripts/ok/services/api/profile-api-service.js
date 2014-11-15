@@ -7,9 +7,9 @@
 
     ng
         .module('ok.services')
-        .service('profileApiService', function ProfileApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
+        .service('profileApiService', function ProfileApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatService) {
             var s = this,
-                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
+                formatUrl = urlFormatService.formatUrl.bind(urlFormatService)
 
             /**
              * Get the singleton data.

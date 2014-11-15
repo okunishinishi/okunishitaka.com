@@ -7,9 +7,9 @@
 
     ng
         .module('ok.services')
-        .service('settingApiService', function SettingApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
+        .service('settingApiService', function SettingApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatService) {
             var s = this,
-                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
+                formatUrl = urlFormatService.formatUrl.bind(urlFormatService)
 
         });
 })(angular);

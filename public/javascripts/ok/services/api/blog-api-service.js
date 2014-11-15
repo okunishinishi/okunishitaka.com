@@ -7,9 +7,9 @@
 
     ng
         .module('ok.services')
-        .service('blogApiService', function BlogApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatLogic) {
+        .service('blogApiService', function BlogApiService ($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatService) {
             var s = this,
-                formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic)
+                formatUrl = urlFormatService.formatUrl.bind(urlFormatService)
 
             /**
              * List resources.

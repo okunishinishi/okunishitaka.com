@@ -12,7 +12,7 @@ describe('Works', function () {
     it('List works', function (done) {
         var scenario = this;
         request.get({
-            url: scenario.url('/works')
+            url: scenario.url('/api/works')
         }, function (err, res, body) {
             test.ifError(err);
             test.equal(res.statusCode, 200);

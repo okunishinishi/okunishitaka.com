@@ -15,7 +15,7 @@ describe('Blogs', function () {
     it('List blogs.', function (done) {
         var scenario = this;
         request.get({
-            url: scenario.url('/blogs')
+            url: scenario.url('/api/blogs')
         }, function (err, res, body) {
             test.ifError(err);
             test.equal(res.statusCode, 200);
@@ -28,7 +28,7 @@ describe('Blogs', function () {
     it('Create a blog.', function (done) {
         var scenario = this;
         request.post({
-            url: scenario.url('/blogs'),
+            url: scenario.url('/api/blogs'),
             form: {
                 title: 'title-bar',
                 name: 'blog0'
@@ -43,7 +43,7 @@ describe('Blogs', function () {
             test.equal(blog0._vr, 0);
 
             request.post({
-                url: scenario.url('/blogs'),
+                url: scenario.url('/api/blogs'),
                 form: {
                     title: 'title-bar',
                     name: 'blog1'
@@ -58,7 +58,7 @@ describe('Blogs', function () {
     it('Update a blog', function (done) {
         var scenario = this;
         request.put({
-            url: scenario.url('/blogs/' + blog0._id),
+            url: scenario.url('/api/blogs/' + blog0._id),
             form: {
                 content: 'bazbaz',
                 _vr: 0
@@ -75,7 +75,7 @@ describe('Blogs', function () {
     it('Conflict on a blog', function (done) {
         var scenario = this;
         request.put({
-            url: scenario.url('/blogs/' + blog0._id),
+            url: scenario.url('/api/blogs/' + blog0._id),
             form: {
                 content: 'bazbaz',
                 _vr: 0
@@ -90,7 +90,7 @@ describe('Blogs', function () {
     it('Find the blog', function (done) {
         var scenario = this;
         request.get({
-            url: scenario.url('/blogs/' + blog0._id)
+            url: scenario.url('/api/blogs/' + blog0._id)
         }, function (err, res, body) {
             test.ifError(err);
             test.equal(res.statusCode, 200);
@@ -103,7 +103,7 @@ describe('Blogs', function () {
     it('List blogs.', function (done) {
         var scenario = this;
         request.get({
-            url: scenario.url('/blogs') + '?_limit=1&_sort=_at&_reverse=true',
+            url: scenario.url('/api/blogs') + '?_limit=1&_sort=_at&_reverse=true',
         }, function (err, res, body) {
             test.ifError(err);
             test.equal(res.statusCode, 200);
@@ -111,7 +111,7 @@ describe('Blogs', function () {
             test.ok(data.length == 1);
             test.equal(data[0].name, 'blog0');
             request.get({
-                url: scenario.url('/blogs') + '?_skip=1&_sort=_at&_reverse=true',
+                url: scenario.url('/api/blogs') + '?_skip=1&_sort=_at&_reverse=true',
             }, function (err, res, body) {
                 test.ifError(err);
                 test.equal(res.statusCode, 200);
@@ -127,7 +127,7 @@ describe('Blogs', function () {
         var scenario = this;
         request({
             method: 'delete',
-            url: scenario.url('/blogs/' + blog0._id)
+            url: scenario.url('/api/blogs/' + blog0._id)
         }, function (err) {
             test.ifError(err);
             done();
@@ -137,7 +137,7 @@ describe('Blogs', function () {
     it('Find the blog', function (done) {
         var scenario = this;
         request.get({
-            url: scenario.url('/blogs/' + blog0._id)
+            url: scenario.url('/api/blogs/' + blog0._id)
         }, function (err, res, body) {
             test.ifError(err);
             test.equal(res.statusCode, 404);
@@ -149,7 +149,7 @@ describe('Blogs', function () {
     it('Update a blog', function (done) {
         var scenario = this;
         request.put({
-            url: scenario.url('/blogs/' + blog0._id),
+            url: scenario.url('/api/blogs/' + blog0._id),
             form: {
                 content: 'bazbaz',
                 _vr: 1

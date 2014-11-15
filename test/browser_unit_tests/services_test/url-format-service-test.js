@@ -9,14 +9,13 @@
 var ng = angular,
     mock = ng.mock;
 
-describe('urlFormatLogic', function () {
+describe('urlFormatService', function () {
 
-    beforeEach(mock.module('ok.logics'));
-    it('Inject the logic.', inject(function (urlFormatLogic) {
-        expect(urlFormatLogic).toBeDefined();
+    beforeEach(mock.module('ok.services'));
+    it('Inject a service.', inject(function (urlFormatService) {
+        expect(urlFormatService).toBeDefined();
     }));
-
-    it('Format an url', inject(function (urlFormatLogic) {
+    it('Format url.', inject(function (urlFormatService) {
         var formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic);
         expect(formatUrl('/blogs/:_id', {_id: '1234'})).toEqual('/blogs/1234');
         expect(formatUrl('/blogs/:_id/:_idd', {_id: '1234', _idd: '5678'})).toEqual('/blogs/1234/5678');
