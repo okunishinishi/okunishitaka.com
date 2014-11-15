@@ -11,8 +11,7 @@
     ],
     "directives": [
       "ok.filters",
-      "ok.utils",
-      "ok.logics"
+      "ok.utils"
     ],
     "entities": [
     ],

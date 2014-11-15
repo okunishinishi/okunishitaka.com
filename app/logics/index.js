@@ -6,5 +6,5 @@
 "use strict";
 
 module.exports = {
-    get passwordLogic() { return require('./password_logic'); }
+    get passwordHashLogic() { return require('./password_hash_logic'); }
 };

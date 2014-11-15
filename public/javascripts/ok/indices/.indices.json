@@ -10,8 +10,6 @@
     "datasources": {
         "pascal": true
     },
-    "logics": {
-    },
     "services": {
     },
     "templates": {

@@ -18,16 +18,14 @@
             'ok.errors',
             'ok.filters',
             'ok.indices',
-            'ok.logics',
             'ok.services',
             'ok.templates',
             'ok.utils'
         ])
         .factory('global', [
             'constantsIndex',
-            'logicsIndex',
             'servicesIndex',
-            function global(cn, lg, sv) {
+            function global(cn, sv) {
                 var lang = sv.langDetectService.detectLang(),
                     locale = sv.localeLoadService.localeForLang(lang);
                 return {

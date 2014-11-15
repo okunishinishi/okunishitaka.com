@@ -8,8 +8,7 @@
     ng
         .module('ok.directives', [
             'ok.filters',
-            'ok.utils',
-            'ok.logics'
+            'ok.utils'
         ]);
 })(angular);
 

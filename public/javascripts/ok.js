@@ -1203,8 +1203,7 @@
     ng
         .module('ok.directives', [
             'ok.filters',
-            'ok.utils',
-            'ok.logics'
+            'ok.utils'
         ]);
 })(angular);
 
@@ -2167,22 +2166,6 @@
         });
 })(angular);
 /**
- * Logics index.
- * @requires angular
- * @requires apeman
- */
-(function (ng) {
-    "use strict";
-
-    ng
-        .module('ok.indices')
-        .factory('logicsIndex', function defineLogicsIndex($injector) {
-            return {
-                
-            };
-        });
-})(angular);
-/**
  * Services index.
  * @requires angular
  * @requires apeman
@@ -2508,16 +2491,14 @@
             'ok.errors',
             'ok.filters',
             'ok.indices',
-            'ok.logics',
             'ok.services',
             'ok.templates',
             'ok.utils'
         ])
         .factory('global', [
             'constantsIndex',
-            'logicsIndex',
             'servicesIndex',
-            function global(cn, lg, sv) {
+            function global(cn, sv) {
                 var lang = sv.langDetectService.detectLang(),
                     locale = sv.localeLoadService.localeForLang(lang);
                 return {
