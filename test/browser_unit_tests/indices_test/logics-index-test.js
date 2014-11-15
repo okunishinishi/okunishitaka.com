@@ -17,5 +17,6 @@ describe('logicsIndex', function () {
         Object.keys(logicsIndex).forEach(function(key){
             expect(logicsIndex[key]).toBeDefined();
         });
+
     }));
 });

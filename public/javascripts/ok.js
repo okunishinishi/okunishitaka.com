@@ -2033,6 +2033,27 @@
             }
         });
 })(angular, apeman);
+/**
+ * @ngdoc filter
+ * @filter textEllipsisFilter
+ * @description Text ellipsis filter
+ */
+
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.filters')
+        .filter('textEllipsisFilter', function defineTextEllipsisFilter() {
+            return function textEllipsisFilter(text, maxLength) {
+                if (!text) {
+                    return '';
+                }
+                var suffix = '...';
+                return text.substr(0, maxLength - suffix.length) + suffix;
+            };
+        });
+})(angular, apeman);
 
 /**
  * ok indices module.
@@ -2157,7 +2178,6 @@
                 get errorCodeLogic() { return $injector.get('errorCodeLogic'); },
                 get multiLangUrlLogic() { return $injector.get('multiLangUrlLogic'); },
                 get textLinkLogic() { return $injector.get('textLinkLogic'); },
-                get textSummarizeLogic() { return $injector.get('textSummarizeLogic'); },
                 get urlFormatLogic() { return $injector.get('urlFormatLogic'); }
             };
         });
@@ -2372,28 +2392,6 @@
         });
 })(angular, apeman);
 /**
- * Text summarize logic.
- * @requires angular
- * @requires apeman
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.logics')
-        .factory('textSummarizeLogic', function defineTextSummarizeLogic() {
-            return {
-                summarize: function (text, maxLength) {
-                    if (!text) {
-                        return '';
-                    }
-                    var suffix = '...';
-                    return text.substr(0, maxLength - suffix.length) + suffix;
-                }
-            }
-        });
-})(angular, apeman);
-/**
  * Url format logic.
  * @requires angular
  * @requires apeman
@@ -2494,12 +2492,12 @@
         .controller('AdminBlogListCtrl', function ($scope,
                                                    blogEditingDatasource,
                                                    blogListingDatasource,
-                                                   textSummarizeLogic,
                                                    toastMessageService,
                                                    confirmMessageService) {
             var l = $scope.locale;
 
             ap.copy({
+                contentEllipsisLength: 32,
                 listing: blogListingDatasource,
                 edit: function (blog) {
                     blogEditingDatasource
@@ -2523,9 +2521,6 @@
                             }
                         });
                     });
-                },
-                summarize: function (text) {
-                    return textSummarizeLogic.summarize(text, 30);
                 }
             }, $scope);
 
@@ -3443,7 +3438,7 @@
         .module('ok.templates')
         .value('adminAdminBlogListSectionHtmlTemplate', {
 		    "name": "/html/partials/admin/admin-blog-list-section.html",
-		    "content": "<section id=\"admin-blog-list-section\" ng:controller=\"AdminBlogListCtrl\">\n    <ul id=\"admin-blog-list\">\n        <li ng:repeat=\"b in listing.data\" class=\"admin-blog-list-item\">\n\n            <span class=\"admin-blog-list-action-area\">\n                <a href=\"javascript:void(0)\" class=\"link-button\" ng:click=\"edit(b)\"><i class=\"fa fa-pencil\"></i>{{l.buttons.EDIT}}</a>\n                <a href=\"javascript:void(0)\" class=\"link-button\" ng:click=\"destroy(b)\"><i class=\"fa fa-trash-o\"></i>{{l.buttons.DELETE}}</a>\n            </span>\n\n            <div class=\"admin-blog-list-item-inner\">\n\n\n                <h3 class=\"admin-blog-list-title\">\n                    <a class=\"blog-dt-anchor\"\n                       name=\"blog-{{b._id}}\">{{b.title}}</a>\n                </h3>\n\n            <span class=\"admin-blog-list-content\">\n            {{summarize(b.content)}}\n            </span>\n\n            </div>\n        </li>\n    </ul>\n</section>"
+		    "content": "<section id=\"admin-blog-list-section\" ng:controller=\"AdminBlogListCtrl\">\n    <ul id=\"admin-blog-list\">\n        <li ng:repeat=\"b in listing.data\" class=\"admin-blog-list-item\">\n\n            <span class=\"admin-blog-list-action-area\">\n                <a href=\"javascript:void(0)\" class=\"link-button\" ng:click=\"edit(b)\"><i class=\"fa fa-pencil\"></i>{{l.buttons.EDIT}}</a>\n                <a href=\"javascript:void(0)\" class=\"link-button\" ng:click=\"destroy(b)\"><i class=\"fa fa-trash-o\"></i>{{l.buttons.DELETE}}</a>\n            </span>\n\n            <div class=\"admin-blog-list-item-inner\">\n\n\n                <h3 class=\"admin-blog-list-title\">\n                    <a class=\"blog-dt-anchor\"\n                       name=\"blog-{{b._id}}\">{{b.title}}</a>\n                </h3>\n\n            <span class=\"admin-blog-list-content\">\n            {{b.content | textEllipsisFilter:contentEllipsisLength}}\n            </span>\n\n            </div>\n        </li>\n    </ul>\n</section>"
 		});
 
 })(angular);

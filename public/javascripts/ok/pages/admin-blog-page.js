@@ -48,12 +48,12 @@
         .controller('AdminBlogListCtrl', function ($scope,
                                                    blogEditingDatasource,
                                                    blogListingDatasource,
-                                                   textSummarizeLogic,
                                                    toastMessageService,
                                                    confirmMessageService) {
             var l = $scope.locale;
 
             ap.copy({
+                contentEllipsisLength: 32,
                 listing: blogListingDatasource,
                 edit: function (blog) {
                     blogEditingDatasource
@@ -77,9 +77,6 @@
                             }
                         });
                     });
-                },
-                summarize: function (text) {
-                    return textSummarizeLogic.summarize(text, 30);
                 }
             }, $scope);
 

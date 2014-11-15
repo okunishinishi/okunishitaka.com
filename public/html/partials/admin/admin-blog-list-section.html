@@ -16,7 +16,7 @@
                 </h3>
 
             <span class="admin-blog-list-content">
-            {{summarize(b.content)}}
+            {{b.content | textEllipsisFilter:contentEllipsisLength}}
             </span>
 
             </div>
