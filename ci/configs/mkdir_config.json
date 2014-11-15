@@ -4,6 +4,7 @@
     "app/bin",
     "app/codes",
     "app/locales",
+    "app/logics",
     "app/middlewares",
     "app/routes",
     "app/routes/handlers",
