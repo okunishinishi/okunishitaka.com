@@ -11,7 +11,6 @@
             'ok.datasources',
             'ok.entities',
             'ok.errors',
-            'ok.logics',
             'ok.services',
             'ok.templates',
             'ok.utils'
@@ -118,8 +117,7 @@
         .module('ok.indices')
         .factory('logicsIndex', function defineLogicsIndex($injector) {
             return {
-                get errorCodeLogic() { return $injector.get('errorCodeLogic'); },
-                get textLinkLogic() { return $injector.get('textLinkLogic'); }
+                
             };
         });
 })(angular);
@@ -142,6 +140,7 @@
                 get workApiService() { return $injector.get('workApiService'); },
                 get blogRenderService() { return $injector.get('blogRenderService'); },
                 get browserDetectService() { return $injector.get('browserDetectService'); },
+                get codeConvertService() { return $injector.get('codeConvertService'); },
                 get confirmMessageService() { return $injector.get('confirmMessageService'); },
                 get langDetectService() { return $injector.get('langDetectService'); },
                 get localeLoadService() { return $injector.get('localeLoadService'); },

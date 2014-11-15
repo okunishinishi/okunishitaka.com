@@ -16,7 +16,7 @@ describe('urlFormatService', function () {
         expect(urlFormatService).toBeDefined();
     }));
     it('Format url.', inject(function (urlFormatService) {
-        var formatUrl = urlFormatLogic.formatUrl.bind(urlFormatLogic);
+        var formatUrl = urlFormatService.formatUrl.bind(urlFormatService);
         expect(formatUrl('/blogs/:_id', {_id: '1234'})).toEqual('/blogs/1234');
         expect(formatUrl('/blogs/:_id/:_idd', {_id: '1234', _idd: '5678'})).toEqual('/blogs/1234/5678');
     }));

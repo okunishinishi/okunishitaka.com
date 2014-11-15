@@ -9,7 +9,7 @@
 
     ng
         .module('ok.services')
-        .service('apiService', function ApiService($http, errorCodeLogic, AppApiError) {
+        .service('apiService', function ApiService($http, AppApiError, codeConvertService) {
             var s = this;
             ap.copy(
                 /**
@@ -18,9 +18,9 @@
                 {
                     _newError: function (data, status) {
                         var s = this;
-                        var code = errorCodeLogic.errorCodeWithHttpStatus(status);
+                        var code = codeConvertService.errorCodeWithHttpStatus(status);
                         if (code === null) {
-                            code = errorCodeLogic.UNEXPECTED_ERROR;
+                            code = codeConvertService.UNEXPECTED_ERROR;
                         }
                         return new AppApiError(code);
                     },

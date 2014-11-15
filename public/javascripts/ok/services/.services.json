@@ -1,13 +1,14 @@
 [
+  "blogRenderService",
+  "browserDetectService",
+  "codeConvertService",
+  "confirmMessageService",
   "locationChangeService",
   "locationResolveService",
   "localeLoadService",
   "langDetectService",
-  "templateCacheService",
   "markdownRenderService",
-  "browserDetectService",
-  "blogRenderService",
-  "urlFormatService",
-  "confirmMessageService",
-  "toastMessageService"
+  "templateCacheService",
+  "toastMessageService",
+  "urlFormatService"
 ]

@@ -7,10 +7,11 @@
     </thead>
     <tbody>
     <tr ng:repeat="row in data.body" ng:init="headed=!!data.headedBody">
-        <th ng:repeat="cell in row" ng:if="(headed && $first)" ok:linked="data.links" ng:bind="cell"></th>
-        <td ng:repeat="cell in row" ng:if="!(headed && $first)"
-            ok:linked="data.links">
-            <span ng:hide="cell.image">{{cell}}</span>
+        <th ng:repeat="cell in row" ng:if="(headed && $first)"
+            ng:bind-html="cell | textLinkFilter:data.links"></th>
+        <td ng:repeat="cell in row" ng:if="!(headed && $first)">
+            <span ng:hide="cell.image"
+                  ng:bind-html="cell | textLinkFilter:data.links"></span>
             <span ng:show="cell.image"><a href="{{images[cell.image]}}" target="_blank">{{cell.title}}</a></span>
         </td>
     </tr>

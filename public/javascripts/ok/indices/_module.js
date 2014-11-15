@@ -11,7 +11,6 @@
             'ok.datasources',
             'ok.entities',
             'ok.errors',
-            'ok.logics',
             'ok.services',
             'ok.templates',
             'ok.utils'

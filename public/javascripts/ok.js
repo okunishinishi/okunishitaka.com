@@ -1400,32 +1400,6 @@
 })(angular, apeman);
 /**
  * @ngdoc directive
- * @name okLinked
- * @description Ok linked.
- */
-(function (ng, ap, $) {
-    "use strict";
-
-    ng
-        .module('ok.directives')
-        .directive('okLinked', function defineOkLinked(textLinkLogic) {
-            return {
-                link: function (scope, elm, attr) {
-                    scope.$watch(function (scope) {
-                        var text = $(elm).html(),
-                            html = textLinkLogic.toLinkedHtml(text, scope.links || {});
-                        $(elm).html(html).find('a').attr({target: '_blank'});
-                    });
-                },
-                scope: {
-                    links: "=okLinked"
-                }
-            }
-        });
-
-})(angular, apeman, jQuery);
-/**
- * @ngdoc directive
  * @name okReplace
  * @param {string} ngReplace - angular expression evaluating to external HTML URL.
  * @description Replace tag with an external HTML fragment.
@@ -1977,6 +1951,7 @@
     "use strict";
     ng
         .module('ok.filters', [
+            'ok.constants',
             'ok.entities',
             'ok.utils'
         ]);
@@ -2054,6 +2029,35 @@
             };
         });
 })(angular, apeman);
+/**
+ * @ngdoc filter
+ * @filter textLinkFilter
+ * @description Filter to convert links.
+ */
+
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.filters')
+        .filter('textLinkFilter', function defineTextLinkFilter(linkUrlConstant, imageUrlConstant) {
+            return function textLinkFilter(text, links) {
+                var html = String(text);
+                Object.keys(links || {}).forEach(function (key) {
+                    html = html.replace(new RegExp(key, 'g'), function (text) {
+                        var name = links[key],
+                            href = linkUrlConstant[name] || imageUrlConstant[name];
+                        if (href) {
+                            return '<a href="' + href + '">' + text + '</a>';
+                        } else {
+                            return text;
+                        }
+                    });
+                });
+                return html;
+            };
+        });
+})(angular, apeman);
 
 /**
  * ok indices module.
@@ -2068,7 +2072,6 @@
             'ok.datasources',
             'ok.entities',
             'ok.errors',
-            'ok.logics',
             'ok.services',
             'ok.templates',
             'ok.utils'
@@ -2175,8 +2178,7 @@
         .module('ok.indices')
         .factory('logicsIndex', function defineLogicsIndex($injector) {
             return {
-                get errorCodeLogic() { return $injector.get('errorCodeLogic'); },
-                get textLinkLogic() { return $injector.get('textLinkLogic'); }
+                
             };
         });
 })(angular);
@@ -2199,6 +2201,7 @@
                 get workApiService() { return $injector.get('workApiService'); },
                 get blogRenderService() { return $injector.get('blogRenderService'); },
                 get browserDetectService() { return $injector.get('browserDetectService'); },
+                get codeConvertService() { return $injector.get('codeConvertService'); },
                 get confirmMessageService() { return $injector.get('confirmMessageService'); },
                 get langDetectService() { return $injector.get('langDetectService'); },
                 get localeLoadService() { return $injector.get('localeLoadService'); },
@@ -2275,91 +2278,6 @@
         });
 })(angular);
 
-/**
- * ok logics module.
- * @requires angular
- */
-
-(function (ng) {
-    "use strict";
-    ng
-        .module('ok.logics', [
-            'ok.constants',
-            'ok.entities',
-            'ok.errors',
-            'ok.utils'
-        ]);
-})(angular);
-
-/**
- * Error code logic.
- * @requires angular
- * @requires apeman
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.logics')
-        .factory('errorCodeLogic', function defineErrorCodeLogic(codeConstant) {
-            var appErrorCodes = codeConstant.appErrorCodes,
-                httpStatusCodes = codeConstant.httpStatusCodes;
-            return {
-                /**
-                 * Unexpected error code.
-                 * @type {number}
-                 */
-                UNEXPECTED_ERROR: codeConstant.appErrorCodes.UNEXPECTED_ERROR,
-                /**
-                 * Get error code for http status
-                 * @param {number} statusCode - HTTP status code.
-                 */
-                errorCodeWithHttpStatus: function (statusCode) {
-                    statusCode = Number(statusCode);
-                    var keys = Object.keys(appErrorCodes);
-                    for (var i = 0, len = keys.length; i < len; i++) {
-                        var key = keys[i];
-                        var hit = httpStatusCodes[key] === statusCode;
-                        if (hit) {
-                            return appErrorCodes[key];
-                        }
-                    }
-                    return null;
-                }
-            }
-        });
-})(angular, apeman);
-/**
- * Text link logic.
- * @requires angular
- * @requires apeman
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.logics')
-        .factory('textLinkLogic', function defineTextLinkLogic(linkUrlConstant, imageUrlConstant) {
-            return {
-                toLinkedHtml: function (text, links) {
-                    var html = String(text);
-                    Object.keys(links).forEach(function (key) {
-                        html = html.replace(new RegExp(key, 'g'), function (text) {
-                            var name = links[key],
-                                href = linkUrlConstant[name] || imageUrlConstant[name];
-                            if (href) {
-                                return '<a href="' + href + '">' + text + '</a>';
-                            } else {
-                                return text;
-                            }
-                        });
-                    });
-                    return html;
-
-                }
-            }
-        });
-})(angular, apeman);
 
 /**
  * ok pages module.
@@ -2766,7 +2684,6 @@
             'ok.constants',
             'ok.entities',
             'ok.errors',
-            'ok.logics',
             'ok.utils'
         ]);
 })(angular);
@@ -2782,7 +2699,7 @@
 
     ng
         .module('ok.services')
-        .service('apiService', function ApiService($http, errorCodeLogic, AppApiError) {
+        .service('apiService', function ApiService($http, AppApiError, codeConvertService) {
             var s = this;
             ap.copy(
                 /**
@@ -2791,9 +2708,9 @@
                 {
                     _newError: function (data, status) {
                         var s = this;
-                        var code = errorCodeLogic.errorCodeWithHttpStatus(status);
+                        var code = codeConvertService.errorCodeWithHttpStatus(status);
                         if (code === null) {
-                            code = errorCodeLogic.UNEXPECTED_ERROR;
+                            code = codeConvertService.UNEXPECTED_ERROR;
                         }
                         return new AppApiError(code);
                     },
@@ -3090,6 +3007,46 @@
 
         });
 
+})(angular, apeman);
+/**
+ * Code convert service.
+ * @requires angular
+ * @requires apeman
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('codeConvertService', function CodeConvertService(codeConstant) {
+
+            var appErrorCodes = codeConstant.appErrorCodes,
+                httpStatusCodes = codeConstant.httpStatusCodes;
+
+            var s = this;
+            /**
+             * Unexpected error code.
+             * @type {number}
+             */
+            s.UNEXPECTED_ERROR = appErrorCodes.UNEXPECTED_ERROR;
+
+            /**
+             * Get error code for http status
+             * @param {number} statusCode - HTTP status code.
+             */
+            s.errorCodeWithHttpStatus = function (statusCode) {
+                statusCode = Number(statusCode);
+                var keys = Object.keys(appErrorCodes);
+                for (var i = 0, len = keys.length; i < len; i++) {
+                    var key = keys[i];
+                    var hit = httpStatusCodes[key] === statusCode;
+                    if (hit) {
+                        return appErrorCodes[key];
+                    }
+                }
+                return null;
+            }
+        });
 })(angular, apeman);
 /**
  * Confirm message service.
@@ -3700,7 +3657,7 @@
         .module('ok.templates')
         .value('profileProfileListHtmlTemplate', {
 		    "name": "/html/partials/profile/profile-list.html",
-		    "content": "<h3 class=\"caption\">{{caption}}</h3>\n<ul id=\"{{id}}\">\n    <li ng:repeat=\"line in data.lines\"\n        ok:linked=\"data.links\">{{line}}\n    </li>\n</ul>"
+		    "content": "<h3 class=\"caption\">{{caption}}</h3>\n<ul id=\"{{id}}\">\n    <li ng:repeat=\"line in data.lines\"\n        ng:bind-html=\"line | textLinkFilter:data.links\"></li>\n</ul>"
 		});
 
 })(angular);
@@ -3715,7 +3672,7 @@
         .module('ok.templates')
         .value('profileProfileTableHtmlTemplate', {
 		    "name": "/html/partials/profile/profile-table.html",
-		    "content": "<table id=\"{{id}}\" class=\"profile-table\">\n    <caption>{{caption}}</caption>\n    <thead>\n    <tr ng:if=\"!!data.head\">\n        <th ng:repeat=\"head in data.head\">{{head}}</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr ng:repeat=\"row in data.body\" ng:init=\"headed=!!data.headedBody\">\n        <th ng:repeat=\"cell in row\" ng:if=\"(headed && $first)\" ok:linked=\"data.links\" ng:bind=\"cell\"></th>\n        <td ng:repeat=\"cell in row\" ng:if=\"!(headed && $first)\"\n            ok:linked=\"data.links\">\n            <span ng:hide=\"cell.image\">{{cell}}</span>\n            <span ng:show=\"cell.image\"><a href=\"{{images[cell.image]}}\" target=\"_blank\">{{cell.title}}</a></span>\n        </td>\n    </tr>\n    </tbody>\n</table>"
+		    "content": "<table id=\"{{id}}\" class=\"profile-table\">\n    <caption>{{caption}}</caption>\n    <thead>\n    <tr ng:if=\"!!data.head\">\n        <th ng:repeat=\"head in data.head\">{{head}}</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr ng:repeat=\"row in data.body\" ng:init=\"headed=!!data.headedBody\">\n        <th ng:repeat=\"cell in row\" ng:if=\"(headed && $first)\"\n            ng:bind-html=\"cell | textLinkFilter:data.links\"></th>\n        <td ng:repeat=\"cell in row\" ng:if=\"!(headed && $first)\">\n            <span ng:hide=\"cell.image\"\n                  ng:bind-html=\"cell | textLinkFilter:data.links\"></span>\n            <span ng:show=\"cell.image\"><a href=\"{{images[cell.image]}}\" target=\"_blank\">{{cell.title}}</a></span>\n        </td>\n    </tr>\n    </tbody>\n</table>"
 		});
 
 })(angular);

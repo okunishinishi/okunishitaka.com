@@ -1,6 +1,5 @@
 <h3 class="caption">{{caption}}</h3>
 <ul id="{{id}}">
     <li ng:repeat="line in data.lines"
-        ok:linked="data.links">{{line}}
-    </li>
+        ng:bind-html="line | textLinkFilter:data.links"></li>
 </ul>

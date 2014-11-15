@@ -7,6 +7,7 @@
     "use strict";
     ng
         .module('ok.filters', [
+            'ok.constants',
             'ok.entities',
             'ok.utils'
         ]);
