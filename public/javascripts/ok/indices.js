@@ -121,7 +121,6 @@
                 get errorCodeLogic() { return $injector.get('errorCodeLogic'); },
                 get multiLangUrlLogic() { return $injector.get('multiLangUrlLogic'); },
                 get pageTitleLogic() { return $injector.get('pageTitleLogic'); },
-                get tagColorLogic() { return $injector.get('tagColorLogic'); },
                 get textLinkLogic() { return $injector.get('textLinkLogic'); },
                 get textSummarizeLogic() { return $injector.get('textSummarizeLogic'); },
                 get urlFormatLogic() { return $injector.get('urlFormatLogic'); }

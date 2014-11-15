@@ -225,6 +225,7 @@
             'ok.constants',
             'ok.datasources',
             'ok.directives',
+            'ok.filters',
             'ok.entities',
             'ok.errors',
             'ok.filters',

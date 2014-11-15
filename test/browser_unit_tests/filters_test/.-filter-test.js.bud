@@ -12,19 +12,19 @@ var u = require('apeman-util'),
     path = u.core.path;
 
 var basedir = path.resolve(__dirname, '../../../'),
-    srcDir = path.resolve(basedir, 'public/javascripts/ok/logics'),
+    srcDir = path.resolve(basedir, 'public/javascripts/ok/filters'),
     destDir = __dirname;
 
 
 module.exports = fs.readdirSync(srcDir)
-    .filter(filtering.patternAcceptFilter(/-logic\.js$/))
+    .filter(filtering.patternAcceptFilter(/-filter\.js$/))
     .map(mapping.pathResolveMap(srcDir))
     .map(function (src) {
-        var name = path.basename(src, path.extname(src)).replace(/\-logic$/, '');
+        var name = path.basename(src, path.extname(src)).replace(/\-filter$/, '');
         return {
             force: false,
             mode: '644',
-            path: path.resolve(destDir, name + '-logic-test.js'),
+            path: path.resolve(destDir, name + '-filter-test.js'),
             data: {
                 name: string.camelString(name),
                 Name: string.pascalString(name)

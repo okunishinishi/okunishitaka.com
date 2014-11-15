@@ -1,0 +1,24 @@
+/**
+ * Test for {{name}}
+ * Runs with karma.
+ */
+
+"use strict";
+
+
+var ng = angular,
+    mock = ng.mock;
+
+describe('{{name}}Filter', function () {
+
+    var {{name}};
+    beforeEach(mock.module('ok.filters'));
+    beforeEach(function () {
+        inject(function ($filter) {
+            {{name}} = $filter('{{name}}');
+        });
+    });
+    it('Inject the filter.', inject(function () {
+        expect({{name}}Filter).toBeDefined();
+    }));
+});

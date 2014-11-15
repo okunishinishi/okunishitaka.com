@@ -10,6 +10,7 @@
       "ok.utils"
     ],
     "directives": [
+      "ok.filters",
       "ok.utils",
       "ok.logics"
     ],
@@ -19,6 +20,8 @@
       "ok.constants"
     ],
     "filters": [
+      "ok.entities",
+      "ok.utils"
     ],
     "indices": [
       "ok.constants",

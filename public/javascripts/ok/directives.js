@@ -7,6 +7,7 @@
     "use strict";
     ng
         .module('ok.directives', [
+            'ok.filters',
             'ok.utils',
             'ok.logics'
         ]);
@@ -397,17 +398,16 @@
 
     ng
         .module('ok.directives')
-        .directive('okTag', function defineOkTag(tagColorLogic) {
+        .directive('okTag', function defineOkTag() {
             return {
                 scope: {
                     title: '=okTitle'
                 },
                 link: function (scope, elm) {
-                    scope.color = tagColorLogic.tagColor(scope.title);
                 },
                 template: [
-                    '<span class="ok-tag" style="border-color: {{color}};color:{{color}};">',
-                    '<span class="ok-tag-icon" style="background-color: {{color}};"></span>',
+                    '<span class="ok-tag" style="border-color: {{title | tagColorFilter}};color:{{title | tagColorFilter}};">',
+                    '<span class="ok-tag-icon" style="background-color: {{title | tagColorFilter}};"></span>',
                     '{{title}}',
                     '</span>'
                 ].join('')

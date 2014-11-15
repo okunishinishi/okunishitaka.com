@@ -7,6 +7,7 @@
     "use strict";
     ng
         .module('ok.directives', [
+            'ok.filters',
             'ok.utils',
             'ok.logics'
         ]);

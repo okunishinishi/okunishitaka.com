@@ -1200,6 +1200,7 @@
     "use strict";
     ng
         .module('ok.directives', [
+            'ok.filters',
             'ok.utils',
             'ok.logics'
         ]);
@@ -1590,17 +1591,16 @@
 
     ng
         .module('ok.directives')
-        .directive('okTag', function defineOkTag(tagColorLogic) {
+        .directive('okTag', function defineOkTag() {
             return {
                 scope: {
                     title: '=okTitle'
                 },
                 link: function (scope, elm) {
-                    scope.color = tagColorLogic.tagColor(scope.title);
                 },
                 template: [
-                    '<span class="ok-tag" style="border-color: {{color}};color:{{color}};">',
-                    '<span class="ok-tag-icon" style="background-color: {{color}};"></span>',
+                    '<span class="ok-tag" style="border-color: {{title | tagColorFilter}};color:{{title | tagColorFilter}};">',
+                    '<span class="ok-tag-icon" style="background-color: {{title | tagColorFilter}};"></span>',
                     '{{title}}',
                     '</span>'
                 ].join('')
@@ -1975,10 +1975,40 @@
     "use strict";
     ng
         .module('ok.filters', [
-            
+            'ok.entities',
+            'ok.utils'
         ]);
 })(angular);
 
+/**
+ * @ngdoc filter
+ * @filter tagColorFilter
+ * @description Tag color filter
+ */
+
+(function (ng, ap) {
+    "use strict";
+    ng
+        .module('ok.filters')
+        .filter('tagColorFilter', function defineTagColorFilter(hashUtil) {
+            var _cache = {};
+            return function tagColorFilter(title, namespace) {
+                var seed = [title, namespace || ''].join('-');
+                var cahched = _cache[seed];
+                if (cahched) {
+                    return cahched;
+                }
+                var hashCode = hashUtil.toHashCode(seed);
+                var hue = parseInt(hashCode % 50 + 100) / 100.0,
+                    color = one.color('#a9d91d').hue(hue, true).hex();
+                if (!color.match(/^#/)) {
+                    color = '#' + color;
+                }
+                _cache[seed] = color;
+                return color;
+            }
+        });
+})(angular, apeman);
 
 /**
  * ok indices module.
@@ -2103,7 +2133,6 @@
                 get errorCodeLogic() { return $injector.get('errorCodeLogic'); },
                 get multiLangUrlLogic() { return $injector.get('multiLangUrlLogic'); },
                 get pageTitleLogic() { return $injector.get('pageTitleLogic'); },
-                get tagColorLogic() { return $injector.get('tagColorLogic'); },
                 get textLinkLogic() { return $injector.get('textLinkLogic'); },
                 get textSummarizeLogic() { return $injector.get('textSummarizeLogic'); },
                 get urlFormatLogic() { return $injector.get('urlFormatLogic'); }
@@ -2314,31 +2343,6 @@
             }
         });
 })(angular, apeman);
-/**
- * Tag color logic.
- * @requires angular
- * @requires apeman
- */
-(function (ng, ap, one) {
-    "use strict";
-
-    ng
-        .module('ok.logics')
-        .factory('tagColorLogic', function defineTagColorLogic(hashUtil) {
-            return {
-                tagColor: function (title, namespace) {
-                    var seed = [title, namespace || ''].join('-'),
-                        hashCode = hashUtil.toHashCode(seed);
-                    var hue = parseInt(hashCode % 50 + 100) / 100.0;
-                    var color = one.color('#a9d91d').hue(hue, true).hex();
-                    if (!color.match(/^#/)) {
-                        color = '#' + color;
-                    }
-                    return  color;
-                }
-            }
-        });
-})(angular, apeman, one);
 /**
  * Text link logic.
  * @requires angular
@@ -2657,6 +2661,7 @@
             'ok.constants',
             'ok.datasources',
             'ok.directives',
+            'ok.filters',
             'ok.entities',
             'ok.errors',
             'ok.filters',
