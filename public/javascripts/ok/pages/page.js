@@ -25,7 +25,8 @@
         .factory('global', [
             'constantsIndex',
             'servicesIndex',
-            function global(cn, sv) {
+            '$location',
+            function global(cn, sv, $location) {
                 var lang = sv.langDetectService.detectLang(),
                     locale = sv.localeLoadService.localeForLang(lang);
                 return {
@@ -49,7 +50,8 @@
                     },
                     scrollTo: function (id) {
                         sv.locationChangeService.scrollToHash(id);
-                    }
+                    },
+                    hash: $location.hash.bind($location)
                 }
             }
         ])

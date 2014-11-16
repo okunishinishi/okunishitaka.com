@@ -22,12 +22,12 @@
 <header ng:include="partials.HEADER" ng:controller="HeaderControl"></header>
 
 <div class="container position-relative" ng:controller="BlogCtrl">
-    <aside id="blog-aside">
-        <div ng-include="partials.BLOG_ASIDE_CONTENT"></div>
+    <aside id="blog-aside" ng:hide="isDetailed()">
+        <div ng:include="partials.BLOG_ASIDE_CONTENT"></div>
     </aside>
     <main>
         <article id="blog-article">
-            <div ng-include="partials.BLOG_LIST_SECTION"></div>
+            <div ng:include="partials.BLOG_LIST_SECTION"></div>
         </article>
     </main>
 </div>

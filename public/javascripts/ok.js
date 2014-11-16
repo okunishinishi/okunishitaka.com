@@ -2420,12 +2420,31 @@
                 }
             });
         })
-        .controller('BlogCtrl', function ($scope, blogListingDatasource) {
+        .controller('BlogCtrl', function ($scope,
+                                          global,
+                                          blogListingDatasource) {
             ap.copy({
-                listing: blogListingDatasource
+                listing: blogListingDatasource,
+                isDetailed: function () {
+                    return !!(blogListingDatasource.condition._id);
+                }
             }, $scope);
 
-            blogListingDatasource.load();
+            function applyHash(hash) {
+                console.log('hash', hash);
+                if (hash) {
+                    blogListingDatasource.condition._id = hash.split('-').pop();
+                } else {
+                    delete blogListingDatasource.condition._id;
+                }
+                blogListingDatasource.load(function () {
+                });
+            }
+
+            $scope.$watch('hash()', function () {
+                applyHash($scope.hash());
+            });
+
         })
         .controller('BlogListCtrl', function ($scope) {
 
@@ -2513,7 +2532,8 @@
         .factory('global', [
             'constantsIndex',
             'servicesIndex',
-            function global(cn, sv) {
+            '$location',
+            function global(cn, sv, $location) {
                 var lang = sv.langDetectService.detectLang(),
                     locale = sv.localeLoadService.localeForLang(lang);
                 return {
@@ -2537,7 +2557,8 @@
                     },
                     scrollTo: function (id) {
                         sv.locationChangeService.scrollToHash(id);
-                    }
+                    },
+                    hash: $location.hash.bind($location)
                 }
             }
         ])
