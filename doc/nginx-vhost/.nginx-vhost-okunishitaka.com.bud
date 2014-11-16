@@ -8,7 +8,8 @@ var u = require('apeman-util'),
     path = u.core.path,
     server = require('../../server.json');
 
-var basedir = path.resolve(__dirname, '../../');
+var basedir = path.resolve(__dirname, '../../'),
+    publicDir = path.resolve(basedir, 'public');
 
 module.exports = {
     force: true,
@@ -17,8 +18,8 @@ module.exports = {
         port: server.port,
         domain: server.domain,
         basicAuth: [
-            {location: '^/admin', root: "public/html"},
-            {location: '/admin.html', root: "public/html"}
+            {location: '/admin', root: publicDir},
+            {location: '/admin.html', root: publicDir}
         ],
         get errorPages() {
             var data = {

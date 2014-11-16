@@ -20,18 +20,6 @@ server {
         proxy_redirect off;
     }
 
-    location ^/admin {
-        auth_basic            "Basic Auth";
-        auth_basic_user_file  "/etc/nginx/.htpasswd";
-        root "public/html";
-    }
-
-    location /admin.html {
-        auth_basic            "Basic Auth";
-        auth_basic_user_file  "/etc/nginx/.htpasswd";
-        root "public/html";
-    }
-
 
     error_page 502 503 /error-something-wrong.html;
     location = /error-something-wrong.html {
