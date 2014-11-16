@@ -57,3 +57,12 @@ button,
     text-align: center;
 }
 
+.link-button,
+.link-button:link,
+.link-button:visited {
+    border: none;
+}
+.link-button:active,
+.link-button.button-active{
+    box-shadow: none;
+}

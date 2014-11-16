@@ -90,7 +90,7 @@
                             datasources.destroying
                                 .destroy(function (err) {
                                     if (!err) {
-                                        messanger.showBlogDestoryDone();
+                                        messenger.showBlogDestoryDone();
                                         datasources.listing.load();
                                     }
                                 });

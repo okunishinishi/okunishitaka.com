@@ -3,8 +3,8 @@
         <li ng:repeat="b in datasources.listing.data" class="admin-blog-list-item">
 
             <span class="admin-blog-list-action-area">
-                <a href="javascript:void(0)" class="link-button" ng:click="edit(b)"><i class="fa fa-pencil"></i>{{l.buttons.EDIT}}</a>
-                <a href="javascript:void(0)" class="link-button" ng:click="destroy(b)"><i class="fa fa-trash-o"></i>{{l.buttons.DELETE}}</a>
+                <a ok:button ok:button-type="'link'" ng:click="edit(b)"><i class="fa fa-pencil"></i>{{l.buttons.EDIT}}</a>
+                <a ok:button ok:button-type="'link'" ng:click="destroy(b)"><i class="fa fa-trash-o"></i>{{l.buttons.DELETE}}</a>
             </span>
 
             <div class="admin-blog-list-item-inner">

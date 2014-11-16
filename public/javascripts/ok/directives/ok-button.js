@@ -25,6 +25,9 @@
                         case 'primary':
                             $elm.addClass('button-primary');
                             break;
+                        case 'link':
+                            $elm.addClass('link-button');
+                            break;
                     }
                 }
             }
