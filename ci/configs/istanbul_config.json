@@ -1,9 +1,9 @@
 {
-    "cmd": "cover",
-    "cmdArgs": [
-        "nodeunit",
-        "test/unit_tests/*",
-        "--dir",
-        "doc/coverage"
-    ]
+  "cmd": "cover",
+  "cmdArgs": [
+    "nodeunit",
+    "test/unit_tests/*",
+    "--dir",
+    "doc/coverage"
+  ]
 }

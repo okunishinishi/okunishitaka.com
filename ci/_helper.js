@@ -32,7 +32,18 @@ h.rmdirRecursive = file.rmdirRecursive;
 h.yesno = u.ext.yesno;
 h.pkg = require('../package.json')
 h.takePngScreenshot = u.browsing.takePngScreenshot;
-h.watchAll = file.watchAll;
+h.watchAndRun = function (task, filenames) {
+    task.busyToRun = false;
+    file.watchAll(filenames, {persistent: true}, function (event, filename) {
+        if (task.busyToRun) {
+            return;
+        }
+        task.busyToRun = true;
+        task.run(function () {
+            task.busyToRun = false;
+        });
+    });
+}
 
 h.writeJsonFile = u.json.writeJsonFile;
 h.readJsonFile = u.json.readJsonFile;

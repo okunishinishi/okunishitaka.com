@@ -16,18 +16,10 @@ process.chdir(h.basedir);
 var task = new tasks.ForkTask({
     files: ['ci/bin/test_unit_tests']
 });
-task.busyToRun = false;
 
 configs.testScaffoldConfig.forEach(function (config) {
     [].concat(config.srcPattern).forEach(function (filenames) {
         console.log('Watch files:', filenames);
-        h.watchAll(filenames, {persistent: true}, function (event, filename) {
-            if (task.busyToRun) {
-                return;
-            }
-            task.run(function () {
-                task.busyToRun = false;
-            });
-        });
+        h.watchAndRun(task, filenames);
     });
 });

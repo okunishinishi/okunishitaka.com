@@ -4,6 +4,7 @@ node_js:
 before_install: 
 install:
 - npm install
+- npm install nodeunit -g
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start

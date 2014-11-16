@@ -15,18 +15,9 @@ var h = require('../_helper'),
 process.chdir(h.basedir);
 
 var task = new tasks.BudTask(configs.budConfig);
-task.busyToRun = false;
 
 [].concat(configs.budConfig).forEach(function (config) {
     var filenames = config.pattern;
     console.log('Watch files:', filenames);
-    h.watchAll(filenames, {persistent: true}, function (event, filename) {
-        if (task.busyToRun) {
-            return;
-        }
-        task.busyToRun = true;
-        task.run(function () {
-            task.busyToRun = false;
-        });
-    });
+    h.watchAndRun(task, filenames);
 });

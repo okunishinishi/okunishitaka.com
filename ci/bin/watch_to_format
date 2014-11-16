@@ -18,17 +18,8 @@ var htmlTask = new tasks.ForkTask({
         'ci/bin/format_html',
     ]
 });
-htmlTask.busyToRun = false;
 
 [].concat(configs.formatConfig.html.files).forEach(function (filenames) {
     console.log('Watch files:', filenames);
-    h.watchAll(filenames, {persistent: true}, function (event, filename) {
-        if (htmlTask.busyToRun) {
-            return;
-        }
-        htmlTask.busyToRun = true;
-        htmlTask.run(function () {
-            htmlTask.busyToRun = false;
-        });
-    })
+    h.watchAndRun(htmlTask, filenames);
 });
