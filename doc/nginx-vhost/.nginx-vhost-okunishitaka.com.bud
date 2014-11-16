@@ -17,8 +17,8 @@ module.exports = {
         port: server.port,
         domain: server.domain,
         basicAuth: [
-            '^/(admin)/',
-            '/admin.html'
+            {location: '^/(admin)/', root: "public/html"},
+            {location: '/admin.html', root: "public/html"}
         ],
         get errorPages() {
             var data = {
