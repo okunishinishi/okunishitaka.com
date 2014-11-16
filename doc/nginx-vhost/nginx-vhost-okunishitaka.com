@@ -20,7 +20,7 @@ server {
         proxy_redirect off;
     }
 
-    location ^/(admin)/ {
+    location ^/admin {
         auth_basic            "Basic Auth";
         auth_basic_user_file  "/etc/nginx/.htpasswd";
         root "public/html";
