@@ -15,39 +15,47 @@
         .run(function ($rootScope) {
             $rootScope.page = 'blog';
         })
-        .factory('blogListingDatasource', function (BlogListingDatasource) {
-            return new BlogListingDatasource({
-                condition: {
-                    _sort: '_at',
-                    _reverse: true
+        .factory('datasources', function (BlogViewingDatasource, BlogListingDatasource) {
+            return {
+                viewing: new BlogViewingDatasource({}),
+                listing: new BlogListingDatasource({
+                    condition: {
+                        _sort: '_at',
+                        _reverse: true
 
-                }
-            });
+                    }
+                })
+            }
+
         })
         .controller('BlogCtrl', function ($scope,
-                                          global,
-                                          blogListingDatasource) {
+                                          datasources) {
+            var listing = datasources.listing,
+                viewing = datasources.viewing;
             ap.copy({
-                listing: blogListingDatasource,
+                listing: listing,
+                viewing: viewing,
                 isDetailed: function () {
-                    return !!(blogListingDatasource.condition._id);
+                    return !!(listing.condition._id);
                 }
             }, $scope);
 
             function applyHash(hash) {
-                console.log('hash', hash);
-                if (hash) {
-                    blogListingDatasource.condition._id = hash.split('-').pop();
-                } else {
-                    delete blogListingDatasource.condition._id;
-                }
-                blogListingDatasource.load(function () {
-                });
+                viewing
+                    .init({
+                        id: (hash || '').split('-').pop()
+                    })
+                    .load(function () {
+
+                    });
             }
+
+            listing.load();
 
             $scope.$watch('hash()', function () {
                 applyHash($scope.hash());
             });
+
 
         })
         .controller('BlogListCtrl', function ($scope) {

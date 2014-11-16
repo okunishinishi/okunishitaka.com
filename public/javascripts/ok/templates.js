@@ -87,6 +87,21 @@
 
 })(angular);
 /**
+ * Template for blogBlogDetailSectionHtml
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('blogBlogDetailSectionHtmlTemplate', {
+		    "name": "/html/partials/blog/blog-detail-section.html",
+		    "content": "<section id=\"blog-detail-section\"\n         ng:if=\"!!viewing.data._id\"\n         ng:controller=\"BlogDetailCtrl\">\n    <div id=\"blog-detail-section-inner\" class=\"container\"\n         ok:alias=\"{'b':'viewing.data'}\">\n        <div id=\"blog-detail-section-back\">\n\n            <a class=\"blog-title\">{{b.title}}</a>\n            <span class=\"blog-date-label\">{{b._at | dateFormatFilter}}</span>\n            <span class=\"display-block\">\n                <span ok:tag ok:title=\"t\" ng:repeat=\"t in (b.tagText | textSplitFilter:',')\"></span>\n            </span>\n\n            <div class=\"blog-content-container\"\n                 ng:bind-html=\"b.content | markdownRenderFilter\"></div>\n        </div>\n    </div>\n</section>"
+		});
+
+})(angular);
+/**
  * Template for blogBlogEditEditorSectionHtml
  * @ngdoc object
  */
@@ -172,7 +187,7 @@
         .module('ok.templates')
         .value('blogBlogListSectionHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-list-section.html",
-		    "content": "<section id=\"blog-list-section\" ng:controller=\"BlogListCtrl\">\n    <dl id=\"blog-list\">\n        <dt ng:repeat-start=\"b in listing.data\">\n            <a class=\"blog-dt-anchor\"\n               name=\"blog-{{b._id}}\">\n                {{b.title}}\n            </a>\n            <span class=\"blog-date-label\">{{b._at | dateFormatFilter}}</span>\n            <span class=\"display-block\">\n                <span ok:tag ok:title=\"t\" ng:repeat=\"t in (b.tagText | textSplitFilter:',')\"></span>\n            </span>\n        </dt>\n        <dd ng:repeat-end=\"\" ng:bind-html=\"b.content | markdownRenderFilter\"></dd>\n    </dl>\n    <a id=\"blog-more-button\"\n       class=\"list-more-button\"\n       ok:button\n       ng:show=\"listing.hasMore\"\n       ng:click=\"listing.loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</section>"
+		    "content": "<section id=\"blog-list-section\" ng:controller=\"BlogListCtrl\">\n    <dl id=\"blog-list\">\n        <dt ng:repeat-start=\"b in listing.data\">\n            <a class=\"blog-dt-anchor blog-title\"\n               name=\"blog-{{b._id}}\">\n                {{b.title}}\n            </a>\n            <span class=\"blog-date-label\">{{b._at | dateFormatFilter}}</span>\n            <span class=\"display-block\">\n                <span ok:tag ok:title=\"t\" ng:repeat=\"t in (b.tagText | textSplitFilter:',')\"></span>\n            </span>\n        </dt>\n        <dd ng:repeat-end=\"\" ng:bind-html=\"b.content | markdownRenderFilter\"></dd>\n    </dl>\n    <a id=\"blog-more-button\"\n       class=\"list-more-button\"\n       ok:button\n       ng:show=\"listing.hasMore\"\n       ng:click=\"listing.loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</section>"
 		});
 
 })(angular);
