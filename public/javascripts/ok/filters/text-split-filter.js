@@ -11,7 +11,10 @@
         .module('ok.filters')
         .filter('textSplitFilter', function defineTextSplitFilter() {
             return function textSplitFilter(text, seperator) {
-                return String(text || '').split(seperator || ',');
+                if (!text) {
+                    return [];
+                }
+                return String(text).split(seperator || ',');
             };
         });
 })(angular, apeman);

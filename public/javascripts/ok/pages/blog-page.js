@@ -17,8 +17,11 @@
         })
         .factory('blogListingDatasource', function (BlogListingDatasource) {
             return new BlogListingDatasource({
-                _sort: '_at',
-                _revert: true
+                condition: {
+                    _sort: '_at',
+                    _reverse: true
+
+                }
             });
         })
         .controller('BlogCtrl', function ($scope, blogListingDatasource) {

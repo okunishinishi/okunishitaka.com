@@ -43,5 +43,9 @@ module.exports = [
     cssBud('wide', {
         description: 'Wide size.',
         styles: data.wide
+    }),
+    cssBud('display', {
+        description: 'Displys',
+        styles: data.display
     })
 ];

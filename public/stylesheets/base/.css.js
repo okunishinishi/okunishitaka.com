@@ -40,6 +40,9 @@ exports.clear = valueStyle('clear', [
 exports.position = valueStyle('position', [
     'static', 'relative', 'absolute', 'fixed'
 ]);
+exports.display = valueStyle('display', [
+    'block', 'inline-block', 'inline', 'none'
+]);
 
 var fonts = fs.readdirSync(fontsDir)
     .filter(filtering.patternAcceptFilter(/\.woff$/))

@@ -9,8 +9,6 @@
             </span>
 
             <div class="admin-blog-list-item-inner">
-
-
                 <h3 class="admin-blog-list-title">
                     <a class="blog-dt-anchor"
                        name="blog-{{b._id}}">{{b.title}}</a>
@@ -18,6 +16,9 @@
 
                 <div>
                     <span class="blog-date-label">{{b._at | dateFormatFilter}}</span>
+                </div>
+                <div>
+                    <span ok:tag ok:title="t" ng:repeat="t in (b.tagText | textSplitFilter:',')"></span>
                 </div>
             <span class="admin-blog-list-content">
             {{b.content | textEllipsisFilter:ellipsisLength}}

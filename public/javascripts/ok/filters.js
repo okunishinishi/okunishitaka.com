@@ -27,11 +27,12 @@
         .filter('dateFormatFilter', function defineDateFormatFilter() {
             return function dateFormatFilter(date) {
                 date = new Date(date);
-                return [
+                var yyyyMMdd = [
                     date.getFullYear(),
                     date.getMonth(),
                     date.getDate()
-                ].join('/')
+                ].join('/');
+                return yyyyMMdd;
             };
         });
 })(angular, apeman);
@@ -149,7 +150,10 @@
         .module('ok.filters')
         .filter('textSplitFilter', function defineTextSplitFilter() {
             return function textSplitFilter(text, seperator) {
-                return String(text || '').split(seperator || ',');
+                if (!text) {
+                    return [];
+                }
+                return String(text).split(seperator || ',');
             };
         });
 })(angular, apeman);

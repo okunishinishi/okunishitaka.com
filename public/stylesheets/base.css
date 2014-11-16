@@ -107,6 +107,24 @@ button,
     margin: 0 auto;
 }
 /**
+ * Displys
+ */
+
+.display-block {
+  display: block;
+}
+.display-inline-block {
+  display: inline-block;
+}
+.display-inline {
+  display: inline;
+}
+.display-none {
+  display: none;
+}
+
+
+/**
  * Style for floating.
  */
 

@@ -12,11 +12,12 @@
         .filter('dateFormatFilter', function defineDateFormatFilter() {
             return function dateFormatFilter(date) {
                 date = new Date(date);
-                return [
+                var yyyyMMdd = [
                     date.getFullYear(),
                     date.getMonth(),
                     date.getDate()
-                ].join('/')
+                ].join('/');
+                return yyyyMMdd;
             };
         });
 })(angular, apeman);

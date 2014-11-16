@@ -6,7 +6,16 @@
                 {{b.title}}
             </a>
             <span class="blog-date-label">{{b._at | dateFormatFilter}}</span>
+            <span class="display-block">
+                <span ok:tag ok:title="t" ng:repeat="t in (b.tagText | textSplitFilter:',')"></span>
+            </span>
         </dt>
         <dd ng:repeat-end="">{{b.content}}</dd>
     </dl>
+    <a id="blog-more-button"
+       class="list-more-button"
+       ok:button
+       ng:show="listing.hasMore"
+       ng:click="listing.loadMore()"
+            >{{l.buttons.MORE}}</a>
 </section>

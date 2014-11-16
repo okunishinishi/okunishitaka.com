@@ -20,6 +20,18 @@ server {
         proxy_redirect off;
     }
 
+    location /admin {
+        auth_basic            "Basic Auth";
+        auth_basic_user_file  "/etc/nginx/.htpasswd";
+        root "/Users/okuni/WebstormProjects/okunishitaka.com/public";
+    }
+
+    location /admin.html {
+        auth_basic            "Basic Auth";
+        auth_basic_user_file  "/etc/nginx/.htpasswd";
+        root "/Users/okuni/WebstormProjects/okunishitaka.com/public";
+    }
+
 
     error_page 502 503 /error-something-wrong.html;
     location = /error-something-wrong.html {
