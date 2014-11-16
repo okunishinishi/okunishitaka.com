@@ -1,7 +1,7 @@
 /**
- * Data source for editing.
- * @requires angular
- * @requires apeman
+ * @ngdoc object
+ * @name EditingDatasource
+ * @description Data source for editing.
  */
 (function (ng, ap) {
     "use strict";
@@ -53,7 +53,7 @@
                     },
                     /**
                      * Save data.
-                     * @param callback
+                     * @param {function} callback
                      */
                     save: function (callback) {
                         var s = this,

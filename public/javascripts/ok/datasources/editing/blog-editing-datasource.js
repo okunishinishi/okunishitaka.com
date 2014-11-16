@@ -1,7 +1,7 @@
 /**
- * Editing data source for blog.
- * @requires angular
- * @requires apeman
+ * @ngdoc object
+ * @name BlogEditingDatasource
+ * @description Editing data source for blog.
  */
 (function (ng, ap) {
     "use strict";

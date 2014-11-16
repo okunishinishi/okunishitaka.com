@@ -1,7 +1,7 @@
 [
     {
         "src": "doc/readme/README.md",
-        "dest": "/Users/okuni/WebstormProjects/okunishitaka.com/README.md",
+        "dest": "README.md",
         "mode": "444"
     },
     {

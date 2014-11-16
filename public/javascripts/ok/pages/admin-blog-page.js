@@ -15,72 +15,90 @@
         .run(function ($rootScope) {
 
         })
-        .factory('blogEditingDatasource', function (BlogEditingDatasource) {
-            return new BlogEditingDatasource({});
+        .factory('datasources', function (BlogEditingDatasource,
+                                          BlogListingDatasource,
+                                          BlogDestroyingDatasource) {
+            return {
+                editing: new BlogEditingDatasource({}),
+                listing: new BlogListingDatasource({
+                    _sort: '_at',
+                    _revert: true
+                }),
+                destroying: new BlogDestroyingDatasource({})
+            }
+        })
+        .factory('messenger', function (global,
+                                        toastMessageService,
+                                        confirmMessageService) {
+            var l = global.locale;
+            return {
+                askSure: function () {
+                    return confirmMessageService.confirm(l.pages.admin.ASK_SURE);
+                },
+                showBlogDestoryDone: function () {
+                    var msg = l.pages.admin.DESTROY_BLOG_DONE;
+                    toastMessageService.showInfoMessage(msg);
+                }
+            }
         })
         .controller('AdminBlogCtrl', function ($scope) {
         })
-        .controller('AdminBlogEditCtrl', function ($scope, blogEditingDatasource, blogRenderService) {
+        .controller('AdminBlogEditCtrl', function ($scope, datasources, blogRenderService) {
+            function close() {
+                datasources.editing.clear();
+            }
+
             ap.copy({
                 preview: function (blog) {
                     return blogRenderService.renderBlog(blog);
                 },
-                editing: blogEditingDatasource,
+                datasources: datasources,
+                editing: datasources.editing,
                 save: function (blog) {
-                    blogEditingDatasource.save(function (err, data) {
-                        $scope.close();
+                    datasources.editing.save(function (err, data) {
+                        close();
                     });
                 },
                 cancel: function () {
-                    $scope.close();
+                    close();
                 },
-                close: function () {
-                    blogEditingDatasource.clear();
-                }
+                close: close
             }, $scope);
         })
-        .factory('blogListingDatasource', function (BlogListingDatasource) {
-            return new BlogListingDatasource({
-                _sort: '_at',
-                _revert: true
-            });
-        })
         .controller('AdminBlogListCtrl', function ($scope,
-                                                   blogEditingDatasource,
-                                                   blogListingDatasource,
-                                                   toastMessageService,
-                                                   confirmMessageService) {
-            var l = $scope.locale;
-
+                                                   datasources,
+                                                   messenger) {
             ap.copy({
                 contentEllipsisLength: 32,
-                listing: blogListingDatasource,
+                datasources: datasources,
+                listing: datasources.listing,
                 edit: function (blog) {
-                    blogEditingDatasource
+                    datasources.editing
                         .init({id: blog._id})
                         .load(function () {
                         });
                 },
                 destroy: function (blog) {
-                    var sure = confirmMessageService.confirm(l.pages.admin.ASK_SURE);
+                    var sure = messenger.askSure();
                     if (!sure) {
                         return;
                     }
 
-                    blogOneDatasource.id = blog._id;
-                    blogOneDatasource.load(function () {
-                        blogOneDatasource.destroy(function (err) {
-                            if (!err) {
-                                var msg = l.pages.admin.DESTROY_BLOG_DONE;
-                                toastMessageService.showInfoMessage(msg);
-                                blogListingDatasource.load();
-                            }
+                    datasources.destroying
+                        .init({id: blog._id})
+                        .load(function () {
+                            datasources.destroying
+                                .destroy(function (err) {
+                                    if (!err) {
+                                        messanger.showBlogDestoryDone();
+                                        datasources.listing.load();
+                                    }
+                                });
                         });
-                    });
                 }
             }, $scope);
 
-            blogListingDatasource.load();
+            datasources.listing.load();
         });
 
 })(angular, apeman);

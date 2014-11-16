@@ -18,7 +18,7 @@ module.exports = {
     mode: '444',
     force: true,
     data: [
-        budForFile('doc/readme/README.md', h.basedir),
+        budForFile('doc/readme/README.md', ''),
         budForFile(f.paths.fonts.fontawesomeWebfontEot, 'public/fonts'),
         budForFile(f.paths.fonts.fontawesomeWebfontSvg, 'public/fonts'),
         budForFile(f.paths.fonts.fontawesomeWebfontWoff, 'public/fonts'),

@@ -39,6 +39,7 @@
     "apeman-tasks": "0.0.29",
     "karma": "^0.12.25",
     "karma-jasmine": "^0.2.3",
-    "karma-chrome-launcher": "^0.1.5"
+    "karma-chrome-launcher": "^0.1.5",
+    "karma-firefox-launcher": "^0.1.3"
   }
 }

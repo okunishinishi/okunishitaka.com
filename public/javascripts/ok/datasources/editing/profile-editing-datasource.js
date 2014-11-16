@@ -1,7 +1,7 @@
 /**
- * Editing data source for profile.
- * @requires angular
- * @requires apeman
+ * @ngdoc object
+ * @name ProfileEditingDatasource
+ * @description Editing data source for profile.
  */
 (function (ng, ap) {
     "use strict";

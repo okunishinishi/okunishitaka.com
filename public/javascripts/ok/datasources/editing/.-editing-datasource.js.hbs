@@ -1,13 +1,13 @@
 /**
- * Editing data source for {{name}}.
- * @requires angular
- * @requires apeman
+ * @ngdoc object
+ * @name {{Name}}EditingDatasource
+ * @description Editing data source for {{name}}.
  */
 (function (ng, ap) {
     "use strict";
 
     ng
-        .module('ok.datasources')
+        .module('{{module}}')
         .factory('{{Name}}EditingDatasource', function (EditingDatasource, {{Name}}Entity, {{name}}ApiService) {
             return EditingDatasource.define(
                 /** @lends {{Name}}EditingDatasource.prototype */

@@ -47,3 +47,12 @@ button,
     color: white;
     border-color: #26777B;
 }
+
+.list-more-button,
+.list-more-button:link,
+.list-more-button:visited {
+    border: none;
+    color: #AAA;
+    display: block;
+    text-align: center;
+}

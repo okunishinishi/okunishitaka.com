@@ -59,7 +59,7 @@
     },
     "profile": {
       "singleton": "apiUrlConstant.API_PROFILES_GET",
-      "save": "apiUrlConstant.API_PROFILES_PUT"
+      "save": "apiUrlConstant.API_moPROFILES_PUT"
     },
     "work": {
       "list": "apiUrlConstant.API_WORKS_GET"
