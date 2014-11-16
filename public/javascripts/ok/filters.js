@@ -9,7 +9,8 @@
         .module('ok.filters', [
             'ok.constants',
             'ok.entities',
-            'ok.utils'
+            'ok.utils',
+            'ok.services'
         ]);
 })(angular);
 
