@@ -109,6 +109,7 @@
 		            "WORK": "What I've made."
 		        },
 		        "buttons": {
+		            "NEW": "Create new",
 		            "MORE": "See more",
 		            "EDIT": "Edit",
 		            "DELETE": "Delete",
@@ -202,6 +203,7 @@
 		            "WORK": "What I've made."
 		        },
 		        "buttons": {
+		            "NEW": "Create new",
 		            "MORE": "See more",
 		            "EDIT": "Edit",
 		            "DELETE": "Delete",

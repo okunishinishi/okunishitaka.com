@@ -85,8 +85,8 @@
                     },
                     init: function () {
                         var s = this;
-                        Datasource.prototype.init.apply(s, arguments);
                         s.data = null;
+                        Datasource.prototype.init.apply(s, arguments);
                         return s;
                     },
                     /**

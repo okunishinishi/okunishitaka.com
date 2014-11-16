@@ -120,7 +120,7 @@ StorageHandler.prototype = {
             },
             sorter = {
                 key: q._sort || '_at',
-                desc: ['true', 'yes', '1'].indexOf((q._reverse || '').toLowerCase()) !== -1
+                desc: ['true', 'yes', '1'].indexOf((q._revert || q._reverse || '').toLowerCase()) !== -1
             }
         async.waterfall([
             function (callback) {

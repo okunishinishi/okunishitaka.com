@@ -109,6 +109,7 @@
 		            "WORK": "What I've made."
 		        },
 		        "buttons": {
+		            "NEW": "Create new",
 		            "MORE": "See more",
 		            "EDIT": "Edit",
 		            "DELETE": "Delete",
@@ -202,6 +203,7 @@
 		            "WORK": "What I've made."
 		        },
 		        "buttons": {
+		            "NEW": "Create new",
 		            "MORE": "See more",
 		            "EDIT": "Edit",
 		            "DELETE": "Delete",
@@ -1080,8 +1082,8 @@
                     },
                     init: function () {
                         var s = this;
-                        Datasource.prototype.init.apply(s, arguments);
                         s.data = null;
+                        Datasource.prototype.init.apply(s, arguments);
                         return s;
                     },
                     /**
@@ -1143,7 +1145,7 @@
                             get: function () {
                                 return values[key];
                             },
-                            set: function () {
+                            set: function (value) {
                                 var msg = [
                                     'You can not set value with key "' + key + '"',
                                     'because it is defined as alias key by okAlias directive.'
@@ -2193,7 +2195,7 @@
  * @description Page script for admin.
  */
 
-(function (ng, ap) {
+(function (ng, ap, async) {
     "use strict";
 
     ng
@@ -2210,8 +2212,10 @@
             return {
                 editing: new BlogEditingDatasource({}),
                 listing: new BlogListingDatasource({
-                    _sort: '_at',
-                    _revert: true
+                    condition: {
+                        _sort: '_at',
+                        _reverse: true
+                    }
                 }),
                 destroying: new BlogDestroyingDatasource({})
             }
@@ -2224,29 +2228,43 @@
                 askSure: function () {
                     return confirmMessageService.confirm(l.pages.admin.ASK_SURE);
                 },
-                showBlogDestoryDone: function () {
+                showBlogDestoryDone: function (callback) {
                     var msg = l.pages.admin.DESTROY_BLOG_DONE;
                     toastMessageService.showInfoMessage(msg);
+                    callback = callback || ap.doNothing;
+                    callback(null);
                 }
             }
         })
-        .controller('AdminBlogCtrl', function ($scope) {
+        .controller('AdminBlogCtrl', function ($scope, datasources) {
+            var editing = datasources.editing;
+            ap.copy({
+                add: function () {
+                    editing.init({
+                        data: {}
+                    });
+                }
+            }, $scope);
         })
         .controller('AdminBlogEditCtrl', function ($scope, datasources, blogRenderService) {
+            var editing = datasources.editing,
+                listing = datasources.listing;
+
             function close() {
-                datasources.editing.clear();
+                editing.clear();
             }
 
             ap.copy({
                 preview: function (blog) {
                     return blogRenderService.renderBlog(blog);
                 },
-                datasources: datasources,
-                editing: datasources.editing,
+                editing: editing,
                 save: function (blog) {
-                    datasources.editing.save(function (err, data) {
-                        close();
-                    });
+                    async.series([
+                        editing.save.bind(editing),
+                        listing.load.bind(listing),
+                        close
+                    ]);
                 },
                 cancel: function () {
                     close();
@@ -2257,10 +2275,12 @@
         .controller('AdminBlogListCtrl', function ($scope,
                                                    datasources,
                                                    messenger) {
+            var listing = datasources.listing,
+                destroying = datasources.destroying;
+
             ap.copy({
-                contentEllipsisLength: 32,
-                datasources: datasources,
-                listing: datasources.listing,
+                ellipsisLength: 32,
+                listing: listing,
                 edit: function (blog) {
                     datasources.editing
                         .init({id: blog._id})
@@ -2273,24 +2293,20 @@
                         return;
                     }
 
-                    datasources.destroying
-                        .init({id: blog._id})
-                        .load(function () {
-                            datasources.destroying
-                                .destroy(function (err) {
-                                    if (!err) {
-                                        messenger.showBlogDestoryDone();
-                                        datasources.listing.load();
-                                    }
-                                });
-                        });
+                    destroying.init({id: blog._id});
+                    async.series([
+                        destroying.load.bind(destroying),
+                        destroying.destroy.bind(destroying),
+                        messenger.showBlogDestoryDone.bind(messenger),
+                        listing.load.bind(listing)
+                    ]);
                 }
             }, $scope);
 
-            datasources.listing.load();
+            listing.load();
         });
 
-})(angular, apeman);
+})(angular, apeman, async);
 /**
  * @ngdoc module
  * @module ok.adminPage
@@ -3298,7 +3314,7 @@
         .module('ok.templates')
         .value('adminAdminBlogListSectionHtmlTemplate', {
 		    "name": "/html/partials/admin/admin-blog-list-section.html",
-		    "content": "<section id=\"admin-blog-list-section\" ng:controller=\"AdminBlogListCtrl\">\n    <ul id=\"admin-blog-list\">\n        <li ng:repeat=\"b in datasources.listing.data\" class=\"admin-blog-list-item\">\n\n            <span class=\"admin-blog-list-action-area\">\n                <a ok:button ok:button-type=\"'link'\" ng:click=\"edit(b)\"><i class=\"fa fa-pencil\"></i>{{l.buttons.EDIT}}</a>\n                <a ok:button ok:button-type=\"'link'\" ng:click=\"destroy(b)\"><i class=\"fa fa-trash-o\"></i>{{l.buttons.DELETE}}</a>\n            </span>\n\n            <div class=\"admin-blog-list-item-inner\">\n\n\n                <h3 class=\"admin-blog-list-title\">\n                    <a class=\"blog-dt-anchor\"\n                       name=\"blog-{{b._id}}\">{{b.title}}</a>\n                </h3>\n\n            <span class=\"admin-blog-list-content\">\n            {{b.content | textEllipsisFilter:contentEllipsisLength}}\n            </span>\n\n            </div>\n        </li>\n    </ul>\n    <a id=\"admin-blog-more-button\"\n       class=\"list-more-button\"\n       ok:button\n       ng:show=\"datasources.listing.hasMore\"\n       ng:click=\"datasources.listing.loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</section>"
+		    "content": "<section id=\"admin-blog-list-section\" ng:controller=\"AdminBlogListCtrl\">\n    <ul id=\"admin-blog-list\">\n        <li ng:repeat=\"b in listing.data\" class=\"admin-blog-list-item\">\n\n            <span class=\"admin-blog-list-action-area\">\n                <a ok:button ok:button-type=\"'link'\" ng:click=\"edit(b)\"><i class=\"fa fa-pencil\"></i>{{l.buttons.EDIT}}</a>\n                <a ok:button ok:button-type=\"'link'\" ng:click=\"destroy(b)\"><i class=\"fa fa-trash-o\"></i>{{l.buttons.DELETE}}</a>\n            </span>\n\n            <div class=\"admin-blog-list-item-inner\">\n\n\n                <h3 class=\"admin-blog-list-title\">\n                    <a class=\"blog-dt-anchor\"\n                       name=\"blog-{{b._id}}\">{{b.title}}</a>\n                </h3>\n\n            <span class=\"admin-blog-list-content\">\n            {{b.content | textEllipsisFilter:ellipsisLength}}\n            </span>\n\n            </div>\n        </li>\n    </ul>\n    <a id=\"admin-blog-more-button\"\n       class=\"list-more-button\"\n       ok:button\n       ng:show=\"listing.hasMore\"\n       ng:click=\"listing.loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</section>"
 		});
 
 })(angular);

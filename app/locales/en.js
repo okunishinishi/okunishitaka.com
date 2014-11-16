@@ -55,6 +55,7 @@ l.pageDescriptions = {
 };
 
 l.buttons = {
+    NEW: 'Create new',
     MORE: 'See more',
     EDIT: 'Edit',
     DELETE: 'Delete',

@@ -25,7 +25,7 @@
                             get: function () {
                                 return values[key];
                             },
-                            set: function () {
+                            set: function (value) {
                                 var msg = [
                                     'You can not set value with key "' + key + '"',
                                     'because it is defined as alias key by okAlias directive.'

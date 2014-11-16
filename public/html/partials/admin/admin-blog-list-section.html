@@ -1,6 +1,6 @@
 <section id="admin-blog-list-section" ng:controller="AdminBlogListCtrl">
     <ul id="admin-blog-list">
-        <li ng:repeat="b in datasources.listing.data" class="admin-blog-list-item">
+        <li ng:repeat="b in listing.data" class="admin-blog-list-item">
 
             <span class="admin-blog-list-action-area">
                 <a ok:button ok:button-type="'link'" ng:click="edit(b)"><i class="fa fa-pencil"></i>{{l.buttons.EDIT}}</a>
@@ -16,7 +16,7 @@
                 </h3>
 
             <span class="admin-blog-list-content">
-            {{b.content | textEllipsisFilter:contentEllipsisLength}}
+            {{b.content | textEllipsisFilter:ellipsisLength}}
             </span>
 
             </div>
@@ -25,7 +25,7 @@
     <a id="admin-blog-more-button"
        class="list-more-button"
        ok:button
-       ng:show="datasources.listing.hasMore"
-       ng:click="datasources.listing.loadMore()"
+       ng:show="listing.hasMore"
+       ng:click="listing.loadMore()"
             >{{l.buttons.MORE}}</a>
 </section>

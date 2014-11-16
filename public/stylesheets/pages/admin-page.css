@@ -38,8 +38,28 @@ fieldset {
     padding: 4px 0;
 }
 
-#admin-blog-editor-section-content{
-    padding:16px 8px 8px;
+#admin-blog-editor-section {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: auto;
+    height: auto;
+    z-index: 202;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#admin-blog-editor-section.blog-editor-visible {
+    display: block;
+}
+
+#admin-blog-editor-section-content {
+    padding: 16px 8px 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 120px auto 20px;
+    overflow-y: auto;
 }
 
 #admin-blog-list-section {
