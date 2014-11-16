@@ -29,10 +29,10 @@ server {
         proxy_set_header X-Forwarder-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;
         proxy_set_header X-NginX-Proxy true;
-        proxy_pass http://127.0.0.1:/;
+        proxy_pass http://127.0.0.1:3801/;
         proxy_redirect off;
     }
-    
+
     location /admin.html {
         auth_basic            "Basic Auth";
         auth_basic_user_file  "/etc/nginx/.htpasswd";
@@ -42,10 +42,10 @@ server {
         proxy_set_header X-Forwarder-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;
         proxy_set_header X-NginX-Proxy true;
-        proxy_pass http://127.0.0.1:/;
+        proxy_pass http://127.0.0.1:3801/;
         proxy_redirect off;
     }
-    
+
 
     error_page 502 503 /error-something-wrong.html;
     location = /error-something-wrong.html {
