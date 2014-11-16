@@ -26,7 +26,8 @@ l.meta = {
 l.placeholders = {
     blog: {
         TITLE: 'Title',
-        CONTENT: 'Content '
+        CONTENT: 'Content ',
+        TAGS:'Tags (comman-seperated)'
     }
 };
 

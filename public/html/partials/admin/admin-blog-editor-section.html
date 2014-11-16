@@ -17,6 +17,12 @@
                                class="wide-input">
                     </div>
                     <div class="field">
+                        <input type="text" id="blog-tags-input"
+                               placeholder="{{l.placeholders.blog.TAGS}}"
+                               ng:model="blog.tagText"
+                               class="wide-input"/>
+                    </div>
+                    <div class="field">
                         <textarea name="blog-text" id="blog-text-textarea"
                                   placeholder="{{l.placeholders.blog.CONTENT}}"
                                   class="wide-textarea" cols="20" rows="10"
@@ -42,6 +48,9 @@
                     <div id="admin-blog-preview-div">
                         <h2>{{blog.title}}</h2>
 
+                        <div>
+                            <span ok:tag ok:title="t" ng:repeat="t in (blog.tagText | textSplitFilter:',')"></span>
+                        </div>
                         <div ng:bind-html="preview(blog).html"></div>
                     </div>
                 </fieldset>

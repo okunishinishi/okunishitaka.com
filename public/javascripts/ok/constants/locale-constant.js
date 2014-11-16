@@ -18,7 +18,8 @@
 		        "placeholders": {
 		            "blog": {
 		                "TITLE": "Title",
-		                "CONTENT": "Content "
+		                "CONTENT": "Content ",
+		                "TAGS": "Tags (comman-seperated)"
 		            }
 		        },
 		        "labels": {
@@ -112,7 +113,8 @@
 		        "placeholders": {
 		            "blog": {
 		                "TITLE": "Title",
-		                "CONTENT": "Content "
+		                "CONTENT": "Content ",
+		                "TAGS": "Tags (comman-seperated)"
 		            }
 		        },
 		        "labels": {

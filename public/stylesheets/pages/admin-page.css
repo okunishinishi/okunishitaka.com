@@ -38,6 +38,15 @@ fieldset {
     padding: 4px 0;
 }
 
+.blog-date-label {
+    font-size: 0.75em;
+    color: #AAA;
+}
+
+#blog-title-input {
+    font-size: 1.5em;
+}
+
 #admin-blog-editor-section {
     display: none;
     position: fixed;

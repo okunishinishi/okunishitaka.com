@@ -15,6 +15,28 @@
 
 /**
  * @ngdoc filter
+ * @filter dateFormatFilter
+ * @description Date format filter
+ */
+
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.filters')
+        .filter('dateFormatFilter', function defineDateFormatFilter() {
+            return function dateFormatFilter(date) {
+                date = new Date(date);
+                return [
+                    date.getFullYear(),
+                    date.getMonth(),
+                    date.getDate()
+                ].join('/')
+            };
+        });
+})(angular, apeman);
+/**
+ * @ngdoc filter
  * @filter pageTitleFilter
  * @description Page title filter
  */
@@ -111,6 +133,23 @@
                     });
                 });
                 return html;
+            };
+        });
+})(angular, apeman);
+/**
+ * @ngdoc filter
+ * @filter textSplitFilter
+ * @description Text split filter
+ */
+
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.filters')
+        .filter('textSplitFilter', function defineTextSplitFilter() {
+            return function textSplitFilter(text, seperator) {
+                return String(text || '').split(seperator || ',');
             };
         });
 })(angular, apeman);

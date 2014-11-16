@@ -2,5 +2,7 @@
   "tagColorFilter",
   "pageTitleFilter",
   "textEllipsisFilter",
-  "textLinkFilter"
+  "textLinkFilter",
+  "dateFormatFilter",
+  "textSplitFilter"
 ]

@@ -5,6 +5,7 @@
                name="blog-{{b._id}}">
                 {{b.title}}
             </a>
+            <span class="blog-date-label">{{b._at | dateFormatFilter}}</span>
         </dt>
         <dd ng:repeat-end="">{{b.content}}</dd>
     </dl>

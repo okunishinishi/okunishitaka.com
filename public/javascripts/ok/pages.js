@@ -45,16 +45,19 @@
         .factory('messenger', function (global,
                                         toastMessageService,
                                         confirmMessageService) {
-            var l = global.locale;
+            var l = global.locale,
+                showInfoMessage = toastMessageService.showInfoMessage.bind(toastMessageService);
             return {
                 askSure: function () {
                     return confirmMessageService.confirm(l.pages.admin.ASK_SURE);
                 },
-                showBlogDestoryDone: function (callback) {
-                    var msg = l.pages.admin.DESTROY_BLOG_DONE;
-                    toastMessageService.showInfoMessage(msg);
-                    callback = callback || ap.doNothing;
-                    callback(null);
+                blogDestroyDone: function (callback) {
+                    showInfoMessage(l.pages.admin.DESTROY_BLOG_DONE);
+                    (callback || ap.doNothing)(null);
+                },
+                blogSaveDone: function (callback) {
+                    showInfoMessage(l.pages.admin.SAVE_BLOG_DONE);
+                    (callback || ap.doNothing)(null);
                 }
             }
         })
@@ -68,12 +71,16 @@
                 }
             }, $scope);
         })
-        .controller('AdminBlogEditCtrl', function ($scope, datasources, blogRenderService) {
+        .controller('AdminBlogEditCtrl', function ($scope,
+                                                   datasources,
+                                                   messenger,
+                                                   blogRenderService) {
             var editing = datasources.editing,
                 listing = datasources.listing;
 
-            function close() {
+            function close(callback) {
                 editing.clear();
+                (callback || ap.doNothing)(null);
             }
 
             ap.copy({
@@ -85,7 +92,8 @@
                     async.series([
                         editing.save.bind(editing),
                         listing.load.bind(listing),
-                        close
+                        close,
+                        messenger.blogSaveDone.bind(messenger)
                     ]);
                 },
                 cancel: function () {
@@ -119,7 +127,7 @@
                     async.series([
                         destroying.load.bind(destroying),
                         destroying.destroy.bind(destroying),
-                        messenger.showBlogDestoryDone.bind(messenger),
+                        messenger.blogDestroyDone.bind(messenger),
                         listing.load.bind(listing)
                     ]);
                 }

@@ -84,7 +84,8 @@
 		        "placeholders": {
 		            "blog": {
 		                "TITLE": "Title",
-		                "CONTENT": "Content "
+		                "CONTENT": "Content ",
+		                "TAGS": "Tags (comman-seperated)"
 		            }
 		        },
 		        "labels": {
@@ -178,7 +179,8 @@
 		        "placeholders": {
 		            "blog": {
 		                "TITLE": "Title",
-		                "CONTENT": "Content "
+		                "CONTENT": "Content ",
+		                "TAGS": "Tags (comman-seperated)"
 		            }
 		        },
 		        "labels": {
@@ -1872,6 +1874,28 @@
 
 /**
  * @ngdoc filter
+ * @filter dateFormatFilter
+ * @description Date format filter
+ */
+
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.filters')
+        .filter('dateFormatFilter', function defineDateFormatFilter() {
+            return function dateFormatFilter(date) {
+                date = new Date(date);
+                return [
+                    date.getFullYear(),
+                    date.getMonth(),
+                    date.getDate()
+                ].join('/')
+            };
+        });
+})(angular, apeman);
+/**
+ * @ngdoc filter
  * @filter pageTitleFilter
  * @description Page title filter
  */
@@ -1968,6 +1992,23 @@
                     });
                 });
                 return html;
+            };
+        });
+})(angular, apeman);
+/**
+ * @ngdoc filter
+ * @filter textSplitFilter
+ * @description Text split filter
+ */
+
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.filters')
+        .filter('textSplitFilter', function defineTextSplitFilter() {
+            return function textSplitFilter(text, seperator) {
+                return String(text || '').split(seperator || ',');
             };
         });
 })(angular, apeman);
@@ -2223,16 +2264,19 @@
         .factory('messenger', function (global,
                                         toastMessageService,
                                         confirmMessageService) {
-            var l = global.locale;
+            var l = global.locale,
+                showInfoMessage = toastMessageService.showInfoMessage.bind(toastMessageService);
             return {
                 askSure: function () {
                     return confirmMessageService.confirm(l.pages.admin.ASK_SURE);
                 },
-                showBlogDestoryDone: function (callback) {
-                    var msg = l.pages.admin.DESTROY_BLOG_DONE;
-                    toastMessageService.showInfoMessage(msg);
-                    callback = callback || ap.doNothing;
-                    callback(null);
+                blogDestroyDone: function (callback) {
+                    showInfoMessage(l.pages.admin.DESTROY_BLOG_DONE);
+                    (callback || ap.doNothing)(null);
+                },
+                blogSaveDone: function (callback) {
+                    showInfoMessage(l.pages.admin.SAVE_BLOG_DONE);
+                    (callback || ap.doNothing)(null);
                 }
             }
         })
@@ -2246,12 +2290,16 @@
                 }
             }, $scope);
         })
-        .controller('AdminBlogEditCtrl', function ($scope, datasources, blogRenderService) {
+        .controller('AdminBlogEditCtrl', function ($scope,
+                                                   datasources,
+                                                   messenger,
+                                                   blogRenderService) {
             var editing = datasources.editing,
                 listing = datasources.listing;
 
-            function close() {
+            function close(callback) {
                 editing.clear();
+                (callback || ap.doNothing)(null);
             }
 
             ap.copy({
@@ -2263,7 +2311,8 @@
                     async.series([
                         editing.save.bind(editing),
                         listing.load.bind(listing),
-                        close
+                        close,
+                        messenger.blogSaveDone.bind(messenger)
                     ]);
                 },
                 cancel: function () {
@@ -2297,7 +2346,7 @@
                     async.series([
                         destroying.load.bind(destroying),
                         destroying.destroy.bind(destroying),
-                        messenger.showBlogDestoryDone.bind(messenger),
+                        messenger.blogDestroyDone.bind(messenger),
                         listing.load.bind(listing)
                     ]);
                 }
@@ -3299,7 +3348,7 @@
         .module('ok.templates')
         .value('adminAdminBlogEditorSectionHtmlTemplate', {
 		    "name": "/html/partials/admin/admin-blog-editor-section.html",
-		    "content": "<section id=\"admin-blog-editor-section\"\n         ng:class=\"{'blog-editor-visible':!!editing.data}\"\n         ng:controller=\"AdminBlogEditCtrl\" class=\"cover\">\n    <div id=\"admin-blog-editor-section-content\"\n         ok:alias=\"{blog:'editing.data'}\"\n         class=\"container position-relative\">\n\n        <a ng:click=\"close()\" id=\"admin-blog-close-button\" class=\"close-button\">{{l.buttons.CLOSE}}</a>\n\n        <div class=\"grid-row\">\n            <div class=\"grid-col\">\n                <fieldset class=\"no-style-fieldset\">\n                    <div class=\"field\">\n                        <input type=\"text\" id=\"blog-title-input\"\n                               placeholder=\"{{l.placeholders.blog.TITLE}}\"\n                               ng:model=\"blog.title\"\n                               class=\"wide-input\">\n                    </div>\n                    <div class=\"field\">\n                        <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n                                  placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n                                  class=\"wide-textarea\" cols=\"20\" rows=\"10\"\n                                  ng:model=\"blog.content\"\n                                ></textarea>\n                    </div>\n                    <div class=\"field\">\n                        <div class=\"text-align-center\">\n                            <a id=\"blog-cancel-button\"\n                               ok:button\n                               ng:click=\"cancel()\">{{l.buttons.CANCEL}}</a>\n                            <a id=\"blog-save-button\"\n                               ok:button\n                               ok:button-type=\"'primary'\"\n                               ng:click=\"save(blog)\">{{l.buttons.SAVE}}</a>\n                        </div>\n                    </div>\n                </fieldset>\n            </div>\n            <div class=\"grid-col\">\n                <fieldset>\n                    <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>\n                    <div id=\"admin-blog-preview-div\">\n                        <h2>{{blog.title}}</h2>\n\n                        <div ng:bind-html=\"preview(blog).html\"></div>\n                    </div>\n                </fieldset>\n                <div class=\"grid-col\">\n                    <br class=\"clear\"/>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>"
+		    "content": "<section id=\"admin-blog-editor-section\"\n         ng:class=\"{'blog-editor-visible':!!editing.data}\"\n         ng:controller=\"AdminBlogEditCtrl\" class=\"cover\">\n    <div id=\"admin-blog-editor-section-content\"\n         ok:alias=\"{blog:'editing.data'}\"\n         class=\"container position-relative\">\n\n        <a ng:click=\"close()\" id=\"admin-blog-close-button\" class=\"close-button\">{{l.buttons.CLOSE}}</a>\n\n        <div class=\"grid-row\">\n            <div class=\"grid-col\">\n                <fieldset class=\"no-style-fieldset\">\n                    <div class=\"field\">\n                        <input type=\"text\" id=\"blog-title-input\"\n                               placeholder=\"{{l.placeholders.blog.TITLE}}\"\n                               ng:model=\"blog.title\"\n                               class=\"wide-input\">\n                    </div>\n                    <div class=\"field\">\n                        <input type=\"text\" id=\"blog-tags-input\"\n                               placeholder=\"{{l.placeholders.blog.TAGS}}\"\n                               ng:model=\"blog.tagText\"\n                               class=\"wide-input\"/>\n                    </div>\n                    <div class=\"field\">\n                        <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n                                  placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n                                  class=\"wide-textarea\" cols=\"20\" rows=\"10\"\n                                  ng:model=\"blog.content\"\n                                ></textarea>\n                    </div>\n                    <div class=\"field\">\n                        <div class=\"text-align-center\">\n                            <a id=\"blog-cancel-button\"\n                               ok:button\n                               ng:click=\"cancel()\">{{l.buttons.CANCEL}}</a>\n                            <a id=\"blog-save-button\"\n                               ok:button\n                               ok:button-type=\"'primary'\"\n                               ng:click=\"save(blog)\">{{l.buttons.SAVE}}</a>\n                        </div>\n                    </div>\n                </fieldset>\n            </div>\n            <div class=\"grid-col\">\n                <fieldset>\n                    <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>\n                    <div id=\"admin-blog-preview-div\">\n                        <h2>{{blog.title}}</h2>\n\n                        <div>\n                            <span ok:tag ok:title=\"t\" ng:repeat=\"t in (blog.tagText | textSplitFilter:',')\"></span>\n                        </div>\n                        <div ng:bind-html=\"preview(blog).html\"></div>\n                    </div>\n                </fieldset>\n                <div class=\"grid-col\">\n                    <br class=\"clear\"/>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>"
 		});
 
 })(angular);
@@ -3314,7 +3363,7 @@
         .module('ok.templates')
         .value('adminAdminBlogListSectionHtmlTemplate', {
 		    "name": "/html/partials/admin/admin-blog-list-section.html",
-		    "content": "<section id=\"admin-blog-list-section\" ng:controller=\"AdminBlogListCtrl\">\n    <ul id=\"admin-blog-list\">\n        <li ng:repeat=\"b in listing.data\" class=\"admin-blog-list-item\">\n\n            <span class=\"admin-blog-list-action-area\">\n                <a ok:button ok:button-type=\"'link'\" ng:click=\"edit(b)\"><i class=\"fa fa-pencil\"></i>{{l.buttons.EDIT}}</a>\n                <a ok:button ok:button-type=\"'link'\" ng:click=\"destroy(b)\"><i class=\"fa fa-trash-o\"></i>{{l.buttons.DELETE}}</a>\n            </span>\n\n            <div class=\"admin-blog-list-item-inner\">\n\n\n                <h3 class=\"admin-blog-list-title\">\n                    <a class=\"blog-dt-anchor\"\n                       name=\"blog-{{b._id}}\">{{b.title}}</a>\n                </h3>\n\n            <span class=\"admin-blog-list-content\">\n            {{b.content | textEllipsisFilter:ellipsisLength}}\n            </span>\n\n            </div>\n        </li>\n    </ul>\n    <a id=\"admin-blog-more-button\"\n       class=\"list-more-button\"\n       ok:button\n       ng:show=\"listing.hasMore\"\n       ng:click=\"listing.loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</section>"
+		    "content": "<section id=\"admin-blog-list-section\" ng:controller=\"AdminBlogListCtrl\">\n    <ul id=\"admin-blog-list\">\n        <li ng:repeat=\"b in listing.data\" class=\"admin-blog-list-item\">\n\n            <span class=\"admin-blog-list-action-area\">\n                <a ok:button ok:button-type=\"'link'\" ng:click=\"edit(b)\"><i\n                        class=\"fa fa-pencil\"></i>{{l.buttons.EDIT}}</a>\n                <a ok:button ok:button-type=\"'link'\" ng:click=\"destroy(b)\"><i class=\"fa fa-trash-o\"></i>{{l.buttons.DELETE}}</a>\n            </span>\n\n            <div class=\"admin-blog-list-item-inner\">\n\n\n                <h3 class=\"admin-blog-list-title\">\n                    <a class=\"blog-dt-anchor\"\n                       name=\"blog-{{b._id}}\">{{b.title}}</a>\n                </h3>\n\n                <div>\n                    <span class=\"blog-date-label\">{{b._at | dateFormatFilter}}</span>\n                </div>\n            <span class=\"admin-blog-list-content\">\n            {{b.content | textEllipsisFilter:ellipsisLength}}\n            </span>\n\n            </div>\n        </li>\n    </ul>\n    <a id=\"admin-blog-more-button\"\n       class=\"list-more-button\"\n       ok:button\n       ng:show=\"listing.hasMore\"\n       ng:click=\"listing.loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</section>"
 		});
 
 })(angular);
@@ -3449,7 +3498,7 @@
         .module('ok.templates')
         .value('blogBlogListSectionHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-list-section.html",
-		    "content": "<section id=\"blog-list-section\" ng:controller=\"BlogListCtrl\">\n    <dl id=\"blog-list\">\n        <dt ng:repeat-start=\"b in listing.data\">\n            <a class=\"blog-dt-anchor\"\n               name=\"blog-{{b._id}}\">\n                {{b.title}}\n            </a>\n        </dt>\n        <dd ng:repeat-end=\"\">{{b.content}}</dd>\n    </dl>\n</section>"
+		    "content": "<section id=\"blog-list-section\" ng:controller=\"BlogListCtrl\">\n    <dl id=\"blog-list\">\n        <dt ng:repeat-start=\"b in listing.data\">\n            <a class=\"blog-dt-anchor\"\n               name=\"blog-{{b._id}}\">\n                {{b.title}}\n            </a>\n            <span class=\"blog-date-label\">{{b._at | dateFormatFilter}}</span>\n        </dt>\n        <dd ng:repeat-end=\"\">{{b.content}}</dd>\n    </dl>\n</section>"
 		});
 
 })(angular);
