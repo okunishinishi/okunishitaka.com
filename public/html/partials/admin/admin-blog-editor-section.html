@@ -51,7 +51,7 @@
                         <div>
                             <span ok:tag ok:title="t" ng:repeat="t in (blog.tagText | textSplitFilter:',')"></span>
                         </div>
-                        <div ng:bind-html="preview(blog).html"></div>
+                        <div ng:bind-html="blog.content | markdownRenderFilter"></div>
                     </div>
                 </fieldset>
                 <div class="grid-col">

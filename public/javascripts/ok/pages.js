@@ -73,8 +73,7 @@
         })
         .controller('AdminBlogEditCtrl', function ($scope,
                                                    datasources,
-                                                   messenger,
-                                                   blogRenderService) {
+                                                   messenger) {
             var editing = datasources.editing,
                 listing = datasources.listing;
 
@@ -84,9 +83,6 @@
             }
 
             ap.copy({
-                preview: function (blog) {
-                    return blogRenderService.renderBlog(blog);
-                },
                 editing: editing,
                 save: function (blog) {
                     async.series([

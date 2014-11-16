@@ -4,5 +4,6 @@
   "textEllipsisFilter",
   "textLinkFilter",
   "dateFormatFilter",
-  "textSplitFilter"
+  "textSplitFilter",
+  "markdownRenderFilter"
 ]

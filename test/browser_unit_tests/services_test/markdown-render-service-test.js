@@ -20,4 +20,5 @@ describe('markdownRenderService', function () {
         var rendered = markdownRenderService.render('###foo\nbar');
         expect(rendered).toBeDefined();
     }));
+
 });

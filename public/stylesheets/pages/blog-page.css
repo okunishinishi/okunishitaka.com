@@ -47,14 +47,17 @@ main {
 }
 
 #blog-list dd {
-    margin: 0 0 40px;
+    margin: 0 0 20px;
+    padding: 0 0 20px;
+    border-bottom: 1px solid #F0F0F0;
 }
 
 #blog-list .blog-dt-anchor {
     position: relative;
-    padding-top: 55px;
-    margin-top: -55px;
+    padding-top: 60px;
+    margin-top: -60px;
 }
+
 #blog-list .blog-date-label {
     font-size: 12px;
     color: #CCC;

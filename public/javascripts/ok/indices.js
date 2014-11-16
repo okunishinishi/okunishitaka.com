@@ -122,7 +122,6 @@
                 get profileApiService() { return $injector.get('profileApiService'); },
                 get settingApiService() { return $injector.get('settingApiService'); },
                 get workApiService() { return $injector.get('workApiService'); },
-                get blogRenderService() { return $injector.get('blogRenderService'); },
                 get browserDetectService() { return $injector.get('browserDetectService'); },
                 get codeConvertService() { return $injector.get('codeConvertService'); },
                 get confirmMessageService() { return $injector.get('confirmMessageService'); },

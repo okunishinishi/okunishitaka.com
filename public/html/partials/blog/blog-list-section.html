@@ -10,7 +10,7 @@
                 <span ok:tag ok:title="t" ng:repeat="t in (b.tagText | textSplitFilter:',')"></span>
             </span>
         </dt>
-        <dd ng:repeat-end="">{{b.content}}</dd>
+        <dd ng:repeat-end="" ng:bind-html="b.content | markdownRenderFilter"></dd>
     </dl>
     <a id="blog-more-button"
        class="list-more-button"
