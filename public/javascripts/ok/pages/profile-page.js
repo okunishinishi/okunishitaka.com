@@ -42,13 +42,16 @@
                 templateUrl: partialUrlConstant.PROFILE_TABLE
             }
         })
-        .factory('profileViewingDatasource', function (ProfileViewingDatasource) {
-            return new ProfileViewingDatasource({});
-        })
-        .controller('ProfileCtrl', function ($scope, profileViewingDatasource) {
-            $scope.viewing = profileViewingDatasource;
-            profileViewingDatasource.load(function (err) {
-            });
+        .controller('ProfileCtrl', function ($scope, profileApiService) {
+            $scope.profile = null;
+            profileApiService.singleton()
+                .then(function resolve(data) {
+                    $scope.profile = data;
+
+                })
+                .then(function rejected(err) {
+                    //TODO
+                });
         });
 
 })(angular, jQuery);

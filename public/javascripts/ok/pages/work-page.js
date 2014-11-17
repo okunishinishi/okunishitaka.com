@@ -14,13 +14,6 @@
         .run(function ($rootScope) {
             $rootScope.page = 'work';
         })
-        .factory('workListingDatasource', function (WorkListingDatasource) {
-            return new WorkListingDatasource({
-                _sort: '_at',
-                _revert: true,
-                limit: 100
-            });
-        })
         .directive('okWorkLink', function (partialUrlConstant, linkUrlConstant) {
             return {
                 scope: {
@@ -37,18 +30,23 @@
         })
         .controller('WorkCtrl', function ($scope) {
         })
-        .controller('WorkListCtrl', function ($scope, workListingDatasource) {
-            ap.copy({
-                listing: workListingDatasource,
-                hrefForWork: function (work) {
-                    if (!work) {
-                        return null;
-                    }
-                    var links = $scope.links;
-                    return links[work.demo] || links[work.link] || links[work.repo];
+        .controller('WorkListCtrl', function ($scope, workApiService) {
+            $scope.hrefForWork = function (work) {
+                if (!work) {
+                    return null;
                 }
-            }, $scope);
-            workListingDatasource.load();
+                var links = $scope.links;
+                return links[work.demo] || links[work.link] || links[work.repo];
+            }
+            workApiService.list({
+                _sort: '_at',
+                _revert: true,
+                limit: 100
+            }).then(function resolved(data) {
+                $scope.works = data;
+            }, function rejected(err) {
+
+            });
         });
 
 })(angular, apeman, jQuery);

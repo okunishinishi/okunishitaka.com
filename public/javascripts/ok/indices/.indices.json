@@ -1,19 +1,16 @@
 {
-    "constants": {
-    },
-    "errors": {
-        "pascal": true
-    },
-    "entities": {
-        "pascal": true
-    },
-    "datasources": {
-        "pascal": true
-    },
-    "services": {
-    },
-    "templates": {
-    },
-    "utils": {
-    }
+  "constants": {
+  },
+  "errors": {
+    "pascal": true
+  },
+  "entities": {
+    "pascal": true
+  },
+  "services": {
+  },
+  "templates": {
+  },
+  "utils": {
+  }
 }

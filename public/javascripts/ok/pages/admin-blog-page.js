@@ -15,20 +15,6 @@
         .run(function ($rootScope) {
 
         })
-        .factory('datasources', function (BlogEditingDatasource,
-                                          BlogListingDatasource,
-                                          BlogDestroyingDatasource) {
-            return {
-                editing: new BlogEditingDatasource({}),
-                listing: new BlogListingDatasource({
-                    condition: {
-                        _sort: '_at',
-                        _reverse: true
-                    }
-                }),
-                destroying: new BlogDestroyingDatasource({})
-            }
-        })
         .factory('messenger', function (global,
                                         toastMessageService,
                                         confirmMessageService) {
@@ -48,75 +34,76 @@
                 }
             }
         })
-        .controller('AdminBlogCtrl', function ($scope, datasources) {
-            var editing = datasources.editing;
-            ap.copy({
-                add: function () {
-                    editing.init({
-                        data: {}
-                    });
-                }
-            }, $scope);
+        .controller('AdminBlogCtrl', function ($scope) {
+            $scope.add = function () {
+                $scope.$emit('addBlog');
+            }
         })
         .controller('AdminBlogEditCtrl', function ($scope,
-                                                   datasources,
+                                                   $rootScope,
+                                                   blogApiService,
                                                    messenger) {
-            var editing = datasources.editing,
-                listing = datasources.listing;
+            $scope.blog = null;
+            $scope.close = function () {
+                $scope.blog = null;
+            }
+            $scope.save = function () {
+                var blog = $scope.blog,
+                    id = blog && blog._id;
 
-            function close(callback) {
-                editing.clear();
-                (callback || ap.doNothing)(null);
+                var promise;
+                if (id) {
+                    promise = blogApiService.update(id, blog)
+                } else {
+                    console.log('create', blog);
+                    promise = blogApiService.create(blog);
+                }
+                promise.then(function () {
+                    $scope.close();
+                });
+            }
+            $scope.add = function () {
+                $scope.blog = {};
+                console.log('addded', $scope.blog);
             }
 
-            ap.copy({
-                editing: editing,
-                save: function (blog) {
-                    async.series([
-                        editing.save.bind(editing),
-                        listing.load.bind(listing),
-                        close,
-                        messenger.blogSaveDone.bind(messenger)
-                    ]);
-                },
-                cancel: function () {
-                    close();
-                },
-                close: close
-            }, $scope);
+            $scope.edit = function (id) {
+                blogApiService.one(id)
+                    .then(function resolved(data) {
+                        $scope.blog = data;
+                    })
+                    .then(function rejected(err) {
+                        //TODO
+                    });
+            }
+
+
+            $rootScope.$on('editBlog', function (event, id) {
+                $scope.edit(id);
+            });
+            $rootScope.$on('addBlog', function (event) {
+                $scope.add();
+            });
         })
         .controller('AdminBlogListCtrl', function ($scope,
-                                                   datasources,
+                                                   blogApiService,
                                                    messenger) {
-            var listing = datasources.listing,
-                destroying = datasources.destroying;
 
-            ap.copy({
-                ellipsisLength: 32,
-                listing: listing,
-                edit: function (blog) {
-                    datasources.editing
-                        .init({id: blog._id})
-                        .load(function () {
-                        });
-                },
-                destroy: function (blog) {
-                    var sure = messenger.askSure();
-                    if (!sure) {
-                        return;
-                    }
+            $scope.ellipsisLength = 32;
+            $scope.blogs = [];
+            $scope.edit = function (blog) {
+                $scope.$emit('editBlog', blog._id);
+            }
 
-                    destroying.init({id: blog._id});
-                    async.series([
-                        destroying.load.bind(destroying),
-                        destroying.destroy.bind(destroying),
-                        messenger.blogDestroyDone.bind(messenger),
-                        listing.load.bind(listing)
-                    ]);
-                }
-            }, $scope);
+            blogApiService.list({
+                _sort: '_at',
+                _reverse: true
+            }).then(function resolved(data) {
+                $scope.blogs = $scope.blogs.concat(data);
+            }, function rejected(err) {
 
-            listing.load();
+            });
+
         });
 
 })(angular, apeman);
