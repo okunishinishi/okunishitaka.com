@@ -4,7 +4,7 @@
  * @description Page script for admin.
  */
 
-(function (ng, ap, async) {
+(function (ng, ap) {
     "use strict";
 
     ng
@@ -119,4 +119,4 @@
             listing.load();
         });
 
-})(angular, apeman, async);
+})(angular, apeman);

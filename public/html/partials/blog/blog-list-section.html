@@ -1,6 +1,6 @@
 <section id="blog-list-section" ng:controller="BlogListCtrl">
     <dl id="blog-list">
-        <dt ng:repeat-start="b in listing.data">
+        <dt ng:repeat-start="b in blogs">
             <a class="blog-dt-anchor blog-title"
                name="blog-{{b._id}}">
                 {{b.title}}
@@ -15,7 +15,7 @@
     <a id="blog-more-button"
        class="list-more-button"
        ok:button
-       ng:show="listing.hasMore"
-       ng:click="listing.loadMore()"
+       ng:show="hasMore"
+       ng:click="loadMore()"
             >{{l.buttons.MORE}}</a>
 </section>

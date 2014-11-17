@@ -26,7 +26,7 @@
 
     ng
         .module('ok.services')
-        .service('apiService', function ApiService($http, AppApiError, codeConvertService) {
+        .service('apiService', function ApiService($http, $q, AppApiError, codeConvertService) {
             var s = this;
             ap.copy(
                 /**
@@ -44,110 +44,98 @@
                     /**
                      * Send request.
                      * @param {object} config - Request configuration.
-                     * @param {fnction} callback - Callback when done.
-                     * @returns {*}
+                     * @returns {Promise} - Deferred promise.
                      * @private
                      */
-                    _request: function (config, callback) {
+                    _request: function (config) {
                         var s = this;
 
                         if (!config.url) {
                             // angular.js標準のエラーが分かりにくいのでここで明示的にthrowしている。
                             throw new Error('url is required.');
                         }
-                        callback = callback || ap.doNothing;
-                        return $http(config)
+                        var deferred = $q.defer();
+                        $http(config)
                             .success(function (data, status) {
-                                callback(null, data);
+                                deferred.resolve(data);
                             })
                             .error(function (data, status) {
                                 var err = s._newError(data, status);
-                                callback(err, data);
+                                deferred.reject(err);
                             });
+                        return deferred.promise;
                     },
                     /**
                      * Request with params.
-                     * @param url
-                     * @param method
-                     * @param params
-                     * @param callback
-                     * @returns {*}
+                     * @param {string} url - Url to request.
+                     * @param {string} method - Method to request.
+                     * @param {object} params - Paremeter data.
+                     * @returns {Promise} - Deferred promise.
                      * @private
                      */
-                    _paramsRequest: function (url, method, params, callback) {
+                    _paramsRequest: function (url, method, params) {
                         var s = this;
-                        var noParams = (params === undefined) || (typeof(params) == 'function');
-                        if (noParams) {
-                            callback = callback || params;
-                            return s._paramsRequest(url, method, null, callback);
-                        }
                         return s._request({
                             url: url,
                             method: method,
                             params: params
-                        }, callback);
+                        });
                     },
                     /**
                      * Request with data.
-                     * @param url
-                     * @param method
-                     * @param data
-                     * @param callback
+                     * @param {string} url - Url to request.
+                     * @param {string} method - Method to request.
+                     * @param {object} data - Request data.
+                     * @returns {Promise} - Deferred promise.
                      * @private
                      */
-                    _dataRequest: function (url, method, data, callback) {
+                    _dataRequest: function (url, method, data) {
                         var s = this;
-                        var noData = (data === undefined) || (typeof(data) == 'function');
-                        if (noData) {
-                            callback = callback || data;
-                            return s._dataRequest(url, method, null, callback);
-                        }
                         return s._request({
                             url: url,
                             method: method,
                             data: data
-                        }, callback);
+                        });
                     },
                     /**
                      * Get request.
                      * @param {string} url - URL to get.
                      * @param {object} [params] - Parameters.
-                     * @param {function} callback - Callback when done.
-                     * @returns {*}
+                     * @returns {Promise} - Deferred promise.
                      */
-                    get: function (url, params, callback) {
+                    get: function (url, params) {
                         var s = this;
-                        return s._paramsRequest(url, 'GET', params, callback);
+                        return s._paramsRequest(url, 'GET', params);
                     },
                     /**
                      * Post request.
                      * @param {string} url - URL to get.
                      * @param {object} [data] - Parameters.
-                     * @param {function} callback - Callback when done.
+                     * @returns {Promise} - Deferred promise.
                      */
-                    post: function (url, data, callback) {
+                    post: function (url, data) {
                         var s = this;
-                        return s._dataRequest(url, 'POST', data, callback);
+                        return s._dataRequest(url, 'POST', data);
                     },
                     /**
                      * Put request.
                      * @param {string} url - URL to get.
                      * @param {object} [data] - Parameters.
-                     * @param {function} callback - Callback when done.
+                     * @returns {Promise} - Deferred promise.
                      */
-                    put: function (url, data, callback) {
+                    put: function (url, data) {
                         var s = this;
-                        return s._dataRequest(url, 'PUT', data, callback);
+                        return s._dataRequest(url, 'PUT', data);
                     },
                     /**
                      * Delete request.
                      * @param {string} url - URL to get.
                      * @param {object} [data] - Parameters.
-                     * @param {function} callback - Callback when done.
+                     * @returns {Promise} - Deferred promise.
                      */
-                    delete: function (url, data, callback) {
+                    delete: function (url, data) {
                         var s = this;
-                        return s._dataRequest(url, 'DELETE', data, callback);
+                        return s._dataRequest(url, 'DELETE', data);
                     }
                 },
                 s
@@ -171,57 +159,52 @@
             /**
              * List resources.
              * @param {object} params - Query data.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
+             * @returns {Promise} - Deferred promise.
              */
-            s.list = function list(params, callback) {
+            s.list = function list(params) {
                 var url = apiUrlConstant.API_BLOGS_GET;
-                return apiService.get(url, params, callback);
+                return apiService.get(url, params);
             }
 
             /**
              * File a resource.
              * @param {string} id - Resource id.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
+             * @returns {Promise} - Deferred promise.
              */
-            s.one = function one(id, callback) {
+            s.one = function one(id) {
                 var url = formatUrl(apiUrlConstant.API_BLOGS_GET_WITH_ID, {_id: id});
-                return apiService.get(url, callback);
+                return apiService.get(url);
             };
 
             /**
              * Create a resource.
              * @param {object} data - Data to create.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
+             * @returns {Promise} - Deferred promise.
              */
-            s.create = function create(data, callback) {
+            s.create = function create(data) {
                 var url = apiUrlConstant.API_BLOGS_POST;
-                return apiService.post(url, data, callback);
+                return apiService.post(url, data);
             }
 
             /**
              * Update a resouce.
              * @param {string} id - Resource id.
              * @param {object} data - Data to update.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
+             * @returns {Promise} - Deferred promise.
              */
-            s.update = function update(id, data, callback) {
+            s.update = function update(id, data) {
                     var url = formatUrl(apiUrlConstant.API_BLOGS_PUT_WITH_ID, {_id: id});
-                    return apiService.put(url, data, callback);
+                    return apiService.put(url, data);
             }
 
             /**
              * Destroy a resouce.
              * @param {string} id - Resource id.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
+             * @returns {Promise} - Deferred promise.
              */
-            s.destroy = function destroy(id, callback) {
+            s.destroy = function destroy(id) {
                 var url = formatUrl(apiUrlConstant.API_BLOGS_DELETE_WITH_ID, {_id: id});
-                return apiService.delete(url, callback);
+                return apiService.delete(url);
             }
 
         });
@@ -241,11 +224,11 @@
 
             /**
              * Get the singleton data.
-             * @param {function} callback - Callback when done.
+             * @returns {Promise} - Deferred promise.
              */
-            s.singleton = function singleton(callback) {
+            s.singleton = function singleton() {
                 var url = apiUrlConstant.API_PROFILES_GET;
-                return apiService.get(url, callback);
+                return apiService.get(url);
             }
 
         });
@@ -281,12 +264,11 @@
             /**
              * List resources.
              * @param {object} params - Query data.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
+             * @returns {Promise} - Deferred promise.
              */
-            s.list = function list(params, callback) {
+            s.list = function list(params) {
                 var url = apiUrlConstant.API_WORKS_GET;
-                return apiService.get(url, params, callback);
+                return apiService.get(url, params);
             }
 
         });

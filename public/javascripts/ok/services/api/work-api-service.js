@@ -14,12 +14,11 @@
             /**
              * List resources.
              * @param {object} params - Query data.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
+             * @returns {Promise} - Deferred promise.
              */
-            s.list = function list(params, callback) {
+            s.list = function list(params) {
                 var url = apiUrlConstant.API_WORKS_GET;
-                return apiService.get(url, params, callback);
+                return apiService.get(url, params);
             }
 
         });

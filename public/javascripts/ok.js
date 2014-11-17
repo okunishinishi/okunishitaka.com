@@ -463,648 +463,6 @@
 
 
 
-/**
- * ok datasources module.
- * @requires angular
- */
-
-(function (ng) {
-    "use strict";
-    ng
-        .module('ok.datasources', [
-            'ok.constants',
-            'ok.entities',
-            'ok.services',
-            'ok.utils'
-        ]);
-})(angular);
-
-/**
- * Abstract data source.
- * @requires angular
- * @retuires apeman
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('Datasource', function () {
-            /**
-             * @abstract
-             * @constructor Datasource
-             */
-            function Datasource() {
-                var s = this;
-                s.init.apply(s, arguments);
-            }
-
-            Datasource.prototype = {
-                /**
-                 * Inialize a data source.
-                 */
-                init: function (properties) {
-                    var s = this;
-                    ap.copy(properties || {}, s);
-                    return s;
-                }
-            };
-
-
-            /**
-             * Define a data source constructor.
-             * @param {object} properties - Data source properties.
-             * @returns {function} Defined constructor
-             */
-            Datasource.define = function (properties, Prototype) {
-                if (!Prototype) {
-                    Prototype = Datasource;
-                }
-                function Defined() {
-                    var s = this;
-                    s.init.apply(s, arguments);
-                }
-
-                Defined.prototype = new Prototype(properties);
-
-                return Defined;
-            };
-
-            return Datasource;
-        });
-})(angular, apeman);
-/**
- * @ngdoc object
- * @name BlogDestroyingDatasource
- * @description Destoying data source for blog.
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('BlogDestroyingDatasource', function (DestroyingDatasource, BlogEntity, blogApiService) {
-            return DestroyingDatasource.define(
-                /** @lends BlogDestroyingDatasource.prototype */
-                {
-                    _oneRequest: function (id, callback) {
-                        blogApiService.one(id, callback);
-                    },
-                    _destroyRequest: function (id, callback) {
-                        blogApiService.destroy(id, callback);
-                    },
-                }
-            );
-        });
-})(angular, apeman);
-/**
- * @ngdoc object
- * @name DestroyingDatasource
- * @description Data source for editing.
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('DestroyingDatasource', function (Datasource, ViewingDatasource) {
-
-            /**
-             * @agutments Datasource
-             * @constructor DestroyingDatasource
-             */
-            function DestroyingDatasource(properties) {
-                var s = this;
-                s.init.apply(s, arguments);
-            }
-
-
-            /**
-             * Define an one data source.
-             * @param {object} properties - Data source properties.
-             * @returns {function} Defined constructor
-             */
-            DestroyingDatasource.define = function (properties) {
-                return Datasource.define(properties, DestroyingDatasource);
-            };
-
-            DestroyingDatasource.prototype = ap.copy(
-                /** @lends DestroyingDatasource.prototype */
-                {
-                    /**
-                     * Send a request to destroy a resource.
-                     * @param {string} id - Resource id to destroy.
-                     * @param {function} callback - Callback when done.
-                     * @private
-                     */
-                    _destroyRequest: function (id, callback) {
-                        ap.throwNotImplmentedError();
-                    },
-                    /**
-                     * Destroy data.
-                     * @param {function} callback
-                     */
-                    destroy: function (callback) {
-                        var s = this,
-                            id = s.id;
-                        callback = callback || ap.doNothing;
-                        s._destroyRequest(id, callback);
-                        return s;
-                    },
-                    clear: function () {
-                        var s = this;
-                        s._discard()
-                        return s;
-                    }
-                },
-                new ViewingDatasource({})
-            );
-
-            return DestroyingDatasource;
-        });
-})(angular, apeman);
-/**
- * @ngdoc object
- * @name BlogEditingDatasource
- * @description Editing data source for blog.
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('BlogEditingDatasource', function (EditingDatasource, BlogEntity, blogApiService) {
-            return EditingDatasource.define(
-                /** @lends BlogEditingDatasource.prototype */
-                {
-                    _oneRequest: function (id, callback) {
-                        blogApiService.one(id, callback);
-                    },
-                    _createRequest: function (data, callback) {
-                        blogApiService.create(data, callback);
-                    },
-                    _updateRequest: function (id, data, callback) {
-                        blogApiService.update(id, data, callback);
-                    },
-                    _parseData: function (data) {
-                        return BlogEntity.new(data);
-                    }
-                }
-            );
-        });
-})(angular, apeman);
-/**
- * @ngdoc object
- * @name EditingDatasource
- * @description Data source for editing.
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('EditingDatasource', function (Datasource, ViewingDatasource) {
-
-            /**
-             * @agutments Datasource
-             * @constructor EditingDatasource
-             */
-            function EditingDatasource(properties) {
-                var s = this;
-                s.init.apply(s, arguments);
-            }
-
-
-            /**
-             * Define an one data source.
-             * @param {object} properties - Data source properties.
-             * @returns {function} Defined constructor
-             */
-            EditingDatasource.define = function (properties) {
-                return Datasource.define(properties, EditingDatasource);
-            };
-
-            EditingDatasource.prototype = ap.copy(
-                /** @lends EditingDatasource.prototype */
-                {
-                    /**
-                     * Send a request to create a new resource.
-                     * @param {object} data - Resource data to create.
-                     * @param {function} callback - Callback when done.
-                     * @private
-                     */
-                    _createRequest: function (data, callback) {
-                        ap.throwNotImplmentedError();
-                    },
-                    /**
-                     * Send a request to update a exiting resource.
-                     * @param {string} id - Data identifier.
-                     * @param {object} data - Data to create.
-                     * @param {function} callback - Callback when done.
-                     * @private
-                     */
-                    _updateRequest: function (id, data, callback) {
-                        ap.throwNotImplmentedError();
-                    },
-                    /**
-                     * Save data.
-                     * @param {function} callback
-                     */
-                    save: function (callback) {
-                        var s = this,
-                            id = s.id,
-                            data = s.data || {};
-                        callback = callback || ap.doNothing;
-                        if (id) {
-                            s._updateRequest(id, data, callback);
-                        } else {
-                            s._createRequest(data, callback);
-                        }
-                        return s;
-                    },
-                    clear: function () {
-                        var s = this;
-                        s._discard()
-                        return s;
-                    }
-                },
-                new ViewingDatasource({})
-            );
-
-            return EditingDatasource;
-        });
-})(angular, apeman);
-/**
- * @ngdoc object
- * @name ProfileEditingDatasource
- * @description Editing data source for profile.
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('ProfileEditingDatasource', function (EditingDatasource, ProfileEntity, profileApiService) {
-            return EditingDatasource.define(
-                /** @lends ProfileEditingDatasource.prototype */
-                {
-                    _oneRequest: function (id, callback) {
-                        profileApiService.singleton(callback);
-                    },
-                    _updateRequest: function (data, callback) {
-                        profileApiService.save(data, callback);
-                    },
-                }
-            );
-        });
-})(angular, apeman);
-/**
- * @ngdoc object
- * @description List data source for blog.
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('BlogListingDatasource', function (ListingDatasource, BlogEntity, blogApiService) {
-            return ListingDatasource.define(
-                /** @lends BlogListingDatasource.prototype */
-                {
-                    _listRequest: function (query, callback) {
-                        blogApiService.list(query, callback);
-                    },
-                    _parseData: function (data) {
-                        return data.map(BlogEntity.new);
-                    }
-                }
-            );
-        });
-
-})(angular, apeman);
-/**
- * @ngdoc object
- * @name ListingDatasource
- * @description Data source to list resouces.
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('ListingDatasource', function (Datasource) {
-
-            /**
-             * @augments Datasource
-             * @constructor ListDatasource
-             */
-            function ListDatasource() {
-                var s = this;
-                s.init.apply(s, arguments);
-            }
-
-            /**
-             * Define a list data source.
-             * @param {object} properties - Data source properties.
-             * @returns {function} Defined constructor
-             */
-            ListDatasource.define = function (properties) {
-                return Datasource.define(properties, ListDatasource);
-            };
-
-            ListDatasource.prototype = ap.copy(
-                /** @lends ListDatasource.prototype */
-                {
-                    /** Limit count for fetching. */
-                    limit: 20,
-                    /** Skip count for fething. */
-                    skip: 0,
-                    /** Feched data. */
-                    data: null,
-                    /** Has more data to fetch or not. */
-                    hasMore: true,
-                    /** Search condition. */
-                    condition: {},
-                    /** Is loading or not. */
-                    loading: false,
-                    /**
-                     * Get query.
-                     * @returns {object}
-                     * @private
-                     */
-                    _queryData: function () {
-                        var s = this,
-                            query = {};
-                        ap.copy({
-                            _limit: s.limit,
-                            _skip: s.skip
-                        }, query);
-                        ap.copy(s.condition, query);
-                        return query;
-                    },
-                    /**
-                     * Send a request to get list.
-                     * @param {object} query - Query data.
-                     * @param {function} callback - Callback when done.
-                     */
-                    _listRequest: function (query, callback) {
-                        ap.throwNotImplmentedError();
-                    },
-                    /**
-                     * Parse data.
-                     * @param {object} data - Data to parsed.
-                     * @returns {object} - Parsed data.
-                     */
-                    _parseData: function (data) {
-                        return data;
-                    },
-                    _addFetchedData: function (data) {
-                        var s = this;
-                        s.hasMore = s.limit <= data.length;
-                        s.data = s.data.concat(s._parseData(data));
-                        s.skip = s.data.length;
-                    },
-                    /**
-                     * Load data.
-                     * @param {function} callback
-                     */
-                    _fetch: function (callback) {
-                        var s = this,
-                            query = s._queryData();
-                        s.loading = true;
-                        callback = callback || ap.doNothing;
-                        s._listRequest(query, function (err, data) {
-                            s.loading = false;
-                            if (!err) {
-                                s._addFetchedData(data);
-                            }
-                            callback(err);
-                        });
-                    },
-                    /**
-                     * Discard fethced data.
-                     * @private
-                     */
-                    _discard: function () {
-                        var s = this;
-                        s.init({});
-                    },
-                    init: function () {
-                        var s = this;
-                        Datasource.prototype.init.apply(s, arguments);
-                        s.hasMore = true;
-                        s.data = [];
-                        s.skip = 0;
-                        return s;
-                    },
-                    /**
-                     * Clear and fetch data.
-                     * @param {function} callback
-                     */
-                    load: function (callback) {
-                        var s = this;
-                        s._discard();
-                        s._fetch(callback);
-                        return s;
-                    },
-                    /**
-                     * Load next resources.
-                     * @param {function} callback - Callback when done.
-                     */
-                    loadMore: function (callback) {
-                        var s = this;
-                        s._fetch(callback);
-                        return s;
-                    }
-                },
-                new Datasource({})
-            );
-
-            return ListDatasource;
-        });
-})(angular, apeman);
-/**
- * @ngdoc object
- * @description List data source for work.
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('WorkListingDatasource', function (ListingDatasource, WorkEntity, workApiService) {
-            return ListingDatasource.define(
-                /** @lends WorkListingDatasource.prototype */
-                {
-                    _listRequest: function (query, callback) {
-                        workApiService.list(query, callback);
-                    },
-                    _parseData: function (data) {
-                        return data.map(WorkEntity.new);
-                    }
-                }
-            );
-        });
-
-})(angular, apeman);
-/**
- * @ngdoc object
- * @name BlogViewingDatasource
- * @description View data source for blog.
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('BlogViewingDatasource', function (ViewingDatasource, BlogEntity, blogApiService) {
-            return ViewingDatasource.define(
-                /** @lends BlogViewingDatasource.prototype */
-                {
-                    _oneRequest: function (id, callback) {
-                        blogApiService.one(id, callback);
-                    },
-                    _parseData: function (data) {
-                        return BlogEntity.new(data);
-                    }
-                }
-            );
-        });
-
-})(angular, apeman);
-/**
- * @ngdoc object
- * @name ProfileViewingDatasource
- * @description View data source for profile.
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('ProfileViewingDatasource', function (ViewingDatasource, ProfileEntity, profileApiService) {
-            return ViewingDatasource.define(
-                /** @lends ProfileViewingDatasource.prototype */
-                {
-                    _oneRequest: function (id, callback) {
-                        profileApiService.singleton(callback);
-                    },
-                    _parseData: function (data) {
-                        return ProfileEntity.new(data);
-                    }
-                }
-            );
-        });
-
-})(angular, apeman);
-/**
- * @ngdoc object
- * @name ViewingDatasource
- * @description Data source for viewing.
- */
-(function (ng, ap) {
-    "use strict";
-
-    ng
-        .module('ok.datasources')
-        .factory('ViewingDatasource', function (Datasource) {
-
-            /**
-             * @agutments Datasource
-             * @constructor ViewingDatasource
-             */
-            function ViewingDatasource(properties) {
-                var s = this;
-                s.init.apply(s, arguments);
-            }
-
-
-            /**
-             * Define an one data source.
-             * @param {object} properties - Data source properties.
-             * @returns {function} Defined constructor
-             */
-            ViewingDatasource.define = function (properties) {
-                return Datasource.define(properties, ViewingDatasource);
-            };
-
-            ViewingDatasource.prototype = ap.copy(
-                /** @lends ViewingDatasource.prototype */
-                {
-                    /**
-                     * Data identifier
-                     */
-                    id: null,
-                    data: null,
-                    loading: false,
-                    /**
-                     * Send a request to get one.
-                     * @param {string} id - Data identifier.
-                     * @param {function} callback - Callback when done.
-                     */
-                    _oneRequest: function (id, callback) {
-                        ap.throwNotImplmentedError();
-                    },
-                    /**
-                     * Parse data.
-                     * @param {object} data - Fethed data.
-                     * @returns {*} - Parsed data.
-                     */
-                    _parseData: function (data) {
-                        return data;
-                    },
-                    _setFetchedData: function (data) {
-                        var s = this;
-                        s.data = s._parseData(data);
-                    },
-                    /**
-                     * Load data.
-                     * @param {function} callback
-                     */
-                    _fetch: function (callback) {
-                        var s = this,
-                            id = s.id;
-                        s.loading = true;
-                        callback = callback || ap.doNothing;
-                        s._oneRequest(id, function (err, data) {
-                            s.loading = false;
-                            if (!err) {
-                                s._setFetchedData(data);
-                            }
-                            callback(err);
-                        });
-                    },
-                    /**
-                     * Discard fethced data.
-                     * @private
-                     */
-                    _discard: function () {
-                        var s = this;
-                        s.init({});
-                    },
-                    init: function () {
-                        var s = this;
-                        s.data = null;
-                        Datasource.prototype.init.apply(s, arguments);
-                        return s;
-                    },
-                    /**
-                     * Load data.
-                     * @param {function} callback
-                     */
-                    load: function (callback) {
-                        var s = this;
-                        s._discard();
-                        s._fetch(callback);
-                        return s;
-                    }
-                },
-                new Datasource({})
-            );
-
-            return ViewingDatasource;
-        });
-})(angular, apeman);
 
 /**
  * ok directives module.
@@ -2045,7 +1403,6 @@
     ng
         .module('ok.indices', [
             'ok.constants',
-            'ok.datasources',
             'ok.entities',
             'ok.errors',
             'ok.services',
@@ -2090,18 +1447,7 @@
         .module('ok.indices')
         .factory('datasourcesIndex', function defineDatasourcesIndex($injector) {
             return {
-                get Datasource() { return $injector.get('Datasource'); },
-                get BlogDestroyingDatasource() { return $injector.get('BlogDestroyingDatasource'); },
-                get DestroyingDatasource() { return $injector.get('DestroyingDatasource'); },
-                get BlogEditingDatasource() { return $injector.get('BlogEditingDatasource'); },
-                get EditingDatasource() { return $injector.get('EditingDatasource'); },
-                get ProfileEditingDatasource() { return $injector.get('ProfileEditingDatasource'); },
-                get BlogListingDatasource() { return $injector.get('BlogListingDatasource'); },
-                get ListingDatasource() { return $injector.get('ListingDatasource'); },
-                get WorkListingDatasource() { return $injector.get('WorkListingDatasource'); },
-                get BlogViewingDatasource() { return $injector.get('BlogViewingDatasource'); },
-                get ProfileViewingDatasource() { return $injector.get('ProfileViewingDatasource'); },
-                get ViewingDatasource() { return $injector.get('ViewingDatasource'); }
+                
             };
         });
 })(angular);
@@ -2258,7 +1604,7 @@
  * @description Page script for admin.
  */
 
-(function (ng, ap, async) {
+(function (ng, ap) {
     "use strict";
 
     ng
@@ -2373,7 +1719,7 @@
             listing.load();
         });
 
-})(angular, apeman, async);
+})(angular, apeman);
 /**
  * @ngdoc module
  * @module ok.adminPage
@@ -2412,51 +1758,45 @@
         .run(function ($rootScope) {
             $rootScope.page = 'blog';
         })
-        .factory('datasources', function (BlogViewingDatasource, BlogListingDatasource) {
-            return {
-                viewing: new BlogViewingDatasource({}),
-                listing: new BlogListingDatasource({
-                    condition: {
-                        _sort: '_at',
-                        _reverse: true
-
-                    }
-                })
-            }
-
-        })
-        .controller('BlogCtrl', function ($scope,
-                                          datasources) {
-            var listing = datasources.listing,
-                viewing = datasources.viewing;
-            ap.copy({
-                listing: listing,
-                viewing: viewing,
-                isDetailed: function () {
-                    return !!(listing.condition._id);
-                }
-            }, $scope);
+        .controller('BlogCtrl', function ($scope,blogApiService) {
 
             function applyHash(hash) {
-                viewing
-                    .init({
-                        id: (hash || '').split('-').pop()
-                    })
-                    .load(function () {
-
-                    });
+                var id = (hash || '').split('-').pop()
             }
-
-            listing.load();
 
             $scope.$watch('hash()', function () {
                 applyHash($scope.hash());
             });
 
 
+            $scope.condition = {
+                _sort: '_at',
+                _reverse: true,
+                _limit: 20,
+                _skip: 0
+            };
+            $scope.blogs = [];
+            $scope.hasMore = true;
+            $scope.loadMore = function () {
+                load();
+            }
+
+            function load() {
+                blogApiService.list($scope.condition)
+                    .then(function resolved(data) {
+                        $scope.blogs = $scope.blogs.concat(data);
+                        $scope.hasMore = data.length >= $scope.condition._limit;
+                    })
+                    .then(function rejected(err) {
+
+
+                    });
+            }
+
+
+            load();
         })
         .controller('BlogListCtrl', function ($scope) {
-
         })
         .controller('BlogAsideCtrl', function ($scope) {
         })
@@ -2527,7 +1867,6 @@
         .module('ok.page', [
             'apeman',
             'ok.constants',
-            'ok.datasources',
             'ok.directives',
             'ok.filters',
             'ok.entities',
@@ -2725,7 +2064,7 @@
 
     ng
         .module('ok.services')
-        .service('apiService', function ApiService($http, AppApiError, codeConvertService) {
+        .service('apiService', function ApiService($http, $q, AppApiError, codeConvertService) {
             var s = this;
             ap.copy(
                 /**
@@ -2743,110 +2082,98 @@
                     /**
                      * Send request.
                      * @param {object} config - Request configuration.
-                     * @param {fnction} callback - Callback when done.
-                     * @returns {*}
+                     * @returns {Promise} - Deferred promise.
                      * @private
                      */
-                    _request: function (config, callback) {
+                    _request: function (config) {
                         var s = this;
 
                         if (!config.url) {
                             // angular.js標準のエラーが分かりにくいのでここで明示的にthrowしている。
                             throw new Error('url is required.');
                         }
-                        callback = callback || ap.doNothing;
-                        return $http(config)
+                        var deferred = $q.defer();
+                        $http(config)
                             .success(function (data, status) {
-                                callback(null, data);
+                                deferred.resolve(data);
                             })
                             .error(function (data, status) {
                                 var err = s._newError(data, status);
-                                callback(err, data);
+                                deferred.reject(err);
                             });
+                        return deferred.promise;
                     },
                     /**
                      * Request with params.
-                     * @param url
-                     * @param method
-                     * @param params
-                     * @param callback
-                     * @returns {*}
+                     * @param {string} url - Url to request.
+                     * @param {string} method - Method to request.
+                     * @param {object} params - Paremeter data.
+                     * @returns {Promise} - Deferred promise.
                      * @private
                      */
-                    _paramsRequest: function (url, method, params, callback) {
+                    _paramsRequest: function (url, method, params) {
                         var s = this;
-                        var noParams = (params === undefined) || (typeof(params) == 'function');
-                        if (noParams) {
-                            callback = callback || params;
-                            return s._paramsRequest(url, method, null, callback);
-                        }
                         return s._request({
                             url: url,
                             method: method,
                             params: params
-                        }, callback);
+                        });
                     },
                     /**
                      * Request with data.
-                     * @param url
-                     * @param method
-                     * @param data
-                     * @param callback
+                     * @param {string} url - Url to request.
+                     * @param {string} method - Method to request.
+                     * @param {object} data - Request data.
+                     * @returns {Promise} - Deferred promise.
                      * @private
                      */
-                    _dataRequest: function (url, method, data, callback) {
+                    _dataRequest: function (url, method, data) {
                         var s = this;
-                        var noData = (data === undefined) || (typeof(data) == 'function');
-                        if (noData) {
-                            callback = callback || data;
-                            return s._dataRequest(url, method, null, callback);
-                        }
                         return s._request({
                             url: url,
                             method: method,
                             data: data
-                        }, callback);
+                        });
                     },
                     /**
                      * Get request.
                      * @param {string} url - URL to get.
                      * @param {object} [params] - Parameters.
-                     * @param {function} callback - Callback when done.
-                     * @returns {*}
+                     * @returns {Promise} - Deferred promise.
                      */
-                    get: function (url, params, callback) {
+                    get: function (url, params) {
                         var s = this;
-                        return s._paramsRequest(url, 'GET', params, callback);
+                        return s._paramsRequest(url, 'GET', params);
                     },
                     /**
                      * Post request.
                      * @param {string} url - URL to get.
                      * @param {object} [data] - Parameters.
-                     * @param {function} callback - Callback when done.
+                     * @returns {Promise} - Deferred promise.
                      */
-                    post: function (url, data, callback) {
+                    post: function (url, data) {
                         var s = this;
-                        return s._dataRequest(url, 'POST', data, callback);
+                        return s._dataRequest(url, 'POST', data);
                     },
                     /**
                      * Put request.
                      * @param {string} url - URL to get.
                      * @param {object} [data] - Parameters.
-                     * @param {function} callback - Callback when done.
+                     * @returns {Promise} - Deferred promise.
                      */
-                    put: function (url, data, callback) {
+                    put: function (url, data) {
                         var s = this;
-                        return s._dataRequest(url, 'PUT', data, callback);
+                        return s._dataRequest(url, 'PUT', data);
                     },
                     /**
                      * Delete request.
                      * @param {string} url - URL to get.
                      * @param {object} [data] - Parameters.
-                     * @param {function} callback - Callback when done.
+                     * @returns {Promise} - Deferred promise.
                      */
-                    delete: function (url, data, callback) {
+                    delete: function (url, data) {
                         var s = this;
-                        return s._dataRequest(url, 'DELETE', data, callback);
+                        return s._dataRequest(url, 'DELETE', data);
                     }
                 },
                 s
@@ -2870,57 +2197,52 @@
             /**
              * List resources.
              * @param {object} params - Query data.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
+             * @returns {Promise} - Deferred promise.
              */
-            s.list = function list(params, callback) {
+            s.list = function list(params) {
                 var url = apiUrlConstant.API_BLOGS_GET;
-                return apiService.get(url, params, callback);
+                return apiService.get(url, params);
             }
 
             /**
              * File a resource.
              * @param {string} id - Resource id.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
+             * @returns {Promise} - Deferred promise.
              */
-            s.one = function one(id, callback) {
+            s.one = function one(id) {
                 var url = formatUrl(apiUrlConstant.API_BLOGS_GET_WITH_ID, {_id: id});
-                return apiService.get(url, callback);
+                return apiService.get(url);
             };
 
             /**
              * Create a resource.
              * @param {object} data - Data to create.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
+             * @returns {Promise} - Deferred promise.
              */
-            s.create = function create(data, callback) {
+            s.create = function create(data) {
                 var url = apiUrlConstant.API_BLOGS_POST;
-                return apiService.post(url, data, callback);
+                return apiService.post(url, data);
             }
 
             /**
              * Update a resouce.
              * @param {string} id - Resource id.
              * @param {object} data - Data to update.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
+             * @returns {Promise} - Deferred promise.
              */
-            s.update = function update(id, data, callback) {
+            s.update = function update(id, data) {
                     var url = formatUrl(apiUrlConstant.API_BLOGS_PUT_WITH_ID, {_id: id});
-                    return apiService.put(url, data, callback);
+                    return apiService.put(url, data);
             }
 
             /**
              * Destroy a resouce.
              * @param {string} id - Resource id.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
+             * @returns {Promise} - Deferred promise.
              */
-            s.destroy = function destroy(id, callback) {
+            s.destroy = function destroy(id) {
                 var url = formatUrl(apiUrlConstant.API_BLOGS_DELETE_WITH_ID, {_id: id});
-                return apiService.delete(url, callback);
+                return apiService.delete(url);
             }
 
         });
@@ -2940,11 +2262,11 @@
 
             /**
              * Get the singleton data.
-             * @param {function} callback - Callback when done.
+             * @returns {Promise} - Deferred promise.
              */
-            s.singleton = function singleton(callback) {
+            s.singleton = function singleton() {
                 var url = apiUrlConstant.API_PROFILES_GET;
-                return apiService.get(url, callback);
+                return apiService.get(url);
             }
 
         });
@@ -2980,12 +2302,11 @@
             /**
              * List resources.
              * @param {object} params - Query data.
-             * @param {function} callback - Callback when done.
-             * @returns {$http} - Http module.
+             * @returns {Promise} - Deferred promise.
              */
-            s.list = function list(params, callback) {
+            s.list = function list(params) {
                 var url = apiUrlConstant.API_WORKS_GET;
-                return apiService.get(url, params, callback);
+                return apiService.get(url, params);
             }
 
         });
@@ -3430,7 +2751,7 @@
         .module('ok.templates')
         .value('blogBlogAsideContentHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-aside-content.html",
-		    "content": "<div ng:controller=\"BlogAsideCtrl\">\n    <ul>\n        <li ng:repeat=\"b in listing.data\">\n            <a href=\"javascript:void(0)\" ng:click=\"scrollTo('blog-' + b._id)\">{{b.title}}</a>\n        </li>\n    </ul>\n    <a id=\"aside-blog-more-button\"\n       href=\"javascript:void(0)\"\n       ng:show=\"list.hasMore\"\n       ng:click=\"list.loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</div>"
+		    "content": "<div ng:controller=\"BlogAsideCtrl\">\n    <ul>\n        <li ng:repeat=\"b in blogs\">\n            <a href=\"javascript:void(0)\" ng:click=\"scrollTo('blog-' + b._id)\">{{b.title}}</a>\n        </li>\n    </ul>\n    <a id=\"aside-blog-more-button\"\n       href=\"javascript:void(0)\"\n       ng:show=\"hasMore\"\n       ng:click=\"loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</div>"
 		});
 
 })(angular);
@@ -3535,7 +2856,7 @@
         .module('ok.templates')
         .value('blogBlogListSectionHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-list-section.html",
-		    "content": "<section id=\"blog-list-section\" ng:controller=\"BlogListCtrl\">\n    <dl id=\"blog-list\">\n        <dt ng:repeat-start=\"b in listing.data\">\n            <a class=\"blog-dt-anchor blog-title\"\n               name=\"blog-{{b._id}}\">\n                {{b.title}}\n            </a>\n            <span class=\"blog-date-label\">{{b._at | dateFormatFilter}}</span>\n            <span class=\"display-block\">\n                <span ok:tag ok:title=\"t\" ng:repeat=\"t in (b.tagText | textSplitFilter:',')\"></span>\n            </span>\n        </dt>\n        <dd ng:repeat-end=\"\" ng:bind-html=\"b.content | markdownRenderFilter\"></dd>\n    </dl>\n    <a id=\"blog-more-button\"\n       class=\"list-more-button\"\n       ok:button\n       ng:show=\"listing.hasMore\"\n       ng:click=\"listing.loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</section>"
+		    "content": "<section id=\"blog-list-section\" ng:controller=\"BlogListCtrl\">\n    <dl id=\"blog-list\">\n        <dt ng:repeat-start=\"b in blogs\">\n            <a class=\"blog-dt-anchor blog-title\"\n               name=\"blog-{{b._id}}\">\n                {{b.title}}\n            </a>\n            <span class=\"blog-date-label\">{{b._at | dateFormatFilter}}</span>\n            <span class=\"display-block\">\n                <span ok:tag ok:title=\"t\" ng:repeat=\"t in (b.tagText | textSplitFilter:',')\"></span>\n            </span>\n        </dt>\n        <dd ng:repeat-end=\"\" ng:bind-html=\"b.content | markdownRenderFilter\"></dd>\n    </dl>\n    <a id=\"blog-more-button\"\n       class=\"list-more-button\"\n       ok:button\n       ng:show=\"hasMore\"\n       ng:click=\"loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</section>"
 		});
 
 })(angular);

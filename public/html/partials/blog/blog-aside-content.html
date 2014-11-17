@@ -1,12 +1,12 @@
 <div ng:controller="BlogAsideCtrl">
     <ul>
-        <li ng:repeat="b in listing.data">
+        <li ng:repeat="b in blogs">
             <a href="javascript:void(0)" ng:click="scrollTo('blog-' + b._id)">{{b.title}}</a>
         </li>
     </ul>
     <a id="aside-blog-more-button"
        href="javascript:void(0)"
-       ng:show="list.hasMore"
-       ng:click="list.loadMore()"
+       ng:show="hasMore"
+       ng:click="loadMore()"
             >{{l.buttons.MORE}}</a>
 </div>

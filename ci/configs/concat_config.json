@@ -4,10 +4,6 @@
         "dest": "public/javascripts/ok/constants.js"
     },
     {
-        "src": "public/javascripts/ok/datasources/**/*.js",
-        "dest": "public/javascripts/ok/datasources.js"
-    },
-    {
         "src": "public/javascripts/ok/directives/**/*.js",
         "dest": "public/javascripts/ok/directives.js"
     },

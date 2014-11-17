@@ -11,7 +11,6 @@
         .module('ok.page', [
             'apeman',
             'ok.constants',
-            'ok.datasources',
             'ok.directives',
             'ok.filters',
             'ok.entities',

@@ -3,12 +3,6 @@
   "modules": {
     "constants": [
     ],
-    "datasources": [
-      "ok.constants",
-      "ok.entities",
-      "ok.services",
-      "ok.utils"
-    ],
     "directives": [
       "ok.filters",
       "ok.utils"
@@ -26,7 +20,6 @@
     ],
     "indices": [
       "ok.constants",
-      "ok.datasources",
       "ok.entities",
       "ok.errors",
       "ok.services",

@@ -13,11 +13,11 @@
 
             /**
              * Get the singleton data.
-             * @param {function} callback - Callback when done.
+             * @returns {Promise} - Deferred promise.
              */
-            s.singleton = function singleton(callback) {
+            s.singleton = function singleton() {
                 var url = apiUrlConstant.API_PROFILES_GET;
-                return apiService.get(url, callback);
+                return apiService.get(url);
             }
 
         });

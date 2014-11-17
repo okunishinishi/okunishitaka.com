@@ -15,51 +15,45 @@
         .run(function ($rootScope) {
             $rootScope.page = 'blog';
         })
-        .factory('datasources', function (BlogViewingDatasource, BlogListingDatasource) {
-            return {
-                viewing: new BlogViewingDatasource({}),
-                listing: new BlogListingDatasource({
-                    condition: {
-                        _sort: '_at',
-                        _reverse: true
-
-                    }
-                })
-            }
-
-        })
-        .controller('BlogCtrl', function ($scope,
-                                          datasources) {
-            var listing = datasources.listing,
-                viewing = datasources.viewing;
-            ap.copy({
-                listing: listing,
-                viewing: viewing,
-                isDetailed: function () {
-                    return !!(listing.condition._id);
-                }
-            }, $scope);
+        .controller('BlogCtrl', function ($scope,blogApiService) {
 
             function applyHash(hash) {
-                viewing
-                    .init({
-                        id: (hash || '').split('-').pop()
-                    })
-                    .load(function () {
-
-                    });
+                var id = (hash || '').split('-').pop()
             }
-
-            listing.load();
 
             $scope.$watch('hash()', function () {
                 applyHash($scope.hash());
             });
 
 
+            $scope.condition = {
+                _sort: '_at',
+                _reverse: true,
+                _limit: 20,
+                _skip: 0
+            };
+            $scope.blogs = [];
+            $scope.hasMore = true;
+            $scope.loadMore = function () {
+                load();
+            }
+
+            function load() {
+                blogApiService.list($scope.condition)
+                    .then(function resolved(data) {
+                        $scope.blogs = $scope.blogs.concat(data);
+                        $scope.hasMore = data.length >= $scope.condition._limit;
+                    })
+                    .then(function rejected(err) {
+
+
+                    });
+            }
+
+
+            load();
         })
         .controller('BlogListCtrl', function ($scope) {
-
         })
         .controller('BlogAsideCtrl', function ($scope) {
         })
