@@ -22,7 +22,7 @@ SchemaHandler.prototype = {
      * Validate request.
      * @param {http.ServerRequest} req - Request to validate.
      * @param {http.ServerResponse} res - Response to send if validation failed.
-     * @param {functon} next - Next handler. Called only when request is valid.
+     * @param {function} next - Next handler. Called only when request is valid.
      */
     validate: function (req, res, next) {
         var s = this;
@@ -43,6 +43,6 @@ SchemaHandler.prototype = {
             }
         });
     }
-}
+};
 
 module.exports = SchemaHandler;

@@ -18,7 +18,7 @@ var app = require('../app'),
     settings = require('../app_settings');
 
 var cluster = require('cluster');
-cluster.isMaster
+
 h.persist(cluster, {
     basedir: h.basedir,
     start: function () {

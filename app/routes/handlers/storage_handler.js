@@ -26,12 +26,12 @@ StorageHandler.valuesWithKeys = function (object, keys) {
         }
     }
     return result;
-}
+};
 
 
 StorageHandler.prototype = {
     /**
-     * Check data identitiy.
+     * Check data identity.
      * @param req
      * @param res
      * @param next
@@ -121,7 +121,7 @@ StorageHandler.prototype = {
             sorter = {
                 key: q._sort || '_at',
                 desc: ['true', 'yes', '1'].indexOf((q._revert || q._reverse || '').toLowerCase()) !== -1
-            }
+            };
         async.waterfall([
             function (callback) {
                 s.storage.list(condition, sorter, chopper, callback);

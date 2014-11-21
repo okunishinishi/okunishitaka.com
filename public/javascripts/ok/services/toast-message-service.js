@@ -19,22 +19,22 @@
                 s._dismissTimer = $timeout(function () {
                     queue.shift();
                 }, s._dismissDuration);
-            }
+            };
 
             /**
-             * Show infor message.
+             * Show info message.
              * @param {string} message - Message to show.
              */
             s.showInfoMessage = function (message) {
                 s._showMessage(message, 'info');
-            }
+            };
             /**
              * Show warn message.
              * @param {string} message - Message to show.
              */
             s.showWarnMessage = function (message) {
                 s._showMessage(message, 'warn');
-            }
+            };
             /**
              * Show error message.
              * @param {string} message - Message to show.

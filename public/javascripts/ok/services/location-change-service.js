@@ -23,7 +23,7 @@
              */
             s.changeToTopPage = function () {
                 s.changeTo('/');
-            }
+            };
 
             /**
              * Scroll to hash.
