@@ -23,19 +23,19 @@ server {
     location /admin {
         auth_basic            "Basic Auth";
         auth_basic_user_file  "/etc/nginx/.htpasswd";
-        root "/Users/okuni/WebstormProjects/okunishitaka.com/public";
+        root "/Users/okuni/projects/okunishitaka.com/public";
     }
 
     location /admin.html {
         auth_basic            "Basic Auth";
         auth_basic_user_file  "/etc/nginx/.htpasswd";
-        root "/Users/okuni/WebstormProjects/okunishitaka.com/public";
+        root "/Users/okuni/projects/okunishitaka.com/public";
     }
 
 
     error_page 502 503 /error-something-wrong.html;
     location = /error-something-wrong.html {
-        root /Users/okuni/WebstormProjects/okunishitaka.com/public/html/error;
+        root /Users/okuni/projects/okunishitaka.com/public/html/error;
     }
 
 

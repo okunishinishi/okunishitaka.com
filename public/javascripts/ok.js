@@ -79,7 +79,7 @@
 		            "NAME": "okunishitaka.com",
 		            "DESCRIPTION": "Homepage of Taka Okunishi",
 		            "AUTHOR": "Taka Okunishi",
-		            "COPY_RIGHT": "Copyright © 2014 Taka Okunishi"
+		            "COPY_RIGHT": "Copyright © 2015 Taka Okunishi"
 		        },
 		        "placeholders": {
 		            "blog": {
@@ -149,8 +149,8 @@
 		                "NAME": "name",
 		                "captions": {
 		                    "ABOUT": "About",
-		                    "PERSONEL": "Personel",
-		                    "EDUCATION": "Eductation",
+		                    "BASICS": "Basics",
+		                    "EDUCATION": "Education",
 		                    "JOB_HISTORY": "Job History",
 		                    "QUALIFICATION": "Qualification"
 		                }
@@ -174,7 +174,7 @@
 		            "NAME": "okunishitaka.com",
 		            "DESCRIPTION": "Homepage of Taka Okunishi",
 		            "AUTHOR": "Taka Okunishi",
-		            "COPY_RIGHT": "Copyright © 2014 Taka Okunishi"
+		            "COPY_RIGHT": "Copyright © 2015 Taka Okunishi"
 		        },
 		        "placeholders": {
 		            "blog": {
@@ -244,8 +244,8 @@
 		                "NAME": "name",
 		                "captions": {
 		                    "ABOUT": "About",
-		                    "PERSONEL": "Personel",
-		                    "EDUCATION": "Eductation",
+		                    "BASICS": "Basics",
+		                    "EDUCATION": "Education",
 		                    "JOB_HISTORY": "Job History",
 		                    "QUALIFICATION": "Qualification"
 		                }
@@ -1923,7 +1923,7 @@
                 scope: {
                     id: '=okId',
                     caption: '=okCaption',
-                    data: '=okData',
+                    data: '=okData'
                 },
                 templateUrl: partialUrlConstant.PROFILE_LIST
             }
@@ -1937,7 +1937,7 @@
                 scope: {
                     id: '=okId',
                     caption: '=okCaption',
-                    data: '=okData',
+                    data: '=okData'
                 },
                 templateUrl: partialUrlConstant.PROFILE_TABLE
             }
@@ -2457,7 +2457,7 @@
              */
             s.changeToTopPage = function () {
                 s.changeTo('/');
-            }
+            };
 
             /**
              * Scroll to hash.
@@ -2575,22 +2575,22 @@
                 s._dismissTimer = $timeout(function () {
                     queue.shift();
                 }, s._dismissDuration);
-            }
+            };
 
             /**
-             * Show infor message.
+             * Show info message.
              * @param {string} message - Message to show.
              */
             s.showInfoMessage = function (message) {
                 s._showMessage(message, 'info');
-            }
+            };
             /**
              * Show warn message.
              * @param {string} message - Message to show.
              */
             s.showWarnMessage = function (message) {
                 s._showMessage(message, 'warn');
-            }
+            };
             /**
              * Show error message.
              * @param {string} message - Message to show.

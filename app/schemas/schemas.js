@@ -12,4 +12,4 @@ module.exports = {
     get settingSaveSchema() {
         return new JsonSchema(require('./setting_save.schema.json'));
     }
-};
+}

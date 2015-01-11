@@ -27,7 +27,7 @@ l.placeholders = {
     blog: {
         TITLE: 'Title',
         CONTENT: 'Content ',
-        TAGS:'Tags (comman-seperated)'
+        TAGS: 'Tags (comman-seperated)'
     }
 };
 
@@ -98,8 +98,8 @@ l.pages = {
         NAME: 'name',
         captions: {
             ABOUT: 'About',
-            PERSONEL: "Personel",
-            EDUCATION: "Eductation",
+            BASICS: "Basics",
+            EDUCATION: "Education",
             JOB_HISTORY: "Job History",
             QUALIFICATION: "Qualification"
         }

@@ -79,7 +79,7 @@
 		            "NAME": "okunishitaka.com",
 		            "DESCRIPTION": "Homepage of Taka Okunishi",
 		            "AUTHOR": "Taka Okunishi",
-		            "COPY_RIGHT": "Copyright © 2014 Taka Okunishi"
+		            "COPY_RIGHT": "Copyright © 2015 Taka Okunishi"
 		        },
 		        "placeholders": {
 		            "blog": {
@@ -149,8 +149,8 @@
 		                "NAME": "name",
 		                "captions": {
 		                    "ABOUT": "About",
-		                    "PERSONEL": "Personel",
-		                    "EDUCATION": "Eductation",
+		                    "BASICS": "Basics",
+		                    "EDUCATION": "Education",
 		                    "JOB_HISTORY": "Job History",
 		                    "QUALIFICATION": "Qualification"
 		                }
@@ -174,7 +174,7 @@
 		            "NAME": "okunishitaka.com",
 		            "DESCRIPTION": "Homepage of Taka Okunishi",
 		            "AUTHOR": "Taka Okunishi",
-		            "COPY_RIGHT": "Copyright © 2014 Taka Okunishi"
+		            "COPY_RIGHT": "Copyright © 2015 Taka Okunishi"
 		        },
 		        "placeholders": {
 		            "blog": {
@@ -244,8 +244,8 @@
 		                "NAME": "name",
 		                "captions": {
 		                    "ABOUT": "About",
-		                    "PERSONEL": "Personel",
-		                    "EDUCATION": "Eductation",
+		                    "BASICS": "Basics",
+		                    "EDUCATION": "Education",
 		                    "JOB_HISTORY": "Job History",
 		                    "QUALIFICATION": "Qualification"
 		                }

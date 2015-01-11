@@ -23,7 +23,7 @@
                 scope: {
                     id: '=okId',
                     caption: '=okCaption',
-                    data: '=okData',
+                    data: '=okData'
                 },
                 templateUrl: partialUrlConstant.PROFILE_LIST
             }
@@ -37,7 +37,7 @@
                 scope: {
                     id: '=okId',
                     caption: '=okCaption',
-                    data: '=okData',
+                    data: '=okData'
                 },
                 templateUrl: partialUrlConstant.PROFILE_TABLE
             }
