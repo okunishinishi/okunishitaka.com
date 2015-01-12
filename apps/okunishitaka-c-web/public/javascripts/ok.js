@@ -12,6 +12,95 @@
         ]);
 })(angular);
 
+/**
+ * @ngdoc object
+ * @name BlogList
+ * @description Blog list
+ */
+
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.components')
+        .factory('BlogList', function defineBlogList($q,
+                                                     BlogEntity,
+                                                     blogApiService,
+                                                     blogTagApiService,
+                                                     objectUtil) {
+            var copy = objectUtil.copy.bind(objectUtil);
+
+            function BlogList(config) {
+                var s = this;
+                copy(config || {}, s);
+            }
+
+            BlogList.prototype = {
+                data: [],
+                hasMore: false,
+                condition: {
+                    _sort: '_at',
+                    _reverse: true,
+                    _limit: 100,
+                    _skip: 0
+                },
+                fetch: function () {
+                    var s = this,
+                        deferred = $q.defer();
+
+                    function apiRejected(err) {
+                        deferred.reject(err);
+                    }
+
+                    blogApiService.list(s.condition)
+                        .then(function resolved(data) {
+                            return data.map(BlogEntity.new);
+                        }, apiRejected)
+                        .then(function (blogs) {
+                            s.data = s.data.concat(blogs);
+                            s.hasMore = blogs.length >= s.condition._limit;
+                            s.condition._skip += blogs.length;
+                            return blogs;
+                        })
+                        .then(function (blogs) {
+                            return blogTagApiService.list({
+                                'blog_id[]': blogs.map(function (blog) {
+                                    return blog._id;
+                                })
+                            });
+                        })
+                        .then(function (blogTags) {
+                            var hash = s.blogTagHash || {};
+                            blogTags.forEach(function (tag) {
+                                var blogId = tag.blog_id;
+                                hash[blogId] = hash[blogId] || [];
+                                var isNew = hash[blogId].indexOf(tag) === -1;
+                                if (isNew) {
+                                    hash[blogId].push(tag);
+                                }
+                            });
+                            s.blogTagHash = hash;
+                            return hash;
+                        }, apiRejected)
+                        .then(function (hash) {
+                            s.data.forEach(function (blog) {
+                                var tags = hash[blog._id];
+                                blog.tag_texts = tags.map(function (tag) {
+                                    return tag.tag_text;
+                                });
+                            });
+                            deferred.resolve({
+                                data: s.data,
+                                hasMore: s.hasMore
+                            });
+                        });
+                    return deferred.promise;
+                }
+            };
+
+            return BlogList;
+        });
+})(angular);
 
 /**
  * @ngdoc module
@@ -370,6 +459,7 @@
     ng
         .module('ok.constants')
         .constant('partialUrlConstant', {
+		    "BLOG_DETAIL_SECTION": "/html/partials/blog/blog-detail-section.html",
 		    "BLOG_LIST_SECTION": "/html/partials/blog/blog-list-section.html",
 		    "COVER": "/html/partials/cover.html",
 		    "FAVICON": "/html/partials/favicon.html",
@@ -1276,6 +1366,27 @@
 })(angular, moment);
 /**
  * @ngdoc filter
+ * @filter htmlTextFilter
+ * @description Html text filter
+ */
+
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.filters')
+        .filter('htmlTextFilter', function defineHtmlTextFilter() {
+            return function htmlTextFilter(input) {
+                try {
+                    return $(input).text();
+                } catch (e) {
+                    return input;
+                }
+            };
+        });
+})(angular);
+/**
+ * @ngdoc filter
  * @filter markdownRenderFilter
  * @description Markdown render filter
  */
@@ -1347,6 +1458,27 @@
             }
         });
 })(angular, one);
+/**
+ * @ngdoc filter
+ * @filter textEllipsisFilter
+ * @description Text ellipsis filter
+ */
+
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.filters')
+        .filter('textEllipsisFilter', function defineTextEllipsisFilter() {
+            return function textEllipsisFilter(text, maxLength) {
+                if (!text) {
+                    return '';
+                }
+                var suffix = '...';
+                return text.substr(0, maxLength - suffix.length) + suffix;
+            };
+        });
+})(angular);
 /**
  * @ngdoc filter
  * @filter textLinkFilter
@@ -1508,6 +1640,7 @@
         .module('ok.indices')
         .factory('templatesIndex', function defineTemplatesIndex($injector) {
             return {
+                get blogBlogDetailSectionHtmlTemplate() { return $injector.get('blogBlogDetailSectionHtmlTemplate'); },
                 get blogBlogListSectionHtmlTemplate() { return $injector.get('blogBlogListSectionHtmlTemplate'); },
                 get coverHtmlTemplate() { return $injector.get('coverHtmlTemplate'); },
                 get faviconHtmlTemplate() { return $injector.get('faviconHtmlTemplate'); },
@@ -1579,78 +1712,96 @@
         .run(function setupRootScope($rootScope) {
             $rootScope.page = 'blog';
         })
+        .factory('blogList', function (BlogList) {
+            return new BlogList({
+                condition: {
+                    _sort: '_at',
+                    _reverse: true,
+                    _limit: 3,
+                    _skip: 0
+                }
+            });
+        })
         .controller('BlogCtrl', function defineBlogCtrl($scope) {
 
         })
-        .controller('BlogListCtrl', function ($scope,
-                                              objectUtil,
-                                              arrayUtil,
-                                              errorHandleService,
-                                              BlogEntity,
-                                              blogApiService,
-                                              blogTagApiService) {
-
+        .controller('BlogDetailCtrl', function ($scope,
+                                                blogApiService,
+                                                BlogEntity,
+                                                errorHandleService,
+                                                locationSearchService,
+                                                eventEmitService) {
             function apiRejected(err) {
                 errorHandleService.handleError(err);
             }
 
-            $scope.blogTagHash = {};
 
-            function load() {
+            function load(blogId) {
+                $scope.blogId = blogId;
+                if (!blogId) {
+                    return;
+                }
+                locationSearchService.update('blog_id', blogId);
                 $scope.loading = true;
-                blogApiService.list($scope.condition)
-                    .then(function resolved(data) {
-                        return data.map(BlogEntity.new);
+                blogApiService.one(blogId)
+                    .then(function (data) {
+                        $scope.blog = BlogEntity.new(data);
                     }, apiRejected)
-                    .then(function (blogs) {
-                        $scope.blogs = $scope.blogs.concat(blogs);
-                        $scope.hasMore = blogs.length >= $scope.condition._limit;
-                        $scope.condition._skip += blogs.length;
-                        return blogs;
-                    })
-                    .then(function (blogs) {
-                        return blogTagApiService.list({
-                            'blog_id[]': blogs.map(function (blog) {
-                                return blog._id;
-                            })
-                        });
-                    })
-                    .then(function (blogTags) {
-                        var hash = $scope.blogTagHash || {};
-                        blogTags.forEach(function (tag) {
-                            var blogId = tag.blog_id;
-                            hash[blogId] = hash[blogId] || [];
-                            var isNew = hash[blogId].indexOf(tag) === -1;
-                            if (isNew) {
-                                hash[blogId].push(tag);
-                            }
-                        });
-                        $scope.blogTagHash = hash;
-                        return hash;
-                    }, apiRejected)
-                    .then(function (hash) {
-                        $scope.blogs.forEach(function (blog) {
-                            var tags = hash[blog._id];
-                            blog.tag_texts = tags.map(function (tag) {
-                                return tag.tag_text;
-                            });
-                        });
-                    })
                     .finally(function () {
                         $scope.loading = false;
                     });
             }
 
-            $scope.condition = {
-                _sort: '_at',
-                _reverse: true,
-                _limit: 3,
-                _skip: 0
-            };
-            $scope.blogs = [];
+            eventEmitService.on('blog.detailBlog', function (ev, blog) {
+                var _id = blog && blog._id;
+                load(_id);
+            });
+
+            var blogId = locationSearchService.get('blog_id');
+            load(blogId);
+
+            $scope.$watch(function () {
+                return locationSearchService.get();
+            }, function (search) {
+                var blogId = search['blog_id'],
+                    changed = $scope.blogId !== blogId;
+                if (changed) {
+                    load(blogId);
+                }
+            });
+        })
+        .controller('BlogListCtrl', function ($scope,
+                                              objectUtil,
+                                              arrayUtil,
+                                              errorHandleService,
+                                              eventEmitService,
+                                              blogList) {
+
+            function apiRejected(err) {
+                errorHandleService.handleError(err);
+            }
+
+            $scope.CONTENT_MAX_LENGTH = 80;
+
+            function load() {
+                $scope.loading = true;
+                blogList.fetch()
+                    .then(function (result) {
+                        $scope.blogs = result.data;
+                        $scope.hasMore = result.hasMore;
+                    }, apiRejected)
+                    .finally(function () {
+                        $scope.loading = false;
+                    });
+            }
+
             $scope.hasMore = false;
             $scope.loadMore = function () {
                 load();
+            };
+
+            $scope.detail = function (b) {
+                eventEmitService.emit('blog.detailBlog', b);
             };
 
             load();
@@ -2719,6 +2870,22 @@
 
 /**
  * @ngdoc object
+ * @name blogBlogDetailSectionHtmlTemplate
+ * @description Template for blogBlogDetailSectionHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('blogBlogDetailSectionHtmlTemplate', {
+		    "name": "/html/partials/blog/blog-detail-section.html",
+		    "content": "<section id=\"blog-detail-section\" ng:controller=\"BlogDetailCtrl\" ng:show=\"!!blogId\">\n    <div ok:cover ok:cover-visible=\"loading\"></div>\n    <div ng:if=\"!!blog\" id=\"blog-detail-section-inner\">\n\n        <h1>{{blog.blog_title}}</h1>\n\n        <div class=\"section-content\">\n            <div ng:bind-html=\"blog.blog_content | markdownRenderFilter\"></div>\n        </div>\n    </div>\n</section>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
  * @name blogBlogListSectionHtmlTemplate
  * @description Template for blogBlogListSectionHtml
  */
@@ -2729,7 +2896,7 @@
         .module('ok.templates')
         .value('blogBlogListSectionHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-list-section.html",
-		    "content": "<section id=\"blog-list-section\" ng:controller=\"BlogListCtrl\">\n    <dl id=\"blog-list\" class=\"cover-container\">\n        <div ok:cover ok:cover-visible=\"loading\"></div>\n        <dt ng:repeat-start=\"b in blogs\">\n            <a class=\"blog-dt-anchor blog-title\"\n               name=\"blog-{{b._id}}\">\n                {{b.blog_title}}\n            </a>\n            <span class=\"blog-date-label\">{{b._at | dateFormatFilter}}</span>\n            <span class=\"display-block\">\n                <span ok:tag ok:title=\"t\" ng:repeat=\"t in (b.tag_texts) track by $index\"></span>\n            </span>\n        </dt>\n        <dd ng:repeat-end=\"\" ng:bind-html=\"b.blog_content | markdownRenderFilter\"></dd>\n    </dl>\n    <a id=\"blog-more-button\"\n       class=\"list-more-button\"\n       ok:button\n       ng:show=\"hasMore\"\n       ng:click=\"loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</section>"
+		    "content": "<section id=\"blog-list-section\" ng:controller=\"BlogListCtrl\">\n    <dl id=\"blog-list\" class=\"cover-container\">\n        <div ok:cover ok:cover-visible=\"loading\"></div>\n        <dt ng:repeat-start=\"b in blogs\">\n            <a class=\"blog-dt-anchor blog-title\"\n               ng:click=\"detail(b);\"\n               name=\"blog-{{b._id}}\">\n                {{b.blog_title}}\n            </a>\n            <span class=\"blog-date-label\">{{b._at | dateFormatFilter}}</span>\n            <span class=\"display-block\">\n                <span ok:tag ok:title=\"t\" ng:repeat=\"t in (b.tag_texts) track by $index\"></span>\n            </span>\n        </dt>\n        <dd ng:repeat-end=\"\"\n            ng:bind-html=\"b.blog_content | markdownRenderFilter | htmlTextFilter | textEllipsisFilter:CONTENT_MAX_LENGTH\"></dd>\n    </dl>\n    <a id=\"blog-more-button\"\n       class=\"list-more-button\"\n       ok:button\n       ng:show=\"hasMore\"\n       ng:click=\"loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</section>"
 		});
 
 })(angular);

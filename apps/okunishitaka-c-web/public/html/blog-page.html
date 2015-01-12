@@ -5,10 +5,10 @@
 <html ng:app="ok.blogPage">
 <head ng:attr-lang="{{lang}}" ng:controller="HeadCtrl">
 
-    <meta ok:replace="partials.META" />
+    <meta ok:replace="partials.META"/>
 
     <title ok:replace="partials.TITLE"></title>
-    <link ok:replace="partials.FAVICON" />
+    <link ok:replace="partials.FAVICON"/>
 
     <link rel="stylesheet" href="/stylesheets/lib.css"/>
     <link rel="stylesheet" href="/stylesheets/base.css"/>
@@ -26,6 +26,7 @@
         </div>
         <div class="container">
             <div ng:include="partials.BLOG_LIST_SECTION"></div>
+            <div ng:include="partials.BLOG_DETAIL_SECTION"></div>
         </div>
     </main>
 

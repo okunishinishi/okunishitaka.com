@@ -3,6 +3,7 @@
         <div ok:cover ok:cover-visible="loading"></div>
         <dt ng:repeat-start="b in blogs">
             <a class="blog-dt-anchor blog-title"
+               ng:click="detail(b);"
                name="blog-{{b._id}}">
                 {{b.blog_title}}
             </a>
@@ -11,7 +12,8 @@
                 <span ok:tag ok:title="t" ng:repeat="t in (b.tag_texts) track by $index"></span>
             </span>
         </dt>
-        <dd ng:repeat-end="" ng:bind-html="b.blog_content | markdownRenderFilter"></dd>
+        <dd ng:repeat-end=""
+            ng:bind-html="b.blog_content | markdownRenderFilter | htmlTextFilter | textEllipsisFilter:CONTENT_MAX_LENGTH"></dd>
     </dl>
     <a id="blog-more-button"
        class="list-more-button"

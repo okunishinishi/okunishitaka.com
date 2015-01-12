@@ -14,78 +14,96 @@
         .run(function setupRootScope($rootScope) {
             $rootScope.page = 'blog';
         })
+        .factory('blogList', function (BlogList) {
+            return new BlogList({
+                condition: {
+                    _sort: '_at',
+                    _reverse: true,
+                    _limit: 3,
+                    _skip: 0
+                }
+            });
+        })
         .controller('BlogCtrl', function defineBlogCtrl($scope) {
 
         })
-        .controller('BlogListCtrl', function ($scope,
-                                              objectUtil,
-                                              arrayUtil,
-                                              errorHandleService,
-                                              BlogEntity,
-                                              blogApiService,
-                                              blogTagApiService) {
-
+        .controller('BlogDetailCtrl', function ($scope,
+                                                blogApiService,
+                                                BlogEntity,
+                                                errorHandleService,
+                                                locationSearchService,
+                                                eventEmitService) {
             function apiRejected(err) {
                 errorHandleService.handleError(err);
             }
 
-            $scope.blogTagHash = {};
 
-            function load() {
+            function load(blogId) {
+                $scope.blogId = blogId;
+                if (!blogId) {
+                    return;
+                }
+                locationSearchService.update('blog_id', blogId);
                 $scope.loading = true;
-                blogApiService.list($scope.condition)
-                    .then(function resolved(data) {
-                        return data.map(BlogEntity.new);
+                blogApiService.one(blogId)
+                    .then(function (data) {
+                        $scope.blog = BlogEntity.new(data);
                     }, apiRejected)
-                    .then(function (blogs) {
-                        $scope.blogs = $scope.blogs.concat(blogs);
-                        $scope.hasMore = blogs.length >= $scope.condition._limit;
-                        $scope.condition._skip += blogs.length;
-                        return blogs;
-                    })
-                    .then(function (blogs) {
-                        return blogTagApiService.list({
-                            'blog_id[]': blogs.map(function (blog) {
-                                return blog._id;
-                            })
-                        });
-                    })
-                    .then(function (blogTags) {
-                        var hash = $scope.blogTagHash || {};
-                        blogTags.forEach(function (tag) {
-                            var blogId = tag.blog_id;
-                            hash[blogId] = hash[blogId] || [];
-                            var isNew = hash[blogId].indexOf(tag) === -1;
-                            if (isNew) {
-                                hash[blogId].push(tag);
-                            }
-                        });
-                        $scope.blogTagHash = hash;
-                        return hash;
-                    }, apiRejected)
-                    .then(function (hash) {
-                        $scope.blogs.forEach(function (blog) {
-                            var tags = hash[blog._id];
-                            blog.tag_texts = tags.map(function (tag) {
-                                return tag.tag_text;
-                            });
-                        });
-                    })
                     .finally(function () {
                         $scope.loading = false;
                     });
             }
 
-            $scope.condition = {
-                _sort: '_at',
-                _reverse: true,
-                _limit: 3,
-                _skip: 0
-            };
-            $scope.blogs = [];
+            eventEmitService.on('blog.detailBlog', function (ev, blog) {
+                var _id = blog && blog._id;
+                load(_id);
+            });
+
+            var blogId = locationSearchService.get('blog_id');
+            load(blogId);
+
+            $scope.$watch(function () {
+                return locationSearchService.get();
+            }, function (search) {
+                var blogId = search['blog_id'],
+                    changed = $scope.blogId !== blogId;
+                if (changed) {
+                    load(blogId);
+                }
+            });
+        })
+        .controller('BlogListCtrl', function ($scope,
+                                              objectUtil,
+                                              arrayUtil,
+                                              errorHandleService,
+                                              eventEmitService,
+                                              blogList) {
+
+            function apiRejected(err) {
+                errorHandleService.handleError(err);
+            }
+
+            $scope.CONTENT_MAX_LENGTH = 80;
+
+            function load() {
+                $scope.loading = true;
+                blogList.fetch()
+                    .then(function (result) {
+                        $scope.blogs = result.data;
+                        $scope.hasMore = result.hasMore;
+                    }, apiRejected)
+                    .finally(function () {
+                        $scope.loading = false;
+                    });
+            }
+
             $scope.hasMore = false;
             $scope.loadMore = function () {
                 load();
+            };
+
+            $scope.detail = function (b) {
+                eventEmitService.emit('blog.detailBlog', b);
             };
 
             load();

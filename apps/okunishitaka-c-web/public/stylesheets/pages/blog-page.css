@@ -19,6 +19,7 @@ main {
     margin: 0 0 20px;
     padding: 0 0 20px;
     border-bottom: 1px solid #F0F0F0;
+    font-size: 12px;
 }
 
 #blog-list .blog-dt-anchor {
@@ -37,8 +38,31 @@ main {
     font-size: 1.5em;
 }
 
+.blog-title:hover {
+    color: #26777B;
+    cursor: pointer;
+}
+
+.blog-title:active {
+    opacity: 0.8;
+}
+
 .ok-tag {
     margin: 0 4px 0 0;
+}
+
+#blog-detail-section {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.99);
+}
+
+#blog-detail-section-inner {
+    margin: 4px 8px;
 }
 
 @media (max-width: 568px) {

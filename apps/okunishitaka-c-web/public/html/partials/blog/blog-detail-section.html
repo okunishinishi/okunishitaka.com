@@ -1,0 +1,11 @@
+<section id="blog-detail-section" ng:controller="BlogDetailCtrl" ng:show="!!blogId">
+    <div ok:cover ok:cover-visible="loading"></div>
+    <div ng:if="!!blog" id="blog-detail-section-inner">
+
+        <h1>{{blog.blog_title}}</h1>
+
+        <div class="section-content">
+            <div ng:bind-html="blog.blog_content | markdownRenderFilter"></div>
+        </div>
+    </div>
+</section>

@@ -3,5 +3,7 @@
   "markdownRenderFilter",
   "pageTitleFilter",
   "tagColorFilter",
+  "htmlTextFilter",
+  "textEllipsisFilter",
   "textLinkFilter"
 ]
