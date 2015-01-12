@@ -22,7 +22,9 @@
 		    "SOCIAL": "/html/partials/social.html",
 		    "TITLE": "/html/partials/title.html",
 		    "TOAST": "/html/partials/toast.html",
-		    "TRACK": "/html/partials/track.html"
+		    "TRACK": "/html/partials/track.html",
+		    "WORK_LINK": "/html/partials/work/work-link.html",
+		    "WORK_LIST": "/html/partials/work/work-list.html"
 		});
 
 })(angular);

@@ -116,6 +116,23 @@
 		                    "Homepage of Taka Okunishi"
 		                ],
 		                "TITLE": "okunishitaka.com"
+		            },
+		            "profile": {
+		                "NAME": "name",
+		                "captions": {
+		                    "ABOUT": "About",
+		                    "DREAM": "Dream",
+		                    "BASICS": "Basics",
+		                    "EDUCATION": "Education",
+		                    "JOB_HISTORY": "Job History",
+		                    "QUALIFICATION": "Qualification"
+		                }
+		            },
+		            "blog": {
+		                "PREVIEW_LEGEND": "Preview"
+		            },
+		            "work": {
+		                "DESCRIPTION": "Personal works."
 		            }
 		        },
 		        "pageDescriptions": {
@@ -189,7 +206,9 @@
 		    "ADMIN_API_BLOG_TAG_POST": "/admin/api/blog-tag",
 		    "API_BLOG_GET": "/api/blog",
 		    "API_BLOG_GET_WITH_ID": "/api/blog/:_id",
-		    "API_BLOG_TAG_GET": "/api/blog-tag"
+		    "API_BLOG_TAG_GET": "/api/blog-tag",
+		    "API_PROFILE_GET": "/api/profile",
+		    "API_WORK_GET": "/api/work"
 		});
 
 })(angular);
@@ -245,7 +264,10 @@
 
     ng
         .module('ok.constants')
-        .constant('jsonUrlConstant', {});
+        .constant('jsonUrlConstant', {
+		    "PROFILE": "/json/profile.json",
+		    "WORKS": "/json/works.json"
+		});
 
 })(angular);
 
@@ -313,7 +335,8 @@
         .module('ok.constants')
         .constant('pageUrlConstant', {
 		    "INDEX": "/index.html",
-		    "PROFILE": "/profile.html"
+		    "PROFILE": "/profile.html",
+		    "WORK": "/work.html"
 		});
 
 })(angular);
@@ -343,7 +366,9 @@
 		    "SOCIAL": "/html/partials/social.html",
 		    "TITLE": "/html/partials/title.html",
 		    "TOAST": "/html/partials/toast.html",
-		    "TRACK": "/html/partials/track.html"
+		    "TRACK": "/html/partials/track.html",
+		    "WORK_LINK": "/html/partials/work/work-link.html",
+		    "WORK_LIST": "/html/partials/work/work-list.html"
 		});
 
 })(angular);
@@ -373,7 +398,9 @@
     ng
         .module('ok.constants')
         .constant('viewConstant', {
-		    "profile.LIST": "partialUrlConstant.PROFILE_PROFILE_LIST_VIEW"
+		    "profile.LIST": "partialUrlConstant.PROFILE_PROFILE_LIST_VIEW",
+		    "blog.LIST": "partialUrlConstant.BLOG_BLOG_LIST_VIEW",
+		    "work.LIST": "partialUrlConstant.WORK_WORK_LIST_VIEW"
 		});
 
 })(angular);

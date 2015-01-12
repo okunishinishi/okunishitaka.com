@@ -7,7 +7,10 @@
 
     ng
         .module('ok.constants')
-        .constant('jsonUrlConstant', {});
+        .constant('jsonUrlConstant', {
+		    "PROFILE": "/json/profile.json",
+		    "WORKS": "/json/works.json"
+		});
 
 })(angular);
 

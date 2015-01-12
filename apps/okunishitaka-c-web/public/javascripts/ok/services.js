@@ -373,6 +373,58 @@
         });
 })(angular);
 /**
+ * @ngdoc Service
+ * @name profileApiService
+ * @description Profile api service.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('profileApiService', function ProfileApiService($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatService) {
+            var s = this,
+                formatUrl = urlFormatService.formatUrl.bind(urlFormatService);
+
+            /**
+             * File a resource.
+             * @param {string} _id - Resource id.
+             * @returns {Promise} - Deferred promise.
+             */
+            s.one = function one(_id) {
+                var url = formatUrl(apiUrlConstant.API_PROFILE_GET, {_id: _id});
+                return apiService.get(url);
+            };
+
+        });
+})(angular);
+/**
+ * @ngdoc Service
+ * @name workApiService
+ * @description Work api service.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('workApiService', function WorkApiService($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatService) {
+            var s = this,
+                formatUrl = urlFormatService.formatUrl.bind(urlFormatService);
+
+            /**
+             * List resources.
+             * @param {object} params - Query data.
+             * @returns {Promise} - Deferred promise.
+             */
+            s.list = function list(params) {
+                var url = formatUrl(apiUrlConstant.API_WORK_GET, params);
+                return apiService.get(url, params);
+            };
+
+        });
+})(angular);
+/**
  * @ngdoc object
  * @name codeConvertService
  * @description Code convert service.

@@ -40,6 +40,23 @@ l.pages = {
             'Homepage of ' + pkg.author
         ],
         TITLE: pkg.name
+    },
+    profile: {
+        NAME: 'name',
+        captions: {
+            ABOUT: 'About',
+            DREAM: 'Dream',
+            BASICS: "Basics",
+            EDUCATION: "Education",
+            JOB_HISTORY: "Job History",
+            QUALIFICATION: "Qualification"
+        }
+    },
+    blog: {
+        PREVIEW_LEGEND: 'Preview'
+    },
+    work: {
+        DESCRIPTION: 'Personal works.'
     }
 };
 

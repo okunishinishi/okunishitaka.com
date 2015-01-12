@@ -1,0 +1,43 @@
+table {
+    border-collapse: collapse;
+}
+
+.caption,
+caption {
+    text-align: center;
+    color: #E5E5E5;
+    padding: 4px 8px;
+    font-weight: 100;
+    font-size: 1.5em;
+}
+
+th {
+    color: #999;
+    font-weight: 100;
+}
+
+td, th {
+    padding: 10px 15px;
+    background-color: #FFF;
+    border: 1px solid #EEE;
+}
+
+th:first-child,
+td:first-child {
+    border-left: none;
+}
+
+th:last-child,
+td:last-child {
+    border-right: none;
+}
+
+tr:first-child th,
+tr:first-child td {
+    border-top: none;
+}
+
+tbody tr:last-child th,
+tbody tr:last-child td {
+    border-bottom: none;
+}

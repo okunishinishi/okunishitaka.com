@@ -20,7 +20,8 @@
 <div ng:controller="ProfileCtrl">
     <header ok:replace="partials.HEADER"></header>
     <aside ok:replace="partials.ASIDE"></aside>
-    <main>
+    <main class="cover-container">
+        <div ok:cover ok:cover-visible="loading"></div>
         <div class="container">
             <div ng:include="partials.TOAST"></div>
         </div>
@@ -28,6 +29,36 @@
             <section id="my-img-section">
                 <img id="my-img" ng:src="{{images.ME}}">
             </section>
+
+            <section ng:show="!!profile">
+
+                <div ok:profile-table="" ok:id="basic-table" ok:data="profile.basic"
+                     ok:caption="l.pages.profile.captions.BASICS">
+                </div>
+
+                <div ok:profile-list="" ok:id="about-list" ok:data="profile.about"
+                     ok:caption="l.pages.profile.captions.ABOUT">
+                </div>
+
+                <div ok:profile-list="" ok:id="about-list" ok:data="profile.dream"
+                     ok:caption="l.pages.profile.captions.DREAM">
+                </div>
+
+
+                <div ok:profile-table="" ok:id="education-table" ok:data="profile.education"
+                     ok:caption="l.pages.profile.captions.EDUCATION">
+                </div>
+
+                <div ok:profile-table="" ok:id="job-history-table" ok:data="profile.jobHistory"
+                     ok:caption="l.pages.profile.captions.JOB_HISTORY">
+                </div>
+
+                <div ok:profile-table="" ok:id="qualification-table" ok:data="profile.qualification"
+                     ok:caption="l.pages.profile.captions.QUALIFICATION">
+                </div>
+
+            </section>
+            <br class="clear-both">
         </div>
     </main>
 

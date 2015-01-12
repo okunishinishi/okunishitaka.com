@@ -131,6 +131,23 @@
 		                    "Homepage of Taka Okunishi"
 		                ],
 		                "TITLE": "okunishitaka.com"
+		            },
+		            "profile": {
+		                "NAME": "name",
+		                "captions": {
+		                    "ABOUT": "About",
+		                    "DREAM": "Dream",
+		                    "BASICS": "Basics",
+		                    "EDUCATION": "Education",
+		                    "JOB_HISTORY": "Job History",
+		                    "QUALIFICATION": "Qualification"
+		                }
+		            },
+		            "blog": {
+		                "PREVIEW_LEGEND": "Preview"
+		            },
+		            "work": {
+		                "DESCRIPTION": "Personal works."
 		            }
 		        },
 		        "pageDescriptions": {
@@ -204,7 +221,9 @@
 		    "ADMIN_API_BLOG_TAG_POST": "/admin/api/blog-tag",
 		    "API_BLOG_GET": "/api/blog",
 		    "API_BLOG_GET_WITH_ID": "/api/blog/:_id",
-		    "API_BLOG_TAG_GET": "/api/blog-tag"
+		    "API_BLOG_TAG_GET": "/api/blog-tag",
+		    "API_PROFILE_GET": "/api/profile",
+		    "API_WORK_GET": "/api/work"
 		});
 
 })(angular);
@@ -260,7 +279,10 @@
 
     ng
         .module('ok.constants')
-        .constant('jsonUrlConstant', {});
+        .constant('jsonUrlConstant', {
+		    "PROFILE": "/json/profile.json",
+		    "WORKS": "/json/works.json"
+		});
 
 })(angular);
 
@@ -328,7 +350,8 @@
         .module('ok.constants')
         .constant('pageUrlConstant', {
 		    "INDEX": "/index.html",
-		    "PROFILE": "/profile.html"
+		    "PROFILE": "/profile.html",
+		    "WORK": "/work.html"
 		});
 
 })(angular);
@@ -358,7 +381,9 @@
 		    "SOCIAL": "/html/partials/social.html",
 		    "TITLE": "/html/partials/title.html",
 		    "TOAST": "/html/partials/toast.html",
-		    "TRACK": "/html/partials/track.html"
+		    "TRACK": "/html/partials/track.html",
+		    "WORK_LINK": "/html/partials/work/work-link.html",
+		    "WORK_LIST": "/html/partials/work/work-list.html"
 		});
 
 })(angular);
@@ -388,7 +413,9 @@
     ng
         .module('ok.constants')
         .constant('viewConstant', {
-		    "profile.LIST": "partialUrlConstant.PROFILE_PROFILE_LIST_VIEW"
+		    "profile.LIST": "partialUrlConstant.PROFILE_PROFILE_LIST_VIEW",
+		    "blog.LIST": "partialUrlConstant.BLOG_BLOG_LIST_VIEW",
+		    "work.LIST": "partialUrlConstant.WORK_WORK_LIST_VIEW"
 		});
 
 })(angular);
@@ -410,6 +437,26 @@
         ]);
 })(angular);
 
+/**
+ * @ngdoc directive
+ * @name okCover
+ * @description Ok cover.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okCover', function defineOkCover(partialUrlConstant) {
+            return {
+                scope: {
+                    visible: '=okCoverVisible'
+                },
+                templateUrl: partialUrlConstant.COVER
+            }
+        });
+
+})(angular);
 /**
  * @ngdoc directive
  * @name okFacebookButton
@@ -702,7 +749,23 @@
         .module('ok.directives')
         .directive('okToast', function defineOkToast() {
             return {
-
+                scope: {
+                    'messages': '=okToastMessages',
+                    'icon': '=okIcon'
+                },
+                link: function (scope, elm) {
+                    elm.addClass('ok-toast');
+                    scope.$watch('messages', function (messages) {
+                        var hasMessage = !!messages && (messages.length > 0);
+                        elm.toggleClass('ok-toast-visible', hasMessage);
+                        scope.data = [].concat(messages).map(function (message) {
+                            return {message: message};
+                        });
+                    }, true);
+                },
+                template: [
+                    '<div ng-repeat="d in data"><i class="ok-toast-icon fa fa-{{icon}}"></i>{{d.message}}</div>'
+                ].join('')
             }
         });
 
@@ -905,6 +968,100 @@
 
             return Entity;
         });
+})(angular);
+/**
+ * @ngdoc Object
+ * @name ProfileEntity
+ * @description Profile entity.
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.entities')
+        .factory('ProfileEntity', function defineProfileEntity(Entity) {
+
+            /**
+             * @augments Entity
+             * @constructor ProfileEntity
+             * @param {object} data - Entity data.
+             */
+            var ProfileEntity = Entity.define(
+                /** @lends ProfileEntity.prototype */
+                {
+
+                }
+            );
+
+            /**
+             * Get default values.
+             * @returns {object}
+             */
+            ProfileEntity.defaults = function () {
+                return {
+                }
+            };
+
+            /**
+             * Create a new entity.
+             * @returns {object} - Created entity.
+             */
+            ProfileEntity.new = function (data) {
+                var entity = new ProfileEntity(data);
+                return entity;
+            };
+
+            return ProfileEntity;
+
+        });
+
+})(angular);
+/**
+ * @ngdoc Object
+ * @name WorkEntity
+ * @description Work entity.
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('ok.entities')
+        .factory('WorkEntity', function defineWorkEntity(Entity) {
+
+            /**
+             * @augments Entity
+             * @constructor WorkEntity
+             * @param {object} data - Entity data.
+             */
+            var WorkEntity = Entity.define(
+                /** @lends WorkEntity.prototype */
+                {
+
+                }
+            );
+
+            /**
+             * Get default values.
+             * @returns {object}
+             */
+            WorkEntity.defaults = function () {
+                return {
+                }
+            };
+
+            /**
+             * Create a new entity.
+             * @returns {object} - Created entity.
+             */
+            WorkEntity.new = function (data) {
+                var entity = new WorkEntity(data);
+                return entity;
+            };
+
+            return WorkEntity;
+
+        });
+
 })(angular);
 
 /**
@@ -1149,7 +1306,9 @@
             return {
                 get BlogEntity() { return $injector.get('BlogEntity'); },
                 get BlogTagEntity() { return $injector.get('BlogTagEntity'); },
-                get Entity() { return $injector.get('Entity'); }
+                get Entity() { return $injector.get('Entity'); },
+                get ProfileEntity() { return $injector.get('ProfileEntity'); },
+                get WorkEntity() { return $injector.get('WorkEntity'); }
             };
         });
 })(angular);
@@ -1187,6 +1346,8 @@
                 get apiService() { return $injector.get('apiService'); },
                 get blogApiService() { return $injector.get('blogApiService'); },
                 get blogTagApiService() { return $injector.get('blogTagApiService'); },
+                get profileApiService() { return $injector.get('profileApiService'); },
+                get workApiService() { return $injector.get('workApiService'); },
                 get codeConvertService() { return $injector.get('codeConvertService'); },
                 get errorHandleService() { return $injector.get('errorHandleService'); },
                 get eventEmitService() { return $injector.get('eventEmitService'); },
@@ -1228,7 +1389,9 @@
                 get socialHtmlTemplate() { return $injector.get('socialHtmlTemplate'); },
                 get titleHtmlTemplate() { return $injector.get('titleHtmlTemplate'); },
                 get toastHtmlTemplate() { return $injector.get('toastHtmlTemplate'); },
-                get trackHtmlTemplate() { return $injector.get('trackHtmlTemplate'); }
+                get trackHtmlTemplate() { return $injector.get('trackHtmlTemplate'); },
+                get workWorkLinkHtmlTemplate() { return $injector.get('workWorkLinkHtmlTemplate'); },
+                get workWorkListHtmlTemplate() { return $injector.get('workWorkListHtmlTemplate'); }
             };
         });
 })(angular);
@@ -1265,6 +1428,27 @@
         ]);
 })(angular);
 
+/**
+ * @ngdoc module
+ * @module ok.blogPage
+ * @description Page script for blog.
+ */
+
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.blogPage', [
+            'ok.page'
+        ])
+        .run(function setupRootScope($rootScope) {
+            $rootScope.page = 'blog';
+        })
+        .controller('BlogCtrl', function defineBlogCtrl($scope) {
+
+        });
+
+})(angular);
 /**
  * @ngdoc module
  * @module ok.indexPage
@@ -1420,9 +1604,117 @@
         .run(function setupRootScope($rootScope) {
             $rootScope.page = 'profile';
         })
-        .controller('ProfileCtrl', function defineProfileCtrl($scope) {
+        .directive('okProfileList', function (partialUrlConstant) {
+            return {
+                link: function (scope, elm, attr) {
+                    $(elm).addClass('profile-list-container');
+                },
+                scope: {
+                    id: '=okId',
+                    caption: '=okCaption',
+                    data: '=okData'
+                },
+                templateUrl: partialUrlConstant.PROFILE_LIST
+            }
+        })
+        .directive('okProfileTable', function (partialUrlConstant, imageUrlConstant) {
+            return {
+                link: function (scope, elm, attr) {
+                    scope.images = imageUrlConstant;
+                    $(elm).addClass('profile-table-container');
+                },
+                scope: {
+                    id: '=okId',
+                    caption: '=okCaption',
+                    data: '=okData'
+                },
+                templateUrl: partialUrlConstant.PROFILE_TABLE
+            }
+        })
+        .controller('ProfileCtrl', function defineProfileCtrl($scope,
+                                                              profileApiService,
+                                                              errorHandleService) {
+            function apiRejected(err) {
+                errorHandleService.handleError(err);
+            }
 
+
+            function load() {
+                $scope.loading = true;
+                profileApiService.one(null)
+                    .then(function (profile) {
+                        $scope.profile = profile;
+                    }, apiRejected)
+                    .finally(function () {
+                        $scope.loading = false;
+                    });
+            }
+
+            load();
         });
+
+})(angular);
+/**
+ * @ngdoc module
+ * @module ok.workPage
+ * @description Page script for work.
+ */
+
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.workPage', [
+            'ok.page'
+        ])
+        .run(function setupRootScope($rootScope) {
+            $rootScope.page = 'work';
+        })
+        .directive('okWorkLink', function (partialUrlConstant, linkUrlConstant) {
+            return {
+                scope: {
+                    href: '=okWorkHref',
+                    title: '=okWorkTitle',
+                    icon: '=okWorkIcon'
+                },
+                link: function (scope, elm, attr) {
+                    scope.links = linkUrlConstant;
+                    $(elm).addClass('work-link-container');
+                },
+                templateUrl: partialUrlConstant.WORK_LINK
+            }
+        })
+
+        .controller('WorkCtrl', function defineWorkCtrl($scope,
+                                                        workApiService,
+                                                        errorHandleService) {
+
+            function apiRejected(err) {
+                errorHandleService.handleError(err);
+            }
+
+
+            function load() {
+                $scope.loading = true;
+                workApiService.list({})
+                    .then(function (works) {
+                        $scope.works = works;
+                    }, apiRejected)
+                    .finally(function () {
+                        $scope.loading = false;
+                    });
+            }
+
+            load();
+
+            $scope.hrefForWork = function (work) {
+                if (!work) {
+                    return null;
+                }
+                var links = $scope.links;
+                return links[work.demo] || links[work.link] || links[work.repo];
+            };
+        })
 
 })(angular);
 
@@ -1795,6 +2087,58 @@
              */
             s.list = function list(params) {
                 var url = formatUrl(apiUrlConstant.API_BLOG_TAG_GET, params);
+                return apiService.get(url, params);
+            };
+
+        });
+})(angular);
+/**
+ * @ngdoc Service
+ * @name profileApiService
+ * @description Profile api service.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('profileApiService', function ProfileApiService($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatService) {
+            var s = this,
+                formatUrl = urlFormatService.formatUrl.bind(urlFormatService);
+
+            /**
+             * File a resource.
+             * @param {string} _id - Resource id.
+             * @returns {Promise} - Deferred promise.
+             */
+            s.one = function one(_id) {
+                var url = formatUrl(apiUrlConstant.API_PROFILE_GET, {_id: _id});
+                return apiService.get(url);
+            };
+
+        });
+})(angular);
+/**
+ * @ngdoc Service
+ * @name workApiService
+ * @description Work api service.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('workApiService', function WorkApiService($http, apiService, apiUrlConstant, jsonUrlConstant,  urlFormatService) {
+            var s = this,
+                formatUrl = urlFormatService.formatUrl.bind(urlFormatService);
+
+            /**
+             * List resources.
+             * @param {object} params - Query data.
+             * @returns {Promise} - Deferred promise.
+             */
+            s.list = function list(params) {
+                var url = formatUrl(apiUrlConstant.API_WORK_GET, params);
                 return apiService.get(url, params);
             };
 
@@ -2359,7 +2703,7 @@
         .module('ok.templates')
         .value('toastHtmlTemplate', {
 		    "name": "/html/partials/toast.html",
-		    "content": "<div class=\"toast-container\">\n    <div class=\"container\">\n        <div class=\"toast error-toast\" kt:toast kt:toast-messages=\"toasts.error\" kt:icon=\"'exclamation-circle'\"></div>\n        <div class=\"toast warn-toast\" kt:toast kt:toast-messages=\"toasts.warn\" kt:icon=\"'warning'\"></div>\n        <div class=\"toast info-toast\" kt:toast kt:toast-messages=\"toasts.info\" kt:icon=\"'check-circle'\"></div>\n    </div>\n\n\n</div>"
+		    "content": "<div class=\"toast-container\">\n    <div class=\"container\">\n        <div class=\"toast error-toast\" ok:toast ok:toast-messages=\"toasts.error\" ok:icon=\"'exclamation-circle'\"></div>\n        <div class=\"toast warn-toast\" ok:toast ok:toast-messages=\"toasts.warn\" ok:icon=\"'warning'\"></div>\n        <div class=\"toast info-toast\" ok:toast ok:toast-messages=\"toasts.info\" ok:icon=\"'check-circle'\"></div>\n    </div>\n\n\n</div>"
 		});
 
 })(angular);
@@ -2376,6 +2720,38 @@
         .value('trackHtmlTemplate', {
 		    "name": "/html/partials/track.html",
 		    "content": "<div ok:google-analytics ok:tracking-id=\"app.GA_TRACKING_ID\"></div>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
+ * @name workWorkLinkHtmlTemplate
+ * @description Template for workWorkLinkHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('workWorkLinkHtmlTemplate', {
+		    "name": "/html/partials/work/work-link.html",
+		    "content": "<a ng:href=\"{{links[href]}}\"\n   ng:if=\"!!links[href]\"\n   class=\"work-link work-white-back\"><span class=\"work-link-icon-container\"><img\n        ng:if=\"!!links[icon]\"\n        ng:src=\"{{links[icon]}}\"\n        class=\"work-link-icon\"/></span>{{title}}<span\n        class=\"work-link-disclosure fa fa-angle-right\"></span></a>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
+ * @name workWorkListHtmlTemplate
+ * @description Template for workWorkListHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('workWorkListHtmlTemplate', {
+		    "name": "/html/partials/work/work-list.html",
+		    "content": "<ul id=\"work-list\">\n\n    <li ng:repeat=\"work in works\" class=\"work-list-item\">\n\n        <div class=\"work-background-image-container\">\n            <a ng:href=\"{{hrefForWork(work)}}\" class=\"image-link\">\n                <img ng:src=\"{{images[work.thumbnail]}}\" class=\"work-background-image\">\n            </a>\n        </div>\n\n        <h3 class=\"work-list-item-title work-white-back theme-font\">\n            <a ng:href=\"{{hrefForWork(work)}}\">{{work.name}}<img class=\"work-list-favicon\"\n                                                                 ng:src=\"{{links[work.favicon]}}\"\n                                                                 ng:if=\"!!links[work.favicon]\"/>\n            </a>\n        </h3>\n\n        <div class=\"work-list-item-content\">\n            <div class=\"work-description work-white-back\">\n                <div class=\"work-tags-container\">\n                    <span ok:tag ok:title=\"t\" ng:repeat=\"t in work.tag\"></span>\n                </div>\n\n                <div ng:repeat=\"d in work.description\">{{d}}</div>\n            </div>\n\n            <div ok:work-link ok:work-href=\"work.link\" ok:work-title=\"l.buttons.VISIT_SITE\"\n                 ok:work-icon=\"work.favicon\">\n            </div>\n            <div ok:work-link ok:work-href=\"work.demo\" ok:work-title=\"l.buttons.TRY_DEMO\"\n                 ok:work-icon=\"work.favicon\">\n            </div>\n            <div ok:work-link ok:work-href=\"work.repo\" ok:work-title=\"l.buttons.VIEW_SOURCE_CODE\"\n                 ok:work-icon=\"work.repoFavicon\">\n            </div>\n        </div>\n\n    </li>\n    <li class=\"clear-both\"></li>\n</ul>"
 		});
 
 })(angular);

@@ -18,7 +18,9 @@
 		    "ADMIN_API_BLOG_TAG_POST": "/admin/api/blog-tag",
 		    "API_BLOG_GET": "/api/blog",
 		    "API_BLOG_GET_WITH_ID": "/api/blog/:_id",
-		    "API_BLOG_TAG_GET": "/api/blog-tag"
+		    "API_BLOG_TAG_GET": "/api/blog-tag",
+		    "API_PROFILE_GET": "/api/profile",
+		    "API_WORK_GET": "/api/work"
 		});
 
 })(angular);

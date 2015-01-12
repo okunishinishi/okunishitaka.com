@@ -9,7 +9,8 @@
         .module('ok.constants')
         .constant('pageUrlConstant', {
 		    "INDEX": "/index.html",
-		    "PROFILE": "/profile.html"
+		    "PROFILE": "/profile.html",
+		    "WORK": "/work.html"
 		});
 
 })(angular);

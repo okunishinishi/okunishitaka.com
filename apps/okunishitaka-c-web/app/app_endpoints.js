@@ -55,6 +55,18 @@ module.exports = Object.seal(
          */
         '/api/blog-tag': {
             'GET': r.blogTagRoute.list
+        },
+        /**
+         * Route for profile.
+         */
+        '/api/profile': {
+            'GET': r.profileRoute.one
+        },
+        /**
+         * Route for work.
+         */
+        '/api/work': {
+            'GET': r.workRoute.list
         }
 
     }

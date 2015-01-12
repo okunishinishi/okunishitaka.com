@@ -17,5 +17,11 @@
   },
   "blog-tag": {
     "list": "apiUrlConstant.API_BLOG_TAG_GET"
+  },
+  "profile": {
+    "one": "apiUrlConstant.API_PROFILE_GET"
+  },
+  "work": {
+    "list": "apiUrlConstant.API_WORK_GET"
   }
 }

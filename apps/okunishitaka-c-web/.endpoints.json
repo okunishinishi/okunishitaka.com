@@ -10,5 +10,11 @@
     "list",
     "create",
     "destroy"
+  ],
+  "profile": [
+    "one"
+  ],
+  "work": [
+    "list"
   ]
 }

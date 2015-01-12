@@ -2,5 +2,11 @@
   "index": [],
   "profile": [
     "profile.LIST"
+  ],
+  "blog": [
+    "blog.LIST"
+  ],
+  "work": [
+    "work.LIST"
   ]
 }

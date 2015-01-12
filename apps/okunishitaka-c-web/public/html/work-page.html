@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+    HTML for work page.
+-->
+<html ng:app="ok.workPage">
+<head ng:attr-lang="{{lang}}" ng:controller="HeadCtrl">
+
+    <meta ok:replace="partials.META"/>
+
+    <title ok:replace="partials.TITLE"></title>
+    <link ok:replace="partials.FAVICON"/>
+
+    <link rel="stylesheet" href="/stylesheets/lib.css"/>
+    <link rel="stylesheet" href="/stylesheets/base.css"/>
+    <link rel="stylesheet" href="/stylesheets/pages/work-page.css"/>
+    <script src="/javascripts/lib.js"></script>
+    <script src="/javascripts/ok.js"></script>
+</head>
+<body ng:cloak ng:controller="BodyCtrl">
+<div ng:controller="WorkCtrl">
+    <header ok:replace="partials.HEADER"></header>
+    <aside ok:replace="partials.ASIDE"></aside>
+    <main class="cover-container">
+        <div ok:cover ok:cover-visible="loading"></div>
+        <div class="container">
+            <div ng:include="partials.TOAST"></div>
+        </div>
+        <div class="container">
+            <p>{{l.pages.work.DESCRIPTION}}</p>
+        </div>
+        <section id="work-list-section" ng:include="partials.WORK_LIST"></section>
+        <br class="clear-both">
+    </main>
+
+    <footer ok:replace="partials.FOOTER"></footer>
+</div>
+</body>
+</html>

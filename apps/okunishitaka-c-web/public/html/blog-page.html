@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--
+    HTML for blog page.
+-->
+<html ng:app="ok.blogPage">
+<head ng:attr-lang="{{lang}}" ng:controller="HeadCtrl">
+
+    <meta ok:replace="partials.META" />
+
+    <title ok:replace="partials.TITLE"></title>
+    <link ok:replace="partials.FAVICON" />
+
+    <link rel="stylesheet" href="/stylesheets/lib.css"/>
+    <link rel="stylesheet" href="/stylesheets/base.css"/>
+    <link rel="stylesheet" href="/stylesheets/pages/blog-page.css"/>
+    <script src="/javascripts/lib.js"></script>
+    <script src="/javascripts/ok.js"></script>
+</head>
+<body ng:cloak ng:controller="BodyCtrl">
+<div ng:controller="BlogCtrl">
+    <header ok:replace="partials.HEADER"></header>
+    <aside ok:replace="partials.ASIDE"></aside>
+    <main>
+        <div class="container">
+            <div ng:include="partials.TOAST"></div>
+        </div>
+        <div class="container">
+
+        </div>
+    </main>
+
+    <footer ok:replace="partials.FOOTER"></footer>
+</div>
+</body>
+</html>

@@ -59,7 +59,9 @@
             return {
                 get BlogEntity() { return $injector.get('BlogEntity'); },
                 get BlogTagEntity() { return $injector.get('BlogTagEntity'); },
-                get Entity() { return $injector.get('Entity'); }
+                get Entity() { return $injector.get('Entity'); },
+                get ProfileEntity() { return $injector.get('ProfileEntity'); },
+                get WorkEntity() { return $injector.get('WorkEntity'); }
             };
         });
 })(angular);
@@ -97,6 +99,8 @@
                 get apiService() { return $injector.get('apiService'); },
                 get blogApiService() { return $injector.get('blogApiService'); },
                 get blogTagApiService() { return $injector.get('blogTagApiService'); },
+                get profileApiService() { return $injector.get('profileApiService'); },
+                get workApiService() { return $injector.get('workApiService'); },
                 get codeConvertService() { return $injector.get('codeConvertService'); },
                 get errorHandleService() { return $injector.get('errorHandleService'); },
                 get eventEmitService() { return $injector.get('eventEmitService'); },
@@ -138,7 +142,9 @@
                 get socialHtmlTemplate() { return $injector.get('socialHtmlTemplate'); },
                 get titleHtmlTemplate() { return $injector.get('titleHtmlTemplate'); },
                 get toastHtmlTemplate() { return $injector.get('toastHtmlTemplate'); },
-                get trackHtmlTemplate() { return $injector.get('trackHtmlTemplate'); }
+                get trackHtmlTemplate() { return $injector.get('trackHtmlTemplate'); },
+                get workWorkLinkHtmlTemplate() { return $injector.get('workWorkLinkHtmlTemplate'); },
+                get workWorkListHtmlTemplate() { return $injector.get('workWorkListHtmlTemplate'); }
             };
         });
 })(angular);

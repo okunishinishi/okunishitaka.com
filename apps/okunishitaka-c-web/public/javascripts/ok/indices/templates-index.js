@@ -24,7 +24,9 @@
                 get socialHtmlTemplate() { return $injector.get('socialHtmlTemplate'); },
                 get titleHtmlTemplate() { return $injector.get('titleHtmlTemplate'); },
                 get toastHtmlTemplate() { return $injector.get('toastHtmlTemplate'); },
-                get trackHtmlTemplate() { return $injector.get('trackHtmlTemplate'); }
+                get trackHtmlTemplate() { return $injector.get('trackHtmlTemplate'); },
+                get workWorkLinkHtmlTemplate() { return $injector.get('workWorkLinkHtmlTemplate'); },
+                get workWorkListHtmlTemplate() { return $injector.get('workWorkListHtmlTemplate'); }
             };
         });
 })(angular);

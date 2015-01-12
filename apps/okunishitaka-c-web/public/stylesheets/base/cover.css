@@ -1,0 +1,53 @@
+.cover-container {
+    position: relative;
+}
+
+.cover {
+    position: absolute;
+    box-sizing: border-box;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    z-index: 888;
+    background-color: rgba(255, 255, 255, 0.94);
+    text-align: center;
+}
+
+.cover-black {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.cover-icon-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+}
+
+.cover-icon {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 44px;
+    left: -22px;
+    top: -22px;
+    display: inline-block;
+}
+
+.cover-container-small .cover-icon-container {
+    width: 22px;
+    height: 22px;
+}
+
+.cover-container-small .cover-icon {
+    height: 22px;
+    width: 22px;
+    line-height: 22px;
+    font-size: 22px;
+    left: -11px;
+    top: -11px;
+}
