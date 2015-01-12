@@ -117,9 +117,28 @@
 		            "HOMEPAGE": "http://okunishitaka.com",
 		            "COPY_RIGHT": "Copyright © 2015 okunishitaka.com"
 		        },
-		        "pageNames": {},
+		        "pageNames": {
+		            "INDEX": "Top",
+		            "PROFILE": "Profile",
+		            "BLOG": "Blog",
+		            "WORK": "Works"
+		        },
 		        "labels": {},
 		        "buttons": {},
+		        "pages": {
+		            "index": {
+		                "CAPTION": [
+		                    "Homepage of Taka Okunishi"
+		                ],
+		                "TITLE": "okunishitaka.com"
+		            }
+		        },
+		        "pageDescriptions": {
+		            "INDEX": "Top page.",
+		            "PROFILE": "Who am I?",
+		            "BLOG": "What I think?",
+		            "WORK": "What I've made."
+		        },
 		        "errors": {
 		            "CONFLICT": "コンフリクト（衝突）が発生しました。他の人が更新を行なったようです。",
 		            "CONNECTION": "通信に失敗しました。",
@@ -267,9 +286,14 @@
         .constant('partialUrlConstant', {
 		    "COVER": "/html/partials/cover.html",
 		    "FAVICON": "/html/partials/favicon.html",
+		    "INDEX_CAPTION_SECTION": "/html/partials/index/index-caption-section.html",
+		    "INDEX_CONTENT_TITLE": "/html/partials/index/index-content-title.html",
+		    "INDEX_SEE_MORE_BUTTON": "/html/partials/index/index-see-more-button.html",
+		    "INDEX_TITLE_SECTION": "/html/partials/index/index-title-section.html",
 		    "META": "/html/partials/meta.html",
 		    "TITLE": "/html/partials/title.html",
-		    "TOAST": "/html/partials/toast.html"
+		    "TOAST": "/html/partials/toast.html",
+		    "TRACK": "/html/partials/track.html"
 		});
 
 })(angular);
@@ -323,6 +347,46 @@
 
 /**
  * @ngdoc directive
+ * @name okGoogleAnalytics
+ * @description Ok google analytics.
+*/
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okGoogleAnalytics', function defineOkGoogleAnalytics() {
+            function loadSDK(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            }
+
+            return {
+                scope: {
+                    trackingId: '=okTrackingId'
+                },
+                compile: function () {
+                    return {
+                        post: function (scope, elm, attr) {
+                            loadSDK(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+                            ga('create', scope.trackingId, 'auto');
+                            ga('send', 'pageview');
+                        }
+                    }
+                }
+            }
+        });
+
+})(angular);
+/**
+ * @ngdoc directive
  * @name okReplace
  * @description Ok replace.
  */
@@ -353,6 +417,138 @@
                 }
             }
         });
+
+})(angular);
+/**
+ * @ngdoc directive
+ * @name okScrollToFixed
+ * @description Ok scroll to fixed.
+ */
+(function (ng, $) {
+    "use strict";
+
+    var name = 'okScrollToFixed';
+    ng
+        .module('ok.directives')
+        .directive(name, function defineOkScrollToFixed($window, positionUtil) {
+            return {
+                compile: function () {
+                    return {
+                        post: function (scope, elm, attr) {
+                            elm = $(elm);
+
+                            var top, fixed = false, ready = false;
+                            var window = $($window);
+                            var content = $(attr[name]);
+
+                            function clear() {
+                                ready = false;
+                                fixed = false;
+                                content.removeClass('ok-fixed');
+                                elm.removeAttr('style');
+                            }
+
+                            function update() {
+                                if (!ready) {
+                                    top = positionUtil.offsetSum(elm).top;
+                                    elm.height(elm.height());
+                                    ready = true;
+                                }
+                                var winTop = window.scrollTop();
+                                var needsFix = top < winTop;
+                                if (fixed != needsFix) {
+                                    fixed = needsFix;
+                                    content.toggleClass('ok-fixed', fixed);
+                                }
+                            }
+
+                            window.resize(function () {
+                                clear();
+                                update();
+                            });
+                            window.scroll(function () {
+                                update();
+                            });
+
+                        }
+                    }
+                }
+            }
+        });
+
+})(angular, jQuery);
+/**
+ * @ngdoc directive
+ * @name okScrollToStay
+ * @description Ok scroll to stay.
+ */
+(function (ng) {
+    "use strict";
+    var name = 'okScrollToStay';
+    ng
+        .module('ok.directives')
+        .directive(name, function defineOkScrollToStay($window, $document, positionUtil) {
+            return {
+                compile: function () {
+                    return {
+                        post: function (scope, elm, attr) {
+                            elm = $(elm);
+                            var window = $($window),
+                                content = $(attr[name]);
+
+                            var ready = false,
+                                winHeight,
+                                contentHeight,
+                                scrollHeight,
+                                _contentTop;
+
+                            function clear() {
+                                ready = false;
+                                content.removeClass('ok-fixed');
+                                elm.removeAttr('style');
+                            }
+
+                            function update() {
+                                if (!content.length) {
+                                    content = $(attr[name]);
+                                }
+                                if (!ready) {
+                                    elm.height(elm.height());
+                                    elm.width(elm.width());
+                                    content.addClass('ok-fixed');
+                                    winHeight = window.height();
+                                    contentHeight = content.outerHeight(true);
+                                    scrollHeight = $('body,html').prop('scrollHeight');
+                                    _contentTop = null;
+
+                                    ready = true;
+                                }
+                                var scrollRate = window.scrollTop() / (scrollHeight - winHeight);
+                                var contentTop = Math.round((contentHeight - winHeight) * scrollRate);
+                                if (contentTop < 0) contentTop = 0;
+
+                                if (_contentTop != contentTop) {
+                                    content.css({
+                                        top: -contentTop
+                                    });
+                                    _contentTop = contentTop;
+                                }
+                            }
+
+                            window.scroll(function () {
+                                update();
+                            });
+                            window.resize(function () {
+                                clear();
+                                update();
+                            });
+                            clear();
+                        }
+                    }
+                }
+            }
+        });
+
 
 })(angular);
 /**
@@ -813,9 +1009,14 @@
             return {
                 get coverHtmlTemplate() { return $injector.get('coverHtmlTemplate'); },
                 get faviconHtmlTemplate() { return $injector.get('faviconHtmlTemplate'); },
+                get indexIndexCaptionSectionHtmlTemplate() { return $injector.get('indexIndexCaptionSectionHtmlTemplate'); },
+                get indexIndexContentTitleHtmlTemplate() { return $injector.get('indexIndexContentTitleHtmlTemplate'); },
+                get indexIndexSeeMoreButtonHtmlTemplate() { return $injector.get('indexIndexSeeMoreButtonHtmlTemplate'); },
+                get indexIndexTitleSectionHtmlTemplate() { return $injector.get('indexIndexTitleSectionHtmlTemplate'); },
                 get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); },
                 get titleHtmlTemplate() { return $injector.get('titleHtmlTemplate'); },
-                get toastHtmlTemplate() { return $injector.get('toastHtmlTemplate'); }
+                get toastHtmlTemplate() { return $injector.get('toastHtmlTemplate'); },
+                get trackHtmlTemplate() { return $injector.get('trackHtmlTemplate'); }
             };
         });
 })(angular);
@@ -833,6 +1034,7 @@
             return {
                 get arrayUtil() { return $injector.get('arrayUtil'); },
                 get objectUtil() { return $injector.get('objectUtil'); },
+                get positionUtil() { return $injector.get('positionUtil'); },
                 get stringUtil() { return $injector.get('stringUtil'); }
             };
         });
@@ -867,8 +1069,37 @@
         .run(function setupRootScope($rootScope) {
             $rootScope.page = 'index';
         })
+        .directive('okIndexContentTitle', function (partialUrlConstant) {
+            return {
+                scope: {
+                    title: '=okIndexContentTitle',
+                    subtitle: '=okContentSubtitle'
+                },
+                link: function (scope, elm, attr) {
+                    $(elm).addClass('content-section-title-container');
+                },
+                templateUrl: partialUrlConstant.INDEX_CONTENT_TITLE
+            }
+        })
+        .directive('okIndexSeeMore', function (partialUrlConstant) {
+            return {
+                scope: {
+                    href: '=okSeeMore'
+                },
+                link: function (scope, elm, attr) {
+                    $(elm).addClass('see-more-button-container');
+                },
+                templateUrl: partialUrlConstant.INDEX_SEE_MORE_BUTTON
+            }
+        })
         .controller('IndexCtrl', function defineIndexCtrl($scope) {
 
+        })
+        .controller('IndexProfileCtrl', function ($scope) {
+        })
+        .controller('IndexBlogCtrl', function ($scope) {
+        })
+        .controller('IndexWorkCtrl', function ($scope) {
         });
 
 })(angular);
@@ -1729,6 +1960,70 @@
 })(angular);
 /**
  * @ngdoc object
+ * @name indexIndexCaptionSectionHtmlTemplate
+ * @description Template for indexIndexCaptionSectionHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('indexIndexCaptionSectionHtmlTemplate', {
+		    "name": "/html/partials/index/index-caption-section.html",
+		    "content": "<section class=\"container\" id=\"index-caption-section\">\n    <div id=\"page-caption\" ng:click=\"changeToTopPage();\">\n        <div id=\"page-caption-inner\">\n            <div ng:repeat=\"c in l.pages.index.CAPTION\">{{c}}</div>\n        </div>\n    </div>\n</section>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
+ * @name indexIndexContentTitleHtmlTemplate
+ * @description Template for indexIndexContentTitleHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('indexIndexContentTitleHtmlTemplate', {
+		    "name": "/html/partials/index/index-content-title.html",
+		    "content": "<h1 class=\"content-section-title\">{{title}}</h1>\n<span class=\"content-section-subtitle\">{{subtitle}}</span>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
+ * @name indexIndexSeeMoreButtonHtmlTemplate
+ * @description Template for indexIndexSeeMoreButtonHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('indexIndexSeeMoreButtonHtmlTemplate', {
+		    "name": "/html/partials/index/index-see-more-button.html",
+		    "content": "<a class=\"see-more-button\" href=\"{{href}}\">\n    <span class=\"see-more-button-label\">\n        <span class=\"see-more-button-label-inner fa fa-angle-right\"></span>\n    </span>\n</a>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
+ * @name indexIndexTitleSectionHtmlTemplate
+ * @description Template for indexIndexTitleSectionHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('indexIndexTitleSectionHtmlTemplate', {
+		    "name": "/html/partials/index/index-title-section.html",
+		    "content": "<section id=\"title-section\" ok:scroll-to-stay=\"#title-section-inner\" style=\"\">\n    <div id=\"title-section-inner\">\n        <div id=\"main-title\">\n            <div class=\"container\">\n                    <span id=\"main-title-text\" class=\"outlined-text-white\">\n                        {{l.pages.index.TITLE}}\n                    </span>\n            </div>\n        </div>\n    </div>\n</section>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
  * @name metaHtmlTemplate
  * @description Template for metaHtml
  */
@@ -1772,6 +2067,22 @@
         .value('toastHtmlTemplate', {
 		    "name": "/html/partials/toast.html",
 		    "content": "<div class=\"toast-container\">\n    <div class=\"container\">\n        <div class=\"toast error-toast\" kt:toast kt:toast-messages=\"toasts.error\" kt:icon=\"'exclamation-circle'\"></div>\n        <div class=\"toast warn-toast\" kt:toast kt:toast-messages=\"toasts.warn\" kt:icon=\"'warning'\"></div>\n        <div class=\"toast info-toast\" kt:toast kt:toast-messages=\"toasts.info\" kt:icon=\"'check-circle'\"></div>\n    </div>\n\n\n</div>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
+ * @name trackHtmlTemplate
+ * @description Template for trackHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('trackHtmlTemplate', {
+		    "name": "/html/partials/track.html",
+		    "content": "<div ok:google-analytics ok:tracking-id=\"app.GA_TRACKING_ID\"></div>"
 		});
 
 })(angular);
@@ -1819,6 +2130,36 @@
             var u = {};
             u.__proto__ = apObjectUtil;
             return u;
+        });
+})(angular);
+/**
+ * @ngdoc object
+ * @name positionUtil
+ * @description Position util.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.utils')
+        .factory('positionUtil', function definePositionUtil() {
+            return {
+                /**
+                 * Get offset from window.
+                 * @param {HTMLElement} elm
+                 * @returns {{top: number, left: number}}
+                 */
+                offsetSum: function (elm) {
+                    var top = 0, left = 0;
+                    if (elm[0]) elm = elm[0]; //Remove jquery.
+                    while (elm) {
+                        top = top + parseInt(elm.offsetTop, 10);
+                        left = left + parseInt(elm.offsetLeft, 10);
+                        elm = elm.offsetParent;
+                    }
+                    return {top: top, left: left};
+                }
+            }
         });
 })(angular);
 /**

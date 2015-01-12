@@ -16,9 +16,28 @@
 		            "HOMEPAGE": "http://okunishitaka.com",
 		            "COPY_RIGHT": "Copyright © 2015 okunishitaka.com"
 		        },
-		        "pageNames": {},
+		        "pageNames": {
+		            "INDEX": "Top",
+		            "PROFILE": "Profile",
+		            "BLOG": "Blog",
+		            "WORK": "Works"
+		        },
 		        "labels": {},
 		        "buttons": {},
+		        "pages": {
+		            "index": {
+		                "CAPTION": [
+		                    "Homepage of Taka Okunishi"
+		                ],
+		                "TITLE": "okunishitaka.com"
+		            }
+		        },
+		        "pageDescriptions": {
+		            "INDEX": "Top page.",
+		            "PROFILE": "Who am I?",
+		            "BLOG": "What I think?",
+		            "WORK": "What I've made."
+		        },
 		        "errors": {
 		            "CONFLICT": "コンフリクト（衝突）が発生しました。他の人が更新を行なったようです。",
 		            "CONNECTION": "通信に失敗しました。",

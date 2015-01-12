@@ -12,6 +12,7 @@
             return {
                 get arrayUtil() { return $injector.get('arrayUtil'); },
                 get objectUtil() { return $injector.get('objectUtil'); },
+                get positionUtil() { return $injector.get('positionUtil'); },
                 get stringUtil() { return $injector.get('stringUtil'); }
             };
         });

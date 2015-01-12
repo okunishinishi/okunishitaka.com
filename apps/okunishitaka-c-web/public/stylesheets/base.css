@@ -238,6 +238,10 @@
 }
 
 
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
+}
 /**
  * Style for display
  */
@@ -256,6 +260,9 @@
 }
 
 
+.ok-fixed {
+    position: fixed !important;
+}
 /**
  * Style for floating.
  */
@@ -275,6 +282,22 @@
  * Font faces.
  */
 
+@font-face {
+  font-family: josefin-slab-bold;
+  src: url('/fonts/Josefin Slab Bold.woff');
+}
+@font-face {
+  font-family: lato-hairline;
+  src: url('/fonts/Lato Hairline.woff');
+}
+@font-face {
+  font-family: source-code-pro-extra-light;
+  src: url('/fonts/Source Code Pro Extra Light.woff');
+}
+@font-face {
+  font-family: ubuntu-bold;
+  src: url('/fonts/Ubuntu Bold.woff');
+}
 @font-face {
   font-family: fontawesome-webfont;
   src: url('/fonts/fontawesome-webfont.woff');

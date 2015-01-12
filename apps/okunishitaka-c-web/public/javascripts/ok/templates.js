@@ -45,6 +45,70 @@
 })(angular);
 /**
  * @ngdoc object
+ * @name indexIndexCaptionSectionHtmlTemplate
+ * @description Template for indexIndexCaptionSectionHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('indexIndexCaptionSectionHtmlTemplate', {
+		    "name": "/html/partials/index/index-caption-section.html",
+		    "content": "<section class=\"container\" id=\"index-caption-section\">\n    <div id=\"page-caption\" ng:click=\"changeToTopPage();\">\n        <div id=\"page-caption-inner\">\n            <div ng:repeat=\"c in l.pages.index.CAPTION\">{{c}}</div>\n        </div>\n    </div>\n</section>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
+ * @name indexIndexContentTitleHtmlTemplate
+ * @description Template for indexIndexContentTitleHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('indexIndexContentTitleHtmlTemplate', {
+		    "name": "/html/partials/index/index-content-title.html",
+		    "content": "<h1 class=\"content-section-title\">{{title}}</h1>\n<span class=\"content-section-subtitle\">{{subtitle}}</span>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
+ * @name indexIndexSeeMoreButtonHtmlTemplate
+ * @description Template for indexIndexSeeMoreButtonHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('indexIndexSeeMoreButtonHtmlTemplate', {
+		    "name": "/html/partials/index/index-see-more-button.html",
+		    "content": "<a class=\"see-more-button\" href=\"{{href}}\">\n    <span class=\"see-more-button-label\">\n        <span class=\"see-more-button-label-inner fa fa-angle-right\"></span>\n    </span>\n</a>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
+ * @name indexIndexTitleSectionHtmlTemplate
+ * @description Template for indexIndexTitleSectionHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('indexIndexTitleSectionHtmlTemplate', {
+		    "name": "/html/partials/index/index-title-section.html",
+		    "content": "<section id=\"title-section\" ok:scroll-to-stay=\"#title-section-inner\" style=\"\">\n    <div id=\"title-section-inner\">\n        <div id=\"main-title\">\n            <div class=\"container\">\n                    <span id=\"main-title-text\" class=\"outlined-text-white\">\n                        {{l.pages.index.TITLE}}\n                    </span>\n            </div>\n        </div>\n    </div>\n</section>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
  * @name metaHtmlTemplate
  * @description Template for metaHtml
  */
@@ -88,6 +152,22 @@
         .value('toastHtmlTemplate', {
 		    "name": "/html/partials/toast.html",
 		    "content": "<div class=\"toast-container\">\n    <div class=\"container\">\n        <div class=\"toast error-toast\" kt:toast kt:toast-messages=\"toasts.error\" kt:icon=\"'exclamation-circle'\"></div>\n        <div class=\"toast warn-toast\" kt:toast kt:toast-messages=\"toasts.warn\" kt:icon=\"'warning'\"></div>\n        <div class=\"toast info-toast\" kt:toast kt:toast-messages=\"toasts.info\" kt:icon=\"'check-circle'\"></div>\n    </div>\n\n\n</div>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
+ * @name trackHtmlTemplate
+ * @description Template for trackHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('trackHtmlTemplate', {
+		    "name": "/html/partials/track.html",
+		    "content": "<div ok:google-analytics ok:tracking-id=\"app.GA_TRACKING_ID\"></div>"
 		});
 
 })(angular);

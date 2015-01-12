@@ -25,10 +25,30 @@ l.meta = {
     }
 };
 l.pageNames = {
+    INDEX: 'Top',
+    PROFILE: 'Profile',
+    BLOG: 'Blog',
+    WORK: 'Works'
 };
 l.labels = {};
 
 l.buttons = {};
+
+l.pages = {
+    index: {
+        CAPTION: [
+            'Homepage of ' + pkg.author
+        ],
+        TITLE: pkg.name
+    }
+};
+
+l.pageDescriptions = {
+    INDEX: 'Top page.',
+    PROFILE: 'Who am I?',
+    BLOG: 'What I think?',
+    WORK: "What I've made."
+};
 
 l.errors = {
     CONFLICT: 'コンフリクト（衝突）が発生しました。他の人が更新を行なったようです。',

@@ -5,10 +5,10 @@
 <html ng:app="ok.indexPage">
 <head ng:attr-lang="{{lang}}" ng:controller="HeadCtrl">
 
-    <meta ok:replace="partials.META" />
+    <meta ok:replace="partials.META"/>
 
     <title ok:replace="partials.TITLE"></title>
-    <link ok:replace="partials.FAVICON" />
+    <link ok:replace="partials.FAVICON"/>
 
     <link rel="stylesheet" href="/stylesheets/lib.css"/>
     <link rel="stylesheet" href="/stylesheets/base.css"/>
@@ -17,19 +17,38 @@
     <script src="/javascripts/ok.js"></script>
 </head>
 <body ng:cloak ng:controller="BodyCtrl">
+<div ng:include="partials.TRACK"></div>
 <div ng:controller="IndexCtrl">
-    <header kt:replace="partials.HEADER"></header>
-    <aside kt:replace="partials.ASIDE"></aside>
+    <header ok:replace="partials.HEADER"></header>
+    <aside ok:replace="partials.ASIDE"></aside>
     <main>
         <div class="container">
             <div ng:include="partials.TOAST"></div>
         </div>
-        <div class="container">
+        <section ok:replace="partials.INDEX_CAPTION_SECTION"></section>
+        <section ok:replace="partials.INDEX_TITLE_SECTION"></section>
+        <div id="main-content-background">
+            <div class="container">
+                <section id="profile-section" ng:controller="IndexProfileCtrl" class="content-section">
+                    <div ok:index-content-title="l.pageNames.PROFILE" ok:content-subtitle="l.pageDescriptions.PROFILE"></div>
+                    <span ok:index-see-more="pages.PROFILE"></span>
+                </section>
 
+                <section id="blog-section" ng:controller="IndexBlogCtrl" class="content-section">
+                    <div ok:index-content-title="l.pageNames.BLOG" ok:content-subtitle="l.pageDescriptions.BLOG"></div>
+                    <span ok:index-see-more="pages.BLOG"></span>
+                </section>
+
+                <section id="work-section" ng:controller="IndexWorkCtrl" class="content-section">
+                    <div ok:index-content-title="l.pageNames.WORK" ok:content-subtitle="l.pageDescriptions.WORK"></div>
+                    <span ok:index-see-more="pages.WORK"></span>
+                </section>
+
+            </div>
         </div>
     </main>
 
-    <footer kg:replace="partials.FOOTER"></footer>
+    <footer ok:replace="partials.FOOTER"></footer>
 </div>
 </body>
 </html>

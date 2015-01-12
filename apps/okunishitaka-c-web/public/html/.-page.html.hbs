@@ -19,8 +19,8 @@
 </head>
 <body ng:cloak ng:controller="BodyCtrl">
 <div ng:controller="{{Name}}Ctrl">
-    <header kt:replace="partials.HEADER"></header>
-    <aside kt:replace="partials.ASIDE"></aside>
+    <header {{prefix}}:replace="partials.HEADER"></header>
+    <aside {{prefix}}:replace="partials.ASIDE"></aside>
     <main>
         <div class="container">
             <div ng:include="partials.TOAST"></div>
@@ -30,7 +30,7 @@
         </div>
     </main>
 
-    <footer kg:replace="partials.FOOTER"></footer>
+    <footer {{prefix}}:replace="partials.FOOTER"></footer>
 </div>
 </body>
 </html>
