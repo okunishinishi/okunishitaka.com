@@ -1,3 +1,24 @@
+a {
+    text-decoration: none;
+}
+
+a:link, a:visited {
+    color: #26777B;
+}
+
+a:link:hover,
+a:visited:hover {
+    text-decoration: underline;
+}
+
+
+body {
+    padding: 0;
+    margin: 60px 0 0;
+    overflow-x: hidden;
+    font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
+    font-weight: 100;
+}
 /**
  * Style for bordering.
  */
@@ -49,6 +70,74 @@
 }
 
 
+button,
+.button,
+.button:visited,
+.button:link {
+    border-radius: 4px;
+    border: 1px solid #26777B;
+    color: #26777B;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    background-color: #FFF;
+    padding: 0.25em 0.5em;
+    cursor: default;
+}
+
+.button-hover,
+.button:hover,
+.button:link:hover,
+.button:visited:hover {
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.button-active,
+.button:active {
+    text-decoration: none;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25) inset;
+    opacity: .5;
+}
+
+.button-disabled,
+.button-disabled.button-hover,
+.button-disabled:hover,
+.button-disabled:active
+.button-disabled.button-active {
+    opacity: 1;
+    box-shadow: none;
+    background-color: #F3F3F3;
+    border-color: #F0F0F0;
+    color: #DDD;
+}
+
+.button-primary,
+.button-primary:link,
+.button-primary:visited {
+    background: #26777B;
+    color: white;
+    border-color: #26777B;
+}
+
+.list-more-button,
+.list-more-button:link,
+.list-more-button:visited {
+    border: none;
+    color: #AAA;
+    display: block;
+    text-align: center;
+}
+
+.link-button,
+.link-button:link,
+.link-button:visited {
+    border: none;
+}
+.link-button:active,
+.link-button.button-active{
+    box-shadow: none;
+}
 /**
  * Style for clearing.
  */
@@ -338,6 +427,20 @@
 }
 
 
+footer {
+    padding: 32px 4px;
+    border-top: 1px solid #F5F5F5;
+    margin: 40px 10px 0;
+    color: #B0B0B0;
+}
+
+.footer-logo{
+
+}
+
+main {
+    min-height: 400px;
+}
 /**
  * Style for margin.
  */
@@ -518,6 +621,26 @@
 }
 
 
+#social-buttons-container {
+    height: 24px;
+    margin: 20px auto;
+    position: relative;
+    z-index: 1;
+}
+
+#twitter-button-container {
+    min-width: 109px;
+}
+
+#facebook-button-container {
+    min-width: 146px;
+}
+
+.button-container {
+    float: right;
+    margin: 0 4px;
+    min-height: 1px;
+}
 /**
  * Sticking position.
  */
@@ -540,6 +663,27 @@
 }
 
 
+.ok-tag {
+    display: inline-block;
+    margin: 0 2px;
+    padding: 0 4px 0 0;
+    border: 1px solid #AAA;
+    color: #AAA;
+    font-size: 10px;
+    line-height: 12px;
+    border-radius: 2px;
+    font-weight: 100;
+    font-family: 'source-code-pro-extra-light';
+}
+
+.ok-tag-icon {
+    float: left;
+    display: inline-block;
+    border-radius: 50%;
+    width: 4px;
+    height: 4px;
+    margin: 4px 3px;
+}
 /**
  * Style for text aligning.
  */

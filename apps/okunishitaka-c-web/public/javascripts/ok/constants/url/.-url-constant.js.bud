@@ -80,6 +80,7 @@ module.exports = [
     constantBud('imageUrl', fileUrlData('images', '*/*.+(jpg|jpeg|gif|png)')),
     constantBud('zipUrl', fileUrlData('zips', '*/*.zip')),
     constantBud('jsonUrl', fileUrlData('json', '**/*.json')),
+    constantBud('linkUrl', require('./.links.data')),
     constantBud('apiUrl', endpointData(endpoints))
 ]
 ;

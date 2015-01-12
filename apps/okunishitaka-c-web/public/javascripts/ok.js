@@ -258,6 +258,58 @@
 
 
 /**
+ * Constant for linkUrl.
+ * @ngdoc object
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.constants')
+        .constant('linkUrlConstant', {
+		    "ABOUT_MARK_DOWN": "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet",
+		    "GITHUB_FAVICON": "https://assets-cdn.github.com/favicon.ico",
+		    "IPA_HOMEPAGE": "http://www.ipa.go.jp/",
+		    "MY_GITHUB": "https://github.com/okunishinishi",
+		    "OKUNISHITAKA_DOT_COM": "http://okunishitaka.com",
+		    "REAL_GLOBE_HOMEPAGE": "http://realglobe.jp/",
+		    "TIS_HOMEPAGE": "http://www.tis.co.jp/",
+		    "WORKS_CHESS": "http://okunishinishi.github.io/ChessTek/",
+		    "WORKS_CHESS_FAVICON": "http://okunishinishi.github.io/ChessTek/fav.ico",
+		    "WORKS_CHESS_REPO": "https://github.com/okunishinishi/ChessTek",
+		    "WORKS_CSS_GALLERY": "http://okunishinishi.github.io/css-art-gallery/",
+		    "WORKS_CSS_GALLERY_FAVICON": "http://okunishinishi.github.io/css-art-gallery/fav.ico",
+		    "WORKS_CSS_GALLERY_REPO": "https://github.com/okunishinishi/css-art-gallery",
+		    "WORKS_FILEDROP": "http://filedrop.demo.okunishitaka.com/",
+		    "WORKS_FILEDROP_FAVICON": "http://filedrop.demo.okunishitaka.com/fav.ico",
+		    "WORKS_FILEDROP_REPO": "https://github.com/okunishinishi/filedrop",
+		    "WORKS_KUROKAWA": "http://kurokawa.demo.okunishitaka.com/",
+		    "WORKS_KUROKAWA_FAVICON": "http://kurokawa.demo.okunishitaka.com/fav.ico",
+		    "WORKS_KUROKAWA_REPO": "https://github.com/okunishinishi/kurokawa",
+		    "WORKS_MOCK_MONKEY": "http://mockmonkey.demo.okunishitaka.com/",
+		    "WORKS_MOCK_MONKEY_FAVICON": "http://mockmonkey.demo.okunishitaka.com/fav.ico",
+		    "WORKS_MOCK_MONKEY_REPO": "https://github.com/okunishinishi/mock-monkey",
+		    "WORKS_OKUNISHITAKA": "http://okunishitaka.com/",
+		    "WORKS_OKUNISHITAKA_FAVICON": "http://okunishitaka.com/favicon.png",
+		    "WORKS_OKUNISHITAKA_REPO": "https://github.com/okunishinishi/okunishitaka.com",
+		    "WORKS_OTHERO": "http://okunishinishi.github.io/OthelloTek/",
+		    "WORKS_OTHERO_FAVICON": "http://okunishinishi.github.io/OthelloTek/fav.ico",
+		    "WORKS_OTHERO_REPO": "https://github.com/okunishinishi/OthelloTek",
+		    "WORKS_SELLIT": "http://sellit.demo.okunishitaka.com/",
+		    "WORKS_SELLIT_FAVICON": "http://sellit.demo.okunishitaka.com/fav.ico",
+		    "WORKS_SELLIT_REPO": "https://github.com/okunishinishi/sellit",
+		    "WORKS_SHOT": "http://okunishinishi.github.io/SHOTek/",
+		    "WORKS_SHOT_FAVICON": "http://okunishinishi.github.io/SHOTek/fav.ico",
+		    "WORKS_SHOT_REPO": "https://github.com/okunishinishi/SHOTek",
+		    "WORKS_TYPE": "http://okunishinishi.github.io/TouchTypeTraining/",
+		    "WORKS_TYPE_FAVICON": "http://okunishinishi.github.io/TouchTypeTraining/fav.ico",
+		    "WORKS_TYPE_REPO": "https://github.com/okunishinishi/TouchTypeTraining"
+		});
+
+})(angular);
+
+
+/**
  * Constant for pageUrl.
  * @ngdoc object
  */
@@ -286,11 +338,13 @@
         .constant('partialUrlConstant', {
 		    "COVER": "/html/partials/cover.html",
 		    "FAVICON": "/html/partials/favicon.html",
+		    "FOOTER": "/html/partials/footer.html",
 		    "INDEX_CAPTION_SECTION": "/html/partials/index/index-caption-section.html",
 		    "INDEX_CONTENT_TITLE": "/html/partials/index/index-content-title.html",
 		    "INDEX_SEE_MORE_BUTTON": "/html/partials/index/index-see-more-button.html",
 		    "INDEX_TITLE_SECTION": "/html/partials/index/index-title-section.html",
 		    "META": "/html/partials/meta.html",
+		    "SOCIAL": "/html/partials/social.html",
 		    "TITLE": "/html/partials/title.html",
 		    "TOAST": "/html/partials/toast.html",
 		    "TRACK": "/html/partials/track.html"
@@ -345,6 +399,80 @@
         ]);
 })(angular);
 
+/**
+ * @ngdoc directive
+ * @name okFacebookButton
+ * @description Ok facebook button.
+*/
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okFacebookButton', function defineOkFacebookButton() {
+            function loadSDK(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&appId=520712554606371&version=v2.0";
+                fjs.parentNode.insertBefore(js, fjs);
+            }
+
+            return {
+                scope: {
+                    href: '=okHref'
+                },
+                compile: function () {
+                    return {
+                        post: function (scope, elm, attr) {
+                            var root = $('#fb-root');
+                            if (!root.length) {
+                                $('<div />').attr('id', 'fb-root').insertAfter($(elm));
+                            }
+                            loadSDK(document, 'script', 'facebook-jssdk');
+                        }
+                    }
+                },
+                template: '<div class="fb-like" data-href="{{href}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>'
+            }
+        });
+
+})(angular);
+/**
+ * @ngdoc directive
+ * @name okFadeIn
+ * @description Ok fade in.
+*/
+(function (ng, $) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okFadeIn', function defineOkFadeIn($timeout) {
+            return {
+                scope: {
+                    duration: '=okDuration',
+                    delay: '=okDelay'
+                },
+                compile: function () {
+                    return {
+                        pre: function (scope, elm) {
+                            $(elm).hide();
+                        },
+                        post: function (scope, elm) {
+                            var delay = Number(scope.delay || 0),
+                                duration = Number(scope.duration || 0);
+                            $timeout(function () {
+                                $(elm).fadeIn(duration);
+                            }, delay);
+                        }
+                    }
+                }
+            }
+        });
+
+})(angular, jQuery);
 /**
  * @ngdoc directive
  * @name okGoogleAnalytics
@@ -564,6 +692,44 @@
         .directive('okToast', function defineOkToast() {
             return {
 
+            }
+        });
+
+})(angular);
+/**
+ * @ngdoc directive
+ * @name okTwitterButton
+ * @description Ok twitter button.
+*/
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okTwitterButton', function defineOkTwitterButton() {
+            function loadSDK(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                if (!d.getElementById(id)) {
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = p + '://platform.twitter.com/widgets.js';
+                    fjs.parentNode.insertBefore(js, fjs);
+                }
+            }
+
+            return {
+                scope: {
+                    href: '=okHref',
+                    via: '=okVia'
+                },
+                compile: function () {
+                    return {
+                        post: function (scope, elm) {
+                            loadSDK(document, 'script', 'twitter-wjs');
+                        }
+                    }
+                },
+                template: '<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{href}}" data-via="{{via}}">Tweet</a>'
             }
         });
 
@@ -921,6 +1087,7 @@
                 get apiUrlConstant() { return $injector.get('apiUrlConstant'); },
                 get imageUrlConstant() { return $injector.get('imageUrlConstant'); },
                 get jsonUrlConstant() { return $injector.get('jsonUrlConstant'); },
+                get linkUrlConstant() { return $injector.get('linkUrlConstant'); },
                 get pageUrlConstant() { return $injector.get('pageUrlConstant'); },
                 get partialUrlConstant() { return $injector.get('partialUrlConstant'); },
                 get zipUrlConstant() { return $injector.get('zipUrlConstant'); },
@@ -1009,11 +1176,13 @@
             return {
                 get coverHtmlTemplate() { return $injector.get('coverHtmlTemplate'); },
                 get faviconHtmlTemplate() { return $injector.get('faviconHtmlTemplate'); },
+                get footerHtmlTemplate() { return $injector.get('footerHtmlTemplate'); },
                 get indexIndexCaptionSectionHtmlTemplate() { return $injector.get('indexIndexCaptionSectionHtmlTemplate'); },
                 get indexIndexContentTitleHtmlTemplate() { return $injector.get('indexIndexContentTitleHtmlTemplate'); },
                 get indexIndexSeeMoreButtonHtmlTemplate() { return $injector.get('indexIndexSeeMoreButtonHtmlTemplate'); },
                 get indexIndexTitleSectionHtmlTemplate() { return $injector.get('indexIndexTitleSectionHtmlTemplate'); },
                 get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); },
+                get socialHtmlTemplate() { return $injector.get('socialHtmlTemplate'); },
                 get titleHtmlTemplate() { return $injector.get('titleHtmlTemplate'); },
                 get toastHtmlTemplate() { return $injector.get('toastHtmlTemplate'); },
                 get trackHtmlTemplate() { return $injector.get('trackHtmlTemplate'); }
@@ -1139,6 +1308,7 @@
                     icons: cn.iconConstant,
                     images: cn.imageUrlConstant,
                     json: cn.jsonUrlConstant,
+                    links: cn.linkUrlConstant,
                     locale: locale,
                     l: locale, //Alias of locale.
                     pages: cn.pageUrlConstant,
@@ -1960,6 +2130,22 @@
 })(angular);
 /**
  * @ngdoc object
+ * @name footerHtmlTemplate
+ * @description Template for footerHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('footerHtmlTemplate', {
+		    "name": "/html/partials/footer.html",
+		    "content": "<footer>\n    <div class=\"container\" id=\"footer-content\">\n        <small id=\"small-copyright\">{{l.meta.COPY_RIGHT}}</small>\n\n        <div class=\"float-right\">\n            <a ng:href=\"{{links.MY_GITHUB}}\">Repo on GitHub</a>\n        </div>\n    </div>\n</footer>\n"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
  * @name indexIndexCaptionSectionHtmlTemplate
  * @description Template for indexIndexCaptionSectionHtml
  */
@@ -2035,6 +2221,22 @@
         .value('metaHtmlTemplate', {
 		    "name": "/html/partials/meta.html",
 		    "content": "<!-- Meta HTML -->\n<meta ng:attr-charset=\"UTF-8\">\n<meta name=\"fragment\" content=\"!\">\n<meta name=\"application-name\" content=\"{{l.meta.NAME}}\"/>\n<meta name=\"description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"generator\" content=\"apeman\"/>\n<meta name=\"author\" content=\"{{l.meta.AUTHOR}}\"/>\n<meta name=\"viewport\" content=\"width=device-width, user-scalable=no\"/>\n\n<!-- Open graph tags -->\n<meta property=\"og:title\" content=\"{{page | pageTitleFilter:l}}\"/>\n<meta property=\"og:type\" content=\"website\"/>\n<meta property=\"og:image\" content=\"\"/> <!-- FIXME -->\n<meta property=\"og:url\" content=\"{{app.HOMEPAGE}}\"/>\n<meta property=\"og:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n\n\n<!-- Twitter tags -->\n<meta name=\"twitter:card\" content=\"summary\">\n<meta name=\"twitter:title\" content=\"{{page | pageTitleFilter:l}}\">\n<meta name=\"twitter:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"twitter:image\" content=\"\"/> <!-- FIXME -->\n"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
+ * @name socialHtmlTemplate
+ * @description Template for socialHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('socialHtmlTemplate', {
+		    "name": "/html/partials/social.html",
+		    "content": "<div id=\"social-buttons-container\" class=\"container\">\n    <div ok:fade-in ok:duration=\"400\" ok:delay=\"800\">\n\n        <div class=\"button-container\" id=\"facebook-button-container\">\n            <div ok:facebook-button ok:href=\"links['OKUNISHITAKA_DOT_COM']\"></div>\n        </div>\n\n\n        <div class=\"button-container\" id=\"twitter-button-container\">\n            <div ok:twitter-button ok:href=\"links['OKUNISHITAKA_DOT_COM']\" ok:via=\"okunishinishi\"></div>\n        </div>\n\n        <br class=\"clear-both\"/>\n    </div>\n</div>"
 		});
 
 })(angular);

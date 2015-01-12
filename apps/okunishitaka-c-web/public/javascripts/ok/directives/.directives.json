@@ -1,7 +1,10 @@
 [
+  "okFacebookButton",
+  "okFadeIn",
   "okGoogleAnalytics",
   "okReplace",
   "okScrollToFixed",
   "okScrollToStay",
-  "okToast"
+  "okToast",
+  "okTwitterButton"
 ]

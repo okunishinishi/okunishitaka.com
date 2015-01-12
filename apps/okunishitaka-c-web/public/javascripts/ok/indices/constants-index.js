@@ -17,6 +17,7 @@
                 get apiUrlConstant() { return $injector.get('apiUrlConstant'); },
                 get imageUrlConstant() { return $injector.get('imageUrlConstant'); },
                 get jsonUrlConstant() { return $injector.get('jsonUrlConstant'); },
+                get linkUrlConstant() { return $injector.get('linkUrlConstant'); },
                 get pageUrlConstant() { return $injector.get('pageUrlConstant'); },
                 get partialUrlConstant() { return $injector.get('partialUrlConstant'); },
                 get zipUrlConstant() { return $injector.get('zipUrlConstant'); },

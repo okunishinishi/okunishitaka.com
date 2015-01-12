@@ -15,6 +15,80 @@
 
 /**
  * @ngdoc directive
+ * @name okFacebookButton
+ * @description Ok facebook button.
+*/
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okFacebookButton', function defineOkFacebookButton() {
+            function loadSDK(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&appId=520712554606371&version=v2.0";
+                fjs.parentNode.insertBefore(js, fjs);
+            }
+
+            return {
+                scope: {
+                    href: '=okHref'
+                },
+                compile: function () {
+                    return {
+                        post: function (scope, elm, attr) {
+                            var root = $('#fb-root');
+                            if (!root.length) {
+                                $('<div />').attr('id', 'fb-root').insertAfter($(elm));
+                            }
+                            loadSDK(document, 'script', 'facebook-jssdk');
+                        }
+                    }
+                },
+                template: '<div class="fb-like" data-href="{{href}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>'
+            }
+        });
+
+})(angular);
+/**
+ * @ngdoc directive
+ * @name okFadeIn
+ * @description Ok fade in.
+*/
+(function (ng, $) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okFadeIn', function defineOkFadeIn($timeout) {
+            return {
+                scope: {
+                    duration: '=okDuration',
+                    delay: '=okDelay'
+                },
+                compile: function () {
+                    return {
+                        pre: function (scope, elm) {
+                            $(elm).hide();
+                        },
+                        post: function (scope, elm) {
+                            var delay = Number(scope.delay || 0),
+                                duration = Number(scope.duration || 0);
+                            $timeout(function () {
+                                $(elm).fadeIn(duration);
+                            }, delay);
+                        }
+                    }
+                }
+            }
+        });
+
+})(angular, jQuery);
+/**
+ * @ngdoc directive
  * @name okGoogleAnalytics
  * @description Ok google analytics.
 */
@@ -232,6 +306,44 @@
         .directive('okToast', function defineOkToast() {
             return {
 
+            }
+        });
+
+})(angular);
+/**
+ * @ngdoc directive
+ * @name okTwitterButton
+ * @description Ok twitter button.
+*/
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okTwitterButton', function defineOkTwitterButton() {
+            function loadSDK(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                if (!d.getElementById(id)) {
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = p + '://platform.twitter.com/widgets.js';
+                    fjs.parentNode.insertBefore(js, fjs);
+                }
+            }
+
+            return {
+                scope: {
+                    href: '=okHref',
+                    via: '=okVia'
+                },
+                compile: function () {
+                    return {
+                        post: function (scope, elm) {
+                            loadSDK(document, 'script', 'twitter-wjs');
+                        }
+                    }
+                },
+                template: '<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{href}}" data-via="{{via}}">Tweet</a>'
             }
         });
 

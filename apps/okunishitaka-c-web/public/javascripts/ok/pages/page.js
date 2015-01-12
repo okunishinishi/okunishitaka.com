@@ -34,6 +34,7 @@
                     icons: cn.iconConstant,
                     images: cn.imageUrlConstant,
                     json: cn.jsonUrlConstant,
+                    links: cn.linkUrlConstant,
                     locale: locale,
                     l: locale, //Alias of locale.
                     pages: cn.pageUrlConstant,

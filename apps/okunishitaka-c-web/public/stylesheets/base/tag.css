@@ -1,0 +1,21 @@
+.ok-tag {
+    display: inline-block;
+    margin: 0 2px;
+    padding: 0 4px 0 0;
+    border: 1px solid #AAA;
+    color: #AAA;
+    font-size: 10px;
+    line-height: 12px;
+    border-radius: 2px;
+    font-weight: 100;
+    font-family: 'source-code-pro-extra-light';
+}
+
+.ok-tag-icon {
+    float: left;
+    display: inline-block;
+    border-radius: 50%;
+    width: 4px;
+    height: 4px;
+    margin: 4px 3px;
+}
