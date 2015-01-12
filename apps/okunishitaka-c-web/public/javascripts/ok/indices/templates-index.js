@@ -10,6 +10,7 @@
         .module('ok.indices')
         .factory('templatesIndex', function defineTemplatesIndex($injector) {
             return {
+                get blogBlogListSectionHtmlTemplate() { return $injector.get('blogBlogListSectionHtmlTemplate'); },
                 get coverHtmlTemplate() { return $injector.get('coverHtmlTemplate'); },
                 get faviconHtmlTemplate() { return $injector.get('faviconHtmlTemplate'); },
                 get footerHtmlTemplate() { return $injector.get('footerHtmlTemplate'); },

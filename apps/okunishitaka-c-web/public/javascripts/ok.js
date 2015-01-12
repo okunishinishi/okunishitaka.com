@@ -124,7 +124,9 @@
 		            "WORK": "Works"
 		        },
 		        "labels": {},
-		        "buttons": {},
+		        "buttons": {
+		            "MORE": "もっと読み込む"
+		        },
 		        "pages": {
 		            "index": {
 		                "CAPTION": [
@@ -349,6 +351,7 @@
     ng
         .module('ok.constants')
         .constant('pageUrlConstant', {
+		    "BLOG": "/blog.html",
 		    "INDEX": "/index.html",
 		    "PROFILE": "/profile.html",
 		    "WORK": "/work.html"
@@ -367,6 +370,7 @@
     ng
         .module('ok.constants')
         .constant('partialUrlConstant', {
+		    "BLOG_LIST_SECTION": "/html/partials/blog/blog-list-section.html",
 		    "COVER": "/html/partials/cover.html",
 		    "FAVICON": "/html/partials/favicon.html",
 		    "FOOTER": "/html/partials/footer.html",
@@ -437,6 +441,42 @@
         ]);
 })(angular);
 
+/**
+ * @ngdoc directive
+ * @name okButton
+ * @description Ok button.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okButton', function defineOkButton() {
+            return {
+                scope: {
+                    type: '=okButtonType'
+                },
+                link: function (scope, elm, attr) {
+                    var $elm = $(elm);
+                    $elm.addClass('button')
+                        .attr({
+                            href: $elm.attr('href') || 'javascript:void(0)'
+                        }
+                    );
+                    switch (scope.type) {
+                        case 'button-primary':
+                        case 'primary':
+                            $elm.addClass('button-primary');
+                            break;
+                        case 'link':
+                            $elm.addClass('link-button');
+                            break;
+                    }
+                }
+            }
+        });
+
+})(angular);
 /**
  * @ngdoc directive
  * @name okCover
@@ -735,6 +775,33 @@
             }
         });
 
+
+})(angular);
+/**
+ * @ngdoc directive
+ * @name okTag
+ * @description Ok tag.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okTag', function defineOkTag() {
+            return {
+                scope: {
+                    title: '=okTitle'
+                },
+                link: function (scope, elm) {
+                },
+                template: [
+                    '<span class="ok-tag" style="border-color: {{title | tagColorFilter}};color:{{title | tagColorFilter}};">',
+                    '<span class="ok-tag-icon" style="background-color: {{title | tagColorFilter}};"></span>',
+                    '{{title}}',
+                    '</span>'
+                ].join('')
+            }
+        });
 
 })(angular);
 /**
@@ -1185,10 +1252,45 @@
     ng
         .module('ok.filters', [
             'ok.constants',
+            'ok.services',
             'ok.utils'
         ]);
 })(angular);
 
+/**
+ * @ngdoc filter
+ * @filter dateFormatFilter
+ * @description Date format filter
+ */
+
+(function (ng, moment) {
+    "use strict";
+
+    ng
+        .module('ok.filters')
+        .filter('dateFormatFilter', function defineDateFormatFilter() {
+            return function dateFormatFilter(date) {
+                return moment(date).format('YYYY/MM/DD');
+            };
+        });
+})(angular, moment);
+/**
+ * @ngdoc filter
+ * @filter markdownRenderFilter
+ * @description Markdown render filter
+ */
+
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.filters')
+        .filter('markdownRenderFilter', function defineMarkdownRenderFilter(markdownRenderService) {
+            return function markdownRenderFilter(text) {
+                return markdownRenderService.render(text);
+            };
+        });
+})(angular);
 /**
  * @ngdoc filter
  * @filter pageTitleFilter
@@ -1215,6 +1317,36 @@
             };
         });
 })(angular);
+/**
+ * @ngdoc filter
+ * @filter tagColorFilter
+ * @description Tag color filter
+ */
+
+(function (ng, one) {
+    "use strict";
+
+    ng
+        .module('ok.filters')
+        .filter('tagColorFilter', function defineTagColorFilter(hashUtil) {
+            var _cache = {};
+            return function tagColorFilter(title, namespace) {
+                var seed = [title, namespace || ''].join('-');
+                var _cached = _cache[seed];
+                if (_cached) {
+                    return _cached;
+                }
+                var hashCode = hashUtil.toHashCode(seed);
+                var hue = parseInt(hashCode % 41 + 100) / 100.0,
+                    color = one.color('#a9d91d').hue(hue, true).hex();
+                if (!color.match(/^#/)) {
+                    color = '#' + color;
+                }
+                _cache[seed] = color;
+                return color;
+            }
+        });
+})(angular, one);
 /**
  * @ngdoc filter
  * @filter textLinkFilter
@@ -1357,6 +1489,7 @@
                 get locationChangeService() { return $injector.get('locationChangeService'); },
                 get locationResolveService() { return $injector.get('locationResolveService'); },
                 get locationSearchService() { return $injector.get('locationSearchService'); },
+                get markdownRenderService() { return $injector.get('markdownRenderService'); },
                 get templateCacheService() { return $injector.get('templateCacheService'); },
                 get toastMessageService() { return $injector.get('toastMessageService'); },
                 get urlFormatService() { return $injector.get('urlFormatService'); }
@@ -1375,6 +1508,7 @@
         .module('ok.indices')
         .factory('templatesIndex', function defineTemplatesIndex($injector) {
             return {
+                get blogBlogListSectionHtmlTemplate() { return $injector.get('blogBlogListSectionHtmlTemplate'); },
                 get coverHtmlTemplate() { return $injector.get('coverHtmlTemplate'); },
                 get faviconHtmlTemplate() { return $injector.get('faviconHtmlTemplate'); },
                 get footerHtmlTemplate() { return $injector.get('footerHtmlTemplate'); },
@@ -1408,6 +1542,7 @@
         .factory('utilsIndex', function defineUtilsIndex($injector) {
             return {
                 get arrayUtil() { return $injector.get('arrayUtil'); },
+                get hashUtil() { return $injector.get('hashUtil'); },
                 get objectUtil() { return $injector.get('objectUtil'); },
                 get positionUtil() { return $injector.get('positionUtil'); },
                 get stringUtil() { return $injector.get('stringUtil'); }
@@ -1445,6 +1580,80 @@
             $rootScope.page = 'blog';
         })
         .controller('BlogCtrl', function defineBlogCtrl($scope) {
+
+        })
+        .controller('BlogListCtrl', function ($scope,
+                                              objectUtil,
+                                              arrayUtil,
+                                              errorHandleService,
+                                              BlogEntity,
+                                              blogApiService,
+                                              blogTagApiService) {
+
+            function apiRejected(err) {
+                errorHandleService.handleError(err);
+            }
+
+            $scope.blogTagHash = {};
+
+            function load() {
+                $scope.loading = true;
+                blogApiService.list($scope.condition)
+                    .then(function resolved(data) {
+                        return data.map(BlogEntity.new);
+                    }, apiRejected)
+                    .then(function (blogs) {
+                        $scope.blogs = $scope.blogs.concat(blogs);
+                        $scope.hasMore = blogs.length >= $scope.condition._limit;
+                        $scope.condition._skip += blogs.length;
+                        return blogs;
+                    })
+                    .then(function (blogs) {
+                        return blogTagApiService.list({
+                            'blog_id[]': blogs.map(function (blog) {
+                                return blog._id;
+                            })
+                        });
+                    })
+                    .then(function (blogTags) {
+                        var hash = $scope.blogTagHash || {};
+                        blogTags.forEach(function (tag) {
+                            var blogId = tag.blog_id;
+                            hash[blogId] = hash[blogId] || [];
+                            var isNew = hash[blogId].indexOf(tag) === -1;
+                            if (isNew) {
+                                hash[blogId].push(tag);
+                            }
+                        });
+                        $scope.blogTagHash = hash;
+                        return hash;
+                    }, apiRejected)
+                    .then(function (hash) {
+                        $scope.blogs.forEach(function (blog) {
+                            var tags = hash[blog._id];
+                            blog.tag_texts = tags.map(function (tag) {
+                                return tag.tag_text;
+                            });
+                        });
+                    })
+                    .finally(function () {
+                        $scope.loading = false;
+                    });
+            }
+
+            $scope.condition = {
+                _sort: '_at',
+                _reverse: true,
+                _limit: 3,
+                _skip: 0
+            };
+            $scope.blogs = [];
+            $scope.hasMore = false;
+            $scope.loadMore = function () {
+                load();
+            };
+
+            load();
 
         });
 
@@ -2388,6 +2597,31 @@
 })(angular);
 /**
  * @ngdoc object
+ * @name markdownRenderService
+ * @description Markdown render service.
+ */
+(function (ng, marked) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('markdownRenderService', function MarkdownRenderService() {
+            var s = this;
+
+            /**
+             * Render a markdown text.
+             * @param {string} text - Text to render.
+             * @returns {string} - Rendered text.
+             */
+            s.render = function (text) {
+                return marked(text || '');
+            };
+
+        });
+
+})(angular, marked);
+/**
+ * @ngdoc object
  * @name templateCacheService
  * @description Template cache service.
  */
@@ -2483,6 +2717,22 @@
         ]);
 })(angular);
 
+/**
+ * @ngdoc object
+ * @name blogBlogListSectionHtmlTemplate
+ * @description Template for blogBlogListSectionHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('blogBlogListSectionHtmlTemplate', {
+		    "name": "/html/partials/blog/blog-list-section.html",
+		    "content": "<section id=\"blog-list-section\" ng:controller=\"BlogListCtrl\">\n    <dl id=\"blog-list\" class=\"cover-container\">\n        <div ok:cover ok:cover-visible=\"loading\"></div>\n        <dt ng:repeat-start=\"b in blogs\">\n            <a class=\"blog-dt-anchor blog-title\"\n               name=\"blog-{{b._id}}\">\n                {{b.blog_title}}\n            </a>\n            <span class=\"blog-date-label\">{{b._at | dateFormatFilter}}</span>\n            <span class=\"display-block\">\n                <span ok:tag ok:title=\"t\" ng:repeat=\"t in (b.tag_texts) track by $index\"></span>\n            </span>\n        </dt>\n        <dd ng:repeat-end=\"\" ng:bind-html=\"b.blog_content | markdownRenderFilter\"></dd>\n    </dl>\n    <a id=\"blog-more-button\"\n       class=\"list-more-button\"\n       ok:button\n       ng:show=\"hasMore\"\n       ng:click=\"loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</section>"
+		});
+
+})(angular);
 /**
  * @ngdoc object
  * @name coverHtmlTemplate
@@ -2783,6 +3033,32 @@
             var arrayUtil = {};
             arrayUtil.__proto__ = apArrayUtil;
             return arrayUtil;
+        });
+})(angular);
+/**
+ * @ngdoc object
+ * @name hashUtil
+ * @description Hash util.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.utils')
+        .factory('hashUtil', function defineHashUtil() {
+            return {
+                /**
+                 * Get hash code for string value.
+                 * @param {string} value - String to hash.
+                 * @returns {number} - Hash code.
+                 */
+                toHashCode: function (value) {
+                    return value.split("").reduce(function (a, b) {
+                        a = ((a << 5) - a) + b.charCodeAt(0);
+                        return a & a
+                    }, 0);
+                }
+            }
         });
 })(angular);
 /**

@@ -8,6 +8,7 @@
   "locationChangeService",
   "locationResolveService",
   "locationSearchService",
+  "markdownRenderService",
   "templateCacheService",
   "toastMessageService",
   "urlFormatService"

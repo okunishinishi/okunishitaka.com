@@ -128,6 +128,9 @@ button,
     display: block;
     text-align: center;
 }
+.list-more-button:active{
+    box-shadow: none;
+}
 
 .link-button,
 .link-button:link,

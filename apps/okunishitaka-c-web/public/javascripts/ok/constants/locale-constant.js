@@ -23,7 +23,9 @@
 		            "WORK": "Works"
 		        },
 		        "labels": {},
-		        "buttons": {},
+		        "buttons": {
+		            "MORE": "もっと読み込む"
+		        },
 		        "pages": {
 		            "index": {
 		                "CAPTION": [

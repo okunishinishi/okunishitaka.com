@@ -32,7 +32,9 @@ l.pageNames = {
 };
 l.labels = {};
 
-l.buttons = {};
+l.buttons = {
+    MORE: 'もっと読み込む'
+};
 
 l.pages = {
     index: {

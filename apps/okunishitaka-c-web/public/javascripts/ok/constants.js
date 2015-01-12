@@ -109,7 +109,9 @@
 		            "WORK": "Works"
 		        },
 		        "labels": {},
-		        "buttons": {},
+		        "buttons": {
+		            "MORE": "もっと読み込む"
+		        },
 		        "pages": {
 		            "index": {
 		                "CAPTION": [
@@ -334,6 +336,7 @@
     ng
         .module('ok.constants')
         .constant('pageUrlConstant', {
+		    "BLOG": "/blog.html",
 		    "INDEX": "/index.html",
 		    "PROFILE": "/profile.html",
 		    "WORK": "/work.html"
@@ -352,6 +355,7 @@
     ng
         .module('ok.constants')
         .constant('partialUrlConstant', {
+		    "BLOG_LIST_SECTION": "/html/partials/blog/blog-list-section.html",
 		    "COVER": "/html/partials/cover.html",
 		    "FAVICON": "/html/partials/favicon.html",
 		    "FOOTER": "/html/partials/footer.html",

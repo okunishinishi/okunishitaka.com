@@ -15,6 +15,42 @@
 
 /**
  * @ngdoc directive
+ * @name okButton
+ * @description Ok button.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okButton', function defineOkButton() {
+            return {
+                scope: {
+                    type: '=okButtonType'
+                },
+                link: function (scope, elm, attr) {
+                    var $elm = $(elm);
+                    $elm.addClass('button')
+                        .attr({
+                            href: $elm.attr('href') || 'javascript:void(0)'
+                        }
+                    );
+                    switch (scope.type) {
+                        case 'button-primary':
+                        case 'primary':
+                            $elm.addClass('button-primary');
+                            break;
+                        case 'link':
+                            $elm.addClass('link-button');
+                            break;
+                    }
+                }
+            }
+        });
+
+})(angular);
+/**
+ * @ngdoc directive
  * @name okCover
  * @description Ok cover.
  */
@@ -311,6 +347,33 @@
             }
         });
 
+
+})(angular);
+/**
+ * @ngdoc directive
+ * @name okTag
+ * @description Ok tag.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.directives')
+        .directive('okTag', function defineOkTag() {
+            return {
+                scope: {
+                    title: '=okTitle'
+                },
+                link: function (scope, elm) {
+                },
+                template: [
+                    '<span class="ok-tag" style="border-color: {{title | tagColorFilter}};color:{{title | tagColorFilter}};">',
+                    '<span class="ok-tag-icon" style="background-color: {{title | tagColorFilter}};"></span>',
+                    '{{title}}',
+                    '</span>'
+                ].join('')
+            }
+        });
 
 })(angular);
 /**

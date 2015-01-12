@@ -8,6 +8,7 @@
     ng
         .module('ok.filters', [
             'ok.constants',
+            'ok.services',
             'ok.utils'
         ]);
 })(angular);

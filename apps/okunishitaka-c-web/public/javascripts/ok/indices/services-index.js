@@ -26,6 +26,7 @@
                 get locationChangeService() { return $injector.get('locationChangeService'); },
                 get locationResolveService() { return $injector.get('locationResolveService'); },
                 get locationSearchService() { return $injector.get('locationSearchService'); },
+                get markdownRenderService() { return $injector.get('markdownRenderService'); },
                 get templateCacheService() { return $injector.get('templateCacheService'); },
                 get toastMessageService() { return $injector.get('toastMessageService'); },
                 get urlFormatService() { return $injector.get('urlFormatService'); }
