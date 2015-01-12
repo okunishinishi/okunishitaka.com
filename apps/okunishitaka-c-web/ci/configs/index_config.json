@@ -1,0 +1,31 @@
+[
+  {
+    "dirname": "ci/configs",
+    "doc": {
+      "file": "CI configuration.",
+      "module": "kaite-web/ci/configs"
+    }
+  },
+  {
+    "dirname": "ci/tasks",
+    "doc": {
+      "file": "CI tasks.",
+      "module": "kaite-web/ci/tasks"
+    },
+    "pascalPattern": "*task"
+  },
+  {
+    "dirname": "app/locales",
+    "doc": {
+      "file": "App locales.",
+      "module": "kaite-web/app/locales"
+    }
+  },
+  {
+    "dirname": "app/routes",
+    "doc": {
+      "file": "App routes.",
+      "module": "kaite-web/app/routes"
+    }
+  }
+]

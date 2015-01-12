@@ -1,0 +1,68 @@
+/**
+ * @file Bud for definitions.
+ * @ignore
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    string = u.string;
+
+module.exports = {
+    mode: '444',
+    force: true,
+    data: {
+        doc: {
+            memberof: 'module:karakuri-g-lib/schemas',
+            member: '_def',
+            type: 'object'
+        },
+        get types() {
+            return [
+                'array',
+                'boolean',
+                'integer',
+                'number',
+                'null',
+                'object',
+                'string'
+            ].map(function (type) {
+                    return {
+                        key: (string.snakeString(type) + '_TYPE').toUpperCase(),
+                        type: type
+                    }
+                })
+        },
+        get stringDef() {
+            var stringDef = {
+                numeric: 'pattern: \'^[0-9]*$\'',
+                alpha: 'pattern: \'^[a-zA-Z]*$\'',
+                account: 'pattern: \'^[a-zA-Z0-9_\\\\-]+$\'',
+                password: "pattern: \'^[a-zA-Z0-9_N\\\\-\\\\!\\\\*\\\\+]+$\'",
+                email: 'format: "email"'
+            };
+
+            return Object.keys(stringDef).map(function (type) {
+                return {
+                    type: type,
+                    def: stringDef[type],
+                    key: (string.snakeString(type) + '_STRING').toUpperCase()
+                }
+            });
+        },
+        get arrayDef() {
+            var arrayDef = {
+                unique: 'uniqueItems: true',
+                notEmpty: 'minItems: 1'
+            };
+            return Object.keys(arrayDef).map(function (type) {
+                return {
+                    type: type,
+                    def: arrayDef[type],
+                    key: (string.snakeString(type) + '_ARRAY').toUpperCase()
+                }
+            });
+        }
+    }
+};
+

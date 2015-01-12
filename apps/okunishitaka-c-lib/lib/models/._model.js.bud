@@ -1,0 +1,43 @@
+/**
+ * Bud file for models.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    format = u.core.util.format,
+    string = u.string;
+
+var models = require('../../../.models.json');
+
+module.exports = Object.keys(models).map(function (key) {
+    var model = models[key];
+    return {
+        force: true,
+        mode: '444',
+        path: format('%s/%s_model.js', __dirname, string.snakeString(key)),
+        data: {
+            name: string.camelString(key),
+            module: 'okunishitaka-c-lib',
+            properties: JSON.stringify(model.properties, null, 4),
+            get foreign() {
+                var data = {};
+                Object.keys(model.foreign || {}).forEach(function (colName) {
+                    var value = model.foreign[colName].split(/\./);
+                    data[colName] = {
+                        table: value[0],
+                        col: value[1]
+                    }
+                });
+                return JSON.stringify(data, null, 4);
+            },
+            get indices() {
+                return JSON.stringify(model.indices || {}, null, 4);
+            },
+            get unique() {
+                return JSON.stringify(model.unique || {}, null, 4);
+            },
+            __description__: model.__description__
+        }
+    }
+});

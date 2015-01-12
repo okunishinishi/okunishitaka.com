@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+"use strict";
+
+
+/**
+ * Watch project.
+ * @type {exports}
+ */
+
+var h = require('../_helper'),
+    async = h.async,
+    tasks = h.tasks,
+    configs = require('../configs');
+
+process.chdir(h.basedir);
+
+configs.forkConfig.watch.files.forEach(function (filename) {
+    new tasks.ForkTask({
+        files: [].concat(filename)
+    }).run(h.done('Concat done!'));
+});

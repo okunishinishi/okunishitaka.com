@@ -1,0 +1,14 @@
+{
+  "blog": [
+    "one",
+    "list",
+    "create",
+    "update",
+    "destroy"
+  ],
+  "blog_tag": [
+    "list",
+    "create",
+    "destroy"
+  ]
+}

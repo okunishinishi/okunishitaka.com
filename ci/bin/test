@@ -1,20 +1,23 @@
 #!/usr/bin/env node
 
 /**
- * @file Run tests
+ * @file Run unit tests
  */
 
 "use strict";
 
 var h = require('../_helper'),
+    configs = require('../configs'),
     async = h.async,
     tasks = h.tasks;
 
 process.chdir(h.basedir);
 
-new tasks.ForkTask({
-    files: [
-        'ci/bin/test_unit_tests',
-        'ci/bin/test_scenario_tests'
-    ]
-}).run(h.done('Doc done!', true));
+async.eachSeries([
+    {
+        config: configs.forkConfig.test,
+        task: tasks.ForkTask
+    }
+], function (data, callback) {
+    new (data.task)(data.config).run(callback);
+}, h.done('All test done!', true));

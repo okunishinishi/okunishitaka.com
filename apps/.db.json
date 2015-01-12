@@ -1,0 +1,39 @@
+{
+  "databases": {
+    "production": {
+      "schema": "ok-c",
+      "port": "3306",
+      "host": "localhost",
+      "user": [
+        "ci",
+        "web"
+      ]
+    },
+    "test": {
+      "schema": "ok-c-test",
+      "port": "3306",
+      "host": "localhost",
+      "user": [
+        "ci",
+        "test"
+      ]
+    }
+  },
+  "users": {
+    "web": {
+      "username": "ok-c-web",
+      "password": "ok-c-web",
+      "host": "localhost"
+    },
+    "ci": {
+      "username": "ok-c-ci",
+      "password": "ok-c-ci",
+      "host": "localhost"
+    },
+    "test": {
+      "username": "ok-c-test",
+      "password": "ok-c-test",
+      "host": "localhost"
+    }
+  }
+}

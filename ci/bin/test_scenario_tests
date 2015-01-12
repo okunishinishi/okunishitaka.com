@@ -1,24 +1,23 @@
 #!/usr/bin/env node
 
 /**
- * @file Run unit tests.
+ * @file Run scenario tests
  */
 
 "use strict";
 
-
 var h = require('../_helper'),
+    configs = require('../configs'),
     async = h.async,
-    tasks = h.tasks,
-    configs = require('../configs');
+    tasks = h.tasks;
 
 process.chdir(h.basedir);
 
 async.eachSeries([
     {
-        config: configs.mochaConfig,
-        task: tasks.MochaTask
+        config: configs.forkConfig.testScenarioTests,
+        task: tasks.ForkTask
     }
 ], function (data, callback) {
     new (data.task)(data.config).run(callback);
-}, h.done('Scenario tests done!', true));
+}, h.done('All test done!', true));

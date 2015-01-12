@@ -1,0 +1,31 @@
+/**
+ * Bud file for update schema.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    format = u.core.util.format,
+    string = u.string;
+
+var endpoints = require('../../.endpoints');
+
+module.exports = Object.keys(endpoints)
+    .filter(function (key) {
+        var endpoint = endpoints[key];
+        return endpoint.indexOf('update') != -1;
+    })
+    .map(function (key) {
+        return {
+            mode: '644',
+            force: false,
+            path: format('%s/%s_update.schema.js', __dirname, string.snakeString(key)),
+            data: {
+                title: string.paramString(key + '-update'),
+                model: string.camelString(key)
+            }
+        }
+    });
+
+
+

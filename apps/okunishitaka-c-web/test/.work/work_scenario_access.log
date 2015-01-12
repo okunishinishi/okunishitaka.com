@@ -1,0 +1,5 @@
+[Mon Jan 12 2015 15:19:47 GMT+0900 (JST)] 127.0.0.1 - "POST /api/blog HTTP/1.1 200 178 "" "" "tracking-id="  (process 15011) 73 ms
+[Mon Jan 12 2015 15:19:47 GMT+0900 (JST)] 127.0.0.1 - "GET /api/blog/1 HTTP/1.1 200 129 "" "" "tracking-id="  (process 15011) 18 ms
+[Mon Jan 12 2015 15:19:47 GMT+0900 (JST)] 127.0.0.1 - "PUT /api/blog/1 HTTP/1.1 200 185 "" "" "tracking-id="  (process 15011) 47 ms
+[Mon Jan 12 2015 15:19:47 GMT+0900 (JST)] 127.0.0.1 - "GET /api/blog HTTP/1.1 200 154 "" "" "tracking-id="  (process 15011) 13 ms
+[Mon Jan 12 2015 15:19:47 GMT+0900 (JST)] 127.0.0.1 - "DELETE /api/blog/1 HTTP/1.1 200 39 "" "" "tracking-id="  (process 15011) 13 ms

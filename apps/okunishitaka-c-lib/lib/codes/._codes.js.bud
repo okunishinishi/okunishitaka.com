@@ -1,0 +1,27 @@
+"use strict";
+
+var u = require('apeman-util'),
+    string = u.string,
+    format = u.core.util.format,
+    codes = require('./.codes.json');
+
+module.exports = Object.keys(codes).map(function (name) {
+    return {
+        force: true,
+        mode: '444',
+        path: format('%s/%s.js', __dirname, string.snakeString(name)),
+        data: {
+            memberof: 'okunishitaka-c/lib/codes',
+            name: string.camelString(name),
+            file: string.sentenceString(name),
+            properties: Object.keys(codes[name]).map(function (key, i) {
+                var data = codes[name][key];
+                return {
+                    key: key,
+                    desc: data.hasOwnProperty('desc') ? data.desc : data,
+                    val: data.hasOwnProperty('val') ? data.val : i
+                }
+            })
+        }
+    }
+});

@@ -1,0 +1,7 @@
+{
+  "pattern":[
+    "+(ci|doc|lib)/**/.*.bud",
+    "+(ci|doc|lib)/**/..bud"
+  ]
+
+}

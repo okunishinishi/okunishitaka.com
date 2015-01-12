@@ -1,0 +1,19 @@
+{
+  "build": {
+    "files": [
+    ]
+  },
+  "test": {
+    "files": [
+      "ci/bin/test_unit_tests",
+      "ci/bin/test_scenario_tests"
+    ]
+  },
+  "watch": {
+    "files": [
+      "ci/bin/watch_to_bud",
+      "ci/bin/watch_to_concat",
+      "ci/bin/watch_to_test"
+    ]
+  }
+}

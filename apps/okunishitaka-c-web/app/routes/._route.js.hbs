@@ -1,0 +1,119 @@
+/**
+ * Routing for {{name}}.
+ * @module {{module}}/{{name}}Route
+ */
+
+"use strict";
+
+var h = require('./_helper'),
+    {{name}}Storage = h.storages.{{name}}Storage,
+    schemas = require('../schemas'),
+    async = h.async,
+    rest = h.handlers.rest,
+    StorageHandler = h.handlers.StorageHandler;
+
+
+var {{name}}Converters = {
+    outbound: function {{name}}OutboundConverter({{name}}) {
+        return {{name}};
+    },
+    inbound: function {{name}}InboundConverter({{name}}) {
+        return {{name}};
+    }
+};
+
+
+{{#if hasOne}}/**
+ * One {{name}} data.
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ */
+exports.one = function (req, res, next) {
+    async.series([
+        function (next) {
+            var handler = new rest.OneRestHandler({
+                storage: {{name}}Storage,
+                converters: {{name}}Converters
+            });
+            handler.handle(req, res, next);
+        }
+    ], next);
+};{{/if}}
+
+{{#if hasList}}/**
+ * List {{name}} data.
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ */
+exports.list = function (req, res, next) {
+    async.series([
+        function (next) {
+            var handler = new rest.ListRestHandler({
+                storage: {{name}}Storage,
+                converters: {{name}}Converters
+            });
+            handler.handle(req, res, next);
+        }
+    ], next);
+};{{/if}}
+
+
+{{#if hasCreate}}/**
+ * Create {{name}} data.
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ */
+exports.create = function (req, res, next) {
+    async.series([
+        function (next) {
+            var handler = new rest.CreateRestHandler({
+                storage: {{name}}Storage,
+                schema: schemas.{{name}}CreateSchema,
+                converters: {{name}}Converters
+            });
+            handler.handle(req, res, next);
+        }
+    ], next);
+};{{/if}}
+
+{{#if hasUpdate}}/**
+ * Update {{name}} data.
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ */
+exports.update = function (req, res, next) {
+    async.series([
+        function (next) {
+            var handler = new rest.UpdateRestHandler({
+                storage: {{name}}Storage,
+                schema: schemas.{{name}}UpdateSchema,
+                converters: {{name}}Converters
+            });
+            handler.handle(req, res, next);
+        }
+    ], next);
+};{{/if}}
+
+
+{{#if hasDestroy}}/**
+ * Destroy {{name}} data.
+ * @param {object} req
+ * @param {object} res
+ * @param {function} next
+ */
+exports.destroy = function (req, res, next) {
+    async.series([
+        function (next) {
+            var handler = new rest.DestroyRestHandler({
+                storage: {{name}}Storage,
+                converters: {{name}}Converters
+            });
+            handler.handle(req, res, next);
+        }
+    ], next);
+};{{/if}}
+

@@ -1,0 +1,11 @@
+[
+  {
+    "srcPattern": [
+      "app/app_*.js"
+    ],
+    "destDir": "test/unit_tests",
+    "data": {
+      "helperPath": "../_helper"
+    }
+  }
+]

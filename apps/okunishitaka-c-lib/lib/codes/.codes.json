@@ -1,0 +1,10 @@
+{
+  "appErrorCodes": {
+    "CONFLICT_ERROR": "Resource conflict error.",
+    "CONNECTION_ERROR": "Network connection error.",
+    "NOT_FOUND_ERROR": "Not found error.",
+    "SERVER_ERROR": "Internal server error.",
+    "UNEXPECTED_ERROR": "Unexpected error.",
+    "VALIDATION_ERROR": "Schema validation error."
+  }
+}

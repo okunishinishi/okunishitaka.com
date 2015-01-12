@@ -1,0 +1,11 @@
+{
+  "build": {
+    "files": [
+    ]
+  },
+  "test": {
+    "files": [
+      "ci/bin/test_unit_tests"
+    ]
+  }
+}

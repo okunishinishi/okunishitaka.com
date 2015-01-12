@@ -1,0 +1,67 @@
+#!/usr/bin/env node
+
+/**
+ * Initialize database.
+ */
+
+"use strict";
+
+
+var h = require('../_helper'),
+    tasks = h.tasks,
+    u = require('apeman-util'),
+    yesno = u.ext.yesno,
+    path = u.core.path,
+    async = u.ext.async,
+    MysqlTask = require('../tasks/mysql_task'),
+    db = require('../../../.db.json');
+
+
+var question = [
+    "Are you sure to initialize database?",
+    "(All data will be lost.)[y/N]"
+].join('');
+
+var basedir = path.resolve(__dirname, '../../'),
+    resolve = function (pathname) {
+        return path.resolve(basedir, pathname);
+    };
+
+
+yesno.ask(question, 'no', function (result) {
+    if (!result) {
+        console.log('Aborted!');
+        process.exit(0);
+        return;
+    }
+
+    async.series([
+        function (callback) {
+            new tasks.ForkTask({
+                files: [
+                    resolve("ci/bin/build")
+                ]
+            }).run(callback);
+        },
+        function (callback) {
+            var user = db.users.ci;
+            new MysqlTask({
+                db: {
+                    port: db.port,
+                    host: db.host
+                },
+                user: {
+                    username: user.username,
+                    password: user.password
+                },
+                get filename() {
+                    var filenames = [
+                        'ci/assets/ddl/reset_schema.sql'
+                    ];
+                    return filenames.map(resolve);
+                }
+            }).run(callback)
+        }
+
+    ], h.done('Initialize done!', true));
+});

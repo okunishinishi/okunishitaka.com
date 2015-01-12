@@ -1,8 +1,39 @@
 {
-    "build": {
-        "files": [
-            "ci/bin/format",
-            "ci/bin/minify"
-        ]
-    }
+  "build": {
+    "files": [
+      "apps/okunishitaka-c-lib/ci/bin/build",
+      "apps/okunishitaka-c-web/ci/bin/build"
+    ]
+  },
+  "test": {
+    "files": [
+      "ci/bin/build",
+      "apps/okunishitaka-c-lib/ci/bin/test",
+      "apps/okunishitaka-c-web/ci/bin/test"
+    ]
+  },
+  "testUnitTests": {
+    "files": [
+      "apps/okunishitaka-c-lib/ci/bin/test_unit_tests",
+      "apps/okunishitaka-c-web/ci/bin/test_unit_tests"
+    ]
+  },
+  "testScenarioTests": {
+    "files": [
+      "ci/bin/build",
+      "apps/okunishitaka-c-web/ci/bin/test_scenario_tests"
+    ]
+  },
+  "initializeDatabase": {
+    "files": [
+      "apps/okunishitaka-c-lib/ci/bin/build",
+      "apps/okunishitaka-c-lib/ci/bin/initialize_database"
+    ]
+  },
+  "loadTestdata": {
+    "files": [
+      "apps/okunishitaka-c-lib/ci/bin/build",
+      "apps/okunishitaka-c-lib/ci/bin/load_testdata"
+    ]
+  }
 }

@@ -1,0 +1,36 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+
+{{#each databases}}
+-- -----------------------------------------------------
+-- Create schema {{schema}}
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `{{schema}}` ;
+CREATE SCHEMA IF NOT EXISTS `{{schema}}` ;
+USE `{{schema}}` ;
+
+{{#each tables}}
+-- Create table `{{../schema}}`.`{{tableName}}` --
+CREATE TABLE IF NOT EXISTS `{{../schema}}`.`{{tableName}}` (
+`_id` SMALLINT NOT NULL AUTO_INCREMENT,
+`_at` TIMESTAMP(6),
+`_vr` SMALLINT,
+{{#each columns}}`{{columnName}}` {{columnType}}{{#if columnLength}}({{columnLength}}){{/if}}{{#if required}} NOT NULL{{/if}}{{#if defaultValue}} DEFAULT {{defaultValue}}{{/if}},
+{{/each}}
+{{#each indices}}INDEX `{{indexName}}` (`{{colName}}` ASC), {{/each}}
+{{#each unique}}UNIQUE KEY (`{{this}}`),
+{{/each}}
+{{#each foreign}}FOREIGN KEY (`{{colName}}`) REFERENCES `{{ref.table}}`(`{{ref.colName}}`) ON DELETE CASCADE,
+{{/each}}
+PRIMARY KEY (`_id`)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+ALTER TABLE `{{../schema}}`.`{{tableName}}` AUTO_INCREMENT = 1;
+{{/each}}
+{{/each}}
+
+

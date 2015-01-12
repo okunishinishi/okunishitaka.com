@@ -1,0 +1,48 @@
+#!/usr/bin/env node
+
+"use strict";
+
+/**
+ * Build project.
+ * @type {exports}
+ */
+
+var h = require('../_helper'),
+    async = h.async,
+    tasks = h.tasks,
+    configs = require('../configs/index');
+
+process.chdir(h.basedir);
+
+async.eachSeries([
+    {
+        config: configs.mkdirConfig,
+        task: tasks.MkdirTask
+    },
+    {
+        config: configs.indexConfig,
+        task: tasks.IndexTask
+    },
+    {
+        config: configs.chmodConfig,
+        task: tasks.ChmodTask
+    },
+    {
+        config: configs.budConfig,
+        task: tasks.BudTask
+    },
+    {
+        config: configs.cpConfig,
+        task: tasks.CpTask
+    },
+    {
+        config: configs.forkConfig.build,
+        task: tasks.ForkTask
+    },
+    {
+        config: configs.testScaffoldConfig,
+        task: tasks.TestScaffoldTask
+    }
+], function (data, callback) {
+    new (data.task)(data.config).run(callback);
+}, h.done('All build done!'));

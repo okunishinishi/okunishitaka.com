@@ -4,7 +4,6 @@
 
 /**
  * Build project.
- * @type {exports}
  */
 
 var h = require('../_helper'),
@@ -28,24 +27,12 @@ async.eachSeries([
         task: tasks.ChmodTask
     },
     {
-        config: configs.testScaffoldConfig,
-        task: tasks.TestScaffoldTask
-    },
-    {
         config: configs.budConfig,
         task: tasks.BudTask
     },
     {
-        config: configs.concatConfig,
-        task: tasks.ConcatTask
-    },
-    {
         config: configs.cpConfig,
         task: tasks.CpTask
-    },
-    {
-        config: configs.symlinkConfig,
-        task: tasks.SymlinkTask
     },
     {
         config: configs.forkConfig.build,
@@ -53,4 +40,4 @@ async.eachSeries([
     }
 ], function (data, callback) {
     new (data.task)(data.config).run(callback);
-}, h.done('Build done!'));
+}, h.done('All build done!'));

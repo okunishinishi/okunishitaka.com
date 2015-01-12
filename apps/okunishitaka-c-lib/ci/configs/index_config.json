@@ -1,0 +1,75 @@
+[
+  {
+    "dirname": "ci/configs",
+    "doc": {
+      "file": "CI configuration.",
+      "module": "okunishitaka-c-lib/ci/configs"
+    }
+  },
+  {
+    "dirname": "ci/tasks",
+    "doc": {
+      "file": "CI tasks.",
+      "module": "okunishitaka-c-lib/ci/tasks"
+    },
+    "pascalPattern": "*task"
+  },
+  {
+    "dirname": "lib",
+    "doc": {
+      "file": "Lib for okunishitaka.com.",
+      "module": "okunishitaka-c-lib/lib"
+    }
+  },
+  {
+    "dirname": "lib/codes",
+    "doc": {
+      "file": "Codes",
+      "module": "okunishitaka-c-lib/lib/codes"
+    }
+  },
+  {
+    "dirname": "lib/handlers",
+    "doc": {
+      "file": "Route handlers.",
+      "module": "okunishitaka-c-lib/lib/handlers"
+    },
+    "pascalPattern": "*handler"
+  },
+  {
+    "dirname": "lib/handlers/rest",
+    "doc": {
+      "file": "Rest route handlers.",
+      "module": "okunishitaka-c-lib/lib/handlers/rest"
+    },
+    "pascalPattern": "*handler"
+  },
+  {
+    "dirname": "lib/logics",
+    "doc": {
+      "file": "Logics",
+      "module": "okunishitaka-c-lib/lib/logics"
+    }
+  },
+  {
+    "dirname": "lib/middlewares",
+    "doc": {
+      "file": "Middlewares",
+      "module": "okunishitaka-c-lib/lib/middlewares"
+    }
+  },
+  {
+    "dirname": "lib/models",
+    "doc": {
+      "file": "Models",
+      "module": "okunishitaka-c-lib/lib/models"
+    }
+  },
+  {
+    "dirname": "lib/utils",
+    "doc": {
+      "file": "Utility functions.",
+      "module": "okunishitaka-c-lib/lib/utils"
+    }
+  }
+]

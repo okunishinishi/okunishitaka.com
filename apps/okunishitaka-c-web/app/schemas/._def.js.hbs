@@ -1,0 +1,51 @@
+/**
+ * Schema definitions.{{#each doc}}
+ * @{{@key}} {{this}}{{/each}}
+ */
+
+"use strict";
+
+/** @lends {{doc.member}} **/
+var _def = {};
+
+{{#each types}}
+/**
+ * Type definition for {{type}}.
+ * @memberof {{../doc.member}}
+ */
+_def.{{key}} = {
+    type: '{{type}}'
+};
+{{/each}}
+{{#each types}}
+/**
+ * Type definition for {{type}} array.
+ * @memberof {{../doc.member}}
+ */
+_def.{{key}}_ARRAY = {
+    type: 'array',
+    items: {type: '{{type}}'}
+};
+{{/each}}
+{{#each stringDef}}
+/**
+ * Type definition for {{type}} string.
+ * @memberof {{../doc.member}}
+ */
+_def.{{key}} = {
+    type: 'string',
+    {{{def}}}
+};
+{{/each}}
+{{#each arrayDef}}
+/**
+ * Type definition for {{type}} array.
+ * @memberof {{../doc.member}}
+ */
+_def.{{key}} = {
+    type: 'array',
+    {{{def}}}
+};
+{{/each}}
+
+module.exports = Object.seal(_def);

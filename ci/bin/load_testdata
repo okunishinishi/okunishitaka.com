@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+"use strict";
+
+/**
+ * @file Load test data
+ */
+
+var h = require('../_helper'),
+    async = h.async,
+    tasks = h.tasks,
+    configs = require('../configs');
+
+process.chdir(h.basedir);
+
+async.eachSeries([
+    {
+        config: configs.forkConfig.loadTestdata,
+        task: tasks.ForkTask
+    }
+], function (data, callback) {
+    new (data.task)(data.config).run(callback);
+}, h.done('All load testdata done!'));

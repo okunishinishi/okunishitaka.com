@@ -1,0 +1,88 @@
+{
+  "blog": {
+    "__description__": "Blog data.",
+    "type": "table",
+    "properties": {
+      "blog_title": {
+        "type": "string",
+        "required": true
+      },
+      "blog_content": {
+        "type": "string"
+      }
+    },
+    "foreign": {
+    },
+    "indices": [
+    ]
+  },
+  "blog_tag": {
+    "__description__": "Tag for blog.",
+    "type": "table",
+    "properties": {
+      "blog_id": {
+        "type": "number",
+        "required": true
+      },
+      "tag_text": {
+        "type": "string"
+      }
+    },
+    "foreign": {
+      "blog_id": "blog._id"
+    },
+    "unique": [
+    ],
+    "indices": [
+      "blog_id",
+      "tag_text"
+    ]
+  },
+  "score": {
+    "__description__": "Score for an answer.",
+    "type": "table",
+    "properties": {
+      "answer_id": {
+        "type": "number",
+        "required": true
+      },
+      "user_id": {
+        "type": "number"
+      },
+      "star_count": {
+        "type": "number"
+      }
+    },
+    "foreign": {
+      "answer_id": "answer._id",
+      "user_id": "user._id"
+    },
+    "indices": [
+      "answer_id",
+      "user_id"
+    ]
+  },
+  "session": {
+    "__description__": "Session data table.",
+    "type": "table",
+    "properties": {
+      "session_id": {
+        "type": "string",
+        "required": true
+      },
+      "session_data": {
+        "type": "TEXT",
+        "required": false,
+        "length": "65535"
+      },
+      "expire_date": {
+        "type": "date",
+        "default": "CURRENT_TIMESTAMP"
+      }
+    },
+    "indices": [
+      "session_id",
+      "expire_date"
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+/**
+ * @file Run tests
+ */
+
+"use strict";
+
+var h = require('../_helper'),
+    configs = require('../configs'),
+    async = h.async,
+    tasks = h.tasks;
+
+process.chdir(h.basedir);
+
+async.eachSeries([
+    {
+        config: configs.forkConfig.test,
+        task: tasks.ForkTask
+    }
+], function (data, callback) {
+    new (data.task)(data.config).run(callback);
+}, h.done('Test done!', true));

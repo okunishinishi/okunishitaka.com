@@ -1,0 +1,6 @@
+{
+  "pattern": [
+    "+(public)/**/..bud",
+    "+(app|ci|doc|public|test)/**/.*.bud"
+  ]
+}

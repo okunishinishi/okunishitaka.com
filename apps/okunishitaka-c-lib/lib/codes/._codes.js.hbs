@@ -1,0 +1,15 @@
+/**
+ * {{file}}
+ * @memberof {{memberof}}
+ * @member {{name}}
+{{#each properties}} * @property {number} {{key}} - {{desc}}
+{{/each}} */
+
+"use strict";
+
+module.exports = Object.seal(
+    {
+{{#each properties}}        {{key}}: {{val}}{{#if @last}}{{else}},
+{{/if}}{{/each}}
+    }
+);

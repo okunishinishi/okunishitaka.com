@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+
+/**
+ * @file Start app.
+ * @see {@link http://nodejs.org/api/cluster.html | cluster}
+ */
+
+"use strict";
+
+var h = require('./_helper'),
+    data = require('../../../../server');
+
+process.chdir(h.basedir);
+process.env.NODE_ENV = 'production';
+
+var app = require('../app'),
+    port = data.port,
+    settings = require('../app_settings');
+
+var cluster = require('cluster');
+
+h.persist(cluster, {
+    basedir: h.basedir,
+    start: function () {
+        console.log('Cluster server start with port:', port);
+    },
+    stop: function () {
+        console.log('Cluster server killed.');
+    },
+    workerStart: function () {
+        app.start(port, settings);
+    },
+    workerStop: function () {
+        app.close();
+    }
+});
+

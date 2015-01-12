@@ -1,0 +1,15 @@
+/**
+ * @file App schemas.
+ * @module {{module}}
+ */
+
+"use strict";
+
+var Schema = require('./_schema');
+
+module.exports = {
+    {{#each schemas}}get {{exportsName}}() {
+        return new Schema(require('./{{requireName}}'));
+    }{{#if @last}}{{else}},
+    {{/if}}{{/each}}
+};

@@ -1,0 +1,30 @@
+/**
+ * Bud file for create users.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    config = require('../../../../.db.json');
+
+
+module.exports = {
+    mode: '444',
+    force: true,
+    data: {
+        get databases() {
+            return Object.keys(config.databases).map(function (key) {
+                var database = config.databases[key];
+                return {
+                    schema: database.schema,
+                    host: database.host,
+                    users: database.user.map(function (key) {
+                        return config.users[key];
+                    })
+                }
+            })
+        }
+    }
+};
+
+

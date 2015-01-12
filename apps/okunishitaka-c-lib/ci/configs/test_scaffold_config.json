@@ -1,0 +1,14 @@
+[
+  {
+    "srcPattern": [
+      "lib/handlers/*.js",
+      "lib/logics/*.js",
+      "lib/middlewares/*.js",
+      "lib/utils/*.js"
+    ],
+    "destDir": "test/unit_tests",
+    "data": {
+      "helperPath": "../_helper"
+    }
+  }
+]

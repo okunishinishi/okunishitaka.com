@@ -1,0 +1,32 @@
+/**
+ * Bud file for create schema.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    format = u.core.util.format,
+    string = u.string;
+
+var endpoints = require('../../.endpoints');
+
+module.exports = Object.keys(endpoints)
+    .filter(function (key) {
+        var endpoint = endpoints[key];
+        return endpoint.indexOf('create') != -1;
+    })
+    .map(function (key) {
+        return {
+            mode: '644',
+            force: false,
+            path: format('%s/%s_create.schema.js', __dirname, string.snakeString(key)),
+            data: {
+                module:'okunishitaka-c-web',
+                title: string.paramString(key + '-create'),
+                model: string.camelString(key)
+            }
+        }
+    });
+
+
+

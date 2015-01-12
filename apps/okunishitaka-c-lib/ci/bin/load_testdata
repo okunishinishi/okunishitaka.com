@@ -1,0 +1,95 @@
+#!/usr/bin/env node
+
+/**
+ * Load test data.
+ */
+
+"use strict";
+
+var h = require('../_helper'),
+    u = require('apeman-util'),
+    path = u.core.path,
+    glob = u.ext.glob,
+    string = u.string,
+    async = u.ext.async,
+    yesno = u.ext.yesno,
+    mysql = require('apeman-storage/lib/ext').mysql,
+    MysqlStorage = require('apeman-storage/lib/mysql_storage'),
+    config = require('../../../.db.json');
+
+
+var basedir = path.resolve(__dirname, '../..'),
+    datadir = path.resolve(basedir, 'test/data');
+
+
+var question = [
+    "Are you sure to load testdata?",
+    "(All data will be lost.)[y/N]"
+].join('');
+
+yesno.ask(question, 'no', function (result) {
+    if (!result) {
+        console.log('Aborted!');
+        process.exit(0);
+        return;
+    }
+    var database = config.databases.production,
+        user = config.users.ci;
+
+    var connection = mysql
+        .createConnection({
+            //debug: true,
+            database: database.schema,
+            multipleStatements: true,
+            port: database.port,
+            host: database.host,
+            user: user.username,
+            password: user.password
+        });
+
+    function reload(storage, data, callback) {
+        async.series([
+            function (callback) {
+                storage.deleteAll(callback);
+            },
+            function (callback) {
+                async.eachSeries(data, function (data, callback) {
+                    storage.create(data, callback);
+                }, callback);
+            }
+        ], callback);
+    }
+
+    async.series([
+        function (callback) {
+            connection.connect(callback);
+        },
+        function (callback) {
+            async.waterfall([
+                function (callback) {
+                    glob(path.join(datadir, '*.testdata.js'), callback);
+                },
+                function (filenames, callback) {
+                    filenames = filenames.sort(function (a, b) {
+                        return a.localeCompare(b);
+                    });
+                    async.eachSeries(filenames, function (filename, callback) {
+                        var data = require(filename),
+                            tableName = string.snakeString(path.basename(filename, 'testdata.js').replace(/^\d+\./, ''));
+                        data = data.map(function (data) {
+                            return data;
+                        });
+                        var storage = new MysqlStorage(tableName);
+                        storage.connect(connection);
+                        reload(storage, data, function (err) {
+                            setTimeout(function () {
+                                callback(err);
+                            }, 1);
+                        });
+                    }, callback);
+                }
+            ], callback);
+        }
+    ], h.done('Load test data done!', true));
+
+});

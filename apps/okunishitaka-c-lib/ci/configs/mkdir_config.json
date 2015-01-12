@@ -1,0 +1,23 @@
+{
+  "dirnames": [
+    "ci",
+    "ci/assets",
+    "ci/assets/ddl",
+    "ci/bin",
+    "ci/configs",
+    "ci/tasks",
+    "lib",
+    "lib/codes",
+    "lib/handlers",
+    "lib/handlers/rest",
+    "lib/logics",
+    "lib/middlewares",
+    "lib/models",
+    "lib/utils",
+    "doc",
+    "test",
+    "test/.work",
+    "test/data",
+    "test/unit_tests"
+  ]
+}

@@ -1,0 +1,98 @@
+/**
+ * Bud file for circus web sql.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    string = u.string,
+    models = require('../../../../.models'),
+    config = require('../../../../.db');
+
+function lowerSnakeString(value) {
+    return string.snakeString(value).toLowerCase();
+}
+
+function columnType(value) {
+    switch (String(value).toLowerCase()) {
+        case 'string':
+            return 'VARCHAR';
+        case 'number':
+            return 'SMALLINT';
+        case 'date':
+            return 'TIMESTAMP';
+    }
+    return value || "VARCHAR";
+}
+function columnLength(value, columnType) {
+    if (value) {
+        return value;
+    }
+    switch (columnType) {
+        case 'SMALLINT':
+            return null;
+        case 'TIMESTAMP':
+            return null;
+    }
+    return 255;
+}
+
+module.exports = {
+    force: true,
+    mode: '444',
+    data: {
+        get databases() {
+            return Object.keys(config.databases).map(function (key) {
+                var database = config.databases[key];
+                return {
+                    schema: database.schema,
+                    tables: Object.keys(models)
+                        .filter(function (name) {
+                            return models[name].type === 'table';
+                        })
+                        .map(function (name) {
+                            var model = models[name];
+                            if (!model.properties) {
+                                model.properties = {};
+                            }
+                            return {
+                                tableName: lowerSnakeString(name).toUpperCase(),
+                                columns: Object.keys(model.properties).map(function (key) {
+                                    var property = model.properties[key];
+                                    return {
+                                        columnName: lowerSnakeString(key),
+                                        defaultValue: property['default'],
+                                        get columnLength() {
+                                            return columnLength(property.length, this.columnType);
+                                        },
+                                        get columnType() {
+                                            return columnType(String(property.type));
+                                        }
+                                    }
+                                }),
+                                unique: [].concat(model.unique || []).map(function (unique) {
+                                    return [].concat(unique).join(', ');
+                                }),
+                                indices: (model.indices || []).map(function (index) {
+                                    return {
+                                        indexName: [lowerSnakeString(index), 'index'].join('_'),
+                                        colName: [lowerSnakeString(index)]
+                                    }
+                                }),
+                                foreign: Object.keys(model.foreign || {}).map(function (key) {
+                                    var val = model.foreign[key].split(/\./);
+                                    return {
+                                        colName: key,
+                                        ref: {
+                                            table: lowerSnakeString(val[0]).toUpperCase(),
+                                            colName: val[1]
+                                        }
+                                    }
+                                })
+                            }
+                        })
+                }
+            })
+        }
+    }
+};

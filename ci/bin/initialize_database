@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+"use strict";
+
+/**
+ * Initialize database.
+ * @type {exports}
+ */
+
+var h = require('../_helper'),
+    async = h.async,
+    tasks = h.tasks,
+    configs = require('../configs');
+
+process.chdir(h.basedir);
+
+async.eachSeries([
+    {
+        config: configs.forkConfig.initializeDatabase,
+        task: tasks.ForkTask
+    }
+], function (data, callback) {
+    new (data.task)(data.config).run(callback);
+}, h.done('InitializeDatabase done!'));

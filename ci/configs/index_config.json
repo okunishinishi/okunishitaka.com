@@ -1,59 +1,5 @@
 [
   {
-    "dirname": "app/codes",
-    "doc": {
-      "file": "Codes.",
-      "module": "okunishitaka-dot-com/app/codes"
-    }
-  },
-  {
-    "dirname": "app/locales",
-    "doc": {
-      "file": "Locales.",
-      "module": "okunishitaka-dot-com/app/locales"
-    }
-  },
-  {
-    "dirname": "app/logics",
-    "doc": {
-      "file": "Logics.",
-      "module": "okunishitaka-dot-com/app/logics"
-    }
-  },
-  {
-    "dirname": "app/middlewares",
-    "doc": {
-      "file": "Middleware functions.",
-      "module": "okunishitaka-dot-com/app/middlewares"
-    }
-  },
-  {
-    "dirname": "app/routes",
-    "doc": {
-      "file": "App routes.",
-      "module": "okunishitaka-dot-com/app/routes"
-    },
-    "descProperties": true
-  },
-  {
-    "dirname": "app/routes/handlers",
-    "doc": {
-      "file": "App handlers",
-      "module": "okunishitaka-dot-com/app/routes/handlers"
-    },
-    "descProperties": true,
-    "pascalPattern": "*_handler"
-  },
-  {
-    "dirname": "app/routes/handlers/rest",
-    "doc": {
-      "file": "App rest handlers",
-      "module": "okunishitaka-dot-com/app/routes/handlers/rest"
-    },
-    "descProperties": true,
-    "pascalPattern": "*_handler"
-  },
-  {
     "dirname": "ci/configs",
     "doc": {
       "file": "CI configuration.",
@@ -67,11 +13,5 @@
       "module": "okunishitaka-dot-com/ci/tasks"
     },
     "pascalPattern": "*task"
-  },
-  {
-    "dirname": "test/data",
-    "doc": {
-      "file": "test data modules."
-    }
   }
 ]

@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+/**
+ * Watch project to concat.
+ */
+
+
+"use strict";
+
+var h = require('../_helper'),
+    async = h.async,
+    tasks = h.tasks,
+    configs = require('../configs');
+
+process.chdir(h.basedir);
+
+var task = new tasks.BudTask(configs.budConfig);
+[].concat(configs.budConfig).forEach(function (config) {
+    var filenames = config.pattern;
+    console.log('Watch files:', filenames);
+    h.watchAndRun(filenames, task);
+});

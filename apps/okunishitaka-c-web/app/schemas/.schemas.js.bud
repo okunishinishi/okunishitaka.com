@@ -1,0 +1,33 @@
+/**
+ * Bud file for schema.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    string = u.string,
+    fs = u.core.fs,
+    path = u.core.path,
+    filtering = u.filtering,
+    mapping = u.mapping;
+
+module.exports = {
+    mode: '444',
+    force: true,
+    data: {
+        module: 'okunishitaka-c-web/app/schemas',
+        schemas: fs.readdirSync(__dirname)
+            .filter(filtering.patternAcceptFilter(/\.schema\.js$/))
+            .filter(filtering.patternRejectFilter(/^\./))
+            .filter(filtering.patternRejectFilter(/^index\.js$/))
+            .filter(filtering.patternRejectFilter(/^_/))
+            .map(mapping.pathResolveMap(__dirname))
+            .map(function (filename) {
+                var name = path.basename(filename, '.js');
+                return {
+                    exportsName: string.camelString(name),
+                    requireName: path.basename(filename)
+                }
+            })
+    }
+};

@@ -1,3 +1,7 @@
 {
-    "pattern": "+(app|ci|doc|public|test)/**/.*.bud"
+  "pattern":[
+    "+(ci|doc)/**/.*.bud",
+    "+(ci|doc)/**/..bud"
+  ]
+
 }
