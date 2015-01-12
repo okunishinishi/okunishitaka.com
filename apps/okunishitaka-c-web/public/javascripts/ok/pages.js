@@ -42,7 +42,7 @@
         .directive('okIndexSeeMore', function (partialUrlConstant) {
             return {
                 scope: {
-                    href: '=okSeeMore'
+                    href: '=okIndexSeeMore'
                 },
                 link: function (scope, elm, attr) {
                     $(elm).addClass('see-more-button-container');

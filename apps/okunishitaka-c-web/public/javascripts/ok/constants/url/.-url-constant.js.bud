@@ -77,7 +77,7 @@ function endpointData(endpoints) {
 module.exports = [
     constantBud('partialUrl', fileUrlData('html/partials', '**/*.html')),
     constantBud('pageUrl', fileUrlData('', '*.html')),
-    constantBud('imageUrl', fileUrlData('images', '*/*.+(jpg|jpeg|gif|png)')),
+    constantBud('imageUrl', fileUrlData('images', '**/*.+(jpg|jpeg|gif|png)')),
     constantBud('zipUrl', fileUrlData('zips', '*/*.zip')),
     constantBud('jsonUrl', fileUrlData('json', '**/*.json')),
     constantBud('linkUrl', require('./.links.data')),

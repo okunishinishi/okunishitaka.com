@@ -1,0 +1,15 @@
+<!-- Header HTML -->
+<header>
+
+    <div class="container">
+        <nav class="header-nav">
+            <a class="header-nav-item nav-item theme-font" ng:class="{'nav-item-selected':page=='profile'}"
+               ng:href="{{pages.PROFILE}}">{{l.pageNames.PROFILE}}</a>
+            <a class="header-nav-item nav-item theme-font" ng:class="{'nav-item-selected':page=='blog'}"
+               ng:href="{{pages.BLOG}}">{{l.pageNames.BLOG}}</a>
+            <a class="header-nav-item nav-item theme-font" ng:class="{'nav-item-selected':page=='work'}"
+               ng:href="{{pages.WORK}}">{{l.pageNames.WORK}}</a>
+        </nav>
+        <h1 class="header-logo" ng:click="changeToTopPage();">{{l.meta.NAME}}</h1>
+    </div>
+</header>

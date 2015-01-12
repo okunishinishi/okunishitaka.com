@@ -5,10 +5,10 @@
 <html ng:app="ok.profilePage">
 <head ng:attr-lang="{{lang}}" ng:controller="HeadCtrl">
 
-    <meta ok:replace="partials.META" />
+    <meta ok:replace="partials.META"/>
 
     <title ok:replace="partials.TITLE"></title>
-    <link ok:replace="partials.FAVICON" />
+    <link ok:replace="partials.FAVICON"/>
 
     <link rel="stylesheet" href="/stylesheets/lib.css"/>
     <link rel="stylesheet" href="/stylesheets/base.css"/>
@@ -18,18 +18,20 @@
 </head>
 <body ng:cloak ng:controller="BodyCtrl">
 <div ng:controller="ProfileCtrl">
-    <header kt:replace="partials.HEADER"></header>
-    <aside kt:replace="partials.ASIDE"></aside>
+    <header ok:replace="partials.HEADER"></header>
+    <aside ok:replace="partials.ASIDE"></aside>
     <main>
         <div class="container">
             <div ng:include="partials.TOAST"></div>
         </div>
         <div class="container">
-
+            <section id="my-img-section">
+                <img id="my-img" ng:src="{{images.ME}}">
+            </section>
         </div>
     </main>
 
-    <footer kg:replace="partials.FOOTER"></footer>
+    <footer ok:replace="partials.FOOTER"></footer>
 </div>
 </body>
 </html>

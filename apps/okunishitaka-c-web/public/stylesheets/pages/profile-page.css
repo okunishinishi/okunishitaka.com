@@ -1,1 +1,16 @@
 /** Style for profile page. **/
+
+main {
+    min-height: 300px;
+}
+
+#my-img-section {
+    display: inline-block;
+    float: left;
+    padding: 20px 10px;
+}
+
+#my-img {
+    width: 160px;
+    height: 160px;
+}

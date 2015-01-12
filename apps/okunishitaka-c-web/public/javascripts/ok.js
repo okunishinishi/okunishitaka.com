@@ -220,12 +220,20 @@
     ng
         .module('ok.constants')
         .constant('imageUrlConstant', {
+		    "ME": "/images/me.jpg",
+		    "OKUNISHITAKA": "/images/okunishitaka.com-favicon.png",
 		    "QUALIFICATION_0159": "/images/qualification/qualification_0159.jpg",
+		    "QUALIFICATION_0159_FULL": "/images/qualification/full/qualification_0159_full.jpg",
 		    "QUALIFICATION_0160": "/images/qualification/qualification_0160.jpg",
+		    "QUALIFICATION_0160_FULL": "/images/qualification/full/qualification_0160_full.jpg",
 		    "QUALIFICATION_0161": "/images/qualification/qualification_0161.jpg",
+		    "QUALIFICATION_0161_FULL": "/images/qualification/full/qualification_0161_full.jpg",
 		    "QUALIFICATION_0162": "/images/qualification/qualification_0162.jpg",
+		    "QUALIFICATION_0162_FULL": "/images/qualification/full/qualification_0162_full.jpg",
 		    "QUALIFICATION_0163": "/images/qualification/qualification_0163.jpg",
+		    "QUALIFICATION_0163_FULL": "/images/qualification/full/qualification_0163_full.jpg",
 		    "QUALIFICATION_0164": "/images/qualification/qualification_0164.jpg",
+		    "QUALIFICATION_0164_FULL": "/images/qualification/full/qualification_0164_full.jpg",
 		    "WORKS_CHESS_THUMBNAIL": "/images/works/works-chess-thumbnail.png",
 		    "WORKS_CSS_GALLERY_THUMBNAIL": "/images/works/works-css-gallery-thumbnail.png",
 		    "WORKS_DOC_GALLERY_THUMBNAIL": "/images/works/works-doc-gallery-thumbnail.png",
@@ -339,11 +347,14 @@
 		    "COVER": "/html/partials/cover.html",
 		    "FAVICON": "/html/partials/favicon.html",
 		    "FOOTER": "/html/partials/footer.html",
+		    "HEADER": "/html/partials/header.html",
 		    "INDEX_CAPTION_SECTION": "/html/partials/index/index-caption-section.html",
 		    "INDEX_CONTENT_TITLE": "/html/partials/index/index-content-title.html",
 		    "INDEX_SEE_MORE_BUTTON": "/html/partials/index/index-see-more-button.html",
 		    "INDEX_TITLE_SECTION": "/html/partials/index/index-title-section.html",
 		    "META": "/html/partials/meta.html",
+		    "PROFILE_LIST": "/html/partials/profile/profile-list.html",
+		    "PROFILE_TABLE": "/html/partials/profile/profile-table.html",
 		    "SOCIAL": "/html/partials/social.html",
 		    "TITLE": "/html/partials/title.html",
 		    "TOAST": "/html/partials/toast.html",
@@ -1047,6 +1058,35 @@
             };
         });
 })(angular);
+/**
+ * @ngdoc filter
+ * @filter textLinkFilter
+ * @description Text link filter
+ */
+
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.filters')
+        .filter('textLinkFilter', function defineTextLinkFilter(linkUrlConstant, imageUrlConstant) {
+            return function textLinkFilter(text, links) {
+                var html = String(text);
+                Object.keys(links || {}).forEach(function (key) {
+                    html = html.replace(new RegExp(key, 'g'), function (text) {
+                        var name = links[key],
+                            href = linkUrlConstant[name] || imageUrlConstant[name];
+                        if (href) {
+                            return '<a href="' + href + '">' + text + '</a>';
+                        } else {
+                            return text;
+                        }
+                    });
+                });
+                return html;
+            };
+        });
+})(angular);
 
 /**
  * @ngdoc module
@@ -1177,11 +1217,14 @@
                 get coverHtmlTemplate() { return $injector.get('coverHtmlTemplate'); },
                 get faviconHtmlTemplate() { return $injector.get('faviconHtmlTemplate'); },
                 get footerHtmlTemplate() { return $injector.get('footerHtmlTemplate'); },
+                get headerHtmlTemplate() { return $injector.get('headerHtmlTemplate'); },
                 get indexIndexCaptionSectionHtmlTemplate() { return $injector.get('indexIndexCaptionSectionHtmlTemplate'); },
                 get indexIndexContentTitleHtmlTemplate() { return $injector.get('indexIndexContentTitleHtmlTemplate'); },
                 get indexIndexSeeMoreButtonHtmlTemplate() { return $injector.get('indexIndexSeeMoreButtonHtmlTemplate'); },
                 get indexIndexTitleSectionHtmlTemplate() { return $injector.get('indexIndexTitleSectionHtmlTemplate'); },
                 get metaHtmlTemplate() { return $injector.get('metaHtmlTemplate'); },
+                get profileProfileListHtmlTemplate() { return $injector.get('profileProfileListHtmlTemplate'); },
+                get profileProfileTableHtmlTemplate() { return $injector.get('profileProfileTableHtmlTemplate'); },
                 get socialHtmlTemplate() { return $injector.get('socialHtmlTemplate'); },
                 get titleHtmlTemplate() { return $injector.get('titleHtmlTemplate'); },
                 get toastHtmlTemplate() { return $injector.get('toastHtmlTemplate'); },
@@ -1253,7 +1296,7 @@
         .directive('okIndexSeeMore', function (partialUrlConstant) {
             return {
                 scope: {
-                    href: '=okSeeMore'
+                    href: '=okIndexSeeMore'
                 },
                 link: function (scope, elm, attr) {
                     $(elm).addClass('see-more-button-container');
@@ -2146,6 +2189,22 @@
 })(angular);
 /**
  * @ngdoc object
+ * @name headerHtmlTemplate
+ * @description Template for headerHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('headerHtmlTemplate', {
+		    "name": "/html/partials/header.html",
+		    "content": "<!-- Header HTML -->\n<header>\n\n    <div class=\"container\">\n        <nav class=\"header-nav\">\n            <a class=\"header-nav-item nav-item theme-font\" ng:class=\"{'nav-item-selected':page=='profile'}\"\n               ng:href=\"{{pages.PROFILE}}\">{{l.pageNames.PROFILE}}</a>\n            <a class=\"header-nav-item nav-item theme-font\" ng:class=\"{'nav-item-selected':page=='blog'}\"\n               ng:href=\"{{pages.BLOG}}\">{{l.pageNames.BLOG}}</a>\n            <a class=\"header-nav-item nav-item theme-font\" ng:class=\"{'nav-item-selected':page=='work'}\"\n               ng:href=\"{{pages.WORK}}\">{{l.pageNames.WORK}}</a>\n        </nav>\n        <h1 class=\"header-logo\" ng:click=\"changeToTopPage();\">{{l.meta.NAME}}</h1>\n    </div>\n</header>\n"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
  * @name indexIndexCaptionSectionHtmlTemplate
  * @description Template for indexIndexCaptionSectionHtml
  */
@@ -2221,6 +2280,38 @@
         .value('metaHtmlTemplate', {
 		    "name": "/html/partials/meta.html",
 		    "content": "<!-- Meta HTML -->\n<meta ng:attr-charset=\"UTF-8\">\n<meta name=\"fragment\" content=\"!\">\n<meta name=\"application-name\" content=\"{{l.meta.NAME}}\"/>\n<meta name=\"description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"generator\" content=\"apeman\"/>\n<meta name=\"author\" content=\"{{l.meta.AUTHOR}}\"/>\n<meta name=\"viewport\" content=\"width=device-width, user-scalable=no\"/>\n\n<!-- Open graph tags -->\n<meta property=\"og:title\" content=\"{{page | pageTitleFilter:l}}\"/>\n<meta property=\"og:type\" content=\"website\"/>\n<meta property=\"og:image\" content=\"\"/> <!-- FIXME -->\n<meta property=\"og:url\" content=\"{{app.HOMEPAGE}}\"/>\n<meta property=\"og:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n\n\n<!-- Twitter tags -->\n<meta name=\"twitter:card\" content=\"summary\">\n<meta name=\"twitter:title\" content=\"{{page | pageTitleFilter:l}}\">\n<meta name=\"twitter:description\" content=\"{{l.meta.DESCRIPTION}}\"/>\n<meta name=\"twitter:image\" content=\"\"/> <!-- FIXME -->\n"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
+ * @name profileProfileListHtmlTemplate
+ * @description Template for profileProfileListHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('profileProfileListHtmlTemplate', {
+		    "name": "/html/partials/profile/profile-list.html",
+		    "content": "<h3 class=\"caption\">{{caption}}</h3>\n<ul id=\"{{id}}\" ng:class=\"{'no-border-list':data.plain}\">\n    <li ng:repeat=\"line in data.lines\"\n        ng:bind-html=\"line | textLinkFilter:data.links\"></li>\n</ul>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
+ * @name profileProfileTableHtmlTemplate
+ * @description Template for profileProfileTableHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('profileProfileTableHtmlTemplate', {
+		    "name": "/html/partials/profile/profile-table.html",
+		    "content": "<table id=\"{{id}}\" class=\"profile-table\">\n    <caption>{{caption}}</caption>\n    <thead>\n    <tr ng:if=\"!!data.head\">\n        <th ng:repeat=\"head in data.head\">{{head}}</th>\n    </tr>\n    </thead>\n    <tbody>\n    <tr ng:repeat=\"row in data.body\" ng:init=\"headed=!!data.headedBody\">\n        <th ng:repeat=\"cell in row\" ng:if=\"(headed && $first)\"\n            ng:bind-html=\"cell | textLinkFilter:data.links\"></th>\n        <td ng:repeat=\"cell in row\" ng:if=\"!(headed && $first)\">\n            <span ng:hide=\"cell.image\"\n                  ng:bind-html=\"cell | textLinkFilter:data.links\"></span>\n            <span ng:show=\"cell.image\"><a href=\"{{images[cell.image]}}\" target=\"_blank\">{{cell.title}}</a></span>\n        </td>\n    </tr>\n    </tbody>\n</table>"
 		});
 
 })(angular);
