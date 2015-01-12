@@ -109,10 +109,27 @@
 		            "WORK": "Works"
 		        },
 		        "labels": {},
+		        "placeholders": {
+		            "blog": {
+		                "TITLE": "タイトル",
+		                "CONTENT": "コンテンツ",
+		                "TAGS": "タグ (カンマ区切り)"
+		            }
+		        },
 		        "buttons": {
-		            "MORE": "もっと読み込む"
+		            "MORE": "もっと読み込む",
+		            "EDIT": "編集",
+		            "DESTROY": "削除",
+		            "SAVE": "保存",
+		            "CANCEL": "キャンセル"
+		        },
+		        "messages": {
+		            "SURE_TO_DESTROY": "削除してよろしいですか？"
 		        },
 		        "pages": {
+		            "admin": {
+		                "TITLE": "admin.okunishitaka.com"
+		            },
 		            "index": {
 		                "CAPTION": [
 		                    "Homepage of Taka Okunishi"
@@ -336,6 +353,7 @@
     ng
         .module('ok.constants')
         .constant('pageUrlConstant', {
+		    "ADMIN": "/admin.html",
 		    "BLOG": "/blog.html",
 		    "INDEX": "/index.html",
 		    "PROFILE": "/profile.html",
@@ -355,6 +373,9 @@
     ng
         .module('ok.constants')
         .constant('partialUrlConstant', {
+		    "ADMIN_BLOG_EDIT_SECTION": "/html/partials/admin/admin-blog-edit-section.html",
+		    "ADMIN_BLOG_LIST_SECTION": "/html/partials/admin/admin-blog-list-section.html",
+		    "ADMIN_HEADER": "/html/partials/admin/admin-header.html",
 		    "BLOG_DETAIL_SECTION": "/html/partials/blog/blog-detail-section.html",
 		    "BLOG_LIST_SECTION": "/html/partials/blog/blog-list-section.html",
 		    "COVER": "/html/partials/cover.html",
@@ -405,7 +426,8 @@
         .constant('viewConstant', {
 		    "profile.LIST": "partialUrlConstant.PROFILE_PROFILE_LIST_VIEW",
 		    "blog.LIST": "partialUrlConstant.BLOG_BLOG_LIST_VIEW",
-		    "work.LIST": "partialUrlConstant.WORK_WORK_LIST_VIEW"
+		    "work.LIST": "partialUrlConstant.WORK_WORK_LIST_VIEW",
+		    "admin.BLOG": "partialUrlConstant.ADMIN_ADMIN_BLOG_VIEW"
 		});
 
 })(angular);

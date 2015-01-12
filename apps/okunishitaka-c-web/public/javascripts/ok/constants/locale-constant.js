@@ -23,10 +23,27 @@
 		            "WORK": "Works"
 		        },
 		        "labels": {},
+		        "placeholders": {
+		            "blog": {
+		                "TITLE": "タイトル",
+		                "CONTENT": "コンテンツ",
+		                "TAGS": "タグ (カンマ区切り)"
+		            }
+		        },
 		        "buttons": {
-		            "MORE": "もっと読み込む"
+		            "MORE": "もっと読み込む",
+		            "EDIT": "編集",
+		            "DESTROY": "削除",
+		            "SAVE": "保存",
+		            "CANCEL": "キャンセル"
+		        },
+		        "messages": {
+		            "SURE_TO_DESTROY": "削除してよろしいですか？"
 		        },
 		        "pages": {
+		            "admin": {
+		                "TITLE": "admin.okunishitaka.com"
+		            },
 		            "index": {
 		                "CAPTION": [
 		                    "Homepage of Taka Okunishi"

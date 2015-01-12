@@ -8,5 +8,8 @@
   ],
   "work": [
     "work.LIST"
+  ],
+  "admin": [
+    "admin.BLOG"
   ]
 }

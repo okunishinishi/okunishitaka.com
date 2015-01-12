@@ -1,0 +1,27 @@
+<section id="admin-blog-list-section" ng:controller="AdminBlogListCtrl">
+    <dl id="admin-blog-list" class="cover-container">
+        <div ok:cover ok:cover-visible="loading"></div>
+        <dt ng:repeat-start="b in blogs">
+            <span class="blog-list-action-area">
+                <a ok:button ok:button-type="'link'" ng:click="edit(b)"><i
+                        class="fa fa-pencil"></i>{{l.buttons.EDIT}}</a>
+                <a ok:button ok:button-type="'link'" ng:click="destroy(b)"><i class="fa fa-trash-o"></i>{{l.buttons.DESTROY}}</a>
+            </span>
+            <span name="blog-{{b._id}}">
+                {{b.blog_title}}
+            </span>
+            <span class="blog-date-label">{{b._at | dateFormatFilter}}</span>
+            <span class="display-block">
+                <span ok:tag ok:title="t" ng:repeat="t in (b.tag_texts) track by $index"></span>
+            </span>
+        </dt>
+        <dd ng:repeat-end=""
+            ng:bind-html="b.blog_content | markdownRenderFilter | htmlTextFilter | textEllipsisFilter:CONTENT_MAX_LENGTH"></dd>
+    </dl>
+    <a id="admin-blog-more-button"
+       class="list-more-button"
+       ok:button
+       ng:show="hasMore && !loading"
+       ng:click="loadMore()"
+            >{{l.buttons.MORE}}</a>
+</section>

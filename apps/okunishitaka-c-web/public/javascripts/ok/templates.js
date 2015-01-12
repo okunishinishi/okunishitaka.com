@@ -13,6 +13,54 @@
 
 /**
  * @ngdoc object
+ * @name adminAdminBlogEditSectionHtmlTemplate
+ * @description Template for adminAdminBlogEditSectionHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('adminAdminBlogEditSectionHtmlTemplate', {
+		    "name": "/html/partials/admin/admin-blog-edit-section.html",
+		    "content": "<section id=\"admin-blog-editor-section\"\n         ng:show=\"!!blog\"\n         ng:controller=\"AdminBlogEditCtrl\" class=\"cover\">\n    <div id=\"admin-blog-editor-section-content\"\n         class=\"container position-relative\">\n\n        <a ng:click=\"close()\" id=\"admin-blog-close-button\" class=\"close-button\">{{l.buttons.CLOSE}}</a>\n\n        <div class=\"grid-row\">\n            <div class=\"grid-col\">\n                <fieldset class=\"no-style-fieldset\">\n                    <div class=\"field\">\n                        <input type=\"text\" id=\"blog-title-input\"\n                               placeholder=\"{{l.placeholders.blog.TITLE}}\"\n                               ng:model=\"blog.title\"\n                               class=\"wide-input\">\n                    </div>\n                    <div class=\"field\">\n                        <input type=\"text\" id=\"blog-tags-input\"\n                               placeholder=\"{{l.placeholders.blog.TAGS}}\"\n                               ng:model=\"blog.tagText\"\n                               class=\"wide-input\"/>\n                    </div>\n                    <div class=\"field\">\n                        <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n                                  placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n                                  class=\"wide-textarea\" cols=\"20\" rows=\"10\"\n                                  ng:model=\"blog.content\"\n                                ></textarea>\n                    </div>\n                    <div class=\"field\">\n                        <div class=\"text-align-center\">\n                            <a id=\"blog-cancel-button\"\n                               ok:button\n                               ng:click=\"close()\">{{l.buttons.CANCEL}}</a>\n                            <a id=\"blog-save-button\"\n                               ok:button\n                               ok:button-type=\"'primary'\"\n                               ng:click=\"save(blog)\">{{l.buttons.SAVE}}</a>\n                        </div>\n                    </div>\n                </fieldset>\n            </div>\n            <div class=\"grid-col\">\n                <fieldset>\n                    <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>\n                    <div id=\"admin-blog-preview-div\">\n                        <h2>{{blog.title}}</h2>\n\n                        <div>\n                            <!--<span ok:tag ok:title=\"t\" ng:repeat=\"t in (blog.tagTexts | textSplitFilter:',')\"></span>-->\n                        </div>\n                        <div ng:bind-html=\"blog.content | markdownRenderFilter\"></div>\n                    </div>\n                </fieldset>\n                <div class=\"grid-col\">\n                    <br class=\"clear\"/>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
+ * @name adminAdminBlogListSectionHtmlTemplate
+ * @description Template for adminAdminBlogListSectionHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('adminAdminBlogListSectionHtmlTemplate', {
+		    "name": "/html/partials/admin/admin-blog-list-section.html",
+		    "content": "<section id=\"admin-blog-list-section\" ng:controller=\"AdminBlogListCtrl\">\n    <dl id=\"admin-blog-list\" class=\"cover-container\">\n        <div ok:cover ok:cover-visible=\"loading\"></div>\n        <dt ng:repeat-start=\"b in blogs\">\n            <span class=\"blog-list-action-area\">\n                <a ok:button ok:button-type=\"'link'\" ng:click=\"edit(b)\"><i\n                        class=\"fa fa-pencil\"></i>{{l.buttons.EDIT}}</a>\n                <a ok:button ok:button-type=\"'link'\" ng:click=\"destroy(b)\"><i class=\"fa fa-trash-o\"></i>{{l.buttons.DESTROY}}</a>\n            </span>\n            <span name=\"blog-{{b._id}}\">\n                {{b.blog_title}}\n            </span>\n            <span class=\"blog-date-label\">{{b._at | dateFormatFilter}}</span>\n            <span class=\"display-block\">\n                <span ok:tag ok:title=\"t\" ng:repeat=\"t in (b.tag_texts) track by $index\"></span>\n            </span>\n        </dt>\n        <dd ng:repeat-end=\"\"\n            ng:bind-html=\"b.blog_content | markdownRenderFilter | htmlTextFilter | textEllipsisFilter:CONTENT_MAX_LENGTH\"></dd>\n    </dl>\n    <a id=\"admin-blog-more-button\"\n       class=\"list-more-button\"\n       ok:button\n       ng:show=\"hasMore && !loading\"\n       ng:click=\"loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</section>"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
+ * @name adminAdminHeaderHtmlTemplate
+ * @description Template for adminAdminHeaderHtml
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.templates')
+        .value('adminAdminHeaderHtmlTemplate', {
+		    "name": "/html/partials/admin/admin-header.html",
+		    "content": "<!-- Header HTML -->\n<header>\n\n    <div class=\"container\">\n        <nav class=\"header-nav\">\n        </nav>\n        <h1 class=\"header-logo\" ng:click=\"changeToTopPage();\">{{l.pages.admin.TITLE}}</h1>\n    </div>\n</header>\n"
+		});
+
+})(angular);
+/**
+ * @ngdoc object
  * @name blogBlogDetailSectionHtmlTemplate
  * @description Template for blogBlogDetailSectionHtml
  */
@@ -23,7 +71,7 @@
         .module('ok.templates')
         .value('blogBlogDetailSectionHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-detail-section.html",
-		    "content": "<section id=\"blog-detail-section\" ng:controller=\"BlogDetailCtrl\" ng:show=\"!!blogId\">\n    <div ok:cover ok:cover-visible=\"loading\"></div>\n    <div ng:if=\"!!blog\" id=\"blog-detail-section-inner\">\n\n        <h1>{{blog.blog_title}}</h1>\n\n        <div class=\"section-content\">\n            <div ng:bind-html=\"blog.blog_content | markdownRenderFilter\"></div>\n        </div>\n    </div>\n</section>"
+		    "content": "<section id=\"blog-detail-section\" ng:controller=\"BlogDetailCtrl\" ng:show=\"!!blogId\">\n    <div ok:cover ok:cover-visible=\"loading\"></div>\n    <div ng:if=\"!!blog && !loading\" id=\"blog-detail-section-inner\">\n        <div class=\"container\">\n\n\n            <h1>{{blog.blog_title}}</h1>\n\n            <div class=\"section-content\">\n                <div ng:bind-html=\"blog.blog_content | markdownRenderFilter\"></div>\n            </div>\n        </div>\n    </div>\n</section>"
 		});
 
 })(angular);

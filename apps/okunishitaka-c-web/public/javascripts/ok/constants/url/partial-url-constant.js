@@ -8,6 +8,9 @@
     ng
         .module('ok.constants')
         .constant('partialUrlConstant', {
+		    "ADMIN_BLOG_EDIT_SECTION": "/html/partials/admin/admin-blog-edit-section.html",
+		    "ADMIN_BLOG_LIST_SECTION": "/html/partials/admin/admin-blog-list-section.html",
+		    "ADMIN_HEADER": "/html/partials/admin/admin-header.html",
 		    "BLOG_DETAIL_SECTION": "/html/partials/blog/blog-detail-section.html",
 		    "BLOG_LIST_SECTION": "/html/partials/blog/blog-list-section.html",
 		    "COVER": "/html/partials/cover.html",

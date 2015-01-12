@@ -32,11 +32,30 @@ l.pageNames = {
 };
 l.labels = {};
 
+l.placeholders = {
+    blog: {
+        TITLE: 'タイトル',
+        CONTENT: 'コンテンツ',
+        TAGS: 'タグ (カンマ区切り)'
+    }
+};
+
 l.buttons = {
-    MORE: 'もっと読み込む'
+    MORE: 'もっと読み込む',
+    EDIT: '編集',
+    DESTROY: '削除',
+    SAVE: '保存',
+    CANCEL: 'キャンセル'
+};
+l.messages = {
+    SURE_TO_DESTROY: '削除してよろしいですか？'
 };
 
 l.pages = {
+    admin: {
+        TITLE: "admin.okunishitaka.com"
+    }
+    ,
     index: {
         CAPTION: [
             'Homepage of ' + pkg.author

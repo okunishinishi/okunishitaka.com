@@ -129,6 +129,9 @@
         .module('ok.indices')
         .factory('templatesIndex', function defineTemplatesIndex($injector) {
             return {
+                get adminAdminBlogEditSectionHtmlTemplate() { return $injector.get('adminAdminBlogEditSectionHtmlTemplate'); },
+                get adminAdminBlogListSectionHtmlTemplate() { return $injector.get('adminAdminBlogListSectionHtmlTemplate'); },
+                get adminAdminHeaderHtmlTemplate() { return $injector.get('adminAdminHeaderHtmlTemplate'); },
                 get blogBlogDetailSectionHtmlTemplate() { return $injector.get('blogBlogDetailSectionHtmlTemplate'); },
                 get blogBlogListSectionHtmlTemplate() { return $injector.get('blogBlogListSectionHtmlTemplate'); },
                 get coverHtmlTemplate() { return $injector.get('coverHtmlTemplate'); },

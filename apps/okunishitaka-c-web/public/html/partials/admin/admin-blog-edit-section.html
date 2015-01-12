@@ -1,0 +1,62 @@
+<section id="admin-blog-editor-section"
+         ng:show="!!blog"
+         ng:controller="AdminBlogEditCtrl" class="cover">
+    <div id="admin-blog-editor-section-content"
+         class="container position-relative">
+
+        <a ng:click="close()" id="admin-blog-close-button" class="close-button">{{l.buttons.CLOSE}}</a>
+
+        <div class="grid-row">
+            <div class="grid-col">
+                <fieldset class="no-style-fieldset">
+                    <div class="field">
+                        <input type="text" id="blog-title-input"
+                               placeholder="{{l.placeholders.blog.TITLE}}"
+                               ng:model="blog.title"
+                               class="wide-input">
+                    </div>
+                    <div class="field">
+                        <input type="text" id="blog-tags-input"
+                               placeholder="{{l.placeholders.blog.TAGS}}"
+                               ng:model="blog.tagText"
+                               class="wide-input"/>
+                    </div>
+                    <div class="field">
+                        <textarea name="blog-text" id="blog-text-textarea"
+                                  placeholder="{{l.placeholders.blog.CONTENT}}"
+                                  class="wide-textarea" cols="20" rows="10"
+                                  ng:model="blog.content"
+                                ></textarea>
+                    </div>
+                    <div class="field">
+                        <div class="text-align-center">
+                            <a id="blog-cancel-button"
+                               ok:button
+                               ng:click="close()">{{l.buttons.CANCEL}}</a>
+                            <a id="blog-save-button"
+                               ok:button
+                               ok:button-type="'primary'"
+                               ng:click="save(blog)">{{l.buttons.SAVE}}</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="grid-col">
+                <fieldset>
+                    <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>
+                    <div id="admin-blog-preview-div">
+                        <h2>{{blog.title}}</h2>
+
+                        <div>
+                            <!--<span ok:tag ok:title="t" ng:repeat="t in (blog.tagTexts | textSplitFilter:',')"></span>-->
+                        </div>
+                        <div ng:bind-html="blog.content | markdownRenderFilter"></div>
+                    </div>
+                </fieldset>
+                <div class="grid-col">
+                    <br class="clear"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

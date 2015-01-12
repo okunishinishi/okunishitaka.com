@@ -1,0 +1,15 @@
+
+fieldset {
+    border: 1px groove #AAA;
+    margin: 4px 8px;
+}
+
+.no-style-fieldset {
+    border: none;
+    padding: 0;
+}
+
+.field {
+    display: block;
+    padding: 4px 0;
+}
