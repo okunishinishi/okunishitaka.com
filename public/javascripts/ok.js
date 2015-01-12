@@ -85,7 +85,7 @@
 		            "blog": {
 		                "TITLE": "Title",
 		                "CONTENT": "Content ",
-		                "TAGS": "Tags (comman-seperated)"
+		                "TAGS": "Tags (comma-separated)"
 		            }
 		        },
 		        "labels": {
@@ -123,18 +123,18 @@
 		            "VISIT_SITE": "Visit the site"
 		        },
 		        "errors": {
-		            "CONFLICT_ERROR": "Conflict occured.",
-		            "CONNECTION_ERROR": "Connection error occured.",
+		            "CONFLICT_ERROR": "Conflict occurred.",
+		            "CONNECTION_ERROR": "Connection error occurred.",
 		            "NOT_FOUND_ERROR": "Resource not found.",
-		            "SERVER_ERROR": "Server error occured.",
-		            "UNEXPECTED_ERROR": "Unexpected error occured.",
+		            "SERVER_ERROR": "Server error occurred.",
+		            "UNEXPECTED_ERROR": "Unexpected error occurred.",
 		            "VALIDATION_ERROR": "Invalid input."
 		        },
 		        "errorDescriptions": {
 		            "CONFLICT_ERROR": "It seems that someone else update the resource first. \nPlease reload the page and try again.",
 		            "CONNECTION_ERROR": "Ensure you are connected to the Internet and please try again.",
-		            "NOT_FOUND_ERROR": "Sorry! The requested resource is not availabe anymore.",
-		            "SERVER_ERROR": "Something wrong within our server. Plase try again later.",
+		            "NOT_FOUND_ERROR": "Sorry! The requested resource is not available anymore.",
+		            "SERVER_ERROR": "Something wrong within our server. Please try again later.",
 		            "UNEXPECTED_ERROR": "Something seems to be wrong.",
 		            "VALIDATION_ERROR": ""
 		        },
@@ -149,6 +149,7 @@
 		                "NAME": "name",
 		                "captions": {
 		                    "ABOUT": "About",
+		                    "DREAM": "Dream",
 		                    "BASICS": "Basics",
 		                    "EDUCATION": "Education",
 		                    "JOB_HISTORY": "Job History",
@@ -180,7 +181,7 @@
 		            "blog": {
 		                "TITLE": "Title",
 		                "CONTENT": "Content ",
-		                "TAGS": "Tags (comman-seperated)"
+		                "TAGS": "Tags (comma-separated)"
 		            }
 		        },
 		        "labels": {
@@ -218,18 +219,18 @@
 		            "VISIT_SITE": "Visit the site"
 		        },
 		        "errors": {
-		            "CONFLICT_ERROR": "Conflict occured.",
-		            "CONNECTION_ERROR": "Connection error occured.",
+		            "CONFLICT_ERROR": "Conflict occurred.",
+		            "CONNECTION_ERROR": "Connection error occurred.",
 		            "NOT_FOUND_ERROR": "Resource not found.",
-		            "SERVER_ERROR": "Server error occured.",
-		            "UNEXPECTED_ERROR": "Unexpected error occured.",
+		            "SERVER_ERROR": "Server error occurred.",
+		            "UNEXPECTED_ERROR": "Unexpected error occurred.",
 		            "VALIDATION_ERROR": "Invalid input."
 		        },
 		        "errorDescriptions": {
 		            "CONFLICT_ERROR": "It seems that someone else update the resource first. \nPlease reload the page and try again.",
 		            "CONNECTION_ERROR": "Ensure you are connected to the Internet and please try again.",
-		            "NOT_FOUND_ERROR": "Sorry! The requested resource is not availabe anymore.",
-		            "SERVER_ERROR": "Something wrong within our server. Plase try again later.",
+		            "NOT_FOUND_ERROR": "Sorry! The requested resource is not available anymore.",
+		            "SERVER_ERROR": "Something wrong within our server. Please try again later.",
 		            "UNEXPECTED_ERROR": "Something seems to be wrong.",
 		            "VALIDATION_ERROR": ""
 		        },
@@ -244,6 +245,7 @@
 		                "NAME": "name",
 		                "captions": {
 		                    "ABOUT": "About",
+		                    "DREAM": "Dream",
 		                    "BASICS": "Basics",
 		                    "EDUCATION": "Education",
 		                    "JOB_HISTORY": "Job History",
@@ -2963,7 +2965,7 @@
         .module('ok.templates')
         .value('profileProfileListHtmlTemplate', {
 		    "name": "/html/partials/profile/profile-list.html",
-		    "content": "<h3 class=\"caption\">{{caption}}</h3>\n<ul id=\"{{id}}\">\n    <li ng:repeat=\"line in data.lines\"\n        ng:bind-html=\"line | textLinkFilter:data.links\"></li>\n</ul>"
+		    "content": "<h3 class=\"caption\">{{caption}}</h3>\n<ul id=\"{{id}}\" ng:class=\"{'no-border-list':data.plain}\">\n    <li ng:repeat=\"line in data.lines\"\n        ng:bind-html=\"line | textLinkFilter:data.links\"></li>\n</ul>"
 		});
 
 })(angular);

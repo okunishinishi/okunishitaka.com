@@ -295,6 +295,13 @@ header h1 {
 .header-nav-item.nav-item-selected:after {
     background-color: #F90;
 }
+ul, ol {
+    max-width: 420px;
+}
+
+.no-border-list {
+    list-style: none;
+}
 main {
     min-height: 400px;
 }
