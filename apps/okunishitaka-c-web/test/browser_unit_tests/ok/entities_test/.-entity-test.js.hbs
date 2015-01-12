@@ -1,0 +1,36 @@
+/**
+ * Test for {{name}}
+ * Runs with karma.
+ */
+
+"use strict";
+
+var ng = angular,
+    mock = ng.mock;
+
+describe('{{Name}}Entity', function () {
+    var {{Name}}Entity;
+    beforeEach(function () {
+        mock.module('{{prefix}}.entities');
+        inject(['{{Name}}Entity', function (injected) {
+            {{Name}}Entity = injected;
+        }]);
+    });
+
+    it('Inject the entity.', function () {
+        expect({{Name}}Entity).toBeDefined();
+    });
+
+    it('Create an instance.', function () {
+        var entity = {{Name}}Entity.new({
+            foo: 'bar'
+        });
+        expect(entity).toBeDefined();
+        expect(entity.foo).toEqual('bar');
+    });
+
+    it('Get default values', function(){
+        var defaults = {{Name}}Entity.defaults();
+        expect(defaults).toBeDefined();
+    });
+});

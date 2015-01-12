@@ -1,0 +1,14 @@
+/**
+ * Style for floating.
+ */
+
+.float-left {
+  float: left;
+}
+.float-none {
+  float: none;
+}
+.float-right {
+  float: right;
+}
+

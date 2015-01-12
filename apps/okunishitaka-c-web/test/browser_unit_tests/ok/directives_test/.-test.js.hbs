@@ -1,0 +1,28 @@
+/**
+ * Test for {{name}}
+ * Runs with karma.
+ */
+
+"use strict";
+
+var ng = angular,
+    mock = ng.mock;
+
+describe('{{name}} directive.', function () {
+    var $compile, $rootScope;
+
+    beforeEach(function () {
+        mock.module('{{prefix}}.directives');
+        inject(function (_$compile_, _$rootScope_) {
+            // The injector unwraps the underscores (_) from around the parameter names when matching
+            $compile = _$compile_;
+            $rootScope = _$rootScope_;
+        });
+    });
+
+    it('Render the directive.', function () {
+        var elm = $compile('<div {{attr}}></div>')($rootScope);
+        $rootScope.$digest();
+        expect(elm).toBeDefined();
+    });
+});

@@ -1,0 +1,24 @@
+/**
+* Test for {{name}}
+* Runs with karma.
+*/
+
+"use strict";
+
+var ng = angular,
+mock = ng.mock;
+
+describe('{{name}}Util', function () {
+    var {{name}}Util;
+    beforeEach(function () {
+        mock.module('{{prefix}}.utils');
+        inject(['{{name}}Util', function (injected) {
+            {{name}}Util= injected;
+        }]);
+    });
+
+    it('Inject the util.', function () {
+        expect({{name}}Util).toBeDefined();
+    });
+
+});

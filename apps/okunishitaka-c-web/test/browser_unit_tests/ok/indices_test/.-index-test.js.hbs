@@ -1,0 +1,29 @@
+/**
+ * Test for {{name}}
+ * Runs with karma.
+ */
+
+"use strict";
+
+var ng = angular,
+    mock = ng.mock;
+
+describe('{{name}}Index', function () {
+    var {{name}}Index;
+    beforeEach(function () {
+        mock.module('{{prefix}}.indices');
+        inject(['{{name}}Index', function (injected) {
+            {{name}}Index = injected;
+        }]);
+    });
+
+    it('Inject the index.', function () {
+        expect({{name}}Index).toBeDefined();
+    });
+
+    it('Eval each properties', function () {
+        Object.keys({{name}}Index).forEach(function (key) {
+            expect({{name}}Index[key]).toBeDefined();
+        });
+    });
+});

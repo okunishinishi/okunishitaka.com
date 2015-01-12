@@ -1,0 +1,29 @@
+/**
+ * Test for {{name}}
+ * Runs with karma.
+ */
+
+"use strict";
+
+var ng = angular,
+    mock = ng.mock;
+
+describe('{{Name}}', function () {
+    var {{Name}};
+    beforeEach(function () {
+        mock.module('{{prefix}}.components');
+        inject(['{{Name}}', function (injected) {
+            {{Name}} = injected;
+        }]);
+    });
+
+    it('Inject the component.', function () {
+        expect({{Name}}).toBeDefined();
+    });
+
+    it('Create an instance.', function () {
+        var {{name}} = new {{Name}}({});
+        expect({{name}}).toBeDefined();
+    });
+
+});

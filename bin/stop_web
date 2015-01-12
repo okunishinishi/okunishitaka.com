@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+/**
+ * Start web app.
+ */
+
+"use strict";
+
+var h = require('./_helper');
+h.spawn('apps/okunishitaka-c-web/app/bin/stop');
+

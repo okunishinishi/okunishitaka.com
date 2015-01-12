@@ -1,0 +1,45 @@
+/**
+ * Bud file for models.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    glob = u.ext.glob,
+    path = u.core.path,
+    string = u.string,
+    filtering = u.filtering;
+
+var meta = require('../.meta.json'),
+    data = require('./.indices.json');
+
+module.exports = Object.keys(data).map(function (key) {
+    var dirname = path.resolve(__dirname, '..', string.snakeString(key)),
+        name = key + 'Index';
+    return {
+        mode: '444',
+        force: true,
+        path: [
+            __dirname,
+            (string.paramString(name) + '.js')
+        ].join('/'),
+        data: {
+            module: [meta.prefix, 'indices'].join('.'),
+            description: string.sentenceString(name),
+            name: string.camelString(name),
+            Name: string.pascalString(name),
+            subModules: glob.sync('**/*.js', {
+                cwd: dirname
+            })
+                .filter(filtering.patternRejectFilter(/^_/))
+                .map(function (filename) {
+                    var name = string.camelString(path.basename(filename, '.js'));
+                    var pascal = data[key].pascal;
+                    if (pascal) {
+                        name = string.pascalString(name);
+                    }
+                    return name;
+                })
+        }
+    }
+});

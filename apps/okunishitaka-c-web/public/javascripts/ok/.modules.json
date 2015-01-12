@@ -1,0 +1,44 @@
+{
+  "components": [
+    "ok.services",
+    "ok.utils"
+  ],
+  "constants": [
+  ],
+  "directives": [
+    "ok.constants",
+    "ok.filters",
+    "ok.utils"
+  ],
+  "entities": [
+    "ok.constants",
+    "ok.utils"
+  ],
+  "errors": [],
+  "filters": [
+    "ok.constants",
+    "ok.utils"
+  ],
+  "indices": [
+    "ok.constants",
+    "ok.directives",
+    "ok.entities",
+    "ok.errors",
+    "ok.filters",
+    "ok.services",
+    "ok.templates",
+    "ok.utils"
+  ],
+  "pages": [],
+  "services": [
+    "ap.services",
+    "ok.constants",
+    "ok.entities",
+    "ok.errors",
+    "ok.utils"
+  ],
+  "templates": [],
+  "utils": [
+    "ap.utils"
+  ]
+}

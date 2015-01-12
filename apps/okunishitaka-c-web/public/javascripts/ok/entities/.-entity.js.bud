@@ -1,0 +1,33 @@
+/**
+ * Bud file for models.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    format = u.core.util.format,
+    string = u.string;
+
+var meta = require('../.meta.json'),
+    endpoints = require('../../../../.endpoints.json');
+
+module.exports = Object.keys(endpoints)
+    .filter(function (name) {
+        var endpoint = endpoints[name];
+        return (endpoint.indexOf('one') !== -1 ) || (endpoint.indexOf('list') !== -1);
+    })
+    .map(function (name) {
+        return {
+            mode: '644',
+            force: false,
+            path: format('%s/%s-entity.js',
+                __dirname,
+                string.paramString(name)
+            ),
+            data: {
+                module: [meta.prefix, 'entities'].join('.'),
+                name: string.camelString(name),
+                Name: string.pascalString(name)
+            }
+        }
+    });

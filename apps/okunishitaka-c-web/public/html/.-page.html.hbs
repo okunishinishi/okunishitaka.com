@@ -1,0 +1,36 @@
+{{!
+    Template for page HTML.
+}}<!DOCTYPE html>
+<!--
+    HTML for {{name}} page.
+-->
+<html ng:app="{{prefix}}.{{name}}Page">
+<head ng:attr-lang="{{{lang}}}" ng:controller="HeadCtrl">
+
+    <meta {{prefix}}:replace="partials.META" />
+
+    <title {{prefix}}:replace="partials.TITLE"></title>
+    <link {{prefix}}:replace="partials.FAVICON" />
+
+{{#each stylesheets}}    <link rel="stylesheet" href="/stylesheets/{{this}}"/>
+{{/each}}
+{{#each javascripts}}    <script src="/javascripts/{{this}}"></script>
+{{/each}}
+</head>
+<body ng:cloak ng:controller="BodyCtrl">
+<div ng:controller="{{Name}}Ctrl">
+    <header kt:replace="partials.HEADER"></header>
+    <aside kt:replace="partials.ASIDE"></aside>
+    <main>
+        <div class="container">
+            <div ng:include="partials.TOAST"></div>
+        </div>
+        <div class="container">
+
+        </div>
+    </main>
+
+    <footer kg:replace="partials.FOOTER"></footer>
+</div>
+</body>
+</html>

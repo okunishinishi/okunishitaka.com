@@ -1,0 +1,14 @@
+{{!
+    Template for css.
+}}/**
+ * {{description}}
+ */
+
+{{#each styles}}
+{{#if doc}}/** {{doc}} **/
+{{/if}}{{selector}} {
+{{#each values}}  {{@key}}: {{{this}}};
+{{/each}}
+}
+{{/each}}
+

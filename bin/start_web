@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+/**
+ * Start web app.
+ */
+
+"use strict";
+
+process.env.NODE_ENV = 'development';
+var h = require('./_helper');
+h.spawn('ci/bin/build');
+h.spawn('apps/okunishitaka-c-web/app/bin/start');
+

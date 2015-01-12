@@ -1,0 +1,24 @@
+/**
+ * Bud file for html.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    string = u.string,
+    path = u.core.path,
+    views = require('../../.views.json'),
+    pages = Object.keys(views);
+
+
+module.exports = pages.map(function (page) {
+    return {
+        mode: '644',
+        path: path.join(__dirname, string.paramString(page) + '-page.css'),
+        force: false,
+        data: {
+            name: page,
+            Name: string.pascalString(page)
+        }
+    }
+});

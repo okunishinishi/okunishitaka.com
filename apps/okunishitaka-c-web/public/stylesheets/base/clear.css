@@ -1,0 +1,14 @@
+/**
+ * Style for clearing.
+ */
+
+.clear-left {
+  clear: left;
+}
+.clear-both {
+  clear: both;
+}
+.clear-right {
+  clear: right;
+}
+

@@ -1,0 +1,30 @@
+/**
+ * @ngdoc object
+ * @name {{Name}}
+ * @description {{description}}.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('{{module}}')
+        .factory('{{Name}}', function define{{Name}} (AppError) {
+
+            /**
+             * @augments Error
+             * @constructor {{Name}}
+             * @param {number} code - App error code.
+             * @param {object} message - Error message.
+             */
+            var {{Name}} = AppError.define(
+                /** @lends {{Name}}.prototype */
+                {
+                    name: '{{Name}}'
+                }
+            );
+
+            return {{Name}};
+
+        });
+
+})(angular);

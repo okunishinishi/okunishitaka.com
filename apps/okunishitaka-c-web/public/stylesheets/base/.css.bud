@@ -1,0 +1,87 @@
+/**
+ * Bud file for css.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    format = u.core.util.format,
+    string = u.string;
+
+var data = require('./.css.data.js');
+
+function cssBud(name, data) {
+    return {
+        path: format('%s/%s.css', __dirname, string.paramString(name)),
+        force: true,
+        mode: '444',
+        data: data
+    }
+}
+
+module.exports = [
+    cssBud('border', {
+        description: 'Style for bordering.',
+        styles: data.border
+    }),
+    cssBud('clear', {
+        description: 'Style for clearing.',
+        styles: data.clear
+    }),
+    cssBud('color', {
+        description: 'Colors',
+        styles: data.color
+    }),
+    cssBud('display', {
+        description: 'Style for display',
+        styles: data.display
+    }),
+    cssBud('float', {
+        description: 'Style for floating.',
+        styles: data.float
+    }),
+    cssBud('font-faces', {
+        description: 'Font faces.',
+        styles: data.fontFaces
+    }),
+    cssBud('font-size', {
+        description: 'Font sizes.',
+        styles: data.fontSizes
+    }),
+    cssBud('text-align', {
+        description: 'Style for text aligning.',
+        styles: data.textAlign
+    }),
+    cssBud('text-decoration', {
+        description: 'Style for text decoration.',
+        styles: data.textDecoration
+    }),
+    cssBud('margin', {
+        description: 'Style for margin.',
+        styles: data.margin
+    }),
+    cssBud('padding', {
+        description: 'Style for padding.',
+        styles: data.padding
+    }),
+    cssBud('position', {
+        description: 'Style for position.',
+        styles: data.position
+    }),
+    cssBud('stick', {
+        description: 'Sticking position.',
+        styles: data.stick
+    }),
+    cssBud('wide', {
+        description: 'Wide size.',
+        styles: data.wide
+    }),
+    cssBud('width', {
+        description: 'Width.',
+        styles: data.width
+    }),
+    cssBud('z-index', {
+        description: 'z-index',
+        styles: data.zIndex
+    })
+];

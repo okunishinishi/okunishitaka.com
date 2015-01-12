@@ -1,0 +1,10 @@
+#!/bin/bash
+
+### Create favicon.ico
+
+command -v fur >/dev/null 2>&1 || { echo >&2 " fur not found. Aborting."; exit 1; }
+
+BASE_DIR=$(cd "$(dirname $0)/../../" && pwd)
+PUBLIC_DIR="${BASE_DIR}/public"
+
+fur ico "${PUBLIC_DIR}/favicon.png" "${PUBLIC_DIR}/favicon.ico"

@@ -1,0 +1,36 @@
+"use strict";
+
+
+var u = require('apeman-util'),
+    mapping = u.mapping,
+    filtering = u.filtering,
+    fs = u.core.fs,
+    path = u.core.path;
+
+var basedir = path.resolve(__dirname, '../..'),
+    publicDir = path.resolve(basedir, 'public'),
+    publicHtmlDir = path.resolve(publicDir, 'html');
+
+module.exports = {
+    mode: '444',
+    force: true,
+    data: []
+        .concat(fs.readdirSync(publicHtmlDir)
+            .filter(filtering.patternAcceptFilter(/\.html$/))
+            .map(mapping.pathResolveMap(publicHtmlDir))
+            .map(function (filename) {
+                var linkName = path.join(publicDir, path.basename(filename, '.html').replace(/\-page$/, '')) + '.html';
+                return {
+                    src: path.relative(basedir, filename),
+                    dest: path.relative(basedir, linkName)
+                }
+            })
+    )
+        .concat([
+            {
+                src: 'public/images/okunishitaka.com-favicon.png',
+                dest: 'public/favicon.png'
+
+            }
+        ])
+};

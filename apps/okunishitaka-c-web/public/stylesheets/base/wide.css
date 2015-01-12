@@ -1,0 +1,40 @@
+/**
+ * Wide size.
+ */
+
+.wide-article {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+.wide-button {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+.wide-input {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+.wide-label {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+.wide-section {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+.wide-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+.wide-table {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+

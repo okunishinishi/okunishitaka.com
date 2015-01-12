@@ -1,0 +1,43 @@
+/**
+ * Bud file for html.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    string = u.string,
+    path = u.core.path,
+    format = u.core.util.format,
+    reducing = u.reducing,
+    views = require('../.views.json'),
+    pages = Object.keys(views);
+
+var meta = require('../javascripts/ok/.meta.json');
+
+module.exports = pages.map(function (page) {
+    var prefix = meta.prefix,
+        name = string.paramString(page);
+    return {
+        mode: '644',
+        path: path.join(__dirname, string.paramString(page) + '-page.html'),
+        force: false,
+        data: {
+            prefix: prefix,
+            lang: '{{lang}}',
+            name: string.camelString(name),
+            Name: string.pascalString(page),
+            stylesheets: [
+                'lib.css',
+                'base.css',
+                format('pages/%s-page.css', name)
+            ],
+            javascripts: [
+                [
+                    'lib.js',
+                    'ok.js'
+                ]
+            ].reduce(reducing.concatReduce(), []),
+            title: format('{{title("%s")}}', name)
+        }
+    }
+});

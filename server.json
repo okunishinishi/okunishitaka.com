@@ -2,7 +2,9 @@
   "port": "34001",
   "domain": "okunishitaka.com",
   "log": {
-    "access": "/var/log/nginx/okunishitaka.com-access.log",
-    "error": "/var/log/nginx/okunishitaka.com-error.log"
+    "app": {
+      "access": "/var/log/nginx/okunishitaka.com-access.log",
+      "error": "/var/log/nginx/okunishitaka.com-error.log"
+    }
   }
 }

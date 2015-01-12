@@ -1,0 +1,16 @@
+{
+  "constants": {
+  },
+  "errors": {
+    "pascal": true
+  },
+  "entities": {
+    "pascal": true
+  },
+  "services": {
+  },
+  "templates": {
+  },
+  "utils": {
+  }
+}

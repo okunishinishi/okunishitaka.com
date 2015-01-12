@@ -11,16 +11,16 @@ var r = require('./routes');
 module.exports = Object.seal(
     {
         /**
-         * Route for blog.
+         * Route for admin blog.
          */
-        '/api/blog': {
+        '/admin/api/blog': {
             'GET': r.blogRoute.list,
             'POST': r.blogRoute.create
         },
-        /**
-         * Route for blog.
+        /*
+         * Route for admin blog.
          */
-        '/api/blog/:_id': {
+        '/admin/api/blog/:_id': {
             'GET': r.blogRoute.one,
             'PUT': r.blogRoute.update,
             'DELETE': r.blogRoute.destroy
@@ -28,15 +28,33 @@ module.exports = Object.seal(
         /**
          * Route for blog tag.
          */
-        '/api/blog-tag': {
-            'GET': r.blogRoute.list,
-            'POST': r.blogRoute.create
+        '/admin/api/blog-tag': {
+            'GET': r.blogTagRoute.list,
+            'POST': r.blogTagRoute.create
         },
         /**
          * Route for blog tag.
          */
-        '/api/blog-tag/:_id': {
-            'DELETE': r.blogRoute.destroy
+        '/admin/api/blog-tag/:_id': {
+            'DELETE': r.blogTagRoute.destroy
+        },
+        /**
+         * Route for blog.
+         */
+        '/api/blog': {
+            'GET': r.blogRoute.list
+        },
+        /**
+         * Route for blog.
+         */
+        '/api/blog/:_id': {
+            'GET': r.blogRoute.one
+        },
+        /**
+         * Route for blog tag.
+         */
+        '/api/blog-tag': {
+            'GET': r.blogTagRoute.list
         }
 
     }

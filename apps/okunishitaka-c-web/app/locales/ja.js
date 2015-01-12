@@ -14,7 +14,7 @@ var u = require('apeman-util'),
 var l = {};
 
 l.meta = {
-    NAME: 'KAITE',
+    NAME: 'okunishitaka.com',
     DESCRIPTION: pkg.description,
     AUTHOR: pkg.author,
     HOMEPAGE: format('http://%s', server.domain),
@@ -24,9 +24,9 @@ l.meta = {
         return format('Copyright © %s %s', year, name)
     }
 };
-l.pageNames = {};
-l.labels = {
+l.pageNames = {
 };
+l.labels = {};
 
 l.buttons = {};
 

@@ -1,1 +1,77 @@
-[]
+[
+    {
+        "src": "public/javascripts/ok/components/**/*.js",
+        "dest": "public/javascripts/ok/components.js",
+        "mode": "444"
+    },
+    {
+        "src": "public/javascripts/ok/constants/**/*.js",
+        "dest": "public/javascripts/ok/constants.js",
+        "mode": "444"
+    },
+    {
+        "src": "public/javascripts/ok/directives/**/*.js",
+        "dest": "public/javascripts/ok/directives.js",
+        "mode": "444"
+    },
+    {
+        "src": "public/javascripts/ok/entities/**/*.js",
+        "dest": "public/javascripts/ok/entities.js",
+        "mode": "444"
+    },
+    {
+        "src": "public/javascripts/ok/errors/**/*.js",
+        "dest": "public/javascripts/ok/errors.js",
+        "mode": "444"
+    },
+    {
+        "src": "public/javascripts/ok/filters/**/*.js",
+        "dest": "public/javascripts/ok/filters.js",
+        "mode": "444"
+    },
+    {
+        "src": "public/javascripts/ok/indices/**/*.js",
+        "dest": "public/javascripts/ok/indices.js",
+        "mode": "444"
+    },
+    {
+        "src": "public/javascripts/ok/pages/**/*.js",
+        "dest": "public/javascripts/ok/pages.js",
+        "mode": "444"
+    },
+    {
+        "src": "public/javascripts/ok/services/**/*.js",
+        "dest": "public/javascripts/ok/services.js",
+        "mode": "444"
+    },
+    {
+        "src": "public/javascripts/ok/templates/**/*.js",
+        "dest": "public/javascripts/ok/templates.js",
+        "mode": "444"
+    },
+    {
+        "src": "public/javascripts/ok/utils/**/*.js",
+        "dest": "public/javascripts/ok/utils.js",
+        "mode": "444"
+    },
+    {
+        "src": "public/javascripts/ok/*.js",
+        "dest": "public/javascripts/ok.js",
+        "mode": "444"
+    },
+    {
+        "src": "public/javascripts/lib/*.js",
+        "dest": "public/javascripts/lib.js",
+        "mode": "444"
+    },
+    {
+        "src": "public/stylesheets/base/*.css",
+        "dest": "public/stylesheets/base.css",
+        "mode": "444"
+    },
+    {
+        "src": "public/stylesheets/lib/*.css",
+        "dest": "public/stylesheets/lib.css",
+        "mode": "444"
+    }
+]

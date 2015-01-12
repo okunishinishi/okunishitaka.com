@@ -1,0 +1,17 @@
+/**
+ * @ngdoc object
+ * @name {{name}}
+ * @description {{description}}.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('{{module}}')
+        .factory('{{name}}', function define{{Name}}($injector) {
+            return {
+                {{#each subModules}}get {{this}}() { return $injector.get('{{this}}'); }{{#if @last}}{{else}},
+                {{/if}}{{/each}}
+            };
+        });
+})(angular);

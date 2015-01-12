@@ -1,0 +1,14 @@
+[
+  "codeConvertService",
+  "eventEmitService",
+  "errorHandleService",
+  "langDetectService",
+  "localStorageService",
+  "localeStoreService",
+  "locationChangeService",
+  "locationResolveService",
+  "locationSearchService",
+  "templateCacheService",
+  "toastMessageService",
+  "urlFormatService"
+]

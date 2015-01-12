@@ -1,0 +1,85 @@
+/**
+ * @ngdoc Service
+ * @name {{name}}ApiService
+ * @description {{Name}} api service.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('{{module}}')
+        .service('{{name}}ApiService', function {{Name}}ApiService($http, apiService, {{#each constants}}{{this}}, {{/each}} urlFormatService) {
+            var s = this,
+                formatUrl = urlFormatService.formatUrl.bind(urlFormatService);
+
+{{#if list}}            /**
+             * List resources.
+             * @param {object} params - Query data.
+             * @returns {Promise} - Deferred promise.
+             */
+            s.list = function list(params) {
+                var url = formatUrl({{list}}, params);
+                return apiService.get(url, params);
+            };
+
+{{/if}}
+{{#if one}}            /**
+             * File a resource.
+             * @param {string} _id - Resource id.
+             * @returns {Promise} - Deferred promise.
+             */
+            s.one = function one(_id) {
+                var url = formatUrl({{one}}, {_id: _id});
+                return apiService.get(url);
+            };
+
+{{/if}}
+{{#if create}}            /**
+             * Create a resource.
+             * @param {object} data - Data to create.
+             * @returns {Promise} - Deferred promise.
+             */
+            s.create = function create(data) {
+                var url = formatUrl({{create}}, data);
+                return apiService.post(url, data);
+            };
+
+{{/if}}
+{{#if update}}            /**
+             * Update a resource.
+             * @param {string} _id - Resource id.
+             * @param {object} data - Data to update.
+             * @returns {Promise} - Deferred promise.
+             */
+            s.update = function update(_id, data) {
+                    var url = formatUrl({{update}}, {_id: _id});
+                    return apiService.put(url, data);
+            };
+
+{{/if}}
+{{#if destroy}}            /**
+             * Destroy a resource.
+             * @param {string} {{destroyKey}} - Resource id.
+             * @param {data?} data - Resource data.
+             * @returns {Promise} - Deferred promise.
+             */
+            s.destroy = function destroy({{destroyKey}}, data) {
+                var url = formatUrl({{destroy}}, {
+                    {{destroyKey}}: {{destroyKey}}
+                });
+                return apiService.delete(url, data);
+            };
+
+{{/if}}
+{{#if singleton}}            /**
+             * Get the singleton data.
+             * @returns {Promise} - Deferred promise.
+             */
+            s.singleton = function singleton() {
+                var url = {{singleton}};
+                return apiService.get(url);
+            };
+
+{{/if}}
+        });
+})(angular);

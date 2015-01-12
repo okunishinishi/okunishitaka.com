@@ -1,0 +1,52 @@
+/**
+ * Bud file for api service.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    string = u.string,
+    path = u.core.path,
+    format = u.core.util.format,
+    meta = require('../../.meta.json'),
+    api = require('./.api.json');
+
+module.exports = Object.keys(api).map(function (name) {
+    var endpoint = api[name];
+    return {
+        mode: '444',
+        force: true,
+        path: format(
+            '%s/%s-api-service.js',
+            __dirname, string.paramString(name)
+        ),
+        data: {
+            module: [
+                meta.prefix,
+                string.camelString(path.basename(path.dirname(__dirname)))
+            ].join('.'),
+            name: string.camelString(name),
+            Name: string.pascalString(name),
+            constants: [
+                'apiUrlConstant',
+                'jsonUrlConstant'
+            ],
+            list: endpoint.list,
+            one: endpoint.one,
+            create: endpoint.create,
+            update: endpoint.update,
+            destroy: endpoint.destroy,
+            get destroyKey() {
+                var destroy = this.destroy,
+                    key = destroy.split('_WITH_').pop();
+                switch (key) {
+                    case 'ID':
+                        return '_id';
+                    default:
+                        return (key || '_id').toLowerCase();
+                }
+            },
+            singleton: endpoint.singleton
+        }
+    }
+});

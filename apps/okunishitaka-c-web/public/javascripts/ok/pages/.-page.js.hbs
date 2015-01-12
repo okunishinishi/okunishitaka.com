@@ -1,0 +1,21 @@
+/**
+ * @ngdoc module
+ * @module {{prefix}}.{{name}}Page
+ * @description Page script for {{name}}.
+ */
+
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('{{prefix}}.{{name}}Page', [
+            '{{prefix}}.page'
+        ])
+        .run(function setupRootScope($rootScope) {
+            $rootScope.page = '{{name}}';
+        })
+        .controller('{{Name}}Ctrl', function define{{Name}}Ctrl($scope) {
+
+        });
+
+})(angular);

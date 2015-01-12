@@ -10,7 +10,7 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 script:
 - "./ci/bin/build"
-- "./ci/bin/test"
+- "./ci/bin/test_unit_tests"
 - "./node_modules/karma/bin/karma start test/browser_unit_tests/karma.conf.js --browsers Firefox --single-run"
 - "./ci/bin/coverage"
 - "./ci/bin/send_coverage"

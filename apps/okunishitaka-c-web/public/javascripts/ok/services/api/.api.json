@@ -1,0 +1,21 @@
+{
+  "admin-blog": {
+    "list": "apiUrlConstant.ADMIN_API_BLOG_GET",
+    "create": "apiUrlConstant.ADMIN_API_BLOG_POST",
+    "one": "apiUrlConstant.ADMIN_API_BLOG_GET_WITH_ID",
+    "update": "apiUrlConstant.ADMIN_API_BLOG_PUT_WITH_ID",
+    "destroy": "apiUrlConstant.ADMIN_API_BLOG_DELETE_WITH_ID"
+  },
+  "admin-blog-tag": {
+    "list": "apiUrlConstant.ADMIN_API_BLOG_TAG_GET",
+    "create": "apiUrlConstant.ADMIN_API_BLOG_TAG_POST",
+    "destroy": "apiUrlConstant.ADMIN_API_BLOG_TAG_DELETE_WITH_ID"
+  },
+  "blog": {
+    "list": "apiUrlConstant.API_BLOG_GET",
+    "one": "apiUrlConstant.API_BLOG_GET_WITH_ID"
+  },
+  "blog-tag": {
+    "list": "apiUrlConstant.API_BLOG_TAG_GET"
+  }
+}

@@ -1,0 +1,58 @@
+/**
+ * Bud file for concat config.
+ */
+
+"use strict";
+
+var u = require('apeman-util'),
+    reducing = u.reducing,
+    path = u.core.path;
+
+function concatData(basedir, data) {
+    return data.map(function (data) {
+        return {
+            src: path.join(basedir, data.src),
+            dest: path.join(basedir, data.dest),
+            mode: '444'
+        }
+    });
+}
+
+module.exports = {
+    mode: '444',
+    force: true,
+    data: [
+        concatData('public/javascripts/ok',
+            Object.keys(require('../../public/javascripts/ok/.modules.json')).map(function (moduleName) {
+                return {
+                    src: moduleName + '/**/*.js',
+                    dest: moduleName + '.js'
+
+                }
+            })
+        ),
+        concatData('public/javascripts', [
+            {
+                src: 'ok/*.js',
+                dest: 'ok.js'
+
+            },
+            {
+                src: 'lib/*.js',
+                dest: 'lib.js'
+
+            }
+        ]),
+        concatData('public/stylesheets', [
+            {
+                src: 'base/*.css',
+                dest: 'base.css'
+            },
+            {
+                src: 'lib/*.css',
+                dest: 'lib.css'
+            }
+        ])
+    ].reduce(reducing.concatReduce(), [])
+};
+

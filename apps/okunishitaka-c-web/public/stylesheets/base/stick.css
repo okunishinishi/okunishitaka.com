@@ -1,0 +1,21 @@
+/**
+ * Sticking position.
+ */
+
+.stick-top {
+  position: absolute;
+  top: 0;
+}
+.stick-right {
+  position: absolute;
+  right: 0;
+}
+.stick-bottom {
+  position: absolute;
+  bottom: 0;
+}
+.stick-left {
+  position: absolute;
+  left: 0;
+}
+

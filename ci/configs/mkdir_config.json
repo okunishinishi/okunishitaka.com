@@ -12,6 +12,7 @@
     "doc/nginx_conf",
     "doc/readme",
     "var",
-    "var/log"
+    "var/log",
+    "var/log/nginx"
   ]
 }

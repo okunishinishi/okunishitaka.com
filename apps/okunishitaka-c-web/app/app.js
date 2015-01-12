@@ -100,7 +100,7 @@ app.start = function startApp(port, settings, callback) {
 /**
  * Create a new server.
  * @param {function} middlewares - Middleware functions.
- * @returns {object} - Node connect server..
+ * @returns {object} - Node connect server.
  * @see {@link https://github.com/senchalabs/connect|connect}
  * @private
  */

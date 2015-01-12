@@ -14,7 +14,7 @@ describe('Blog', function () {
         var scenario = this;
         var now = new Date();
         request.post({
-            url: scenario.url('/api/blog'),
+            url: scenario.url('/admin/api/blog'),
             form: {
                 blog_title: 'scenario-' + now.getTime()
             }
@@ -27,10 +27,11 @@ describe('Blog', function () {
             done();
         });
     });
+
     it('Get one.', function (done) {
         var scenario = this;
         request.get({
-            url: scenario.url('/api/blog/') + blog01._id
+            url: scenario.url('/admin/api/blog/') + blog01._id
         }, function (err, res, body) {
             test.ifError(err);
             test.equal(res.statusCode, 200);
@@ -39,12 +40,13 @@ describe('Blog', function () {
             done();
         });
     });
+
     it('Update blog.', function (done) {
         var scenario = this;
         var now = new Date();
         var blog_title = 'scenario-updated' + now.getTime();
         request.put({
-            url: scenario.url('/api/blog/') + blog01._id,
+            url: scenario.url('/admin/api/blog/') + blog01._id,
             form: {
                 blog_title: blog_title,
                 _vr: 0
@@ -61,7 +63,7 @@ describe('Blog', function () {
     it('List blog.', function (done) {
         var scenario = this;
         request.get({
-            url: scenario.url('/api/blog')
+            url: scenario.url('/admin/api/blog')
         }, function (err, res, body) {
             test.ifError(err);
             test.equal(res.statusCode, 200);
@@ -75,7 +77,7 @@ describe('Blog', function () {
         var scenario = this;
         request({
             method: 'DELETE',
-            url: scenario.url('/api/blog/') + blog01._id
+            url: scenario.url('/admin/api/blog/') + blog01._id
         }, function (err, res, body) {
             test.ifError(err);
             var data = JSON.parse(body);

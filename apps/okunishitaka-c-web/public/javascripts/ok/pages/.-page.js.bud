@@ -1,0 +1,30 @@
+/**
+ * Bud file for pages.
+ */
+
+var u = require('apeman-util'),
+    path = u.core.path,
+    string = u.string,
+    format = u.core.util.format,
+    meta = require('../.meta.json'),
+    views = require('../../../.views.json'),
+    pages = Object.keys(views);
+
+"use strict";
+
+module.exports = pages.map(function (name) {
+    var prefix = meta.prefix,
+        filename = format('%s-page.js', string.paramString(name));
+    return {
+        path: path.resolve(__dirname, filename),
+        force: false,
+        mode: '644',
+        data: {
+            prefix: prefix,
+            name: string.camelString(name),
+            Name: string.pascalString(name)
+        }
+    }
+});
+
+

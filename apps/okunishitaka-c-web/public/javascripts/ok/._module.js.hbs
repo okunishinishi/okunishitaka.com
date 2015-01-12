@@ -1,0 +1,13 @@
+/**
+ * @ngdoc module
+ * @module {{prefix}}.{{namespace}}
+ */
+
+(function (ng) {
+    "use strict";
+    ng
+        .module('{{prefix}}.{{namespace}}', [
+            {{#each dependencies}}'{{this}}'{{#if @last}}{{else}},
+            {{/if}}{{/each}}
+        ]);
+})(angular);

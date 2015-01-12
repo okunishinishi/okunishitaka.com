@@ -1,0 +1,29 @@
+/**
+ * Test for {{name}}
+ * Runs with karma.
+ */
+
+"use strict";
+
+var ng = angular,
+    mock = ng.mock;
+
+describe('{{name}}Constant', function () {
+    var {{name}}Constant;
+    beforeEach(function () {
+        mock.module('{{prefix}}.constants');
+        inject(['{{name}}Constant', function (injected) {
+            {{name}}Constant = injected;
+        }]);
+    });
+
+    it('Inject the constant.', function () {
+        expect({{name}}Constant).toBeDefined();
+    });
+
+    it('Eval each properties', function () {
+        Object.keys({{name}}Constant).forEach(function (key) {
+            expect({{name}}Constant[key]).toBeDefined();
+        });
+    });
+});

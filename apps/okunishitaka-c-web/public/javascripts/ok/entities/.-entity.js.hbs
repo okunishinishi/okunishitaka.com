@@ -1,0 +1,47 @@
+/**
+ * @ngdoc Object
+ * @name {{Name}}Entity
+ * @description {{Name}} entity.
+ */
+(function (ng, ap) {
+    "use strict";
+
+    ng
+        .module('{{module}}')
+        .factory('{{Name}}Entity', function define{{Name}}Entity(Entity) {
+
+            /**
+             * @augments Entity
+             * @constructor {{Name}}Entity
+             * @param {object} data - Entity data.
+             */
+            var {{Name}}Entity = Entity.define(
+                /** @lends {{Name}}Entity.prototype */
+                {
+
+                }
+            );
+
+            /**
+             * Get default values.
+             * @returns {object}
+             */
+            {{Name}}Entity.defaults = function () {
+                return {
+                }
+            };
+
+            /**
+             * Create a new entity.
+             * @returns {object} - Created entity.
+             */
+            {{Name}}Entity.new = function (data) {
+                var entity = new {{Name}}Entity(data);
+                return entity;
+            };
+
+            return {{Name}}Entity;
+
+        });
+
+})(angular);
