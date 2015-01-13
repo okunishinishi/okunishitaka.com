@@ -1,4 +1,7 @@
 /** Style for profile page. **/
+ul, ol {
+    max-width: 420px;
+}
 
 main {
     min-height: 300px;

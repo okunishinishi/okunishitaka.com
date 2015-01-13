@@ -37,7 +37,7 @@
                 }
                 var links = $scope.links;
                 return links[work.demo] || links[work.link] || links[work.repo];
-            }
+            };
             workApiService.list({
                 _sort: '_at',
                 _revert: true,
