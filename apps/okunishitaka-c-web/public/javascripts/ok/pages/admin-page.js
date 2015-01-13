@@ -28,7 +28,6 @@
 
         })
         .controller('AdminBlogEditCtrl', function ($scope,
-                                                   adminBlogApiService,
                                                    BlogEntity,
                                                    errorHandleService,
                                                    toastMessageService,
@@ -93,6 +92,7 @@
 
         })
         .controller('AdminBlogListCtrl', function ($scope,
+                                                   adminBlogApiService,
                                                    l,
                                                    objectUtil,
                                                    arrayUtil,

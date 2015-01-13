@@ -11,7 +11,7 @@ before_script:
 script:
 - "./ci/bin/build"
 - "./ci/bin/test_unit_tests"
-- "./node_modules/karma/bin/karma start test/browser_unit_tests/karma.conf.js --browsers Firefox --single-run"
+- "./node_modules/karma/bin/karma start apps/okunishitaka-c-web/test/browser_unit_tests/karma.conf.js --browsers Firefox --single-run"
 - "./ci/bin/coverage"
 - "./ci/bin/send_coverage"
 env:
