@@ -28,9 +28,11 @@
 
         })
         .controller('AdminBlogEditCtrl', function ($scope,
-                                                   blogApiService,
+                                                   adminBlogApiService,
                                                    BlogEntity,
                                                    errorHandleService,
+                                                   toastMessageService,
+                                                   l,
                                                    locationSearchService,
                                                    eventEmitService) {
 
@@ -46,7 +48,7 @@
                 }
                 locationSearchService.update('blog_id', blogId);
                 $scope.loading = true;
-                blogApiService.one(blogId)
+                adminBlogApiService.one(blogId)
                     .then(function (data) {
                         $scope.blog = BlogEntity.new(data);
                     }, apiRejected)
@@ -54,11 +56,40 @@
                         $scope.loading = false;
                     });
             }
+
             eventEmitService.on('admin.editBlog', function (ev, blog) {
                 var _id = blog && blog._id;
                 load(_id);
             });
 
+
+            $scope.close = function () {
+                $scope.blogId = null;
+                $scope.blog = null;
+            };
+            function _saveBlog(blog) {
+                var _id = blog && blog._id;
+                if (_id) {
+                    return adminBlogApiService.update(_id, blog);
+                } else {
+                    return adminBlogApiService.create(blog);
+                }
+            }
+
+            $scope.save = function (blog) {
+                if ($scope.loading) {
+                    return;
+                }
+                $scope.loading = true;
+                _saveBlog(blog)
+                    .then(function () {
+                        $scope.close();
+                        toastMessageService.showInfoMessage(l.toasts.SAVE_DONE);
+                    }, apiRejected)
+                    .finally(function () {
+                        $scope.loading = false;
+                    })
+            };
 
         })
         .controller('AdminBlogListCtrl', function ($scope,

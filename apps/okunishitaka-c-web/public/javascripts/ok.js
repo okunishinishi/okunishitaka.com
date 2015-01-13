@@ -220,6 +220,9 @@
 		                "TAGS": "タグ (カンマ区切り)"
 		            }
 		        },
+		        "toasts": {
+		            "SAVE_DONE": "保存しました。"
+		        },
 		        "buttons": {
 		            "MORE": "もっと読み込む",
 		            "EDIT": "編集",
@@ -1751,9 +1754,11 @@
 
         })
         .controller('AdminBlogEditCtrl', function ($scope,
-                                                   blogApiService,
+                                                   adminBlogApiService,
                                                    BlogEntity,
                                                    errorHandleService,
+                                                   toastMessageService,
+                                                   l,
                                                    locationSearchService,
                                                    eventEmitService) {
 
@@ -1769,7 +1774,7 @@
                 }
                 locationSearchService.update('blog_id', blogId);
                 $scope.loading = true;
-                blogApiService.one(blogId)
+                adminBlogApiService.one(blogId)
                     .then(function (data) {
                         $scope.blog = BlogEntity.new(data);
                     }, apiRejected)
@@ -1777,11 +1782,40 @@
                         $scope.loading = false;
                     });
             }
+
             eventEmitService.on('admin.editBlog', function (ev, blog) {
                 var _id = blog && blog._id;
                 load(_id);
             });
 
+
+            $scope.close = function () {
+                $scope.blogId = null;
+                $scope.blog = null;
+            };
+            function _saveBlog(blog) {
+                var _id = blog && blog._id;
+                if (_id) {
+                    return adminBlogApiService.update(_id, blog);
+                } else {
+                    return adminBlogApiService.create(blog);
+                }
+            }
+
+            $scope.save = function (blog) {
+                if ($scope.loading) {
+                    return;
+                }
+                $scope.loading = true;
+                _saveBlog(blog)
+                    .then(function () {
+                        $scope.close();
+                        toastMessageService.showInfoMessage(l.toasts.SAVE_DONE);
+                    }, apiRejected)
+                    .finally(function () {
+                        $scope.loading = false;
+                    })
+            };
 
         })
         .controller('AdminBlogListCtrl', function ($scope,
@@ -3012,7 +3046,7 @@
         .module('ok.templates')
         .value('adminAdminBlogEditSectionHtmlTemplate', {
 		    "name": "/html/partials/admin/admin-blog-edit-section.html",
-		    "content": "<section id=\"admin-blog-editor-section\"\n         ng:show=\"!!blog\"\n         ng:controller=\"AdminBlogEditCtrl\" class=\"cover\">\n    <div id=\"admin-blog-editor-section-content\"\n         class=\"container position-relative\">\n\n        <a ng:click=\"close()\" id=\"admin-blog-close-button\" class=\"close-button\">{{l.buttons.CLOSE}}</a>\n\n        <div class=\"grid-row\">\n            <div class=\"grid-col\">\n                <fieldset class=\"no-style-fieldset\">\n                    <div class=\"field\">\n                        <input type=\"text\" id=\"blog-title-input\"\n                               placeholder=\"{{l.placeholders.blog.TITLE}}\"\n                               ng:model=\"blog.title\"\n                               class=\"wide-input\">\n                    </div>\n                    <div class=\"field\">\n                        <input type=\"text\" id=\"blog-tags-input\"\n                               placeholder=\"{{l.placeholders.blog.TAGS}}\"\n                               ng:model=\"blog.tagText\"\n                               class=\"wide-input\"/>\n                    </div>\n                    <div class=\"field\">\n                        <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n                                  placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n                                  class=\"wide-textarea\" cols=\"20\" rows=\"10\"\n                                  ng:model=\"blog.content\"\n                                ></textarea>\n                    </div>\n                    <div class=\"field\">\n                        <div class=\"text-align-center\">\n                            <a id=\"blog-cancel-button\"\n                               ok:button\n                               ng:click=\"close()\">{{l.buttons.CANCEL}}</a>\n                            <a id=\"blog-save-button\"\n                               ok:button\n                               ok:button-type=\"'primary'\"\n                               ng:click=\"save(blog)\">{{l.buttons.SAVE}}</a>\n                        </div>\n                    </div>\n                </fieldset>\n            </div>\n            <div class=\"grid-col\">\n                <fieldset>\n                    <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>\n                    <div id=\"admin-blog-preview-div\">\n                        <h2>{{blog.title}}</h2>\n\n                        <div>\n                            <!--<span ok:tag ok:title=\"t\" ng:repeat=\"t in (blog.tagTexts | textSplitFilter:',')\"></span>-->\n                        </div>\n                        <div ng:bind-html=\"blog.content | markdownRenderFilter\"></div>\n                    </div>\n                </fieldset>\n                <div class=\"grid-col\">\n                    <br class=\"clear\"/>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>"
+		    "content": "<section id=\"admin-blog-editor-section\"\n         ng:show=\"!!blogId\"\n         ng:controller=\"AdminBlogEditCtrl\" class=\"cover\">\n    <div id=\"admin-blog-editor-section-content\"\n         class=\"container position-relative cover-container\">\n        <div ok:cover ok:cover-visible=\"loading\"></div>\n        <a ng:click=\"close()\" id=\"admin-blog-close-button\" class=\"close-button\">{{l.buttons.CLOSE}}</a>\n\n        <div class=\"grid-row\">\n            <div class=\"grid-col\">\n                <fieldset class=\"no-style-fieldset\">\n                    <div class=\"field\">\n                        <input type=\"text\" id=\"blog-title-input\"\n                               placeholder=\"{{l.placeholders.blog.TITLE}}\"\n                               ng:model=\"blog.blog_title\"\n                               class=\"wide-input\">\n                    </div>\n                    <div class=\"field\">\n                        <input type=\"text\" id=\"blog-tags-input\"\n                               placeholder=\"{{l.placeholders.blog.TAGS}}\"\n                               ng:model=\"blog.tagText\"\n                               class=\"wide-input\"/>\n                    </div>\n                    <div class=\"field\">\n                        <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n                                  placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n                                  class=\"wide-textarea\" cols=\"20\" rows=\"10\"\n                                  ng:model=\"blog.blog_content\"\n                                ></textarea>\n                    </div>\n                    <div class=\"field\">\n                        <div class=\"text-align-center\">\n                            <a id=\"blog-cancel-button\"\n                               ok:button\n                               ng:click=\"close()\">{{l.buttons.CANCEL}}</a>\n                            <a id=\"blog-save-button\"\n                               ok:button\n                               ok:button-type=\"'primary'\"\n                               ng:click=\"save(blog)\">{{l.buttons.SAVE}}</a>\n                        </div>\n                    </div>\n                </fieldset>\n            </div>\n            <div class=\"grid-col\">\n                <fieldset>\n                    <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>\n                    <div id=\"admin-blog-preview-div\">\n                        <h2>{{blog.title}}</h2>\n\n                        <div>\n                            <!--<span ok:tag ok:title=\"t\" ng:repeat=\"t in (blog.tagTexts | textSplitFilter:',')\"></span>-->\n                        </div>\n                        <div ng:bind-html=\"blog.content | markdownRenderFilter\"></div>\n                    </div>\n                </fieldset>\n                <div class=\"grid-col\">\n                    <br class=\"clear\"/>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>"
 		});
 
 })(angular);

@@ -1,9 +1,9 @@
 <section id="admin-blog-editor-section"
-         ng:show="!!blog"
+         ng:show="!!blogId"
          ng:controller="AdminBlogEditCtrl" class="cover">
     <div id="admin-blog-editor-section-content"
-         class="container position-relative">
-
+         class="container position-relative cover-container">
+        <div ok:cover ok:cover-visible="loading"></div>
         <a ng:click="close()" id="admin-blog-close-button" class="close-button">{{l.buttons.CLOSE}}</a>
 
         <div class="grid-row">
@@ -12,7 +12,7 @@
                     <div class="field">
                         <input type="text" id="blog-title-input"
                                placeholder="{{l.placeholders.blog.TITLE}}"
-                               ng:model="blog.title"
+                               ng:model="blog.blog_title"
                                class="wide-input">
                     </div>
                     <div class="field">
@@ -25,7 +25,7 @@
                         <textarea name="blog-text" id="blog-text-textarea"
                                   placeholder="{{l.placeholders.blog.CONTENT}}"
                                   class="wide-textarea" cols="20" rows="10"
-                                  ng:model="blog.content"
+                                  ng:model="blog.blog_content"
                                 ></textarea>
                     </div>
                     <div class="field">

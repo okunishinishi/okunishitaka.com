@@ -39,7 +39,9 @@ l.placeholders = {
         TAGS: 'タグ (カンマ区切り)'
     }
 };
-
+l.toasts = {
+    SAVE_DONE: '保存しました。'
+};
 l.buttons = {
     MORE: 'もっと読み込む',
     EDIT: '編集',
