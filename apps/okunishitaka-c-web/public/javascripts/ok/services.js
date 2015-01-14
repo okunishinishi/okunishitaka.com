@@ -426,6 +426,63 @@
 })(angular);
 /**
  * @ngdoc object
+ * @name blogSaveService
+ * @description Blog save service.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('blogSaveService', function BlogSaveService($q,
+                                                             adminBlogApiService,
+                                                             adminBlogTagApiService,
+                                                             BlogEntity,
+                                                             BlogTagEntity) {
+            var s = this;
+
+
+            function _saveBlog(blog) {
+                var _id = blog && blog._id;
+                if (_id) {
+                    return adminBlogApiService.update(_id, blog);
+                } else {
+                    return adminBlogApiService.create(blog);
+                }
+            }
+
+
+            s.save = function (blog) {
+                var deferred = $q.defer();
+
+                function rejected(err) {
+                    deferred.reject(err);
+                }
+
+                var saved;
+                _saveBlog(blog)
+                    .then(function (data) {
+                        return BlogEntity.new(data.data);
+                    }, rejected)
+                    .then(function (blog) {
+                        saved = blog;
+                        return adminBlogTagApiService.list({
+                            blog_id: saved._id
+                        });
+                    })
+                    .then(function (data) {
+                        return data.map(BlogTagEntity.new);
+                    }, rejected)
+                    .then(function () {
+
+                    });
+                return deferred.promise;
+            };
+        });
+
+})(angular);
+/**
+ * @ngdoc object
  * @name codeConvertService
  * @description Code convert service.
  */

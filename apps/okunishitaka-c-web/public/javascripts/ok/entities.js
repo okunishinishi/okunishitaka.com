@@ -32,7 +32,7 @@
             var BlogEntity = Entity.define(
                 /** @lends BlogEntity.prototype */
                 {
-
+                    tag_texts: []
                 }
             );
 
@@ -41,8 +41,7 @@
              * @returns {object}
              */
             BlogEntity.defaults = function () {
-                return {
-                }
+                return {}
             };
 
             /**
@@ -51,6 +50,18 @@
              */
             BlogEntity.new = function (data) {
                 var entity = new BlogEntity(data);
+                Object.defineProperties(entity, {
+                    tag_text_joined: {
+                        get: function () {
+                            var s = this;
+                            return s.tag_texts.join(',');
+                        },
+                        set: function (texts) {
+                            var s = this;
+                            s.tag_texts = [].concat(texts).split(',');
+                        }
+                    }
+                });
                 return entity;
             };
 
