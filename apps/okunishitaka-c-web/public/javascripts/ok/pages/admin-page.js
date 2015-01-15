@@ -29,6 +29,7 @@
         })
         .controller('AdminBlogEditCtrl', function ($scope,
                                                    adminBlogApiService,
+                                                   blogLoadService,
                                                    BlogEntity,
                                                    blogSaveService,
                                                    errorHandleService,
@@ -49,9 +50,9 @@
                 }
                 locationSearchService.update('blog_id', blogId);
                 $scope.loading = true;
-                adminBlogApiService.one(blogId)
-                    .then(function (data) {
-                        $scope.blog = BlogEntity.new(data);
+                blogLoadService.load(blogId)
+                    .then(function (blog) {
+                        $scope.blog = blog;
                     }, apiRejected)
                     .finally(function () {
                         $scope.loading = false;

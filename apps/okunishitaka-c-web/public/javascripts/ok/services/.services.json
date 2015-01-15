@@ -1,6 +1,7 @@
 [
   "codeConvertService",
   "blogSaveService",
+  "blogLoadService",
   "eventEmitService",
   "errorHandleService",
   "langDetectService",

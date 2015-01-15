@@ -27,7 +27,7 @@
             }
 
             function _saveBlogTag(blog_id, tagText) {
-                return adminBlogTagApiService.save({
+                return adminBlogTagApiService.create({
                     blog_id: blog_id,
                     tag_text: tagText
                 });
@@ -48,11 +48,14 @@
                         return tag.tag_text;
                     }),
                     saving = s._filterTagTexts(blog.tag_texts, _excluded(existing)),
-                    destroying = s._filterTagTexts(existing, _excluded(saving));
+                    destroying = s._filterTagTexts(existing, _excluded(blog.tag_texts));
 
                 var deferred = $q.defer(),
                     promise = deferred.promise;
                 saving.forEach(function (saving) {
+                    if (!saving) {
+                        return;
+                    }
                     promise = promise.then(function () {
                         return _saveBlogTag(blog._id, saving);
                     });
@@ -101,7 +104,7 @@
                         return data.map(BlogTagEntity.new);
                     }, rejected)
                     .then(function (blogTags) {
-                        return _updateBlogTags(blogTags, saved).then(function () {
+                        return _updateBlogTags(blogTags, blog).then(function () {
                             deferred.resolve();
                         });
                     }, rejected);

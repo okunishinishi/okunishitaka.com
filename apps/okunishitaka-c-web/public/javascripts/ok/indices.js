@@ -101,6 +101,7 @@
                 get blogTagApiService() { return $injector.get('blogTagApiService'); },
                 get profileApiService() { return $injector.get('profileApiService'); },
                 get workApiService() { return $injector.get('workApiService'); },
+                get blogLoadService() { return $injector.get('blogLoadService'); },
                 get blogSaveService() { return $injector.get('blogSaveService'); },
                 get codeConvertService() { return $injector.get('codeConvertService'); },
                 get errorHandleService() { return $injector.get('errorHandleService'); },

@@ -53,7 +53,7 @@ app.start = function startApp(port, settings, callback) {
                 }),
                 mw.delayMiddleware({
                     // Add delay when development.
-                    delay: isDevelopment ? 500 : 0
+                    delay: isDevelopment ? 200 : 0
                 }),
                 function setQuery(req, res, next) {
                     req.query = req.getQuery();

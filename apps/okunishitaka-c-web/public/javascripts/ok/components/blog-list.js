@@ -10,6 +10,7 @@
     ng
         .module('ok.components')
         .factory('BlogList', function defineBlogList($q,
+                                                     arrayUtil,
                                                      BlogEntity,
                                                      blogApiService,
                                                      blogTagApiService,
@@ -36,6 +37,7 @@
                 clear: function () {
                     var s = this;
                     s.data = [];
+                    s.blogTagHash = {};
                     s.condition._skip = 0;
                 },
                 /**
@@ -72,7 +74,8 @@
                             blogTags.forEach(function (tag) {
                                 var blogId = tag.blog_id;
                                 hash[blogId] = hash[blogId] || [];
-                                var isNew = hash[blogId].indexOf(tag) === -1;
+                                var known = arrayUtil.toHashWithKey(hash[blogId], '_id') || {},
+                                    isNew = !known[tag._id];
                                 if (isNew) {
                                     hash[blogId].push(tag);
                                 }

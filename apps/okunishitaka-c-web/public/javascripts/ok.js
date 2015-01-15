@@ -24,6 +24,7 @@
     ng
         .module('ok.components')
         .factory('BlogList', function defineBlogList($q,
+                                                     arrayUtil,
                                                      BlogEntity,
                                                      blogApiService,
                                                      blogTagApiService,
@@ -50,6 +51,7 @@
                 clear: function () {
                     var s = this;
                     s.data = [];
+                    s.blogTagHash = {};
                     s.condition._skip = 0;
                 },
                 /**
@@ -86,7 +88,8 @@
                             blogTags.forEach(function (tag) {
                                 var blogId = tag.blog_id;
                                 hash[blogId] = hash[blogId] || [];
-                                var isNew = hash[blogId].indexOf(tag) === -1;
+                                var known = arrayUtil.toHashWithKey(hash[blogId], '_id') || {},
+                                    isNew = !known[tag._id];
                                 if (isNew) {
                                     hash[blogId].push(tag);
                                 }
@@ -1038,6 +1041,11 @@
             var BlogEntity = Entity.define(
                 /** @lends BlogEntity.prototype */
                 {
+                    init: function () {
+                        var s = this;
+                        Object.defineProperties(s, BlogEntity.properties);
+                        Entity.prototype.init.apply(s, arguments);
+                    },
                     tag_texts: []
                 }
             );
@@ -1050,24 +1058,26 @@
                 return {}
             };
 
+            BlogEntity.properties = {
+                tag_text_joined: {
+                    get: function () {
+                        var s = this;
+                        return s.tag_texts.join(',');
+                    },
+                    set: function (texts) {
+                        var s = this;
+                        s.tag_texts = [].concat(texts).join(',').split(',');
+                    }
+                }
+            };
+
             /**
              * Create a new entity.
              * @returns {object} - Created entity.
              */
             BlogEntity.new = function (data) {
                 var entity = new BlogEntity(data);
-                Object.defineProperties(entity, {
-                    tag_text_joined: {
-                        get: function () {
-                            var s = this;
-                            return s.tag_texts.join(',');
-                        },
-                        set: function (texts) {
-                            var s = this;
-                            s.tag_texts = [].concat(texts).join(',').split(',');
-                        }
-                    }
-                });
+
                 return entity;
             };
 
@@ -1661,6 +1671,7 @@
                 get blogTagApiService() { return $injector.get('blogTagApiService'); },
                 get profileApiService() { return $injector.get('profileApiService'); },
                 get workApiService() { return $injector.get('workApiService'); },
+                get blogLoadService() { return $injector.get('blogLoadService'); },
                 get blogSaveService() { return $injector.get('blogSaveService'); },
                 get codeConvertService() { return $injector.get('codeConvertService'); },
                 get errorHandleService() { return $injector.get('errorHandleService'); },
@@ -1780,6 +1791,7 @@
         })
         .controller('AdminBlogEditCtrl', function ($scope,
                                                    adminBlogApiService,
+                                                   blogLoadService,
                                                    BlogEntity,
                                                    blogSaveService,
                                                    errorHandleService,
@@ -1800,9 +1812,9 @@
                 }
                 locationSearchService.update('blog_id', blogId);
                 $scope.loading = true;
-                adminBlogApiService.one(blogId)
-                    .then(function (data) {
-                        $scope.blog = BlogEntity.new(data);
+                blogLoadService.load(blogId)
+                    .then(function (blog) {
+                        $scope.blog = blog;
                     }, apiRejected)
                     .finally(function () {
                         $scope.loading = false;
@@ -2711,6 +2723,59 @@
 })(angular);
 /**
  * @ngdoc object
+ * @name blogLoadService
+ * @description Blog load service.
+ */
+(function (ng) {
+    "use strict";
+
+    ng
+        .module('ok.services')
+        .service('blogLoadService', function BlogLoadService($q,
+                                                             BlogEntity,
+                                                             BlogTagEntity,
+                                                             blogApiService,
+                                                             blogTagApiService) {
+            var s = this;
+
+            s.load = function (_id) {
+                var deferred = $q.defer();
+
+                function apiRejected(err) {
+                    deferred.reject(err);
+                }
+
+                var result;
+                blogApiService.one(_id)
+                    .then(function (data) {
+                        return BlogEntity.new(data);
+                    }, apiRejected)
+                    .then(function (blog) {
+                        result = blog;
+                        return blogTagApiService.list({
+                            blog_id: result._id
+                        });
+                    })
+                    .then(function (data) {
+                        return data.map(BlogTagEntity.new);
+                    }, apiRejected)
+                    .then(function (blogTags) {
+                        blogTags.forEach(function () {
+                            result.tag_texts = blogTags.map(function (tag) {
+                                return tag.tag_text;
+                            });
+                        });
+                        deferred.resolve(result);
+                    });
+                return deferred.promise;
+            };
+
+            return s;
+        });
+
+})(angular);
+/**
+ * @ngdoc object
  * @name blogSaveService
  * @description Blog save service.
  */
@@ -2738,7 +2803,7 @@
             }
 
             function _saveBlogTag(blog_id, tagText) {
-                return adminBlogTagApiService.save({
+                return adminBlogTagApiService.create({
                     blog_id: blog_id,
                     tag_text: tagText
                 });
@@ -2759,11 +2824,14 @@
                         return tag.tag_text;
                     }),
                     saving = s._filterTagTexts(blog.tag_texts, _excluded(existing)),
-                    destroying = s._filterTagTexts(existing, _excluded(saving));
+                    destroying = s._filterTagTexts(existing, _excluded(blog.tag_texts));
 
                 var deferred = $q.defer(),
                     promise = deferred.promise;
                 saving.forEach(function (saving) {
+                    if (!saving) {
+                        return;
+                    }
                     promise = promise.then(function () {
                         return _saveBlogTag(blog._id, saving);
                     });
@@ -2812,7 +2880,7 @@
                         return data.map(BlogTagEntity.new);
                     }, rejected)
                     .then(function (blogTags) {
-                        return _updateBlogTags(blogTags, saved).then(function () {
+                        return _updateBlogTags(blogTags, blog).then(function () {
                             deferred.resolve();
                         });
                     }, rejected);
