@@ -451,6 +451,17 @@
                 }
             }
 
+            function _excluded(array) {
+                return function (value) {
+                    return array.indexOf(value) === -1;
+                }
+            }
+
+            s._filterTagTexts = function (tag_texts, condition) {
+                return tag_texts.map(function (tag_text) {
+                    return String(tag_text).trim();
+                }).filter(condition);
+            };
 
             s.save = function (blog) {
                 var deferred = $q.defer();
@@ -460,6 +471,7 @@
                 }
 
                 var saved;
+
                 _saveBlog(blog)
                     .then(function (data) {
                         return BlogEntity.new(data.data);
@@ -473,8 +485,13 @@
                     .then(function (data) {
                         return data.map(BlogTagEntity.new);
                     }, rejected)
-                    .then(function () {
-
+                    .then(function (blogTags) {
+                        var existing = blogTags.map(function (tag) {
+                                return tag.tag_text;
+                            }),
+                            saving = s._filterTagTexts(blog.tag_texts, _excluded(existing)),
+                            destroying = s._filterTagTexts(existing, _excluded(saving));
+                        //TODO
                     });
                 return deferred.promise;
             };

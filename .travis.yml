@@ -12,8 +12,6 @@ script:
 - "./ci/bin/build"
 - "./ci/bin/test_unit_tests"
 - "./node_modules/karma/bin/karma start apps/okunishitaka-c-web/test/browser_unit_tests/karma.conf.js --browsers Firefox --single-run"
-- "./ci/bin/coverage"
-- "./ci/bin/send_coverage"
 env:
   global:
     secure: kGtDZtFKFndcG4OnNWCL8FuS8RHb8EWMPAfwUt7ziVOJ4ND3TKHBgBIHO7Q+7Wed9StxO/czx9uSrSiPhoTP6dW6YtFy8pEV3n8OI1EiyZQbLGUqN6w2hxi+033qGO377a/zknJiUUu20ZOgxdkQ+T5uDmMnxm1i/Nyfu7wIRNQ=
