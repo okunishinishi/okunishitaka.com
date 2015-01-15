@@ -28,7 +28,9 @@
 
         })
         .controller('AdminBlogEditCtrl', function ($scope,
+                                                   adminBlogApiService,
                                                    BlogEntity,
+                                                   blogSaveService,
                                                    errorHandleService,
                                                    toastMessageService,
                                                    l,
@@ -66,21 +68,13 @@
                 $scope.blogId = null;
                 $scope.blog = null;
             };
-            function _saveBlog(blog) {
-                var _id = blog && blog._id;
-                if (_id) {
-                    return adminBlogApiService.update(_id, blog);
-                } else {
-                    return adminBlogApiService.create(blog);
-                }
-            }
 
             $scope.save = function (blog) {
                 if ($scope.loading) {
                     return;
                 }
                 $scope.loading = true;
-                _saveBlog(blog)
+                blogSaveService.save(blog)
                     .then(function () {
                         $scope.close();
                         toastMessageService.showInfoMessage(l.toasts.SAVE_DONE);

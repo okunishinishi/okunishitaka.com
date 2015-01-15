@@ -70,7 +70,7 @@
                         }, apiRejected)
                         .then(function (hash) {
                             s.data.forEach(function (blog) {
-                                var tags = hash[blog._id];
+                                var tags = hash[blog._id] || [];
                                 blog.tag_texts = tags.map(function (tag) {
                                     return tag.tag_text;
                                 });

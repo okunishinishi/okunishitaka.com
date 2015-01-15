@@ -58,7 +58,7 @@
                         },
                         set: function (texts) {
                             var s = this;
-                            s.tag_texts = [].concat(texts).split(',');
+                            s.tag_texts = [].concat(texts).join(',').split(',');
                         }
                     }
                 });

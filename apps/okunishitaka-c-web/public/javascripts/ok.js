@@ -84,7 +84,7 @@
                         }, apiRejected)
                         .then(function (hash) {
                             s.data.forEach(function (blog) {
-                                var tags = hash[blog._id];
+                                var tags = hash[blog._id] || [];
                                 blog.tag_texts = tags.map(function (tag) {
                                     return tag.tag_text;
                                 });
@@ -1051,7 +1051,7 @@
                         },
                         set: function (texts) {
                             var s = this;
-                            s.tag_texts = [].concat(texts).split(',');
+                            s.tag_texts = [].concat(texts).join(',').split(',');
                         }
                     }
                 });
@@ -1648,6 +1648,7 @@
                 get blogTagApiService() { return $injector.get('blogTagApiService'); },
                 get profileApiService() { return $injector.get('profileApiService'); },
                 get workApiService() { return $injector.get('workApiService'); },
+                get blogSaveService() { return $injector.get('blogSaveService'); },
                 get codeConvertService() { return $injector.get('codeConvertService'); },
                 get errorHandleService() { return $injector.get('errorHandleService'); },
                 get eventEmitService() { return $injector.get('eventEmitService'); },
@@ -1765,7 +1766,9 @@
 
         })
         .controller('AdminBlogEditCtrl', function ($scope,
+                                                   adminBlogApiService,
                                                    BlogEntity,
+                                                   blogSaveService,
                                                    errorHandleService,
                                                    toastMessageService,
                                                    l,
@@ -1803,21 +1806,13 @@
                 $scope.blogId = null;
                 $scope.blog = null;
             };
-            function _saveBlog(blog) {
-                var _id = blog && blog._id;
-                if (_id) {
-                    return adminBlogApiService.update(_id, blog);
-                } else {
-                    return adminBlogApiService.create(blog);
-                }
-            }
 
             $scope.save = function (blog) {
                 if ($scope.loading) {
                     return;
                 }
                 $scope.loading = true;
-                _saveBlog(blog)
+                blogSaveService.save(blog)
                     .then(function () {
                         $scope.close();
                         toastMessageService.showInfoMessage(l.toasts.SAVE_DONE);
@@ -2694,6 +2689,7 @@
         .service('blogSaveService', function BlogSaveService($q,
                                                              adminBlogApiService,
                                                              adminBlogTagApiService,
+                                                             apArrayUtil,
                                                              BlogEntity,
                                                              BlogTagEntity) {
             var s = this;
@@ -2708,10 +2704,50 @@
                 }
             }
 
+            function _saveBlogTag(blog_id, tagText) {
+                return adminBlogTagApiService.save({
+                    blog_id: blog_id,
+                    tag_text: tagText
+                });
+            }
+
+            function destroyBlogTag(blogTag) {
+                return adminBlogTagApiService.destroy(blogTag._id);
+            }
+
             function _excluded(array) {
                 return function (value) {
                     return array.indexOf(value) === -1;
                 }
+            }
+
+            function _updateBlogTags(blogTags, blog) {
+                var existing = blogTags.map(function (tag) {
+                        return tag.tag_text;
+                    }),
+                    saving = s._filterTagTexts(blog.tag_texts, _excluded(existing)),
+                    destroying = s._filterTagTexts(existing, _excluded(saving));
+
+                var deferred = $q.defer(),
+                    promise = deferred.promise;
+                saving.forEach(function (saving) {
+                    promise = promise.then(function () {
+                        return _saveBlogTag(blog._id, saving);
+                    });
+                });
+
+                var blogTagsHash = apArrayUtil.toHashWithKey(blogTags, 'tag_text');
+                destroying.forEach(function (destroying) {
+                    var blogTag = blogTagsHash[destroying];
+                    if (!blogTag) {
+                        return;
+                    }
+                    promise = promise.then(function () {
+                        return destroyBlogTag(blogTag);
+                    });
+                });
+                deferred.resolve();
+                return promise;
             }
 
             s._filterTagTexts = function (tag_texts, condition) {
@@ -2743,13 +2779,10 @@
                         return data.map(BlogTagEntity.new);
                     }, rejected)
                     .then(function (blogTags) {
-                        var existing = blogTags.map(function (tag) {
-                                return tag.tag_text;
-                            }),
-                            saving = s._filterTagTexts(blog.tag_texts, _excluded(existing)),
-                            destroying = s._filterTagTexts(existing, _excluded(saving));
-                        //TODO
-                    });
+                        return _updateBlogTags(blogTags, saved).then(function () {
+                            deferred.resolve();
+                        });
+                    }, rejected);
                 return deferred.promise;
             };
         });
@@ -3131,7 +3164,7 @@
         .module('ok.templates')
         .value('adminAdminBlogEditSectionHtmlTemplate', {
 		    "name": "/html/partials/admin/admin-blog-edit-section.html",
-		    "content": "<section id=\"admin-blog-editor-section\"\n         ng:show=\"!!blogId\"\n         ng:controller=\"AdminBlogEditCtrl\" class=\"cover\">\n    <div id=\"admin-blog-editor-section-content\"\n         class=\"container position-relative cover-container\">\n        <div ok:cover ok:cover-visible=\"loading\"></div>\n        <a ng:click=\"close()\" id=\"admin-blog-close-button\" class=\"close-button\">{{l.buttons.CLOSE}}</a>\n\n        <div class=\"grid-row\">\n            <div class=\"grid-col\">\n                <fieldset class=\"no-style-fieldset\">\n                    <div class=\"field\">\n                        <input type=\"text\" id=\"blog-title-input\"\n                               placeholder=\"{{l.placeholders.blog.TITLE}}\"\n                               ng:model=\"blog.blog_title\"\n                               class=\"wide-input\">\n                    </div>\n                    <div class=\"field\">\n                        <input type=\"text\" id=\"blog-tags-input\"\n                               placeholder=\"{{l.placeholders.blog.TAGS}}\"\n                               ng:model=\"blog.tagText\"\n                               class=\"wide-input\"/>\n                    </div>\n                    <div class=\"field\">\n                        <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n                                  placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n                                  class=\"wide-textarea\" cols=\"20\" rows=\"10\"\n                                  ng:model=\"blog.blog_content\"\n                                ></textarea>\n                    </div>\n                    <div class=\"field\">\n                        <div class=\"text-align-center\">\n                            <a id=\"blog-cancel-button\"\n                               ok:button\n                               ng:click=\"close()\">{{l.buttons.CANCEL}}</a>\n                            <a id=\"blog-save-button\"\n                               ok:button\n                               ok:button-type=\"'primary'\"\n                               ng:click=\"save(blog)\">{{l.buttons.SAVE}}</a>\n                        </div>\n                    </div>\n                </fieldset>\n            </div>\n            <div class=\"grid-col\">\n                <fieldset>\n                    <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>\n                    <div id=\"admin-blog-preview-div\">\n                        <h2>{{blog.title}}</h2>\n\n                        <div>\n                            <!--<span ok:tag ok:title=\"t\" ng:repeat=\"t in (blog.tagTexts | textSplitFilter:',')\"></span>-->\n                        </div>\n                        <div ng:bind-html=\"blog.content | markdownRenderFilter\"></div>\n                    </div>\n                </fieldset>\n                <div class=\"grid-col\">\n                    <br class=\"clear\"/>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>"
+		    "content": "<section id=\"admin-blog-editor-section\"\n         ng:show=\"!!blogId\"\n         ng:controller=\"AdminBlogEditCtrl\" class=\"cover\">\n    <div id=\"admin-blog-editor-section-content\"\n         class=\"container position-relative cover-container\">\n        <div ok:cover ok:cover-visible=\"loading\"></div>\n        <a ng:click=\"close()\" id=\"admin-blog-close-button\" class=\"close-button\">{{l.buttons.CLOSE}}</a>\n\n        <div class=\"grid-row\">\n            <div class=\"grid-col\">\n                <fieldset class=\"no-style-fieldset\">\n                    <div class=\"field\">\n                        <input type=\"text\" id=\"blog-title-input\"\n                               placeholder=\"{{l.placeholders.blog.TITLE}}\"\n                               ng:model=\"blog.blog_title\"\n                               class=\"wide-input\">\n                    </div>\n                    <div class=\"field\">\n                        <input type=\"text\" id=\"blog-tags-input\"\n                               placeholder=\"{{l.placeholders.blog.TAGS}}\"\n                               ng:model=\"blog.tag_text_joined\"\n                               class=\"wide-input\"/>\n                    </div>\n                    <div class=\"field\">\n                        <textarea name=\"blog-text\" id=\"blog-text-textarea\"\n                                  placeholder=\"{{l.placeholders.blog.CONTENT}}\"\n                                  class=\"wide-textarea\" cols=\"20\" rows=\"10\"\n                                  ng:model=\"blog.blog_content\"\n                                ></textarea>\n                    </div>\n                    <div class=\"field\">\n                        <div class=\"text-align-center\">\n                            <a id=\"blog-cancel-button\"\n                               ok:button\n                               ng:click=\"close()\">{{l.buttons.CANCEL}}</a>\n                            <a id=\"blog-save-button\"\n                               ok:button\n                               ok:button-type=\"'primary'\"\n                               ng:click=\"save(blog)\">{{l.buttons.SAVE}}</a>\n                        </div>\n                    </div>\n                </fieldset>\n            </div>\n            <div class=\"grid-col\">\n                <fieldset>\n                    <legend>{{l.pages.blog.PREVIEW_LEGEND}}</legend>\n                    <div id=\"admin-blog-preview-div\">\n                        <h2>{{blog.title}}</h2>\n\n                        <div>\n                            <!--<span ok:tag ok:title=\"t\" ng:repeat=\"t in (blog.tagTexts | textSplitFilter:',')\"></span>-->\n                        </div>\n                        <div ng:bind-html=\"blog.content | markdownRenderFilter\"></div>\n                    </div>\n                </fieldset>\n                <div class=\"grid-col\">\n                    <br class=\"clear\"/>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>"
 		});
 
 })(angular);

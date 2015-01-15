@@ -11,6 +11,7 @@
         .service('blogSaveService', function BlogSaveService($q,
                                                              adminBlogApiService,
                                                              adminBlogTagApiService,
+                                                             apArrayUtil,
                                                              BlogEntity,
                                                              BlogTagEntity) {
             var s = this;
@@ -25,10 +26,50 @@
                 }
             }
 
+            function _saveBlogTag(blog_id, tagText) {
+                return adminBlogTagApiService.save({
+                    blog_id: blog_id,
+                    tag_text: tagText
+                });
+            }
+
+            function destroyBlogTag(blogTag) {
+                return adminBlogTagApiService.destroy(blogTag._id);
+            }
+
             function _excluded(array) {
                 return function (value) {
                     return array.indexOf(value) === -1;
                 }
+            }
+
+            function _updateBlogTags(blogTags, blog) {
+                var existing = blogTags.map(function (tag) {
+                        return tag.tag_text;
+                    }),
+                    saving = s._filterTagTexts(blog.tag_texts, _excluded(existing)),
+                    destroying = s._filterTagTexts(existing, _excluded(saving));
+
+                var deferred = $q.defer(),
+                    promise = deferred.promise;
+                saving.forEach(function (saving) {
+                    promise = promise.then(function () {
+                        return _saveBlogTag(blog._id, saving);
+                    });
+                });
+
+                var blogTagsHash = apArrayUtil.toHashWithKey(blogTags, 'tag_text');
+                destroying.forEach(function (destroying) {
+                    var blogTag = blogTagsHash[destroying];
+                    if (!blogTag) {
+                        return;
+                    }
+                    promise = promise.then(function () {
+                        return destroyBlogTag(blogTag);
+                    });
+                });
+                deferred.resolve();
+                return promise;
             }
 
             s._filterTagTexts = function (tag_texts, condition) {
@@ -60,13 +101,10 @@
                         return data.map(BlogTagEntity.new);
                     }, rejected)
                     .then(function (blogTags) {
-                        var existing = blogTags.map(function (tag) {
-                                return tag.tag_text;
-                            }),
-                            saving = s._filterTagTexts(blog.tag_texts, _excluded(existing)),
-                            destroying = s._filterTagTexts(existing, _excluded(saving));
-                        //TODO
-                    });
+                        return _updateBlogTags(blogTags, saved).then(function () {
+                            deferred.resolve();
+                        });
+                    }, rejected);
                 return deferred.promise;
             };
         });
