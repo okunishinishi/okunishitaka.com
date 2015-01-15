@@ -39,7 +39,8 @@
 		            "EDIT": "編集",
 		            "DESTROY": "削除",
 		            "SAVE": "保存",
-		            "CANCEL": "キャンセル"
+		            "CANCEL": "キャンセル",
+		            "LIST": "一覧へ"
 		        },
 		        "messages": {
 		            "SURE_TO_DESTROY": "削除してよろしいですか？"

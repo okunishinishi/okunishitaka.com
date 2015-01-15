@@ -56,7 +56,8 @@ button,
     display: block;
     text-align: center;
 }
-.list-more-button:active{
+
+.list-more-button:active {
     box-shadow: none;
 }
 
@@ -65,11 +66,11 @@ button,
 .link-button:visited {
     border: none;
 }
+
 .link-button:active,
-.link-button.button-active{
+.link-button.button-active {
     box-shadow: none;
 }
-
 
 .close-button {
     position: absolute;
@@ -84,4 +85,26 @@ button,
 
 .close-button:hover {
     color: #333;
+}
+
+.back-button {
+    font-size: 12px;
+    display: inline-block;
+    padding: 4px 8px;
+    color: #AAA;
+    position: relative;
+    left: -8px;
+    cursor: pointer;
+}
+
+.back-button:before {
+    content: '<<';
+}
+
+.back-button:hover {
+    text-decoration: underline;
+}
+
+.back-button:active {
+    opacity: .8;
 }

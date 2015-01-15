@@ -41,14 +41,15 @@ l.placeholders = {
 };
 l.toasts = {
     SAVE_DONE: '保存しました。',
-    DESTROY_DONE:'削除しました。'
+    DESTROY_DONE: '削除しました。'
 };
 l.buttons = {
     MORE: 'もっと読み込む',
     EDIT: '編集',
     DESTROY: '削除',
     SAVE: '保存',
-    CANCEL: 'キャンセル'
+    CANCEL: 'キャンセル',
+    LIST: '一覧へ'
 };
 l.messages = {
     SURE_TO_DESTROY: '削除してよろしいですか？'

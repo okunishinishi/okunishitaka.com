@@ -1,4 +1,6 @@
-<section id="blog-list-section" ng:controller="BlogListCtrl">
+<section id="blog-list-section"
+         ng:show="visible"
+         ng:controller="BlogListCtrl">
     <dl id="blog-list" class="cover-container">
         <div ok:cover ok:cover-visible="loading"></div>
         <dt ng:repeat-start="b in blogs">

@@ -244,7 +244,8 @@
 		            "EDIT": "編集",
 		            "DESTROY": "削除",
 		            "SAVE": "保存",
-		            "CANCEL": "キャンセル"
+		            "CANCEL": "キャンセル",
+		            "LIST": "一覧へ"
 		        },
 		        "messages": {
 		            "SURE_TO_DESTROY": "削除してよろしいですか？"
@@ -1934,7 +1935,7 @@
                 condition: {
                     _sort: '_at',
                     _reverse: true,
-                    _limit: 3,
+                    _limit: 20,
                     _skip: 0
                 }
             });
@@ -1956,6 +1957,8 @@
             function load(blogId) {
                 $scope.blogId = blogId;
                 if (!blogId) {
+                    $scope.blog = null;
+                    eventEmitService.emit('blog.detailBlog.dismissed');
                     return;
                 }
                 locationSearchService.update('blog_id', blogId);
@@ -1963,6 +1966,7 @@
                 blogApiService.one(blogId)
                     .then(function (data) {
                         $scope.blog = BlogEntity.new(data);
+                        eventEmitService.emit('blog.detailBlog.done');
                     }, apiRejected)
                     .finally(function () {
                         $scope.loading = false;
@@ -1986,6 +1990,13 @@
                     load(blogId);
                 }
             });
+
+            $scope.close = function () {
+                $scope.blogId = null;
+                $scope.blog = null;
+                locationSearchService.consume('blog_id');
+                eventEmitService.emit('blog.detailBlog.dismissed');
+            }
         })
         .controller('BlogListCtrl', function ($scope,
                                               objectUtil,
@@ -2023,6 +2034,12 @@
 
             load();
 
+            eventEmitService.on('blog.detailBlog.done', function () {
+                $scope.visible = false;
+            });
+            eventEmitService.on('blog.detailBlog.dismissed', function () {
+                $scope.visible = true;
+            });
         });
 
 })(angular);
@@ -3313,7 +3330,7 @@
         .module('ok.templates')
         .value('blogBlogDetailSectionHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-detail-section.html",
-		    "content": "<section id=\"blog-detail-section\" ng:controller=\"BlogDetailCtrl\" ng:show=\"!!blogId\">\n    <div ok:cover ok:cover-visible=\"loading\"></div>\n    <div ng:if=\"!!blog && !loading\" id=\"blog-detail-section-inner\">\n        <div class=\"container\">\n\n\n            <h1>{{blog.blog_title}}</h1>\n\n            <div class=\"section-content\">\n                <div ng:bind-html=\"blog.blog_content | markdownRenderFilter\"></div>\n            </div>\n        </div>\n    </div>\n</section>"
+		    "content": "<section id=\"blog-detail-section\" ng:controller=\"BlogDetailCtrl\" ng:show=\"!!blogId\">\n    <div class=\"container cover-container\">\n        <div ok:cover ok:cover-visible=\"loading\"></div>\n        <div ng:if=\"!!blog && !loading\" id=\"blog-detail-section-inner\">\n\n            <div>\n                <a class=\"back-button\" ng:click=\"close();\">{{l.buttons.LIST}}</a>\n            </div>\n\n            <h1>{{blog.blog_title}}</h1>\n\n            <div class=\"section-content\">\n                <div ng:bind-html=\"blog.blog_content | markdownRenderFilter\"></div>\n            </div>\n        </div>\n    </div>\n</section>\n"
 		});
 
 })(angular);
@@ -3329,7 +3346,7 @@
         .module('ok.templates')
         .value('blogBlogListSectionHtmlTemplate', {
 		    "name": "/html/partials/blog/blog-list-section.html",
-		    "content": "<section id=\"blog-list-section\" ng:controller=\"BlogListCtrl\">\n    <dl id=\"blog-list\" class=\"cover-container\">\n        <div ok:cover ok:cover-visible=\"loading\"></div>\n        <dt ng:repeat-start=\"b in blogs\">\n            <a class=\"blog-dt-anchor blog-title\"\n               ng:click=\"detail(b);\"\n               name=\"blog-{{b._id}}\">\n                {{b.blog_title}}\n            </a>\n            <span class=\"blog-date-label\">{{b._at | dateFormatFilter}}</span>\n            <span class=\"display-block\">\n                <span ok:tag ok:title=\"t\" ng:repeat=\"t in (b.tag_texts) track by $index\"></span>\n            </span>\n        </dt>\n        <dd ng:repeat-end=\"\"\n            ng:bind-html=\"b.blog_content | markdownRenderFilter | htmlTextFilter | textEllipsisFilter:CONTENT_MAX_LENGTH\"></dd>\n    </dl>\n    <a id=\"blog-more-button\"\n       class=\"list-more-button\"\n       ok:button\n       ng:show=\"hasMore\"\n       ng:click=\"loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</section>"
+		    "content": "<section id=\"blog-list-section\"\n         ng:show=\"visible\"\n         ng:controller=\"BlogListCtrl\">\n    <dl id=\"blog-list\" class=\"cover-container\">\n        <div ok:cover ok:cover-visible=\"loading\"></div>\n        <dt ng:repeat-start=\"b in blogs\">\n            <a class=\"blog-dt-anchor blog-title\"\n               ng:click=\"detail(b);\"\n               name=\"blog-{{b._id}}\">\n                {{b.blog_title}}\n            </a>\n            <span class=\"blog-date-label\">{{b._at | dateFormatFilter}}</span>\n            <span class=\"display-block\">\n                <span ok:tag ok:title=\"t\" ng:repeat=\"t in (b.tag_texts) track by $index\"></span>\n            </span>\n        </dt>\n        <dd ng:repeat-end=\"\"\n            ng:bind-html=\"b.blog_content | markdownRenderFilter | htmlTextFilter | textEllipsisFilter:CONTENT_MAX_LENGTH\"></dd>\n    </dl>\n    <a id=\"blog-more-button\"\n       class=\"list-more-button\"\n       ok:button\n       ng:show=\"hasMore\"\n       ng:click=\"loadMore()\"\n            >{{l.buttons.MORE}}</a>\n</section>"
 		});
 
 })(angular);

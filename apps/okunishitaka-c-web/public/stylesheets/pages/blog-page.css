@@ -2,9 +2,10 @@
 body {
 }
 
-#blog-list-section{
-    max-width:480px;
+#blog-list-section {
+    max-width: 480px;
 }
+
 #blog-list {
     margin: 0 8px;
     min-height: 220px;
@@ -62,6 +63,7 @@ body {
 
 #blog-detail-section-inner {
     margin: 4px 8px;
+    max-width: 600px;
 }
 
 @media (max-width: 568px) {

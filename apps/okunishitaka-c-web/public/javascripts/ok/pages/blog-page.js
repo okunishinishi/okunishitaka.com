@@ -19,7 +19,7 @@
                 condition: {
                     _sort: '_at',
                     _reverse: true,
-                    _limit: 3,
+                    _limit: 20,
                     _skip: 0
                 }
             });
@@ -41,6 +41,8 @@
             function load(blogId) {
                 $scope.blogId = blogId;
                 if (!blogId) {
+                    $scope.blog = null;
+                    eventEmitService.emit('blog.detailBlog.dismissed');
                     return;
                 }
                 locationSearchService.update('blog_id', blogId);
@@ -48,6 +50,7 @@
                 blogApiService.one(blogId)
                     .then(function (data) {
                         $scope.blog = BlogEntity.new(data);
+                        eventEmitService.emit('blog.detailBlog.done');
                     }, apiRejected)
                     .finally(function () {
                         $scope.loading = false;
@@ -71,6 +74,13 @@
                     load(blogId);
                 }
             });
+
+            $scope.close = function () {
+                $scope.blogId = null;
+                $scope.blog = null;
+                locationSearchService.consume('blog_id');
+                eventEmitService.emit('blog.detailBlog.dismissed');
+            }
         })
         .controller('BlogListCtrl', function ($scope,
                                               objectUtil,
@@ -108,6 +118,12 @@
 
             load();
 
+            eventEmitService.on('blog.detailBlog.done', function () {
+                $scope.visible = false;
+            });
+            eventEmitService.on('blog.detailBlog.dismissed', function () {
+                $scope.visible = true;
+            });
         });
 
 })(angular);
