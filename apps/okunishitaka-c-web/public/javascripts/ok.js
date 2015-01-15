@@ -44,6 +44,18 @@
                     _limit: 100,
                     _skip: 0
                 },
+                /**
+                 * Clear data.
+                 */
+                clear: function () {
+                    var s = this;
+                    s.data = [];
+                    s.condition._skip = 0;
+                },
+                /**
+                 * Fetch data.
+                 * @returns {*}
+                 */
                 fetch: function () {
                     var s = this,
                         deferred = $q.defer();
@@ -221,7 +233,8 @@
 		            }
 		        },
 		        "toasts": {
-		            "SAVE_DONE": "保存しました。"
+		            "SAVE_DONE": "保存しました。",
+		            "DESTROY_DONE": "削除しました。"
 		        },
 		        "buttons": {
 		            "MORE": "もっと読み込む",
@@ -1816,10 +1829,11 @@
                     .then(function () {
                         $scope.close();
                         toastMessageService.showInfoMessage(l.toasts.SAVE_DONE);
+                        eventEmitService.emit('blog.saveBlog.done');
                     }, apiRejected)
                     .finally(function () {
                         $scope.loading = false;
-                    })
+                    });
             };
 
         })
@@ -1829,6 +1843,7 @@
                                                    objectUtil,
                                                    arrayUtil,
                                                    errorHandleService,
+                                                   toastMessageService,
                                                    eventEmitService,
                                                    blogList) {
             function apiRejected(err) {
@@ -1849,6 +1864,11 @@
                     });
             }
 
+            function reload() {
+                blogList.clear();
+                load();
+            }
+
             $scope.hasMore = false;
             $scope.loadMore = function () {
                 load();
@@ -1860,9 +1880,22 @@
             $scope.destroy = function (b) {
                 var sure = confirm(l.messages.SURE_TO_DESTROY);
                 if (sure) {
-                    eventEmitService.emit('admin.destroyBlog', b);
+                    $scope.loading = true;
+                    adminBlogApiService.destroy(b._id)
+                        .then(function () {
+                            toastMessageService.showInfoMessage(l.toasts.DESTROY_DONE);
+                            reload();
+                        }, apiRejected)
+                        .finally(function () {
+                            $scope.loading = false;
+                        });
                 }
             };
+
+            eventEmitService.on('blog.saveBlog.done', function () {
+                reload();
+            });
+
 
             load();
         });

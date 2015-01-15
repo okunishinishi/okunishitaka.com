@@ -30,6 +30,18 @@
                     _limit: 100,
                     _skip: 0
                 },
+                /**
+                 * Clear data.
+                 */
+                clear: function () {
+                    var s = this;
+                    s.data = [];
+                    s.condition._skip = 0;
+                },
+                /**
+                 * Fetch data.
+                 * @returns {*}
+                 */
                 fetch: function () {
                     var s = this,
                         deferred = $q.defer();

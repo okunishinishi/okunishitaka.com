@@ -117,7 +117,8 @@
 		            }
 		        },
 		        "toasts": {
-		            "SAVE_DONE": "保存しました。"
+		            "SAVE_DONE": "保存しました。",
+		            "DESTROY_DONE": "削除しました。"
 		        },
 		        "buttons": {
 		            "MORE": "もっと読み込む",

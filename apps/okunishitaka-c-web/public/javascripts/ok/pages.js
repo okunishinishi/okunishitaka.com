@@ -91,10 +91,11 @@
                     .then(function () {
                         $scope.close();
                         toastMessageService.showInfoMessage(l.toasts.SAVE_DONE);
+                        eventEmitService.emit('blog.saveBlog.done');
                     }, apiRejected)
                     .finally(function () {
                         $scope.loading = false;
-                    })
+                    });
             };
 
         })
@@ -104,6 +105,7 @@
                                                    objectUtil,
                                                    arrayUtil,
                                                    errorHandleService,
+                                                   toastMessageService,
                                                    eventEmitService,
                                                    blogList) {
             function apiRejected(err) {
@@ -124,6 +126,11 @@
                     });
             }
 
+            function reload() {
+                blogList.clear();
+                load();
+            }
+
             $scope.hasMore = false;
             $scope.loadMore = function () {
                 load();
@@ -135,9 +142,22 @@
             $scope.destroy = function (b) {
                 var sure = confirm(l.messages.SURE_TO_DESTROY);
                 if (sure) {
-                    eventEmitService.emit('admin.destroyBlog', b);
+                    $scope.loading = true;
+                    adminBlogApiService.destroy(b._id)
+                        .then(function () {
+                            toastMessageService.showInfoMessage(l.toasts.DESTROY_DONE);
+                            reload();
+                        }, apiRejected)
+                        .finally(function () {
+                            $scope.loading = false;
+                        });
                 }
             };
+
+            eventEmitService.on('blog.saveBlog.done', function () {
+                reload();
+            });
+
 
             load();
         });
