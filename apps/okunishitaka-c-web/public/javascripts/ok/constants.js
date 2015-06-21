@@ -250,6 +250,7 @@
         .constant('imageUrlConstant', {
 		    "ME": "/images/me.jpg",
 		    "OKUNISHITAKA": "/images/okunishitaka.com-favicon.png",
+		    "OKUNISHITAKA_BANNER": "/images/okunishitaka-banner.png",
 		    "QUALIFICATION_0159": "/images/qualification/qualification_0159.jpg",
 		    "QUALIFICATION_0159_FULL": "/images/qualification/full/qualification_0159_full.jpg",
 		    "QUALIFICATION_0160": "/images/qualification/qualification_0160.jpg",
