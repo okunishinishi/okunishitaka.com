@@ -28,3 +28,5 @@ test/.work
 /var/log/*
 /var/data/*
 /var/cache/*
+
+.DS_Store
