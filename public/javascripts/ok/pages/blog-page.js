@@ -15,7 +15,7 @@
         .run(function ($rootScope) {
             $rootScope.page = 'blog';
         })
-        .controller('BlogCtrl', function ($scope,blogApiService) {
+        .controller('BlogCtrl', function ($scope, blogApiService) {
 
             function applyHash(hash) {
                 var id = (hash || '').split('-').pop()
@@ -36,7 +36,7 @@
             $scope.hasMore = true;
             $scope.loadMore = function () {
                 load();
-            }
+            };
 
             function load() {
                 blogApiService.list($scope.condition)
