@@ -53,3 +53,6 @@ Requirements
 [my_gemnasium_url]: http://gemnasium.com/okunishinishi/okunishitaka.com
 [my_gemnasium_badge_url]: http://img.shields.io/gemnasium/okunishinishi/okunishitaka.com.svg?style=flat
 <!-- Links end-->
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/okunishinishi/okunishitaka.com/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
